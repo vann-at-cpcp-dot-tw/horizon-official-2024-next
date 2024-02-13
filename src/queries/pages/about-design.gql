@@ -1,0 +1,33 @@
+query QueryPageAboutDesignAndCraft {
+  aboutDesignAndCraft {
+    aboutDesignCustomFields {
+      featuredVideo {
+        node {
+          mediaItemUrl
+        }
+      }
+      contentList {
+        basic {
+          title
+          description
+          keyImage {
+            node {
+              mediaItemUrl
+            }
+          }
+        }
+        content
+        designPartners {
+          title
+          subtitle
+          description
+          image {
+            node {
+              mediaItemUrl
+            }
+          }
+        }
+      }
+    }
+  }
+}

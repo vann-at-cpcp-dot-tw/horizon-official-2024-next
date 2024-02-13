@@ -1,0 +1,18 @@
+query QuerySinglePublication($slug:ID!) {
+  publication(id: $slug, idType:SLUG) {
+    title
+    slug
+    publicationCustomFields {
+      relatedYachts {
+        seriesSlug
+      }
+      album {
+        image {
+          node {
+            mediaItemUrl
+          }
+        }
+      }
+    }
+  }
+}

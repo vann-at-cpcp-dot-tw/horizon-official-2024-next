@@ -1,0 +1,27 @@
+#import '../fragments/yacht.gql'
+
+query QuerySingleYachtPage($slug:ID!) {
+  yacht(id:$slug, idType: SLUG) {
+    ...yachtBasic
+    yachtSeriesList {
+      nodes {
+        slug
+        name
+      }
+    }
+    yachtCustomFields {
+      yachtDescription
+      relatedPublicationSlug
+      ...yachtHeroVideo
+      ...yachtHeroImage
+      ...yachtExteriorImages
+      ...yachtInteriorImages
+      ...yachtGeneralArrangementImages
+      ...yachtVRPreview
+      ...yachtVideosPreview
+      ...yachtEmbedVideosGallery
+      ...yachtSpecsTable
+      ...yachtHulls
+    }
+  }
+}

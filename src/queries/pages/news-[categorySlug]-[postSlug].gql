@@ -1,0 +1,68 @@
+query QuerySinglePost($categorySlug: ID!, $postSlug: String) {
+  category(id: $categorySlug, idType: SLUG) {
+    posts(where: {name: $postSlug}, first: 1) {
+      nodes {
+        title
+        date
+        content(format: RENDERED)
+        categories(where: {parent: 0}, first: 1) {
+          nodes {
+            slug
+            name
+          }
+        }
+        postCustomFields {
+            gallery {
+              image {
+                node {
+                  mediaItemUrl
+                }
+              }
+            }
+            relatedYachts {
+              seriesSlug
+              yachtSlug
+            }
+          }
+      }
+      pageInfo {
+        startCursor
+        endCursor
+        hasPreviousPage
+        hasNextPage
+      }
+    }
+  }
+}
+
+query QueryRelatedPosts($categorySlug:ID!, $after:String, $before:String, $first:Int, $last:Int) {
+  category(id:$categorySlug, idType: SLUG) {
+    posts(
+      after: $after
+      before: $before
+      first: $first
+      last: $last
+    ) {
+      nodes {
+        slug
+        title
+        date
+        categories(where: {parent: 0}, first: 1) {
+          nodes {
+            slug
+            name
+          }
+        }
+        postCustomFields {
+            gallery {
+              image {
+                node {
+                  mediaItemUrl
+                }
+              }
+            }
+          }
+      }
+    }
+  }
+}

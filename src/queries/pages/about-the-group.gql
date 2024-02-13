@@ -1,0 +1,40 @@
+query QueryPageAboutTheGroup {
+  aboutTheGroup {
+    aboutTheGroupCustomFields {
+      atgpHeroImage {
+        node {
+          mediaItemUrl
+        }
+      }
+      atgpGroupIntroduction
+      atgpOrganization {
+        companies {
+          basic {
+            componyName
+            subtitle
+            since
+          }
+          shortDescription
+          description
+          images {
+            grid {
+              node {
+                mediaItemUrl
+              }
+            }
+            banner {
+              node {
+                mediaItemUrl
+              }
+            }
+          }
+          numericalData {
+            prefix
+            number
+            unit
+          }
+        }
+      }
+    }
+  }
+}

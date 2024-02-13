@@ -1,0 +1,134 @@
+query QueryBrokeragePage {
+  brokerageSettings {
+    brokerageSettingCustomFields {
+      brokeragePriceCurrency
+      brokerageLengthOptions {
+        label
+        minValue
+        maxValue
+      }
+      brokeragePriceOptions {
+        label
+        minValue
+        maxValue
+      }
+      brokerageYearOptions {
+        value
+      }
+    }
+  }
+  brokerages {
+    nodes {
+      slug
+      title
+      brokerageCustomFields {
+        year
+        price
+        yachtDescription
+        relatedPublicationSlug
+        heroImage {
+          node {
+            mediaItemUrl
+          }
+        }
+        exteriorImages {
+          image {
+            node {
+              mediaItemUrl
+            }
+          }
+        }
+        interiorImages {
+          description
+          image {
+            node {
+              mediaItemUrl
+            }
+          }
+        }
+        featuresTable {
+          tableType
+          terms {
+            termName
+            termValue
+          }
+        }
+      }
+      yachtConditions {
+        nodes {
+          slug
+          name
+        }
+      }
+    }
+  }
+  yachtConditions(first: 99) {
+    nodes {
+      slug
+      name
+    }
+  }
+}
+
+query QueryBrokerages(
+  $yachtConditions: [String]
+  $yachtConditionsOperator: TaxQueryOperator = NOT_IN
+) {
+  brokerages(
+    where: {
+      taxQuery: {
+        relation: AND,
+        taxArray: {
+          taxonomy: YACHTCONDITION,
+          field: SLUG,
+          terms: $yachtConditions,
+          operator: $yachtConditionsOperator
+        }
+      }
+    }
+  ) {
+    nodes {
+      slug
+      title
+      brokerageCustomFields {
+        year
+        price
+        yachtDescription
+        relatedPublicationSlug
+        heroImage {
+          node {
+            mediaItemUrl
+          }
+        }
+        exteriorImages {
+          image {
+            node {
+              mediaItemUrl
+            }
+          }
+        }
+        interiorImages {
+          description
+          image {
+            node {
+              mediaItemUrl
+            }
+          }
+        }
+        featuresTable {
+          tableType
+          terms {
+            termName
+            termValue
+          }
+        }
+      }
+      yachtConditions {
+        nodes {
+          slug
+          name
+        }
+      }
+    }
+  }
+}

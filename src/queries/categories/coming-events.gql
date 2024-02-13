@@ -1,0 +1,27 @@
+query QueryComingEvents {
+  comingEvents(first: 99) {
+    nodes {
+      slug
+      date
+      title
+      content(format: RENDERED)
+      comingEventCustomFields {
+        subtitle
+        scheduleDate
+        contactTitle
+        contactNumber
+        contactEmail
+        relatedHulls {
+          yachtSlug
+          hullName
+        }
+        showInfoTable {
+          dateAndTimeRows {
+            dateAndTimes
+          }
+          dockNumber
+        }
+      }
+    }
+  }
+}

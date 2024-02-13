@@ -1,0 +1,18 @@
+query QueryTeamPage {
+  teamPageSettings {
+    teamPageCustomFields {
+      pageTitle
+      teamIntroduction
+      teamMembers {
+        name
+        subtitle
+        contactEmail
+        image {
+          node {
+            mediaItemUrl
+          }
+        }
+      }
+    }
+  }
+}

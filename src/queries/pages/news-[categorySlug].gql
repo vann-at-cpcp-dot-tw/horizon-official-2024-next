@@ -1,0 +1,44 @@
+#import '../fragments/post.gql'
+
+query QueryPostsByCategory(
+  $slug: ID!
+  $first: Int
+  $last: Int
+  $after: String
+  $before: String
+  $relatedYachtSeries: String
+) {
+    category(id:$slug, idType: SLUG) {
+      name
+      posts(
+        first: $first
+        last: $last,
+        after: $after,
+        before: $before,
+        where: {
+          relatedYachtSeries: $relatedYachtSeries
+        }
+      ) {
+        nodes {
+          ...postBasic
+          categories(where: {parent: 0}, first: 1) {
+            nodes {
+              slug
+              name
+            }
+          }
+          postCustomFields {
+            ...postCoverImage
+            ...postGallery
+            ...postRelatedYachts
+          }
+        }
+        pageInfo {
+          endCursor
+          hasNextPage
+          hasPreviousPage
+          startCursor
+        }
+      }
+    }
+}

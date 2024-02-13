@@ -1,0 +1,270 @@
+// 選單滿版圖片暫定比例 1024*768
+// picture tag ref: https://www.fooish.com/html/picture-tag.html
+// RR 參考 src-set
+// https://www.rolls-roycemotorcars.com/content/dam/rrmc/marketUK/common/navigation/desktop/RRMC_Model_Phantom_II_D.jpg/jcr:content/renditions/cq5dam.web.1242.jpeg 1242w,
+
+// https://www.rolls-roycemotorcars.com/content/dam/rrmc/marketUK/common/navigation/desktop/RRMC_Model_Phantom_II_D.jpg/jcr:content/renditions/cq5dam.web.1125.jpeg 1125w,
+
+// https://www.rolls-roycemotorcars.com/content/dam/rrmc/marketUK/common/navigation/desktop/RRMC_Model_Phantom_II_D.jpg/jcr:content/renditions/cq5dam.web.1668.jpeg 1668w,
+
+// https://www.rolls-roycemotorcars.com/content/dam/rrmc/marketUK/common/navigation/desktop/RRMC_Model_Phantom_II_D.jpg/jcr:content/renditions/cq5dam.web.2880.jpeg 2880w,
+
+// https://www.rolls-roycemotorcars.com/content/dam/rrmc/marketUK/common/navigation/desktop/RRMC_Model_Phantom_II_D.jpg/jcr:content/renditions/cq5dam.web.828.jpeg 828w,
+
+// https://www.rolls-roycemotorcars.com/content/dam/rrmc/marketUK/common/navigation/desktop/RRMC_Model_Phantom_II_D.jpg/jcr:content/renditions/original 1200w,
+
+// https://www.rolls-roycemotorcars.com/content/dam/rrmc/marketUK/common/navigation/desktop/RRMC_Model_Phantom_II_D.jpg/jcr:content/renditions/cq5dam.web.1920.jpeg 1920w,
+
+// https://www.rolls-roycemotorcars.com/content/dam/rrmc/marketUK/common/navigation/desktop/RRMC_Model_Phantom_II_D.jpg/jcr:content/renditions/cq5dam.web.4000.jpeg 4000w
+@import before-after.sass
+@import bootstrap-icons.sass
+@import btn.sass
+
+*
+  box-sizing: border-box
+  outline: none
+  -webkit-overflow-scrolling: touch
+  word-break: break-word
+  word-wrap: break-word
+  -webkit-tap-highlight-color: transparent
+  min-width: 0
+  border-color: inherit
+  &:focus
+    outline: none
+
+h1,h2,h3,h4,div,p,.block,.flex
+  white-space: pre-wrap
+
+html,
+body
+  padding: 0px
+  margin: 0px
+  font-family: 'cairo', sans-serif
+  font-size: 16px
+  min-height: 100dvh
+  background: var(--color-golden-100)
+  // overscroll-behavior: none // 捲到頂/底部時，不要Q彈
+  // Adobe source-han-sans-traditional Font Weight Setting
+  // ExtraLight 100
+  // Light 200
+  // Normal 300
+  // Regular 400
+  // Medium 500
+  // Bold 700
+  // Heavy 900
+
+.serif
+  font-family: 'kepler-std-display', serif
+
+// html
+//   &.lg-on
+//     overflow: hidden
+//     body
+//       overflow: hidden
+
+body
+  opacity: 0
+  &.page-loaded
+    opacity: 1
+  &.lb-open
+    overflow: hidden
+    &::after
+      width: 100%
+      height: 100%
+      position: absolute
+      left: 0
+      top: 0
+      content: ''
+      display: block
+      background-color: black
+      pointer-events: none
+      opacity: 0.8
+      z-index: 9998
+  &.lg-open,
+  &.menu-open
+    overflow: hidden
+
+#app
+  position: relative
+  @apply h-screen flex flex-col flex-nowrap
+
+.sticky
+  position: relative
+  position: sticky
+
+.disabled
+  pointer-events: none
+
+.flex
+  flex-wrap: wrap
+
+.flex-col
+  flex-wrap: nowrap
+
+a
+  color: inherit
+  cursor: pointer
+  text-decoration: none
+  &:hover
+    text-decoration: none
+  &:visited
+    text-decoration: none
+
+hr
+  padding: 0px
+  margin: 0px
+  border: none
+  border-top: solid 1px
+
+img
+  max-width: 100%
+  display: block
+  user-drag: none
+  user-select: none
+
+h1, h2, h3, h4
+  text-wrap: balance
+
+p
+  text-wrap: pretty
+
+#nprogress
+  visibility: hidden
+
+.swiper-wrapper
+  transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000) !important
+
+.swiper-milestone
+  @apply -mx-5 relative
+  &:after
+    content: ''
+    display: block
+    @apply absolute w-full h-[1px] left-0 bottom-[29px] bg-white
+  .swiper-wrapper
+    display: flex
+    align-items: flex-end
+    transition-duration: .8s !important
+  .swiper-slide
+    width: auto !important
+    .slide-inner
+      position: relative
+      // width: 100vw
+      // max-width: 310px
+      width: 22.69vw
+      transition: all .8s cubic-bezier(0.215, 0.610, 0.355, 1.000)
+      @apply px-5
+    .title
+      @apply text-gray-500
+    .description
+      // width: 100vw
+      // max-width: 270px
+      width: calc(22.69vw - 40px)
+      @apply line-clamp-1
+    .line
+      @apply absolute left-5 bottom-[28px] w-full h-[4px]
+      &:after
+        content: ''
+        display: block
+        transition: all .8s cubic-bezier(0.215, 0.610, 0.355, 1.000)
+        @apply absolute bg-white w-full h-[1px] left-0 top-1/2 -translate-y-1/2
+    &-active
+      .slide-inner
+        // width: 100vw
+        // max-width: 720px
+        width: 52.7vw
+      .title
+        @apply text-golden-700
+      .description
+        // width: 100vw
+        // max-width: 680px
+        width: 49.78vw
+        @apply line-clamp-none
+      .line
+        &:after
+          @apply bg-golden-700 h-full
+
+.swiper-yacht-exterior
+  @apply -mx-5 relative
+  .swiper-wrapper
+    display: flex
+    align-items: center
+    transition-duration: .8s !important
+  .swiper-slide
+    width: auto !important
+    display: flex
+    align-items: center
+    .slide-inner
+      position: relative
+      // width: 100vw
+      // max-width: 533px
+      width: 39.01vw
+      transition: all .8s cubic-bezier(0.215, 0.610, 0.355, 1.000)
+      @apply px-5
+    &-active
+      .slide-inner
+        width: 76.35vw
+        // width: 100vw
+        // max-width: 76.35vw
+
+.swiper-yacht-interior
+  @apply relative
+  .swiper-wrapper
+    // display: flex
+    // justify-content: center
+    transition-duration: .8s !important
+
+.lg-container
+  *
+    white-space: normal
+
+.lg-backdrop
+  background-color: rgba(0, 0, 0, 0.9) !important
+
+.lg-outer
+  .lg-thumb-outer
+    background-color: rgba(0, 0, 0, 0.5) !important
+  .lg-thumb-item
+    &:hover,
+    &.active
+      border-color: var(--color-golden-900) !important
+
+.lg-progress-bar
+  .lg-progress
+    background-color: var(--color-golden-900) !important
+
+.lg-toolbar
+  display: flex
+  .lg-close
+    order: 1
+    margin-right: auto
+  .lg-counter
+    order: 2
+    padding: 10px 0px
+    position: absolute
+    left: 50%
+    top: 50%
+    transform: translate(-50%, -50%)
+    // margin-right: auto
+  .lg-toggle-thumb
+    order: 3
+  .lg-zoom-out
+    order: 4
+  .lg-zoom-in
+    order: 5
+  .lg-autoplay-button
+    order: 6
+  .lg-download
+    order: 7
+  .lg-fullscreen
+    order: 8
+
+.dealersColumn
+  width: 100%
+  margin: 0 auto
+  // column-count: 2
+  column-gap: 40px
+  @media ( max-width: 991px)
+    column-count: 1
+    column-gap: 0px
+  > .item
+      break-inside: avoid

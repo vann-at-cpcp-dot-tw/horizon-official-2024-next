@@ -1,0 +1,26 @@
+query QueryDealersWithRegion {
+  dealerRegions(first: 99, where: {parent: 0}) {
+    nodes {
+      slug
+      name
+      dealers(first: 99, where: {orderby: {field: MENU_ORDER, order: ASC}}) {
+        nodes {
+          title
+          slug
+          dealerCustomFields {
+            contactNumber
+            contactEmail
+            address
+            website
+          }
+          dealerRegions(where: {childless: true}) {
+            nodes {
+              name
+              slug
+            }
+          }
+        }
+      }
+    }
+  }
+}

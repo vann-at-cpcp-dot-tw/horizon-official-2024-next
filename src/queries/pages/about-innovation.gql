@@ -1,0 +1,23 @@
+query QueryPageAboutInnovation {
+  aboutInnovation {
+    aboutInnovationCustomFields {
+      featuredVideo {
+        node {
+          mediaItemUrl
+        }
+      }
+      contentList {
+        basic {
+          title
+          description
+          keyImage {
+            node {
+              mediaItemUrl
+            }
+          }
+        }
+        content
+      }
+    }
+  }
+}

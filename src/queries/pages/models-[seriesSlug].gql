@@ -1,0 +1,15 @@
+#import '../fragments/yacht.gql'
+
+query QuerySingleSeriesPage($slug:ID!) {
+  yachtSeries(id: $slug, idType: SLUG) {
+    yachts(first: 99) {
+      nodes {
+        ...yachtBasic
+        yachtCustomFields {
+          ...yachtExteriorImages
+          ...yachtSpecsTable
+        }
+      }
+    }
+  }
+}

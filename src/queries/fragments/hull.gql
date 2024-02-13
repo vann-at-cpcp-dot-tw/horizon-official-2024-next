@@ -1,0 +1,89 @@
+fragment hullSpecTerms on YachtCustomFieldsHullsSpecTerms {
+  loa {
+    metric
+    imperial
+  }
+  lwl {
+    metric
+    imperial
+  }
+  beam {
+    metric
+    imperial
+  }
+  draft {
+    metric
+    imperial
+  }
+  engines {
+    metric
+    imperial
+  }
+  generator {
+    metric
+    imperial
+  }
+  displacement {
+    metric
+    imperial
+  }
+  fuelCapacity {
+    metric
+    imperial
+  }
+  waterCapacity {
+    metric
+    imperial
+  }
+  recommendedCapacity {
+    metric
+    imperial
+  }
+  cabins {
+    metric
+    imperial
+  }
+}
+
+fragment hullExteriorImages on YachtCustomFieldsHulls {
+  exteriorImages {
+    image {
+      node {
+        mediaItemUrl
+      }
+    }
+  }
+}
+
+fragment hullInteriorImages on YachtCustomFieldsHulls {
+  interiorImages {
+    image {
+      node {
+        mediaItemUrl
+      }
+    }
+    description
+  }
+}
+
+fragment hullGeneralArrangementImages on YachtCustomFieldsHulls {
+  generalArrangementImages {
+    title
+    image {
+      node {
+        mediaItemUrl
+      }
+    }
+    imageM {
+      node {
+        mediaItemUrl
+      }
+    }
+  }
+}
+
+fragment hullEmbedVideosGallery on YachtCustomFieldsHulls {
+  embedVideosGallery {
+    embedUrl
+  }
+}

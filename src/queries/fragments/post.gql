@@ -1,0 +1,31 @@
+fragment postBasic on Post {
+  slug
+  title
+  date
+  content(format: RENDERED)
+}
+
+fragment postCoverImage on PostCustomFields {
+  coverImage {
+    node {
+      mediaItemUrl
+    }
+  }
+}
+
+fragment postGallery on PostCustomFields {
+  gallery {
+    image {
+      node {
+        mediaItemUrl
+      }
+    }
+  }
+}
+
+fragment postRelatedYachts on PostCustomFields {
+  relatedYachts {
+    seriesSlug
+    yachtSlug
+  }
+}

@@ -1,0 +1,31 @@
+query QueryHomePage {
+  homePageSettings {
+    homePageCustomFields{
+      homePageKeyVision {
+        mainTitle
+        heroImage {
+          node {
+            mediaItemUrl
+          }
+        }
+        heroVideo {
+          node {
+            mediaItemUrl
+          }
+        }
+      }
+      homePageIntroduction {
+        smallVideo {
+          node {
+            mediaItemUrl
+          }
+        }
+        innovationVideo {
+          node {
+            mediaItemUrl
+          }
+        }
+      }
+    }
+  }
+}

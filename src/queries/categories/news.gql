@@ -1,0 +1,60 @@
+#import '../fragments/post.gql'
+
+query QueryNews(
+  $first: Int
+  $last: Int
+  $after: String
+  $before: String
+  $relatedYachtSeries: String
+  $categories: [String]
+  $categoriesOperator: TaxQueryOperator = NOT_IN
+) {
+  posts(
+    first: $first
+ 		last: $last,
+    after: $after,
+    before: $before,
+    where: {
+      taxQuery: {
+        relation: AND,
+        taxArray: [
+          {
+            taxonomy: CATEGORY,
+            field: SLUG,
+            terms: ["uncategorized", "cover-story", "events"]
+            operator: NOT_IN,
+          },
+          {
+            taxonomy: CATEGORY,
+            field: SLUG,
+            terms: $categories,
+            operator: $categoriesOperator,
+          }
+        ]
+      }
+      relatedYachtSeries: $relatedYachtSeries
+    }
+  ) {
+    nodes {
+      ...postBasic
+      categories {
+        nodes {
+          slug
+          name
+          parentId
+        }
+      }
+      postCustomFields {
+        ...postCoverImage
+        ...postGallery
+        ...postRelatedYachts
+      }
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+    }
+  }
+}

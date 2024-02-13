@@ -1,0 +1,85 @@
+query QueryCommonData {
+  globalSettings {
+    mainMenu {
+      menuItemImages {
+        normal {
+          image {
+            node {
+              mediaItemUrl
+            }
+          }
+          video {
+            node {
+              mediaItemUrl
+            }
+          }
+        }
+        about {
+          image {
+            node {
+              mediaItemUrl
+            }
+          }
+          video {
+            node {
+              mediaItemUrl
+            }
+          }
+        }
+        models {
+          image {
+            node {
+              mediaItemUrl
+            }
+          }
+          video {
+            node {
+              mediaItemUrl
+            }
+          }
+        }
+      }
+      series {
+        slug
+        image {
+          node {
+            mediaItemUrl
+          }
+        }
+        video {
+          node {
+            mediaItemUrl
+          }
+        }
+        yachts {
+          slug
+          image {
+            node {
+              mediaItemUrl
+            }
+          }
+          video {
+            node {
+              mediaItemUrl
+            }
+          }
+        }
+      }
+    }
+  }
+  yachtSeriesList(first: 99) {
+    nodes {
+      slug
+      name
+      description
+      yachtsSeriesCustomFields {
+        seriesSimpleDescription
+        seriesKeyImage {
+          node {
+            mediaItemUrl
+          }
+        }
+      }
+    }
+  }
+}

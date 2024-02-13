@@ -1,0 +1,39 @@
+query QueryPageAboutHorizon {
+  aboutHorizon {
+    aboutHorizonCustomFields {
+      firstScreen {
+        backgroundVideo {
+          node {
+            mediaItemUrl
+          }
+        }
+        heroImage {
+          node {
+            mediaItemUrl
+          }
+        }
+        description
+      }
+      discoverHorizon
+      imageAfterDiscoverHorizon {
+        node {
+          mediaItemUrl
+        }
+      }
+      numericalData {
+        yachtsBuild
+        overSqftArea
+        iso9001Certified
+        employees
+      }
+      achievement {
+        image {
+          node {
+            mediaItemUrl
+          }
+        }
+      }
+      history
+    }
+  }
+}

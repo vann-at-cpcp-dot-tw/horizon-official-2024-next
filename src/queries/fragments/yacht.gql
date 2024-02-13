@@ -1,0 +1,169 @@
+#import '../fragments/hull.gql'
+
+fragment yachtBasic on Yacht {
+  slug
+  title
+}
+
+fragment yachtHeroVideo on YachtCustomFields {
+  heroVideo {
+    node {
+      mediaItemUrl
+    }
+  }
+}
+
+fragment yachtHeroImage on YachtCustomFields {
+  heroImage {
+    node {
+      mediaItemUrl
+    }
+  }
+}
+
+fragment yachtExteriorImages on YachtCustomFields {
+  exteriorImages {
+    image {
+      node {
+        mediaItemUrl
+      }
+    }
+  }
+}
+
+fragment yachtInteriorImages on YachtCustomFields {
+  interiorImages {
+    image {
+      node {
+        mediaItemUrl
+      }
+    }
+    description
+  }
+}
+
+fragment yachtGeneralArrangementImages on YachtCustomFields {
+  generalArrangementImages {
+    type
+    images {
+      title
+      image {
+        node {
+          mediaItemUrl
+        }
+      }
+      imageM {
+        node {
+          mediaItemUrl
+        }
+      }
+    }
+  }
+}
+
+fragment yachtVRPreview on YachtCustomFields {
+   vrPreview {
+    previewVideo {
+      node {
+        mediaItemUrl
+      }
+    }
+    previewImage {
+      node {
+        mediaItemUrl
+      }
+    }
+  }
+}
+
+fragment yachtVideosPreview on YachtCustomFields {
+  videosPreview {
+    previewVideo {
+      node {
+        mediaItemUrl
+      }
+    }
+    previewImage {
+      node {
+        mediaItemUrl
+      }
+    }
+  }
+}
+
+fragment yachtEmbedVideosGallery on YachtCustomFields {
+  embedVideosGallery {
+    embedUrl
+  }
+}
+
+
+fragment yachtSpecTerms on YachtCustomFieldsSpecsTableSpecTerms {
+  loa {
+    metric
+    imperial
+  }
+  lwl {
+    metric
+    imperial
+  }
+  beam {
+    metric
+    imperial
+  }
+  draft {
+    metric
+    imperial
+  }
+  engines {
+    metric
+    imperial
+  }
+  generator {
+    metric
+    imperial
+  }
+  displacement {
+    metric
+    imperial
+  }
+  fuelCapacity {
+    metric
+    imperial
+  }
+  waterCapacity {
+    metric
+    imperial
+  }
+  recommendedCapacity {
+    metric
+    imperial
+  }
+  cabins {
+    metric
+    imperial
+  }
+}
+
+fragment yachtSpecsTable on YachtCustomFields {
+  specsTable {
+    specType
+    specTerms{
+      ...yachtSpecTerms
+    }
+  }
+}
+
+fragment yachtHulls on YachtCustomFields {
+  hulls {
+    hullName
+    vrEmbedUrl
+    ...hullExteriorImages
+    ...hullInteriorImages
+    ...hullGeneralArrangementImages
+    ...hullEmbedVideosGallery
+    specTerms {
+      ...hullSpecTerms
+    }
+  }
+}

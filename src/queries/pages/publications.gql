@@ -1,0 +1,23 @@
+query QueryPublicationsPage {
+  publicationCategories {
+    nodes {
+      slug
+      name
+      publications(first: 6) {
+        nodes {
+          slug
+          title
+          publicationCustomFields {
+            album {
+              image {
+                node {
+                  mediaItemUrl
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

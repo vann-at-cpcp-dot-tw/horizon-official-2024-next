@@ -1,0 +1,13 @@
+fragment yachtSeriesBasic on YachtSeries {
+  slug
+  name
+  description
+}
+
+fragment yachtSeriesKeyImage on YachtsSeriesCustomFields {
+  seriesKeyImage {
+    node {
+      mediaItemUrl
+    }
+  }
+}

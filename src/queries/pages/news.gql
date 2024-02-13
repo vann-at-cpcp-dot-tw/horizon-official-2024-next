@@ -1,0 +1,116 @@
+#import '../fragments/post.gql'
+
+query QueryNewsPage(
+  $first: Int
+  $last: Int
+  $after: String
+  $before: String
+  $relatedYachtSeries: String
+  $categories: [String]
+  $categoriesOperator: TaxQueryOperator = NOT_IN
+) {
+  posts(
+    first: $first
+ 		last: $last,
+    after: $after,
+    before: $before,
+    where: {
+      taxQuery: {
+        relation: AND,
+        taxArray: [
+          {
+            taxonomy: CATEGORY,
+            field: SLUG,
+            terms: ["uncategorized", "cover-story", "events"]
+            operator: NOT_IN,
+          },
+          {
+            taxonomy: CATEGORY,
+            field: SLUG,
+            terms: $categories,
+            operator: $categoriesOperator,
+          }
+        ]
+      }
+      relatedYachtSeries: $relatedYachtSeries
+    }
+  ) {
+    nodes {
+      slug
+      title
+      date
+      categories {
+        nodes {
+          slug
+          name
+          parentId
+        }
+      }
+      postCustomFields {
+        ...postGallery
+        ...postRelatedYachts
+      }
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+    }
+  }
+  categories(first: 99) {
+    nodes {
+      slug
+      name
+    }
+  }
+  coverStory:category(id: "cover-story", idType: SLUG) {
+    posts(first: 1) {
+      nodes {
+        slug
+        title
+        date
+        postCustomFields {
+           ...postCoverImage
+        }
+      }
+    }
+  }
+  events:category(id: "events", idType: SLUG) {
+    posts(first: 3) {
+      nodes {
+        slug
+        title
+        date
+        postCustomFields {
+          ...postGallery
+        }
+      }
+    }
+  }
+  publicationCategory(id: "brand-publication", idType: SLUG) {
+    publications(first: 1) {
+      nodes {
+        publicationCustomFields {
+          album {
+            image {
+              node {
+                mediaItemUrl
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  newsPageSettings {
+    ownerPerspective {
+      description
+      image {
+        node {
+          mediaItemUrl
+        }
+      }
+    }
+  }
+}
