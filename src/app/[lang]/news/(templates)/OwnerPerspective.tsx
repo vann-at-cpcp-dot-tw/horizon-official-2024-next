@@ -36,7 +36,12 @@ function OwnerPerspective(props:TypeProps, ref:React.ReactNode){
             </div>
           </div>
           <div className="lg:col-6 col-12 relative">
-            <Image className="absolute left-0 top-0 z-0 h-full w-full object-cover" src={props.image} fill={true} sizes="50vw" alt=""/>
+            <Image className="w-full" src={props.image} width={1920} height={1920} alt=""
+            style={{
+              width: '100%',
+              minWidth: '100%',
+              height: 'auto',
+            }}/>
           </div>
         </div>
       </div>
