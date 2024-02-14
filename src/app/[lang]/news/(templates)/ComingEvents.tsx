@@ -70,13 +70,15 @@ function ComingEvents(props:TypeProps, ref:React.ReactNode){
 
   return <Suspense fallback={null}>
     <div className={twMerge('', className)}>
-      <div className="container serif mb-6 text-center font-300 text-minor-900">
-        <div className={`mb-2 ${props?.isSmallLayout ?'text-[28px]' :'text-[40px]'} italic`}>- ON THE -</div>
-        <div className={`-mt-6 ${props?.isSmallLayout ?'text-[53px]' :'text-[80px]'}`}>CALENDER</div>
-        {
-          props?.isSmallLayout && <div className="-mt-3 text-gray-500">Coming Events</div>
-        }
-      </div>
+      {
+        !isEmpty(list) && <div className="container serif mb-6 text-center font-300 text-minor-900">
+          <div className={`mb-2 ${props?.isSmallLayout ?'text-[28px]' :'text-[40px]'} italic`}>- ON THE -</div>
+          <div className={`-mt-6 ${props?.isSmallLayout ?'text-[53px]' :'text-[80px]'}`}>CALENDER</div>
+          {
+            props?.isSmallLayout && <div className="-mt-3 text-gray-500">Coming Events</div>
+          }
+        </div>
+      }
 
       <div className="container">
         {
