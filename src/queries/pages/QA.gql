@@ -1,0 +1,10 @@
+query QueryQA {
+  globalSettings {
+    additionalContent {
+      qaList {
+        question
+        answer
+      }
+    }
+  }
+}

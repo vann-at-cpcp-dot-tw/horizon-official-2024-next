@@ -1,0 +1,16 @@
+query QueryPolicyPage {
+  globalSettings {
+    additionalContent {
+      privacyPolicy {
+        content
+      }
+      termsAndConditions {
+        content
+      }
+      qaList {
+        question
+        answer
+      }
+    }
+  }
+}

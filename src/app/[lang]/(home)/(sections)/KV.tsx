@@ -73,6 +73,10 @@ function KV(props:TypeProps, ref:React.ReactNode){
             letterSpacing: '0.277em',
           }}>{props?.title}</div>
         </div>
+        <div className="absolute bottom-5 left-1/2 -translate-x-1/2 text-[13px] text-[#FAF8F5]">Scroll Down</div>
+        <div className="absolute bottom-5 right-5">
+          <Image src={`${BASE_PATH}/assets/img/icon_sybass.svg`} width={108} height={40} alt=""/>
+        </div>
       </motion.div>
     </div>
   </Suspense>

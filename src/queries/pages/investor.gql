@@ -1,0 +1,28 @@
+query QueryInvestorPage(
+  $first: Int
+  $after: String
+) {
+  posts:investors(
+    first: $first,
+    after: $after
+  ) {
+    nodes {
+      date
+      title
+      slug
+      customFields:investorCustomFields {
+        pdfFile {
+          node {
+            mediaItemUrl
+          }
+        }
+      }
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+    }
+  }
+}

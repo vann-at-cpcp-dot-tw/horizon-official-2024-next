@@ -7,6 +7,7 @@ import Header from '@src/components/custom/Header'
 import Footer from '@src/components/custom/Footer'
 import Providers from './providers'
 import PageTransition from "@src/components/custom/PageTransition"
+import CookiePolicy from "@src/components/custom/CookiePolicy"
 
 import 'swiper/css'
 import 'swiper/css/autoplay'
@@ -56,6 +57,7 @@ export default async function RootLayout({
             { children }
           </PageTransition>
           <Footer />
+          <CookiePolicy />
         </div>
       </Providers>
     </body>

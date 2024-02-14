@@ -1,0 +1,9 @@
+query QueryTermsPage {
+  globalSettings {
+    additionalContent {
+      termsAndConditions {
+        content
+      }
+    }
+  }
+}

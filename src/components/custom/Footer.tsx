@@ -59,19 +59,19 @@ function Footer(props:TypeProps, ref:React.ReactNode){
           <div className="col-8">
             <div className="row row-gap-8">
               <div className="col-auto border-r">
-                <LinkWithLang className="block leading-none" href="###" lang={lang}>Q<span className="text-[13px]">&</span>A</LinkWithLang>
+                <LinkWithLang className="block leading-none" href="/QA" lang={lang}>Q<span className="text-[13px]">&</span>A</LinkWithLang>
               </div>
               <div className="col-auto border-r">
                 <LinkWithLang className="block leading-none" href="###" lang={lang}>Career</LinkWithLang>
               </div>
               <div className="col-auto border-r">
-                <LinkWithLang className="block leading-none" href="###" lang={lang}>Investor</LinkWithLang>
+                <LinkWithLang className="block leading-none" href="/investor" lang={lang}>Investor</LinkWithLang>
               </div>
               <div className="col-auto border-r">
-                <LinkWithLang className="block leading-none" href="###" lang={lang}>Privacy policy</LinkWithLang>
+                <LinkWithLang className="block leading-none" href="/privacy-policy" lang={lang}>Privacy Policy</LinkWithLang>
               </div>
               <div className="col-auto">
-                <LinkWithLang className="block leading-none" href="###" lang={lang}>Terms and Conditions</LinkWithLang>
+                <LinkWithLang className="block leading-none" href="/terms-and-conditions" lang={lang}>Terms and Conditions</LinkWithLang>
               </div>
             </div>
           </div>
