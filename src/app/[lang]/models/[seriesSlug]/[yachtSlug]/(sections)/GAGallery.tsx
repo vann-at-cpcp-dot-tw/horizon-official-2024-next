@@ -74,7 +74,7 @@ function GAGallery(props:TypeProps, ref:React.ReactNode){
 
         {
           !isOpen && imageItem && <div className="container">
-            <div className="btn relative"
+            <div className="btn group relative"
             style={{
               paddingBottom: imgPaddingBottom,
               height: '1px',
@@ -82,7 +82,16 @@ function GAGallery(props:TypeProps, ref:React.ReactNode){
             onClick={()=>{
               setIsOpen(true)
             }}>
+              <div className="absolute left-0 top-0 z-10 flex h-full w-full cursor-pointer items-center justify-center opacity-0 group-hover:opacity-100"
+                style={{
+                  transition: 'all .4s'
+                }}>
+                <div className="flex h-[56px] w-[56px] items-center justify-center rounded-full bg-golden-700">
+                  <i className="bi bi-plus-lg text-[24px] text-white"></i>
+                </div>
+              </div>
               <Image
+              className="group-hover:brightness-50"
               src={imageItem}
               fill={true}
               sizes="90vw"
@@ -97,8 +106,9 @@ function GAGallery(props:TypeProps, ref:React.ReactNode){
 
         {
           isOpen && imageItem && <div className="fixed left-0 top-0 z-[99999] flex h-full w-full flex-col justify-center bg-gray-200 p-10">
-            <div className="flex">
-              <div className="btn"
+
+            <div className="sticky left-0 top-0 -ml-8 -mt-10 mb-8 flex pt-2">
+              <div className="btn bg-golden-300"
               onClick={()=>{
                 setIsOpen(false)
               }}>
@@ -116,7 +126,7 @@ function GAGallery(props:TypeProps, ref:React.ReactNode){
 
 
             <div className="flex grow !flex-nowrap overflow-hidden">
-              <div className="h-full w-full shrink px-5">
+              <div className="h-full w-full shrink px-10">
                 <div className="relative h-full w-full">
                   <Image src={imageItem} fill={true} sizes="100vw" style={{objectFit: "contain"}} alt="" />
                 </div>

@@ -36,7 +36,7 @@ export default async function PageAboutHorizon({
       <Discover content={discoverHorizon} imageAfterContent={imageAfterDiscoverHorizon?.node?.mediaItemUrl} />
     </div>
 
-    <div className="mb-[]">
+    <div className="mb-[120px]">
       <NumericalData
        yachtsBuild={numericalData?.yachtsBuild}
        overSqftArea={numericalData?.overSqftArea}

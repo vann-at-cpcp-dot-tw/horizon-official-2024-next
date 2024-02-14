@@ -60,7 +60,7 @@ function NumericalData(props:TypeProps, ref:React.ReactNode){
         </div>
       </div>
       <div className="container">
-        <div className="serif mx-auto w-full max-w-[730px] text-center text-[18px] text-gray-500">“The top 10 boat manufacturers with excellent sales performance emerged, along with the world&apos;s fifth-largest custom yacht manufacturer.”<br/><br/>- ShowBoats-Global OrderBook</div>
+        <div className="serif mx-auto w-full max-w-[730px] text-center text-[18px] text-gray-500">Horizon is willing to change major features within the predetermined envelope to suit a client, and that flexibility was important to this owner.”<br/><br/>- BOAT International</div>
       </div>
     </div>
   </Suspense>

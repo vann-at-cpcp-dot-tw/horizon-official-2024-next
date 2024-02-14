@@ -28,7 +28,7 @@ function KV(props:TypeProps, ref:React.ReactNode){
 
       <div className="py-20">
         <div className="container text-center">
-          <div className="serif mb-3 text-[32px] text-minor-900">The Group</div>
+          <div className="serif mb-3 text-[32px] text-minor-900">The Horizon Group</div>
           <div className="serif mb-6 text-[20px] text-minor-900">Horizon Group is a specialized yacht conglomerate encompassing a composite material technology company,<br/>three shipyards, and a top-tier luxury yacht marina.</div>
           <div className="text-[17px] text-gray-300">100% Crafted in Kaohsiung, Taiwan</div>
         </div>

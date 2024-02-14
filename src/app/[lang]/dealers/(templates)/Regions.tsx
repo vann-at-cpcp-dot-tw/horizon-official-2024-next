@@ -90,7 +90,7 @@ function RegionsNav(props:TypeProps, ref:React.ReactNode){
                           <div className="flex flex-nowrap items-center">
                             <div className="mb-1 shrink text-[20px] text-gray-700">{ dealerNode?.title }</div>
                             {
-                              dealerNode?.dealerCustomFields?.website && <a className="ml-2 text-golden-900" href={dealerNode?.dealerCustomFields?.website}>Website</a>
+                              dealerNode?.dealerCustomFields?.website && <a className="btn-opacity ml-2 text-golden-900" href={dealerNode?.dealerCustomFields?.website}>Website</a>
                             }
                           </div>
                           {

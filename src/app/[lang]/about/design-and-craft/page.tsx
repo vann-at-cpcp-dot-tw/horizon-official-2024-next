@@ -14,7 +14,7 @@ export default async function PageAboutDesign(){
     <div className="container py-[90px] text-minor-900">
       <div className="serif mb-8 text-center text-[32px]">Extraordinary Design and Craftsmanship</div>
       <div className="serif mx-auto w-full max-w-[900px]">
-        <p className="text-center text-[20px]">“Horizon Style” is the creative combination of the expertise of the world’s leading yacht designers coupled with the unparalleled proficiency of Horizon’s in-house team of professional naval architects. Using the most advanced visualization technology, such as 3D CAD and virtual reality, Horizon‘s design team works closely with clients to provide thoughtful design advice, fulfill lifestyle requirements, and ensure the reliability, safety and performance of every new Horizon motoryacht.</p>
+        <p className="text-center text-[20px]">The “Horizon Style” is the creative combination of the expertise of the world’s leading yacht designers coupled with the unparalleled proficiency of Horizon’s in-house team of professional naval architects, engineers and designers. Using the most advanced visualization technology, such as 3D CAD and virtual reality, Horizon‘s team works closely with clients to provide thoughtful design advice, fulfill lifestyle requirements, and ensure the reliability, safety and performance of every new Horizon luxury yacht. </p>
       </div>
     </div>
 

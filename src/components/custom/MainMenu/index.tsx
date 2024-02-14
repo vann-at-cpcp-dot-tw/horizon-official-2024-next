@@ -200,7 +200,7 @@ function MainMenu(props:TypeProps, ref:React.ReactNode){
           },
           {
             key: 'about-the-group',
-            label: 'The Group',
+            label: 'The Horizon Group',
             href: '/about/the-group'
           },
           {
@@ -210,7 +210,7 @@ function MainMenu(props:TypeProps, ref:React.ReactNode){
           },
           {
             key: 'about-design-and-craft',
-            label: 'Design and Craft',
+            label: 'Design and Craftsmanship',
             href: '/about/design-and-craft'
           },
         ]
@@ -306,7 +306,7 @@ function MainMenu(props:TypeProps, ref:React.ReactNode){
 
 
   return <Suspense fallback={null}>
-    <div className="flex cursor-pointer flex-nowrap items-center"
+    <div className="btn-opacity flex cursor-pointer flex-nowrap items-center"
       onClick={()=>{
         setIsMenuOpen(true)
         setMenuScreen({

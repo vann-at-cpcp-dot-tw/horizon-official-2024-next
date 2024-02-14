@@ -16,6 +16,7 @@ import ComingEventDetail from "./ComingEventDetail"
 // import { useWindowSize } from 'react-use'
 
 interface TypeProps {
+  isSmallLayout?: boolean
   [key:string]: any
 }
 
@@ -32,7 +33,7 @@ function ComingEvents(props:TypeProps, ref:React.ReactNode){
   const { nodes:list }:{nodes:{[key:string]:any}[]} = data?.comingEvents ?? {}
   const searchParams = useSearchParams()
   const pathname = usePathname()
-  const lightboxQuery = searchParams.get('open')
+  const lightboxQuery = searchParams.get('comingEvent')
 
   const allowLightboxIDs = useMemo(()=>{
     if( !Array.isArray(list) ){
@@ -70,8 +71,11 @@ function ComingEvents(props:TypeProps, ref:React.ReactNode){
   return <Suspense fallback={null}>
     <div className={twMerge('', className)}>
       <div className="container serif mb-6 text-center font-300 text-minor-900">
-        <div className="mb-2 text-[40px] italic">- ON THE -</div>
-        <div className="-mt-6 text-[80px]">CALENDER</div>
+        <div className={`mb-2 ${props?.isSmallLayout ?'text-[28px]' :'text-[40px]'} italic`}>- ON THE -</div>
+        <div className={`-mt-6 ${props?.isSmallLayout ?'text-[53px]' :'text-[80px]'}`}>CALENDER</div>
+        {
+          props?.isSmallLayout && <div className="-mt-3 text-gray-500">Coming Events</div>
+        }
       </div>
 
       <div className="container">
@@ -83,7 +87,7 @@ function ComingEvents(props:TypeProps, ref:React.ReactNode){
               if( isLightboxOpen ){
                 return
               }
-              router.push(`${pathname}?open=${index}`, {scroll:false})
+              router.push(`${pathname}?comingEvent=${index}`, {scroll:false})
             }}>
               <div className="serif text-[32px] italic text-minor-900 group-hover:text-golden-700">{node?.title}</div>
               <div className="row !flex-nowrap items-end">

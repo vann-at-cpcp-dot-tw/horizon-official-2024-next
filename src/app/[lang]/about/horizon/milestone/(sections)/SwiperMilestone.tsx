@@ -64,16 +64,22 @@ function SwiperMilestone(props:TypeProps, ref:React.ReactNode){
           {
             props?.list?.map?.((node, index)=>{
               return <SwiperSlide key={index}>
-                <div className="slide-inner btn"
+                <div className="slide-inner btn flex flex-col"
                 onClick={()=>{
                   swiper.slideTo(index)
                 }}>
-                  <RatioArea className="mb-3" ratio="56.25">
-                    <Image className="absolute left-0 top-0 z-0 h-full w-full object-cover" src={node.image} fill={true} alt="" />
-                  </RatioArea>
-                  <div className="description mb-10 text-[13px] font-300 text-white">{node?.description}</div>
+                  <div
+                  className="flex flex-col justify-center"
+                  style={{
+                    height: `${slideFrameSize.height + 40}px`
+                  }}>
+                    <RatioArea className="mb-3" ratio="56.25">
+                      <Image className="absolute left-0 top-0 z-0 h-full w-full object-cover" src={node.image} fill={true} alt="" />
+                    </RatioArea>
+                    <div className="description mb-10 line-clamp-2 text-[13px] font-300 text-white">{node?.description}</div>
+                  </div>
 
-                  <div className="btn">
+                  <div className="btn mt-auto">
                     <div className="mb-6 text-[12px] text-white">{node?.year}</div>
                     <div className="line"></div>
                     <div className="title line-clamp-1 text-[13px]">{node?.title}</div>

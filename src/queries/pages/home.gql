@@ -28,4 +28,42 @@ query QueryHomePage {
       }
     }
   }
+
+  posts(
+    first: 3
+    where: {
+      taxQuery: {
+        relation: AND,
+        taxArray: [
+          {
+            taxonomy: CATEGORY,
+            field: SLUG,
+            terms: ["uncategorized", "events"]
+            operator: NOT_IN,
+          },
+        ]
+      }
+    }
+  ) {
+    nodes {
+      slug
+      title
+      date
+      categories {
+        nodes {
+          slug
+          name
+        }
+      }
+      postCustomFields {
+        gallery {
+          image {
+            node {
+              mediaItemUrl
+            }
+          }
+        }
+      }
+    }
+  }
 }

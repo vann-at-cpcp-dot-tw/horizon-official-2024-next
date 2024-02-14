@@ -37,7 +37,8 @@ function IFrameGallery(props:TypeProps, ref:React.ReactNode){
       style={{
         background
       }}>
-        <div className="mb-2 flex items-center justify-center">
+
+        <div className="sticky left-0 top-0 -ml-8 -mt-10 flex pt-2">
           <div className="btn mr-auto"
             onClick={()=>{
               props.onClose()
@@ -47,7 +48,7 @@ function IFrameGallery(props:TypeProps, ref:React.ReactNode){
                 filter: 'grayscale(100) brightness(1000)'
               }}/>
           </div>
-          <div className="mr-auto">
+          <div className="mr-auto pt-6">
             <div className="row">
               {
                 props?.list?.map((node, index)=>{

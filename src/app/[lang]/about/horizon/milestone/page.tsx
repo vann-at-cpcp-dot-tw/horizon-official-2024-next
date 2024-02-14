@@ -19,9 +19,9 @@ export default async function PageHome({
   const { lang } = params
   const data = await fetchGQL(QueryMilestone)
   const { milestone } = data?.aboutHorizon?.aboutHorizonCustomFields ?? {}
-  return <main className="fixed left-0 top-0 z-[99999] flex h-full w-full flex-col justify-center bg-major-950 py-8">
+  return <main className="fixed left-0 top-0 z-[99999] flex h-full w-full flex-col justify-center bg-major-950 py-10">
 
-    <div className="container-fluid flex">
+    <div className="sticky left-0 top-0 -mt-10 ml-2 flex pt-2">
       <LinkWithLang className="btn" href={`${BASE_PATH}/about/horizon`} lang={lang}>
         <Image src={`${BASE_PATH}/assets/img/icon_menu_x.svg`} width={48} height={48} style={{filter:'grayscale(1) brightness(100)'}} alt=""/>
       </LinkWithLang>

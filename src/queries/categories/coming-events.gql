@@ -1,5 +1,5 @@
-query QueryComingEvents {
-  comingEvents(first: 99) {
+query QueryComingEvents($first:Int = 99) {
+  comingEvents(first:$first) {
     nodes {
       slug
       date

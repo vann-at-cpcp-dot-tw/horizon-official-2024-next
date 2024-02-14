@@ -11,9 +11,10 @@ import RatioArea from "@src/components/custom/RatioArea"
 import useRefSize from "@src/hooks/useDomNodeSize"
 import { motion } from "framer-motion"
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { EffectFade } from 'swiper/modules'
+import { EffectFade, FreeMode, Autoplay } from 'swiper/modules'
 import { SwiperClass } from "swiper/react"
 import 'swiper/css/effect-fade'
+import Marquee from "react-fast-marquee"
 
 // import { useRouter } from 'next/navigation'
 // import { useStore } from '@src/store'
@@ -54,76 +55,32 @@ function YachtInteriorSwiper(props:TypeProps, ref:React.ReactNode){
 
   return <Suspense fallback={null}>
     <div className={twMerge('overflow-hidden', className)}>
-      <div className="container mb-6 text-center text-gray-500">Interior</div>
+      <div className="container mb-5 text-center text-gray-500">Interior</div>
       {
-        !isOpen && <div className="swiper-yacht-interior mb-5">
-          <Swiper
-          speed={1000}
-          spaceBetween={40}
-          slidesPerView="auto"
-          initialSlide={realIndex}
-          loop
-          // centeredSlides={true}
-          // loopAdditionalSlides={14}
-          onSwiper={(e)=>{
-            setSwiper(e)
-          }}
-          onSlideChange={(e)=>{
-            setRealIndex(e.realIndex)
-          }}>
-            {
-              props?.list?.map?.((node, index)=>{
-                return <SwiperSlide className="!w-[23.42%]" key={index}>
-                  <div className="btn slide-inner"
-                onClick={()=>{
-                  swiper.slideTo(index)
-                  setIsOpen(true)
-                }}>
-                    <RatioArea ratio="56.25">
-                      <Image className="absolute left-0 top-0 z-0 h-full w-full object-cover" fill={true} sizes="23.42vw" src={node?.image?.node?.mediaItemUrl || ''} alt="" />
-                    </RatioArea>
-                  </div>
-                </SwiperSlide>
-              })
-            }
-          </Swiper>
-        </div>
-      }
-
-
-      {
-        swiper?.isLocked === false && <div className="container-fluid overflow-hidden">
-          <div className="row row-gap-2 flex-nowrap justify-center">
-            {
-              props?.list?.map((node, index)=>{
-                return <div className="col group" key={index}
-                style={{
-                  maxWidth: realIndex === index ?'68px' :'38px',
-                  transition: 'all .8s cubic-bezier(0.215, 0.610, 0.355, 1.000)',
-                }}>
-                  <div
-                  className="btn relative py-2"
+        !isOpen && <Marquee
+          speed={20}>
+          {
+            props?.list?.map?.((node, index)=>{
+              return <div className="w-[35vw] px-1.5 lg:w-[23.42vw] lg:px-2.5" key={index}>
+                <div className="btn"
                   onClick={()=>{
-                    swiper.slideTo(index)
+                    setRealIndex(index)
+                    setIsOpen(true)
                   }}>
-                    <div className="absolute w-full group-hover:!h-[2px]"
-                    style={{
-                      background: realIndex === index ?'var(--color-golden-900)' :'var(--color-gray-300)',
-                      height: realIndex === index ?'2px' :'1px',
-                    }}></div>
-                  </div>
+                  <RatioArea ratio="56.25">
+                    <Image className="absolute left-0 top-0 z-0 h-full w-full object-cover" fill={true} sizes="23.42vw" src={node?.image?.node?.mediaItemUrl || ''} alt="" />
+                  </RatioArea>
                 </div>
-              })
-            }
-          </div>
-        </div>
+              </div>
+            })
+          }
+        </Marquee>
       }
 
       {
         isOpen && <div className="fixed left-0 top-0 z-[99999] flex h-full w-full flex-col justify-center bg-golden-300 p-10">
-
-          <div className="flex">
-            <div className="btn"
+          <div className="sticky left-0 top-0 -ml-8 -mt-10 mb-8 flex pt-2">
+            <div className="btn bg-golden-300"
             onClick={()=>{
               setIsOpen(false)
             }}>
