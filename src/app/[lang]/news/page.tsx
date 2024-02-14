@@ -51,7 +51,7 @@ async function PageNews({params, searchParams}:TypeProps){
 
     <BrandPublication album={data.publicationCategory?.publications?.nodes?.[0]?.publicationCustomFields?.album} />
 
-    <OwnerPerspective image={data.newsPageSettings.image?.node?.mediaItemUrl} description={data.newsPageSettings.ownerPerspective?.description} />
+    <OwnerPerspective image={data.newsPageSettings.ownerPerspective.image?.node?.mediaItemUrl} description={data.newsPageSettings.ownerPerspective?.description} />
   </main>
 }
 
