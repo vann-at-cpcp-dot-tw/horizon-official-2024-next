@@ -8,7 +8,7 @@ import Image from "next/image"
 import LinkWithLang from "@src/components/custom/LinkWithLang"
 import { redirect } from "next/navigation"
 import { isEmpty } from '@src/lib/helpers'
-import { QueryBrokeragePage } from '@src/queries/pages/brokerage.gql'
+import { QueryCharterPage } from '@src/queries/pages/charter.gql'
 import { fetchGQL } from "@src/lib/apollo"
 import List from "@src/app/[lang]/brokerage/(templates)/List"
 
@@ -19,10 +19,10 @@ interface TypeProps {
 }
 interface TypeState {}
 
-async function PageBrokerage({params}:TypeProps){
+async function PageCharters({params}:TypeProps){
 
   const { lang } = params
-  const data = await fetchGQL(QueryBrokeragePage, {
+  const data = await fetchGQL(QueryCharterPage, {
     variables: {
       first: postsPerPage
     }
@@ -42,6 +42,7 @@ async function PageBrokerage({params}:TypeProps){
     </div>
 
     <List
+    queryPostType="charter"
     yachtConditions={yachtConditions}
     lengthOptions={settings?.lengthOptions}
     priceOptions={settings?.priceOptions}
@@ -52,4 +53,4 @@ async function PageBrokerage({params}:TypeProps){
   </main>
 }
 
-export default PageBrokerage
+export default PageCharters

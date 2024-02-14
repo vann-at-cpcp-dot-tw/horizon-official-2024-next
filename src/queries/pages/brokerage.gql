@@ -1,36 +1,33 @@
-query QueryBrokeragePage {
-  brokerageSettings {
-    brokerageSettingCustomFields {
-      brokeragePriceCurrency
-      brokerageLengthOptions {
+query QueryBrokeragePage(
+  $first: Int
+) {
+  settings:brokerageSettings {
+    customFields:brokerageSettingCustomFields {
+      priceCurrency:brokeragePriceCurrency
+      lengthOptions:brokerageLengthOptions {
         label
         minValue
         maxValue
       }
-      brokeragePriceOptions {
+      priceOptions:brokeragePriceOptions {
         label
         minValue
         maxValue
       }
-      brokerageYearOptions {
+      yearOptions:brokerageYearOptions {
         value
       }
     }
   }
-  brokerages {
+  posts:brokerages(
+    first: $first,
+  ) {
     nodes {
       slug
       title
-      brokerageCustomFields {
+      customFields:brokerageCustomFields {
         year
         price
-        yachtDescription
-        relatedPublicationSlug
-        heroImage {
-          node {
-            mediaItemUrl
-          }
-        }
         exteriorImages {
           image {
             node {
@@ -38,19 +35,18 @@ query QueryBrokeragePage {
             }
           }
         }
-        interiorImages {
-          description
-          image {
-            node {
-              mediaItemUrl
-            }
+        specTerms {
+          loa {
+            metric
+            imperial
           }
-        }
-        featuresTable {
-          tableType
-          terms {
-            termName
-            termValue
+          beam {
+            metric
+            imperial
+          }
+          engines {
+            metric
+            imperial
           }
         }
       }
@@ -60,6 +56,12 @@ query QueryBrokeragePage {
           name
         }
       }
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
     }
   }
   yachtConditions(first: 99) {
@@ -71,10 +73,17 @@ query QueryBrokeragePage {
 }
 
 query QueryBrokerages(
+  $first: Int
+  $after: String
   $yachtConditions: [String]
   $yachtConditionsOperator: TaxQueryOperator = NOT_IN
+  $yachtYear: String = ""
+  $yachtPriceRange: String = "",
+  $yachtLengthRange: String = ""
 ) {
-  brokerages(
+  posts:brokerages(
+    first: $first,
+    after: $after,
     where: {
       taxQuery: {
         relation: AND,
@@ -85,21 +94,17 @@ query QueryBrokerages(
           operator: $yachtConditionsOperator
         }
       }
+      yachtYear: $yachtYear,
+      yachtLengthRange: $yachtLengthRange,
+      yachtPriceRange: $yachtPriceRange,
     }
   ) {
     nodes {
       slug
       title
-      brokerageCustomFields {
+      customFields:brokerageCustomFields {
         year
         price
-        yachtDescription
-        relatedPublicationSlug
-        heroImage {
-          node {
-            mediaItemUrl
-          }
-        }
         exteriorImages {
           image {
             node {
@@ -107,19 +112,18 @@ query QueryBrokerages(
             }
           }
         }
-        interiorImages {
-          description
-          image {
-            node {
-              mediaItemUrl
-            }
+        specTerms {
+          loa {
+            metric
+            imperial
           }
-        }
-        featuresTable {
-          tableType
-          terms {
-            termName
-            termValue
+          beam {
+            metric
+            imperial
+          }
+          engines {
+            metric
+            imperial
           }
         }
       }
@@ -129,6 +133,12 @@ query QueryBrokerages(
           name
         }
       }
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
     }
   }
 }

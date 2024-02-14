@@ -56,8 +56,6 @@ const termsConfig = [
   }
 ]
 
-const displayTermKeys = ['loa', 'lwl', 'engines', 'recommendedCapacity', 'cabins']
-
 interface TypeTermListNode {
   key: string
   label: string
@@ -75,6 +73,7 @@ interface TypeProps {
     }
   } | undefined
   merged?: boolean
+  displayTermKeys?: string[]
   [key:string]: any
 }
 
@@ -88,7 +87,7 @@ function SpecTable(props:TypeProps, ref:React.ReactNode){
   const termList = useMemo(()=>{
     return termsConfig.reduce((acc:TypeTermListNode[], node, index)=>{
       const fieldKey = node.key
-      if( !displayTermKeys.includes(fieldKey) ){
+      if( !isEmpty(props?.displayTermKeys) && !props?.displayTermKeys?.includes(fieldKey) ){
         return acc
       }
 

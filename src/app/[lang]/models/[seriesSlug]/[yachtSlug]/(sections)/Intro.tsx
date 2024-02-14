@@ -23,8 +23,8 @@ function Intro(props:TypeProps, ref:React.ReactNode){
   // const viewport = useWindowSize()
   const { className } = props
   return <Suspense fallback={null}>
-    <div className={twMerge('', className)}>
-      <div className="container mb-24">
+    <div className={twMerge('mb-24', className)}>
+      <div className="container">
         <div className="mx-auto w-full max-w-[900px]">
           <div className="serif mb-4 text-center text-[32px] text-golden-900">{props.title}</div>
           <div className="text-[15px] leading-[1.6] text-gray-700">{props.description}</div>

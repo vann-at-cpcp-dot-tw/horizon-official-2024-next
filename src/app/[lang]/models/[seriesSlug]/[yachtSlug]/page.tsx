@@ -4,6 +4,7 @@ const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 // import { useRouter } from 'next/navigation'
 // import { useStore } from '@src/store'
 // import { useWindowSize } from 'react-use'
+import LinkWithLang from "@src/components/custom/LinkWithLang"
 import { isEmpty, convertYoutubeUrlToEmbed } from '@src/lib/helpers'
 import { fetchGQL } from "@src/lib/apollo"
 import { QuerySingleYachtPage } from '@src/queries/pages/models-[seriesSlug]-[yachtSlug].gql'
@@ -21,6 +22,8 @@ import VRPreview from "./(sections)/VRPreview"
 import VideoPreview from "./(sections)/VideoPreview"
 import Hulls from "./(sections)/Hulls"
 import Publication from "./(sections)/Publication"
+import buttonStyles from '@src/components/ui/button.module.sass'
+import { Button } from "@src/components/ui/button"
 
 interface TypeProps {
   params: {
@@ -38,7 +41,7 @@ async function PageSingleYacht(props:TypeProps, ref:React.ReactNode){
   // const router = useRouter()
   // const viewport = useWindowSize()
   const { params, searchParams } = props
-  const { yachtSlug, seriesSlug } = params
+  const { yachtSlug, seriesSlug, lang } = params
 
   const data = await fetchGQL(QuerySingleYachtPage, {
     variables: {
@@ -144,6 +147,15 @@ async function PageSingleYacht(props:TypeProps, ref:React.ReactNode){
     <Hulls yachtName={yachtTitle} list={hulls}/>
 
     <Publication {...publication} />
+
+    <div className="container py-24 text-center">
+      <div className="serif mb-6 text-[32px] text-minor-900">Personal <span className="italic">and</span>  Virtual Tours  <span className="italic">available.</span></div>
+      <div className="flex justify-center">
+        <LinkWithLang href="/contact" lang={lang}>
+          <Button className={`${buttonStyles['rounded-golden']}`}>Contact Us</Button>
+        </LinkWithLang>
+      </div>
+    </div>
   </main>
 }
 

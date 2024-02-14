@@ -2,7 +2,7 @@
 
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
-import { Suspense, useEffect, useState, useCallback } from 'react'
+import { Suspense, useEffect, useState, useCallback, useMemo } from 'react'
 import Image from "next/image"
 import LinkWithLang from "@src/components/custom/LinkWithLang"
 import { twMerge } from 'tailwind-merge'
@@ -15,6 +15,7 @@ import { useStore } from '@src/store'
 // import { useWindowSize } from 'react-use'
 
 interface TypeProps {
+  allowed?: string[]
   [key:string]: any
 }
 interface TypeState {}
@@ -64,6 +65,13 @@ function SectionNav(props:TypeProps, ref:React.ReactNode){
     }
   })
 
+  const allowed = useMemo<string[]>(()=>{
+    if( Array.isArray(props.allowed) ){
+      return props.allowed
+    }
+    return ['Exterior', 'Interior', 'SPEC', 'GA', 'VR', 'Video']
+  }, [props.allowed])
+
   return <Suspense fallback={null}>
     <div ref={navRefCallback} className={twMerge('sticky left-0 bg-golden-100 pb-4 mb-4', className)} {...props}
     style={{
@@ -71,42 +79,78 @@ function SectionNav(props:TypeProps, ref:React.ReactNode){
     }}>
       <div className="container">
         <div className="row justify-center">
-          <div className="col-auto">
-            <div className="btn text-gray-700"
-            onClick={()=>{
-              scrollTo('#SECTION_EXTERIOR')
-            }}>Exterior</div>
-          </div>
-          <div className="col-auto">
-            <div className="btn text-gray-700"
-            onClick={()=>{
-              scrollTo('#SECTION_INTERIOR', -20)
-            }}>Interior</div>
-          </div>
-          <div className="col-auto">
-            <div className="btn text-gray-700"
-            onClick={()=>{
-              scrollTo('#SECTION_SPEC', -50)
-            }}>SPEC</div>
-          </div>
-          <div className="col-auto">
-            <div className="btn text-gray-700"
-            onClick={()=>{
-              scrollTo('#SECTION_GA', -50)
-            }}>GA</div>
-          </div>
-          <div className="col-auto">
-            <div className="btn text-gray-700"
-            onClick={()=>{
-              scrollTo('#SECTION_VR', -50)
-            }}>VR</div>
-          </div>
-          <div className="col-auto">
-            <div className="btn text-gray-700"
-            onClick={()=>{
-              scrollTo('#SECTION_VIDEO', -50)
-            }}>Video</div>
-          </div>
+          {
+            allowed.includes('Exterior') && <div className="col-auto">
+              <div className="btn text-gray-700"
+              onClick={()=>{
+                scrollTo('#SECTION_EXTERIOR')
+              }}>Exterior</div>
+            </div>
+          }
+
+          {
+
+            allowed.includes('Interior') && <div className="col-auto">
+              <div className="btn text-gray-700"
+              onClick={()=>{
+                scrollTo('#SECTION_INTERIOR', -20)
+              }}>Interior</div>
+            </div>
+          }
+
+          {
+            allowed.includes('Features') && <div className="col-auto">
+              <div className="btn text-gray-700"
+              onClick={()=>{
+                scrollTo('#SECTION_FEATURES', -50)
+              }}>Features</div>
+            </div>
+          }
+
+          {
+            allowed.includes('Pricing & Toys') && <div className="col-auto">
+              <div className="btn text-gray-700"
+              onClick={()=>{
+                scrollTo('#SECTION_PRICING_TOYS', -50)
+              }}>Pricing & Toys</div>
+            </div>
+          }
+
+          {
+            allowed.includes('SPEC') && <div className="col-auto">
+              <div className="btn text-gray-700"
+              onClick={()=>{
+                scrollTo('#SECTION_SPEC', -50)
+              }}>SPEC</div>
+            </div>
+          }
+
+          {
+            allowed.includes('GA') && <div className="col-auto">
+              <div className="btn text-gray-700"
+              onClick={()=>{
+                scrollTo('#SECTION_GA', -50)
+              }}>GA</div>
+            </div>
+          }
+
+          {
+            allowed.includes('VR') && <div className="col-auto">
+              <div className="btn text-gray-700"
+              onClick={()=>{
+                scrollTo('#SECTION_VR', -50)
+              }}>VR</div>
+            </div>
+          }
+
+          {
+            allowed.includes('Video') && <div className="col-auto">
+              <div className="btn text-gray-700"
+              onClick={()=>{
+                scrollTo('#SECTION_VIDEO', -50)
+              }}>Video</div>
+            </div>
+          }
         </div>
       </div>
     </div>

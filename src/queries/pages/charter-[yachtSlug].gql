@@ -1,0 +1,107 @@
+query QuerySingleCharter(
+  $slug: ID!
+) {
+  settings:charterSettings {
+    customFields:charterSettingCustomFields {
+      priceCurrency:charterPriceCurrency
+    }
+  }
+  post:charter(
+    id: $slug
+    idType: SLUG
+  ) {
+    title
+    customFields:charterCustomFields {
+      year
+      price
+      yachtDescription
+      relatedPublicationSlug
+      heroImage {
+        node {
+          mediaItemUrl
+        }
+      }
+      exteriorImages {
+        image {
+          node {
+            mediaItemUrl
+          }
+        }
+      }
+      interiorImages {
+        description
+        image {
+          node {
+            mediaItemUrl
+          }
+        }
+      }
+      featuresTable {
+        tableType
+        terms {
+          termName
+          termValue
+        }
+      }
+      pricingToysTable {
+        tableType
+        terms {
+          termName
+          termValue
+        }
+      }
+      specTerms {
+          loa {
+            metric
+            imperial
+          }
+          lwl {
+            metric
+            imperial
+          }
+          beam {
+            metric
+            imperial
+          }
+          draft {
+            metric
+            imperial
+          }
+          engines {
+            metric
+            imperial
+          }
+          generator {
+            metric
+            imperial
+          }
+          displacement {
+            metric
+            imperial
+          }
+          fuelCapacity {
+            metric
+            imperial
+          }
+          waterCapacity {
+            metric
+            imperial
+          }
+          recommendedCapacity {
+            metric
+            imperial
+          }
+          cabins {
+            metric
+            imperial
+          }
+      }
+    }
+    yachtConditions {
+      nodes {
+        slug
+        name
+      }
+    }
+  }
+}

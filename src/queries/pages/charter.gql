@@ -1,0 +1,144 @@
+query QueryCharterPage(
+  $first: Int
+) {
+  settings:charterSettings {
+    customFields:charterSettingCustomFields {
+      priceCurrency:charterPriceCurrency
+      lengthOptions:charterLengthOptions {
+        label
+        minValue
+        maxValue
+      }
+      priceOptions:charterPriceOptions {
+        label
+        minValue
+        maxValue
+      }
+      yearOptions:charterYearOptions {
+        value
+      }
+    }
+  }
+  posts:charters(
+    first: $first,
+  ) {
+    nodes {
+      slug
+      title
+      customFields:charterCustomFields {
+        year
+        price
+        exteriorImages {
+          image {
+            node {
+              mediaItemUrl
+            }
+          }
+        }
+        specTerms {
+          loa {
+            metric
+            imperial
+          }
+          beam {
+            metric
+            imperial
+          }
+          engines {
+            metric
+            imperial
+          }
+        }
+      }
+      yachtConditions {
+        nodes {
+          slug
+          name
+        }
+      }
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+    }
+  }
+  yachtConditions(first: 99) {
+    nodes {
+      slug
+      name
+    }
+  }
+}
+
+query QueryCharters(
+  $first: Int
+  $after: String
+  $yachtConditions: [String]
+  $yachtConditionsOperator: TaxQueryOperator = NOT_IN
+  $yachtYear: String = ""
+  $yachtPriceRange: String = "",
+  $yachtLengthRange: String = ""
+) {
+  posts:charters(
+    first: $first,
+    after: $after,
+    where: {
+      taxQuery: {
+        relation: AND,
+        taxArray: {
+          taxonomy: YACHTCONDITION,
+          field: SLUG,
+          terms: $yachtConditions,
+          operator: $yachtConditionsOperator
+        }
+      }
+      yachtYear: $yachtYear,
+      yachtLengthRange: $yachtLengthRange,
+      yachtPriceRange: $yachtPriceRange,
+    }
+  ) {
+    nodes {
+      slug
+      title
+      customFields:brokerageCustomFields {
+        year
+        price
+        exteriorImages {
+          image {
+            node {
+              mediaItemUrl
+            }
+          }
+        }
+        specTerms {
+          loa {
+            metric
+            imperial
+          }
+          beam {
+            metric
+            imperial
+          }
+          engines {
+            metric
+            imperial
+          }
+        }
+      }
+      yachtConditions {
+        nodes {
+          slug
+          name
+        }
+      }
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+    }
+  }
+}
