@@ -28,7 +28,7 @@ interface TypeProps {
 interface TypeState {}
 
 export function formatCategories(categories:{[key:string]:any} | undefined){
-  const array = Array.isArray(categories?.nodes) ?categories.nodes :categories
+  const array = categories ?Array.isArray(categories?.nodes) ?categories.nodes :categories :[]
   return array?.map((catNode:{[key:string]:any})=>{
     return {
       name: catNode?.name,
