@@ -1,6 +1,6 @@
 #import '../fragments/yacht.gql'
 
-query QuerySingleYachtPage($slug:ID!) {
+query QuerySingleYachtPage($slug:ID!, $yachtSlugForRelatedPost:String) {
   yacht(id:$slug, idType: SLUG) {
     ...yachtBasic
     yachtSeriesList {
@@ -27,7 +27,7 @@ query QuerySingleYachtPage($slug:ID!) {
   posts(
     first: 3,
     where: {
-      relatedYacht: $slug,
+      relatedYacht: $yachtSlugForRelatedPost,
       taxQuery: {
         relation: AND,
         taxArray: [

@@ -46,7 +46,8 @@ async function PageSingleYacht(props:TypeProps, ref:React.ReactNode){
 
   const data = await fetchGQL(QuerySingleYachtPage, {
     variables: {
-      slug: yachtSlug
+      slug: yachtSlug,
+      yachtSlugForRelatedPost: yachtSlug // 因為線上不明原因，不認 ID! 這個 type，故再加傳一次 String
     }
   })
 
