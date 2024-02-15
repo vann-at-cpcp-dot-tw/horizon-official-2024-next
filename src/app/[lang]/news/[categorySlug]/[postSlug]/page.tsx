@@ -59,7 +59,7 @@ async function PageSinglePost({params}:TypeProps){
 
     <div className="MCE-CONTENT mb-10">
       <div className="container" style={{ maxWidth:'940px' }}>
-        <div className="mx-auto w-full" dangerouslySetInnerHTML={{__html:post?.content}}></div>
+        <div className="mx-auto w-full" dangerouslySetInnerHTML={{__html:post?.content || ''}}></div>
       </div>
     </div>
 

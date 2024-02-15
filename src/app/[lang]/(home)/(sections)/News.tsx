@@ -38,7 +38,8 @@ function News(props:TypeProps, ref:React.ReactNode){
         filteredCategories: node?.categories?.nodes?.map((catNode:{[key:string]:any})=>{
           return {
             name: catNode?.name,
-            href: `/news/${catNode?.slug}`
+            href: `/news/${catNode?.slug}`,
+            slug: catNode?.slug
           }
         })
       }
