@@ -24,6 +24,7 @@ import Hulls from "./(sections)/Hulls"
 import Publication from "./(sections)/Publication"
 import buttonStyles from '@src/components/ui/button.module.sass'
 import { Button } from "@src/components/ui/button"
+import News from "@src/app/[lang]/(home)/(sections)/News"
 
 interface TypeProps {
   params: {
@@ -144,9 +145,20 @@ async function PageSingleYacht(props:TypeProps, ref:React.ReactNode){
       <VideoPreview preview={videosPreview} gallery={youtubeEmbedUrls} />
     </div>
 
-    <Hulls yachtName={yachtTitle} list={hulls}/>
+    <div id="SECTION_HULLS">
+      <Hulls yachtName={yachtTitle} list={hulls}/>
+    </div>
 
     <Publication {...publication} />
+
+    {
+      data?.posts?.nodes && <div className="bg-gray-200 py-20">
+        <div className="container">
+          <div className="serif mb-4 text-center text-[24px] text-gray-900">NEWS</div>
+          <News className="pb-0" list={data?.posts?.nodes} lang={lang} />
+        </div>
+      </div>
+    }
 
     <div className="container py-24 text-center">
       <div className="serif mb-6 text-[32px] text-minor-900">Personal <span className="italic">and</span>  Virtual Tours  <span className="italic">available.</span></div>

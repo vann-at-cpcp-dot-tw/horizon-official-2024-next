@@ -68,7 +68,7 @@ function QAList(props:TypeProps, ref:React.ReactNode){
             initial="exit"
             exit="exit"
             animate={active === index ?'enter' :'exit'}>
-              <div className="pt-5">{node.answer}</div>
+              <div className="pt-5" dangerouslySetInnerHTML={{__html:node.answer}}></div>
             </motion.div>
           </div>
         })

@@ -83,7 +83,7 @@ function ComingEvents(props:TypeProps, ref:React.ReactNode){
       <div className="container">
         {
           list?.map((node, index:number)=>{
-            return <div className={`group border-b border-gray-300 py-3 hover:bg-minor-900 hover:px-5 ${index === 0 ?'border-t' :''} ${!isLightboxOpen ?'btn' :''}`}
+            return <div className={`group border-b border-gray-300 py-3 ${index === 0 ?'border-t' :''} ${!isLightboxOpen ?'btn-opacity' :''}`}
             key={index}
             onClick={()=>{
               if( isLightboxOpen ){
@@ -91,13 +91,13 @@ function ComingEvents(props:TypeProps, ref:React.ReactNode){
               }
               router.push(`${pathname}?comingEvent=${index}`, {scroll:false})
             }}>
-              <div className="serif text-[32px] italic text-minor-900 group-hover:text-golden-700">{node?.title}</div>
+              <div className="serif text-[32px] italic text-minor-900">{node?.title}</div>
               <div className="row !flex-nowrap items-end">
                 <div className="col-12 shrink">
-                  <div className="text-[20px] font-300 text-golden-700 group-hover:text-golden-500">{node?.comingEventCustomFields?.scheduleDate}</div>
+                  <div className="text-[20px] font-300 text-golden-700">{node?.comingEventCustomFields?.scheduleDate}</div>
                 </div>
                 <div className="col-auto flex">
-                  <div className="btn-text border-gray-700 text-gray-700 group-hover:border-golden-500 group-hover:text-golden-500">More info</div>
+                  <div className="btn-text border-gray-700 text-gray-700">More info</div>
                 </div>
               </div>
 

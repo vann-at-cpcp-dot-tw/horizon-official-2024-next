@@ -48,9 +48,9 @@ function News(props:TypeProps, ref:React.ReactNode){
   }, [props.list])
 
   return <Suspense fallback={null}>
-    <div className={twMerge('', className)}>
+    <div className={twMerge('pb-24', className)}>
       <div className="container">
-        <div className="row">
+        <div className="row justify-center">
           {
             posts?.map((node:{[key:string]:any}, index:number)=>{
               return <div className="lg:col-4 col-12 mb-10" key={index}>
@@ -65,7 +65,7 @@ function News(props:TypeProps, ref:React.ReactNode){
           }
         </div>
       </div>
-      <div className="container flex justify-center pb-24">
+      <div className="container flex justify-center">
         <LinkWithLang href="/news" lang={props.lang}>
           <span className="btn-text text-gray-700">More News</span>
         </LinkWithLang>

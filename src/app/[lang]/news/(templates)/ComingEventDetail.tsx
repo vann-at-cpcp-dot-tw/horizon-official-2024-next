@@ -269,7 +269,7 @@ function ComingEventDetail(props:TypeProps, ref:React.ReactNode){
             !isEmpty(hullList) && <div className="mb-[96px]">
               <div className="container serif mb-6 text-center text-[40px] italic text-major-900">ON DISPLAY</div>
               <div className="container-fluid mb-[96px]">
-                <div className="row">
+                <div className="row justify-center">
                   {
                     hullList.map((node, index)=>{
                       return <div className="col-6 mb-5" key={index}>

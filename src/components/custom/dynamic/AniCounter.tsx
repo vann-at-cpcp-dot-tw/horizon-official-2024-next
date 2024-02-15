@@ -32,7 +32,7 @@ function DynamicAniCounter(props:TypeProps, ref:React.ReactNode){
     }
 
     if( !isInView ){
-      node.textContent = numberWithCommas(props.from)
+      node.textContent = props.from === 0 ?'-' :numberWithCommas(props.from)
       return
     }
 

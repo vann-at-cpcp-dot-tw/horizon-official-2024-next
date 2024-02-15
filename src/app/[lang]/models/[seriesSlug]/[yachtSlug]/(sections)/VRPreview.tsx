@@ -38,6 +38,19 @@ interface TypeProps {
 
 interface TypeState {}
 
+function scrollTo(targetSelector:string, offset=0){
+  const app = (document.getElementById('app') as HTMLElement)
+  const target = (document.querySelector(targetSelector) as HTMLElement)
+  if( !target || !app ){
+    return
+  }
+
+  window.scrollTo({
+    top: target.offsetTop - (Number(app.style.paddingTop.split('px')[0])  + offset),
+    behavior: 'smooth'
+  })
+}
+
 function VRPreview(props:TypeProps, ref:React.ReactNode){
   // const store = useStore()
   // const router = useRouter()
@@ -81,7 +94,10 @@ function VRPreview(props:TypeProps, ref:React.ReactNode){
       </RatioArea>
 
       <div className="container pb-20 pt-6 text-center">
-        <div className="btn-text text-gray-700">More Virtual Tour</div>
+        <div className="btn-text text-gray-700"
+        onClick={()=>{
+          scrollTo('#SECTION_HULLS', -10)
+        }}>More Virtual Tour</div>
       </div>
     </div>
 

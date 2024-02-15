@@ -62,12 +62,21 @@ function YachtInteriorSwiper(props:TypeProps, ref:React.ReactNode){
           {
             props?.list?.map?.((node, index)=>{
               return <div className="w-[35vw] px-1.5 lg:w-[23.42vw] lg:px-2.5" key={index}>
-                <div className="btn"
+                <div className="btn group"
                   onClick={()=>{
                     setRealIndex(index)
                     setIsOpen(true)
                   }}>
                   <RatioArea ratio="56.25">
+                    <div className="absolute left-0 top-0 z-10 flex h-full w-full cursor-pointer items-center justify-center opacity-0 group-hover:opacity-100"
+                    style={{
+                      background: 'rgba(0, 46, 79, 0.5)',
+                      transition: 'all .4s'
+                    }}>
+                      <div className="flex h-[56px] w-[56px] items-center justify-center rounded-full bg-golden-700">
+                        <i className="bi bi-plus-lg text-[24px] text-white"></i>
+                      </div>
+                    </div>
                     <Image className="absolute left-0 top-0 z-0 h-full w-full object-cover" fill={true} sizes="23.42vw" src={node?.image?.node?.mediaItemUrl || ''} alt="" />
                   </RatioArea>
                 </div>

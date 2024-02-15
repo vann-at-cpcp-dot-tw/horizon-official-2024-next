@@ -48,7 +48,7 @@ function OverflowContent(props:TypeProps, ref:React.ReactNode){
           margin: `0px 0px -${viewport.height / 4}px 0px`
         }}
         transition={{
-          duration: props?.duration || 1.2,
+          duration: props?.duration || 1.6,
           delay: props?.delay || 0,
           ease: [0.215, 0.610, 0.355, 1.000]
         }}>
