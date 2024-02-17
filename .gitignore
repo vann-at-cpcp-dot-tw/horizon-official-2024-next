@@ -31,6 +31,9 @@ yarn-error.log*
 # i18n setting
 i18n.config.ts
 
+# editor
+/.vscode
+
 # vercel
 .vercel
 
