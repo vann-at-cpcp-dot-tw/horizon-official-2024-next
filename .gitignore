@@ -32,7 +32,7 @@ yarn-error.log*
 i18n.config.ts
 
 # editor
-/.vscode
+.vscode
 
 # vercel
 .vercel
