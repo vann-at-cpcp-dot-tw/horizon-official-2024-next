@@ -4,7 +4,7 @@ import { registerApolloClient } from "@apollo/experimental-nextjs-app-support/rs
 import { TypedDocumentNode } from "@graphql-typed-document-node/core"
 
 const API_URL = `${process.env.NEXT_PUBLIC_API_BASE}graphql`
-const revalidate = process.env.NEXT_PUBLIC_REVALIDATE || 60
+const revalidate = Number(process.env.NEXT_PUBLIC_REVALIDATE || 60)
 
 interface TypeFetchQLArgs {
   variables?:{
