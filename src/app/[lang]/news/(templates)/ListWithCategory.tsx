@@ -14,7 +14,7 @@ import { useLazyQuery } from "@apollo/client"
 import { QueryPostsByCategory } from '@src/queries/pages/news-[categorySlug].gql'
 import PageNav from "@src/components/custom/PageNav"
 import Loading from "@src/components/custom/icons/Loading"
-import ListItem from "./ListItem"
+import NewsListItem from "./ListItem"
 import { CommonDataContext } from '@src/app/[lang]/providers'
 import { TypePostNode } from "./ListNewsPage"
 
@@ -144,7 +144,7 @@ function ListWithCategory(props:TypeProps, ref:React.ReactNode){
           {
             highlightList?.map((node:TypePostNode, index:number)=>{
               return <div className={`mb-10 ${categorySlug === 'events' ?'lg:col-4 col-6' :'lg:col-6 col-12'}`} key={index}>
-                <ListItem
+                <NewsListItem
                 href={`/news/${categorySlug}/${node.slug}`}
                 title={node?.title}
                 date={node?.date}
@@ -156,7 +156,7 @@ function ListWithCategory(props:TypeProps, ref:React.ReactNode){
           {
             gridList?.map((node:TypePostNode, index:number)=>{
               return <div className="lg:col-4 col-6 mb-10" key={index}>
-                <ListItem
+                <NewsListItem
                 href={`/news/${categorySlug}/${node.slug}`}
                 title={node?.title}
                 date={node?.date}

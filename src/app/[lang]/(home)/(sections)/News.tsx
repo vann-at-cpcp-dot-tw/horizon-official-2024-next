@@ -9,7 +9,7 @@ import Image from "next/image"
 import LinkWithLang from "@src/components/custom/LinkWithLang"
 import { twMerge } from 'tailwind-merge'
 import { isEmpty } from '@src/lib/helpers'
-import ListItem from "../../news/(templates)/ListItem"
+import NewsListItem from "../../news/(templates)/ListItem"
 
 // import { useRouter } from 'next/navigation'
 // import { useStore } from '@src/store'
@@ -55,7 +55,7 @@ function News(props:TypeProps, ref:React.ReactNode){
           {
             posts?.map((node:{[key:string]:any}, index:number)=>{
               return <div className="lg:col-4 col-12 mb-10" key={index}>
-                <ListItem
+                <NewsListItem
                 href={`/news/${node?.filteredCategories?.[0]?.slug}/${node.slug}`}
                 title={node?.title}
                 date={node?.date}

@@ -1,5 +1,5 @@
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
-
+import '@root/public/import.css'
 import '@src/styles/main.sass'
 import { isEmpty, fetchGraphQL } from '@src/lib/helpers'
 import { QueryCommonData } from '@src/queries/categories/commonData.gql'

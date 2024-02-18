@@ -10,7 +10,7 @@ import { twMerge } from 'tailwind-merge'
 import { isEmpty } from '@src/lib/helpers'
 import { useQuery } from "@apollo/client"
 import { QueryRelatedPosts } from "@src/queries/pages/news-[categorySlug]-[postSlug].gql"
-import ListItem from "./ListItem"
+import NewsListItem from "./ListItem"
 import { formatCategories } from "./ListItem"
 // import { useRouter } from 'next/navigation'
 // import { useStore } from '@src/store'
@@ -63,7 +63,7 @@ function RelatedPosts(props:TypeProps, ref:React.ReactNode){
           {
             posts?.map((node:{[key:string]:any}, index)=>{
               return <div className="lg:col-4 col-12 mb-6" key={index}>
-                <ListItem
+                <NewsListItem
                 href={`/news/${props.categorySlug}/${node.slug}`}
                 title={node?.title}
                 date={node?.date}

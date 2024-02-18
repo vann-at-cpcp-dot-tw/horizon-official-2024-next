@@ -15,7 +15,7 @@ import { useLazyQuery } from "@apollo/client"
 import { QueryNews } from '@src/queries/categories/news.gql'
 import PageNav from "@src/components/custom/PageNav"
 import Loading from "@src/components/custom/icons/Loading"
-import ListItem from "./ListItem"
+import NewsListItem from "./ListItem"
 import { CommonDataContext } from '@src/app/[lang]/providers'
 import { formatCategories } from "./ListItem"
 
@@ -230,7 +230,7 @@ function List(props:TypeProps, ref:React.ReactNode){
           {
             mergedList?.map((node:TypePostNode, index:number)=>{
               return <div className="lg:col-6 col-12 mb-10" key={index}>
-                <ListItem
+                <NewsListItem
                 href={`/news/${node?.filteredCategories?.[0]?.slug}/${node.slug}`}
                 title={node?.title}
                 date={node?.date}

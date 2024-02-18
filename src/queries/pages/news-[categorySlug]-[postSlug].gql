@@ -1,5 +1,6 @@
 query QuerySinglePost($categorySlug: ID!, $postSlug: String) {
   category(id: $categorySlug, idType: SLUG) {
+    id
     posts(where: {name: $postSlug}, first: 1) {
       nodes {
         title
@@ -37,6 +38,7 @@ query QuerySinglePost($categorySlug: ID!, $postSlug: String) {
 
 query QueryRelatedPosts($categorySlug:ID!, $after:String, $before:String, $first:Int, $last:Int) {
   category(id:$categorySlug, idType: SLUG) {
+    id
     posts(
       after: $after
       before: $before

@@ -5,6 +5,7 @@ import { Suspense, useEffect, useState } from 'react'
 import { isEmpty } from '@src/lib/helpers'
 import { motion } from 'framer-motion'
 import Loading from "../icons/Loading"
+import useImageBlurHashes from "@root/src/hooks/useImageBlurHashes"
 
 const variants = {
   enter: {
@@ -35,6 +36,7 @@ interface TypeState {}
 
 function MenuVision(props:TypeProps, ref:React.ReactNode){
   const [mediaLoaded, setMediaLoaded] = useState(false)
+  const imageBlurHashes = useImageBlurHashes([props?.image])
 
   return <Suspense fallback={null}>
     <div className="absolute left-0 top-0 z-0 h-full w-full">
@@ -89,7 +91,9 @@ function MenuVision(props:TypeProps, ref:React.ReactNode){
               onCanPlay={()=>{
                 setMediaLoaded(true)
               }}></video>
-              : <Image className="absolute left-0 top-0 z-0 h-full w-full object-cover" fill={true} src={props?.image} alt=""
+              : <Image className="absolute left-0 top-0 z-0 h-full w-full object-cover" fill={true} src={props?.image}
+              alt=""
+              blurDataURL={imageBlurHashes[0]}
               onLoad={()=>{
                 setMediaLoaded(true)
               }} />

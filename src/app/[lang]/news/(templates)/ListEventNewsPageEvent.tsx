@@ -9,7 +9,7 @@ import RatioArea from "@src/components/custom/RatioArea"
 // import { useRouter } from 'next/navigation'
 // import { useStore } from '@src/store'
 // import { useWindowSize } from 'react-use'
-import ListItem from "./ListItem"
+import NewsListItem from "./ListItem"
 
 interface TypeProps {
   list: {
@@ -46,10 +46,10 @@ function EventSmallList(props:TypeProps, ref:React.ReactNode){
           {
             props.list?.map?.((node, index)=>{
               return <div className="lg:col-4 col-12 mb-10" key={index}>
-                <ListItem
+                <NewsListItem
                 title={node.title}
                 date={node.date}
-                href={`/news/${node.slug}`}
+                href={`/news/events/${node.slug}`}
                 thumbnail={node?.postCustomFields?.gallery?.[0]?.image?.node?.mediaItemUrl || ''}
                 categories={[
                   {
