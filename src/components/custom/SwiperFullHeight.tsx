@@ -38,7 +38,7 @@ function SwiperFullHeight(props:TypeProps, ref:React.ReactNode){
     <div className={twMerge('absolute w-full h-full left-0 top-0 flex flex-col flex-nowrap overflow-hidden', className)}>
       <div className="flex grow !flex-nowrap overflow-hidden">
         <div className="flex flex-none items-center">
-          <div className={`btn group flex size-12 items-center justify-center rounded-full border border-gray-900 hover:border-golden-900 hover:bg-golden-900 ${swiper.isBeginning ?'disabled opacity-50' :''}`}
+          <div className={`btn size-12 group flex items-center justify-center rounded-full border border-gray-900 hover:border-golden-900 hover:bg-golden-900 ${swiper.isBeginning ?'disabled opacity-50' :''}`}
               onClick={()=>{
                 swiper.slidePrev()
               }}>
@@ -64,10 +64,10 @@ function SwiperFullHeight(props:TypeProps, ref:React.ReactNode){
             {
               props?.list?.map?.((node, index)=>{
                 return <SwiperSlide key={index}>
-                  <div className="relative size-full">
+                  <div className="size-full relative">
                     { node.content }
                     {
-                      (node?.embedUrl && realIndex === index) && <iframe className="absolute left-0 top-0 z-10 size-full" src={node.embedUrl} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
+                      (node?.embedUrl && realIndex === index) && <iframe className="size-full absolute left-0 top-0 z-10" src={node.embedUrl} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
                     }
                   </div>
                 </SwiperSlide>
@@ -77,7 +77,7 @@ function SwiperFullHeight(props:TypeProps, ref:React.ReactNode){
         </div>
 
         <div className="flex flex-none items-center">
-          <div className={`btn group flex size-12 items-center justify-center rounded-full border border-gray-900 hover:border-golden-900 hover:bg-golden-900 ${swiper.isEnd ?'disabled opacity-50' :''}`}
+          <div className={`btn size-12 group flex items-center justify-center rounded-full border border-gray-900 hover:border-golden-900 hover:bg-golden-900 ${swiper.isEnd ?'disabled opacity-50' :''}`}
               onClick={()=>{
                 swiper.slideNext()
               }}>

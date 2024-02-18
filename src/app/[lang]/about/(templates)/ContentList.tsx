@@ -101,7 +101,7 @@ function ContentList(props:TypeProps, ref:React.ReactNode){
                   background: 'rgba(0, 46, 79, 0.5)',
                   transition: 'all .4s'
                 }}>
-                  <div className="flex size-[56px] items-center justify-center rounded-full bg-golden-700">
+                  <div className="size-[56px] flex items-center justify-center rounded-full bg-golden-700">
                     <i className="bi bi-plus-lg text-[24px] text-white"></i>
                   </div>
                 </div>

@@ -259,7 +259,7 @@ export const fetchGraphQL = async function fetchAPI(query, { variables } = {}) {
         variables,
       }),
       next: {
-        revalidate: 60
+        revalidate: process.env.NEXT_PUBLIC_REVALIDATE || 60
       },
     })
 

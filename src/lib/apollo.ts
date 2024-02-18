@@ -4,6 +4,7 @@ import { registerApolloClient } from "@apollo/experimental-nextjs-app-support/rs
 import { TypedDocumentNode } from "@graphql-typed-document-node/core"
 
 const API_URL = `${process.env.NEXT_PUBLIC_API_BASE}graphql`
+const revalidate = process.env.NEXT_PUBLIC_REVALIDATE || 60
 
 interface TypeFetchQLArgs {
   variables?:{
@@ -34,13 +35,17 @@ export const fetchGQL = async function(query:TypedDocumentNode, args?:TypeFetchQ
     context: context
       ? {
         fetchOptions: {
-          next: { revalidate: 60 },
+          next: {
+            revalidate
+          },
         },
         ...context
       }
       : {
         fetchOptions: {
-          next: { revalidate: 60 },
+          next: {
+            revalidate
+          },
         },
       },
   })

@@ -81,7 +81,7 @@ function VideoPreview(props:TypeProps, ref:React.ReactNode){
           onClick={()=>{
             setIsOpen(true)
           }}>
-            <div className="pointer-events-none absolute flex size-[64px] items-center justify-center rounded-full border border-white"
+            <div className="size-[64px] pointer-events-none absolute flex items-center justify-center rounded-full border border-white"
             style={{
               background: 'rgba(255,255,255,0.5)',
               ...(

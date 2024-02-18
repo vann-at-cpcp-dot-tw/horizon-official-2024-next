@@ -46,7 +46,7 @@ function LightboxClose(props:TypeProps){
   }, [])
 
   return <div className={twMerge('close flex justify-end', props?.className)}>
-    <div className="btn flex size-10 items-center justify-center"
+    <div className="btn size-10 flex items-center justify-center"
     onClick={()=>{
       store.lightboxClose(props.id)
     }}
@@ -54,7 +54,7 @@ function LightboxClose(props:TypeProps){
       marginRight: viewport.width >= 992 ?'-20px' :'-10px',
       marginTop: viewport.width >= 992 ?'-20px' :'-10px',
     }}>
-      <i className="bi bi-x-lg font-900 text-[28px] leading-none text-secondary lg:text-[32px]"
+      <i className="bi bi-x-lg text-[28px] font-900 leading-none text-secondary lg:text-[32px]"
       style={{
         color: props.color,
       }}></i>

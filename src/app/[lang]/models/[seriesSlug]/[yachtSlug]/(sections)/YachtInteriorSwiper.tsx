@@ -73,7 +73,7 @@ function YachtInteriorSwiper(props:TypeProps, ref:React.ReactNode){
                       background: 'rgba(0, 46, 79, 0.5)',
                       transition: 'all .4s'
                     }}>
-                      <div className="flex size-[56px] items-center justify-center rounded-full bg-golden-700">
+                      <div className="size-[56px] flex items-center justify-center rounded-full bg-golden-700">
                         <i className="bi bi-plus-lg text-[24px] text-white"></i>
                       </div>
                     </div>
@@ -99,7 +99,7 @@ function YachtInteriorSwiper(props:TypeProps, ref:React.ReactNode){
 
           <div className="flex grow !flex-nowrap overflow-hidden">
             <div className="flex flex-none items-center">
-              <div className={`btn group flex size-12 items-center justify-center rounded-full border border-gray-900 hover:border-golden-900 hover:bg-golden-900 ${swiperZoom.isBeginning ?'disabled opacity-50' :''}`}
+              <div className={`btn size-12 group flex items-center justify-center rounded-full border border-gray-900 hover:border-golden-900 hover:bg-golden-900 ${swiperZoom.isBeginning ?'disabled opacity-50' :''}`}
               onClick={()=>{
                 swiperZoom.slidePrev()
               }}>
@@ -135,7 +135,7 @@ function YachtInteriorSwiper(props:TypeProps, ref:React.ReactNode){
             </div>
 
             <div className="flex flex-none items-center">
-              <div className={`btn group flex size-12 items-center justify-center rounded-full border border-gray-900 hover:border-golden-900 hover:bg-golden-900 ${swiperZoom.isEnd ?'disabled opacity-50' :''}`}
+              <div className={`btn size-12 group flex items-center justify-center rounded-full border border-gray-900 hover:border-golden-900 hover:bg-golden-900 ${swiperZoom.isEnd ?'disabled opacity-50' :''}`}
               onClick={()=>{
                 swiperZoom.slideNext()
               }}>
