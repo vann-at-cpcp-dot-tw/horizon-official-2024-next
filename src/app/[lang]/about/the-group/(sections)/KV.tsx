@@ -1,4 +1,3 @@
-"use client"
 
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 import Image from "next/image"
@@ -8,9 +7,10 @@ import { useStore } from '@src/store'
 import { twMerge } from 'tailwind-merge'
 import { isEmpty } from '@src/lib/helpers'
 import RatioArea from "@src/components/custom/RatioArea"
-
+import ImageAutoPlaceholder from "@src/components/custom/ImageWithPlaceholder"
 interface TypeProps {
   heroImage: string
+  heroImagePlaceHolder?: string
   [key:string]: any
 }
 
@@ -23,7 +23,7 @@ function KV(props:TypeProps, ref:React.ReactNode){
   return <Suspense fallback={null}>
     <div className={twMerge('relative  w-full', className)}>
       <RatioArea ratio="42.85">
-        <Image className="absolute left-0 top-0 h-full w-full" src={props?.heroImage} fill={true} alt="" />
+        <ImageAutoPlaceholder className="absolute left-0 top-0 h-full w-full" src={props?.heroImage} fill={true} />
       </RatioArea>
 
       <div className="py-20">
