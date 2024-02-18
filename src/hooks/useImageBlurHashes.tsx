@@ -22,7 +22,7 @@ export default function useImageBlurHashes(imgUrlList:(string | undefined)[], ar
 
     genImageBlurHashes()
 
-  }, [imgUrlList])
+  }, [imgUrlList, w, q])
 
   return imageBlurHashes
 }
