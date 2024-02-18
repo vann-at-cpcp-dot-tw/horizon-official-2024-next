@@ -8,7 +8,7 @@ import KV from "./(sections)/KV"
 import CompaniesGrids from "./(sections)/CompaniesGrids"
 import GroupIntroduction from "./(sections)/GroupIntroduction"
 import CompaniesIntros from "./(sections)/CompaniesIntros"
-
+import { genImageBlurHash } from "@root/src/lib/genImageBlurHash"
 interface TypeProps {
   params: {
     lang: string
@@ -25,9 +25,10 @@ async function PageAboutTheGroup({params}:TypeProps){
     atgpGroupIntroduction:groupIntroduction,
     atgpOrganization:organizationRows
   } = data?.aboutTheGroup?.aboutTheGroupCustomFields ?? {}
+  const heroImagePlaceHolder = await genImageBlurHash(heroImage?.node?.mediaItemUrl)
 
   return <main className="pb-[90px]">
-    <KV heroImage={heroImage?.node?.mediaItemUrl || ''} />
+    <KV heroImage={heroImage?.node?.mediaItemUrl || ''} heroImagePlaceHolder={heroImagePlaceHolder} />
     <CompaniesGrids organizationRows={organizationRows} />
     <GroupIntroduction content={groupIntroduction || ''} />
     <CompaniesIntros organizationRows={organizationRows} />

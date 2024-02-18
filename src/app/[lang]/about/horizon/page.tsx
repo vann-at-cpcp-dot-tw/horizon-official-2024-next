@@ -4,6 +4,7 @@ import { Button } from '@src/components/ui/button'
 import { fetchGQL } from "@src/lib/apollo"
 import { QueryPageAboutHorizon } from '@src/queries/pages/about-horizon.gql'
 import Image from "next/image"
+import milestonePic from '@root/public/assets/img/bg_about_milestone.jpg'
 
 import KV from "./(sections)/KV"
 import Discover from "./(sections)/Discover"
@@ -12,7 +13,7 @@ import Achievement from "./(sections)/Achievement"
 import History from "./(sections)/History"
 import RatioArea from "@src/components/custom/RatioArea"
 import LinkWithLang from "@src/components/custom/LinkWithLang"
-
+import ImageAutoPlaceholder from "@src/components/custom/ImageWithPlaceholder"
 
 export default async function PageAboutHorizon({
   params
@@ -29,7 +30,7 @@ export default async function PageAboutHorizon({
   return <main>
     <KV
     background={firstScreen?.backgroundVideo?.node?.mediaItemUrl}
-    heroImage={firstScreen?.heroImage?.node?.mediaItemUrl}
+    heroImageNode={<ImageAutoPlaceholder src={`${firstScreen?.heroImage?.node?.mediaItemUrl}`} width={1920} height={1080} />}
     description={firstScreen?.description} />
 
     <div className="py-20">
@@ -59,7 +60,12 @@ export default async function PageAboutHorizon({
             <LinkWithLang className="border-b-[3px] border-b-white pb-1" href="/about/horizon/milestone" lang={lang}>Discover</LinkWithLang>
           </div>
         </div>
-        <Image className="absolute left-0 top-0 z-0 h-full w-full object-cover" src={`${BASE_PATH}/assets/img/bg_about_milestone.jpg`} fill={true} alt="" />
+
+        <Image className="absolute left-0 top-0 z-0 h-full w-full object-cover"
+        src={milestonePic}
+        fill={true}
+        placeholder="blur"
+        alt="" />
       </RatioArea>
     </div>
   </main>

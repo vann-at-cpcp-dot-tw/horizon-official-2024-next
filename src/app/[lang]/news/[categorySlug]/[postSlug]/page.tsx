@@ -8,6 +8,7 @@ import { fetchGQL } from "@src/lib/apollo"
 import Breadcrumb from "@src/components/custom/Breadcrumb"
 import PostSwiper from "./(templates)/PostSwiper"
 import RelatedPosts from "../../(templates)/RelatedPosts"
+import { genImageBlurHash } from "@src/lib/genImageBlurHash"
 
 interface TypeProps {
   params: {
@@ -26,7 +27,15 @@ async function PageSinglePost({params}:TypeProps){
     }
   })
   const post = data?.category?.posts?.nodes?.[0]
-  const pageInfo = data?.category?.posts?.pageInfo
+  const galleryWithPlaceholder = await Promise.all(
+    post?.postCustomFields?.gallery.map(async (node:any) => {
+      const base64 = await genImageBlurHash(node?.image?.node?.mediaItemUrl)
+      return {
+        ...node,
+        placeholder: base64,
+      }
+    })
+  )
 
   return <main className="relative pb-[60px]">
     <Breadcrumb className="pb-5 pt-10"
@@ -54,7 +63,7 @@ async function PageSinglePost({params}:TypeProps){
     </div>
 
     <div className="container mb-10" style={{ maxWidth:'940px' }}>
-      <PostSwiper gallery={post?.postCustomFields?.gallery} />
+      <PostSwiper gallery={galleryWithPlaceholder} />
     </div>
 
     <div className="MCE-CONTENT mb-10">

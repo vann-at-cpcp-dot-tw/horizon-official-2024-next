@@ -19,6 +19,7 @@ interface TypeProps {
     year: string
     title: string
     image: string
+    placeholder?: string
     description?: string
   }[]
   [key:string]: any
@@ -74,7 +75,14 @@ function SwiperMilestone(props:TypeProps, ref:React.ReactNode){
                     height: `${slideFrameSize.height + 40}px`
                   }}>
                     <RatioArea className="mb-3" ratio="56.25">
-                      <Image className="absolute left-0 top-0 z-0 h-full w-full object-cover" src={node.image} fill={true} alt="" />
+                      <Image
+                      className="absolute left-0 top-0 z-0 h-full w-full object-cover"
+                      src={node.image}
+                      fill={true}
+                      sizes="50vw"
+                      placeholder={node?.placeholder ?'blur' :'empty'}
+                      blurDataURL={node.placeholder}
+                      alt="" />
                     </RatioArea>
                     <div className="description mb-10 line-clamp-2 text-[13px] font-300 text-white">{node?.description}</div>
                   </div>

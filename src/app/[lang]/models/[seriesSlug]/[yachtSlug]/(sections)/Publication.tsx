@@ -46,7 +46,7 @@ function Publication(props:TypeProps, ref:React.ReactNode){
   const uid = useId()
   const coverImage = useMemo(()=>{
     return props?.publicationCustomFields?.album?.[0]?.image?.node?.mediaItemUrl
-  }, props?.publicationCustomFields?.album)
+  }, [props?.publicationCustomFields?.album])
 
   if( !props.title || !coverImage){
     return null

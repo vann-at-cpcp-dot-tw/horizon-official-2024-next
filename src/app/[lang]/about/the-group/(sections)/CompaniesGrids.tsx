@@ -9,7 +9,9 @@ import { Suspense } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { isEmpty } from '@src/lib/helpers'
 const AniCounter = dynamic(() => import('@src/components/custom/dynamic/AniCounter'), {ssr: false})
+
 import RatioArea from "@src/components/custom/RatioArea"
+import ImageAutoPlaceholder from "@root/src/components/custom/ImageWithPlaceholder"
 
 export interface TypeCompanyNode {
   basic:{
@@ -62,7 +64,7 @@ function CompaniesGrids(props:TypeProps, ref:React.ReactNode){
               companiesRow?.companies?.map((node:TypeCompanyNode, index)=>{
                 return <div className="lg:col col-12 mb-20" key={`${companiesRowIndex}-${index}`}>
                   <RatioArea className="mb-6" ratio="56.25">
-                    <Image className="absolute left-0 top-0 h-full w-full" src={node?.images?.grid?.node?.mediaItemUrl} fill={true} alt="" />
+                    <ImageAutoPlaceholder className="absolute left-0 top-0 h-full w-full" src={node?.images?.grid?.node?.mediaItemUrl} fill={true} />
                   </RatioArea>
 
                   <div className="px-2.5">

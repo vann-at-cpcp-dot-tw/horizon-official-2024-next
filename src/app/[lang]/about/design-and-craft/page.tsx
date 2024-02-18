@@ -4,12 +4,39 @@ import { QueryPageAboutDesignAndCraft } from '@src/queries/pages/about-design.gq
 import FeaturedVideo from "./(templates)/FeaturedVideo"
 // import ContentList from "./(sections)/ContentList"
 import ContentList from "../(templates)/ContentList"
+import { genImageBlurHash } from "@src/lib/genImageBlurHash"
 
 export default async function PageAboutDesign(){
 
   const data = await fetchGQL(QueryPageAboutDesignAndCraft)
   const { featuredVideo, contentList } = data?.aboutDesignAndCraft?.aboutDesignCustomFields ?? {}
+  const contentListWithPlaceholder = await Promise.all(
+    contentList.map(async (node:any) => {
 
+      const designPartners = node?.designPartners
+        ?await Promise.all(node?.designPartners?.map(async (partnerNode:any)=>{
+          return {
+            ...partnerNode,
+            image: {
+              ...(partnerNode?.image || {}),
+              placeholder: await genImageBlurHash(partnerNode?.image?.node?.mediaItemUrl)
+            }
+          }
+        })) :[]
+
+      return {
+        ...node,
+        basic: {
+          ...node.basic,
+          keyImage: {
+            ...(node?.basic?.keyImage || {}),
+            placeholder: await genImageBlurHash(node?.basic?.keyImage?.node?.mediaItemUrl)
+          },
+        },
+        designPartners
+      }
+    })
+  )
   return <main>
     <div className="container py-[90px] text-minor-900">
       <div className="serif mb-8 text-center text-[32px]">Extraordinary Design and Craftsmanship</div>
@@ -24,6 +51,6 @@ export default async function PageAboutDesign(){
       </div>
     }
 
-    <ContentList list={contentList} />
+    <ContentList list={contentListWithPlaceholder} />
   </main>
 }

@@ -3,12 +3,26 @@ import { fetchGQL } from "@src/lib/apollo"
 import { QueryPageAboutInnovation } from '@src/queries/pages/about-innovation.gql'
 import FeaturedVideo from "./(sections)/FeaturedVideo"
 import ContentList from "../(templates)/ContentList"
+import { genImageBlurHash } from "@root/src/lib/genImageBlurHash"
 
 export default async function PageAboutInnovation(){
 
   const data = await fetchGQL(QueryPageAboutInnovation)
   const { featuredVideo, contentList } = data?.aboutInnovation?.aboutInnovationCustomFields ?? {}
-
+  const contentListWithPlaceholder = await Promise.all(
+    contentList.map(async (node:any) => {
+      return {
+        ...node,
+        basic: {
+          ...node.basic,
+          keyImage: {
+            ...(node?.basic?.keyImage || {}),
+            placeholder: await genImageBlurHash(node?.basic?.keyImage?.node?.mediaItemUrl)
+          },
+        },
+      }
+    })
+  )
   return <main>
     <div className="container py-[90px] text-minor-900">
       <div className="serif mb-8 text-center text-[32px]">Innovation</div>
@@ -28,6 +42,6 @@ export default async function PageAboutInnovation(){
       </div>
     }
 
-    <ContentList list={contentList} />
+    <ContentList list={contentListWithPlaceholder} />
   </main>
 }

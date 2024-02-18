@@ -6,8 +6,11 @@ import KV from "./(sections)/KV"
 import Series from "./(sections)/Series"
 import ComingEvents from "../news/(templates)/ComingEvents"
 import News from "./(sections)/News"
+import ImageAutoPlaceholder from "@src/components/custom/ImageWithPlaceholder"
 const Intro = dynamic(() => import("./(sections)/Intro"), {ssr: false})
 const IntroAfterSeries = dynamic(() => import("./(sections)/IntroAfterSeries"), {ssr: false})
+
+import { genImageBlurHash } from "@root/src/lib/genImageBlurHash"
 
 export default async function PageHome({
   params
@@ -20,9 +23,8 @@ export default async function PageHome({
   const { homePageKeyVision, homePageIntroduction } = data?.homePageSettings?.homePageCustomFields ?? {}
   const { heroImage:kvImage, heroVideo:kvVideo, mainTitle:kvTitle } = homePageKeyVision ?? {}
   const { lang } = params
-
   return <main>
-    <KV title={kvTitle} image={kvImage?.node?.mediaItemUrl} video={kvVideo?.node?.mediaItemUrl} />
+    <KV title={kvTitle} imageNode={<ImageAutoPlaceholder className="absolute left-0 top-0 z-0 h-full w-full object-cover" src={kvImage?.node?.mediaItemUrl || ''} fill={true} sizes="100vw" />}  video={kvVideo?.node?.mediaItemUrl}  />
     <Intro />
     <Series />
     <IntroAfterSeries smallVideo={homePageIntroduction?.smallVideo?.node?.mediaItemUrl} wideVideo={homePageIntroduction?.innovationVideo?.node?.mediaItemUrl} lang={lang}/>

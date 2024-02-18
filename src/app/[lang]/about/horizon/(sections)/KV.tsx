@@ -10,8 +10,8 @@ import { isEmpty } from '@src/lib/helpers'
 
 interface TypeProps {
   background: string
-  heroImage: string
   description: string
+  heroImageNode: React.ReactNode
   [key:string]: any
 }
 
@@ -34,7 +34,7 @@ function KV(props:TypeProps, ref:React.ReactNode){
           padding: `${60+store.headerHeight}px 0px`,
         }}>
           <div className="relative mx-auto mb-8 w-full max-w-[956px] xl:w-[69%] xl:max-w-[1920px]">
-            <Image src={`${props?.heroImage}`} width={1920} height={1080} alt=""/>
+            { props.heroImageNode }
           </div>
           <div className="relative mx-auto w-full max-w-[600px]">
             <div className="serif text-center text-[20px] leading-[1.8] text-white">{props?.description}</div>

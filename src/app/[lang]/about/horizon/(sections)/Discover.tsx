@@ -5,7 +5,7 @@ import { Suspense } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { isEmpty } from '@src/lib/helpers'
 import RatioArea from "@src/components/custom/RatioArea"
-
+import ImageAutoPlaceholder from "@src/components/custom/ImageWithPlaceholder"
 interface TypeProps {
   content: string
   imageAfterContent: string
@@ -22,7 +22,7 @@ function Discover(props:TypeProps, ref:React.ReactNode){
         <div className="mx-auto w-full max-w-[900px] leading-[1.6] text-gray-700">{props?.content}</div>
       </div>
       <RatioArea ratio="56.25">
-        <Image src={props?.imageAfterContent} fill={true} alt="" />
+        <ImageAutoPlaceholder src={props?.imageAfterContent} fill={true} sizes="100vw" />
       </RatioArea>
     </div>
   </Suspense>

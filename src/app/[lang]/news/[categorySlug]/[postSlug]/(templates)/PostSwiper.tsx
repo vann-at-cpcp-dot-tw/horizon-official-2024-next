@@ -10,7 +10,6 @@ import { isEmpty } from '@src/lib/helpers'
 import RatioArea from "@src/components/custom/RatioArea"
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { SwiperClass } from "swiper/react"
-import useImageBlurHashes from "@root/src/hooks/useImageBlurHashes"
 
 // import { useRouter } from 'next/navigation'
 // import { useStore } from '@src/store'
@@ -23,6 +22,7 @@ interface TypeProps {
         mediaItemUrl: string
       }
     }
+    placeholder?: string
   }[]
   [key:string]: any
 }
@@ -35,10 +35,6 @@ function PostSwiper(props:TypeProps, ref:React.ReactNode){
   const { className } = props
   const [swiper, setSwiper] = useState<SwiperClass>(({} as SwiperClass))
   const [realIndex, setRealIndex] = useState(0)
-  const imageUrls = useMemo(()=>{
-    return props?.gallery?.map((node)=>node?.image?.node?.mediaItemUrl) || []
-  }, [props?.gallery])
-  const imageBlurHashes = useImageBlurHashes(imageUrls)
 
   return <Suspense fallback={null}>
     <div className={twMerge('', className)}>
@@ -58,13 +54,17 @@ function PostSwiper(props:TypeProps, ref:React.ReactNode){
             props?.gallery?.map((node, index:number)=>{
               return <SwiperSlide key={index}>
                 <RatioArea ratio="56.25">
-                  <Image className="absolute left-0 top-0 z-0 h-full w-full object-cover"
-                  src={node?.image?.node?.mediaItemUrl || ''}
-                  width={900}
-                  height={506}
-                  priority={true}
-                  blurDataURL={imageBlurHashes[index]}
-                  alt="" />
+                  {
+                    <Image className="absolute left-0 top-0 z-0 h-full w-full object-cover"
+                    src={node?.image?.node?.mediaItemUrl || ''}
+                    width={900}
+                    height={506}
+                    priority={true}
+                    placeholder={node?.placeholder ?'blur' :'empty'}
+                    blurDataURL={node?.placeholder}
+                    alt="" />
+                  }
+
                 </RatioArea>
               </SwiperSlide>
             })

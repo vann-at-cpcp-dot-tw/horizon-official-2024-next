@@ -6,6 +6,7 @@ import LinkWithLang from "@src/components/custom/LinkWithLang"
 import { twMerge } from 'tailwind-merge'
 import { isEmpty } from '@src/lib/helpers'
 import RatioArea from "@src/components/custom/RatioArea"
+import ImageAutoPlaceholder from "@root/src/components/custom/ImageWithPlaceholder"
 
 // import { useRouter } from 'next/navigation'
 // import { useStore } from '@src/store'
@@ -31,7 +32,7 @@ function CompaniesIntros(props:TypeProps, ref:React.ReactNode){
           return rowNode?.companies?.map((node, index)=>{
             return <div className="relative mb-[120px]" key={`${rowIndex}-${index}`}>
               <RatioArea className="mb-8" ratio="42.85">
-                <Image className="absolute left-0 top-0 h-full w-full" src={node?.images?.banner?.node?.mediaItemUrl} fill={true} alt="" />
+                <ImageAutoPlaceholder className="absolute left-0 top-0 h-full w-full" src={node?.images?.banner?.node?.mediaItemUrl} fill={true} />
               </RatioArea>
 
               <div className="container">

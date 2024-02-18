@@ -24,6 +24,7 @@ interface TypeProps {
         node?: {
           mediaItemUrl: string
         }
+        placeholder?: string
       }
     }
     content: string
@@ -35,6 +36,7 @@ interface TypeProps {
         node: {
           mediaItemUrl: string
         }
+        placeholder?: string
       }
     }[]
   }[]
@@ -104,7 +106,13 @@ function ContentList(props:TypeProps, ref:React.ReactNode){
                   </div>
                 </div>
                 <Image className="pointer-events-none absolute left-1/2 top-1/2 z-0 h-full w-full -translate-x-1/2 -translate-y-1/2 object-cover group-hover:scale-[1.2]"
-                src={node?.basic?.keyImage?.node?.mediaItemUrl || ''} width={900} height={506} alt=""
+                src={node?.basic?.keyImage?.node?.mediaItemUrl || ''}
+                width={900}
+                height={506}
+                priority={true}
+                placeholder={node?.basic?.keyImage?.placeholder ?'blur' :'empty'}
+                blurDataURL={node?.basic?.keyImage?.placeholder}
+                alt=""
                 style={{
                   transition: 'all 1.6s cubic-bezier(0.215, 0.610, 0.355, 1.000)'
                 }} />
@@ -165,9 +173,14 @@ function ContentList(props:TypeProps, ref:React.ReactNode){
                         node?.designPartners?.map((designerNode, designerIndex)=>{
                           return <div className="lg:col-3 col-6" key={designerIndex}>
                             <RatioArea className="mb-3" ratio="114.28">
-                              <Image className="absolute left-0 top-0 h-full w-full" src={designerNode?.image?.node?.mediaItemUrl || ''} fill={true} alt="" />
+                              <Image className="absolute left-0 top-0 h-full w-full"
+                              src={designerNode?.image?.node?.mediaItemUrl || ''}
+                              fill={true}
+                              sizes="25vw"
+                              placeholder={designerNode?.image?.placeholder ?'blur' :'empty'}
+                              blurDataURL={designerNode?.image?.placeholder}
+                              alt="" />
                             </RatioArea>
-
                             <div className="mb-2 text-[24px] text-gray-900">{designerNode?.title}</div>
 
                             {

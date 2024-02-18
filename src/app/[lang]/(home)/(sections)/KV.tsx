@@ -9,9 +9,10 @@ import { useStore } from '@src/store'
 import { useWindowSize } from 'react-use'
 import { isEmpty } from '@src/lib/helpers'
 import { motion } from "framer-motion"
+import ImageAutoPlaceholder from "@root/src/components/custom/ImageWithPlaceholder"
 
 interface TypeProps {
-  image?: string
+  imageNode?: React.ReactNode
   video?: string
   title?: string
 }
@@ -65,7 +66,7 @@ function KV(props:TypeProps, ref:React.ReactNode){
         {
           props?.video
             ? <video ref={videoRef} className="absolute left-0 top-0 z-0 h-full w-full object-cover" src={props?.video} playsInline muted loop></video>
-            : <Image className="absolute left-0 top-0 z-0 h-full w-full object-cover" fill={true} sizes="100vw" src={props?.image || ''} alt=""/>
+            : <>{ props?.imageNode || ''}</>
         }
         <div className="relative z-10 flex h-full items-center justify-center">
           <div className="serif text-center text-[49px] font-300 text-white"

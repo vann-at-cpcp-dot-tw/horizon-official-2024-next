@@ -9,7 +9,6 @@ import useDomNodeSize from "@src/hooks/useDomNodeSize"
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { SwiperClass } from "swiper/react"
 import LinkWithLang from "@src/components/custom/LinkWithLang"
-import useImageBlurHashes from "@src/hooks/useImageBlurHashes"
 
 interface TypeProps {
   listTitle: string
@@ -18,6 +17,7 @@ interface TypeProps {
     label: string
     link?: string
     mediaItemUrl?: string
+    placeholder?: string
     srcSet?: string
   }[]
   onSlideChange?: Function
@@ -32,11 +32,6 @@ function SwiperOverflow(props:TypeProps, ref:React.ReactNode){
   const [swiper, setSwiper] = useState<SwiperClass>(({} as SwiperClass))
   const [realIndex, setRealIndex] = useState(0)
   const { size:centerSize, setNode:setCenterNode } = useDomNodeSize()
-
-  const imageUrls = useMemo(()=>{
-    return props?.list?.map?.((node)=>node.mediaItemUrl) || []
-  }, [props.list])
-  const imageBlurHashes = useImageBlurHashes(imageUrls)
 
   const centerRight = useMemo(()=>{
     return (bodyWidth - centerSize.width) / 2
@@ -89,13 +84,16 @@ function SwiperOverflow(props:TypeProps, ref:React.ReactNode){
                   }
 
                   <LinkWithLang className="absolute left-0 top-0 z-0 h-full w-full" href={node?.link || ''} lang={lang}>
-                    <Image className="absolute left-0 top-0 z-0 h-full w-full object-cover"
-                    fill={true}
-                    src={node?.mediaItemUrl || ''}
-                    sizes="52.25vw"
-                    blurDataURL={imageBlurHashes[index]}
-                    priority={true}
-                    alt="" />
+                    {
+                      <Image className="absolute left-0 top-0 z-0 h-full w-full object-cover"
+                      fill={true}
+                      src={node?.mediaItemUrl || ''}
+                      sizes="52.25vw"
+                      placeholder={node?.placeholder ?'blur' :'empty'}
+                      blurDataURL={node?.placeholder}
+                      priority={true}
+                      alt="" />
+                    }
                   </LinkWithLang>
                 </RatioArea>
               </SwiperSlide>
