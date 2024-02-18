@@ -30,7 +30,7 @@ function CoverStory(props:TypeProps, ref:React.ReactNode){
     <div className={twMerge('container-fluid mb-32', className)}>
       <RatioArea ratio="42.85">
         <LinkWithLang
-        className="absolute left-0 top-0 h-full w-full"
+        className="size-full absolute left-0 top-0"
         href={`/news/cover-story/${props.slug}`}
         lang={props.lang}>
           <Image className="object-cover" src={props?.image} fill={true} sizes="100vw" alt="" />

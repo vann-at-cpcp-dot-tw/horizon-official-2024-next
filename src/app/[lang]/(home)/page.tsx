@@ -24,7 +24,7 @@ export default async function PageHome({
   const { heroImage:kvImage, heroVideo:kvVideo, mainTitle:kvTitle } = homePageKeyVision ?? {}
   const { lang } = params
   return <main>
-    <KV title={kvTitle} imageNode={<ImageAutoPlaceholder className="absolute left-0 top-0 z-0 h-full w-full object-cover" src={kvImage?.node?.mediaItemUrl || ''} fill={true} sizes="100vw" />}  video={kvVideo?.node?.mediaItemUrl}  />
+    <KV title={kvTitle} imageNode={<ImageAutoPlaceholder className="size-full absolute left-0 top-0 z-0 object-cover" src={kvImage?.node?.mediaItemUrl || ''} fill={true} sizes="100vw" />}  video={kvVideo?.node?.mediaItemUrl}  />
     <Intro />
     <Series />
     <IntroAfterSeries smallVideo={homePageIntroduction?.smallVideo?.node?.mediaItemUrl} wideVideo={homePageIntroduction?.innovationVideo?.node?.mediaItemUrl} lang={lang}/>

@@ -93,7 +93,7 @@ function ContentList(props:TypeProps, ref:React.ReactNode){
           return <div className="container mb-20" key={index}>
             <div className="mx-auto w-full max-w-[900px]">
               <RatioArea className="group mb-5 overflow-hidden" ratio="56.25">
-                <div className="absolute left-0 top-0 z-10 flex h-full w-full cursor-pointer items-center justify-center opacity-0 group-hover:opacity-100"
+                <div className="size-full absolute left-0 top-0 z-10 flex cursor-pointer items-center justify-center opacity-0 group-hover:opacity-100"
                 onClick={()=>{
                   router.push(`${pathname}?open=${index}`, {scroll:false})
                 }}
@@ -101,11 +101,11 @@ function ContentList(props:TypeProps, ref:React.ReactNode){
                   background: 'rgba(0, 46, 79, 0.5)',
                   transition: 'all .4s'
                 }}>
-                  <div className="flex h-[56px] w-[56px] items-center justify-center rounded-full bg-golden-700">
+                  <div className="flex size-[56px] items-center justify-center rounded-full bg-golden-700">
                     <i className="bi bi-plus-lg text-[24px] text-white"></i>
                   </div>
                 </div>
-                <Image className="pointer-events-none absolute left-1/2 top-1/2 z-0 h-full w-full -translate-x-1/2 -translate-y-1/2 object-cover group-hover:scale-[1.2]"
+                <Image className="size-full pointer-events-none absolute left-1/2 top-1/2 z-0 -translate-x-1/2 -translate-y-1/2 object-cover group-hover:scale-[1.2]"
                 src={node?.basic?.keyImage?.node?.mediaItemUrl || ''}
                 width={900}
                 height={506}
@@ -128,7 +128,7 @@ function ContentList(props:TypeProps, ref:React.ReactNode){
             </div>
 
             {
-              isLightboxOpen && lightboxQuery === String(index) && <motion.div className="fixed left-0 top-0 z-[99999] h-full w-full bg-golden-300"
+              isLightboxOpen && lightboxQuery === String(index) && <motion.div className="size-full fixed left-0 top-0 z-[99999] bg-golden-300"
               variants={{
                 enter: {
                   opacity: 1,
@@ -147,7 +147,7 @@ function ContentList(props:TypeProps, ref:React.ReactNode){
               }}
               initial="exit"
               animate="enter">
-                <div className="absolute left-0 top-0 h-full w-full overflow-auto bg-golden-300 px-5 pb-10">
+                <div className="size-full absolute left-0 top-0 overflow-auto bg-golden-300 px-5 pb-10">
 
                   <div className="sticky left-0 top-0  -ml-2 mb-8 flex pt-2">
                     <div className="btn bg-golden-300"
@@ -173,7 +173,7 @@ function ContentList(props:TypeProps, ref:React.ReactNode){
                         node?.designPartners?.map((designerNode, designerIndex)=>{
                           return <div className="lg:col-3 col-6" key={designerIndex}>
                             <RatioArea className="mb-3" ratio="114.28">
-                              <Image className="absolute left-0 top-0 h-full w-full"
+                              <Image className="size-full absolute left-0 top-0"
                               src={designerNode?.image?.node?.mediaItemUrl || ''}
                               fill={true}
                               sizes="25vw"

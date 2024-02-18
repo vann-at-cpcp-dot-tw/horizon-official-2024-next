@@ -55,7 +55,7 @@ function PostSwiper(props:TypeProps, ref:React.ReactNode){
               return <SwiperSlide key={index}>
                 <RatioArea ratio="56.25">
                   {
-                    <Image className="absolute left-0 top-0 z-0 h-full w-full object-cover"
+                    <Image className="absolute left-0 top-0 z-0 size-full object-cover"
                     src={node?.image?.node?.mediaItemUrl || ''}
                     width={900}
                     height={506}

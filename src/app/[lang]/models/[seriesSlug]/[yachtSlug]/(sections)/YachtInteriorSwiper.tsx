@@ -68,16 +68,16 @@ function YachtInteriorSwiper(props:TypeProps, ref:React.ReactNode){
                     setIsOpen(true)
                   }}>
                   <RatioArea ratio="56.25">
-                    <div className="absolute left-0 top-0 z-10 flex h-full w-full cursor-pointer items-center justify-center opacity-0 group-hover:opacity-100"
+                    <div className="size-full absolute left-0 top-0 z-10 flex cursor-pointer items-center justify-center opacity-0 group-hover:opacity-100"
                     style={{
                       background: 'rgba(0, 46, 79, 0.5)',
                       transition: 'all .4s'
                     }}>
-                      <div className="flex h-[56px] w-[56px] items-center justify-center rounded-full bg-golden-700">
+                      <div className="flex size-[56px] items-center justify-center rounded-full bg-golden-700">
                         <i className="bi bi-plus-lg text-[24px] text-white"></i>
                       </div>
                     </div>
-                    <Image className="absolute left-0 top-0 z-0 h-full w-full object-cover" fill={true} sizes="23.42vw" src={node?.image?.node?.mediaItemUrl || ''} alt="" />
+                    <Image className="size-full absolute left-0 top-0 z-0 object-cover" fill={true} sizes="23.42vw" src={node?.image?.node?.mediaItemUrl || ''} alt="" />
                   </RatioArea>
                 </div>
               </div>
@@ -87,7 +87,7 @@ function YachtInteriorSwiper(props:TypeProps, ref:React.ReactNode){
       }
 
       {
-        isOpen && <div className="fixed left-0 top-0 z-[99999] flex h-full w-full flex-col justify-center bg-golden-300 p-10">
+        isOpen && <div className="size-full fixed left-0 top-0 z-[99999] flex flex-col justify-center bg-golden-300 p-10">
           <div className="sticky left-0 top-0 -ml-8 -mt-10 mb-8 flex pt-2">
             <div className="btn bg-golden-300"
             onClick={()=>{
@@ -99,7 +99,7 @@ function YachtInteriorSwiper(props:TypeProps, ref:React.ReactNode){
 
           <div className="flex grow !flex-nowrap overflow-hidden">
             <div className="flex flex-none items-center">
-              <div className={`btn group flex h-12 w-12 items-center justify-center rounded-full border border-gray-900 hover:border-golden-900 hover:bg-golden-900 ${swiperZoom.isBeginning ?'disabled opacity-50' :''}`}
+              <div className={`btn group flex size-12 items-center justify-center rounded-full border border-gray-900 hover:border-golden-900 hover:bg-golden-900 ${swiperZoom.isBeginning ?'disabled opacity-50' :''}`}
               onClick={()=>{
                 swiperZoom.slidePrev()
               }}>
@@ -107,7 +107,7 @@ function YachtInteriorSwiper(props:TypeProps, ref:React.ReactNode){
               </div>
             </div>
 
-            <div className="h-full w-full shrink px-5">
+            <div className="size-full shrink px-5">
               <Swiper
               className="h-full"
               modules={[EffectFade]}
@@ -125,7 +125,7 @@ function YachtInteriorSwiper(props:TypeProps, ref:React.ReactNode){
                 {
                   props?.list?.map?.((node, index)=>{
                     return <SwiperSlide key={index}>
-                      <div className="relative h-full w-full">
+                      <div className="size-full relative">
                         <Image className="" src={node?.image?.node?.mediaItemUrl || ''} fill={true} sizes="100vw" style={{objectFit: "contain"}} alt="" />
                       </div>
                     </SwiperSlide>
@@ -135,7 +135,7 @@ function YachtInteriorSwiper(props:TypeProps, ref:React.ReactNode){
             </div>
 
             <div className="flex flex-none items-center">
-              <div className={`btn group flex h-12 w-12 items-center justify-center rounded-full border border-gray-900 hover:border-golden-900 hover:bg-golden-900 ${swiperZoom.isEnd ?'disabled opacity-50' :''}`}
+              <div className={`btn group flex size-12 items-center justify-center rounded-full border border-gray-900 hover:border-golden-900 hover:bg-golden-900 ${swiperZoom.isEnd ?'disabled opacity-50' :''}`}
               onClick={()=>{
                 swiperZoom.slideNext()
               }}>

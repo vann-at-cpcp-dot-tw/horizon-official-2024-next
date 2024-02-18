@@ -32,7 +32,7 @@ function OverflowContent(props:TypeProps, ref:React.ReactNode){
   return (<Suspense fallback={null}>
     <div className="relative overflow-hidden">
       <div className="relative opacity-0">{ props.children }</div>
-      <motion.div className="absolute left-0 top-0 h-full w-full"
+      <motion.div className="absolute left-0 top-0 size-full"
         variants={{
           enter: {
             top: '0%'

@@ -36,16 +36,16 @@ function ListItem(props:TypeProps, ref:React.ReactNode){
     <div className={twMerge('relative', className)}>
       <LinkWithLang lang={props.lang} href={props.href}>
         <RatioArea className="group mb-4" ratio="56.25">
-          <div className="absolute left-0 top-0 z-10 flex h-full w-full cursor-pointer items-center justify-center opacity-0 group-hover:opacity-100"
+          <div className="size-full absolute left-0 top-0 z-10 flex cursor-pointer items-center justify-center opacity-0 group-hover:opacity-100"
         style={{
           background: 'rgba(0, 46, 79, 0.5)',
           transition: 'all .4s'
         }}>
-            <div className="flex h-[56px] w-[56px] items-center justify-center rounded-full bg-golden-700">
+            <div className="flex size-[56px] items-center justify-center rounded-full bg-golden-700">
               <i className="bi bi-plus-lg text-[24px] text-white"></i>
             </div>
           </div>
-          <Image className="absolute left-0 top-0 h-full w-full" src={props?.thumbnail || ''} fill={true} sizes="50vw" alt="" />
+          <Image className="size-full absolute left-0 top-0" src={props?.thumbnail || ''} fill={true} sizes="50vw" alt="" />
         </RatioArea>
         <div className="serif text-[24px] text-minor-900">{props?.title}</div>
         {

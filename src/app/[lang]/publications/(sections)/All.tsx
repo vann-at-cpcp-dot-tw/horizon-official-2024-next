@@ -63,7 +63,7 @@ function All(props:TypeProps, ref:React.ReactNode){
                 </div>
               </div>
               <div className="col">
-                <div className="relative h-full w-full">
+                <div className="size-full relative">
                   <div className="absolute left-0 top-1/2 h-[1px] w-full -translate-y-1/2 bg-[#D0D0D0]"></div>
                   <div className="absolute left-0 top-1/2 h-[3px] -translate-y-1/2 bg-golden-900"
                   style={{

@@ -26,10 +26,10 @@ function KV(props:TypeProps, ref:React.ReactNode){
     style={{
       marginTop: `-${store.headerHeight}px`
     }}>
-      <video className="absolute left-0 top-0 z-0 h-full w-full object-cover" autoPlay playsInline muted loop
+      <video className="size-full absolute left-0 top-0 z-0 object-cover" autoPlay playsInline muted loop
       src={`${props?.background}`}></video>
 
-      <div className="relative z-10 h-auto min-h-full w-full">
+      <div className="min-size-full relative z-10 h-auto">
         <div style={{
           padding: `${60+store.headerHeight}px 0px`,
         }}>

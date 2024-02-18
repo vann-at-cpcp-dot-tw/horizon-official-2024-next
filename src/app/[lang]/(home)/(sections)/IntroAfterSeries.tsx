@@ -30,7 +30,7 @@ function IntroAfterSeries(props:TypeProps, ref:React.ReactNode){
           <div className="px-2.5" style={{width:'45%'}}>
             <div className="pr-0 lg:pr-9">
               <RatioArea ratio="74.84">
-                <video className="absolute left-0 top-0 z-0 h-full w-full border-[8px] border-white object-cover" autoPlay playsInline muted loop
+                <video className="size-full absolute left-0 top-0 z-0 border-[8px] border-white object-cover" autoPlay playsInline muted loop
               src={props?.smallVideo}
               style={{
                 filter: 'grayscale()',
@@ -55,7 +55,7 @@ function IntroAfterSeries(props:TypeProps, ref:React.ReactNode){
       </div>
 
       <div className="relative mb-[60px] h-[608px] w-full">
-        <div className="absolute left-0 top-0 z-10 flex h-full w-full flex-col items-center justify-center p-5 text-center text-white">
+        <div className="size-full absolute left-0 top-0 z-10 flex flex-col items-center justify-center p-5 text-center text-white">
           <div className="serif text-[32px] font-300 italic">
             <LinkWithLang href="/about/innovation" lang={props?.lang}>The Innovation Behind Horizon</LinkWithLang>
           </div>
@@ -63,7 +63,7 @@ function IntroAfterSeries(props:TypeProps, ref:React.ReactNode){
             <LinkWithLang className="border-b-[3px] border-b-white pb-1" href="/about/innovation" lang={props.lang}>Discover</LinkWithLang>
           </div>
         </div>
-        <video className="absolute left-0 top-0 z-0 h-full w-full object-cover" autoPlay playsInline muted loop
+        <video className="size-full absolute left-0 top-0 z-0 object-cover" autoPlay playsInline muted loop
         src={props?.wideVideo}></video>
       </div>
     </div>

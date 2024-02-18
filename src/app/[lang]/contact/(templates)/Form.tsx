@@ -44,7 +44,7 @@ function Form(props:TypeProps, ref:React.ReactNode){
   return <Suspense fallback={null}>
     <div className={twMerge('', className)}>
 
-      <motion.main className="fixed left-0 top-0 z-[99999] h-full w-full bg-golden-300"
+      <motion.main className="size-full fixed left-0 top-0 z-[99999] bg-golden-300"
       variants={{
         enter: {
           opacity: 1,
@@ -64,7 +64,7 @@ function Form(props:TypeProps, ref:React.ReactNode){
       initial="exit"
       animate="enter">
 
-        <div className="absolute left-0 top-0 h-full w-full overflow-auto bg-golden-300 px-5 pb-10">
+        <div className="size-full absolute left-0 top-0 overflow-auto bg-golden-300 px-5 pb-10">
           <div className="hidden">{referer}</div>
           <div className="sticky left-0 top-0  -ml-2 mb-8 flex pt-2">
             <div className="btn bg-golden-300"
@@ -117,7 +117,7 @@ function Form(props:TypeProps, ref:React.ReactNode){
                 <span className="text-[24px] italic">Message</span>
               </div>
               <RatioArea ratio="25">
-                <textarea className="absolute left-0 top-0 h-full w-full border border-gray-500 bg-transparent p-4 text-[16px]"></textarea>
+                <textarea className="size-full absolute left-0 top-0 border border-gray-500 bg-transparent p-4 text-[16px]"></textarea>
               </RatioArea>
             </div>
 

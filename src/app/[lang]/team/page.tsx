@@ -41,7 +41,7 @@ async function PageTeam({params}:TypeProps){
             data?.teamPageSettings?.teamPageCustomFields?.teamMembers?.map((node:{[key:string]:any}, index:number)=>{
               return <div className="lg:col-3 col-12" key={index}>
                 <RatioArea className="mb-3" ratio="114.28">
-                  <Image className="absolute left-0 top-0 h-full w-full" src={node?.image?.node?.mediaItemUrl || ''} fill={true} alt="" />
+                  <Image className="size-full absolute left-0 top-0" src={node?.image?.node?.mediaItemUrl || ''} fill={true} alt="" />
                 </RatioArea>
 
                 <div className="mb-2 text-[24px] text-gray-900">{node?.name}</div>

@@ -49,20 +49,20 @@ function ListItem(props:TypeProps, ref:React.ReactNode){
   return <Suspense fallback={null}>
     <div className={twMerge('', className)}>
       <RatioArea className="group mb-2" ratio="56.25">
-        <div className="pointer-events-none absolute left-0 top-0 z-10 flex h-full w-full cursor-pointer items-center justify-center opacity-0 group-hover:opacity-100"
+        <div className="size-full pointer-events-none absolute left-0 top-0 z-10 flex cursor-pointer items-center justify-center opacity-0 group-hover:opacity-100"
         style={{
           background: 'rgba(0, 46, 79, 0.5)',
           transition: 'all .4s'
         }}>
-          <div className="flex h-[56px] w-[56px] items-center justify-center rounded-full bg-golden-700">
+          <div className="flex size-[56px] items-center justify-center rounded-full bg-golden-700">
             <i className="bi bi-plus-lg text-[24px] text-white"></i>
           </div>
         </div>
         <LinkWithLang
-        className="absolute left-0 top-0 z-0 h-full w-full overflow-hidden"
+        className="size-full absolute left-0 top-0 z-0 overflow-hidden"
         href={props.href}
         lang={lang}>
-          <Image className="pointer-events-none absolute z-0 h-full w-full object-cover group-hover:scale-[1.2]"
+          <Image className="size-full pointer-events-none absolute z-0 object-cover group-hover:scale-[1.2]"
           src={props?.thumbnail} fill={true} sizes="540px" alt=""
           style={{
             transition: 'all 1.6s cubic-bezier(0.215, 0.610, 0.355, 1.000)'

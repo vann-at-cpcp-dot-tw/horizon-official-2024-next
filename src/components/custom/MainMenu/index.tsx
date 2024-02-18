@@ -325,7 +325,7 @@ function MainMenu(props:TypeProps, ref:React.ReactNode){
         mode="wait">
           {
             isMenuOpen && menus[menuScreen?.key]?.list &&
-            <motion.div className={`fixed left-0 top-0 z-[10000] h-full w-full`}
+            <motion.div className={`fixed left-0 top-0 z-[10000] size-full`}
             variants={{
               enter: {
                 opacity: 1,
@@ -350,7 +350,7 @@ function MainMenu(props:TypeProps, ref:React.ReactNode){
                   const [menuGroupKey, menuGroupNode] = menuEntries
                   return <AnimatePresence mode="wait" key={index}>
                     {
-                      menuScreen.key === menuGroupKey && <div className="absolute left-0 top-0 flex h-full w-full !flex-nowrap items-center bg-white">
+                      menuScreen.key === menuGroupKey && <div className="absolute left-0 top-0 flex size-full !flex-nowrap items-center bg-white">
                         <MenuScreen
                         currentScreen={menuScreen}
                         list={menuGroupNode.list}

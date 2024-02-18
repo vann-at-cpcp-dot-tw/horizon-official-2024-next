@@ -146,7 +146,7 @@ function MenuScreen(props:TypeProps, ref:React.ReactNode){
       </div>
     </div>
 
-    <div className="relative h-full w-full shrink overflow-hidden bg-minor-900">
+    <div className="relative size-full shrink overflow-hidden bg-minor-900">
       <AnimatePresence mode="wait">
         {
           props.currentScreen.key === 'models'
@@ -162,15 +162,15 @@ function MenuScreen(props:TypeProps, ref:React.ReactNode){
                       return null
                     }
 
-                    return <div className="absolute left-0 top-0 h-full w-full" key={index}>
+                    return <div className="absolute left-0 top-0 size-full" key={index}>
                       {
                         (props.currentScreen?.seriesSlug && !props.currentScreen?.yachtSlug)
                       && props.currentScreen?.seriesSlug === seriesNode.key
                       && <MenuVision
                       video={seriesNode?.vision?.video || props?.vision?.video || ''}
                       image={seriesNode?.vision?.image || props?.vision?.video || ''}>
-                        <div className="absolute left-0 top-0 flex h-full w-full flex-col items-center justify-end">
-                          <div className="absolute left-0 top-0 z-0 h-full w-full bg-major-900" style={{opacity:0.2}}></div>
+                        <div className="absolute left-0 top-0 flex size-full flex-col items-center justify-end">
+                          <div className="absolute left-0 top-0 z-0 size-full bg-major-900" style={{opacity:0.2}}></div>
                           <div className="relative z-10 pb-[70px] text-center text-white">
                             <div className="text-[20px] font-700">{seriesNode?.vision?.content?.title}</div>
                             <div className="serif mb-2 text-[40px]">{seriesNode?.vision?.content?.subtitle}</div>
@@ -189,8 +189,8 @@ function MenuScreen(props:TypeProps, ref:React.ReactNode){
                               props.currentScreen?.yachtSlug === childNode.key && <MenuVision
                               video={childNode?.vision?.video || props?.vision?.video || ''}
                               image={childNode?.vision?.image || props?.vision?.video || ''}>
-                                <div className="absolute left-0 top-0 flex h-full w-full flex-col items-center justify-end">
-                                  <div className="absolute left-0 top-0 z-0 h-full w-full bg-major-900" style={{opacity:0.2}}></div>
+                                <div className="absolute left-0 top-0 flex size-full flex-col items-center justify-end">
+                                  <div className="absolute left-0 top-0 z-0 size-full bg-major-900" style={{opacity:0.2}}></div>
                                   <div className="relative z-10 pb-[70px] text-center text-white">
                                     <div className="mb-3 text-[20px] font-700">{childNode?.vision?.content?.title}</div>
                                     <div className="mb-6 text-[14px]">{childNode?.vision?.content?.subtitle}</div>

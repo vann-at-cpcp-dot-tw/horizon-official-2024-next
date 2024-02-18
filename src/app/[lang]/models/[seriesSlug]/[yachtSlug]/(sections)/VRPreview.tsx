@@ -70,8 +70,8 @@ function VRPreview(props:TypeProps, ref:React.ReactNode){
   return <Suspense fallback={null}>
     <div className={twMerge('relative', className)}>
       <RatioArea className="w-full" ratio="56.25">
-        <div className="absolute left-0 top-0 h-full w-full">
-          <div className="absolute left-0 top-0 z-10 flex h-full w-full items-center justify-center"
+        <div className="size-full absolute left-0 top-0">
+          <div className="size-full absolute left-0 top-0 z-10 flex items-center justify-center"
           style={{
             background: 'rgba(0, 0, 0, 0.6)',
           }}>
@@ -87,8 +87,8 @@ function VRPreview(props:TypeProps, ref:React.ReactNode){
           </div>
           {
             props?.preview?.previewVideo?.node?.mediaItemUrl
-              ? <video className="absolute left-0 top-0 z-0 h-full w-full object-cover" src={props?.preview?.previewVideo?.node?.mediaItemUrl} autoPlay playsInline muted loop></video>
-              : <Image className="absolute left-0 top-0 z-0 h-full w-full object-cover" fill={true} sizes="100vw" src={props?.image || ''} alt=""/>
+              ? <video className="size-full absolute left-0 top-0 z-0 object-cover" src={props?.preview?.previewVideo?.node?.mediaItemUrl} autoPlay playsInline muted loop></video>
+              : <Image className="size-full absolute left-0 top-0 z-0 object-cover" fill={true} sizes="100vw" src={props?.image || ''} alt=""/>
           }
         </div>
       </RatioArea>

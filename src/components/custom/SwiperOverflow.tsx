@@ -72,20 +72,20 @@ function SwiperOverflow(props:TypeProps, ref:React.ReactNode){
               return <SwiperSlide key={index}>
                 <RatioArea className="group" ratio="56.25">
                   {
-                    node?.link && <div className="pointer-events-none absolute left-0 top-0 z-10 flex h-full w-full items-center justify-center opacity-0 group-hover:opacity-100"
+                    node?.link && <div className="pointer-events-none absolute left-0 top-0 z-10 flex size-full items-center justify-center opacity-0 group-hover:opacity-100"
                     style={{
                       background: 'rgba(0, 46, 79, 0.5)',
                       transition: 'all .4s'
                     }}>
-                      <div className="flex h-[56px] w-[56px] items-center justify-center rounded-full bg-golden-700">
+                      <div className="flex size-[56px] items-center justify-center rounded-full bg-golden-700">
                         <i className="bi bi-plus-lg text-[24px] text-white"></i>
                       </div>
                     </div>
                   }
 
-                  <LinkWithLang className="absolute left-0 top-0 z-0 h-full w-full" href={node?.link || ''} lang={lang}>
+                  <LinkWithLang className="absolute left-0 top-0 z-0 size-full" href={node?.link || ''} lang={lang}>
                     {
-                      <Image className="absolute left-0 top-0 z-0 h-full w-full object-cover"
+                      <Image className="absolute left-0 top-0 z-0 size-full object-cover"
                       fill={true}
                       src={node?.mediaItemUrl || ''}
                       sizes="52.25vw"
