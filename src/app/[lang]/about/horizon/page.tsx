@@ -13,7 +13,7 @@ import Achievement from "./(sections)/Achievement"
 import History from "./(sections)/History"
 import RatioArea from "@src/components/custom/RatioArea"
 import LinkWithLang from "@src/components/custom/LinkWithLang"
-import ImageAutoPlaceholder from "@src/components/custom/ImageWithPlaceholder"
+import ImageAutoPlaceholder from "@root/src/components/custom/ImageAutoPlaceholder"
 
 export default async function PageAboutHorizon({
   params

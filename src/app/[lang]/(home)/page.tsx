@@ -6,7 +6,7 @@ import KV from "./(sections)/KV"
 import Series from "./(sections)/Series"
 import ComingEvents from "../news/(templates)/ComingEvents"
 import News from "./(sections)/News"
-import ImageAutoPlaceholder from "@src/components/custom/ImageWithPlaceholder"
+import ImageAutoPlaceholder from "@root/src/components/custom/ImageAutoPlaceholder"
 const Intro = dynamic(() => import("./(sections)/Intro"), {ssr: false})
 const IntroAfterSeries = dynamic(() => import("./(sections)/IntroAfterSeries"), {ssr: false})
 

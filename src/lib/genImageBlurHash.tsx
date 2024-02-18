@@ -1,6 +1,6 @@
 const baseUrl = process.env.NODE_ENV === 'development'
-  ? 'http://localhost:3000'
-  : process.env.NEXT_PUBLIC_DOMAIN || ''
+  ? 'http://localhost:3000/'
+  : process.env.NEXT_PUBLIC_DOMAIN
 
 export async function genImageBlurHash(url:string, w:number=16, q:number=75) {
   if( !url ){

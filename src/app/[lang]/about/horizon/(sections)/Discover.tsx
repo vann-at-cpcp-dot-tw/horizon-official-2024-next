@@ -5,7 +5,7 @@ import { Suspense } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { isEmpty } from '@src/lib/helpers'
 import RatioArea from "@src/components/custom/RatioArea"
-import ImageAutoPlaceholder from "@src/components/custom/ImageWithPlaceholder"
+import ImageAutoPlaceholder from "@root/src/components/custom/ImageAutoPlaceholder"
 interface TypeProps {
   content: string
   imageAfterContent: string

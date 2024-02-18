@@ -9,7 +9,6 @@ import { useStore } from '@src/store'
 import { useWindowSize } from 'react-use'
 import { isEmpty } from '@src/lib/helpers'
 import { motion } from "framer-motion"
-import ImageAutoPlaceholder from "@root/src/components/custom/ImageWithPlaceholder"
 
 interface TypeProps {
   imageNode?: React.ReactNode
