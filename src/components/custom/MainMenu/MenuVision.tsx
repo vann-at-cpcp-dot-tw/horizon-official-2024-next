@@ -68,7 +68,7 @@ function MenuVision(props:TypeProps, ref:React.ReactNode){
         initial="exit"
         exit="exit"
         animate={!mediaLoaded ?'enter' :'exit'}>
-          <Image className="absolute left-0 top-0 z-0 h-full w-full object-cover" alt="" src={imageBlurHashes[0] || ''} fill={true} />
+          { imageBlurHashes[0] && <Image className="absolute left-0 top-0 z-0 h-full w-full object-cover" alt="" src={imageBlurHashes[0]} fill={true} /> }
           <div className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2">
             <Loading style={{width:'120px'}} fill="var(--color-golden-900)" />
           </div>
