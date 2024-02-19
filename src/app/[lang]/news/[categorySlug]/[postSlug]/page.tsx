@@ -28,13 +28,13 @@ async function PageSinglePost({params}:TypeProps){
   })
   const post = data?.category?.posts?.nodes?.[0]
   const galleryWithPlaceholder = await Promise.all(
-    post?.postCustomFields?.gallery.map(async (node:any) => {
+    post?.postCustomFields?.gallery?.map?.(async (node:any) => {
       const base64 = await genImageBlurHash(node?.image?.node?.mediaItemUrl)
       return {
         ...node,
         placeholder: base64,
       }
-    })
+    }) || []
   )
 
   return <main className="relative pb-[60px]">

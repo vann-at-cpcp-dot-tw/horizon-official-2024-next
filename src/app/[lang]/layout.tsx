@@ -1,7 +1,8 @@
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 import '@root/public/import.css'
 import '@src/styles/main.sass'
-import { isEmpty, fetchGraphQL } from '@src/lib/helpers'
+import { isEmpty } from '@src/lib/helpers'
+import { fetchGQL } from "@root/src/lib/apollo"
 import { QueryCommonData } from '@src/queries/categories/commonData.gql'
 import Header from '@src/components/custom/Header'
 import Footer from '@src/components/custom/Footer'
@@ -35,7 +36,7 @@ export const metadata = {
 }
 
 async function getCommonData(){
-  const data = fetchGraphQL(QueryCommonData)
+  const data = fetchGQL(QueryCommonData)
   return data
 }
 

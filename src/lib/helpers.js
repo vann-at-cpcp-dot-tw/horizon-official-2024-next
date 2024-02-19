@@ -236,7 +236,7 @@ export const toCamelCase = function(str='', breakKey='-', upperCamelCase=false){
 }
 
 
-export const fetchGraphQL = async function fetchAPI(query, { variables } = {}) {
+export const fetchGraphQL = async function (query, { variables } = {}) {
 
   const API_URL = `${process.env.NEXT_PUBLIC_API_BASE}graphql`
 
