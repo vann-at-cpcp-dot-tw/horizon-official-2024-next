@@ -58,14 +58,13 @@ function Publication(props:TypeProps, ref:React.ReactNode){
       <div className="container">
         <div className="row justify-center">
           {
-            <div className="col-auto">
+            <div className="col-12 flex justify-center lg:col-auto">
               <div className="btn"
               style={{
                 boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.5)'
               }}
               onClick={()=>{
-                // @ts-ignore
-                document.querySelector(`#lg-${window.CSS.escape(uid)} .lg-react-element a:first-child`)?.click?.()
+                (document.querySelector(`#lg-${window.CSS.escape(uid)} .lg-react-element a:first-child`) as HTMLElement)?.click?.()
               }}>
                 <Image src={coverImage} width={420} height={300} alt="" />
               </div>

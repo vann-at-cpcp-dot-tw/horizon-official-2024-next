@@ -51,7 +51,7 @@ async function PageSingleBrokerage({params}:TypeProps){
 
 
   return <main className="relative">
-    <Breadcrumb className="pb-5 pt-10"
+    <Breadcrumb className="pb-5 pt-2.5 lg:pt-10"
     list={[
       {
         label: DEALER_REGION === 'US' ?'Inventory' :'Brokerage',
@@ -72,13 +72,9 @@ async function PageSingleBrokerage({params}:TypeProps){
 
     <SectionNav allowed={['Exterior', 'Interior', 'Features']} />
 
-    <div className="mb-14" id="SECTION_EXTERIOR">
-      <YachtsExteriorSwiper list={customFields?.exteriorImages} />
-    </div>
+    <YachtsExteriorSwiper list={customFields?.exteriorImages} />
 
-    <div className="mb-24" id="SECTION_INTERIOR">
-      <YachtInteriorSwiper list={customFields?.interiorImages} />
-    </div>
+    <YachtInteriorSwiper list={customFields?.interiorImages} />
 
     <div id="SECTION_FEATURES">
       <SpecAndFeatures

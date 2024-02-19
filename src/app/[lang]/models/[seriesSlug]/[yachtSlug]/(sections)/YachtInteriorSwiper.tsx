@@ -54,14 +54,14 @@ function YachtInteriorSwiper(props:TypeProps, ref:React.ReactNode){
   }, [isOpen])
 
   return <Suspense fallback={null}>
-    <div className={twMerge('overflow-hidden', className)}>
-      <div className="container mb-5 text-center text-gray-500">Interior</div>
+    <div id="SECTION_INTERIOR" className={twMerge('overflow-hidden lg:mb-24 mb-12', className)}>
+      <div className="container mb-3 text-center text-gray-500 lg:mb-5">Interior</div>
       {
         !isOpen && <Marquee
           speed={20}>
           {
             props?.list?.map?.((node, index)=>{
-              return <div className="w-[35vw] px-1.5 lg:w-[23.42vw] lg:px-2.5" key={index}>
+              return <div className="w-[44vw] px-1.5 lg:w-[23.42vw] lg:px-2.5" key={index}>
                 <div className="btn group"
                   onClick={()=>{
                     setRealIndex(index)

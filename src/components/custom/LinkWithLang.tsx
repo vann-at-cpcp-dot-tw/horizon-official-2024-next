@@ -4,7 +4,7 @@ import Link from "next/link"
 import { i18n } from '@root/i18n.config'
 
 interface TypeProps {
-  href: string
+  href?: string
   lang: string | string[]
   children: React.ReactNode
   [key:string]: any

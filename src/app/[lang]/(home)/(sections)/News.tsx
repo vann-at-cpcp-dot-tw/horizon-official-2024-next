@@ -49,12 +49,12 @@ function News(props:TypeProps, ref:React.ReactNode){
   }, [props.list])
 
   return <Suspense fallback={null}>
-    <div className={twMerge('pb-24', className)}>
+    <div className={twMerge('lg:pb-24 pb-12', className)}>
       <div className="container">
         <div className="row justify-center">
           {
             posts?.map((node:{[key:string]:any}, index:number)=>{
-              return <div className="lg:col-4 col-12 mb-10" key={index}>
+              return <div className="lg:col-4 col-12 mb-5 lg:mb-10" key={index}>
                 <NewsListItem
                 href={`/news/${node?.filteredCategories?.[0]?.slug}/${node.slug}`}
                 title={node?.title}

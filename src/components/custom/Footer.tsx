@@ -1,5 +1,9 @@
 "use client"
 
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
+const CONTENT_TYPE = process.env.NEXT_PUBLIC_CONTENT_TYPE || 'hq'
+const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
+
 import { Suspense, useRef, useReducer, useEffect, useState } from 'react'
 import { useWindowSize } from 'react-use'
 import { twMerge } from 'tailwind-merge'
@@ -34,7 +38,7 @@ function Footer(props:TypeProps, ref:React.ReactNode){
 
   return <Suspense fallback={null}>
     <div className={twMerge('text-white relative bg-major-900', props?.className)} ref={footerRef}>
-      <div className="container-fluid mb-[140px] pt-20">
+      <div className="container-fluid mb-[70px] pt-20 lg:mb-[140px]">
         <div className="serif mb-5 text-center text-[21px] font-300">BRAND PUBLICATION SUBSCRIPTION</div>
         <form className="row row-gap-0 flex-nowrap items-end justify-center">
           <div className="col-12 shrink" style={{maxWidth:'220px'}}>
@@ -56,32 +60,34 @@ function Footer(props:TypeProps, ref:React.ReactNode){
 
       <div className="container-fluid border-b border-golden-700 pb-6">
         <div className="row">
-          <div className="col-8">
+          <div className="lg:col-8 col-12">
             <div className="row row-gap-8">
-              <div className="col-auto border-r">
-                <LinkWithLang className="block leading-none" href="/QA" lang={lang}>Q<span className="text-[13px]">&</span>A</LinkWithLang>
+              <div className="col-12 lg:col-auto lg:border-r">
+                <LinkWithLang className="block py-2.5 leading-none lg:py-0" href="/QA" lang={lang}>Q<span className="text-[13px]">&</span>A</LinkWithLang>
               </div>
-              <div className="col-auto border-r">
-                <LinkWithLang className="block leading-none" href="###" lang={lang}>Career</LinkWithLang>
+              <div className="col-12 lg:col-auto lg:border-r">
+                <LinkWithLang className="block py-2.5 leading-none lg:py-0" href="###" lang={lang}>Career</LinkWithLang>
               </div>
-              <div className="col-auto border-r">
-                <LinkWithLang className="block leading-none" href="/investor" lang={lang}>Investor</LinkWithLang>
+              {
+                CONTENT_TYPE === 'hq' && <div className="col-12 lg:col-auto lg:border-r">
+                  <LinkWithLang className="block py-2.5 leading-none lg:py-0" href="/investor" lang={lang}>Investor</LinkWithLang>
+                </div>
+              }
+              <div className="col-12 lg:col-auto lg:border-r">
+                <LinkWithLang className="block py-2.5 leading-none lg:py-0" href="/privacy-policy" lang={lang}>Privacy Policy</LinkWithLang>
               </div>
-              <div className="col-auto border-r">
-                <LinkWithLang className="block leading-none" href="/privacy-policy" lang={lang}>Privacy Policy</LinkWithLang>
-              </div>
-              <div className="col-auto">
-                <LinkWithLang className="block leading-none" href="/terms-and-conditions" lang={lang}>Terms and Conditions</LinkWithLang>
+              <div className="col-12 lg:col-auto lg:border-r">
+                <LinkWithLang className="block py-2.5 leading-none lg:py-0" href="/terms-and-conditions" lang={lang}>Terms and Conditions</LinkWithLang>
               </div>
             </div>
           </div>
-          <div className="col-4">
+          <div className="lg:col-4 col-12">
             <div className="row row-gap-8 justify-end">
-              <div className="col-auto">
-                <a className="block leading-none" href="###" target="_blank">Facebook</a>
+              <div className="col-12 lg:col-auto">
+                <a className="block py-2.5 leading-none lg:py-0" href="###" target="_blank">Facebook</a>
               </div>
-              <div className="col-auto">
-                <a className="block leading-none" href="###" target="_blank">Youtube</a>
+              <div className="col-12 lg:col-auto">
+                <a className="block py-2.5 leading-none lg:py-0" href="###" target="_blank">Youtube</a>
               </div>
             </div>
           </div>
@@ -89,7 +95,7 @@ function Footer(props:TypeProps, ref:React.ReactNode){
       </div>
 
       <div className="container-fluid py-4">
-        <div className="text-right text-[11px]">© Copyright Horizon All rights reserved.</div>
+        <div className="text-center text-[11px] lg:text-right">© Copyright Horizon All rights reserved.</div>
       </div>
     </div>
   </Suspense>

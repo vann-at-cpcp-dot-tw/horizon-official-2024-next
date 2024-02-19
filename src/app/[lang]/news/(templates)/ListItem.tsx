@@ -71,17 +71,17 @@ function ListItem(props:TypeProps, ref:React.ReactNode){
       </RatioArea>
 
       {
-        props?.categories?.[0]?.href && <div className="text-[17px] text-gray-300">
+        props?.categories?.[0]?.href && <div className="text-[14px] text-gray-300 lg:text-[17px]">
           <LinkWithLang href={props?.categories?.[0]?.href} lang={lang}>
             { props.categories?.[0]?.name }
           </LinkWithLang>
         </div>
       }
 
-      <div className="serif text-[24px] text-minor-900">
+      <div className="serif text-[18px] text-minor-900 lg:text-[24px]">
         <LinkWithLang href={props?.href} lang={lang}>{props?.title}</LinkWithLang>
       </div>
-      <div className="text-[14px] text-gray-300">{ (props?.date || '').slice(0, 10).replaceAll('-', '.') }</div>
+      <div className="text-[12px] text-gray-300 lg:text-[14px]">{ (props?.date || '').slice(0, 10).replaceAll('-', '.') }</div>
     </div>
   </Suspense>
 }

@@ -38,7 +38,7 @@ async function PageSinglePost({params}:TypeProps){
   )
 
   return <main className="relative pb-[60px]">
-    <Breadcrumb className="pb-5 pt-10"
+    <Breadcrumb className="pb-5 pt-2.5 lg:pt-10"
     list={[
       {
         label: 'News',

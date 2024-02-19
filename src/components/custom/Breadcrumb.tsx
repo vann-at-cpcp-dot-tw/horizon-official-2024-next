@@ -31,7 +31,7 @@ function Breadcrumb(props:TypeProps, ref:React.ReactNode){
 
   return <Suspense fallback={null}>
     <div className={twMerge('', className)}>
-      <div className="container-fluid">
+      <div className="container-fluid text-[12px] lg:text-[16px]">
         <div className="row row-gap-0">
           {
             props?.list?.map?.((node, index)=>{
@@ -47,7 +47,6 @@ function Breadcrumb(props:TypeProps, ref:React.ReactNode){
               </div>
             })
           }
-
         </div>
       </div>
     </div>

@@ -1,21 +1,3 @@
-// 選單滿版圖片暫定比例 1024*768
-// picture tag ref: https://www.fooish.com/html/picture-tag.html
-// RR 參考 src-set
-// https://www.rolls-roycemotorcars.com/content/dam/rrmc/marketUK/common/navigation/desktop/RRMC_Model_Phantom_II_D.jpg/jcr:content/renditions/cq5dam.web.1242.jpeg 1242w,
-
-// https://www.rolls-roycemotorcars.com/content/dam/rrmc/marketUK/common/navigation/desktop/RRMC_Model_Phantom_II_D.jpg/jcr:content/renditions/cq5dam.web.1125.jpeg 1125w,
-
-// https://www.rolls-roycemotorcars.com/content/dam/rrmc/marketUK/common/navigation/desktop/RRMC_Model_Phantom_II_D.jpg/jcr:content/renditions/cq5dam.web.1668.jpeg 1668w,
-
-// https://www.rolls-roycemotorcars.com/content/dam/rrmc/marketUK/common/navigation/desktop/RRMC_Model_Phantom_II_D.jpg/jcr:content/renditions/cq5dam.web.2880.jpeg 2880w,
-
-// https://www.rolls-roycemotorcars.com/content/dam/rrmc/marketUK/common/navigation/desktop/RRMC_Model_Phantom_II_D.jpg/jcr:content/renditions/cq5dam.web.828.jpeg 828w,
-
-// https://www.rolls-roycemotorcars.com/content/dam/rrmc/marketUK/common/navigation/desktop/RRMC_Model_Phantom_II_D.jpg/jcr:content/renditions/original 1200w,
-
-// https://www.rolls-roycemotorcars.com/content/dam/rrmc/marketUK/common/navigation/desktop/RRMC_Model_Phantom_II_D.jpg/jcr:content/renditions/cq5dam.web.1920.jpeg 1920w,
-
-// https://www.rolls-roycemotorcars.com/content/dam/rrmc/marketUK/common/navigation/desktop/RRMC_Model_Phantom_II_D.jpg/jcr:content/renditions/cq5dam.web.4000.jpeg 4000w
 @import before-after.sass
 @import bootstrap-icons.sass
 @import btn.sass
@@ -135,9 +117,6 @@ p
 .swiper-wrapper
   transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000) !important
 
-// .swiper-container-free-mode > .swiper-wrapper
-//   transition-timing-function: linear !important
-
 .swiper-milestone
   @apply -mx-5 relative
   &:after
@@ -202,11 +181,16 @@ p
       // width: 100vw
       // max-width: 533px
       width: 39.01vw
+      padding: 0px 20px
       transition: all .8s cubic-bezier(0.215, 0.610, 0.355, 1.000)
-      @apply px-5
+      @media(max-width: 991px)
+        width: 75vw
+        padding: 0px 8px
     &-active
       .slide-inner
         width: 76.35vw
+        @media(max-width: 991px)
+          width: calc(100vw - 40px)
         // width: 100vw
         // max-width: 76.35vw
 
@@ -272,3 +256,15 @@ p
     column-gap: 0px
   > .item
       break-inside: avoid
+
+
+.animate__float
+  animation-name: float
+  animation-direction: alternate
+  // animation-timing-function: linear
+  animation-duration: 0.75s
+@keyframes float
+  0%
+    transform: translateY(8px)
+  100%
+    transform: translateY(-8px)

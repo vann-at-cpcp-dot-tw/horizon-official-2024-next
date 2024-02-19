@@ -9,6 +9,7 @@ import useDomNodeSize from "@src/hooks/useDomNodeSize"
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { SwiperClass } from "swiper/react"
 import LinkWithLang from "@src/components/custom/LinkWithLang"
+import { useWindowSize } from "react-use"
 
 interface TypeProps {
   listTitle: string
@@ -28,6 +29,7 @@ interface TypeState {}
 function SwiperOverflow(props:TypeProps, ref:React.ReactNode){
   const params = useParams()
   const { lang } = params
+  const viewport = useWindowSize()
   const [bodyWidth, setBodyWidth] = useState(0)
   const [swiper, setSwiper] = useState<SwiperClass>(({} as SwiperClass))
   const [realIndex, setRealIndex] = useState(0)
@@ -48,10 +50,11 @@ function SwiperOverflow(props:TypeProps, ref:React.ReactNode){
   },[])
 
   return <Suspense fallback={null}>
-    <div className="relative overflow-hidden px-5 lg:px-0">
-      <div className="relative mx-auto w-full" ref={setCenterNode}
+    <div className="relative ml-[-20px] overflow-hidden lg:ml-0">
+      <div className="relative mx-auto w-full lg:w-[70%]"
+      ref={setCenterNode}
       style={{
-        maxWidth: '70.27%'
+        maxWidth: 'calc(100% - 80px)'
       }}>
         <Swiper className="!overflow-visible"
         // loop
@@ -105,16 +108,16 @@ function SwiperOverflow(props:TypeProps, ref:React.ReactNode){
         style={{
           width: `${centerSize.width + centerRight}px`
         }}>
-          <div className="row flex-nowrap">
+          <div className="row lg:row-gap-6 row-gap-2 flex-nowrap">
             <div className="col-auto">
-              <div className="serif mt-1.5 leading-none text-gray-300">{props?.listTitle} /</div>
+              <div className="serif mt-1 text-[13px] leading-none text-gray-300  lg:mt-1.5 lg:text-[16px]">{props?.listTitle} /</div>
             </div>
             <div className="col-12 shrink">
-              <div className="row row-gap-8">
+              <div className="row lg:row-gap-6 row-gap-3">
                 {
                   props?.list?.map?.((node, index)=>{
                     return <div className="col-auto mb-2" key={index}>
-                      <div className={`serif btn text-[28px] leading-none ${realIndex === index ?'text-minor-900' :'text-gray-300'}`}
+                      <div className={`serif btn text-[21px] leading-none lg:text-[28px] ${realIndex === index ?'text-minor-900' :'text-gray-300'}`}
                       onClick={()=>{
                         swiper.slideTo(index)
                       }}>{node?.label}</div>

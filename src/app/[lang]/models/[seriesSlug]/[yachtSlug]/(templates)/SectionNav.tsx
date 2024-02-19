@@ -73,12 +73,12 @@ function SectionNav(props:TypeProps, ref:React.ReactNode){
   }, [props.allowed])
 
   return <Suspense fallback={null}>
-    <div ref={navRefCallback} className={twMerge('sticky left-0 bg-golden-100 pb-4 mb-4', className)} {...props}
+    <div ref={navRefCallback} className={twMerge('sticky left-0 bg-golden-100 pb-4 lg:mb-4 mb-3 lg:pt-0 pt-3', className)} {...props}
     style={{
       top: `${store.headerHeight - topOffset}px`
     }}>
       <div className="container">
-        <div className="row justify-center">
+        <div className="row justify-center text-[13px] lg:text-[16px]">
           {
             allowed.includes('Exterior') && <div className="col-auto">
               <div className="btn text-gray-700"

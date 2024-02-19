@@ -31,7 +31,7 @@ function SingleSeriesTop(props:TypeProps, ref:React.ReactNode){
   const { className } = props
 
   return <Suspense fallback={null}>
-    <Breadcrumb className="pb-5 pt-10"
+    <Breadcrumb className="pb-5 pt-2.5 lg:pt-10"
     list={[
       {
         label: 'Models',

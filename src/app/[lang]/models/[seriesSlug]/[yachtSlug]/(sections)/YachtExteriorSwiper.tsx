@@ -14,7 +14,7 @@ import { SwiperClass } from "swiper/react"
 
 // import { useRouter } from 'next/navigation'
 // import { useStore } from '@src/store'
-// import { useWindowSize } from 'react-use'
+import { useWindowSize } from 'react-use'
 
 interface TypeProps {
   list: {
@@ -31,14 +31,15 @@ interface TypeState {}
 function YachtsExteriorSwiper(props:TypeProps, ref:React.ReactNode){
   // const store = useStore()
   // const router = useRouter()
-  // const viewport = useWindowSize()
+  const viewport = useWindowSize()
   const { className } = props
   const {size:slideFrameSize, setNode:setSlideFrameNode} = useDomNodeSize()
   const [swiper, setSwiper] = useState<SwiperClass>(({} as SwiperClass))
   const [realIndex, setRealIndex] = useState(0)
 
   return <Suspense fallback={null}>
-    <div className={twMerge('relative overflow-hidden', className)}>
+
+    <div id="SECTION_EXTERIOR" className={twMerge('relative overflow-hidden lg:mb-14 mb-7', className)}>
       <div className="swiper-yacht-exterior">
         <div className="container" style={{maxWidth:'1080px'}}>
 
@@ -46,13 +47,14 @@ function YachtsExteriorSwiper(props:TypeProps, ref:React.ReactNode){
         style={{
           minHeight: `${slideFrameSize.height}px`
         }}>
+            <div className="pointer-events-none absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 lg:pointer-events-auto"
+            ref={setSlideFrameNode}
+            style={{
+              width: viewport.width >= 992 ?`calc(76.35vw - 40px)` :`calc(100vw - 40px - 16px)`
 
-            <div className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2" ref={setSlideFrameNode}
-          style={{
-            width: 'calc(76.35vw - 40px)'
-          }}>
+            }}>
               <RatioArea ratio="56.25">
-                <div className="absolute left-0 top-0 flex size-full items-center justify-between">
+                <div className="absolute left-0 top-0 hidden size-full items-center justify-between lg:flex">
                   {
                     swiper?.isLocked === false && <>
                       <div className={`btn ${swiper.isBeginning ?'disabled opacity-50' :''}`}

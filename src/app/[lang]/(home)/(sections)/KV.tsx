@@ -62,19 +62,32 @@ function KV(props:TypeProps, ref:React.ReactNode){
       initial="exit"
       exit="exit"
       animate={KVEnterAble ?'enter' :'exit'}>
+
         {
           props?.video
             ? <video ref={videoRef} className="absolute left-0 top-0 z-0 size-full object-cover" src={props?.video} playsInline muted loop></video>
             : <>{ props?.imageNode || ''}</>
         }
-        <div className="relative z-10 flex h-full items-center justify-center">
-          <div className="serif text-center text-[49px] font-300 text-white"
+
+        <div className="relative z-10 flex h-full items-center justify-center"
+        style={{
+          maxHeight: `calc(100% - ${store.headerHeight}px)`
+        }}>
+          <div className="serif text-center text-[36px] font-300 text-white lg:text-[49px]"
           style={{
             letterSpacing: '0.277em',
-          }}>{props?.title}</div>
+          }}>
+            { props?.title }
+          </div>
         </div>
-        <div className="absolute bottom-5 left-1/2 -translate-x-1/2 text-[13px] text-[#FAF8F5]">Scroll Down</div>
-        <div className="absolute bottom-5 right-5">
+
+        <div className="absolute bottom-2.5 left-1/2 -translate-x-1/2">
+          <div className="animate__animated animate__infinite animate__float ">
+            <i className="bi bi-mouse text-[28px] text-[#FAF8F5] lg:text-[32px]"></i>
+          </div>
+        </div>
+
+        <div className="absolute bottom-5 right-5 hidden lg:block">
           <Image src={`${BASE_PATH}/assets/img/icon_sybass.svg`} width={108} height={40} alt=""/>
         </div>
       </motion.div>

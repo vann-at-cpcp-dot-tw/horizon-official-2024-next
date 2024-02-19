@@ -6,12 +6,11 @@ const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
 import Image from "next/image"
 import { Suspense, useContext, useState, useEffect, useMemo, useReducer } from 'react'
 import { CommonDataContext } from '@src/app/[lang]/providers'
-import { useRouter } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 import { useStore } from '@src/store'
 import { useWindowSize } from 'react-use'
 import { usePathname } from "next/navigation"
-import { isEmpty } from '@src/lib/helpers'
-// import { useSuspenseQuery, useQuery } from "@apollo/experimental-nextjs-app-support/ssr"
+import { isEmpty, pathnameWithLang } from '@src/lib/helpers'
 import { useQuery } from "@apollo/client"
 import { QueryMenu } from '@src/queries/components/menu.gql'
 import { motion, AnimatePresence } from "framer-motion"
@@ -85,6 +84,8 @@ function MainMenu(props:TypeProps, ref:React.ReactNode){
   const router = useRouter()
   const viewport = useWindowSize()
   const pathname = usePathname()
+  const params = useParams()
+  const { lang } = params
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const commonData = useContext(CommonDataContext)
   const { yachtSeriesList:allSeries } = commonData
@@ -252,11 +253,13 @@ function MainMenu(props:TypeProps, ref:React.ReactNode){
                   }
                 },
                 onClick: ()=>{
-                  setMenuScreen({
-                    key: 'models',
-                    seriesSlug: seriesData.slug,
-                    yachtSlug: menuChildNode.slug,
-                  })
+                  viewport.width >= 992
+                    ? setMenuScreen({
+                      key: 'models',
+                      seriesSlug: seriesData.slug,
+                      yachtSlug: menuChildNode.slug,
+                    })
+                    : router.push(pathnameWithLang(`/models/${seriesData.slug}/${menuChildNode.slug}`, lang), {scroll:false})
                 }
               }
             })
@@ -316,7 +319,7 @@ function MainMenu(props:TypeProps, ref:React.ReactNode){
         })
       }}>
       <Image src={`${BASE_PATH}/assets/img/icon_menu.svg`} width={48} height={48} alt="" />
-      <div className="text-[15px] text-minor-900">MENU</div>
+      <div className="hidden text-[15px] text-minor-900 lg:block">MENU</div>
     </div>
 
     {
@@ -350,8 +353,7 @@ function MainMenu(props:TypeProps, ref:React.ReactNode){
                   const [menuGroupKey, menuGroupNode] = menuEntries
                   return <AnimatePresence mode="wait" key={index}>
                     {
-                      menuScreen.key === menuGroupKey && <div className="absolute left-0 top-0 flex size-full !flex-nowrap items-center bg-white">
-                        <MenuScreen
+                      menuScreen.key === menuGroupKey && <MenuScreen
                         currentScreen={menuScreen}
                         list={menuGroupNode.list}
                         vision={menuGroupNode?.vision || {
@@ -363,7 +365,6 @@ function MainMenu(props:TypeProps, ref:React.ReactNode){
                         onCloseClick={()=>{
                           setIsMenuOpen(false)
                         }} />
-                      </div>
                     }
                   </AnimatePresence>
                 })

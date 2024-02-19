@@ -71,11 +71,11 @@ function ComingEvents(props:TypeProps, ref:React.ReactNode){
   return <Suspense fallback={null}>
     <div className={twMerge('', className)}>
       {
-        !isEmpty(list) && <div className="container serif mb-6 text-center font-300 text-minor-900">
-          <div className={`mb-2 ${props?.isSmallLayout ?'text-[28px]' :'text-[40px]'} italic`}>- ON THE -</div>
-          <div className={`-mt-6 ${props?.isSmallLayout ?'text-[53px]' :'text-[80px]'}`}>CALENDER</div>
+        !isEmpty(list) && <div className="container serif mb-3 text-center font-300 text-minor-900 lg:mb-6">
+          <div className={`mb-2 ${props?.isSmallLayout ?'text-[21px] lg:text-[28px]' :'text-[20px] lg:text-[40px]'} italic`}>- ON THE -</div>
+          <div className={`-mt-3 lg:-mt-6 ${props?.isSmallLayout ?'text-[32px] lg:text-[53px]' :'text-[40px] lg:text-[80px]'}`}>CALENDER</div>
           {
-            props?.isSmallLayout && <div className="-mt-3 text-gray-500">Coming Events</div>
+            props?.isSmallLayout && <div className="-mt-1.5 text-gray-500 lg:-mt-3">Coming Events</div>
           }
         </div>
       }
@@ -91,13 +91,13 @@ function ComingEvents(props:TypeProps, ref:React.ReactNode){
               }
               router.push(`${pathname}?comingEvent=${index}`, {scroll:false})
             }}>
-              <div className="serif text-[32px] italic text-minor-900">{node?.title}</div>
+              <div className="serif mb-2 text-[21px] italic leading-[1.2] text-minor-900 lg:text-[32px]">{node?.title}</div>
               <div className="row !flex-nowrap items-end">
                 <div className="col-12 shrink">
-                  <div className="text-[20px] font-300 text-golden-700">{node?.comingEventCustomFields?.scheduleDate}</div>
+                  <div className="text-[15px] font-300 text-golden-700 lg:text-[20px]">{node?.comingEventCustomFields?.scheduleDate}</div>
                 </div>
                 <div className="col-auto flex">
-                  <div className="btn-text border-gray-700 text-gray-700">More info</div>
+                  <div className="btn-text border-gray-700 text-[13px] text-gray-700 lg:text-[16px]">More info</div>
                 </div>
               </div>
 

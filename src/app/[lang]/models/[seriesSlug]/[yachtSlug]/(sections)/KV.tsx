@@ -39,7 +39,7 @@ function KV(props:TypeProps, ref:React.ReactNode){
 
   return <Suspense fallback={null}>
     <div className={twMerge('', className)}>
-      <RatioArea className="mb-12" ratio="42.85">
+      <RatioArea className="mb-6 lg:mb-12" ratio="42.85">
         <motion.div className="absolute left-1/2 top-0 size-full -translate-x-1/2"
         variants={{
           enter: {

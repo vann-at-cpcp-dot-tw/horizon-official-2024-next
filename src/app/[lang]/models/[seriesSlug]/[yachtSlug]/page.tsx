@@ -96,7 +96,7 @@ async function PageSingleYacht(props:TypeProps, ref:React.ReactNode){
   }
 
   return <main className="relative">
-    <Breadcrumb className="pb-5 pt-10"
+    <Breadcrumb className="pb-5 pt-2.5 lg:pt-10"
       list={[
         {
           label: 'Models',
@@ -122,13 +122,9 @@ async function PageSingleYacht(props:TypeProps, ref:React.ReactNode){
 
     <SectionNav />
 
-    <div className="mb-14" id="SECTION_EXTERIOR">
-      <YachtsExteriorSwiper list={exteriorImages} />
-    </div>
+    <YachtsExteriorSwiper list={exteriorImages} />
 
-    <div className="mb-24" id="SECTION_INTERIOR">
-      <YachtInteriorSwiper list={interiorImages} />
-    </div>
+    <YachtInteriorSwiper list={interiorImages} />
 
     <div id="SECTION_SPEC">
       <SpecTable list={specsTable} />
