@@ -76,7 +76,7 @@ function SwiperMilestone(props:TypeProps, ref:React.ReactNode){
                   }}>
                     <RatioArea className="mb-3" ratio="56.25">
                       <Image
-                      className="size-full absolute left-0 top-0 z-0 object-cover"
+                      className="absolute left-0 top-0 z-0 size-full object-cover"
                       src={node.image}
                       fill={true}
                       sizes="50vw"

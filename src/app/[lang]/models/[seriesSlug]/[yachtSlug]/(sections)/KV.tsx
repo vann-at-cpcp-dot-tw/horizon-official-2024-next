@@ -40,7 +40,7 @@ function KV(props:TypeProps, ref:React.ReactNode){
   return <Suspense fallback={null}>
     <div className={twMerge('', className)}>
       <RatioArea className="mb-12" ratio="42.85">
-        <motion.div className="size-full absolute left-1/2 top-0 -translate-x-1/2"
+        <motion.div className="absolute left-1/2 top-0 size-full -translate-x-1/2"
         variants={{
           enter: {
             top: '0%',
@@ -64,8 +64,8 @@ function KV(props:TypeProps, ref:React.ReactNode){
         animate={KVEnterAble ?'enter' :'exit'}>
           {
             props?.video
-              ?<video ref={videoRef} className="size-full absolute left-0 top-0 z-0 object-cover" src={props?.video} playsInline muted loop autoPlay></video>
-              :<Image className="size-full absolute left-0 top-0 z-0 object-cover" fill={true} src={props?.image || ''} alt=""/>
+              ?<video ref={videoRef} className="absolute left-0 top-0 z-0 size-full object-cover" src={props?.video} playsInline muted loop autoPlay></video>
+              :<Image className="absolute left-0 top-0 z-0 size-full object-cover" fill={true} src={props?.image || ''} alt=""/>
           }
         </motion.div>
       </RatioArea>

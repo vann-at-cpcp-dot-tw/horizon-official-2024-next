@@ -29,7 +29,7 @@ export default async function PageHome({
       }
     })
   )
-  return <main className="size-full fixed left-0 top-0 z-[99999] flex flex-col justify-center bg-major-950 py-10">
+  return <main className="fixed left-0 top-0 z-[99999] flex size-full flex-col justify-center bg-major-950 py-10">
 
     <div className="sticky left-0 top-0 -mt-10 ml-2 flex pt-2">
       <LinkWithLang className="btn" href={`${BASE_PATH}/about/horizon`} lang={lang}>

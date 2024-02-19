@@ -218,7 +218,7 @@ function ComingEventDetail(props:TypeProps, ref:React.ReactNode){
 
   return <Suspense fallback={null}>
     <div className={twMerge('', className)}>
-      <motion.div className="size-full fixed left-0 top-0 z-[99999] bg-golden-300"
+      <motion.div className="fixed left-0 top-0 z-[99999] size-full bg-golden-300"
       variants={{
         enter: {
           opacity: 1,
@@ -238,7 +238,7 @@ function ComingEventDetail(props:TypeProps, ref:React.ReactNode){
       initial="exit"
       animate="enter">
 
-        <div className="size-full absolute left-0 top-0 overflow-auto bg-golden-300 pb-10">
+        <div className="absolute left-0 top-0 size-full overflow-auto bg-golden-300 pb-10">
 
           <div className="container-fluid sticky left-0 top-0 mb-4 pt-2">
             <div className="flex">
@@ -274,7 +274,7 @@ function ComingEventDetail(props:TypeProps, ref:React.ReactNode){
                     hullList.map((node, index)=>{
                       return <div className="col-6 mb-5" key={index}>
                         <RatioArea className="mb-3" ratio="56.25">
-                          <Image className="size-full absolute left-0 top-0 object-cover" fill={true} src={node.hull?.exteriorImages?.[0]?.image?.node?.mediaItemUrl || ''} sizes="50vw" alt="" />
+                          <Image className="absolute left-0 top-0 size-full object-cover" fill={true} src={node.hull?.exteriorImages?.[0]?.image?.node?.mediaItemUrl || ''} sizes="50vw" alt="" />
                         </RatioArea>
                         <div className="serif mb-4 text-center text-[24px] text-minor-900">{node.yachtName} <span className="text-[22px]">/</span> {node.hull?.hullName}</div>
                         <div className="flex justify-center">

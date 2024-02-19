@@ -44,10 +44,10 @@ function MenuVision(props:TypeProps, ref:React.ReactNode){
   const imageBlurHashes = useImageBlurHashes(images)
 
   return <Suspense fallback={null}>
-    <div className="size-full absolute left-0 top-0 z-0">
+    <div className="absolute left-0 top-0 z-0 size-full">
 
       {
-        <motion.div className="size-full pointer-events-none absolute left-0 top-0 z-20"
+        <motion.div className="pointer-events-none absolute left-0 top-0 z-20 size-full"
         variants={{
           enter: {
             opacity: 1,
@@ -68,15 +68,15 @@ function MenuVision(props:TypeProps, ref:React.ReactNode){
         initial="exit"
         exit="exit"
         animate={!mediaLoaded ?'enter' :'exit'}>
-          { imageBlurHashes[0] && <Image className="size-full absolute left-0 top-0 z-0 object-cover" alt="" src={imageBlurHashes[0]} fill={true} /> }
+          { imageBlurHashes[0] && <Image className="absolute left-0 top-0 z-0 size-full object-cover" alt="" src={imageBlurHashes[0]} fill={true} /> }
           <div className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2">
             <Loading style={{width:'120px'}} fill="var(--color-golden-900)" />
           </div>
         </motion.div>
       }
 
-      <div className="size-full absolute left-0 top-0 z-0">
-        <motion.div className="size-full absolute left-0 top-0 z-10"
+      <div className="absolute left-0 top-0 z-0 size-full">
+        <motion.div className="absolute left-0 top-0 z-10 size-full"
         variants={{
           enter: {
             opacity: 1,
@@ -101,14 +101,14 @@ function MenuVision(props:TypeProps, ref:React.ReactNode){
         </motion.div>
 
         <motion.div
-        className="size-full absolute left-0 top-0 z-0"
+        className="absolute left-0 top-0 z-0 size-full"
         variants={variants}
         initial="exit"
         exit="exit"
         animate={mediaLoaded ?'enter' :'exit'}>
           {
             props?.video
-              ? <video className="size-full absolute left-0 top-0 z-0 object-cover"
+              ? <video className="absolute left-0 top-0 z-0 size-full object-cover"
               src={props?.video}
               autoPlay
               playsInline
@@ -119,7 +119,7 @@ function MenuVision(props:TypeProps, ref:React.ReactNode){
               }}></video>
               : <>
                 {
-                  <Image className="size-full absolute left-0 top-0 z-0 object-cover"
+                  <Image className="absolute left-0 top-0 z-0 size-full object-cover"
                   fill={true}
                   src={props?.image}
                   placeholder={imageBlurHashes[0] ?'blur' :'empty'}

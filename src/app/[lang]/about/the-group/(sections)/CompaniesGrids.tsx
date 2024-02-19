@@ -64,7 +64,7 @@ function CompaniesGrids(props:TypeProps, ref:React.ReactNode){
               companiesRow?.companies?.map((node:TypeCompanyNode, index)=>{
                 return <div className="lg:col col-12 mb-20" key={`${companiesRowIndex}-${index}`}>
                   <RatioArea className="mb-6" ratio="56.25">
-                    <ImageAutoPlaceholder className="size-full absolute left-0 top-0" src={node?.images?.grid?.node?.mediaItemUrl} fill={true} sizes="50vw" />
+                    <ImageAutoPlaceholder className="absolute left-0 top-0 size-full" src={node?.images?.grid?.node?.mediaItemUrl} fill={true} sizes="50vw" />
                   </RatioArea>
 
                   <div className="px-2.5">

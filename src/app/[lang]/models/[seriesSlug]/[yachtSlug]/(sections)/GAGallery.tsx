@@ -82,11 +82,11 @@ function GAGallery(props:TypeProps, ref:React.ReactNode){
             onClick={()=>{
               setIsOpen(true)
             }}>
-              <div className="size-full absolute left-0 top-0 z-10 flex cursor-pointer items-center justify-center opacity-0 group-hover:opacity-100"
+              <div className="absolute left-0 top-0 z-10 flex size-full cursor-pointer items-center justify-center opacity-0 group-hover:opacity-100"
                 style={{
                   transition: 'all .4s'
                 }}>
-                <div className="size-[56px] flex items-center justify-center rounded-full bg-golden-700">
+                <div className="flex size-[56px] items-center justify-center rounded-full bg-golden-700">
                   <i className="bi bi-plus-lg text-[24px] text-white"></i>
                 </div>
               </div>
@@ -105,7 +105,7 @@ function GAGallery(props:TypeProps, ref:React.ReactNode){
         }
 
         {
-          isOpen && imageItem && <div className="size-full fixed left-0 top-0 z-[99999] flex flex-col justify-center bg-gray-200 p-10">
+          isOpen && imageItem && <div className="fixed left-0 top-0 z-[99999] flex size-full flex-col justify-center bg-gray-200 p-10">
 
             <div className="sticky left-0 top-0 -ml-8 -mt-10 mb-8 flex pt-2">
               <div className="btn bg-golden-300"
@@ -127,7 +127,7 @@ function GAGallery(props:TypeProps, ref:React.ReactNode){
 
             <div className="flex grow !flex-nowrap overflow-hidden">
               <div className="size-full shrink px-10">
-                <div className="size-full relative">
+                <div className="relative size-full">
                   <Image src={imageItem} fill={true} sizes="100vw" style={{objectFit: "contain"}} alt="" />
                 </div>
               </div>

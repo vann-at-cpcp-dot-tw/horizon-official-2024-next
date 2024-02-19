@@ -54,14 +54,14 @@ export default async function PageAboutHorizon({
 
     <div className="relative bg-minor-900">
       <RatioArea ratio="39">
-        <div className="size-full absolute left-0 top-0 z-10 flex items-center justify-center p-5">
+        <div className="absolute left-0 top-0 z-10 flex size-full items-center justify-center p-5">
           <div className="flex flex-col items-center text-white">
             <LinkWithLang className="serif mb-2 text-[32px] italic" href="/about/horizon/milestone" lang={lang}>Milestone</LinkWithLang>
             <LinkWithLang className="border-b-[3px] border-b-white pb-1" href="/about/horizon/milestone" lang={lang}>Discover</LinkWithLang>
           </div>
         </div>
 
-        <Image className="size-full absolute left-0 top-0 z-0 object-cover"
+        <Image className="absolute left-0 top-0 z-0 size-full object-cover"
         src={milestonePic}
         fill={true}
         placeholder="blur"

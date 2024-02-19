@@ -33,7 +33,7 @@ function IFrameGallery(props:TypeProps, ref:React.ReactNode){
 
   return <Suspense fallback={null}>
     <div className={twMerge('relative', className)}>
-      <div className="size-full fixed left-0 top-0 z-[99999] flex flex-col justify-center p-10"
+      <div className="fixed left-0 top-0 z-[99999] flex size-full flex-col justify-center p-10"
       style={{
         background
       }}>
@@ -68,10 +68,10 @@ function IFrameGallery(props:TypeProps, ref:React.ReactNode){
         </div>
 
         <div className="relative flex grow !flex-nowrap overflow-hidden">
-          <div className="size-full absolute left-0 top-0 z-0 flex items-center justify-center">
+          <div className="absolute left-0 top-0 z-0 flex size-full items-center justify-center">
             <Loading style={{width:'120px'}} />
           </div>
-          <iframe className="size-full absolute left-0 top-0 z-10" src={props.list?.[activeIndex]?.embedUrl} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
+          <iframe className="absolute left-0 top-0 z-10 size-full" src={props.list?.[activeIndex]?.embedUrl} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
         </div>
       </div>
     </div>

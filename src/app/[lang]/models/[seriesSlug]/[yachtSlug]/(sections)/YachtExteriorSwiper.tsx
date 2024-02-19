@@ -52,7 +52,7 @@ function YachtsExteriorSwiper(props:TypeProps, ref:React.ReactNode){
             width: 'calc(76.35vw - 40px)'
           }}>
               <RatioArea ratio="56.25">
-                <div className="size-full absolute left-0 top-0 flex items-center justify-between">
+                <div className="absolute left-0 top-0 flex size-full items-center justify-between">
                   {
                     swiper?.isLocked === false && <>
                       <div className={`btn ${swiper.isBeginning ?'disabled opacity-50' :''}`}
@@ -90,7 +90,7 @@ function YachtsExteriorSwiper(props:TypeProps, ref:React.ReactNode){
                   return <SwiperSlide key={index}>
                     <div className="slide-inner">
                       <RatioArea className="" ratio="56.25">
-                        <Image className="size-full absolute left-0 top-0 z-0 object-cover" priority={true} src={node?.image?.node?.mediaItemUrl || ''} fill={true} sizes="76.35vw" alt="" />
+                        <Image className="absolute left-0 top-0 z-0 size-full object-cover" priority={true} src={node?.image?.node?.mediaItemUrl || ''} fill={true} sizes="76.35vw" alt="" />
                       </RatioArea>
                     </div>
                   </SwiperSlide>

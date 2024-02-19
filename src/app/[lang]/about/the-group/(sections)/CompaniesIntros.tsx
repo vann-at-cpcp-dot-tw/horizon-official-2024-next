@@ -32,7 +32,7 @@ function CompaniesIntros(props:TypeProps, ref:React.ReactNode){
           return rowNode?.companies?.map((node, index)=>{
             return <div className="relative mb-[120px]" key={`${rowIndex}-${index}`}>
               <RatioArea className="mb-8" ratio="42.85">
-                <ImageAutoPlaceholder className="size-full absolute left-0 top-0" src={node?.images?.banner?.node?.mediaItemUrl} fill={true} sizes="100vw" />
+                <ImageAutoPlaceholder className="absolute left-0 top-0 size-full" src={node?.images?.banner?.node?.mediaItemUrl} fill={true} sizes="100vw" />
               </RatioArea>
 
               <div className="container">

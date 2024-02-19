@@ -29,8 +29,8 @@ function SeriesList(props:TypeProps, ref:React.ReactNode){
         allSeries?.nodes?.map((node, index:number)=>{
           return <div className="mb-10 w-1/2" key={index}>
             <RatioArea className="mb-4" ratio="63.47">
-              <LinkWithLang className="size-full absolute left-0 top-0" href={`/models/${node.slug}`} lang={lang}>
-                <Image className="size-full absolute left-0 top-0 z-0 object-cover" fill={true} src={node?.yachtsSeriesCustomFields?.seriesKeyImage?.node?.mediaItemUrl || ''} alt="" />
+              <LinkWithLang className="absolute left-0 top-0 size-full" href={`/models/${node.slug}`} lang={lang}>
+                <Image className="absolute left-0 top-0 z-0 size-full object-cover" fill={true} src={node?.yachtsSeriesCustomFields?.seriesKeyImage?.node?.mediaItemUrl || ''} alt="" />
               </LinkWithLang>
             </RatioArea>
             <div className="px-6 lg:px-12">

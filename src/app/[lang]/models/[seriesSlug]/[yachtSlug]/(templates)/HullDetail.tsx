@@ -139,7 +139,7 @@ function HullDetail(props:TypeProps, ref:React.ReactNode){
 
   return <Suspense fallback={null}>
     <div className={twMerge('', className)}>
-      <motion.div className="size-full fixed left-0 top-0 z-[99999] bg-golden-300"
+      <motion.div className="fixed left-0 top-0 z-[99999] size-full bg-golden-300"
       variants={{
         enter: {
           opacity: 1,
@@ -161,7 +161,7 @@ function HullDetail(props:TypeProps, ref:React.ReactNode){
       style={{
         background,
       }}>
-        <div className="size-full absolute left-0 top-0 flex flex-col overflow-auto bg-golden-300 pb-10">
+        <div className="absolute left-0 top-0 flex size-full flex-col overflow-auto bg-golden-300 pb-10">
 
 
           <div className="container-fluid sticky left-0 top-0 mb-4 pt-2"
@@ -202,7 +202,7 @@ function HullDetail(props:TypeProps, ref:React.ReactNode){
 
           <div className="container-fluid relative z-0 flex grow !flex-nowrap">
 
-            <div className="size-full absolute left-0 top-0 z-0 flex items-center justify-center">
+            <div className="absolute left-0 top-0 z-0 flex size-full items-center justify-center">
               {
                 isLoading && <Loading style={{width:'120px'}} fill="var(--color-golden-900)"/>
               }
@@ -265,7 +265,7 @@ function HullDetail(props:TypeProps, ref:React.ReactNode){
 
                 case 'VR':
                   return <div className="relative z-10 grow">
-                    <iframe className="size-full absolute left-0 top-0 z-10" src={props.vrEmbedUrl} frameBorder="0"></iframe>
+                    <iframe className="absolute left-0 top-0 z-10 size-full" src={props.vrEmbedUrl} frameBorder="0"></iframe>
                   </div>
 
                 case 'Videos':

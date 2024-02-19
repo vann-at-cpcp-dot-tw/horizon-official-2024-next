@@ -46,7 +46,7 @@ function LightboxClose(props:TypeProps){
   }, [])
 
   return <div className={twMerge('close flex justify-end', props?.className)}>
-    <div className="btn size-10 flex items-center justify-center"
+    <div className="btn flex size-10 items-center justify-center"
     onClick={()=>{
       store.lightboxClose(props.id)
     }}
