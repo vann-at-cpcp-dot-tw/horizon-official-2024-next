@@ -25,7 +25,7 @@ async function PageAboutTheGroup({params}:TypeProps){
     atgpOrganization:organizationRows
   } = data?.aboutTheGroup?.aboutTheGroupCustomFields ?? {}
 
-  return <main className="pb-[90px]">
+  return <main className="pb-10 lg:pb-24">
     <KV heroImage={heroImage?.node?.mediaItemUrl || ''} />
     <CompaniesGrids organizationRows={organizationRows} />
     <GroupIntroduction content={groupIntroduction || ''} />

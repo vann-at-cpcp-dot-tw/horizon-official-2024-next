@@ -13,7 +13,7 @@ import { usePathname, useSearchParams, useRouter } from "next/navigation"
 import ComingEventDetail from "./ComingEventDetail"
 
 // import { useStore } from '@src/store'
-// import { useWindowSize } from 'react-use'
+// import useWindowSize from "@src/hooks/useWindowSize"
 
 interface TypeProps {
   isSmallLayout?: boolean

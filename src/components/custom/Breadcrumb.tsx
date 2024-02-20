@@ -11,7 +11,7 @@ import { useParams } from "next/navigation"
 
 // import { useRouter } from 'next/navigation'
 // import { useStore } from '@src/store'
-// import { useWindowSize } from 'react-use'
+// import useWindowSize from "@src/hooks/useWindowSize"
 
 interface TypeProps {
   list: {

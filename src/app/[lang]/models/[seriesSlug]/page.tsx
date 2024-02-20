@@ -3,7 +3,7 @@ const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 import { Suspense } from 'react'
 import { useRouter } from 'next/navigation'
 import { useStore } from '@src/store'
-import { useWindowSize } from 'react-use'
+import useWindowSize from "@src/hooks/useWindowSize"
 import { isEmpty } from '@src/lib/helpers'
 import { fetchGQL } from '@src/lib/apollo'
 import { QuerySingleSeriesPage } from '@src/queries/pages/models-[seriesSlug].gql'

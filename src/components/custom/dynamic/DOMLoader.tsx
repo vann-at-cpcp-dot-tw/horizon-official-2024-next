@@ -100,8 +100,8 @@ function DOMLoader(props:TypeProps, ref:React.ReactNode){
     animate={'enter'}
     exit="exit">
       <div className="flex flex-nowrap items-center justify-center bg-golden-100 px-2">
-        <Image className="mx-1.5" src={`${BASE_PATH}/assets/img/logo_mark.svg`} width={54} height={34} style={{width:'54px'}} priority={true} alt="" />
-        <Image className="mx-1.5" src={`${BASE_PATH}/assets/img/logo_text.svg`} width={140} height={17} style={{width:'140px'}} priority={true} alt="" />
+        <Image className="mx-1.5 w-[44px] lg:w-[54px]" src={`${BASE_PATH}/assets/img/logo_mark.svg`} width={54} height={34} priority={true} alt="" />
+        <Image className="mx-1.5 w-[130px] lg:w-[140px]" src={`${BASE_PATH}/assets/img/logo_text.svg`} width={140} height={17} priority={true} alt="" />
       </div>
     </motion.div>
 

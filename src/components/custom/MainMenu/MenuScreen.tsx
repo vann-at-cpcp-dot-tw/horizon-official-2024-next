@@ -12,7 +12,7 @@ import { Button } from "@src/components/ui/button"
 import { useParams } from "next/navigation"
 import LinkWithLang from "@src/components/custom/LinkWithLang"
 import usePathnameWithoutLang from "@src/hooks/usePathnameWithoutLang"
-import { useWindowSize } from "react-use"
+import useWindowSize from "@src/hooks/useWindowSize"
 
 interface TypeProps {
   list: TypeMenuListNode[]
@@ -149,7 +149,7 @@ function MenuScreen(props:TypeProps, ref:React.ReactNode){
       </div>
 
       {
-        viewport.width >= 992 && <div className="relative size-full shrink overflow-hidden bg-minor-900">
+        viewport.width && viewport.width >= 992 && <div className="relative size-full shrink overflow-hidden bg-minor-900">
           <AnimatePresence mode="wait">
             {
               props.currentScreen.key === 'models'

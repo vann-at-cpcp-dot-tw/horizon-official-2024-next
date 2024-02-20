@@ -10,7 +10,7 @@ import Image from "next/image"
 import LinkWithLang from "@src/components/custom/LinkWithLang"
 import { twMerge } from 'tailwind-merge'
 import { isEmpty } from '@src/lib/helpers'
-import { useWindowSize } from 'react-use'
+import useWindowSize from "@src/hooks/useWindowSize"
 import { motion } from "framer-motion"
 import useIsClient from "@root/src/hooks/useIsClient"
 
@@ -32,7 +32,8 @@ function OverflowContent(props:TypeProps, ref:React.ReactNode){
   return (<Suspense fallback={null}>
     <div className="relative overflow-hidden">
       <div className="relative opacity-0">{ props.children }</div>
-      <motion.div className="absolute left-0 top-0 size-full"
+      {
+        viewport.height && <motion.div className="absolute left-0 top-0 size-full"
         variants={{
           enter: {
             top: '0%'
@@ -52,8 +53,9 @@ function OverflowContent(props:TypeProps, ref:React.ReactNode){
           delay: props?.delay || 0,
           ease: [0.215, 0.610, 0.355, 1.000]
         }}>
-        { props.children }
-      </motion.div>
+          { props.children }
+        </motion.div>
+      }
     </div>
   </Suspense>)
 }

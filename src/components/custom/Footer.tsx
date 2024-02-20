@@ -4,15 +4,15 @@ const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 const CONTENT_TYPE = process.env.NEXT_PUBLIC_CONTENT_TYPE || 'hq'
 const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
 
-import { Suspense, useRef, useReducer, useEffect, useState } from 'react'
-import { useWindowSize } from 'react-use'
+import { Suspense, useRef, useReducer, useEffect, useState, useContext } from 'react'
+
 import { twMerge } from 'tailwind-merge'
 import { isEmpty } from '@src/lib/helpers'
 import { Button } from '@src/components/ui/button'
 import LinkWithLang from "./LinkWithLang"
 import { useParams } from "next/navigation"
-
-
+import { CommonDataContext } from '@src/app/[lang]/providers'
+import useWindowSize from "@src/hooks/useWindowSize"
 interface TypeProps {
   className?: string
 }
@@ -30,6 +30,8 @@ function Footer(props:TypeProps, ref:React.ReactNode){
   const [subscriptionInputFocus, setSubscriptionInputFocus] = useState(false)
   const { lang } = useParams()
 
+  const commonData = useContext(CommonDataContext)
+  const { externalLinks } = commonData?.globalSettings ?? {}
   useEffect(()=>{
     setState({
       footerHeight: footerRef.current?.clientHeight || 0,
@@ -61,13 +63,17 @@ function Footer(props:TypeProps, ref:React.ReactNode){
       <div className="container-fluid border-b border-golden-700 pb-6">
         <div className="row">
           <div className="lg:col-8 col-12">
-            <div className="row row-gap-8">
+            <div className="row lg:row-gap-8">
               <div className="col-12 lg:col-auto lg:border-r">
                 <LinkWithLang className="block py-2.5 leading-none lg:py-0" href="/QA" lang={lang}>Q<span className="text-[13px]">&</span>A</LinkWithLang>
               </div>
-              <div className="col-12 lg:col-auto lg:border-r">
-                <LinkWithLang className="block py-2.5 leading-none lg:py-0" href="###" lang={lang}>Career</LinkWithLang>
-              </div>
+
+              {
+                externalLinks?.career && <div className="col-12 lg:col-auto lg:border-r">
+                  <a className="block py-2.5 leading-none lg:py-0" href={externalLinks?.career} target="_blank">Career</a>
+                </div>
+              }
+
               {
                 CONTENT_TYPE === 'hq' && <div className="col-12 lg:col-auto lg:border-r">
                   <LinkWithLang className="block py-2.5 leading-none lg:py-0" href="/investor" lang={lang}>Investor</LinkWithLang>
@@ -76,19 +82,32 @@ function Footer(props:TypeProps, ref:React.ReactNode){
               <div className="col-12 lg:col-auto lg:border-r">
                 <LinkWithLang className="block py-2.5 leading-none lg:py-0" href="/privacy-policy" lang={lang}>Privacy Policy</LinkWithLang>
               </div>
-              <div className="col-12 lg:col-auto lg:border-r">
+              <div className="col-12 lg:col-auto">
                 <LinkWithLang className="block py-2.5 leading-none lg:py-0" href="/terms-and-conditions" lang={lang}>Terms and Conditions</LinkWithLang>
               </div>
             </div>
           </div>
-          <div className="lg:col-4 col-12">
-            <div className="row row-gap-8 justify-end">
-              <div className="col-12 lg:col-auto">
-                <a className="block py-2.5 leading-none lg:py-0" href="###" target="_blank">Facebook</a>
-              </div>
-              <div className="col-12 lg:col-auto">
-                <a className="block py-2.5 leading-none lg:py-0" href="###" target="_blank">Youtube</a>
-              </div>
+          <div className="lg:col-4 col-12 mt-6 lg:mt-0">
+            <div className="row lg:justify-end">
+              {
+                [
+                  { key: 'facebook', icon: 'facebook'},
+                  { key: 'instagram', icon: 'instagram'},
+                  { key: 'twitter', icon: 'twitter-x'},
+                  { key: 'youtube', icon: 'youtube'},
+                  { key: 'linkedin', icon: 'linkedin'}
+                ].map((node, index)=>{
+                  if( !externalLinks.socialMedia?.[node.key] ){
+                    return
+                  }
+
+                  return <div className="col-auto" key={index}>
+                    <a className="block py-2.5 text-[24px] leading-none lg:py-0 lg:text-[18px]" href={externalLinks.socialMedia[node.key]} target="_blank">
+                      <i className={`bi bi-${node.icon}`}></i>
+                    </a>
+                  </div>
+                })
+              }
             </div>
           </div>
         </div>

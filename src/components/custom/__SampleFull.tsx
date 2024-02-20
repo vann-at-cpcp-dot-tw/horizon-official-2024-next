@@ -18,7 +18,7 @@ import { useRouter } from 'next/navigation'
 import { useStore } from '@src/store'
 
 // use
-import { useWindowSize } from 'react-use'
+import useWindowSize from "@src/hooks/useWindowSize"
 import { useQuery, useMutation, useQueryClient } from 'react-query'
 
 // methods & components

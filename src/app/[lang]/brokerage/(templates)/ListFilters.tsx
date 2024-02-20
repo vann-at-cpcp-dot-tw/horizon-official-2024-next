@@ -14,7 +14,7 @@ import { isEmpty } from '@src/lib/helpers'
 import { useRouter, useSearchParams } from 'next/navigation'
 import usePathnameWithoutLang from "@root/src/hooks/usePathnameWithoutLang"
 // import { useStore } from '@src/store'
-// import { useWindowSize } from 'react-use'
+// import useWindowSize from "@src/hooks/useWindowSize"
 
 interface TypeProps {
   yachtConditions?: {

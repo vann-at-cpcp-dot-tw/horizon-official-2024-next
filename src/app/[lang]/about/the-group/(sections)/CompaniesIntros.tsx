@@ -10,7 +10,7 @@ import ImageAutoPlaceholder from "@root/src/components/custom/ImageAutoPlacehold
 
 // import { useRouter } from 'next/navigation'
 // import { useStore } from '@src/store'
-// import { useWindowSize } from 'react-use'
+// import useWindowSize from "@src/hooks/useWindowSize"
 
 import { TypeCompanyNode } from './CompaniesGrids'
 
@@ -30,16 +30,16 @@ function CompaniesIntros(props:TypeProps, ref:React.ReactNode){
       {
         props?.organizationRows?.map((rowNode, rowIndex)=>{
           return rowNode?.companies?.map((node, index)=>{
-            return <div className="relative mb-[120px]" key={`${rowIndex}-${index}`}>
-              <RatioArea className="mb-8" ratio="42.85">
+            return <div className="relative mb-16 lg:mb-[120px]" key={`${rowIndex}-${index}`}>
+              <RatioArea className="mb-4 lg:mb-8" ratio="42.85">
                 <ImageAutoPlaceholder className="absolute left-0 top-0 size-full" src={node?.images?.banner?.node?.mediaItemUrl} fill={true} sizes="100vw" />
               </RatioArea>
 
               <div className="container">
-                <div className="mb-6">
-                  <div className="text-center text-[24px] text-golden-900">{node?.basic?.componyName}</div>
+                <div className="mb-3 lg:mb-6">
+                  <div className="text-center text-[18px] text-golden-900 lg:text-[24px]">{node?.basic?.componyName}</div>
                   {
-                    node?.basic?.subtitle && <div className="mt-1 text-center text-gray-300">{node.basic.subtitle}</div>
+                    node?.basic?.subtitle && <div className="mt-1 text-center text-[13px] text-gray-300 lg:text-[16px]">{node.basic.subtitle}</div>
                   }
                 </div>
                 {

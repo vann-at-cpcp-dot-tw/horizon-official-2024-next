@@ -14,7 +14,7 @@ import { SwiperClass } from "swiper/react"
 
 // import { useRouter } from 'next/navigation'
 // import { useStore } from '@src/store'
-import { useWindowSize } from 'react-use'
+import useWindowSize from "@root/src/hooks/useWindowSize"
 
 interface TypeProps {
   list: {
@@ -50,7 +50,7 @@ function YachtsExteriorSwiper(props:TypeProps, ref:React.ReactNode){
             <div className="pointer-events-none absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 lg:pointer-events-auto"
             ref={setSlideFrameNode}
             style={{
-              width: viewport.width >= 992 ?`calc(76.35vw - 40px)` :`calc(100vw - 40px - 16px)`
+              width: viewport.width && viewport.width >= 992 ?`calc(76.35vw - 40px)` :`calc(100vw - 40px - 16px)`
 
             }}>
               <RatioArea ratio="56.25">

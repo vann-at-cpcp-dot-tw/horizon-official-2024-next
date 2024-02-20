@@ -66,6 +66,16 @@ query QueryCommonData {
         }
       }
     }
+    externalLinks {
+      career
+      socialMedia {
+        facebook
+        instagram
+        linkedin
+        twitter
+        youtube
+      }
+    }
   }
   yachtSeriesList(first: 99) {
     nodes {

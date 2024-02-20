@@ -15,7 +15,7 @@ import { Button } from "@src/components/ui/button"
 import HullDetail from "@src/app/[lang]/models/[seriesSlug]/[yachtSlug]/(templates)/HullDetail"
 
 // import { useStore } from '@src/store'
-// import { useWindowSize } from 'react-use'
+// import useWindowSize from "@src/hooks/useWindowSize"
 
 interface TypeHullNode {
   // exteriorImages?: {

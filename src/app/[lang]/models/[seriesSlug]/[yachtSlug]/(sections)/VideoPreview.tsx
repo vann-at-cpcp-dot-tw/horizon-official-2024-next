@@ -12,7 +12,7 @@ import IFrameGallery from "../(templates)/IFrameGallery"
 import useDomNodeSize from "@src/hooks/useDomNodeSize"
 // import { useRouter } from 'next/navigation'
 // import { useStore } from '@src/store'
-// import { useWindowSize } from 'react-use'
+// import useWindowSize from "@src/hooks/useWindowSize"
 
 interface TypeProps {
   preview: {

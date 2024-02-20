@@ -5,7 +5,7 @@ const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 import { Suspense, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useStore } from '@src/store'
-import { useWindowSize } from 'react-use'
+import useWindowSize from "@src/hooks/useWindowSize"
 import { twMerge } from 'tailwind-merge'
 import { isEmpty } from '@src/lib/helpers'
 import SwiperOverflow from "@src/components/custom/SwiperOverflow"

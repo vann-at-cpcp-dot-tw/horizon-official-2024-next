@@ -9,7 +9,7 @@ import RatioArea from "@src/components/custom/RatioArea"
 
 // import { useRouter } from 'next/navigation'
 // import { useStore } from '@src/store'
-// import { useWindowSize } from 'react-use'
+// import useWindowSize from "@src/hooks/useWindowSize"
 
 interface TypeProps {
   slug: string

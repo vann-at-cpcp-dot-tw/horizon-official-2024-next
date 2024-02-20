@@ -15,7 +15,7 @@ import { useRouter, usePathname } from 'next/navigation'
 import { motion } from "framer-motion"
 
 // import { useStore } from '@src/store'
-// import { useWindowSize } from 'react-use'
+// import useWindowSize from "@src/hooks/useWindowSize"
 
 interface TypeProps {
   hullName: string

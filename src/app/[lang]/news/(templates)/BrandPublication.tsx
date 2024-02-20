@@ -12,7 +12,7 @@ import { Button } from "@src/components/ui/button"
 
 // import { useRouter } from 'next/navigation'
 // import { useStore } from '@src/store'
-// import { useWindowSize } from 'react-use'
+// import useWindowSize from "@src/hooks/useWindowSize"
 
 
 import LightGallery from 'lightgallery/react'

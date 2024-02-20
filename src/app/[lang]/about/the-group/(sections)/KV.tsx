@@ -24,15 +24,14 @@ function KV(props:TypeProps, ref:React.ReactNode){
       <ImageAutoPlaceholder className="absolute left-0 top-0 size-full" src={props?.heroImage} fill={true} sizes="100vw" />
     </RatioArea>
 
-    <div className="py-20">
+    <div className="py-12 lg:py-20">
       <div className="container text-center">
-        <div className="serif mb-3 text-[32px] text-minor-900">The Horizon Group</div>
-        <div className="serif mb-6 text-[20px] text-minor-900">Horizon Group is a specialized yacht conglomerate encompassing a composite material technology company,<br/>three shipyards, and a top-tier luxury yacht marina.</div>
-        <div className="text-[17px] text-gray-300">100% Crafted in Kaohsiung, Taiwan</div>
+        <div className="serif mb-1.5 text-[24px] text-minor-900 lg:mb-3 lg:text-[32px]">The Horizon Group</div>
+        <div className="serif mb-3 text-[16px] text-minor-900 lg:mb-6 lg:text-[20px]">Horizon Group is a specialized yacht conglomerate encompassing a composite material technology company,<br/>three shipyards, and a top-tier luxury yacht marina.</div>
+        <div className="text-[14px] text-gray-300 lg:text-[17px]">100% Crafted in Kaohsiung, Taiwan</div>
       </div>
     </div>
   </div>
-  // </Suspense>
 }
 
 export default KV

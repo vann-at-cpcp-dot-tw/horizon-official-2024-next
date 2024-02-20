@@ -6,7 +6,7 @@ import Image from "next/image"
 import { Suspense, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useStore } from '@src/store'
-import { useWindowSize } from 'react-use'
+import useWindowSize from "@src/hooks/useWindowSize"
 import { twMerge } from 'tailwind-merge'
 import { isEmpty } from '@src/lib/helpers'
 import RatioArea from "@src/components/custom/RatioArea"

@@ -16,7 +16,6 @@ export async function genImageBlurHash(url:string, w:number=16, q:number=75) {
       <filter id='b' color-interpolation-filters='sRGB'>
         <feGaussianBlur stdDeviation='0.5' />
       </filter>
-
       <image preserveAspectRatio='none' filter='url(#b)' x='0' y='0' height='100%' width='100%'
       href='data:image/avif;base64,${base64str}' />
     </svg>

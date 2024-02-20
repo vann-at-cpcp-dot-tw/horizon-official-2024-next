@@ -11,7 +11,7 @@ import SpecTable from "@src/components/custom/SpecTable"
 import TermsTable from "@src/components/custom/TermsTable"
 // import { useRouter } from 'next/navigation'
 // import { useStore } from '@src/store'
-// import { useWindowSize } from 'react-use'
+// import useWindowSize from "@src/hooks/useWindowSize"
 
 interface TypeProps {
   title?: string

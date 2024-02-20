@@ -13,9 +13,9 @@ interface TypeState {}
 function History(props:TypeProps, ref:React.ReactNode){
   const { className } = props
   return <Suspense fallback={null}>
-    <div className={twMerge('', className)}>
+    <div className={twMerge('mb-16', className)}>
       <div className="container">
-        <div className="mb-8 text-center text-gray-300">History</div>
+        <div className="mb-4 text-center text-gray-300">History</div>
         <div className="mx-auto w-full max-w-[900px] text-gray-700">{props?.content}</div>
       </div>
     </div>

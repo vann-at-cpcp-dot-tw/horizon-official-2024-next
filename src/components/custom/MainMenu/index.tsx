@@ -8,7 +8,7 @@ import { Suspense, useContext, useState, useEffect, useMemo, useReducer } from '
 import { CommonDataContext } from '@src/app/[lang]/providers'
 import { useParams, useRouter } from 'next/navigation'
 import { useStore } from '@src/store'
-import { useWindowSize } from 'react-use'
+import useWindowSize from "@src/hooks/useWindowSize"
 import { usePathname } from "next/navigation"
 import { isEmpty, pathnameWithLang } from '@src/lib/helpers'
 import { useQuery } from "@apollo/client"
@@ -253,7 +253,7 @@ function MainMenu(props:TypeProps, ref:React.ReactNode){
                   }
                 },
                 onClick: ()=>{
-                  viewport.width >= 992
+                  viewport.width && viewport.width >= 992
                     ? setMenuScreen({
                       key: 'models',
                       seriesSlug: seriesData.slug,
@@ -290,7 +290,7 @@ function MainMenu(props:TypeProps, ref:React.ReactNode){
         })
       },
     }
-  }, [menuSeries, allSeries, yachtsBySeriesSlug])
+  }, [menuSeries, allSeries, yachtsBySeriesSlug, viewport.width])
 
   useEffect(()=>{
     if( isMenuOpen ){
@@ -319,7 +319,7 @@ function MainMenu(props:TypeProps, ref:React.ReactNode){
         })
       }}>
       <Image src={`${BASE_PATH}/assets/img/icon_menu.svg`} width={48} height={48} alt="" />
-      <div className="hidden text-[15px] text-minor-900 lg:block">MENU</div>
+      <div className="hidden text-[15px] leading-none text-minor-900 lg:block">MENU</div>
     </div>
 
     {

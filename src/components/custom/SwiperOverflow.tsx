@@ -9,7 +9,6 @@ import useDomNodeSize from "@src/hooks/useDomNodeSize"
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { SwiperClass } from "swiper/react"
 import LinkWithLang from "@src/components/custom/LinkWithLang"
-import { useWindowSize } from "react-use"
 
 interface TypeProps {
   listTitle: string
@@ -29,7 +28,6 @@ interface TypeState {}
 function SwiperOverflow(props:TypeProps, ref:React.ReactNode){
   const params = useParams()
   const { lang } = params
-  const viewport = useWindowSize()
   const [bodyWidth, setBodyWidth] = useState(0)
   const [swiper, setSwiper] = useState<SwiperClass>(({} as SwiperClass))
   const [realIndex, setRealIndex] = useState(0)

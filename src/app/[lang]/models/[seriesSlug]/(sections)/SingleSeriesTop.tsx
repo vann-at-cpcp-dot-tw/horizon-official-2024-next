@@ -6,7 +6,7 @@ import { Suspense, useContext, useEffect, useMemo } from 'react'
 import { CommonDataContext } from '@src/app/[lang]/providers'
 import { useRouter } from 'next/navigation'
 import { useStore } from '@src/store'
-import { useWindowSize } from 'react-use'
+import useWindowSize from "@src/hooks/useWindowSize"
 import { twMerge } from 'tailwind-merge'
 import { isEmpty } from '@src/lib/helpers'
 import Breadcrumb from "@src/components/custom/Breadcrumb"

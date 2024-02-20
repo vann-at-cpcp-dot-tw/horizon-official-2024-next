@@ -9,7 +9,7 @@ import { routes } from '@src/routes'
 import { useStore } from '@src/store'
 
 // use
-import { useWindowSize } from 'react-use'
+import useWindowSize from "@src/hooks/useWindowSize"
 import { twMerge } from 'tailwind-merge'
 
 // methods & components
@@ -51,8 +51,8 @@ function LightboxClose(props:TypeProps){
       store.lightboxClose(props.id)
     }}
     style={{
-      marginRight: viewport.width >= 992 ?'-20px' :'-10px',
-      marginTop: viewport.width >= 992 ?'-20px' :'-10px',
+      marginRight: viewport.width && viewport.width >= 992 ?'-20px' :'-10px',
+      marginTop: viewport.width && viewport.width >= 992 ?'-20px' :'-10px',
     }}>
       <i className="bi bi-x-lg text-[28px] font-900 leading-none text-secondary lg:text-[32px]"
       style={{

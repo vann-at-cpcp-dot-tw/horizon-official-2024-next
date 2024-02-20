@@ -5,7 +5,7 @@ import { Suspense } from 'react'
 
 import { useRouter } from 'next/navigation'
 import { useStore } from '@src/store'
-import { useWindowSize } from 'react-use'
+import useWindowSize from "@src/hooks/useWindowSize"
 import { isEmpty } from '@src/lib/helpers'
 
 interface TypeProps {}

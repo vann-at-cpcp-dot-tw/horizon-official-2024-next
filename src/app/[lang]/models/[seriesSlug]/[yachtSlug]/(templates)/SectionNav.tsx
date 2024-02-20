@@ -12,7 +12,7 @@ import { useScroll, useMotionValueEvent } from "framer-motion"
 
 // import { useRouter } from 'next/navigation'
 import { useStore } from '@src/store'
-// import { useWindowSize } from 'react-use'
+// import useWindowSize from "@src/hooks/useWindowSize"
 
 interface TypeProps {
   allowed?: string[]

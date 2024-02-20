@@ -10,7 +10,7 @@ import { isEmpty } from '@src/lib/helpers'
 import RatioArea from "@src/components/custom/RatioArea"
 import { useRouter, usePathname, useSearchParams } from "next/navigation"
 // import { useStore } from '@src/store'
-// import { useWindowSize } from 'react-use'
+// import useWindowSize from "@src/hooks/useWindowSize"
 
 import { motion } from "framer-motion"
 
@@ -90,9 +90,9 @@ function ContentList(props:TypeProps, ref:React.ReactNode){
     <div className={twMerge('', className)}>
       {
         props?.list?.map((node, index)=>{
-          return <div className="container mb-20" key={index}>
+          return <div className="container mb-14 lg:mb-20" key={index}>
             <div className="mx-auto w-full max-w-[900px]">
-              <RatioArea className="group mb-5 overflow-hidden" ratio="56.25">
+              <RatioArea className="group mb-3 overflow-hidden lg:mb-5" ratio="56.25">
                 <div className="absolute left-0 top-0 z-10 flex size-full cursor-pointer items-center justify-center opacity-0 group-hover:opacity-100"
                 onClick={()=>{
                   router.push(`${pathname}?open=${index}`, {scroll:false})
@@ -117,8 +117,8 @@ function ContentList(props:TypeProps, ref:React.ReactNode){
                   transition: 'all 1.6s cubic-bezier(0.215, 0.610, 0.355, 1.000)'
                 }} />
               </RatioArea>
-              <div className="serif mb-2 text-center text-[32px] text-minor-900">{node?.basic?.title}</div>
-              <div className="mb-5 text-gray-700">{node?.basic?.description}</div>
+              <div className="serif mb-1 text-center text-[24px] text-minor-900 lg:mb-2 lg:text-[32px]">{node?.basic?.title}</div>
+              <div className="mb-3 text-gray-700 lg:mb-5">{node?.basic?.description}</div>
               <div className="flex justify-center">
                 <div className="cursor-pointer text-gray-300 underline"
                 onClick={()=>{

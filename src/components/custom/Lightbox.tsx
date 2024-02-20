@@ -9,7 +9,7 @@ import { routes } from '@src/routes'
 import { useStore } from '@src/store'
 
 // use
-import { useWindowSize } from 'react-use'
+import useWindowSize from "@src/hooks/useWindowSize"
 import { twMerge } from 'tailwind-merge'
 
 // methods & components

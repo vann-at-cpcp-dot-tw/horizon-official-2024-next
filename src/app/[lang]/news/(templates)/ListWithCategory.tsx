@@ -19,7 +19,7 @@ import { CommonDataContext } from '@src/app/[lang]/providers'
 import { TypePostNode } from "./ListNewsPage"
 
 // import { useStore } from '@src/store'
-// import { useWindowSize } from 'react-use'
+// import useWindowSize from "@src/hooks/useWindowSize"
 
 interface TypeProps {
   lang: string

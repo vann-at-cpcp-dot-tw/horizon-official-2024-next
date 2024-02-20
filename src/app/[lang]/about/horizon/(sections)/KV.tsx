@@ -22,22 +22,22 @@ function KV(props:TypeProps, ref:React.ReactNode){
   const { className } = props
 
   return <Suspense fallback={null}>
-    <div className={twMerge('relative min-h-screen w-full', className)}
+    <div className={twMerge('relative min-h-screen w-full flex flex-col', className)}
     style={{
       marginTop: `-${store.headerHeight}px`
     }}>
       <video className="absolute left-0 top-0 z-0 size-full object-cover" autoPlay playsInline muted loop
       src={`${props?.background}`}></video>
 
-      <div className="min-size-full relative z-10 h-auto">
+      <div className="min-size-full relative z-10 my-auto h-auto px-5">
         <div style={{
-          padding: `${60+store.headerHeight}px 0px`,
+          padding: `${store.headerHeight}px 0px`,
         }}>
           <div className="relative mx-auto mb-8 w-full max-w-[956px] xl:w-[69%] xl:max-w-[1920px]">
             { props.heroImageNode }
           </div>
           <div className="relative mx-auto w-full max-w-[600px]">
-            <div className="serif text-center text-[20px] leading-[1.8] text-white">{props?.description}</div>
+            <div className="serif text-center text-[20px] text-white lg:leading-[1.8]">{props?.description}</div>
           </div>
         </div>
       </div>

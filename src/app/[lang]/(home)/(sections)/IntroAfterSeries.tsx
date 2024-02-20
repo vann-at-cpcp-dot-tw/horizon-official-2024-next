@@ -7,7 +7,8 @@ import RatioArea from "@src/components/custom/RatioArea"
 import LinkWithLang from "@src/components/custom/LinkWithLang"
 import OverflowContent from "@src/components/custom/OverflowContent"
 import { useInView } from "framer-motion"
-import { useWindowSize } from "react-use"
+import useWindowSize from "@root/src/hooks/useWindowSize"
+
 interface TypeProps {
   smallVideo: string
   wideVideo: string
@@ -65,7 +66,7 @@ function IntroAfterSeries(props:TypeProps, ref:React.ReactNode){
             <LinkWithLang className="border-b-[3px] border-b-white pb-1" href="/about/innovation" lang={props.lang}>Discover</LinkWithLang>
           </div>
         </div>
-        <RatioArea ratio={viewport.width >= 992 ?'0' :'56.25'} className="lg:static">
+        <RatioArea ratio={viewport.width && viewport.width >= 992 ?'0' :'56.25'} className="lg:static">
           <video className="absolute left-0 top-0 z-0 size-full object-cover" autoPlay playsInline muted loop
           src={props?.wideVideo}></video>
         </RatioArea>

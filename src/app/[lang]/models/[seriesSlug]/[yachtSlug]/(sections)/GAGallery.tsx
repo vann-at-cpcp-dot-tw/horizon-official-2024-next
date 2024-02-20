@@ -12,7 +12,7 @@ import GAGalleryNav from "../(templates)/GAGalleryNav"
 
 // import { useRouter } from 'next/navigation'
 // import { useStore } from '@src/store'
-// import { useWindowSize } from 'react-use'
+// import useWindowSize from "@src/hooks/useWindowSize"
 
 export interface TypeGAImageNode {
   title?: string

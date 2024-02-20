@@ -20,7 +20,7 @@ import { CommonDataContext } from '@src/app/[lang]/providers'
 import { formatCategories } from "./ListItem"
 
 // import { useStore } from '@src/store'
-// import { useWindowSize } from 'react-use'
+// import useWindowSize from "@src/hooks/useWindowSize"
 
 export interface TypePostNode {
   slug: string

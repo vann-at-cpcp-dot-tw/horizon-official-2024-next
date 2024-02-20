@@ -30,10 +30,6 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'wordpress-1205670-4264663.cloudwaysapps.com'
-      },
-      {
-        protocol: 'https',
         hostname: 'cms-horizon.cpcp.tw'
       }
     ],

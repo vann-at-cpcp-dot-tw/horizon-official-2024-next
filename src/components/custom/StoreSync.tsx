@@ -13,7 +13,7 @@ import { useRouter, usePathname } from 'next/navigation'
 import { useStore } from '@src/store'
 
 // use
-import { useWindowSize } from 'react-use'
+import useWindowSize from "@src/hooks/useWindowSize"
 
 // methods & components
 import { isEmpty } from '@src/lib/helpers'

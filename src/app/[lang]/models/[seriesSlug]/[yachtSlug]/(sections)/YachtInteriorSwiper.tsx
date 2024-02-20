@@ -18,7 +18,7 @@ import Marquee from "react-fast-marquee"
 
 // import { useRouter } from 'next/navigation'
 // import { useStore } from '@src/store'
-// import { useWindowSize } from 'react-use'
+// import useWindowSize from "@src/hooks/useWindowSize"
 
 // import 'swiper/css/free-mode'
 

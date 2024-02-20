@@ -1,4 +1,4 @@
-import { useWindowSize } from "react-use"
+import useWindowSize from "@src/hooks/useWindowSize"
 import { useEffect, useState } from "react"
 
 export default function useIsClient(){
@@ -6,7 +6,7 @@ export default function useIsClient(){
   const [isClient, setIsClient] = useState(false)
 
   useEffect(()=>{
-    if( viewport.width < Infinity ){
+    if( viewport.width && viewport.width > 0){
       setIsClient(true)
     }
   }, [viewport.width])

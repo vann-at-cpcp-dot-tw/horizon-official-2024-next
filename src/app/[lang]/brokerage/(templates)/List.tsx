@@ -15,7 +15,7 @@ import { QueryCharters } from '@src/queries/pages/charter.gql'
 import { useLazyQuery } from "@apollo/client"
 import { useRouter, useParams, useSearchParams } from 'next/navigation'
 // import { useStore } from '@src/store'
-// import { useWindowSize } from 'react-use'
+// import useWindowSize from "@src/hooks/useWindowSize"
 import ListFilters from "./ListFilters"
 import ListItem from "./ListItem"
 import PageNav from "@src/components/custom/PageNav"
