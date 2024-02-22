@@ -66,7 +66,7 @@ function VideoPreview(props:TypeProps, ref:React.ReactNode){
   }
 
   return <Suspense fallback={null}>
-    <div className={twMerge('relative mb-24', className)}>
+    <div className={twMerge('relative lg:mb-24 mb-12', className)}>
       <RatioArea className="w-full" ratio="56.25">
         <div className="absolute left-0 top-0 size-full cursor-pointer overflow-hidden">
           <div className="absolute left-0 top-0 z-10 flex size-full items-center justify-center"
@@ -123,6 +123,7 @@ function VideoPreview(props:TypeProps, ref:React.ReactNode){
 
     {
       isOpen && <IFrameGallery
+        iframeRatio={1.78}
         list={props?.gallery}
         onClose={()=>{
           setIsOpen(false)

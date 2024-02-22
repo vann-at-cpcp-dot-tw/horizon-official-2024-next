@@ -1,0 +1,22 @@
+query QueryYachtsWithSeries {
+  yachtSeriesList(first: 99) {
+    nodes {
+      slug
+      name
+      yachtsSeriesCustomFields {
+        seriesSimpleDescription
+        seriesKeyImage {
+          node {
+            mediaItemUrl
+          }
+        }
+      }
+      yachts {
+        nodes {
+          slug
+          title
+        }
+      }
+    }
+  }
+}

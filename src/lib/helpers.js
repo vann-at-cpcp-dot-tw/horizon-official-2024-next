@@ -352,3 +352,28 @@ export const generatePriceRange = function(prices, step, max) {
   // 回傳價格範圍的陣列
   return priceRanges
 }
+
+
+export const calcSizeByRatio = function({w, h, ratio}) {
+  if (!w  && !h ) {
+    throw new Error("At least one of width or height must be entered.")
+  }
+
+  if (!ratio || ratio <= 0) {
+    throw new Error("The ratio must be a positive number.")
+  }
+
+  let output = {}
+
+  if( w ){
+    output.w = w
+    output.h = Math.round(w / ratio)
+  }
+
+  if( h ) {
+    output.h = h
+    output.w = Math.round(h * ratio)
+  }
+
+  return output
+}

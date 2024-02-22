@@ -152,7 +152,7 @@ async function PageSingleYacht(props:TypeProps, ref:React.ReactNode){
       data?.posts?.nodes && <div className="bg-gray-200 py-20">
         <div className="container">
           <div className="serif mb-4 text-center text-[24px] text-gray-900">NEWS</div>
-          <News className="pb-0" list={data?.posts?.nodes} lang={lang} />
+          <News className="pb-0 lg:pb-0" list={data?.posts?.nodes} lang={lang} />
         </div>
       </div>
     }

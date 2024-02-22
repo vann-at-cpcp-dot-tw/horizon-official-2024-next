@@ -53,7 +53,7 @@ function YachtsSwiper(props:TypeProps, ref:React.ReactNode){
           if( realIndex ===  index){
             return <motion.div className="container-fluid" key={index}
             style={{
-              maxWidth: 'calc(70.27% + 40px)'
+              maxWidth: viewport.width && viewport.width >= 992 ?'calc(70% + 40px)' :'100%',
             }}
             variants={{
               enter: {

@@ -13,7 +13,7 @@ import SpecTable from "@src/components/custom/SpecTable"
 import GAGalleryNav from "./GAGalleryNav"
 import { useRouter, usePathname } from 'next/navigation'
 import { motion } from "framer-motion"
-
+import ContentLightbox from "@src/components/custom/ContentLightbox"
 // import { useStore } from '@src/store'
 // import useWindowSize from "@src/hooks/useWindowSize"
 
@@ -137,153 +137,116 @@ function HullDetail(props:TypeProps, ref:React.ReactNode){
 
   }, [activeSection, activeGAIndex, gaActiveItem])
 
-  return <Suspense fallback={null}>
-    <div className={twMerge('', className)}>
-      <motion.div className="fixed left-0 top-0 z-[99999] size-full bg-golden-300"
-      variants={{
-        enter: {
-          opacity: 1,
-          transition: {
-            duration: 0.5,
-            ease: [0.215, 0.610, 0.355, 1.000]
-          }
-        },
-        exit: {
-          opacity: 0,
-          transition: {
-            duration: 1,
-            ease: [0.215, 0.610, 0.355, 1.000]
-          }
-        },
-      }}
-      initial="exit"
-      animate="enter"
-      style={{
-        background,
-      }}>
-        <div className="absolute left-0 top-0 flex size-full flex-col overflow-auto bg-golden-300 pb-10">
-
-
-          <div className="container-fluid sticky left-0 top-0 mb-4 pt-2"
-          style={{
-            background
-          }}>
-            <div className="flex">
-              <div className="btn -ml-2 -mt-1 bg-golden-300"
-              onClick={()=>{
-                if( !props?.isComponent ){
-                  router.push(pathname, {scroll:false})
-                }
-                props?.onClose?.()
-              }}>
-                <Image className="-ml-2 max-w-[48px]" src={`${BASE_PATH}/assets/img/icon_menu_x.svg`} width={48} height={48} alt="" />
-              </div>
-              <div className="serif mx-auto pt-6 text-center text-major-900">
-                <div className="text-[32px]">
-                  { props.yachtName ?<span>{props.yachtName}<span className="text-[30px]"> / </span></span> :''}
-                  { props.hullName }
-                </div>
-              </div>
-            </div>
-
-            <div className="flex items-center justify-center">
-              <div className="row">
-                {
-                  hullNav?.map((node, index)=><div className="col-auto" key={index}>
-                    <div className={`btn serif py-2 text-[18px] text-major-900 hover:opacity-100 ${activeSection === node.label ?'opacity-100' :'opacity-50'}`}
+  return <ContentLightbox
+  stickyHeader={
+    <>
+      <div className="serif mx-auto text-center text-major-900">
+        <div className="text-[32px]">
+          { props.yachtName ?<span>{props.yachtName}<span className="text-[30px]"> / </span></span> :''}
+          { props.hullName }
+        </div>
+      </div>
+      <div className="flex items-center justify-center">
+        <div className="row">
+          {
+            hullNav?.map((node, index)=><div className="col-auto" key={index}>
+              <div className={`btn serif py-2 text-[18px] text-major-900 hover:opacity-100 ${activeSection === node.label ?'opacity-100' :'opacity-50'}`}
                     onClick={()=>{
                       setActiveSection(node.label)
                     }}>{ node?.label }</div>
-                  </div>)
-                }
+            </div>)
+          }
+        </div>
+      </div>
+    </>
+  }
+  onClose={()=>{
+    if( !props?.isComponent ){
+      router.push(pathname, {scroll:false})
+    }
+    props?.onClose?.()
+  }}>
+    <div className="container-fluid relative z-0 flex grow !flex-nowrap pb-5">
+
+      <div className="absolute left-0 top-0 z-0 flex size-full items-center justify-center">
+        {
+          isLoading && <Loading style={{width:'120px'}} fill="var(--color-golden-900)"/>
+        }
+      </div>
+
+      {(function(){
+        switch(activeSection){
+          case 'Exterior':
+            return <div className="relative z-10 grow overflow-hidden">
+              <SwiperFullHeight
+        list={props.exteriorImages?.map((node)=>{
+          return {
+            content: <Image src={node?.image?.node?.mediaItemUrl || ''} fill={true} sizes="100vw" alt=""
+            style={{objectFit: "contain"}}
+            onLoad={()=>{
+              setIsLoading(false)
+            }} />,
+          }
+        })} />
+            </div>
+
+          case 'Interior':
+            return <div className="relative z-10 grow overflow-hidden">
+              <SwiperFullHeight
+        list={props.interiorImages?.map((node)=>{
+          return {
+            content: <Image src={node?.image?.node?.mediaItemUrl || ''} fill={true} sizes="100vw" alt=""
+            style={{objectFit: "contain"}}
+            onLoad={()=>{
+              setIsLoading(false)
+            }}/>,
+            title: node.description
+          }
+        })} />
+            </div>
+
+          case 'SPECS':
+            return <div className="relative z-10 flex grow flex-col bg-golden-300">
+              <div className="mx-auto  w-full max-w-[900px] py-10">
+                <SpecTable specTerms={props.specTerms} />
+                <div className="h-[2000px]"></div>
               </div>
             </div>
-          </div>
 
-          <div className="container-fluid relative z-0 flex grow !flex-nowrap">
-
-            <div className="absolute left-0 top-0 z-0 flex size-full items-center justify-center">
-              {
-                isLoading && <Loading style={{width:'120px'}} fill="var(--color-golden-900)"/>
-              }
+          case 'GA':
+            return <div className="relative z-10 flex grow flex-col">
+              <GAGalleryNav
+        className="py-10"
+        itemTitles={gaItemTitles}
+        activeItem={activeGAIndex}
+        setActiveItem={setActiveGAIndex} />
+              <Image className="pointer-events-none" src={gaActiveItem?.image?.node?.mediaItemUrl || ''} width={1222} height={336} sizes="100vw" alt=""
+        style={{
+          width: '100%',
+        }}
+        onLoad={()=>{
+          setIsLoading(false)
+        }} />
             </div>
 
-            {(function(){
-              switch(activeSection){
-                case 'Exterior':
-                  return <div className="relative z-10 grow overflow-hidden">
-                    <SwiperFullHeight
-                    list={props.exteriorImages?.map((node)=>{
-                      return {
-                        content: <Image src={node?.image?.node?.mediaItemUrl || ''} fill={true} sizes="100vw" alt=""
-                        style={{objectFit: "contain"}}
-                        onLoad={()=>{
-                          setIsLoading(false)
-                        }} />,
-                      }
-                    })} />
-                  </div>
+          case 'VR':
+            return <div className="relative z-10 grow">
+              <iframe className="absolute left-0 top-0 z-10 size-full" src={props.vrEmbedUrl} frameBorder="0"></iframe>
+            </div>
 
-                case 'Interior':
-                  return <div className="relative z-10 grow overflow-hidden">
-                    <SwiperFullHeight
-                    list={props.interiorImages?.map((node)=>{
-                      return {
-                        content: <Image src={node?.image?.node?.mediaItemUrl || ''} fill={true} sizes="100vw" alt=""
-                        style={{objectFit: "contain"}}
-                        onLoad={()=>{
-                          setIsLoading(false)
-                        }}/>,
-                        title: node.description
-                      }
-                    })} />
-                  </div>
-
-                case 'SPECS':
-                  return <div className="relative z-10 flex grow flex-col bg-golden-300">
-                    <div className="mx-auto  w-full max-w-[900px] py-10">
-                      <SpecTable specTerms={props.specTerms} />
-                      <div className="h-[2000px]"></div>
-                    </div>
-                  </div>
-
-                case 'GA':
-                  return <div className="relative z-10 flex grow flex-col">
-                    <GAGalleryNav
-                    className="py-10"
-                    itemTitles={gaItemTitles}
-                    activeItem={activeGAIndex}
-                    setActiveItem={setActiveGAIndex} />
-                    <Image className="pointer-events-none" src={gaActiveItem?.image?.node?.mediaItemUrl || ''} width={1222} height={336} sizes="100vw" alt=""
-                    style={{
-                      width: '100%',
-                    }}
-                    onLoad={()=>{
-                      setIsLoading(false)
-                    }} />
-                  </div>
-
-                case 'VR':
-                  return <div className="relative z-10 grow">
-                    <iframe className="absolute left-0 top-0 z-10 size-full" src={props.vrEmbedUrl} frameBorder="0"></iframe>
-                  </div>
-
-                case 'Videos':
-                  return <div className="relative z-10 grow">
-                    <SwiperFullHeight
-                    list={props.embedVideosGallery?.map((node)=>{
-                      return {
-                        embedUrl: convertYoutubeUrlToEmbed(node.embedUrl)
-                      }
-                    })} />
-                  </div>
-              }
-            }())}
-          </div>
-        </div>
-      </motion.div>
+          case 'Videos':
+            return <div className="relative z-10 grow">
+              <SwiperFullHeight
+        list={props.embedVideosGallery?.map((node)=>{
+          return {
+            embedUrl: convertYoutubeUrlToEmbed(node.embedUrl)
+          }
+        })} />
+            </div>
+        }
+      }())}
     </div>
-  </Suspense>
+  </ContentLightbox>
 }
 
 export default HullDetail

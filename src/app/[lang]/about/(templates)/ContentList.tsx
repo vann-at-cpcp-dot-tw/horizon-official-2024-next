@@ -13,7 +13,7 @@ import { useRouter, usePathname, useSearchParams } from "next/navigation"
 // import useWindowSize from "@src/hooks/useWindowSize"
 
 import { motion } from "framer-motion"
-
+import ContentLightbox from "@src/components/custom/ContentLightbox"
 
 interface TypeProps {
   list: {
@@ -128,36 +128,12 @@ function ContentList(props:TypeProps, ref:React.ReactNode){
             </div>
 
             {
-              isLightboxOpen && lightboxQuery === String(index) && <motion.div className="fixed left-0 top-0 z-[99999] size-full bg-golden-300"
-              variants={{
-                enter: {
-                  opacity: 1,
-                  transition: {
-                    duration: 0.5,
-                    ease: [0.215, 0.610, 0.355, 1.000]
-                  }
-                },
-                exit: {
-                  opacity: 0,
-                  transition: {
-                    duration: 1,
-                    ease: [0.215, 0.610, 0.355, 1.000]
-                  }
-                },
-              }}
-              initial="exit"
-              animate="enter">
-                <div className="absolute left-0 top-0 size-full overflow-auto bg-golden-300 px-5 pb-10">
-
-                  <div className="sticky left-0 top-0  -ml-2 mb-8 flex pt-2">
-                    <div className="btn bg-golden-300"
-                    onClick={()=>{
-                      router.push(`${pathname}`, {scroll:false})
-                    }}>
-                      <Image src={`${BASE_PATH}/assets/img/icon_menu_x.svg`} width={48} height={48} alt=""/>
-                    </div>
-                  </div>
-
+              isLightboxOpen && lightboxQuery === String(index) && <ContentLightbox
+              background="#f3f0ea"
+              onClose={()=>{
+                router.push(`${pathname}`, {scroll:false})
+              }}>
+                <>
                   <div className="MCE-CONTENT mb-6">
                     <div className="container">
                       <div className="mx-auto w-full max-w-[900px]" dangerouslySetInnerHTML={{__html:node?.content}}></div>
@@ -200,8 +176,8 @@ function ContentList(props:TypeProps, ref:React.ReactNode){
                       router.push(`${pathname}`, {scroll:false})
                     }}>Close</div>
                   </div>
-                </div>
-              </motion.div>
+                </>
+              </ContentLightbox>
             }
           </div>
         })

@@ -6,6 +6,7 @@ import { QueryMilestone } from '@src/queries/components/milestone.gql'
 import SwiperMilestone from "./(sections)/SwiperMilestone"
 import LinkWithLang from "@src/components/custom/LinkWithLang"
 import { genImageBlurHash } from "@root/src/lib/genImageBlurHash"
+import ContentLightbox from "@src/components/custom/ContentLightbox"
 
 export default async function PageHome({
   params
@@ -29,20 +30,22 @@ export default async function PageHome({
       }
     })
   )
-  return <main className="fixed left-0 top-0 z-[99999] flex size-full flex-col justify-center bg-major-950 py-10">
 
-    <div className="sticky left-0 top-0 -mt-10 ml-2 flex pt-2">
-      <LinkWithLang className="btn" href={`${BASE_PATH}/about/horizon`} lang={lang}>
-        <Image src={`${BASE_PATH}/assets/img/icon_menu_x.svg`} width={48} height={48} style={{filter:'grayscale(1) brightness(100)'}} alt=""/>
-      </LinkWithLang>
-      <div className="container pb-8 pt-10">
-        <div className="serif text-center text-[24px] text-white">Milestone</div>
-      </div>
+  return <ContentLightbox
+  theme="dark"
+  background="#040922"
+  stickyHeader={
+    <div className="container pb-8 pt-10">
+      <div className="serif text-center text-[24px] text-white">Milestone</div>
     </div>
-
+  }
+  closeIcon={
+    <LinkWithLang className="btn" href={`${BASE_PATH}/about/horizon`} lang={lang}>
+      <Image src={`${BASE_PATH}/assets/img/icon_menu_x.svg`} width={48} height={48} style={{filter:'grayscale(1) brightness(100)'}} alt=""/>
+    </LinkWithLang>
+  }>
     <div className=" my-auto">
       <SwiperMilestone list={milestoneList}/>
     </div>
-
-  </main>
+  </ContentLightbox>
 }

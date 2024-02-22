@@ -26,7 +26,7 @@ function Intro(props:TypeProps, ref:React.ReactNode){
     <div className={twMerge('lg:mb-24 mb-10', className)}>
       <div className="container">
         <div className="mx-auto w-full max-w-[900px]">
-          <div className="serif mb-4 text-center text-[24px] text-golden-900 lg:text-[32px]">{props.title}</div>
+          <div className="serif text-center text-[28px] text-golden-900 lg:mb-4 lg:text-[32px]">{props.title}</div>
           <div className="text-[15px] leading-[1.6] text-gray-700">{props.description}</div>
         </div>
       </div>

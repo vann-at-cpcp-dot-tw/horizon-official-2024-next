@@ -9,10 +9,8 @@ import { twMerge } from 'tailwind-merge'
 import { isEmpty } from '@src/lib/helpers'
 import { motion } from "framer-motion"
 import GAGalleryNav from "../(templates)/GAGalleryNav"
-
-// import { useRouter } from 'next/navigation'
-// import { useStore } from '@src/store'
-// import useWindowSize from "@src/hooks/useWindowSize"
+import useWindowSize from "@src/hooks/useWindowSize"
+import ContentLightbox from "@src/components/custom/ContentLightbox"
 
 export interface TypeGAImageNode {
   title?: string
@@ -39,7 +37,7 @@ interface TypeState {}
 function GAGallery(props:TypeProps, ref:React.ReactNode){
   // const store = useStore()
   // const router = useRouter()
-  // const viewport = useWindowSize()
+  const viewport = useWindowSize()
   const { className } = props
   const [activeType, setActiveType] = useState(0)
   const [activeItem ,setActiveItem] = useState(0)
@@ -62,7 +60,7 @@ function GAGallery(props:TypeProps, ref:React.ReactNode){
 
   return <Suspense fallback={null}>
     <div className={twMerge('', className)}>
-      <div className="bg-gray-200 py-24">
+      <div className="bg-gray-200 py-12 lg:py-24">
 
         <GAGalleryNav
         gaTypes={props?.list?.map((node)=>node.type)}
@@ -105,34 +103,34 @@ function GAGallery(props:TypeProps, ref:React.ReactNode){
         }
 
         {
-          isOpen && imageItem && <div className="fixed left-0 top-0 z-[99999] flex size-full flex-col justify-center bg-gray-200 p-10">
+          isOpen && imageItem && <ContentLightbox
+          isFullScreen
+          background="#EFEFF0"
+          onClose={()=>{
+            setIsOpen(false)
+          }}>
+            <>
+              <GAGalleryNav
+              gaTypes={props?.list?.map((node)=>node.type)}
+              itemTitles={images?.map((node)=>node?.title || '')}
+              activeType={activeType}
+              activeItem={activeItem}
+              setActiveType={setActiveType}
+              setActiveItem={setActiveItem} />
 
-            <div className="sticky left-0 top-0 -ml-8 -mt-10 mb-8 flex pt-2">
-              <div className="btn bg-golden-300"
-              onClick={()=>{
-                setIsOpen(false)
-              }}>
-                <Image src={`${BASE_PATH}/assets/img/icon_menu_x.svg`} width={48} height={48} alt=""/>
-              </div>
-            </div>
-
-            <GAGalleryNav
-            gaTypes={props?.list?.map((node)=>node.type)}
-            itemTitles={images?.map((node)=>node?.title || '')}
-            activeType={activeType}
-            activeItem={activeItem}
-            setActiveType={setActiveType}
-            setActiveItem={setActiveItem} />
-
-
-            <div className="flex grow !flex-nowrap overflow-hidden">
-              <div className="size-full shrink px-10">
-                <div className="relative size-full">
-                  <Image src={imageItem} fill={true} sizes="100vw" style={{objectFit: "contain"}} alt="" />
+              <div className="flex grow !flex-nowrap overflow-hidden">
+                <div className="size-full shrink px-5 pb-5 lg:px-10 lg:pb-10">
+                  <div className="relative size-full">
+                    {
+                      (viewport.width && viewport.width <= 991) && imageItemM
+                        ?<Image src={imageItemM} fill={true} sizes="100vw" style={{objectFit: "contain"}} alt="" />
+                        :<Image src={imageItem} fill={true} sizes="100vw" style={{objectFit: "contain"}} alt="" />
+                    }
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
+            </>
+          </ContentLightbox>
         }
       </div>
     </div>

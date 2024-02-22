@@ -15,6 +15,7 @@ import { EffectFade, FreeMode, Autoplay } from 'swiper/modules'
 import { SwiperClass } from "swiper/react"
 import 'swiper/css/effect-fade'
 import Marquee from "react-fast-marquee"
+import ContentLightbox from "@src/components/custom/ContentLightbox"
 
 // import { useRouter } from 'next/navigation'
 // import { useStore } from '@src/store'
@@ -87,77 +88,74 @@ function YachtInteriorSwiper(props:TypeProps, ref:React.ReactNode){
       }
 
       {
-        isOpen && <div className="fixed left-0 top-0 z-[99999] flex size-full flex-col justify-center bg-golden-300 p-10">
-          <div className="sticky left-0 top-0 -ml-8 -mt-10 mb-8 flex pt-2">
-            <div className="btn bg-golden-300"
-            onClick={()=>{
-              setIsOpen(false)
-            }}>
-              <Image src={`${BASE_PATH}/assets/img/icon_menu_x.svg`} width={48} height={48} alt=""/>
-            </div>
-          </div>
-
-          <div className="flex grow !flex-nowrap overflow-hidden">
-            <div className="flex flex-none items-center">
-              <div className={`btn group flex size-12 items-center justify-center rounded-full border border-gray-900 hover:border-golden-900 hover:bg-golden-900 ${swiperZoom.isBeginning ?'disabled opacity-50' :''}`}
+        isOpen && <ContentLightbox
+        isFullScreen
+        onClose={()=>{
+          setIsOpen(false)
+        }}>
+          <>
+            <div className="flex grow !flex-nowrap overflow-hidden px-5">
+              <div className="flex flex-none items-center">
+                <div className={`btn group flex size-12 items-center justify-center rounded-full border border-gray-900 hover:border-golden-900 hover:bg-golden-900 ${swiperZoom.isBeginning ?'disabled opacity-50' :''}`}
               onClick={()=>{
                 swiperZoom.slidePrev()
               }}>
-                <Image className="grayscale group-hover:brightness-[1000]" src={`${BASE_PATH}/assets/img/icon_menu_back.svg`} width={48} height={48} alt="" />
+                  <Image className="grayscale group-hover:brightness-[1000]" src={`${BASE_PATH}/assets/img/icon_menu_back.svg`} width={48} height={48} alt="" />
+                </div>
+              </div>
+
+              <div className="size-full shrink px-5">
+                <Swiper
+                className="h-full"
+                modules={[EffectFade]}
+                effect="fade"
+                speed={500}
+                spaceBetween={0}
+                slidesPerView={1}
+                initialSlide={realIndex}
+                onSwiper={(e)=>{
+                  setSwiperZoom(e)
+                }}
+                onSlideChange={(e)=>{
+                  setRealIndex(e.realIndex)
+                }}>
+                  {
+                    props?.list?.map?.((node, index)=>{
+                      return <SwiperSlide key={index}>
+                        <div className="relative size-full">
+                          <Image src={node?.image?.node?.mediaItemUrl || ''} fill={true} sizes="100vw" style={{objectFit: "contain"}} alt="" />
+                        </div>
+                      </SwiperSlide>
+                    })
+                  }
+                </Swiper>
+              </div>
+
+              <div className="flex flex-none items-center">
+                <div className={`btn group flex size-12 items-center justify-center rounded-full border border-gray-900 hover:border-golden-900 hover:bg-golden-900 ${swiperZoom.isEnd ?'disabled opacity-50' :''}`}
+                onClick={()=>{
+                  swiperZoom.slideNext()
+                }}>
+                  <Image className="grayscale group-hover:brightness-[1000]" src={`${BASE_PATH}/assets/img/icon_menu_back.svg`} width={48} height={48} alt=""
+                  style={{
+                    transform: 'rotate(180deg)'
+                  }} />
+                </div>
               </div>
             </div>
 
-            <div className="size-full shrink px-5">
-              <Swiper
-              className="h-full"
-              modules={[EffectFade]}
-              effect="fade"
-              speed={500}
-              spaceBetween={0}
-              slidesPerView={1}
-              initialSlide={realIndex}
-              onSwiper={(e)=>{
-                setSwiperZoom(e)
-              }}
-              onSlideChange={(e)=>{
-                setRealIndex(e.realIndex)
-              }}>
-                {
-                  props?.list?.map?.((node, index)=>{
-                    return <SwiperSlide key={index}>
-                      <div className="relative size-full">
-                        <Image className="" src={node?.image?.node?.mediaItemUrl || ''} fill={true} sizes="100vw" style={{objectFit: "contain"}} alt="" />
-                      </div>
-                    </SwiperSlide>
-                  })
-                }
-              </Swiper>
+            <div className="pb-5">
+              {
+                props?.list?.map((node, index)=>{
+                  if( realIndex === index ){
+                    return <div className="pt-5 text-center text-gray-700" key={index}>{ node?.description }</div>
+                  }
+                })
+              }
+              <div className="text-center text-gray-700">{realIndex+1}{/* &nbsp;/&nbsp; */}／{props?.list?.length}</div>
             </div>
-
-            <div className="flex flex-none items-center">
-              <div className={`btn group flex size-12 items-center justify-center rounded-full border border-gray-900 hover:border-golden-900 hover:bg-golden-900 ${swiperZoom.isEnd ?'disabled opacity-50' :''}`}
-              onClick={()=>{
-                swiperZoom.slideNext()
-              }}>
-                <Image className="grayscale group-hover:brightness-[1000]" src={`${BASE_PATH}/assets/img/icon_menu_back.svg`} width={48} height={48} alt=""
-                style={{
-                  transform: 'rotate(180deg)'
-                }}/>
-              </div>
-            </div>
-          </div>
-
-          <div>
-            {
-              props?.list?.map((node, index)=>{
-                if( realIndex === index ){
-                  return <div className="pt-5 text-center text-gray-700" key={index}>{ node?.description }</div>
-                }
-              })
-            }
-            <div className="text-center text-gray-700">{realIndex+1}{/* &nbsp;/&nbsp; */}／{props?.list?.length}</div>
-          </div>
-        </div>
+          </>
+        </ContentLightbox>
       }
     </div>
   </Suspense>

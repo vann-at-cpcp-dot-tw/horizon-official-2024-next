@@ -134,11 +134,11 @@ function SpecTable(props:TypeProps, ref:React.ReactNode){
             initial="exit"
             exit="exit"
             animate="enter">
-              <div className="row flex-nowrap">
-                <div className="col-auto">
-                  <div className="w-[190px]">{ node.label }</div>
+              <div className="row lg:flex-nowrap">
+                <div className="col-12 lg:col-auto">
+                  <div className="serif w-full lg:w-[190px]">{ node.label }</div>
                 </div>
-                <div className="col-12 shrink">
+                <div className="col-12 shrink text-[15px]">
                   {
                     props.merged
                       ?<div>

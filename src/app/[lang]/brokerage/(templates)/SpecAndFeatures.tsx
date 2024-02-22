@@ -55,7 +55,7 @@ function SpecAndFeatures(props:TypeProps, ref:React.ReactNode){
         <div className="mx-auto w-full max-w-[900px]">
           <div className="row justify-center">
             {
-              !isEmpty(props?.specTerms) && <div className="col-auto mb-6">
+              !isEmpty(props?.specTerms) && <div className="col-auto mb-3 lg:mb-6">
                 <div className={`btn ${active === 'spec' ?'text-gray-900' :'text-gray-300'}`}
                 onClick={()=>{
                   setActive('spec')
@@ -65,7 +65,7 @@ function SpecAndFeatures(props:TypeProps, ref:React.ReactNode){
 
             {
               props?.list?.map((node, index)=>{
-                return <div className="col-auto mb-6" key={index}>
+                return <div className="col-auto mb-3 lg:mb-6" key={index}>
                   <div className={`btn ${active === index ?'text-gray-900' :'text-gray-300'}`}
                   onClick={()=>{
                     setActive(index)

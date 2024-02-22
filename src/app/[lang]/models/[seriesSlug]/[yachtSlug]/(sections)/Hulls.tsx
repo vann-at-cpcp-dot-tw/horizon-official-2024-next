@@ -73,7 +73,7 @@ function Hulls(props:TypeProps, ref:React.ReactNode){
   }, [queryHullName])
 
   return <Suspense fallback={null}>
-    <div className={twMerge('pt-8 pb-[120px]', className)}>
+    <div className={twMerge('lg:py-24 py-12', className)}>
       <div className="container mb-4">
         <div className="mb-2 text-center text-gray-300">All Customization Detail</div>
         <div className="serif text-center text-[32px] text-gray-900">View by Crafts</div>

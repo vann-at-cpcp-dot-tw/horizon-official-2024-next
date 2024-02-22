@@ -93,7 +93,7 @@ function Header(props:TypeProps, ref:React.ReactNode){
             </LinkWithLang>
           </div>
 
-          <div className="col-auto">
+          <div className="col-auto -mr-1">
             <LinkWithLang className="btn-opacity text-[15px] text-minor-900" href={CONTENT_TYPE === 'hq' ?'/dealers' :'/contact'} lang={lang}>CONTACT</LinkWithLang>
           </div>
         </div>

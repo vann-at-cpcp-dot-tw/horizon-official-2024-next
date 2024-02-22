@@ -63,7 +63,7 @@ async function PageSingleSeries(props:TypeProps, ref:React.ReactNode){
   })
 
   return <Suspense fallback={null}>
-    <SingleSeriesTop className="py-[60px]" slug={seriesSlug} />
+    <SingleSeriesTop slug={seriesSlug} />
     <YachtsSwiper list={yachtsSwiperList} />
   </Suspense>
 }

@@ -46,13 +46,13 @@ function MenuScreen(props:TypeProps, ref:React.ReactNode){
       <div className="flex size-full flex-none flex-col justify-center p-5 lg:w-[25%] lg:min-w-[300px]">
         {
           props?.onBackClick
-            ? <div className="btn -ml-3 -mt-3"
+            ? <div className="btn -ml-5 -mt-5"
           onClick={()=>{
             props?.onBackClick?.()
           }}>
               <Image src={`${BASE_PATH}/assets/img/icon_menu_back.svg`} width={48} height={48} alt="" />
             </div>
-            :<div className="btn -ml-3 -mt-3"
+            :<div className="btn -ml-5 -mt-5"
           onClick={()=>{
             props?.onCloseClick?.()
           }}>
