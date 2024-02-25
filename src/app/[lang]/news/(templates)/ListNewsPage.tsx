@@ -46,9 +46,6 @@ export interface TypePostNode {
         }
       }
     }[]
-    relatedYachtSeries?: {
-      seriesSlug: string
-    }[]
   }
 }
 

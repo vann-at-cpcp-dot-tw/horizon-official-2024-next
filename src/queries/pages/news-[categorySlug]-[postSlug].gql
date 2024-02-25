@@ -20,10 +20,6 @@ query QuerySinglePost($categorySlug: ID!, $postSlug: String) {
                 }
               }
             }
-            relatedYachts {
-              seriesSlug
-              yachtSlug
-            }
           }
       }
       pageInfo {
