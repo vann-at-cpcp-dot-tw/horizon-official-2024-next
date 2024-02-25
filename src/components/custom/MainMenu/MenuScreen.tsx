@@ -64,7 +64,7 @@ function MenuScreen(props:TypeProps, ref:React.ReactNode){
           {
             props?.list?.map((node, index)=>{
               return <div key={index}
-              className={node.key === props.currentScreen?.seriesSlug ?'py-3' :''}>
+              className={node.key === props.currentScreen?.seriesSlug ?'py-3' :'py-1'}>
                 <motion.div
               variants={{
                 enter: {
