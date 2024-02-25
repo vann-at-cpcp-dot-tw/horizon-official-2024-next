@@ -61,7 +61,7 @@ function NumericalData(props:TypeProps, ref:React.ReactNode){
         </div>
       </div>
       <div className="container">
-        <div className="serif mx-auto w-full max-w-[730px] text-center text-[18px] text-gray-500">Horizon is willing to change major features within the predetermined envelope to suit a client, and that flexibility was important to this owner.”
+        <div className="serif mx-auto w-full max-w-[730px] text-center text-[18px] text-gray-500">“Horizon is willing to change major features within the predetermined envelope to suit a client, and that flexibility was important to this owner.”
           <div className="leading-[2.5]">- BOAT International</div>
         </div>
       </div>
