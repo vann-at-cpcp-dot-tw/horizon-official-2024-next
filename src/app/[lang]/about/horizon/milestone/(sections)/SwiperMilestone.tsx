@@ -90,7 +90,7 @@ function SwiperMilestone(props:TypeProps, ref:React.ReactNode){
                 <div className="slide-inner btn flex grow flex-col"
                 onClick={()=>{
                   swiper.slideTo(index)
-                  swiperTimeline.slideTo(index)
+                  // swiperTimeline.slideTo(index)
                 }}>
                   <div className="relative flex grow flex-col justify-start"
                   style={{
