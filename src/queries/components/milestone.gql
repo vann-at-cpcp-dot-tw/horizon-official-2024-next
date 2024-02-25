@@ -1,5 +1,9 @@
-query QueryMilestone {
-  aboutHorizon {
+query QueryMilestone(
+  $language: LanguageCodeFilterEnum = EN
+) {
+  aboutHorizon(
+    language: $language
+  ) {
     aboutHorizonCustomFields {
       milestone {
         year

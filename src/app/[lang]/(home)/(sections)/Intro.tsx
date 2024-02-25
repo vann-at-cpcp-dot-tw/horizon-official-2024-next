@@ -63,9 +63,9 @@ function Intro(props:TypeProps, ref:React.ReactNode){
         }}
         initial="exit"
         animate={animateAnchorIsInView ?'enter' :'exit'}>
-        <Button variant="outline" className={buttonStyles['rounded-outline']}>
-          <LinkWithLang href="/about" lang={lang}>About</LinkWithLang>
-        </Button>
+        <LinkWithLang href="/about" lang={lang}>
+          <Button variant="outline" className={buttonStyles['rounded-outline']}>About</Button>
+        </LinkWithLang>
       </motion.div>
     </div>
   </Suspense>

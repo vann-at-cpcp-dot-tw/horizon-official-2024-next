@@ -1,5 +1,12 @@
-query QueryCommonData {
-  globalSettings {
+#import '../fragments/yacht.gql'
+
+query QueryCommonData(
+  $language: LanguageCodeFilterEnum = EN,
+  $translation: LanguageCodeEnum = EN
+){
+  globalSettings(
+    language: $language
+  ) {
     mainMenu {
       menuItemImages {
         normal {
@@ -40,7 +47,19 @@ query QueryCommonData {
         }
       }
       series {
-        slug
+        series {
+          nodes {
+            ... on YachtSeries {
+              translation(language: $translation) {
+                slug
+                name
+                yachtsSeriesCustomFields {
+                  seriesSimpleDescription
+                }
+              }
+            }
+          }
+        }
         image {
           node {
             mediaItemUrl
@@ -52,7 +71,18 @@ query QueryCommonData {
           }
         }
         yachts {
-          slug
+          yacht {
+            nodes {
+              ... on Yacht {
+                translation(language: $translation) {
+                  ...yachtBasic
+                  yachtCustomFields {
+                    ...yachtSpecsTable
+                  }
+                }
+              }
+            }
+          }
           image {
             node {
               mediaItemUrl
@@ -77,7 +107,12 @@ query QueryCommonData {
       }
     }
   }
-  yachtSeriesList(first: 99) {
+  yachtSeriesList(
+    first: 99,
+    where: {
+      language: $language
+    }
+  ) {
     nodes {
       slug
       name

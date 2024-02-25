@@ -1,5 +1,7 @@
-query QueryPublicationsPage {
-  publicationCategories {
+query QueryPublicationsPage(
+	$language: LanguageCodeFilterEnum = EN,
+) {
+  publicationCategories(where: {language: $language}) {
     nodes {
       slug
       name
@@ -8,8 +10,13 @@ query QueryPublicationsPage {
           slug
           title
           publicationCustomFields {
-            album {
-              image {
+            publication {
+              publicationCover {
+                node {
+                  mediaItemUrl
+                }
+              }
+              pdf {
                 node {
                   mediaItemUrl
                 }

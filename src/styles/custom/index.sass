@@ -118,33 +118,36 @@ p
   transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000) !important
 
 .swiper-milestone
-  @apply -mx-5 relative
-  &:after
-    content: ''
-    display: block
-    @apply absolute w-full h-[1px] left-0 bottom-[29px] bg-white
+  @apply relative
+  &-timeline
+    &:after
+      content: ''
+      display: block
+      @apply absolute w-full h-[1px] left-0 bottom-[29px] bg-white
   .swiper-wrapper
     display: flex
-    align-items: flex-end
+    align-items: stretch
     transition-duration: .8s !important
   .swiper-slide
     width: auto !important
+    height: auto !important
+    @apply flex flex-col flex-nowrap
     .slide-inner
       position: relative
-      // width: 100vw
-      // max-width: 310px
-      width: 22.69vw
+      // width: 22.7vw
+      width: 52.7vw
+      padding: 0px 20px
       transition: all .8s cubic-bezier(0.215, 0.610, 0.355, 1.000)
-      @apply px-5
+      @media(max-width: 991px)
+        // width: 75vw
+        width: calc(100vw - 64px)
+        padding: 0px 8px
     .title
       @apply text-gray-500
-    .description
-      // width: 100vw
-      // max-width: 270px
-      width: calc(22.69vw - 40px)
-      @apply line-clamp-1
+    // .description
+    //   @apply line-clamp-1
     .line
-      @apply absolute left-5 bottom-[28px] w-full h-[4px]
+      @apply absolute lg:left-5 left-2 bottom-[28px] w-full h-[4px]
       &:after
         content: ''
         display: block
@@ -152,15 +155,13 @@ p
         @apply absolute bg-white w-full h-[1px] left-0 top-1/2 -translate-y-1/2
     &-active
       .slide-inner
-        // width: 100vw
-        // max-width: 720px
         width: 52.7vw
+        @media(max-width: 991px)
+          // width: 100vw
+          width: calc(100vw - 64px)
       .title
         @apply text-golden-700
       .description
-        // width: 100vw
-        // max-width: 680px
-        width: 49.78vw
         @apply line-clamp-none
       .line
         &:after
@@ -178,9 +179,7 @@ p
     align-items: center
     .slide-inner
       position: relative
-      // width: 100vw
-      // max-width: 533px
-      width: 39.01vw
+      width: 39vw
       padding: 0px 20px
       transition: all .8s cubic-bezier(0.215, 0.610, 0.355, 1.000)
       @media(max-width: 991px)
@@ -191,15 +190,6 @@ p
         width: 76.35vw
         @media(max-width: 991px)
           width: calc(100vw - 40px)
-        // width: 100vw
-        // max-width: 76.35vw
-
-.swiper-yacht-interior
-  @apply relative
-  .swiper-wrapper
-    // display: flex
-    // justify-content: center
-    transition-duration: .8s !important
 
 .lg-container
   *

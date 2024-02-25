@@ -1,5 +1,9 @@
-query QueryQA {
-  globalSettings {
+query QueryQA(
+  $language: LanguageCodeFilterEnum = EN
+){
+  globalSettings(
+    language: $language
+  ){
     additionalContent {
       qaList {
         question

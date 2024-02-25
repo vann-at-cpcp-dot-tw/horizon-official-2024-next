@@ -16,18 +16,6 @@ import { TypePublicationCategoryNode, TypePublicationNode } from "../layout"
 import Loading from "@src/components/custom/icons/Loading"
 import PageNav from "@src/components/custom/PageNav"
 
-import LightGallery from 'lightgallery/react'
-import lgThumbnail from 'lightgallery/plugins/thumbnail'
-import lgZoom from 'lightgallery/plugins/zoom'
-import lgHash from 'lightgallery/plugins/hash'
-import lgAutoplay from 'lightgallery/plugins/autoplay'
-import lgFullscreen from 'lightgallery/plugins/fullscreen'
-
-
-// import { useRouter } from 'next/navigation'
-// import { useStore } from '@src/store'
-// import useWindowSize from "@src/hooks/useWindowSize"
-
 interface TypeProps {
   publicationCategory: {
     name: string
@@ -36,16 +24,18 @@ interface TypeProps {
         slug: string
         title: string
         publicationCustomFields: {
-          relatedYachts?: {
-            seriesSlug: string
-          }[]
-          album: {
-            image?: {
+          publication: {
+            publicationCover: {
               node?: {
-                mediaItemUrl: string
+                mediaItemUrl?: string
               }
             }
-          }[]
+            pdf: {
+              node?: {
+                mediaItemUrl?: string
+              }
+            }
+          }
         }
       }[]
       pageInfo: {
@@ -116,13 +106,8 @@ function SingleCategory(props:TypeProps, ref:React.ReactNode){
           {
             publicationCategory?.publications?.nodes?.map((node:TypePublicationNode, index:number)=>{
               return <div className="col-auto mb-8" key={index}>
-                <div className="btn relative"
-                onClick={()=>{
-                  if( document.querySelector(`#lg-${index} .lg-react-element > a:first-child`) ){
-                    (document.querySelector(`#lg-${index} .lg-react-element > a:first-child`) as HTMLElement).click()
-                  }
-                }}>
-                  <Image className="mb-2" src={`${node.publicationCustomFields?.album?.[0]?.image?.node?.mediaItemUrl || ''}`} alt=""
+                <a className="btn relative block" href={node.publicationCustomFields?.publication?.pdf?.node?.mediaItemUrl} target="_blank">
+                  <Image className="mb-2" src={`${node.publicationCustomFields?.publication?.publicationCover?.node?.mediaItemUrl || ''}`} alt=""
                   width={640}
                   height={320}
                   style={{
@@ -132,30 +117,7 @@ function SingleCategory(props:TypeProps, ref:React.ReactNode){
                   <div className="relative h-8 text-gray-500">
                     <div className="absolute line-clamp-2 w-full">{ node.title }</div>
                   </div>
-                </div>
-
-                <div id={`lg-${index}`} key={index}>
-                  <LightGallery
-                  mode="lg-fade"
-                  galleryId={node.slug}
-                  licenseKey={process.env.NEXT_PUBLIC_LIGHT_GALLERY_KEY}
-                  plugins={[lgThumbnail, lgZoom, lgAutoplay, lgFullscreen]}
-                  speed={500}
-                  toggleThumb={true}
-                  allowMediaOverlap={true}
-                  showZoomInOutIcons={true}
-                  actualSize={false}
-                  scale={0.66}
-                  alignThumbnails="left">
-                    {
-                      node?.publicationCustomFields?.album?.map((pageNode, pageIndex)=>{
-                        return <a className="hidden" data-src={pageNode?.image?.node?.mediaItemUrl || ''} key={`${index}-${pageIndex}`}>
-                          <Image src={pageNode?.image?.node?.mediaItemUrl || ''} width={100} height={100} alt="" style={{height:'auto'}}/>
-                        </a>
-                      })
-                    }
-                  </LightGallery>
-                </div>
+                </a>
               </div>
             })
           }

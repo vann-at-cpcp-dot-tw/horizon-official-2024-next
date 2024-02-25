@@ -355,25 +355,39 @@ export const generatePriceRange = function(prices, step, max) {
 
 
 export const calcSizeByRatio = function({w, h, ratio}) {
-  if (!w  && !h ) {
+  // 輸入寬(或高) + 比例, return 符合比例的寬高值
+  // 比例格式 =  Number((16/9).toFixed(2))
+  if (typeof w !== 'number' && typeof h !== 'number' ) {
     throw new Error("At least one of width or height must be entered.")
   }
 
-  if (!ratio || ratio <= 0) {
+  if (typeof ratio !== 'number' || ratio <= 0) {
     throw new Error("The ratio must be a positive number.")
   }
 
-  let output = {}
-
-  if( w ){
-    output.w = w
-    output.h = Math.round(w / ratio)
+  if( w > 0 ){
+    return {
+      w,
+      h: Math.round(w / ratio)
+    }
   }
 
-  if( h ) {
-    output.h = h
-    output.w = Math.round(h * ratio)
+  if( h > 0 ) {
+    return {
+      w: Math.round(h * ratio),
+      h
+    }
   }
+}
 
-  return output
+export const getContainedSize = function(img){
+  // 取得 object-fit: contain 圖片的實際內容寬高
+  var ratio = img.naturalWidth/img.naturalHeight
+  var width = img.height*ratio
+  var height = img.height
+  if (width > img.width) {
+    width = img.width
+    height = img.width/ratio
+  }
+  return [width, height]
 }

@@ -5,7 +5,7 @@ const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 const CONTENT_TYPE = process.env.NEXT_PUBLIC_CONTENT_TYPE || 'hq'
 const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
 
-import { Suspense } from 'react'
+import { Suspense, useCallback } from 'react'
 import Image from "next/image"
 import LinkWithLang from "@src/components/custom/LinkWithLang"
 import { twMerge } from 'tailwind-merge'
@@ -38,6 +38,8 @@ interface TypeProps {
 }
 interface TypeState {}
 
+
+
 function ListFilters(props:TypeProps, ref:React.ReactNode){
   // const store = useStore()
   const router = useRouter()
@@ -50,18 +52,42 @@ function ListFilters(props:TypeProps, ref:React.ReactNode){
   const queryYachtLength = searchParams.get('length')
   const queryYachtPrice = searchParams.get('price')
   const queryYachtYear = searchParams.get('year')
+  const queryOrderby = searchParams.get('orderby')
 
+  const genQueryString = useCallback((args:{key:string, value:string})=>{
+    const { key, value } = args
+    const queries = {
+      condition: queryCondition || '',
+      length: queryYachtLength || '',
+      price: queryYachtPrice || '',
+      year: queryYachtYear || '',
+      orderby: queryOrderby || ''
+    } as Record<string, string>
+
+    if( key ){
+      queries[key] = value
+    }
+
+    return new URLSearchParams(queries).toString()
+  }, [
+    pathname,
+    queryCondition,
+    queryYachtLength,
+    queryYachtPrice,
+    queryYachtYear,
+    queryOrderby
+  ])
   return <Suspense fallback={null}>
     <div className={twMerge('', className)}>
-      <div className="container">
+      <div className="container mb-10">
         <div className="row justify-center lg:flex-nowrap">
           {
             props?.yachtConditions && <div className="col-6 shrink lg:col-auto">
-              <div className="w-screen max-w-[177px]">
+              <div className="w-screen max-w-full lg:max-w-[177px]">
                 <select className="w-full border-b border-gray-700 bg-transparent text-gray-700"
                 value={queryCondition || ''}
                 onChange={(e)=>{
-                  router.push(`${pathname}?condition=${e.target.value}&length=${queryYachtLength || ''}&price=${queryYachtPrice || ''}&year=${queryYachtYear || ''}`, {scroll:false})
+                  router.push(`${pathname}?${genQueryString({key:'condition', value:e.target.value})}`, {scroll:false})
                 }}>
                   <option value="">All Categories</option>
                   {
@@ -76,11 +102,11 @@ function ListFilters(props:TypeProps, ref:React.ReactNode){
 
           {
             props?.lengthOptions && <div className="col-6 shrink lg:col-auto">
-              <div className="w-screen max-w-[177px]">
+              <div className="w-screen max-w-full lg:max-w-[177px]">
                 <select className="w-full border-b border-gray-700 bg-transparent text-gray-700"
                 value={queryYachtLength || ''}
                 onChange={(e)=>{
-                  router.push(`${pathname}?condition=${queryCondition || ''}&length=${e.target.value || ''}&price=${queryYachtPrice || ''}&year=${queryYachtYear || ''}`, {scroll:false})
+                  router.push(`${pathname}?${genQueryString({key:'length', value:e.target.value})}`, {scroll:false})
                 }}>
                   <option value="">All Lengths</option>
                   {
@@ -95,11 +121,11 @@ function ListFilters(props:TypeProps, ref:React.ReactNode){
 
           {
             props?.priceOptions && <div className="col-6 shrink lg:col-auto">
-              <div className="w-screen max-w-[177px]">
+              <div className="w-screen max-w-full lg:max-w-[177px]">
                 <select className="w-full border-b border-gray-700 bg-transparent text-gray-700"
                 value={queryYachtPrice || ''}
                 onChange={(e)=>{
-                  router.push(`${pathname}?condition=${queryCondition || ''}&length=${queryYachtLength || ''}&price=${e.target.value || ''}&year=${queryYachtYear || ''}`, {scroll:false})
+                  router.push(`${pathname}?${genQueryString({key:'price', value:e.target.value})}`, {scroll:false})
                 }}>
                   <option value="">All Prices</option>
                   {
@@ -114,11 +140,11 @@ function ListFilters(props:TypeProps, ref:React.ReactNode){
 
           {
             props?.yearOptions && <div className="col-6 shrink lg:col-auto">
-              <div className="w-screen max-w-[177px]">
+              <div className="w-screen max-w-full lg:max-w-[177px]">
                 <select className="w-full border-b border-gray-700 bg-transparent text-gray-700"
                 value={queryYachtYear || ''}
                 onChange={(e)=>{
-                  router.push(`${pathname}?condition=${queryCondition || ''}&length=${queryYachtLength || ''}&price=${queryYachtPrice || ''}&year=${e.target.value || ''}`, {scroll:false})
+                  router.push(`${pathname}?${genQueryString({key:'year', value:e.target.value})}`, {scroll:false})
                 }}>
                   <option value="">All Years</option>
                   {
@@ -130,6 +156,27 @@ function ListFilters(props:TypeProps, ref:React.ReactNode){
               </div>
             </div>
           }
+        </div>
+      </div>
+
+      <div className="container">
+        <div className="row row-gap-2 flex-nowrap items-center justify-end">
+          <div className="col-auto text-gray-700">Sort By:</div>
+          <div className="col-6 shrink lg:col-auto">
+            <div className="w-screen max-w-full lg:max-w-[177px]">
+              <select className="w-full border-b border-gray-700 bg-transparent text-gray-700"
+                value={queryOrderby || ''}
+                onChange={(e)=>{
+                  router.push(`${pathname}?${genQueryString({key:'orderby', value:e.target.value})}`, {scroll:false})
+                }}>
+                <option value="">Latest Listing</option>
+                <option value="price,desc">Price - Hight to Low</option>
+                <option value="price,asc">Price - Low to Hight</option>
+                <option value="length,desc">Length - Hight to Low</option>
+                <option value="length,asc">Length - Low to Hight</option>
+              </select>
+            </div>
+          </div>
         </div>
       </div>
     </div>

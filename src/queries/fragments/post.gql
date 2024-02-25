@@ -25,7 +25,18 @@ fragment postGallery on PostCustomFields {
 
 fragment postRelatedYachts on PostCustomFields {
   relatedYachts {
-    seriesSlug
-    yachtSlug
+    nodes {
+      ... on Yacht {
+        slug
+        title
+        databaseId
+        yachtSeriesList(first: 1) {
+          nodes {
+            name
+            slug
+          }
+        }
+      }
+    }
   }
 }

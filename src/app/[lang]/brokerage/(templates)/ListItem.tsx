@@ -35,7 +35,7 @@ function ListItem(props:TypeProps, ref:React.ReactNode){
   return <Suspense fallback={null}>
     <div className={twMerge('relative', className)}>
       <LinkWithLang lang={props.lang} href={props.href}>
-        <RatioArea className="group mb-4" ratio="56.25">
+        <RatioArea className="group mb-2 lg:mb-4" ratio="56.25">
           <div className="absolute left-0 top-0 z-10 flex size-full cursor-pointer items-center justify-center opacity-0 group-hover:opacity-100"
         style={{
           background: 'rgba(0, 46, 79, 0.5)',
@@ -47,9 +47,9 @@ function ListItem(props:TypeProps, ref:React.ReactNode){
           </div>
           <Image className="absolute left-0 top-0 size-full" src={props?.thumbnail || ''} fill={true} sizes="50vw" alt="" />
         </RatioArea>
-        <div className="serif text-[24px] text-minor-900">{props?.title}</div>
+        <div className="serif text-[18px] leading-[1.2] text-minor-900 lg:text-[24px]">{props?.title}</div>
         {
-          props?.infos?.map((node, index)=><div className="text-gray-700" key={index}>{node}</div>)
+          props?.infos?.map((node, index)=><div className="text-[13px] text-gray-700 lg:text-[16px]" key={index}>{node}</div>)
         }
       </LinkWithLang>
     </div>

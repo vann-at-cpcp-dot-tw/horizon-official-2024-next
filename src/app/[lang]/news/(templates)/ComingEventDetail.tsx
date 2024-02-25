@@ -1,4 +1,5 @@
 "use client"
+
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
 import { Suspense, useMemo, useState, useEffect } from 'react'
@@ -6,8 +7,7 @@ import Image from "next/image"
 import LinkWithLang from "@src/components/custom/LinkWithLang"
 import { twMerge } from 'tailwind-merge'
 import { isEmpty } from '@src/lib/helpers'
-import { motion } from "framer-motion"
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname, useRouter, useParams } from 'next/navigation'
 import { gql, useQuery } from "@apollo/client"
 import RatioArea from "@src/components/custom/RatioArea"
 import buttonStyles from '@src/components/ui/button.module.sass'
@@ -30,9 +30,11 @@ interface TypeHullNode {
 }
 
 interface TypeYachtNode {
-  title: string
-  yachtCustomFields: {
-    hulls?: TypeHullNode[]
+  translation: {
+    title: string
+    yachtCustomFields: {
+      hulls?: TypeHullNode[]
+    }
   }
 }
 
@@ -59,7 +61,7 @@ interface TypeProps {
 
 interface TypeState {}
 
-function createHullGQLString(list:{yachtSlug:string, hullName:string}[] | undefined){
+function createHullGQLString(list:{yachtSlug:string, hullName:string}[] | undefined, lang:string){
   if( !list ){
     return null
   }
@@ -71,86 +73,88 @@ function createHullGQLString(list:{yachtSlug:string, hullName:string}[] | undefi
     return `
       ${acc}
       yacht${index}:yacht(id:"${node?.yachtSlug}", idType: SLUG){
-        title
-        yachtCustomFields {
-          hulls {
-            hullName
-            vrEmbedUrl
-            exteriorImages {
-              image {
-                node {
-                  mediaItemUrl
+        translation(language: ${(lang || 'EN').toUpperCase()}){
+          title
+          yachtCustomFields {
+            hulls {
+              hullName
+              vrEmbedUrl
+              exteriorImages {
+                image {
+                  node {
+                    mediaItemUrl
+                  }
                 }
               }
-            }
-            interiorImages {
-              image {
-                node {
-                  mediaItemUrl
+              interiorImages {
+                image {
+                  node {
+                    mediaItemUrl
+                  }
+                }
+                description
+              }
+              generalArrangementImages {
+                title
+                image {
+                  node {
+                    mediaItemUrl
+                  }
+                }
+                imageM {
+                  node {
+                    mediaItemUrl
+                  }
                 }
               }
-              description
-            }
-            generalArrangementImages {
-              title
-              image {
-                node {
-                  mediaItemUrl
+              embedVideosGallery {
+                embedUrl
+              }
+              specTerms {
+                loa {
+                  metric
+                  imperial
                 }
-              }
-              imageM {
-                node {
-                  mediaItemUrl
+                lwl {
+                  metric
+                  imperial
                 }
-              }
-            }
-            embedVideosGallery {
-              embedUrl
-            }
-            specTerms {
-              loa {
-                metric
-                imperial
-              }
-              lwl {
-                metric
-                imperial
-              }
-              beam {
-                metric
-                imperial
-              }
-              draft {
-                metric
-                imperial
-              }
-              engines {
-                metric
-                imperial
-              }
-              generator {
-                metric
-                imperial
-              }
-              displacement {
-                metric
-                imperial
-              }
-              fuelCapacity {
-                metric
-                imperial
-              }
-              waterCapacity {
-                metric
-                imperial
-              }
-              recommendedCapacity {
-                metric
-                imperial
-              }
-              cabins {
-                metric
-                imperial
+                beam {
+                  metric
+                  imperial
+                }
+                draft {
+                  metric
+                  imperial
+                }
+                engines {
+                  metric
+                  imperial
+                }
+                generator {
+                  metric
+                  imperial
+                }
+                displacement {
+                  metric
+                  imperial
+                }
+                fuelCapacity {
+                  metric
+                  imperial
+                }
+                waterCapacity {
+                  metric
+                  imperial
+                }
+                recommendedCapacity {
+                  metric
+                  imperial
+                }
+                cabins {
+                  metric
+                  imperial
+                }
               }
             }
           }
@@ -164,11 +168,13 @@ function ComingEventDetail(props:TypeProps, ref:React.ReactNode){
   const router = useRouter()
   const { className } = props
   const pathname = usePathname()
+  const params = useParams()
+  const { lang } = params
   const [openHullIndex, setOpenHullIndex] = useState<number | null>(null)
 
   const hullGQLString = useMemo(()=>{
-    return createHullGQLString(props?.relatedHulls)
-  }, [props?.relatedHulls])
+    return createHullGQLString(props?.relatedHulls, (lang as string))
+  }, [props?.relatedHulls, lang])
 
   const { data:hullData } = useQuery<{[key:string]:TypeYachtNode}>(gql `query QueryHulls {
     ${hullGQLString}
@@ -177,13 +183,13 @@ function ComingEventDetail(props:TypeProps, ref:React.ReactNode){
   })
 
   const hullList = useMemo(()=>{
-    if( !hullData || !props?.relatedHulls){
+    if( !props?.relatedHulls || !hullData){
       return []
     }
 
     const reduced =  Object.values(hullData).reduce<{yachtName:string, hull:TypeHullNode}[]>((acc, yachtNode:TypeYachtNode, index:number)=>{
       const findHullName = props?.relatedHulls?.[index]?.hullName
-      const foundedHull = yachtNode?.yachtCustomFields?.hulls?.find?.((hullNode)=>hullNode?.hullName === findHullName)
+      const foundedHull = yachtNode?.translation?.yachtCustomFields?.hulls?.find?.((hullNode)=>hullNode?.hullName === findHullName)
 
       if( !findHullName || !foundedHull ){
         return acc
@@ -192,7 +198,7 @@ function ComingEventDetail(props:TypeProps, ref:React.ReactNode){
       return [
         ...acc,
         {
-          yachtName: yachtNode?.title,
+          yachtName: yachtNode?.translation?.title,
           hull: foundedHull
         }
       ]
@@ -219,9 +225,9 @@ function ComingEventDetail(props:TypeProps, ref:React.ReactNode){
 
   return <>
     <ContentLightbox
-  onClose={()=>{
-    router.push(`${pathname}`, {scroll:false})
-  }}>
+    onClose={()=>{
+      router.push(`${pathname}`, {scroll:false})
+    }}>
 
       <div className="container mb-10 text-center">
         <div className="text-gray-500">Coming Event</div>

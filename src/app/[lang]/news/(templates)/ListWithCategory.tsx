@@ -143,7 +143,7 @@ function ListWithCategory(props:TypeProps, ref:React.ReactNode){
         <div className="row">
           {
             highlightList?.map((node:TypePostNode, index:number)=>{
-              return <div className={`mb-10 ${categorySlug === 'events' ?'lg:col-4 col-6' :'lg:col-6 col-12'}`} key={index}>
+              return <div className={`mb-5 lg:mb-10 ${categorySlug === 'events' ?'lg:col-4 col-6' :'lg:col-6 col-12'}`} key={index}>
                 <NewsListItem
                 href={`/news/${categorySlug}/${node.slug}`}
                 title={node?.title}

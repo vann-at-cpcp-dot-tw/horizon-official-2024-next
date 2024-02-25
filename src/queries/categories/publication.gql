@@ -3,11 +3,13 @@ query QuerySinglePublication($slug:ID!) {
     title
     slug
     publicationCustomFields {
-      relatedYachts {
-        seriesSlug
-      }
-      album {
-        image {
+      publication {
+        publicationCover {
+          node {
+            mediaItemUrl
+          }
+        }
+        pdf {
           node {
             mediaItemUrl
           }

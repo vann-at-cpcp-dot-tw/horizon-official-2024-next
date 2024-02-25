@@ -10,7 +10,6 @@ import Image from "next/image"
 import LinkWithLang from "@src/components/custom/LinkWithLang"
 import { twMerge } from 'tailwind-merge'
 import { isEmpty, pathnameWithLang } from '@src/lib/helpers'
-import { motion } from "framer-motion"
 import { useRouter } from "next/navigation"
 import RatioArea from "@root/src/components/custom/RatioArea"
 import buttonStyles from '@src/components/ui/button.module.sass'
@@ -18,6 +17,7 @@ import { Button } from "@src/components/ui/button"
 import ContentLightbox from "@src/components/custom/ContentLightbox"
 
 interface TypeProps {
+  children?: React.ReactNode
   [key:string]: any
 }
 
@@ -25,7 +25,7 @@ interface TypeState {}
 
 function Form(props:TypeProps, ref:React.ReactNode){
   const router = useRouter()
-  const { referer, lang } = props
+  const { referer, lang, children } = props
   const handleClose = useCallback(()=>{
     if( !referer ){
       router.push(pathnameWithLang('/', lang), {scroll:false})
@@ -95,13 +95,15 @@ function Form(props:TypeProps, ref:React.ReactNode){
         </div>
 
         <div className="text-center text-[14px] text-gray-500">
-            By submitting a contact request, you provide consent for us to collect and<br/>use your information pursuant to our <LinkWithLang className="underline" href="###" lang={lang}>Privacy Policy and Terms of Use</LinkWithLang>
+            By submitting a contact request, you provide consent for us to collect and<br className="hidden lg:block"/> use your information pursuant to our <LinkWithLang className="underline" href="###" lang={lang}>Privacy Policy and Terms of Use</LinkWithLang>
         </div>
 
         <div className="flex justify-center py-8">
           <Button variant="outline" className={buttonStyles['rounded-outline']} type="submit">SUBMIT</Button>
         </div>
       </form>
+
+      { children }
     </>
   </ContentLightbox>
 }

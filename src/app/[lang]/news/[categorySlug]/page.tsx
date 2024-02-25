@@ -29,7 +29,7 @@ async function PageNewsWithCategory({params}:TypeProps){
     }
   })
 
-  return <main className="grow pb-[120px]">
+  return <main className="grow pb-16 lg:pb-32">
     <Breadcrumb
     list={[
       {
@@ -41,9 +41,9 @@ async function PageNewsWithCategory({params}:TypeProps){
       }
     ]} />
     {
-      categorySlug === 'events' && <ComingEvents className="mb-20" />
+      categorySlug === 'events' && <ComingEvents className="mb-10 mt-6 lg:mb-20 lg:mt-12" />
     }
-    <div className="container serif mb-10 text-center text-[32px] text-major-900">{data.category?.name}</div>
+    <div className="container serif mb-2 text-center text-[28px] text-major-900 lg:mb-10 lg:text-[32px]">{data.category?.name}</div>
     <ListWithCategory list={data?.category?.posts?.nodes} pageInfo={data?.posts?.pageInfo} lang={lang} />
   </main>
 }

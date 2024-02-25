@@ -79,7 +79,8 @@ query QueryCharters(
   $yachtConditionsOperator: TaxQueryOperator = NOT_IN
   $yachtYear: String = ""
   $yachtPriceRange: String = "",
-  $yachtLengthRange: String = ""
+  $yachtLengthRange: String = "",
+  $customOrderby: String = "",
 ) {
   posts:charters(
     first: $first,
@@ -97,6 +98,7 @@ query QueryCharters(
       yachtYear: $yachtYear,
       yachtLengthRange: $yachtLengthRange,
       yachtPriceRange: $yachtPriceRange,
+      customOrderby: $customOrderby,
     }
   ) {
     nodes {

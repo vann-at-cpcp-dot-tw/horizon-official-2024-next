@@ -12,16 +12,7 @@ import { TypePublicationNode, TypePublicationCategoryNode } from "../layout"
 import { LocalDataContext } from "../(templates)/LocalDataProvider"
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { SwiperClass } from "swiper/react"
-import LightGallery from 'lightgallery/react'
-import lgThumbnail from 'lightgallery/plugins/thumbnail'
-import lgZoom from 'lightgallery/plugins/zoom'
-import lgHash from 'lightgallery/plugins/hash'
-import lgAutoplay from 'lightgallery/plugins/autoplay'
-import lgFullscreen from 'lightgallery/plugins/fullscreen'
 
-// import { useRouter } from 'next/navigation'
-// import { useStore } from '@src/store'
-// import useWindowSize from "@src/hooks/useWindowSize"
 
 interface TypeProps {
   [key:string]: any
@@ -29,9 +20,7 @@ interface TypeProps {
 interface TypeState {}
 
 function All(props:TypeProps, ref:React.ReactNode){
-  // const store = useStore()
-  const router = useRouter()
-  // const viewport = useWindowSize()
+
   const { className } = props
   const localData = useContext(LocalDataContext)
   const { publicationCategories } = localData ?? {}
@@ -40,11 +29,12 @@ function All(props:TypeProps, ref:React.ReactNode){
 
 
   return <Suspense fallback={null}>
+
     <div className={twMerge('overflow-hidden', className)}>
       {
         publicationCategories?.nodes?.map?.((categoryNode:TypePublicationCategoryNode, categoryIndex:number)=>{
           return <div className="container-fluid mb-24 px-20" key={categoryIndex}>
-            <div className="text-gray-300">{categoryNode.name}</div>
+            <div className="text-gray-300">{ categoryNode.name }</div>
             <div className="row row-gap-3 mb-3">
               <div className="col-auto">
                 <div className="row row-gap-3">
@@ -96,13 +86,8 @@ function All(props:TypeProps, ref:React.ReactNode){
               {
                 categoryNode?.publications?.nodes?.map?.((publicationNode:TypePublicationNode, publicationIndex)=>{
                   return <SwiperSlide className="!w-auto" key={`${categoryIndex}-${publicationIndex}`}>
-                    <div className="btn"
-                    onClick={()=>{
-                      if( document.querySelector(`#lg-${categoryIndex}-${publicationIndex} .lg-react-element a:first-child`) ){
-                        (document.querySelector(`#lg-${categoryIndex}-${publicationIndex} .lg-react-element a:first-child`) as HTMLElement).click()
-                      }
-                    }}>
-                      <Image className="mb-2" src={publicationNode?.publicationCustomFields?.album?.[0]?.image?.node?.mediaItemUrl || ''} alt="" width={380} height={categoryIndex === 0 ?525 :320}
+                    <a className="btn block" href={publicationNode.publicationCustomFields?.publication?.pdf?.node?.mediaItemUrl} target="_blank">
+                      <Image className="mb-2" src={`${publicationNode.publicationCustomFields?.publication?.publicationCover?.node?.mediaItemUrl || ''}`} alt="" width={380} height={categoryIndex === 0 ?525 :320}
                       priority={true}
                     style={{
                       width: 'auto',
@@ -111,30 +96,7 @@ function All(props:TypeProps, ref:React.ReactNode){
                       <div className="relative h-8 text-gray-500">
                         <div className="absolute line-clamp-2 w-full">{ publicationNode.title }</div>
                       </div>
-                    </div>
-
-                    <div id={`lg-${categoryIndex}-${publicationIndex}`}>
-                      <LightGallery
-                      mode="lg-fade"
-                      galleryId={publicationNode.slug}
-                      licenseKey={process.env.NEXT_PUBLIC_LIGHT_GALLERY_KEY}
-                      plugins={[lgThumbnail, lgZoom, lgAutoplay, lgFullscreen]}
-                      speed={500}
-                      toggleThumb={true}
-                      allowMediaOverlap={true}
-                      showZoomInOutIcons={true}
-                      actualSize={false}
-                      scale={0.66}
-                      alignThumbnails="left">
-                        {
-                          publicationNode?.publicationCustomFields?.album?.map((pageNode, pageIndex)=>{
-                            return <a className="hidden" data-src={pageNode?.image?.node?.mediaItemUrl || ''} key={`${categoryIndex}-${publicationIndex}-${pageIndex}`}>
-                              <Image src={pageNode?.image?.node?.mediaItemUrl || ''} width={100} height={100} alt="" style={{height:'auto'}}/>
-                            </a>
-                          })
-                        }
-                      </LightGallery>
-                    </div>
+                    </a>
                   </SwiperSlide>
                 })
               }

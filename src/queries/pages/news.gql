@@ -8,6 +8,8 @@ query QueryNewsPage(
   $relatedYachtSeries: String
   $categories: [String]
   $categoriesOperator: TaxQueryOperator = NOT_IN
+  $language: LanguageCodeFilterEnum = EN
+  $translation: LanguageCodeEnum = EN
 ) {
   posts(
     first: $first
@@ -15,6 +17,7 @@ query QueryNewsPage(
     after: $after,
     before: $before,
     where: {
+      language: $language
       taxQuery: {
         relation: AND,
         taxArray: [
@@ -58,7 +61,12 @@ query QueryNewsPage(
       startCursor
     }
   }
-  categories(first: 99) {
+  categories(
+    first: 99,
+    where: {
+      language: $language
+    }
+  ) {
     nodes {
       slug
       name
@@ -67,11 +75,13 @@ query QueryNewsPage(
   coverStory:category(id: "cover-story", idType: SLUG) {
     posts(first: 1) {
       nodes {
-        slug
-        title
-        date
-        postCustomFields {
-           ...postCoverImage
+        translation(language: $translation){
+          slug
+          title
+          date
+          postCustomFields {
+            ...postCoverImage
+          }
         }
       }
     }
@@ -79,11 +89,13 @@ query QueryNewsPage(
   events:category(id: "events", idType: SLUG) {
     posts(first: 3) {
       nodes {
-        slug
-        title
-        date
-        postCustomFields {
-          ...postGallery
+        translation(language: $translation){
+          slug
+          title
+          date
+          postCustomFields {
+            ...postGallery
+          }
         }
       }
     }
@@ -91,11 +103,18 @@ query QueryNewsPage(
   publicationCategory(id: "brand-publication", idType: SLUG) {
     publications(first: 1) {
       nodes {
-        publicationCustomFields {
-          album {
-            image {
-              node {
-                mediaItemUrl
+        translation(language: $translation){
+          publicationCustomFields {
+            publication {
+              publicationCover {
+                node {
+                  mediaItemUrl
+                }
+              }
+              pdf {
+                node {
+                  mediaItemUrl
+                }
               }
             }
           }

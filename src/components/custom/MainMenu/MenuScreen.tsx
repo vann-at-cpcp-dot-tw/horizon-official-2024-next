@@ -63,7 +63,8 @@ function MenuScreen(props:TypeProps, ref:React.ReactNode){
         <div className="my-auto flex flex-col items-end pr-5">
           {
             props?.list?.map((node, index)=>{
-              return <div key={index}>
+              return <div key={index}
+              className={node.key === props.currentScreen?.seriesSlug ?'py-3' :''}>
                 <motion.div
               variants={{
                 enter: {
@@ -88,7 +89,7 @@ function MenuScreen(props:TypeProps, ref:React.ReactNode){
               exit="exit"
               animate={'enter'}>
                   <LinkWithLang
-                className={`btn-opacity block py-2.5 text-right ${node.key === props.currentScreen?.seriesSlug ?'text-golden-900' :'text-gray-700'}`}
+                className={`btn-opacity block py-1 text-right ${node.key === props.currentScreen?.seriesSlug ?'text-[18px] font-900 text-major-500' :'text-gray-700'}`}
                 href={node?.href}
                 lang={lang}
                 onClick={()=>{
@@ -127,7 +128,7 @@ function MenuScreen(props:TypeProps, ref:React.ReactNode){
                       exit="exit"
                       animate={'enter'}>
                         <LinkWithLang
-                      className={`btn-opacity block py-1 text-right ${childNode.key === props.currentScreen?.yachtSlug ?'text-golden-900' :'text-gray-700'}`}
+                      className={`btn-opacity block py-1 text-right text-[14px] ${childNode.key === props.currentScreen?.yachtSlug ?'font-900 text-major-500' :'text-gray-700'}`}
                       href={childNode?.href}
                       lang={lang}
                       onClick={()=>{

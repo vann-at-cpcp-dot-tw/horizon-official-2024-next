@@ -35,7 +35,7 @@ export default async function PageHome({
   theme="dark"
   background="#040922"
   stickyHeader={
-    <div className="container pb-8 pt-10">
+    <div className="container py-10">
       <div className="serif text-center text-[24px] text-white">Milestone</div>
     </div>
   }
@@ -44,7 +44,7 @@ export default async function PageHome({
       <Image src={`${BASE_PATH}/assets/img/icon_menu_x.svg`} width={48} height={48} style={{filter:'grayscale(1) brightness(100)'}} alt=""/>
     </LinkWithLang>
   }>
-    <div className=" my-auto">
+    <div className="mb-auto lg:my-auto">
       <SwiperMilestone list={milestoneList}/>
     </div>
   </ContentLightbox>

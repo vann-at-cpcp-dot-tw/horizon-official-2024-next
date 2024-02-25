@@ -1,5 +1,9 @@
-query QueryTermsPage {
-  globalSettings {
+query QueryTermsPage(
+  $language: LanguageCodeFilterEnum = EN
+){
+  globalSettings(
+    language: $language
+  ){
     additionalContent {
       termsAndConditions {
         content

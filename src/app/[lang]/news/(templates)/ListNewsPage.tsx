@@ -110,7 +110,7 @@ function List(props:TypeProps, ref:React.ReactNode){
 
   const allowedCategories = useMemo<{slug:string, name:string}[] | undefined>(()=>{
     return props?.categories?.nodes?.filter((node:{slug:string, name:string})=>{
-      return !(['uncategorized', 'cover-story', 'events'].includes(node?.slug))
+      return !(['uncategorized', 'cover-story', 'events'].includes(node?.slug)) && !(node?.slug).includes('uncategorized')
     })
   }, [props?.categories])
 
@@ -171,53 +171,43 @@ function List(props:TypeProps, ref:React.ReactNode){
   return <Suspense fallback={null}>
     <div className={twMerge('', className)}>
 
-      <div className="container mb-4">
-        <div className="row flex-nowrap items-center">
+      <div className="container mb-6">
+        <div className="row items-center lg:flex-nowrap">
           <div className="col-auto">
             <div className="text-[24px] font-300 text-minor-900">Latest News</div>
           </div>
-          <div className="col-12 shrink">
-            <div className="row row-gap-8 !flex-nowrap justify-end">
-              <div className="col-auto shrink">
-                <div className="row row-gap-2 !flex-nowrap items-baseline">
-                  {/* <div className="col-auto text-gray-700">Category</div> */}
-                  <div className="col-auto shrink">
-                    <div className="w-screen max-w-[160px]">
-                      <select className="w-full border-b border-gray-700 bg-transparent text-gray-700"
+          <div className="col-12 mt-2 shrink lg:mt-0">
+            <div className="row lg:row-gap-8 !flex-nowrap justify-end">
+              <div className="col-6 shrink lg:col-auto">
+                <div className="w-full max-w-[160px] lg:w-screen">
+                  <select className="w-full border-b border-gray-700 bg-transparent text-gray-700"
                       value={queryCategory || ''}
                       onChange={(e)=>{
                         router.push(`${pathname}?category=${e.target.value}&series=${querySeries || ''}`, {scroll:false})
                       }}>
-                        <option value="">All Categories</option>
-                        {
-                          allowedCategories?.map((node, index:number)=>{
-                            return <option key={index} value={node.slug}>{node.name}</option>
-                          })
-                        }
-                      </select>
-                    </div>
-                  </div>
+                    <option value="">All Categories</option>
+                    {
+                      allowedCategories?.map((node, index:number)=>{
+                        return <option key={index} value={node.slug}>{node.name}</option>
+                      })
+                    }
+                  </select>
                 </div>
               </div>
-              <div className="col-auto shrink">
-                <div className="row row-gap-2 !flex-nowrap items-baseline">
-                  {/* <div className="col-auto text-gray-700">Series</div> */}
-                  <div className="col-auto shrink">
-                    <div className="w-screen max-w-[160px]">
-                      <select className="w-full border-b border-gray-700 bg-transparent text-gray-700"
+              <div className="col-6 shrink lg:col-auto">
+                <div className="w-full max-w-[160px] lg:w-screen">
+                  <select className="w-full border-b border-gray-700 bg-transparent text-gray-700"
                       value={querySeries || ''}
                       onChange={(e)=>{
-                        router.push(`${pathname}?category=${queryCategory}&series=${e.target.value}`, {scroll:false})
+                        router.push(`${pathname}?category=${queryCategory || ''}&series=${e.target.value}`, {scroll:false})
                       }}>
-                        <option value="">All Series</option>
-                        {
-                          yachtSeriesList?.nodes?.map((node, index:number)=>{
-                            return <option key={index} value={node.slug}>{node.name} Series</option>
-                          })
-                        }
-                      </select>
-                    </div>
-                  </div>
+                    <option value="">All Series</option>
+                    {
+                      yachtSeriesList?.nodes?.map((node, index:number)=>{
+                        return <option key={index} value={node.slug}>{node.name} Series</option>
+                      })
+                    }
+                  </select>
                 </div>
               </div>
             </div>

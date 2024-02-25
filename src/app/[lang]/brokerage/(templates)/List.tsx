@@ -14,8 +14,6 @@ import { QueryBrokerages } from '@src/queries/pages/brokerage.gql'
 import { QueryCharters } from '@src/queries/pages/charter.gql'
 import { useLazyQuery } from "@apollo/client"
 import { useRouter, useParams, useSearchParams } from 'next/navigation'
-// import { useStore } from '@src/store'
-// import useWindowSize from "@src/hooks/useWindowSize"
 import ListFilters from "./ListFilters"
 import ListItem from "./ListItem"
 import PageNav from "@src/components/custom/PageNav"
@@ -85,6 +83,7 @@ function List(props:TypeProps, ref:React.ReactNode){
   const queryYachtLength = searchParams.get('length')
   const queryYachtPrice = searchParams.get('price')
   const queryYachtYear = searchParams.get('year')
+  const queryOrderby = searchParams.get('orderby')
 
   const queryVariables = useMemo(()=>{
     return {
@@ -102,8 +101,9 @@ function List(props:TypeProps, ref:React.ReactNode){
       yachtYear: queryYachtYear,
       yachtPriceRange: queryYachtPrice,
       yachtLengthRange: queryYachtYear,
+      customOrderby: queryOrderby,
     }
-  }, [queryCondition, queryYachtLength, queryYachtPrice, queryYachtYear])
+  }, [queryCondition, queryYachtLength, queryYachtPrice, queryYachtYear, queryOrderby])
 
   useEffect(()=>{
 
@@ -116,6 +116,7 @@ function List(props:TypeProps, ref:React.ReactNode){
       && queryYachtLength === null
       && queryYachtPrice === null
       && queryYachtYear === null
+      && queryOrderby === null
     ){
       setMergedList((prev)=>{
         const uniqueSet = new Set()
@@ -138,12 +139,12 @@ function List(props:TypeProps, ref:React.ReactNode){
       variables: queryVariables
     })
 
-  }, [queryCondition, queryYachtLength, queryYachtPrice, queryYachtYear, props.list])
+  }, [queryCondition, queryYachtLength, queryYachtPrice, queryYachtYear, queryOrderby, props.list])
 
   return <Suspense fallback={null}>
     <div className={twMerge('', className)}>
       <ListFilters
-      className="mb-10"
+      className="mb-4"
       yachtConditions={props.yachtConditions}
       lengthOptions={props.lengthOptions}
       priceOptions={props.priceOptions}
@@ -153,7 +154,7 @@ function List(props:TypeProps, ref:React.ReactNode){
         <div className="row">
           {
             mergedList?.map((node, index)=>{
-              return <div className="col-6 mb-5" key={index}>
+              return <div className="lg:col-6 col-12 mb-10" key={index}>
                 <ListItem
                 title={node.title}
                 slug={node.slug}

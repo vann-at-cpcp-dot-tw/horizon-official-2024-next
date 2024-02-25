@@ -57,7 +57,7 @@ function IntroAfterSeries(props:TypeProps, ref:React.ReactNode){
         </div>
       </div>
 
-      <div className="relative mb-[60px] h-auto w-full lg:h-[608px]">
+      <div className="relative mb-16 h-auto w-full lg:mb-24 lg:h-[608px]">
         <div className="absolute left-0 top-0 z-10 flex size-full flex-col items-center justify-center p-5 text-center text-white">
           <div className="serif mb-2 text-[24px] font-300 italic leading-[1.2] lg:text-[32px]">
             <LinkWithLang href="/about/innovation" lang={props?.lang}>The Innovation Behind Horizon</LinkWithLang>

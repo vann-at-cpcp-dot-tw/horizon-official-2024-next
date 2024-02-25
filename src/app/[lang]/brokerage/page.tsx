@@ -31,13 +31,13 @@ async function PageBrokerage({params}:TypeProps){
   const posts = data?.posts?.nodes
   const yachtConditions = data?.yachtConditions?.nodes
 
-  if( CONTENT_TYPE === 'hq '){
+  if( CONTENT_TYPE === 'hq'){
     redirect('/')
   }
 
-  return <main className="pb-24">
+  return <main className="pb-12 lg:pb-24">
 
-    <div className="container serif my-10 text-center text-[32px] text-minor-900">
+    <div className="container serif my-6 text-center text-[32px] text-minor-900 lg:my-10">
       { DEALER_REGION === 'US' ?'Inventory' :'Brokerage' }
     </div>
 

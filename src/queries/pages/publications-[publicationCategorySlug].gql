@@ -22,11 +22,13 @@ query QueryPublicationCategory(
         slug
         title
         publicationCustomFields {
-          relatedYachts {
-            seriesSlug
-          }
-          album {
-            image {
+          publication {
+            publicationCover {
+              node {
+                mediaItemUrl
+              }
+            }
+            pdf {
               node {
                 mediaItemUrl
               }

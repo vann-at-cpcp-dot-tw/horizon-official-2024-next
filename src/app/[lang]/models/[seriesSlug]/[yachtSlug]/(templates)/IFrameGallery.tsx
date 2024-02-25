@@ -27,7 +27,7 @@ function IFrameGallery(props:TypeProps, ref:React.ReactNode){
 
   const [activeIndex, setActiveIndex] = useState(0)
   const {size:contentWrapperSize, setNode:setContentWrapperNode} = useDomNodeSize()
-  const [iframeSize, setIframeSize] = useState({
+  const [iframeSize, setIframeSize] = useState<{w:string|number, h:string|number}>({
     w: '100%',
     h: '100%',
   })
@@ -44,14 +44,14 @@ function IFrameGallery(props:TypeProps, ref:React.ReactNode){
       return
     }
 
-    const heightBasedSize = calcSizeByRatio({w:null, h:contentWrapperSize.height, ratio:props.iframeRatio})
     const widthBasedSize = calcSizeByRatio({w:contentWrapperSize.width, h:null, ratio:props.iframeRatio})
+    const heightBasedSize = calcSizeByRatio({w:null, h:contentWrapperSize.height, ratio:props.iframeRatio})
 
     // 如果寬撐滿時高會超出，那就改成高撐滿模式
-    if( widthBasedSize.h > contentWrapperSize.height ){
-      setIframeSize(heightBasedSize)
+    if( widthBasedSize?.h > contentWrapperSize.height ){
+      setIframeSize(heightBasedSize || iframeSize)
     }else{
-      setIframeSize(widthBasedSize)
+      setIframeSize(widthBasedSize || iframeSize)
     }
 
   }, [contentWrapperSize.width, contentWrapperSize.height, props.iframeRatio])

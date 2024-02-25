@@ -91,10 +91,12 @@ function ContentLightbox(props:TypeProps, ref:React.ReactNode){
               <CloseIcon />
             </div>
           }
-          <div className="w-full">{ props?.stickyHeader }</div>
+          <div className="relative w-full">{ props?.stickyHeader }</div>
         </div>
 
-        { props?.children }
+        <div className="relative flex grow flex-col">
+          { props?.children }
+        </div>
       </div>
     </motion.div>
   </Suspense>

@@ -1,5 +1,9 @@
-query QueryTeamPage {
-  teamPageSettings {
+query QueryTeamPage(
+  $language: LanguageCodeFilterEnum = EN
+) {
+  teamPageSettings(
+    language: $language
+  ){
     teamPageCustomFields {
       pageTitle
       teamIntroduction

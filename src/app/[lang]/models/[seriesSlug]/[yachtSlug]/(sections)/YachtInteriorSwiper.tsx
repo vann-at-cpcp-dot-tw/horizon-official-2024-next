@@ -2,26 +2,18 @@
 
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
-import { Suspense, useEffect, useState } from 'react'
+import { Suspense, useEffect, useState, useMemo } from 'react'
 import Image from "next/image"
-import LinkWithLang from "@src/components/custom/LinkWithLang"
 import { twMerge } from 'tailwind-merge'
-import { isEmpty } from '@src/lib/helpers'
 import RatioArea from "@src/components/custom/RatioArea"
-import useRefSize from "@src/hooks/useDomNodeSize"
-import { motion } from "framer-motion"
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { EffectFade, FreeMode, Autoplay } from 'swiper/modules'
+import { EffectFade } from 'swiper/modules'
 import { SwiperClass } from "swiper/react"
 import 'swiper/css/effect-fade'
 import Marquee from "react-fast-marquee"
 import ContentLightbox from "@src/components/custom/ContentLightbox"
-
-// import { useRouter } from 'next/navigation'
-// import { useStore } from '@src/store'
-// import useWindowSize from "@src/hooks/useWindowSize"
-
-// import 'swiper/css/free-mode'
+import useImageBlurHashes from "@root/src/hooks/useImageBlurHashes"
+import SwiperFullHeight from "@src/components/custom/SwiperFullHeight"
 
 interface TypeProps {
   list: {
@@ -41,7 +33,6 @@ function YachtInteriorSwiper(props:TypeProps, ref:React.ReactNode){
   // const router = useRouter()
   // const viewport = useWindowSize()
   const { className } = props
-  const [swiper, setSwiper] = useState<SwiperClass>(({} as SwiperClass))
   const [swiperZoom, setSwiperZoom] = useState<SwiperClass>(({} as SwiperClass))
   const [realIndex, setRealIndex] = useState(0)
   const [isOpen, setIsOpen] = useState(false)
@@ -54,11 +45,17 @@ function YachtInteriorSwiper(props:TypeProps, ref:React.ReactNode){
     }
   }, [isOpen])
 
+  const images = useMemo(()=>{
+    return props?.list?.map((node)=>node?.image?.node?.mediaItemUrl)
+  }, [props.list])
+  const imageBlurHashes = useImageBlurHashes(images)
+
   return <Suspense fallback={null}>
     <div id="SECTION_INTERIOR" className={twMerge('overflow-hidden lg:mb-24 mb-12', className)}>
       <div className="container mb-3 text-center text-gray-500 lg:mb-5">Interior</div>
       {
         !isOpen && <Marquee
+          autoFill
           speed={20}>
           {
             props?.list?.map?.((node, index)=>{
@@ -78,7 +75,13 @@ function YachtInteriorSwiper(props:TypeProps, ref:React.ReactNode){
                         <i className="bi bi-plus-lg text-[24px] text-white"></i>
                       </div>
                     </div>
-                    <Image className="absolute left-0 top-0 z-0 size-full object-cover" fill={true} sizes="23.42vw" src={node?.image?.node?.mediaItemUrl || ''} alt="" />
+                    <Image className="absolute left-0 top-0 z-0 size-full object-cover"
+                    fill={true}
+                    sizes="23.42vw"
+                    src={node?.image?.node?.mediaItemUrl || ''}
+                    placeholder={imageBlurHashes?.[index] ?'blur' :'empty'}
+                    blurDataURL={imageBlurHashes?.[index]}
+                    alt="" />
                   </RatioArea>
                 </div>
               </div>
@@ -93,68 +96,20 @@ function YachtInteriorSwiper(props:TypeProps, ref:React.ReactNode){
         onClose={()=>{
           setIsOpen(false)
         }}>
-          <>
-            <div className="flex grow !flex-nowrap overflow-hidden px-5">
-              <div className="flex flex-none items-center">
-                <div className={`btn group flex size-12 items-center justify-center rounded-full border border-gray-900 hover:border-golden-900 hover:bg-golden-900 ${swiperZoom.isBeginning ?'disabled opacity-50' :''}`}
-              onClick={()=>{
-                swiperZoom.slidePrev()
-              }}>
-                  <Image className="grayscale group-hover:brightness-[1000]" src={`${BASE_PATH}/assets/img/icon_menu_back.svg`} width={48} height={48} alt="" />
-                </div>
-              </div>
-
-              <div className="size-full shrink px-5">
-                <Swiper
-                className="h-full"
-                modules={[EffectFade]}
-                effect="fade"
-                speed={500}
-                spaceBetween={0}
-                slidesPerView={1}
-                initialSlide={realIndex}
-                onSwiper={(e)=>{
-                  setSwiperZoom(e)
-                }}
-                onSlideChange={(e)=>{
-                  setRealIndex(e.realIndex)
-                }}>
-                  {
-                    props?.list?.map?.((node, index)=>{
-                      return <SwiperSlide key={index}>
-                        <div className="relative size-full">
-                          <Image src={node?.image?.node?.mediaItemUrl || ''} fill={true} sizes="100vw" style={{objectFit: "contain"}} alt="" />
-                        </div>
-                      </SwiperSlide>
-                    })
-                  }
-                </Swiper>
-              </div>
-
-              <div className="flex flex-none items-center">
-                <div className={`btn group flex size-12 items-center justify-center rounded-full border border-gray-900 hover:border-golden-900 hover:bg-golden-900 ${swiperZoom.isEnd ?'disabled opacity-50' :''}`}
-                onClick={()=>{
-                  swiperZoom.slideNext()
-                }}>
-                  <Image className="grayscale group-hover:brightness-[1000]" src={`${BASE_PATH}/assets/img/icon_menu_back.svg`} width={48} height={48} alt=""
-                  style={{
-                    transform: 'rotate(180deg)'
-                  }} />
-                </div>
-              </div>
-            </div>
-
-            <div className="pb-5">
-              {
-                props?.list?.map((node, index)=>{
-                  if( realIndex === index ){
-                    return <div className="pt-5 text-center text-gray-700" key={index}>{ node?.description }</div>
-                  }
-                })
-              }
-              <div className="text-center text-gray-700">{realIndex+1}{/* &nbsp;/&nbsp; */}／{props?.list?.length}</div>
-            </div>
-          </>
+          <SwiperFullHeight
+          list={
+            props?.list?.map?.((node, index)=>({
+              content: <Image src={node?.image?.node?.mediaItemUrl || ''}
+                fill={true}
+                sizes="100vw"
+                style={{ objectFit: "contain" }}
+                placeholder={imageBlurHashes?.[index] ?'blur' :'empty'}
+                blurDataURL={imageBlurHashes?.[index]}
+                alt="" />,
+              title: node?.description
+            }))
+          }
+          />
         </ContentLightbox>
       }
     </div>

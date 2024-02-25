@@ -27,7 +27,8 @@ function CoverStory(props:TypeProps, ref:React.ReactNode){
   // const viewport = useWindowSize()
   const { className } = props
   return <Suspense fallback={null}>
-    <div className={twMerge('container-fluid mb-32', className)}>
+    <div className={twMerge('container-fluid px-0 lg:mb-32 mb-10', className)}>
+
       <RatioArea ratio="42.85">
         <LinkWithLang
         className="absolute left-0 top-0 size-full"
@@ -36,18 +37,15 @@ function CoverStory(props:TypeProps, ref:React.ReactNode){
           <Image className="object-cover" src={props?.image} fill={true} sizes="100vw" alt="" />
         </LinkWithLang>
       </RatioArea>
+
       <div className="relative z-10 flex justify-center">
         <div className="container">
-          <div style={{
-            background: 'white',
-            padding: '32px 20px',
-            marginTop: '-74px'
-          }}>
-            <div className="text-center text-[17px] text-gray-300">Cover Story</div>
-            <div className="serif text-center text-[43px] text-minor-900">
+          <div className="mt-[-32px] bg-white px-2.5 py-4 lg:mt-[-64px] lg:px-5 lg:py-8">
+            <div className="text-center text-[14px] text-gray-300 lg:text-[17px]">Cover Story</div>
+            <div className="serif text-center text-[28px] text-minor-900 lg:text-[43px]">
               <LinkWithLang href={`/news/cover-story/${props.slug}`} lang={props.lang}>{ props?.title }</LinkWithLang>
             </div>
-            <div className="text-center text-[14px] text-gray-300">{ (props?.date || '').slice(0, 10).replaceAll('-', '.') }</div>
+            <div className="text-center text-[12px] text-gray-300 lg:text-[14px]">{ (props?.date || '').slice(0, 10).replaceAll('-', '.') }</div>
           </div>
         </div>
       </div>

@@ -111,7 +111,6 @@ function RegionsNav(props:TypeProps, ref:React.ReactNode){
                               </div>
                             </>
                           }
-
                         </div>
                       })
                     }

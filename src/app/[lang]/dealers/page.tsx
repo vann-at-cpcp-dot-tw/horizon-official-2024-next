@@ -11,6 +11,7 @@ import buttonStyles from '@src/components/ui/button.module.sass'
 import { Button } from "@src/components/ui/button"
 import Regions from "./(templates)/Regions"
 import { redirect } from "next/navigation"
+import { i18n } from "@root/i18n.config"
 
 interface TypeProps {
   params: {
@@ -24,8 +25,12 @@ async function PageDealers({params}:TypeProps){
 
   const { lang } = params
 
-  if( CONTENT_TYPE === 'dealer '){
-    redirect('/')
+  if( CONTENT_TYPE === 'dealer'){
+    if( lang === i18n.defaultLocale ){
+      redirect('/contact')
+    }else{
+      redirect(`${lang}/contact`)
+    }
   }
 
   const data = await fetchGQL(QueryDealersWithRegion)

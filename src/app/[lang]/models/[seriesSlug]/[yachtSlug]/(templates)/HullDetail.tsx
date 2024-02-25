@@ -14,8 +14,7 @@ import GAGalleryNav from "./GAGalleryNav"
 import { useRouter, usePathname } from 'next/navigation'
 import { motion } from "framer-motion"
 import ContentLightbox from "@src/components/custom/ContentLightbox"
-// import { useStore } from '@src/store'
-// import useWindowSize from "@src/hooks/useWindowSize"
+import useWindowSize from "@src/hooks/useWindowSize"
 
 interface TypeProps {
   hullName: string
@@ -67,7 +66,7 @@ interface TypeState {}
 
 function HullDetail(props:TypeProps, ref:React.ReactNode){
   // const store = useStore()
-  // const viewport = useWindowSize()
+  const viewport = useWindowSize()
   const { className, background='var(--color-golden-300)' } = props
   const router = useRouter()
   const pathname = usePathname()
@@ -83,11 +82,11 @@ function HullDetail(props:TypeProps, ref:React.ReactNode){
       },
       {
         label: 'SPECS',
-        hasContent: Object.values(props.specTerms).some((node)=>(node.metric || node.imperial))
+        hasContent: Object?.values?.(props.specTerms)?.some?.((node)=>(node.metric || node.imperial))
       },
       {
         label: 'GA',
-        hasContent: props.generalArrangementImages.some((node)=>node?.image?.node?.mediaItemUrl)
+        hasContent: props.generalArrangementImages?.some?.((node)=>node?.image?.node?.mediaItemUrl)
       },
       {
         label: 'VR',
@@ -95,7 +94,7 @@ function HullDetail(props:TypeProps, ref:React.ReactNode){
       },
       {
         label: 'Videos',
-        hasContent: props.embedVideosGallery.some((node)=>node.embedUrl)
+        hasContent: props.embedVideosGallery?.some?.((node)=>node.embedUrl)
       }
     ].filter((node)=>node.hasContent)
 
@@ -113,11 +112,11 @@ function HullDetail(props:TypeProps, ref:React.ReactNode){
   const [isLoading, setIsLoading] = useState(false)
 
   const gaItemTitles = useMemo(()=>{
-    return props?.generalArrangementImages.map((node)=>node.title)
+    return props?.generalArrangementImages?.map?.((node)=>node.title)
   }, [props.generalArrangementImages])
 
   const gaActiveItem = useMemo(()=>{
-    return props.generalArrangementImages[activeGAIndex]
+    return props.generalArrangementImages?.[activeGAIndex]
   }, [props.generalArrangementImages, activeGAIndex])
 
   useEffect(()=>{
@@ -166,7 +165,7 @@ function HullDetail(props:TypeProps, ref:React.ReactNode){
     }
     props?.onClose?.()
   }}>
-    <div className="container-fluid relative z-0 flex grow !flex-nowrap pb-5">
+    <div className="relative z-0 flex grow flex-col !flex-nowrap">
 
       <div className="absolute left-0 top-0 z-0 flex size-full items-center justify-center">
         {
@@ -177,21 +176,21 @@ function HullDetail(props:TypeProps, ref:React.ReactNode){
       {(function(){
         switch(activeSection){
           case 'Exterior':
-            return <div className="relative z-10 grow overflow-hidden">
+            return <div className="relative z-10 grow overflow-hidden pb-5">
               <SwiperFullHeight
-        list={props.exteriorImages?.map((node)=>{
-          return {
-            content: <Image src={node?.image?.node?.mediaItemUrl || ''} fill={true} sizes="100vw" alt=""
-            style={{objectFit: "contain"}}
-            onLoad={()=>{
-              setIsLoading(false)
-            }} />,
-          }
-        })} />
+              list={props.exteriorImages?.map((node)=>{
+                return {
+                  content: <Image src={node?.image?.node?.mediaItemUrl || ''} fill={true} sizes="100vw" alt=""
+                  style={{objectFit: "contain"}}
+                  onLoad={()=>{
+                    setIsLoading(false)
+                  }} />,
+                }
+              })} />
             </div>
 
           case 'Interior':
-            return <div className="relative z-10 grow overflow-hidden">
+            return <div className="relative z-10 grow overflow-hidden pb-5">
               <SwiperFullHeight
         list={props.interiorImages?.map((node)=>{
           return {
@@ -206,27 +205,32 @@ function HullDetail(props:TypeProps, ref:React.ReactNode){
             </div>
 
           case 'SPECS':
-            return <div className="relative z-10 flex grow flex-col bg-golden-300">
+            return <div className="container-fluid relative z-10 flex grow flex-col bg-golden-300 pb-5">
               <div className="mx-auto  w-full max-w-[900px] py-10">
                 <SpecTable specTerms={props.specTerms} />
-                <div className="h-[2000px]"></div>
               </div>
             </div>
 
           case 'GA':
-            return <div className="relative z-10 flex grow flex-col">
+            return <div className="container-fluid relative z-10 flex grow flex-col pb-5">
               <GAGalleryNav
-        className="py-10"
-        itemTitles={gaItemTitles}
-        activeItem={activeGAIndex}
-        setActiveItem={setActiveGAIndex} />
-              <Image className="pointer-events-none" src={gaActiveItem?.image?.node?.mediaItemUrl || ''} width={1222} height={336} sizes="100vw" alt=""
-        style={{
-          width: '100%',
-        }}
-        onLoad={()=>{
-          setIsLoading(false)
-        }} />
+              itemTitles={gaItemTitles}
+              activeItem={activeGAIndex}
+              setActiveItem={setActiveGAIndex} />
+
+              <div className="relative grow">
+                {
+                  (viewport.width && viewport.width <= 991) && gaActiveItem?.imageM?.node?.mediaItemUrl
+                    ?<Image className="pointer-events-none" src={gaActiveItem?.imageM?.node?.mediaItemUrl || ''} fill={true} sizes="100vw" style={{objectFit: "contain"}} alt=""
+                  onLoad={()=>{
+                    setIsLoading(false)
+                  }} />
+                    :<Image className="pointer-events-none" src={gaActiveItem?.image?.node?.mediaItemUrl || ''} fill={true} sizes="100vw" style={{objectFit: "contain"}} alt=""
+                  onLoad={()=>{
+                    setIsLoading(false)
+                  }} />
+                }
+              </div>
             </div>
 
           case 'VR':
@@ -237,11 +241,12 @@ function HullDetail(props:TypeProps, ref:React.ReactNode){
           case 'Videos':
             return <div className="relative z-10 grow">
               <SwiperFullHeight
-        list={props.embedVideosGallery?.map((node)=>{
-          return {
-            embedUrl: convertYoutubeUrlToEmbed(node.embedUrl)
-          }
-        })} />
+              iframeRatio={1.78}
+              list={props.embedVideosGallery?.map((node)=>{
+                return {
+                  embedUrl: convertYoutubeUrlToEmbed(node.embedUrl)
+                }
+              })} />
             </div>
         }
       }())}

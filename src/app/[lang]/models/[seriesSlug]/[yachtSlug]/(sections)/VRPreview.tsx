@@ -93,7 +93,7 @@ function VRPreview(props:TypeProps, ref:React.ReactNode){
         </div>
       </RatioArea>
 
-      <div className="container pb-20 pt-6 text-center">
+      <div className="container pb-20 pt-3 text-center lg:pt-6">
         <div className="btn-text text-gray-700"
         onClick={()=>{
           scrollTo('#SECTION_HULLS', -10)

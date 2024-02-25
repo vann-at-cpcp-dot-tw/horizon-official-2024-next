@@ -79,7 +79,8 @@ query QueryBrokerages(
   $yachtConditionsOperator: TaxQueryOperator = NOT_IN
   $yachtYear: String = ""
   $yachtPriceRange: String = "",
-  $yachtLengthRange: String = ""
+  $yachtLengthRange: String = "",
+  $customOrderby: String = "",
 ) {
   posts:brokerages(
     first: $first,
@@ -97,6 +98,7 @@ query QueryBrokerages(
       yachtYear: $yachtYear,
       yachtLengthRange: $yachtLengthRange,
       yachtPriceRange: $yachtPriceRange,
+      customOrderby: $customOrderby,
     }
   ) {
     nodes {

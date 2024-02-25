@@ -1,14 +1,9 @@
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
-// import { Suspense } from 'react'
-// import { useRouter } from 'next/navigation'
-// import { useStore } from '@src/store'
-// import useWindowSize from "@src/hooks/useWindowSize"
 import LinkWithLang from "@src/components/custom/LinkWithLang"
 import { isEmpty, convertYoutubeUrlToEmbed } from '@src/lib/helpers'
 import { fetchGQL } from "@src/lib/apollo"
 import { QuerySingleYachtPage } from '@src/queries/pages/models-[seriesSlug]-[yachtSlug].gql'
-import { QuerySinglePublication } from '@src/queries/categories/publication.gql'
 import { notFound } from "next/navigation"
 import Breadcrumb from "@src/components/custom/Breadcrumb"
 import SectionNav from "./(templates)/SectionNav"
@@ -47,23 +42,14 @@ async function PageSingleYacht(props:TypeProps, ref:React.ReactNode){
   const data = await fetchGQL(QuerySingleYachtPage, {
     variables: {
       slug: yachtSlug,
-      yachtSlugForRelatedPost: yachtSlug // 因為線上不明原因，不認 ID! 這個 type，故再加傳一次 String
+      yachtSlugForRelatedPost: yachtSlug, // 因為線上不明原因，不認 ID! 這個 type，故再加傳一次 String
+      language: lang.toUpperCase()
     }
   })
 
-  const { relatedPublicationSlug } = data?.yacht?.yachtCustomFields ?? {}
-
-  const publicationData = relatedPublicationSlug
-    ? await fetchGQL(QuerySinglePublication, {
-      variables: {
-        slug: relatedPublicationSlug
-      }
-    })
-    : null
-
+  const { relatedPublication } = data?.yacht?.yachtCustomFields ?? {}
   const { title:yachtTitle, yachtSeriesList, yachtCustomFields } = data?.yacht ?? {}
   const { heroVideo, heroImage, yachtDescription, exteriorImages, interiorImages, specsTable, generalArrangementImages, vrPreview, videosPreview, embedVideosGallery, hulls } = yachtCustomFields ?? {}
-  const { publication } = publicationData ?? {}
   const parentSeries = yachtSeriesList?.nodes?.[0]
 
   const vrGallery = hulls?.reduce((acc:{hullName?:string, vrEmbedUrl?:string}[], node:{hullName?:string, vrEmbedUrl?:string})=>{
@@ -146,14 +132,12 @@ async function PageSingleYacht(props:TypeProps, ref:React.ReactNode){
       <Hulls yachtName={yachtTitle} list={hulls}/>
     </div>
 
-    <Publication {...publication} />
+    <Publication {...(relatedPublication?.nodes?.[0] || {})} />
 
     {
       data?.posts?.nodes && <div className="bg-gray-200 py-20">
-        <div className="container">
-          <div className="serif mb-4 text-center text-[24px] text-gray-900">NEWS</div>
-          <News className="pb-0 lg:pb-0" list={data?.posts?.nodes} lang={lang} />
-        </div>
+        <div className="serif mb-4 text-center text-[24px] text-gray-900">NEWS</div>
+        <News className="pb-0 lg:pb-0" list={data?.posts?.nodes} lang={lang} />
       </div>
     }
 

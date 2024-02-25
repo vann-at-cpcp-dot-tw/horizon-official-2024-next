@@ -60,7 +60,7 @@ function GAGallery(props:TypeProps, ref:React.ReactNode){
 
   return <Suspense fallback={null}>
     <div className={twMerge('', className)}>
-      <div className="bg-gray-200 py-12 lg:py-24">
+      <div className="bg-gray-200 py-12 pb-16 lg:py-24">
 
         <GAGalleryNav
         gaTypes={props?.list?.map((node)=>node.type)}

@@ -11,8 +11,6 @@ import { useStore } from '@src/store'
 import useWindowSize from "@src/hooks/useWindowSize"
 import { usePathname } from "next/navigation"
 import { isEmpty, pathnameWithLang } from '@src/lib/helpers'
-import { useQuery } from "@apollo/client"
-import { QueryMenu } from '@src/queries/components/menu.gql'
 import { motion, AnimatePresence } from "framer-motion"
 import MenuScreen from "./MenuScreen"
 import Portal from "@src/components/custom/Portal"
@@ -51,7 +49,17 @@ interface TypeMenus {
   }
 }
 interface TypeMenuSeriesNode {
-  slug: string
+  series: {
+    nodes?: {
+        translation?: {
+          slug: string
+          name: string
+          yachtsSeriesCustomFields: {
+            seriesSimpleDescription: string
+          }
+        }
+    }[]
+  }
   image: {
     node: {
       srcSet: string
@@ -64,7 +72,14 @@ interface TypeMenuSeriesNode {
     } | null
   }
   yachts: {
-    slug: string
+    yacht: {
+      nodes?: {
+        translation?: {
+          slug: string
+          title: string
+        }
+      }[]
+    }
     image: {
       node: {
         srcSet: string
@@ -88,18 +103,11 @@ function MainMenu(props:TypeProps, ref:React.ReactNode){
   const { lang } = params
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const commonData = useContext(CommonDataContext)
-  const { yachtSeriesList:allSeries } = commonData
   const { menuItemImages, series:menuSeries } = commonData?.globalSettings?.mainMenu
   const [menuScreen, setMenuScreen] = useReducer((state:{key:string, seriesSlug?:string, yachtSlug?:string}, updateState:{})=>({...state, ...updateState}), {
     key: 'main',
     seriesSlug: '',
     yachtSlug: '',
-  })
-
-  const { data:yachtsBySeriesSlug } = useQuery<{yachtSeries?:{[key:string]:any}}>(QueryMenu, {
-    variables: {
-      slug: menuScreen.seriesSlug
-    }
   })
 
   const menus = useMemo<TypeMenus>(()=>{
@@ -228,22 +236,19 @@ function MainMenu(props:TypeProps, ref:React.ReactNode){
           image: menuItemImages.models?.image?.node?.mediaItemUrl,
           video: menuItemImages.models?.video?.node?.mediaItemUrl,
         },
-        list: menuSeries.map((menuSeriesNode:TypeMenuSeriesNode)=>{
-          const seriesData = allSeries?.nodes?.find((seriesNode:{slug:string, name:string})=>seriesNode.slug === menuSeriesNode.slug)
+        list: menuSeries.map((seriesNode:TypeMenuSeriesNode)=>{
 
-          if( !seriesData ){
-            return null
-          }
-
+          const seriesData = seriesNode?.series?.nodes?.[0]?.translation
           let children
-          if(  Array.isArray(menuSeriesNode?.yachts) ){
-            children = menuSeriesNode?.yachts.map((menuChildNode)=>{
-              const yachtData = yachtsBySeriesSlug?.yachtSeries?.yachts?.nodes?.find?.((childNode:{slug:string})=>childNode.slug === menuChildNode.slug)
+
+          if(  Array.isArray(seriesNode?.yachts) ){
+            children = seriesNode?.yachts.map((menuChildNode)=>{
+              const yachtData = menuChildNode?.yacht?.nodes?.[0]?.translation
               const spec = yachtData?.yachtCustomFields?.specsTable?.[0]?.specTerms
               return {
-                key: menuChildNode.slug,
+                key: yachtData?.slug,
                 label: yachtData?.title,
-                slug: menuChildNode.slug,
+                slug: yachtData?.slug,
                 vision: {
                   image: menuChildNode?.image?.node?.mediaItemUrl,
                   video: menuChildNode?.video?.node?.mediaItemUrl,
@@ -256,24 +261,23 @@ function MainMenu(props:TypeProps, ref:React.ReactNode){
                   viewport.width && viewport.width >= 992
                     ? setMenuScreen({
                       key: 'models',
-                      seriesSlug: seriesData.slug,
-                      yachtSlug: menuChildNode.slug,
+                      seriesSlug: seriesData?.slug,
+                      yachtSlug: yachtData?.slug,
                     })
-                    : router.push(pathnameWithLang(`/models/${seriesData.slug}/${menuChildNode.slug}`, lang), {scroll:false})
+                    : router.push(pathnameWithLang(`/models/${seriesData?.slug}/${menuChildNode.slug}`, lang), {scroll:false})
                 }
               }
             })
           }
 
           return {
-            key: seriesData.slug,
+            key: seriesData?.slug,
             label: `${seriesData?.name} Series`,
-            slug: seriesData.slug,
+            slug: seriesData?.slug,
             vision: {
-              image: menuSeriesNode.image?.node?.mediaItemUrl,
-              video: menuSeriesNode.video?.node?.mediaItemUrl,
+              image: seriesNode.image?.node?.mediaItemUrl,
+              video: seriesNode.video?.node?.mediaItemUrl,
               content: {
-
                 title: `${seriesData?.name} Series`,
                 subtitle: seriesData?.yachtsSeriesCustomFields?.seriesSimpleDescription,
               }
@@ -282,7 +286,7 @@ function MainMenu(props:TypeProps, ref:React.ReactNode){
             onClick: ()=>{
               setMenuScreen({
                 key: 'models',
-                seriesSlug: seriesData.slug,
+                seriesSlug: seriesData?.slug,
                 yachtSlug: '',
               })
             }
@@ -290,7 +294,7 @@ function MainMenu(props:TypeProps, ref:React.ReactNode){
         })
       },
     }
-  }, [menuSeries, allSeries, yachtsBySeriesSlug, viewport.width])
+  }, [menuSeries, viewport.width])
 
   useEffect(()=>{
     if( isMenuOpen ){

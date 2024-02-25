@@ -13,17 +13,19 @@ import NewsListItem from "./ListItem"
 
 interface TypeProps {
   list: {
-    slug: string
-    title: string
-    date: string
-    postCustomFields: {
-      gallery?: {
-        image?: {
-          node?: {
-            mediaItemUrl: string
+    translation?: {
+      slug: string
+      title: string
+      date: string
+      postCustomFields: {
+        gallery?: {
+          image?: {
+            node?: {
+              mediaItemUrl: string
+            }
           }
-        }
-      }[]
+        }[]
+      }
     }
   }[]
   [key:string]: any
@@ -45,12 +47,16 @@ function EventSmallList(props:TypeProps, ref:React.ReactNode){
         <div className="row">
           {
             props.list?.map?.((node, index)=>{
+              if( !node?.translation?.slug ){
+                return null
+              }
+
               return <div className="lg:col-4 col-12 mb-10" key={index}>
                 <NewsListItem
-                title={node.title}
-                date={node.date}
-                href={`/news/events/${node.slug}`}
-                thumbnail={node?.postCustomFields?.gallery?.[0]?.image?.node?.mediaItemUrl || ''}
+                title={node.translation.title}
+                date={node.translation.date}
+                href={`/news/events/${node.translation.slug}`}
+                thumbnail={node.translation?.postCustomFields?.gallery?.[0]?.image?.node?.mediaItemUrl || ''}
                 categories={[
                   {
                     name: 'Events',

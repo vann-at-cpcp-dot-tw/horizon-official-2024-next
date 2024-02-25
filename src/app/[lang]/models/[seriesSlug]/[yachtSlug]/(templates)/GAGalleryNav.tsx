@@ -28,7 +28,7 @@ function GAGalleryNav(props:TypeProps, ref:React.ReactNode){
   const { className } = props
 
   return <Suspense fallback={null}>
-    <div className={twMerge('lg:mb-8 mb-4', className)}>
+    <div className={twMerge('lg:mb-8 mb-6', className)}>
 
       <div className="container serif mb-0 text-center text-[24px] text-gray-900 lg:mb-2">General Arrangement</div>
 

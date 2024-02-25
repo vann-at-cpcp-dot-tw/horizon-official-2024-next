@@ -1,6 +1,10 @@
 #import '../fragments/yacht.gql'
 
-query QuerySingleYachtPage($slug:ID!, $yachtSlugForRelatedPost:String) {
+query QuerySingleYachtPage(
+  $slug: ID!,
+  $yachtSlugForRelatedPost: String,
+  $language: LanguageCodeFilterEnum,
+){
   yacht(id:$slug, idType: SLUG) {
     ...yachtBasic
     yachtSeriesList {
@@ -11,7 +15,7 @@ query QuerySingleYachtPage($slug:ID!, $yachtSlugForRelatedPost:String) {
     }
     yachtCustomFields {
       yachtDescription
-      relatedPublicationSlug
+      ...yachtRelatedPublications
       ...yachtHeroVideo
       ...yachtHeroImage
       ...yachtExteriorImages
@@ -27,18 +31,20 @@ query QuerySingleYachtPage($slug:ID!, $yachtSlugForRelatedPost:String) {
   posts(
     first: 3,
     where: {
+      language: $language
       relatedYacht: $yachtSlugForRelatedPost,
-      taxQuery: {
-        relation: AND,
-        taxArray: [
-          {
-            taxonomy: CATEGORY,
-            field: SLUG,
-            terms: ["uncategorized"]
-            operator: NOT_IN,
-          },
-        ]
-      }
+      # 無論是否有分類皆撈取
+      # taxQuery: {
+      #   relation: AND,
+      #   taxArray: [
+      #     {
+      #       taxonomy: CATEGORY,
+      #       field: SLUG,
+      #       terms: ["uncategorized"]
+      #       operator: NOT_IN,
+      #     },
+      #   ]
+      # }
   }) {
     nodes {
       slug

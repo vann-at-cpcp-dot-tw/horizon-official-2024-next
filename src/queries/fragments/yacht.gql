@@ -97,6 +97,29 @@ fragment yachtEmbedVideosGallery on YachtCustomFields {
   }
 }
 
+fragment yachtRelatedPublications on YachtCustomFields {
+  relatedPublication {
+    nodes {
+      ... on Publication {
+        title
+        publicationCustomFields {
+          publication {
+            publicationCover {
+              node {
+                mediaItemUrl
+              }
+            }
+            pdf {
+              node {
+                mediaItemUrl
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
 
 fragment yachtSpecTerms on YachtCustomFieldsSpecsTableSpecTerms {
   loa {

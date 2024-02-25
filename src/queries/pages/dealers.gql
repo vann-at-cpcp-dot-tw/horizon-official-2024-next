@@ -24,3 +24,25 @@ query QueryDealersWithRegion {
     }
   }
 }
+
+query QuerySingleDealer(
+  $language: LanguageCodeFilterEnum = EN
+) {
+  dealers(
+    first: 1,
+    where: {
+      language: $language
+    }
+  ) {
+    nodes {
+      title
+      slug
+      dealerCustomFields {
+        contactNumber
+        contactEmail
+        address
+        website
+      }
+    }
+  }
+}

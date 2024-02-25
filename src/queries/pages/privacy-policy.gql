@@ -1,5 +1,9 @@
-query QueryPolicyPage {
-  globalSettings {
+query QueryPolicyPage(
+  $language: LanguageCodeFilterEnum = EN
+){
+  globalSettings(
+    language: $language
+  ){
     additionalContent {
       privacyPolicy {
         content

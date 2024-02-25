@@ -18,7 +18,7 @@ interface TypeProps {
       slug: string
       name: string
       publications: {
-        nodes: {
+        nodes?: {
           slug: string
           title: string
         }[]
@@ -31,8 +31,6 @@ interface TypeState {}
 
 function PageTop(props:TypeProps, ref:React.ReactNode){
   const store = useStore()
-  // const router = useRouter()
-  // const viewport = useWindowSize()
   const { className } = props
   const params = useParams()
   const { lang, publicationCategorySlug }  = params
@@ -52,7 +50,7 @@ function PageTop(props:TypeProps, ref:React.ReactNode){
             <LinkWithLang href="/publications" lang={lang} className={`btn ${!publicationCategorySlug ?'text-gray-900' :'text-gray-300'}`}>All</LinkWithLang>
           </div>
           {
-            props?.publicationCategories?.nodes?.map((node:{slug:string, name:string}, index:number)=>{
+            props?.publicationCategories?.nodes?.map((node, index:number)=>{
               return <div className="col-auto" key={index}>
                 <LinkWithLang href={`/publications/${node.slug}`} lang={lang} className={`btn ${publicationCategorySlug === node.slug ?'text-gray-900' :'text-gray-300'}`}>{ node.name }</LinkWithLang>
               </div>

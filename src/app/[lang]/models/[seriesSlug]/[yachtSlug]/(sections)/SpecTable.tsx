@@ -35,7 +35,7 @@ function SpecTableSection(props:TypeProps, ref:React.ReactNode){
 
   return <Suspense fallback={null}>
 
-    <div className={twMerge('lg:py-20 py-10', className)}
+    <div className={twMerge('lg:py-20 py-10 pb-16', className)}
     style={{
       background: 'rgba(238, 235, 230, 1)'
     }}>

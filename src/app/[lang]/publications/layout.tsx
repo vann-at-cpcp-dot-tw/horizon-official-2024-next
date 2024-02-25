@@ -14,16 +14,18 @@ export interface TypePublicationNode {
   slug: string
   title: string
   publicationCustomFields: {
-    album: {
-      image?: {
+    publication: {
+      publicationCover: {
         node?: {
-          mediaItemUrl: string
+          mediaItemUrl?: string
         }
       }
-    }[]
-    relatedYachts?: {
-      seriesSlug: string
-    }[]
+      pdf: {
+        node?: {
+          mediaItemUrl?: string
+        }
+      }
+    }
   }
 }
 
@@ -63,7 +65,6 @@ async function LayoutPublications({params, children}:TypeProps){
   const data = await fetchGQL(QueryPublicationsPage)
   const { publicationCategories } = data ?? {}
   params.data = data
-
   return <main
   className="grow"
   style={{
