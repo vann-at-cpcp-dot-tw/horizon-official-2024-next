@@ -264,7 +264,7 @@ function MainMenu(props:TypeProps, ref:React.ReactNode){
                       seriesSlug: seriesData?.slug,
                       yachtSlug: yachtData?.slug,
                     })
-                    : router.push(pathnameWithLang(`/models/${seriesData?.slug}/${menuChildNode.slug}`, lang), {scroll:false})
+                    : router.push(pathnameWithLang(`/models/${seriesData?.slug}/${yachtData.slug}`, lang), {scroll:false})
                 }
               }
             })
