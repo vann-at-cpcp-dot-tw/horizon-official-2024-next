@@ -138,6 +138,8 @@ p
       width: 52.7vw
       padding: 0px 20px
       transition: all .8s cubic-bezier(0.215, 0.610, 0.355, 1.000)
+      filter: grayscale(100)
+      opacity: 0.5
       @media(max-width: 991px)
         // width: 75vw
         width: calc(100vw - 64px)
@@ -156,6 +158,8 @@ p
     &-active
       .slide-inner
         width: 52.7vw
+        filter: grayscale(0)
+        opacity: 1
         @media(max-width: 991px)
           // width: 100vw
           width: calc(100vw - 64px)

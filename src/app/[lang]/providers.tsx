@@ -10,6 +10,13 @@ const DOMLoader = dynamic(() => import('@src/components/custom/dynamic/DOMLoader
 import { ApolloLink, HttpLink } from "@apollo/client"
 import { ApolloNextAppProvider, NextSSRInMemoryCache, NextSSRApolloClient, SSRMultipartLink } from "@apollo/experimental-nextjs-app-support/ssr"
 
+import '@src/styles/main.sass'
+import 'swiper/css'
+import 'swiper/css/autoplay'
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
+import 'swiper/css/scrollbar'
+
 function makeClient() {
   const httpLink = new HttpLink({
     uri: API_URL,

@@ -49,7 +49,7 @@ function ListItem(props:TypeProps, ref:React.ReactNode){
   return <Suspense fallback={null}>
     <div className={twMerge('', className)}>
       <RatioArea className="group mb-2" ratio="56.25">
-        <div className="pointer-events-none absolute left-0 top-0 z-10 flex size-full cursor-pointer items-center justify-center opacity-0 group-hover:opacity-100"
+        <div className="pointer-events-none absolute left-0 top-0 z-10 flex size-full cursor-pointer items-center justify-center opacity-0 group-hover:opacity-100 group-active:opacity-100"
         style={{
           background: 'rgba(0, 46, 79, 0.5)',
           transition: 'all .4s'
@@ -62,7 +62,7 @@ function ListItem(props:TypeProps, ref:React.ReactNode){
         className="absolute left-0 top-0 z-0 size-full overflow-hidden"
         href={props.href}
         lang={lang}>
-          <Image className="pointer-events-none absolute z-0 size-full object-cover group-hover:scale-[1.2]"
+          <Image className="pointer-events-none absolute z-0 size-full object-cover group-hover:scale-[1.2] group-active:scale-[1.2]"
           src={props?.thumbnail} fill={true} sizes="540px" alt=""
           style={{
             transition: 'all 1.6s cubic-bezier(0.215, 0.610, 0.355, 1.000)'

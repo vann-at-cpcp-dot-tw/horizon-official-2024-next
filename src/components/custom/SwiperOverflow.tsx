@@ -73,7 +73,7 @@ function SwiperOverflow(props:TypeProps, ref:React.ReactNode){
               return <SwiperSlide key={index}>
                 <RatioArea className="group" ratio="56.25">
                   {
-                    node?.link && <div className="pointer-events-none absolute left-0 top-0 z-10 flex size-full items-center justify-center opacity-0 group-hover:opacity-100"
+                    node?.link && <div className="pointer-events-none absolute left-0 top-0 z-10 flex size-full items-center justify-center opacity-0 group-hover:opacity-100 group-active:opacity-100"
                     style={{
                       background: 'rgba(0, 46, 79, 0.5)',
                       transition: 'all .4s'

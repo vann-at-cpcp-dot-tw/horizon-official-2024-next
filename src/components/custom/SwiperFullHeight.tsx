@@ -71,11 +71,11 @@ function SwiperFullHeight(props:TypeProps, ref:React.ReactNode){
 
       <div className="flex grow !flex-nowrap overflow-hidden p-5 lg:px-10">
         <div className="hidden flex-none items-center lg:flex">
-          <div className={`btn group flex size-8 items-center justify-center rounded-full border border-gray-900 hover:border-golden-900 hover:bg-golden-900 lg:size-12 ${swiper.isBeginning ?'disabled opacity-50' :''}`}
+          <div className={`btn group flex size-8 items-center justify-center rounded-full border border-gray-900 hover:border-golden-900 hover:bg-golden-900 active:border-golden-900 active:bg-golden-900 lg:size-12 ${swiper.isBeginning ?'disabled opacity-50' :''}`}
               onClick={()=>{
                 swiper.slidePrev()
               }}>
-            <Image className="grayscale group-hover:brightness-[1000]" src={`${BASE_PATH}/assets/img/icon_menu_back.svg`} width={48} height={48} alt="" />
+            <Image className="grayscale group-hover:brightness-[1000] group-active:brightness-[1000]" src={`${BASE_PATH}/assets/img/icon_menu_back.svg`} width={48} height={48} alt="" />
           </div>
         </div>
 
@@ -119,11 +119,11 @@ function SwiperFullHeight(props:TypeProps, ref:React.ReactNode){
         </div>
 
         <div className="hidden flex-none items-center lg:flex">
-          <div className={`btn group flex size-8 items-center justify-center rounded-full border border-gray-900 hover:border-golden-900 hover:bg-golden-900 lg:size-12 ${swiper.isEnd ?'disabled opacity-50' :''}`}
+          <div className={`btn group flex size-8 items-center justify-center rounded-full border border-gray-900 hover:border-golden-900 hover:bg-golden-900 active:border-golden-900 active:bg-golden-900 lg:size-12 ${swiper.isEnd ?'disabled opacity-50' :''}`}
               onClick={()=>{
                 swiper.slideNext()
               }}>
-            <Image className="grayscale group-hover:brightness-[1000]" src={`${BASE_PATH}/assets/img/icon_menu_back.svg`} width={48} height={48} alt=""
+            <Image className="grayscale group-hover:brightness-[1000] group-active:brightness-[1000]" src={`${BASE_PATH}/assets/img/icon_menu_back.svg`} width={48} height={48} alt=""
                 style={{
                   transform: 'rotate(180deg)'
                 }}/>
@@ -134,20 +134,20 @@ function SwiperFullHeight(props:TypeProps, ref:React.ReactNode){
       <div className="pb-5 lg:pb-10">
         <div className="flex justify-center lg:hidden">
           <div className="mx-2 flex flex-none items-center">
-            <div className={`btn group flex size-9 items-center justify-center rounded-full border border-gray-900 hover:border-golden-900 hover:bg-golden-900 lg:size-12 ${swiper.isBeginning ?'disabled opacity-50' :''}`}
+            <div className={`btn group flex size-9 items-center justify-center rounded-full border border-gray-900 hover:border-golden-900 hover:bg-golden-900 active:border-golden-900 active:bg-golden-900 lg:size-12 ${swiper.isBeginning ?'disabled opacity-50' :''}`}
               onClick={()=>{
                 swiper.slidePrev()
               }}>
-              <Image className="grayscale group-hover:brightness-[1000]" src={`${BASE_PATH}/assets/img/icon_menu_back.svg`} width={48} height={48} alt="" />
+              <Image className="grayscale group-hover:brightness-[1000] group-active:brightness-[1000]" src={`${BASE_PATH}/assets/img/icon_menu_back.svg`} width={48} height={48} alt="" />
             </div>
           </div>
 
           <div className="mx-2 flex flex-none items-center">
-            <div className={`btn group flex size-9 items-center justify-center rounded-full border border-gray-900 hover:border-golden-900 hover:bg-golden-900 lg:size-12 ${swiper.isEnd ?'disabled opacity-50' :''}`}
+            <div className={`btn group flex size-9 items-center justify-center rounded-full border border-gray-900 hover:border-golden-900 hover:bg-golden-900 active:border-golden-900 active:bg-golden-900 lg:size-12 ${swiper.isEnd ?'disabled opacity-50' :''}`}
               onClick={()=>{
                 swiper.slideNext()
               }}>
-              <Image className="grayscale group-hover:brightness-[1000]" src={`${BASE_PATH}/assets/img/icon_menu_back.svg`} width={48} height={48} alt=""
+              <Image className="grayscale group-hover:brightness-[1000] group-active:brightness-[1000]" src={`${BASE_PATH}/assets/img/icon_menu_back.svg`} width={48} height={48} alt=""
                 style={{
                   transform: 'rotate(180deg)'
                 }}/>

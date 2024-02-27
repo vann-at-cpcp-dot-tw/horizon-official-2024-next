@@ -1,6 +1,6 @@
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 import '@root/public/import.css'
-import '@src/styles/main.sass'
+
 import { isEmpty } from '@src/lib/helpers'
 import { fetchGQL } from "@root/src/lib/apollo"
 import { QueryCommonData } from '@src/queries/categories/commonData.gql'
@@ -10,11 +10,7 @@ import Providers from './providers'
 import PageTransition from "@src/components/custom/PageTransition"
 import CookiePolicy from "@src/components/custom/CookiePolicy"
 
-import 'swiper/css'
-import 'swiper/css/autoplay'
-import 'swiper/css/navigation'
-import 'swiper/css/pagination'
-import 'swiper/css/scrollbar'
+
 
 
 export const metadata = {

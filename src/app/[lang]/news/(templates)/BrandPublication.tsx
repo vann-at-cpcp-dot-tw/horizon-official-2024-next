@@ -81,7 +81,7 @@ function BrandPublication(props:TypeProps, ref:React.ReactNode){
                 </div>
                 {
                   subscriptionInputFocus && <div className="col-auto">
-                    <Button type="submit" className="rounded-none border border-gray-500 bg-transparent text-gray-500 hover:border-golden-700 hover:bg-golden-700 hover:text-white">SUBMIT</Button>
+                    <Button type="submit" className="rounded-none border border-gray-500 bg-transparent text-gray-500 hover:border-golden-700 hover:bg-golden-700 hover:text-white active:border-golden-700 active:bg-golden-700 active:text-white">SUBMIT</Button>
                   </div>
                 }
               </form>

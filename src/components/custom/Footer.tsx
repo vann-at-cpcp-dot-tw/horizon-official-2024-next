@@ -54,7 +54,7 @@ function Footer(props:TypeProps, ref:React.ReactNode){
           </div>
           {
             subscriptionInputFocus && <div className="col-auto">
-              <Button type="submit" className="rounded-none border border-golden-700 bg-major-900 text-golden-700 hover:bg-golden-700 hover:text-white">SUBMIT</Button>
+              <Button type="submit" className="rounded-none border border-golden-700 bg-major-900 text-golden-700 hover:bg-golden-700 hover:text-white active:bg-golden-700 active:text-white">SUBMIT</Button>
             </div>
           }
         </form>

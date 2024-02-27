@@ -87,7 +87,7 @@ function PostSwiper(props:TypeProps, ref:React.ReactNode){
                     onClick={()=>{
                       swiper.slideTo(index)
                     }}>
-                    <div className="absolute top-1/2 w-full -translate-y-1/2 group-hover:!h-[2px]"
+                    <div className="absolute top-1/2 w-full -translate-y-1/2 group-hover:!h-[2px] group-active:!h-[2px]"
                     style={{
                       background: realIndex === index ?'var(--color-golden-900)' :'var(--color-gray-300)',
                       height: realIndex === index ?'2px' :'1px',
