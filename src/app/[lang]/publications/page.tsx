@@ -24,7 +24,7 @@ async function PageAllPublications({params}:TypeProps){
 
   const { lang } = params
 
-  return <div className="pb-[120px]"
+  return <div className="pb-16 lg:pb-32"
   style={{
     background: '#EEEBE6',
   }}>

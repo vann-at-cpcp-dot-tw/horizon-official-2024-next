@@ -38,8 +38,8 @@ function QAList(props:TypeProps, ref:React.ReactNode){
           onClick={()=>{
             setActive(index)
           }}>
-            <div className="flex flex-nowrap items-center justify-between">
-              <div className="shrink font-900 text-gray-900">{node?.question}</div>
+            <div className="flex !flex-nowrap items-center">
+              <div className="w-full shrink font-900 text-gray-900">{node?.question}</div>
               <div className="flex flex-none items-center justify-center pl-5">
                 {
                   active === index

@@ -13,6 +13,7 @@ import ListNewsPage from "./(templates)/ListNewsPage"
 import ListNewsPageEvent from "./(templates)/ListNewsPageEvent"
 import BrandPublication from "./(templates)/BrandPublication"
 import OwnerPerspective from "./(templates)/OwnerPerspective"
+import { genImageBlurHash } from "@src/lib/genImageBlurHash"
 
 interface TypeProps {
   params: {
@@ -35,6 +36,10 @@ async function PageNews({params, searchParams}:TypeProps){
     }
   })
 
+  const publicationCover = data.publicationCategory?.publications?.nodes?.[0]?.translation?.publicationCustomFields?.publication?.publicationCover?.node?.mediaItemUrl || ''
+  const publicationPdf = data.publicationCategory?.publications?.nodes?.[0]?.translation?.publicationCustomFields?.publication?.pdf?.node?.mediaItemUrl || ''
+  const publicationPlaceholder = await genImageBlurHash(publicationCover)
+
   return <main className="grow pb-5">
 
     {
@@ -56,8 +61,9 @@ async function PageNews({params, searchParams}:TypeProps){
     </div>
 
     <BrandPublication
-    publicationCover={data.publicationCategory?.publications?.nodes?.[0]?.translation?.publicationCustomFields?.publication?.publicationCover?.node?.mediaItemUrl}
-    pdf={data.publicationCategory?.publications?.nodes?.[0]?.translation?.publicationCustomFields?.publication?.pdf?.node?.mediaItemUrl} />
+    publicationCover={publicationCover}
+    placeholder={publicationPlaceholder}
+    pdf={publicationPdf} />
 
     <OwnerPerspective image={data.newsPageSettings.ownerPerspective.image?.node?.mediaItemUrl} description={data.newsPageSettings.ownerPerspective?.description} />
   </main>

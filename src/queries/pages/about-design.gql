@@ -1,5 +1,9 @@
-query QueryPageAboutDesignAndCraft {
-  aboutDesignAndCraft {
+query QueryPageAboutDesignAndCraft(
+  $language: LanguageCodeFilterEnum = EN
+){
+  aboutDesignAndCraft(
+    language: $language
+  ) {
     aboutDesignCustomFields {
       featuredVideo {
         node {
@@ -17,6 +21,7 @@ query QueryPageAboutDesignAndCraft {
           }
         }
         content
+        designPartnersTitle
         designPartners {
           title
           subtitle

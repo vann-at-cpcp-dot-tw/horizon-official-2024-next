@@ -95,7 +95,9 @@ function ContentLightbox(props:TypeProps, ref:React.ReactNode){
         </div>
 
         <div className="relative flex grow flex-col">
-          { props?.children }
+          <div className="pt-6 lg:pt-12">
+            { props?.children }
+          </div>
         </div>
       </div>
     </motion.div>

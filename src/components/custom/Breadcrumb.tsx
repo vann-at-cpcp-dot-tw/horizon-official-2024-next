@@ -9,10 +9,6 @@ import { twMerge } from 'tailwind-merge'
 import { isEmpty } from '@src/lib/helpers'
 import { useParams } from "next/navigation"
 
-// import { useRouter } from 'next/navigation'
-// import { useStore } from '@src/store'
-// import useWindowSize from "@src/hooks/useWindowSize"
-
 interface TypeProps {
   list: {
     label: string
@@ -23,9 +19,7 @@ interface TypeProps {
 interface TypeState {}
 
 function Breadcrumb(props:TypeProps, ref:React.ReactNode){
-  // const store = useStore()
-  // const router = useRouter()
-  // const viewport = useWindowSize()
+
   const { lang } = useParams()
   const { className } = props
 
@@ -35,7 +29,7 @@ function Breadcrumb(props:TypeProps, ref:React.ReactNode){
         <div className="row row-gap-0">
           {
             props?.list?.map?.((node, index)=>{
-              return <div className="col-auto flex" key={index}>
+              return <div className="col-auto flex max-w-full" key={index}>
                 {
                   node?.href
                     ? <LinkWithLang className="text-major-900" href={node.href} lang={lang}>{node.label}</LinkWithLang>

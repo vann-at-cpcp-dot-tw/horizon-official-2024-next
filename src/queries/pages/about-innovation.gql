@@ -1,5 +1,9 @@
-query QueryPageAboutInnovation {
-  aboutInnovation {
+query QueryPageAboutInnovation(
+  $language: LanguageCodeFilterEnum = EN
+) {
+  aboutInnovation(
+    language: $language
+  ) {
     aboutInnovationCustomFields {
       featuredVideo {
         node {

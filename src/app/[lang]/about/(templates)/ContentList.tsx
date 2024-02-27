@@ -28,7 +28,8 @@ interface TypeProps {
       }
     }
     content: string
-    designPartners: {
+    designPartnersTitle?: string
+    designPartners?: {
       title: string
       subtitle: string
       description: string
@@ -140,14 +141,18 @@ function ContentList(props:TypeProps, ref:React.ReactNode){
                     </div>
                   </div>
 
-                  <div className="container"
+                  <div className="container pt-10 lg:pt-20"
                   style={{
                     maxWidth: '1240px',
                   }}>
+                    {
+                      node?.designPartnersTitle && <div className="mb-6 text-center text-golden-900 lg:mb-8">{node?.designPartnersTitle}</div>
+                    }
+
                     <div className="row xl:row-gap-8 justify-center">
                       {
                         node?.designPartners?.map((designerNode, designerIndex)=>{
-                          return <div className="lg:col-3 col-6" key={designerIndex}>
+                          return <div className="lg:col-3 col-6 mb-5" key={designerIndex}>
                             <RatioArea className="mb-3" ratio="114.28">
                               <Image className="absolute left-0 top-0 size-full"
                               src={designerNode?.image?.node?.mediaItemUrl || ''}

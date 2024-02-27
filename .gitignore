@@ -19,6 +19,7 @@
 # misc
 .DS_Store
 *.pem
+certificates
 
 # debug
 npm-debug.log*
@@ -40,5 +41,3 @@ i18n.config.ts
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-
-certificates

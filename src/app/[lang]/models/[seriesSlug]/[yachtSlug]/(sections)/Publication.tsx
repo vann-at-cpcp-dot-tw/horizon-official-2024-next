@@ -1,12 +1,11 @@
-"use client"
-
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
-import { Suspense, useMemo, useState, useId } from 'react'
+import { Suspense } from 'react'
 import Image from "next/image"
 import LinkWithLang from "@src/components/custom/LinkWithLang"
 import { twMerge } from 'tailwind-merge'
 import { isEmpty } from '@src/lib/helpers'
+import { genImageBlurHash } from "@src/lib/genImageBlurHash"
 
 interface TypeProps {
   title: string
@@ -28,11 +27,10 @@ interface TypeProps {
 }
 interface TypeState {}
 
-function Publication(props:TypeProps, ref:React.ReactNode){
+async function Publication(props:TypeProps, ref:React.ReactNode){
   const { className } = props
-  const coverImage = useMemo(()=>{
-    return props?.publicationCustomFields?.publication?.publicationCover?.node?.mediaItemUrl
-  }, [props?.publicationCustomFields?.publication])
+  const coverImage = props?.publicationCustomFields?.publication?.publicationCover?.node?.mediaItemUrl || ''
+  const placeholder = await genImageBlurHash(coverImage)
 
   if( !props.title || !coverImage){
     return null
@@ -51,7 +49,13 @@ function Publication(props:TypeProps, ref:React.ReactNode){
               style={{
                 boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.5)'
               }}>
-                <Image src={coverImage} width={420} height={300} alt="" />
+                <Image
+                src={coverImage}
+                width={420}
+                height={300}
+                alt=""
+                placeholder={placeholder ?'blur' :'empty'}
+                blurDataURL={placeholder} />
               </a>
             </div>
           }

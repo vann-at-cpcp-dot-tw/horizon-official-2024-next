@@ -58,7 +58,7 @@ async function PageSinglePost({params}:TypeProps){
     ]} />
 
     <div className="container mb-6 mt-2 text-center lg:my-8">
-      <div className="serif text-center text-[28px] text-major-900 lg:text-[32px]">{ post?.title }</div>
+      <div className="serif mb-2 text-center text-[28px] leading-[1.4] text-major-900 lg:text-[32px]">{ post?.title }</div>
       <div className="text-[14px] text-gray-500">{ (post?.date || '').slice(0, 10).replaceAll('-', '.') }</div>
     </div>
 

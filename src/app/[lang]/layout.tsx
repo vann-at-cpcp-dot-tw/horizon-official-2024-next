@@ -15,10 +15,6 @@ import 'swiper/css/autoplay'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import 'swiper/css/scrollbar'
-import 'lightgallery/css/lightgallery-bundle.min.css'
-// import 'lightgallery/css/lightgallery.css'
-// import 'lightgallery/css/lg-zoom.css'
-// import 'lightgallery/css/lg-thumbnail.css'
 
 
 export const metadata = {

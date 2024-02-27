@@ -14,6 +14,7 @@ import { useParams } from "next/navigation"
 interface TypeProps {
   publicationCover: string
   pdf: string
+  placeholder?: string
   [key:string]: any
 }
 
@@ -40,7 +41,14 @@ function BrandPublication(props:TypeProps, ref:React.ReactNode){
                 style={{
                   boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.5)'
                 }}>
-                  <Image src={props.publicationCover} width={202} height={278} alt="" style={{height:'auto'}}/>
+                  <Image
+                  src={props.publicationCover}
+                  style={{height:'auto'}}
+                  width={202}
+                  height={278}
+                  placeholder={props.placeholder ?'blur' :'empty'}
+                  blurDataURL={props.placeholder}
+                  alt="" />
                 </a>
               </div>
               <div className="lg:col-6 col-12 mb-5 text-gray-500 lg:mb-0">

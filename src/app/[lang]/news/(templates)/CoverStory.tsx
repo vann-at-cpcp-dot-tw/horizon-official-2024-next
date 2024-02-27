@@ -40,7 +40,7 @@ function CoverStory(props:TypeProps, ref:React.ReactNode){
 
       <div className="relative z-10 flex justify-center">
         <div className="container">
-          <div className="mt-[-32px] bg-white px-2.5 py-4 lg:mt-[-64px] lg:px-5 lg:py-8">
+          <div className="mt-[-32px] bg-white p-5 lg:mt-[-64px] lg:py-8">
             <div className="text-center text-[14px] text-gray-300 lg:text-[17px]">Cover Story</div>
             <div className="serif text-center text-[28px] text-minor-900 lg:text-[43px]">
               <LinkWithLang href={`/news/cover-story/${props.slug}`} lang={props.lang}>{ props?.title }</LinkWithLang>

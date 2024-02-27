@@ -40,8 +40,8 @@ function Footer(props:TypeProps, ref:React.ReactNode){
 
   return <Suspense fallback={null}>
     <div className={twMerge('text-white relative bg-major-900', props?.className)} ref={footerRef}>
-      <div className="container-fluid mb-[70px] pt-20 lg:mb-[140px]">
-        <div className="serif mb-5 text-center text-[21px] font-300">BRAND PUBLICATION SUBSCRIPTION</div>
+      <div className="container-fluid mb-16 pt-20 lg:mb-32">
+        <div className="serif mb-2.5 text-center text-[21px] font-300 lg:mb-5">BRAND PUBLICATION <br className="block lg:hidden"/>SUBSCRIPTION</div>
         <form className="row row-gap-0 flex-nowrap items-end justify-center">
           <div className="col-12 shrink" style={{maxWidth:'220px'}}>
             <input className="serif h-[44px] w-full border-b border-golden-700 bg-transparent p-0 pb-2 text-center placeholder:text-gray-700" type="email" placeholder="Your email" required

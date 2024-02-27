@@ -1,5 +1,9 @@
-query QueryPageAboutHorizon {
-  aboutHorizon {
+query QueryPageAboutHorizon(
+  $language: LanguageCodeFilterEnum = EN
+) {
+  aboutHorizon(
+    language: $language
+  ) {
     aboutHorizonCustomFields {
       firstScreen {
         backgroundVideo {

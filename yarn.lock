@@ -490,11 +490,6 @@
   resolved "https://registry.npmjs.org/@types/normalize-package-data/-/normalize-package-data-2.4.4.tgz"
   integrity sha512-37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==
 
-"@types/nprogress@^0.2.2":
-  version "0.2.3"
-  resolved "https://registry.npmjs.org/@types/nprogress/-/nprogress-0.2.3.tgz"
-  integrity sha512-k7kRA033QNtC+gLc4VPlfnue58CM1iQLgn1IMAU8VPHGOj7oIHPp9UlhedEnD/Gl8evoCjwkZjlBORtZ3JByUA==
-
 "@types/prop-types@*":
   version "15.7.11"
   resolved "https://registry.npmjs.org/@types/prop-types/-/prop-types-15.7.11.tgz"
@@ -2420,11 +2415,6 @@ levn@^0.4.1:
     prelude-ls "^1.2.1"
     type-check "~0.4.0"
 
-lightgallery@^2.7.2:
-  version "2.7.2"
-  resolved "https://registry.npmjs.org/lightgallery/-/lightgallery-2.7.2.tgz"
-  integrity sha512-Ewdcg9UPDqV0HGZeD7wNE4uYejwH2u0fMo5VAr6GHzlPYlhItJvjhLTR0cL0V1HjhMsH39PAom9iv69ewitLWw==
-
 lilconfig@^2.1.0:
   version "2.1.0"
   resolved "https://registry.npmjs.org/lilconfig/-/lilconfig-2.1.0.tgz"
@@ -2665,15 +2655,6 @@ next@^14.1.0:
     "@next/swc-win32-arm64-msvc" "14.1.0"
     "@next/swc-win32-ia32-msvc" "14.1.0"
     "@next/swc-win32-x64-msvc" "14.1.0"
-
-nextjs-toploader@^1.6.4:
-  version "1.6.6"
-  resolved "https://registry.npmjs.org/nextjs-toploader/-/nextjs-toploader-1.6.6.tgz"
-  integrity sha512-LKow/aV28/DLhj4yH1E8ydF/I5QDNsb5NqlbsXBaIVFrmZ9/OGHyxPLdumvPE2IOYoQdvJ4XWoaCA1v7aivYBg==
-  dependencies:
-    "@types/nprogress" "^0.2.2"
-    nprogress "^0.2.0"
-    prop-types "^15.8.1"
 
 node-releases@^2.0.14:
   version "2.0.14"

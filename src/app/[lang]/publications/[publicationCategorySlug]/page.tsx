@@ -30,7 +30,7 @@ async function PagePublications({params}:TypeProps){
   })
   const { publicationCategory } = data ?? {}
 
-  return <div className="pb-[120px]"
+  return <div className="pb-16 lg:pb-32"
   style={{
     background: '#EEEBE6',
   }}>

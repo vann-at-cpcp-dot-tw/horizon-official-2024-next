@@ -1,5 +1,9 @@
-query QueryPageAboutTheGroup {
-  aboutTheGroup {
+query QueryPageAboutTheGroup(
+  $language: LanguageCodeFilterEnum = EN
+) {
+  aboutTheGroup(
+    language: $language
+  ) {
     aboutTheGroupCustomFields {
       atgpHeroImage {
         node {

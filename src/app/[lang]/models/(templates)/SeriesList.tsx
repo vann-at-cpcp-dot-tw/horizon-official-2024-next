@@ -7,6 +7,7 @@ import { fetchGQL } from "@src/lib/apollo"
 import { isEmpty } from '@src/lib/helpers'
 import RatioArea from "@src/components/custom/RatioArea"
 import LinkWithLang from "@src/components/custom/LinkWithLang"
+import { genImageBlurHash } from "@src/lib/genImageBlurHash"
 
 interface TypeProps {
   lang: string
@@ -21,21 +22,39 @@ async function SeriesList(props:TypeProps, ref:React.ReactNode){
 
   const data = await fetchGQL(QueryYachtsWithSeries)
   const { yachtSeriesList } = data ?? {}
+  const yachtSeriesListWithPlaceholder = await Promise.all(
+    yachtSeriesList?.nodes?.map?.(async (node:any) => {
+      return {
+        ...node,
+        image: node?.image?.node?.mediaItemUrl || '',
+        placeholder: await genImageBlurHash(node?.image?.node?.mediaItemUrl)
+      }
+    })
+  )
 
   return <Suspense fallback={null}>
     <div className="flex">
       {
-        yachtSeriesList?.nodes?.map((node:any, index:number)=>{
+        yachtSeriesListWithPlaceholder?.map((node:any, index:number)=>{
           return <div className="mb-10 w-full lg:w-1/2" key={index}>
 
             <RatioArea className="mb-4" ratio="63.47">
               <LinkWithLang className="absolute left-0 top-0 size-full" href={`/models/${node.slug}`} lang={props.lang}>
-                <Image className="absolute left-0 top-0 z-0 size-full object-cover" fill={true} src={node?.yachtsSeriesCustomFields?.seriesKeyImage?.node?.mediaItemUrl || ''} alt="" />
+                <Image className="absolute left-0 top-0 z-0 size-full object-cover"
+                fill={true}
+                src={node?.yachtsSeriesCustomFields?.seriesKeyImage?.node?.mediaItemUrl || ''}
+                alt=""
+                placeholder={node?.placeholder ?'blur' :'empty'}
+                blurDataURL={node?.placeholder} />
               </LinkWithLang>
             </RatioArea>
             <div className="px-5 lg:px-12">
               <div className="flex">
-                <LinkWithLang className="serif text-[24px] leading-none text-golden-900 lg:text-[32px]" href={`/models/${node.slug}`} lang={props.lang}>{node?.name}</LinkWithLang>
+                <LinkWithLang
+                className="serif text-[24px] leading-none text-golden-900 lg:text-[32px]"
+                href={`/models/${node.slug}`}
+                lang={props.lang}>{node?.name}
+                </LinkWithLang>
               </div>
 
               {

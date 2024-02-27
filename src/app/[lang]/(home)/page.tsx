@@ -10,8 +10,6 @@ import ImageAutoPlaceholder from "@root/src/components/custom/ImageAutoPlacehold
 const Intro = dynamic(() => import("./(sections)/Intro"), {ssr: false})
 const IntroAfterSeries = dynamic(() => import("./(sections)/IntroAfterSeries"), {ssr: false})
 
-import { genImageBlurHash } from "@root/src/lib/genImageBlurHash"
-
 export default async function PageHome({
   params
 }:{

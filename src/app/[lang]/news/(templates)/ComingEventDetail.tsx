@@ -230,13 +230,13 @@ function ComingEventDetail(props:TypeProps, ref:React.ReactNode){
     }}>
 
       <div className="container mb-10 text-center">
-        <div className="text-gray-500">Coming Event</div>
-        <div className="serif text-[40px] text-major-900">{props.title}</div>
+        <div className="mb-4 text-gray-500">Coming Event</div>
+        <div className="serif mb-2 text-[32px] leading-[1.2] text-major-900 lg:text-[40px]">{props.title}</div>
         <div className="mb-3 text-[14px] text-gray-900">{props.subtitle}</div>
         <div className="text-[14px] text-gray-500">{props.scheduleDate}</div>
       </div>
 
-      <div className="MCE-CONTENT mb-10">
+      <div className="MCE-CONTENT mb-8 lg:mb-16">
         <div className="container">
           <div className="mx-auto w-full max-w-[900px]" dangerouslySetInnerHTML={{__html:props?.content}}></div>
         </div>
@@ -244,16 +244,16 @@ function ComingEventDetail(props:TypeProps, ref:React.ReactNode){
 
       {
         !isEmpty(hullList) && <>
-          <div className="container serif mb-6 text-center text-[40px] italic text-major-900">ON DISPLAY</div>
-          <div className="container-fluid mb-[96px]">
+          <div className="container serif mb-3 text-center text-[32px] italic text-major-900 lg:mb-6 lg:text-[40px]">ON DISPLAY</div>
+          <div className="container-fluid mb-6 lg:mb-20">
             <div className="row justify-center">
               {
                 hullList.map((node, index)=>{
-                  return <div className="col-6 mb-5" key={index}>
+                  return <div className="lg:col-6 col-12 mb-10" key={index}>
                     <RatioArea className="mb-3" ratio="56.25">
                       <Image className="absolute left-0 top-0 size-full object-cover" fill={true} src={node.hull?.exteriorImages?.[0]?.image?.node?.mediaItemUrl || ''} sizes="50vw" alt="" />
                     </RatioArea>
-                    <div className="serif mb-4 text-center text-[24px] text-minor-900">{node.yachtName} <span className="text-[22px]">/</span> {node.hull?.hullName}</div>
+                    <div className="serif mb-2 text-center text-[21px] text-minor-900 lg:mb-4 lg:text-[24px]">{node.yachtName} <span className="text-[22px]">/</span> {node.hull?.hullName}</div>
                     <div className="flex justify-center">
                       <Button variant="outline" className={`${buttonStyles['rounded-outline']}`}
                         onClick={()=>{
@@ -271,8 +271,8 @@ function ComingEventDetail(props:TypeProps, ref:React.ReactNode){
       }
 
       <div className="container serif mb-10 text-center">
-        <div className="mb-5 text-[40px] italic leading-[1.18] text-minor-900">{ props?.contactTitle }</div>
-        <div className="text-[24px] text-gray-900">
+        <div className="mb-5 text-[32px] italic leading-[1.18] text-minor-900 lg:text-[40px]">{ props?.contactTitle }</div>
+        <div className="text-[21px] text-gray-900 lg:text-[24px]">
           <a href={`tel:${props.contactNumber?.replace?.(' ', '')?.replace?.('-', '')}`}>{ props.contactNumber }</a>
         </div>
         <div className="text-[24px] text-gray-900">
@@ -282,26 +282,26 @@ function ComingEventDetail(props:TypeProps, ref:React.ReactNode){
 
       <div className="container">
         <div className="relative mx-auto w-full max-w-[900px]">
-          <div className="serif text-[24px] italic text-major-900">Show Info</div>
+          <div className="serif text-[21px] italic text-major-900 lg:text-[24px]">Show Info</div>
           {
             props?.showInfoTable?.dateAndTimeRows?.map((node, index:number)=>{
               return <div className="border-b border-gray-500 py-3 text-gray-700" key={index}>
-                <div className="row flex-nowrap">
-                  <div className="col-auto">
-                    <div className="w-[190px]">{index === 0 ?'Date and Times' :''}</div>
+                <div className="row lg:flex-nowrap">
+                  <div className="col-12 lg:col-auto">
+                    <div className="serif w-full lg:w-[190px]">{index === 0 ?'Date and Times' :''}</div>
                   </div>
-                  <div className="col-12 shrink">{ node?.dateAndTimes }</div>
+                  <div className="col-12 shrink text-[15px]">{ node?.dateAndTimes }</div>
                 </div>
               </div>
             })
           }
           {
             props?.showInfoTable?.dockNumber && <div className="border-b border-gray-500 py-3 text-gray-700">
-              <div className="row flex-nowrap">
-                <div className="col-auto">
-                  <div className="w-[190px]">Dock no.</div>
+              <div className="row lg:flex-nowrap">
+                <div className="col-12 lg:col-auto">
+                  <div className="serif w-full lg:w-[190px]">Dock no.</div>
                 </div>
-                <div className="col-12 shrink">{ props?.showInfoTable?.dockNumber }</div>
+                <div className="col-12 shrink text-[15px]">{ props?.showInfoTable?.dockNumber }</div>
               </div>
             </div>
           }

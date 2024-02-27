@@ -28,7 +28,7 @@ function OwnerPerspective(props:TypeProps, ref:React.ReactNode){
         <div className="row row-gap-0">
           <div className="lg:col-6 col-12 flex flex-col items-center justify-center bg-white px-10 py-4">
             <div className="my-auto pt-6 text-center">
-              <div className="mb-1 text-[15px] text-gray-300 lg:text-[17px]">OWNER PERSPECTIVE</div>
+              <div className="mb-3 text-[15px] text-gray-300 lg:mb-1.5 lg:text-[17px]">OWNER PERSPECTIVE</div>
               <div className="serif text-[32px] text-major-900 lg:text-[60px]">ADVENTURE</div>
             </div>
             <div className="mx-auto w-full max-w-[600px] py-6 text-center text-[13px] text-gray-300 lg:pt-0">

@@ -8,6 +8,7 @@ import { fetchGQL } from "@src/lib/apollo"
 import { QueryPublicationsPage } from '@src/queries/pages/publications.gql'
 import LocalDataProvider from "./(templates)/LocalDataProvider"
 import PageTop from './(templates)/PageTop'
+import { genImageBlurHash } from "@src/lib/genImageBlurHash"
 
 
 export interface TypePublicationNode {
@@ -25,6 +26,7 @@ export interface TypePublicationNode {
           mediaItemUrl?: string
         }
       }
+      placeholder?: string
     }
   }
 }
@@ -64,7 +66,7 @@ async function LayoutPublications({params, children}:TypeProps){
 
   const data = await fetchGQL(QueryPublicationsPage)
   const { publicationCategories } = data ?? {}
-  params.data = data
+
   return <main
   className="grow"
   style={{

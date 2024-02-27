@@ -29,25 +29,32 @@ function RegionsNav(props:TypeProps, ref:React.ReactNode){
 
   return <Suspense fallback={null}>
     <div className={twMerge('', className)}>
-      <div className="container mb-16 text-center">
-        <div className="serif mb-4 text-[32px] text-minor-900">Contact Your Local Representative</div>
-        <div className="row flex-nowrap justify-center">
-          <div className="col-auto">
-            <div className={`btn ${activeRegionIndex === null ?'text-major-900' :'text-gray-500'}`}
+      <div className="mb-16">
+        <div className="container text-center">
+          <div className="serif mb-4 text-[32px] text-minor-900">Contact Your Local Representative</div>
+        </div>
+        <div className="container overflow-auto overflow-y-hidden">
+          <div className="row flex-nowrap">
+            <div className="col-auto ml-auto">
+              <div className={`btn ${activeRegionIndex === null ?'text-major-900' :'text-gray-500'}`}
             onClick={()=>{
               setActiveRegionIndex(null)
             }}>Global</div>
-          </div>
-          {
-            props?.regions?.map((node:{[key:string]:any}, index:number)=>{
-              return <div className="col-auto" key={index}>
-                <div className={`btn ${activeRegionIndex === index ?'text-major-900' :'text-gray-500'}`}
+            </div>
+            {
+              props?.regions?.map((node:{[key:string]:any}, index:number)=>{
+                return <div className="col-auto" key={index}
+              style={{
+                marginRight: index+1 === props?.regions?.length ?'auto' :'0'
+              }}>
+                  <div className={`btn ${activeRegionIndex === index ?'text-major-900' :'text-gray-500'}`}
                 onClick={()=>{
                   setActiveRegionIndex(index)
                 }}>{node?.name}</div>
-              </div>
-            })
-          }
+                </div>
+              })
+            }
+          </div>
         </div>
       </div>
 
