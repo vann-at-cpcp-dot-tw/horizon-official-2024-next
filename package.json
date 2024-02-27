@@ -42,6 +42,7 @@
     "@types/jquery": "^3.5.25",
     "@types/negotiator": "^0.6.3",
     "@types/node": "^20",
+    "@types/nprogress": "^0.2.3",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.0.1",
