@@ -23,6 +23,9 @@ const customColors = [
 
 module.exports = {
   darkMode: ["class"],
+  future: {
+    hoverOnlyWhenSupported: true
+  },
   content: [
     './src/**/*.{js,ts,jsx,tsx,mdx}',
   ],

@@ -95,7 +95,7 @@ function Form(props:TypeProps, ref:React.ReactNode){
         </div>
 
         <div className="text-center text-[14px] text-gray-500">
-            By submitting a contact request, you provide consent for us to collect and<br className="hidden lg:block"/> use your information pursuant to our <LinkWithLang className="underline" href="###" lang={lang}>Privacy Policy and Terms of Use</LinkWithLang>
+            By submitting a contact request, you provide consent for us to collect and<br className="hidden lg:block"/> use your information pursuant to our <LinkWithLang className="btn-opacity underline hover:underline" href="/privacy-policy" lang={lang}>Privacy Policy and Terms of Use</LinkWithLang>
         </div>
 
         <div className="flex justify-center py-8">

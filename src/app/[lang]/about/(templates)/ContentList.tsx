@@ -134,7 +134,7 @@ function ContentList(props:TypeProps, ref:React.ReactNode){
               onClose={()=>{
                 router.push(`${pathname}`, {scroll:false})
               }}>
-                <>
+                <div className="pt-6 lg:pt-12">
                   <div className="MCE-CONTENT mb-6">
                     <div className="container">
                       <div className="mx-auto w-full max-w-[900px]" dangerouslySetInnerHTML={{__html:node?.content}}></div>
@@ -181,7 +181,7 @@ function ContentList(props:TypeProps, ref:React.ReactNode){
                       router.push(`${pathname}`, {scroll:false})
                     }}>Close</div>
                   </div>
-                </>
+                </div>
               </ContentLightbox>
             }
           </div>
