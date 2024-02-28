@@ -271,6 +271,8 @@ function MainMenu(props:TypeProps, ref:React.ReactNode){
                     if( pathnameWithoutLang === `/models/${seriesData?.slug}/${yachtData?.slug}` ){
                       setIsMenuOpen(false)
                     }
+
+                    setIsPageChanging(true)
                     router.push(pathnameWithLang(`/models/${seriesData?.slug}/${yachtData.slug}`, lang))
                   }
                 }
@@ -315,10 +317,6 @@ function MainMenu(props:TypeProps, ref:React.ReactNode){
       })
     }
   }, [isMenuOpen])
-
-  useEffect(()=>{
-    setIsPageChanging(false)
-  }, [menuScreen])
 
   useEffect(()=>{
     setIsMenuOpen(false)

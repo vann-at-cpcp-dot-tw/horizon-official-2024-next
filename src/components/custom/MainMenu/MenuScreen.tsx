@@ -51,15 +51,15 @@ function MenuScreen(props:TypeProps, ref:React.ReactNode){
         {
           props?.onBackClick
             ? <div className="btn -ml-5 -mt-5"
-          onClick={()=>{
-            props?.onBackClick?.()
-          }}>
+            onClick={()=>{
+              props?.onBackClick?.()
+            }}>
               <Image src={`${BASE_PATH}/assets/img/icon_menu_back.svg`} width={48} height={48} alt="" />
             </div>
             :<div className="btn -ml-5 -mt-5"
-          onClick={()=>{
-            props?.onCloseClick?.()
-          }}>
+            onClick={()=>{
+              props?.onCloseClick?.()
+            }}>
               <Image src={`${BASE_PATH}/assets/img/icon_menu_x.svg`} width={48} height={48} alt="" />
             </div>
         }
@@ -70,81 +70,86 @@ function MenuScreen(props:TypeProps, ref:React.ReactNode){
               ? <Loading style={{width:'40px'}} fill="var(--color-golden-900)"/>
               : props?.list?.map((node, index)=>{
                 return <div key={index}
-              className={node.key === props.currentScreen?.seriesSlug ?'py-3' :'py-1'}>
+                className={node.key === props.currentScreen?.seriesSlug ?'py-3' :'py-1'}>
                   <motion.div
-              variants={{
-                enter: {
-                  opacity: 1,
-                  y: 0,
-                  transition: {
-                    duration: 1,
-                    delay: index*0.1,
-                    ease: [0.215, 0.610, 0.355, 1.000]
-                  }
-                },
-                exit: {
-                  opacity: 0,
-                  y: 50,
-                  transition: {
-                    duration: 0,
-                    ease: [0.215, 0.610, 0.355, 1.000]
-                  }
-                }
-              }}
-              initial="exit"
-              exit="exit"
-              animate={'enter'}>
+                  variants={{
+                    enter: {
+                      opacity: 1,
+                      y: 0,
+                      transition: {
+                        duration: 1,
+                        delay: index*0.1,
+                        ease: [0.215, 0.610, 0.355, 1.000]
+                      }
+                    },
+                    exit: {
+                      opacity: 0,
+                      y: 50,
+                      transition: {
+                        duration: 0,
+                        ease: [0.215, 0.610, 0.355, 1.000]
+                      }
+                    }
+                  }}
+                  initial="exit"
+                  exit="exit"
+                  animate={'enter'}>
                     <LinkWithLang
-                className={`btn-opacity block py-1 text-right ${node.key === props.currentScreen?.seriesSlug ?'text-[18px] font-900 text-major-500' :'text-gray-700'}`}
-                href={node?.href}
-                lang={lang}
-                onClick={()=>{
-                  props?.setIsPageChanging(true)
-                  if( node.href === pathnameWithoutLang ){
-                    props.setIsMenuOpen(false)
-                  }
-                  node?.onClick?.()
-                }}>
+                    className={`btn-opacity block py-1 text-right ${node.key === props.currentScreen?.seriesSlug ?'text-[18px] font-900 text-major-500' :'text-gray-700'}`}
+                    href={node?.href}
+                    lang={lang}
+                    onClick={()=>{
+                      if( node.href ){
+                        props?.setIsPageChanging(true)
+                      }
+
+                      if( node.href === pathnameWithoutLang ){
+                        props.setIsMenuOpen(false)
+                      }
+                      node?.onClick?.()
+                    }}>
                       { node.label }
                     </LinkWithLang>
-
                     {
                       node.key === props.currentScreen?.seriesSlug && node?.children?.map((childNode, childNodeIndex)=>{
                         return <motion.div
-                      key={`c-${childNodeIndex}`}
-                      variants={{
-                        enter: {
-                          opacity: 1,
-                          y: 0,
-                          transition: {
-                            duration: 1,
-                            delay: childNodeIndex*0.1,
-                            ease: [0.215, 0.610, 0.355, 1.000]
-                          }
-                        },
-                        exit: {
-                          opacity: 0,
-                          y: 10,
-                          transition: {
-                            duration: 0,
-                            ease: [0.215, 0.610, 0.355, 1.000]
-                          }
+                    key={`c-${childNodeIndex}`}
+                    variants={{
+                      enter: {
+                        opacity: 1,
+                        y: 0,
+                        transition: {
+                          duration: 1,
+                          delay: childNodeIndex*0.1,
+                          ease: [0.215, 0.610, 0.355, 1.000]
                         }
-                      }}
-                      initial="exit"
-                      exit="exit"
-                      animate={'enter'}>
+                      },
+                      exit: {
+                        opacity: 0,
+                        y: 10,
+                        transition: {
+                          duration: 0,
+                          ease: [0.215, 0.610, 0.355, 1.000]
+                        }
+                      }
+                    }}
+                    initial="exit"
+                    exit="exit"
+                    animate={'enter'}>
                           <LinkWithLang
-                      className={`btn-opacity block py-1 text-right lg:text-[14px] ${childNode.key === props.currentScreen?.yachtSlug ?'font-900 text-major-500' :'text-gray-700'}`}
-                      href={childNode?.href}
-                      lang={lang}
-                      onClick={()=>{
+                    className={`btn-opacity block py-1 text-right lg:text-[14px] ${childNode.key === props.currentScreen?.yachtSlug ?'font-900 text-major-500' :'text-gray-700'}`}
+                    href={childNode?.href}
+                    lang={lang}
+                    onClick={()=>{
+                      if( node.href ){
                         props?.setIsPageChanging(true)
-                        if( node.href === pathnameWithoutLang ){
-                          props.setIsMenuOpen(false)
-                        }
-                        childNode?.onClick?.()
-                      }}>
+                      }
+
+                      if( node.href === pathnameWithoutLang ){
+                        props.setIsMenuOpen(false)
+                      }
+                      childNode?.onClick?.()
+                    }}>
                             { childNode?.label }
                           </LinkWithLang>
                         </motion.div>
@@ -164,8 +169,8 @@ function MenuScreen(props:TypeProps, ref:React.ReactNode){
               props.currentScreen.key === 'models'
                 ?(!props.currentScreen?.seriesSlug && !props.currentScreen?.yachtSlug)
                   ? <MenuVision
-              video={props?.vision?.video || ''}
-              image={props?.vision?.image || ''} />
+                  video={props?.vision?.video || ''}
+                  image={props?.vision?.image || ''} />
                   :<>
                     {
                       props?.list?.map((seriesNode:TypeMenuListNode, index)=>{
@@ -177,21 +182,21 @@ function MenuScreen(props:TypeProps, ref:React.ReactNode){
                         return <div className="absolute left-0 top-0 size-full" key={index}>
                           {
                             (props.currentScreen?.seriesSlug && !props.currentScreen?.yachtSlug)
-                      && props.currentScreen?.seriesSlug === seriesNode.key
-                      && <MenuVision
-                      video={seriesNode?.vision?.video || props?.vision?.video || ''}
-                      image={seriesNode?.vision?.image || props?.vision?.video || ''}>
-                        <div className="absolute left-0 top-0 flex size-full flex-col items-center justify-end">
-                          <div className="absolute left-0 top-0 z-0 size-full bg-major-900" style={{opacity:0.2}}></div>
-                          <div className="relative z-10 pb-[70px] text-center text-white">
-                            <div className="text-[20px] font-700">{seriesNode?.vision?.content?.title}</div>
-                            <div className="serif mb-2 text-[40px]">{seriesNode?.vision?.content?.subtitle}</div>
-                            <div className="flex justify-center">
-                              <LinkWithLang className="border-b-[3px] border-b-white pb-1 text-[15px]" href={`/models/${seriesNode?.slug}`} lang={lang}>All Models</LinkWithLang>
-                            </div>
-                          </div>
-                        </div>
-                      </MenuVision>
+                            && props.currentScreen?.seriesSlug === seriesNode.key
+                            && <MenuVision
+                            video={seriesNode?.vision?.video || props?.vision?.video || ''}
+                            image={seriesNode?.vision?.image || props?.vision?.video || ''}>
+                              <div className="absolute left-0 top-0 flex size-full flex-col items-center justify-end">
+                                <div className="absolute left-0 top-0 z-0 size-full bg-major-900" style={{opacity:0.2}}></div>
+                                <div className="relative z-10 pb-[70px] text-center text-white">
+                                  <div className="text-[20px] font-700">{seriesNode?.vision?.content?.title}</div>
+                                  <div className="serif mb-2 text-[40px]">{seriesNode?.vision?.content?.subtitle}</div>
+                                  <div className="flex justify-center">
+                                    <LinkWithLang className="border-b-[3px] border-b-white pb-1 text-[15px]" href={`/models/${seriesNode?.slug}`} lang={lang}>All Models</LinkWithLang>
+                                  </div>
+                                </div>
+                              </div>
+                            </MenuVision>
                           }
 
                           {
@@ -223,8 +228,8 @@ function MenuScreen(props:TypeProps, ref:React.ReactNode){
                     }
                   </>
                 : <MenuVision
-            video={props?.vision?.video || ''}
-            image={props?.vision?.image || ''} />
+                  video={props?.vision?.video || ''}
+                  image={props?.vision?.image || ''} />
             }
           </AnimatePresence>
         </div>
