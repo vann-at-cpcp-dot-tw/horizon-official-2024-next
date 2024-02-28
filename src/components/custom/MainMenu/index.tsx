@@ -14,6 +14,7 @@ import { isEmpty, pathnameWithLang } from '@src/lib/helpers'
 import { motion, AnimatePresence } from "framer-motion"
 import MenuScreen from "./MenuScreen"
 import Portal from "@src/components/custom/Portal"
+import usePathnameWithoutLang from "@src/hooks/usePathnameWithoutLang"
 
 interface TypeProps {}
 interface TypeState {}
@@ -102,6 +103,7 @@ function MainMenu(props:TypeProps, ref:React.ReactNode){
   const params = useParams()
   const { lang } = params
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isPageChanging, setIsPageChanging] = useState(false)
   const commonData = useContext(CommonDataContext)
   const { menuItemImages, series:menuSeries } = commonData?.globalSettings?.mainMenu
   const [menuScreen, setMenuScreen] = useReducer((state:{key:string, seriesSlug?:string, yachtSlug?:string}, updateState:{})=>({...state, ...updateState}), {
@@ -109,6 +111,7 @@ function MainMenu(props:TypeProps, ref:React.ReactNode){
     seriesSlug: '',
     yachtSlug: '',
   })
+  const pathnameWithoutLang = usePathnameWithoutLang()
 
   const menus = useMemo<TypeMenus>(()=>{
     return {
@@ -258,13 +261,18 @@ function MainMenu(props:TypeProps, ref:React.ReactNode){
                   }
                 },
                 onClick: ()=>{
-                  viewport.width && viewport.width >= 992
-                    ? setMenuScreen({
+                  if( viewport.width && viewport.width >= 992 ){
+                    setMenuScreen({
                       key: 'models',
                       seriesSlug: seriesData?.slug,
                       yachtSlug: yachtData?.slug,
                     })
-                    : router.push(pathnameWithLang(`/models/${seriesData?.slug}/${yachtData.slug}`, lang))
+                  }else{
+                    if( pathnameWithoutLang === `/models/${seriesData?.slug}/${yachtData?.slug}` ){
+                      setIsMenuOpen(false)
+                    }
+                    router.push(pathnameWithLang(`/models/${seriesData?.slug}/${yachtData.slug}`, lang))
+                  }
                 }
               }
             })
@@ -299,6 +307,7 @@ function MainMenu(props:TypeProps, ref:React.ReactNode){
   useEffect(()=>{
     if( isMenuOpen ){
       document.body.classList.add('menu-open')
+      setIsPageChanging(false)
     }else{
       document.body.classList.remove('menu-open')
       setMenuScreen({
@@ -364,7 +373,10 @@ function MainMenu(props:TypeProps, ref:React.ReactNode){
                           image: menuItemImages.normal?.image?.node?.mediaItemUrl || '',
                           video: menuItemImages.normal?.video?.node?.mediaItemUrl || ''
                         }}
+                        isMenuOpen={isMenuOpen}
+                        isPageChanging={isPageChanging}
                         setIsMenuOpen={setIsMenuOpen}
+                        setIsPageChanging={setIsPageChanging}
                         onBackClick={menuGroupNode?.onBackClick}
                         onCloseClick={()=>{
                           setIsMenuOpen(false)

@@ -14,6 +14,7 @@ import Marquee from "react-fast-marquee"
 import ContentLightbox from "@src/components/custom/ContentLightbox"
 import useImageBlurHashes from "@root/src/hooks/useImageBlurHashes"
 import SwiperFullHeight from "@src/components/custom/SwiperFullHeight"
+import useWindowSize from "@src/hooks/useWindowSize"
 
 interface TypeProps {
   list: {
@@ -31,9 +32,8 @@ interface TypeState {}
 function YachtInteriorSwiper(props:TypeProps, ref:React.ReactNode){
   // const store = useStore()
   // const router = useRouter()
-  // const viewport = useWindowSize()
+  const viewport = useWindowSize()
   const { className } = props
-  const [swiperZoom, setSwiperZoom] = useState<SwiperClass>(({} as SwiperClass))
   const [realIndex, setRealIndex] = useState(0)
   const [isOpen, setIsOpen] = useState(false)
 
@@ -92,7 +92,6 @@ function YachtInteriorSwiper(props:TypeProps, ref:React.ReactNode){
 
       {
         isOpen && <ContentLightbox
-        isFullScreen
         onClose={()=>{
           setIsOpen(false)
         }}>
@@ -100,9 +99,15 @@ function YachtInteriorSwiper(props:TypeProps, ref:React.ReactNode){
           list={
             props?.list?.map?.((node, index)=>({
               content: <Image src={node?.image?.node?.mediaItemUrl || ''}
-                fill={true}
-                sizes="100vw"
-                style={{ objectFit: "contain" }}
+              fill={viewport.width && viewport.width >= 992 ?true :false}
+              width={viewport.width && viewport.width >= 992 ?0 :1920}
+              height={viewport.width && viewport.width >= 992 ?0 :1080}
+              sizes="100vw"
+              style={{
+                objectFit: viewport.width && viewport.width >= 992 ?'contain' :'cover',
+                width: '100%',
+                height: viewport.width && viewport.width >= 992 ?'100%' :'auto'
+              }}
                 placeholder={imageBlurHashes?.[index] ?'blur' :'empty'}
                 blurDataURL={imageBlurHashes?.[index]}
                 alt="" />,

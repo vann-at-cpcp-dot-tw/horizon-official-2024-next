@@ -71,7 +71,7 @@ function IFrameGallery(props:TypeProps, ref:React.ReactNode){
                 marginLeft: index === 0 ?'auto' :'0',
                 marginRight: index+1 === props?.list?.length ?'auto' :'0'
               }}>
-                <div className={`btn serif text-[16px] text-white hover:opacity-100 lg:text-[18px] ${activeIndex === index ?'opacity-100' :'opacity-50'}`}
+                <div className={`btn serif text-[15px] leading-[1.2] text-white hover:opacity-100 lg:text-[18px] ${activeIndex === index ?'opacity-100' :'opacity-50'}`}
               onClick={()=>{
                 setActiveIndex(index)
               }}>{ node?.title }</div>

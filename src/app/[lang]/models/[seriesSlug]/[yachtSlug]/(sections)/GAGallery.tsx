@@ -104,7 +104,6 @@ function GAGallery(props:TypeProps, ref:React.ReactNode){
 
         {
           isOpen && imageItem && <ContentLightbox
-          isFullScreen
           background="#EFEFF0"
           onClose={()=>{
             setIsOpen(false)
@@ -123,7 +122,15 @@ function GAGallery(props:TypeProps, ref:React.ReactNode){
                   <div className="relative size-full">
                     {
                       (viewport.width && viewport.width <= 991) && imageItemM
-                        ?<Image src={imageItemM} fill={true} sizes="100vw" style={{objectFit: "contain"}} alt="" />
+                        ?<div className="px-20">
+                          <Image
+                          src={imageItemM}
+                          fill={viewport.width && viewport.width >= 992 ?true :false}
+                          width={viewport.width && viewport.width >= 992 ?0 :1920}
+                          height={viewport.width && viewport.width >= 992 ?0 :1080}
+                          sizes="100vw"
+                          alt="" />
+                        </div>
                         :<Image src={imageItem} fill={true} sizes="100vw" style={{objectFit: "contain"}} alt="" />
                     }
                   </div>

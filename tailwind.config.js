@@ -37,12 +37,22 @@ module.exports = {
     container: {
       center: true,
       padding: "2rem",
-      screens: {
-        "xl": "1200px",
-        "2xl": "1400px",
-        "3xl": "1600px",
-        "4xl": "1920px",
-      },
+    },
+    screens: {
+      "sm": "576px",
+      "md": "768px",
+      "lg": "992px",
+      "xl": "1200px",
+      "2xl": "1400px",
+      "3xl": "1600px",
+      "4xl": "1920px",
+      "_sm": {"max": "575px"},
+      "_md": {"max": "767px"},
+      "_lg": {"max": "991px"},
+      "_xl": {"max": "1199px"},
+      "_2xl": {"max": "1399px"},
+      "_3xl": {"max": "1599px"},
+      "_4xl": {"max": "1919px"},
     },
     extend: {
       height: {

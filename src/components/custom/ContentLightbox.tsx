@@ -78,7 +78,10 @@ function ContentLightbox(props:TypeProps, ref:React.ReactNode){
       background
     }}>
       <div className={`absolute left-0 top-0 flex size-full flex-col ${props?.isFullScreen ?'overflow-hidden' :'overflow-auto'}`}>
-        <div className="sticky left-0 top-0 z-10 flex">
+        <div className="left-0 top-0 z-10 flex lg:sticky"
+        style={{
+          background
+        }}>
           {
             (props?.onClose || props?.closeIcon) && <div className="btn flex-none"
             style={{

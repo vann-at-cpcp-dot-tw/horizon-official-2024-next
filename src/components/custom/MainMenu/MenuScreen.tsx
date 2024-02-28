@@ -13,6 +13,7 @@ import { useParams } from "next/navigation"
 import LinkWithLang from "@src/components/custom/LinkWithLang"
 import usePathnameWithoutLang from "@src/hooks/usePathnameWithoutLang"
 import useWindowSize from "@src/hooks/useWindowSize"
+import Loading from "@src/components/custom/icons/Loading"
 
 interface TypeProps {
   list: TypeMenuListNode[]
@@ -28,6 +29,9 @@ interface TypeProps {
       subtitle?: string
     }
   }
+  isMenuOpen: boolean
+  isPageChanging: boolean
+  setIsPageChanging: Function
   setIsMenuOpen: Function
   onCloseClick: Function
   onBackClick?: Function
@@ -62,10 +66,12 @@ function MenuScreen(props:TypeProps, ref:React.ReactNode){
 
         <div className="my-auto flex flex-col items-end pr-5">
           {
-            props?.list?.map((node, index)=>{
-              return <div key={index}
+            props?.isPageChanging
+              ? <Loading style={{width:'40px'}} fill="var(--color-golden-900)"/>
+              : props?.list?.map((node, index)=>{
+                return <div key={index}
               className={node.key === props.currentScreen?.seriesSlug ?'py-3' :'py-1'}>
-                <motion.div
+                  <motion.div
               variants={{
                 enter: {
                   opacity: 1,
@@ -88,22 +94,23 @@ function MenuScreen(props:TypeProps, ref:React.ReactNode){
               initial="exit"
               exit="exit"
               animate={'enter'}>
-                  <LinkWithLang
+                    <LinkWithLang
                 className={`btn-opacity block py-1 text-right ${node.key === props.currentScreen?.seriesSlug ?'text-[18px] font-900 text-major-500' :'text-gray-700'}`}
                 href={node?.href}
                 lang={lang}
                 onClick={()=>{
+                  props?.setIsPageChanging(true)
                   if( node.href === pathnameWithoutLang ){
                     props.setIsMenuOpen(false)
                   }
                   node?.onClick?.()
                 }}>
-                    { node.label }
-                  </LinkWithLang>
+                      { node.label }
+                    </LinkWithLang>
 
-                  {
-                    node.key === props.currentScreen?.seriesSlug && node?.children?.map((childNode, childNodeIndex)=>{
-                      return <motion.div
+                    {
+                      node.key === props.currentScreen?.seriesSlug && node?.children?.map((childNode, childNodeIndex)=>{
+                        return <motion.div
                       key={`c-${childNodeIndex}`}
                       variants={{
                         enter: {
@@ -127,24 +134,25 @@ function MenuScreen(props:TypeProps, ref:React.ReactNode){
                       initial="exit"
                       exit="exit"
                       animate={'enter'}>
-                        <LinkWithLang
-                      className={`btn-opacity block py-1 text-right text-[14px] ${childNode.key === props.currentScreen?.yachtSlug ?'font-900 text-major-500' :'text-gray-700'}`}
+                          <LinkWithLang
+                      className={`btn-opacity block py-1 text-right lg:text-[14px] ${childNode.key === props.currentScreen?.yachtSlug ?'font-900 text-major-500' :'text-gray-700'}`}
                       href={childNode?.href}
                       lang={lang}
                       onClick={()=>{
+                        props?.setIsPageChanging(true)
                         if( node.href === pathnameWithoutLang ){
                           props.setIsMenuOpen(false)
                         }
                         childNode?.onClick?.()
                       }}>
-                          { childNode?.label }
-                        </LinkWithLang>
-                      </motion.div>
-                    })
-                  }
-                </motion.div>
-              </div>
-            })
+                            { childNode?.label }
+                          </LinkWithLang>
+                        </motion.div>
+                      })
+                    }
+                  </motion.div>
+                </div>
+              })
           }
         </div>
       </div>

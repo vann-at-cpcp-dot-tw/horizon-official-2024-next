@@ -333,8 +333,7 @@ function ComingEventDetail(props:TypeProps, ref:React.ReactNode){
       }}
       onUnMounted={()=>{
         document.body.classList.add('lb-open')
-      }}
-      />
+      }} />
     }
   </>
 }

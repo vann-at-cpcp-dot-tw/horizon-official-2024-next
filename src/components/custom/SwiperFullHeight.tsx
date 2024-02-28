@@ -43,13 +43,6 @@ function SwiperFullHeight(props:TypeProps, ref:React.ReactNode){
   })
 
   useEffect(()=>{
-    document.body.classList.add('lb-open')
-    return ()=>{
-      document.body.classList.remove('lb-open')
-    }
-  }, [])
-
-  useEffect(()=>{
     if( !props.iframeRatio || !contentWrapperSize.width){
       return
     }
@@ -67,7 +60,7 @@ function SwiperFullHeight(props:TypeProps, ref:React.ReactNode){
   }, [contentWrapperSize.width, contentWrapperSize.height, props.iframeRatio])
 
   return <Suspense fallback={null}>
-    <div className={twMerge('absolute w-full h-full left-0 top-0 flex flex-col flex-nowrap overflow-hidden', className)}>
+    <div className={twMerge(`lg:absolute relative w-full lg:h-full h-auto left-0 top-0 flex flex-col flex-nowrap overflow-hidden`, className)}>
 
       <div className="flex grow !flex-nowrap overflow-hidden p-5 lg:px-10">
         <div className="hidden flex-none items-center lg:flex">

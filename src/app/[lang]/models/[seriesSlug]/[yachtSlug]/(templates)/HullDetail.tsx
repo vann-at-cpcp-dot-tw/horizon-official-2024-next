@@ -15,6 +15,7 @@ import { useRouter, usePathname } from 'next/navigation'
 import { motion } from "framer-motion"
 import ContentLightbox from "@src/components/custom/ContentLightbox"
 import useWindowSize from "@src/hooks/useWindowSize"
+import RatioArea from "@src/components/custom/RatioArea"
 
 interface TypeProps {
   hullName: string
@@ -127,6 +128,7 @@ function HullDetail(props:TypeProps, ref:React.ReactNode){
     }
   }, [props.onUnMounted])
 
+
   useEffect(()=>{
     setIsLoading(true)
 
@@ -140,7 +142,7 @@ function HullDetail(props:TypeProps, ref:React.ReactNode){
   stickyHeader={
     <>
       <div className="serif mx-auto text-center text-major-900">
-        <div className="text-[32px]">
+        <div className="text-[21px] leading-[1.2] lg:text-[32px]">
           { props.yachtName ?<span>{props.yachtName}<span className="text-[30px]"> / </span></span> :''}
           { props.hullName }
         </div>
@@ -149,7 +151,7 @@ function HullDetail(props:TypeProps, ref:React.ReactNode){
         <div className="row">
           {
             hullNav?.map((node, index)=><div className="col-auto" key={index}>
-              <div className={`btn serif py-2 text-[18px] text-major-900 hover:opacity-100 ${activeSection === node.label ?'opacity-100' :'opacity-50'}`}
+              <div className={`btn serif py-2 text-[14px] leading-[1.2] text-major-900 hover:opacity-100 lg:text-[18px] ${activeSection === node.label ?'opacity-100' :'opacity-50'}`}
                     onClick={()=>{
                       setActiveSection(node.label)
                     }}>{ node?.label }</div>
@@ -176,12 +178,21 @@ function HullDetail(props:TypeProps, ref:React.ReactNode){
       {(function(){
         switch(activeSection){
           case 'Exterior':
-            return <div className="relative z-10 grow overflow-hidden pb-5">
+            return <div className="relative z-10 grow overflow-hidden">
               <SwiperFullHeight
               list={props.exteriorImages?.map((node)=>{
                 return {
-                  content: <Image src={node?.image?.node?.mediaItemUrl || ''} fill={true} sizes="100vw" alt=""
-                  style={{objectFit: "contain"}}
+                  content: <Image src={node?.image?.node?.mediaItemUrl || ''}
+                  fill={viewport.width && viewport.width >= 992 ?true :false}
+                  width={viewport.width && viewport.width >= 992 ?0 :1920}
+                  height={viewport.width && viewport.width >= 992 ?0 :1080}
+                  sizes="100vw"
+                  style={{
+                    objectFit: viewport.width && viewport.width >= 992 ?'contain' :'cover',
+                    width: '100%',
+                    height: viewport.width && viewport.width >= 992 ?'100%' :'auto'
+                  }}
+                  alt=""
                   onLoad={()=>{
                     setIsLoading(false)
                   }} />,
@@ -190,18 +201,27 @@ function HullDetail(props:TypeProps, ref:React.ReactNode){
             </div>
 
           case 'Interior':
-            return <div className="relative z-10 grow overflow-hidden pb-5">
+            return <div className="relative z-10 grow overflow-hidden">
               <SwiperFullHeight
-        list={props.interiorImages?.map((node)=>{
-          return {
-            content: <Image src={node?.image?.node?.mediaItemUrl || ''} fill={true} sizes="100vw" alt=""
-            style={{objectFit: "contain"}}
-            onLoad={()=>{
-              setIsLoading(false)
-            }}/>,
-            title: node.description
-          }
-        })} />
+              list={props.interiorImages?.map((node)=>{
+                return {
+                  content: <Image src={node?.image?.node?.mediaItemUrl || ''}
+                  fill={viewport.width && viewport.width >= 992 ?true :false}
+                  width={viewport.width && viewport.width >= 992 ?0 :1920}
+                  height={viewport.width && viewport.width >= 992 ?0 :1080}
+                  sizes="100vw"
+                  style={{
+                    objectFit: viewport.width && viewport.width >= 992 ?'contain' :'cover',
+                    width: '100%',
+                    height: viewport.width && viewport.width >= 992 ?'100%' :'auto'
+                  }}
+                  alt=""
+                  onLoad={()=>{
+                    setIsLoading(false)
+                  }}/>,
+                  title: node.description
+                }
+              })} />
             </div>
 
           case 'SPECS':
@@ -214,6 +234,7 @@ function HullDetail(props:TypeProps, ref:React.ReactNode){
           case 'GA':
             return <div className="container-fluid relative z-10 flex grow flex-col pb-5">
               <GAGalleryNav
+              className="mt-2"
               itemTitles={gaItemTitles}
               activeItem={activeGAIndex}
               setActiveItem={setActiveGAIndex} />
@@ -221,14 +242,32 @@ function HullDetail(props:TypeProps, ref:React.ReactNode){
               <div className="relative grow">
                 {
                   (viewport.width && viewport.width <= 991) && gaActiveItem?.imageM?.node?.mediaItemUrl
-                    ?<Image className="pointer-events-none" src={gaActiveItem?.imageM?.node?.mediaItemUrl || ''} fill={true} sizes="100vw" style={{objectFit: "contain"}} alt=""
-                  onLoad={()=>{
-                    setIsLoading(false)
-                  }} />
-                    :<Image className="pointer-events-none" src={gaActiveItem?.image?.node?.mediaItemUrl || ''} fill={true} sizes="100vw" style={{objectFit: "contain"}} alt=""
-                  onLoad={()=>{
-                    setIsLoading(false)
-                  }} />
+                    ?<div className="px-20">
+                      <Image className="pointer-events-none"
+                      src={gaActiveItem?.imageM?.node?.mediaItemUrl || ''}
+                      fill={viewport.width && viewport.width >= 992 ?true :false}
+                      width={viewport.width && viewport.width >= 992 ?0 :1920}
+                      height={viewport.width && viewport.width >= 992 ?0 :1080}
+                      sizes="100vw"
+                      style={{
+                        objectFit: viewport.width && viewport.width >= 992 ?'contain' :'cover',
+                        width: '100%',
+                        height: viewport.width && viewport.width >= 992 ?'100%' :'auto'
+                      }}
+                      alt=""
+                      onLoad={()=>{
+                        setIsLoading(false)
+                      }} />
+                    </div>
+                    :<Image className="pointer-events-none"
+                    src={gaActiveItem?.image?.node?.mediaItemUrl || ''}
+                    fill={true}
+                    sizes="100vw"
+                    style={{objectFit: "contain"}}
+                    alt=""
+                    onLoad={()=>{
+                      setIsLoading(false)
+                    }} />
                 }
               </div>
             </div>
@@ -244,7 +283,10 @@ function HullDetail(props:TypeProps, ref:React.ReactNode){
               iframeRatio={1.78}
               list={props.embedVideosGallery?.map((node)=>{
                 return {
-                  embedUrl: convertYoutubeUrlToEmbed(node.embedUrl)
+                  content: <RatioArea ratio="56.25">
+                    <iframe className="absolute left-0 top-0 z-10 size-full"
+                    src={convertYoutubeUrlToEmbed(node.embedUrl)} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
+                  </RatioArea>
                 }
               })} />
             </div>

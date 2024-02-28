@@ -54,7 +54,7 @@ function YachtsExteriorSwiper(props:TypeProps, ref:React.ReactNode){
   return <Suspense fallback={null}>
 
     <div id="SECTION_EXTERIOR" className={twMerge('relative overflow-hidden lg:mb-14 mb-7', className)}>
-      {/* <div className="swiper-yacht-exterior"> */}
+
       <div className="container" style={{maxWidth:'1080px'}}>
 
         <div className="swiper-yacht-exterior mb-5"
@@ -152,11 +152,10 @@ function YachtsExteriorSwiper(props:TypeProps, ref:React.ReactNode){
           </div>
         }
       </div>
-      {/* </div> */}
+
 
       {
         isOpen && <ContentLightbox
-        isFullScreen
         onClose={()=>{
           setIsOpen(false)
         }}>
@@ -164,12 +163,18 @@ function YachtsExteriorSwiper(props:TypeProps, ref:React.ReactNode){
           list={
             props?.list?.map((node, index)=>({
               content: <Image src={node?.image?.node?.mediaItemUrl || ''}
-                fill={true}
-                sizes="100vw"
-                style={{ objectFit: "contain" }}
-                placeholder={imageBlurHashes?.[index] ?'blur' :'empty'}
-                blurDataURL={imageBlurHashes?.[index]}
-                alt="" />,
+              fill={viewport.width && viewport.width >= 992 ?true :false}
+              width={viewport.width && viewport.width >= 992 ?0 :1920}
+              height={viewport.width && viewport.width >= 992 ?0 :1080}
+              sizes="100vw"
+              style={{
+                objectFit: viewport.width && viewport.width >= 992 ?'contain' :'cover',
+                width: '100%',
+                height: viewport.width && viewport.width >= 992 ?'100%' :'auto'
+              }}
+              placeholder={imageBlurHashes?.[index] ?'blur' :'empty'}
+              blurDataURL={imageBlurHashes?.[index]}
+              alt="" />,
             }))
           } />
         </ContentLightbox>

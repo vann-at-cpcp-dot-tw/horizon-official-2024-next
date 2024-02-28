@@ -30,7 +30,7 @@ function GAGalleryNav(props:TypeProps, ref:React.ReactNode){
   return <Suspense fallback={null}>
     <div className={twMerge('lg:mb-8 mb-6', className)}>
 
-      <div className="container serif mb-0 text-center text-[24px] text-gray-900 lg:mb-2">General Arrangement</div>
+      <div className="container serif mb-0 text-center text-[18px] text-gray-900 lg:mb-2 lg:text-[24px]">General Arrangement</div>
 
       <div className="container overflow-auto">
         <div className="row flex-nowrap">
@@ -41,7 +41,7 @@ function GAGalleryNav(props:TypeProps, ref:React.ReactNode){
                   marginLeft: typeIndex === 0 ?'auto' :'0',
                   marginRight: typeIndex+1 === props?.gaTypes?.length ?'auto' :'0'
                 }}>
-                <div className={`btn py-2 ${props.activeType === typeIndex ?'text-golden-900' :'text-gray-500'}`}
+                <div className={`btn py-2 text-[14px] lg:text-[16px] ${props.activeType === typeIndex ?'text-golden-900' :'text-gray-500'}`}
                   onClick={()=>{
                     props?.setActiveType?.(typeIndex)
                     props.setActiveItem(0)
@@ -63,7 +63,7 @@ function GAGalleryNav(props:TypeProps, ref:React.ReactNode){
                   marginLeft: index === 0 ?'auto' :'0',
                   marginRight: index+1 === props?.itemTitles?.length ?'auto' :'0'
                 }}>
-                  <div className={`btn py-2 ${props.activeItem === index ?'text-golden-900' :'text-gray-500'}`}
+                  <div className={`btn py-2 text-[14px] lg:text-[16px] ${props.activeItem === index ?'text-golden-900' :'text-gray-500'}`}
                     onClick={()=>{
                       props.setActiveItem(index)
                     }}>{ node }</div>
