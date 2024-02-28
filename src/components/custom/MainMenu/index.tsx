@@ -317,6 +317,10 @@ function MainMenu(props:TypeProps, ref:React.ReactNode){
   }, [isMenuOpen])
 
   useEffect(()=>{
+    setIsPageChanging(false)
+  }, [menuScreen])
+
+  useEffect(()=>{
     setIsMenuOpen(false)
   }, [pathname])
 
