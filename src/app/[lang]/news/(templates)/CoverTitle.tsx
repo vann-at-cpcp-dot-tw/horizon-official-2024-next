@@ -19,6 +19,7 @@ import { useStore } from '@src/store'
 interface TypeProps {
   title: string
   date: string
+  slug: string
   [key:string]: any
 }
 interface TypeState {}

@@ -49,7 +49,8 @@ async function CoverStory(props:TypeProps, ref:React.ReactNode){
         <div className="container">
           <CoverTitle className="mt-[-32px] lg:mt-[-64px]"
           title={props.title}
-          date={props.date} />
+          date={props.date}
+          slug={props.slug} />
         </div>
       </div>
     </div>
