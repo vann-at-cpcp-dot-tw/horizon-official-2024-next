@@ -126,19 +126,32 @@ function All(props:TypeProps, ref:React.ReactNode){
                 categoryNode?.publications?.nodes?.map?.((publicationNode:TypePublicationNode, publicationIndex)=>{
 
                   return <SwiperSlide className="!w-auto" key={`${categoryIndex}-${publicationIndex}`}>
-                    <a className="btn block" href={publicationNode.publicationCustomFields?.publication?.pdf?.node?.mediaItemUrl} target="_blank">
-                      <Image className="mb-2"
-                      src={`${publicationNode.publicationCustomFields?.publication?.publicationCover?.node?.mediaItemUrl || ''}`}
-                      style={{
-                        width: viewport.width && viewport.width>=992 ?'auto' :'66vw',
-                        height: viewport.width && viewport.width>=992 ?`${categoryIndex === 0 ?525 :320}px` :'auto',
-                      }}
-                      width={380}
-                      height={categoryIndex === 0 ?525 :320}
-                      placeholder={placeholderGroups?.[categoryIndex]?.[publicationIndex] ?'blur' :'empty'}
-                      blurDataURL={placeholderGroups?.[categoryIndex]?.[publicationIndex]}
-                      priority={true}
-                      alt="" />
+                    <a className="btn group relative block" href={publicationNode.publicationCustomFields?.publication?.pdf?.node?.mediaItemUrl} target="_blank">
+                      <div className="relative">
+                        <div className="pointer-events-none absolute left-0 top-0 z-10 flex size-full items-center justify-center opacity-0 group-hover:opacity-100 group-active:opacity-100"
+                        style={{
+                          background: 'rgba(0, 46, 79, 0.5)',
+                          transition: 'all .4s'
+                        }}>
+                          <div className="flex size-[56px] items-center justify-center rounded-full bg-golden-700">
+                            <i className="bi bi-plus-lg text-[24px] text-white"></i>
+                          </div>
+                        </div>
+
+                        <Image className="mb-2"
+                        src={`${publicationNode.publicationCustomFields?.publication?.publicationCover?.node?.mediaItemUrl || ''}`}
+                        style={{
+                          width: viewport.width && viewport.width>=992 ?'auto' :'66vw',
+                          height: viewport.width && viewport.width>=992 ?`${categoryIndex === 0 ?525 :320}px` :'auto',
+                        }}
+                        width={380}
+                        height={categoryIndex === 0 ?525 :320}
+                        placeholder={placeholderGroups?.[categoryIndex]?.[publicationIndex] ?'blur' :'empty'}
+                        blurDataURL={placeholderGroups?.[categoryIndex]?.[publicationIndex]}
+                        priority={true}
+                        alt="" />
+                      </div>
+
                       <div className="relative h-8 text-gray-500">
                         <div className="absolute line-clamp-2 w-full">{ publicationNode.title }</div>
                       </div>

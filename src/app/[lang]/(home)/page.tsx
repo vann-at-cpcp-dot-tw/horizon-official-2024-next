@@ -18,11 +18,21 @@ export default async function PageHome({
   }
 }){
   const data = await fetchGQL(QueryHomePage)
-  const { homePageKeyVision, homePageIntroduction } = data?.homePageSettings?.homePageCustomFields ?? {}
+  const { homePageKeyVision, homePageIntroduction, homePageAchievements } = data?.homePageSettings?.homePageCustomFields ?? {}
   const { heroImage:kvImage, heroVideo:kvVideo, mainTitle:kvTitle } = homePageKeyVision ?? {}
   const { lang } = params
+
   return <main>
-    <KV title={kvTitle} imageNode={<ImageAutoPlaceholder className="absolute left-0 top-0 z-0 size-full object-cover" src={kvImage?.node?.mediaItemUrl || ''} fill={true} sizes="100vw" />}  video={kvVideo?.node?.mediaItemUrl}  />
+    <KV
+    title={kvTitle}
+    imageNode={
+      <ImageAutoPlaceholder className="absolute left-0 top-0 z-0 size-full object-cover"
+      src={kvImage?.node?.mediaItemUrl || ''}
+      fill={true}
+      sizes="100vw" />
+    }
+    video={kvVideo?.node?.mediaItemUrl}
+    achievements={homePageAchievements} />
     <Intro />
     <Series />
     <IntroAfterSeries smallVideo={homePageIntroduction?.smallVideo?.node?.mediaItemUrl} wideVideo={homePageIntroduction?.innovationVideo?.node?.mediaItemUrl} lang={lang}/>

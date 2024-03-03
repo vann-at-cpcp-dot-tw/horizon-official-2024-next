@@ -20,7 +20,7 @@ function IntroAfterSeries(props:TypeProps, ref:React.ReactNode){
   const viewport = useWindowSize()
   const animateAnchorRef = useRef(null)
   const animateAnchorIsInView = useInView(animateAnchorRef, {
-    margin: `0px 0px -${window.innerHeight/4}px 0px`
+    margin: `0px 0px -${(viewport.height || 0)/4}px 0px`
   })
 
   return <Suspense fallback={null}>
@@ -63,7 +63,7 @@ function IntroAfterSeries(props:TypeProps, ref:React.ReactNode){
             <LinkWithLang href="/about/innovation" lang={props?.lang}>The Innovation Behind Horizon</LinkWithLang>
           </div>
           <div className="flex justify-center">
-            <LinkWithLang className="border-b-[3px] border-b-white pb-1" href="/about/innovation" lang={props.lang}>Discover</LinkWithLang>
+            <LinkWithLang className="btn-text btn-opacity" href="/about/innovation" lang={props.lang}>Discover</LinkWithLang>
           </div>
         </div>
         <RatioArea ratio={viewport.width && viewport.width >= 992 ?'0' :'56.25'} className="lg:static">

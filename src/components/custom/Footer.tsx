@@ -65,25 +65,25 @@ function Footer(props:TypeProps, ref:React.ReactNode){
           <div className="lg:col-8 col-12">
             <div className="row lg:row-gap-8">
               <div className="col-12 lg:col-auto lg:border-r">
-                <LinkWithLang className="block py-2.5 leading-none lg:py-0" href="/QA" lang={lang}>Q<span className="text-[13px]">&</span>A</LinkWithLang>
+                <LinkWithLang className="btn-opacity block py-2.5 leading-none lg:py-0" href="/QA" lang={lang}>Q<span className="text-[13px]">&</span>A</LinkWithLang>
               </div>
 
               {
                 externalLinks?.career && <div className="col-12 lg:col-auto lg:border-r">
-                  <a className="block py-2.5 leading-none lg:py-0" href={externalLinks?.career} target="_blank">Career</a>
+                  <a className="btn-opacity block py-2.5 leading-none lg:py-0" href={externalLinks?.career} target="_blank">Career</a>
                 </div>
               }
 
               {
                 CONTENT_TYPE === 'hq' && <div className="col-12 lg:col-auto lg:border-r">
-                  <LinkWithLang className="block py-2.5 leading-none lg:py-0" href="/investor" lang={lang}>Investor</LinkWithLang>
+                  <LinkWithLang className="btn-opacity block py-2.5 leading-none lg:py-0" href="/investor" lang={lang}>Investor</LinkWithLang>
                 </div>
               }
               <div className="col-12 lg:col-auto lg:border-r">
-                <LinkWithLang className="block py-2.5 leading-none lg:py-0" href="/privacy-policy" lang={lang}>Privacy Policy</LinkWithLang>
+                <LinkWithLang className="btn-opacity block py-2.5 leading-none lg:py-0" href="/privacy-policy" lang={lang}>Privacy Policy</LinkWithLang>
               </div>
               <div className="col-12 lg:col-auto">
-                <LinkWithLang className="block py-2.5 leading-none lg:py-0" href="/terms-and-conditions" lang={lang}>Terms and Conditions</LinkWithLang>
+                <LinkWithLang className="btn-opacity block py-2.5 leading-none lg:py-0" href="/terms-and-conditions" lang={lang}>Terms and Conditions</LinkWithLang>
               </div>
             </div>
           </div>
@@ -102,7 +102,7 @@ function Footer(props:TypeProps, ref:React.ReactNode){
                   }
 
                   return <div className="col-auto" key={index}>
-                    <a className="block py-2.5 text-[24px] leading-none lg:py-0 lg:text-[18px]" href={externalLinks.socialMedia[node.key]} target="_blank">
+                    <a className="btn-opacity block py-2.5 text-[24px] leading-none lg:py-0 lg:text-[18px]" href={externalLinks.socialMedia[node.key]} target="_blank">
                       <i className={`bi bi-${node.icon}`}></i>
                     </a>
                   </div>

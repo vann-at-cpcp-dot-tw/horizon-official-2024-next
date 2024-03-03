@@ -1,5 +1,9 @@
-query QueryHomePage {
-  homePageSettings {
+query QueryHomePage(
+  $language: LanguageCodeFilterEnum = EN
+) {
+  homePageSettings(
+    language: $language
+  ) {
     homePageCustomFields{
       homePageKeyVision {
         mainTitle
@@ -21,6 +25,13 @@ query QueryHomePage {
           }
         }
         innovationVideo {
+          node {
+            mediaItemUrl
+          }
+        }
+      }
+      homePageAchievements {
+        image {
           node {
             mediaItemUrl
           }

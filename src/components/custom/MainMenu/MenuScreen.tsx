@@ -192,7 +192,7 @@ function MenuScreen(props:TypeProps, ref:React.ReactNode){
                                   <div className="text-[20px] font-700">{seriesNode?.vision?.content?.title}</div>
                                   <div className="serif mb-2 text-[40px]">{seriesNode?.vision?.content?.subtitle}</div>
                                   <div className="flex justify-center">
-                                    <LinkWithLang className="border-b-[3px] border-b-white pb-1 text-[15px]" href={`/models/${seriesNode?.slug}`} lang={lang}>All Models</LinkWithLang>
+                                    <LinkWithLang className="btn-text btn-opacity text-[15px]" href={`/models/${seriesNode?.slug}`} lang={lang}>All Models</LinkWithLang>
                                   </div>
                                 </div>
                               </div>

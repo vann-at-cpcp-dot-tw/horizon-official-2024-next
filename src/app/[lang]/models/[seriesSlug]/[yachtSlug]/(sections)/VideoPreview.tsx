@@ -81,9 +81,8 @@ function VideoPreview(props:TypeProps, ref:React.ReactNode){
           onClick={()=>{
             setIsOpen(true)
           }}>
-            <div className="pointer-events-none absolute flex size-[64px] items-center justify-center rounded-full border border-white"
+            <div className="pointer-events-none absolute flex size-[64px] items-center justify-center rounded-full border"
             style={{
-              background: 'rgba(255,255,255,0.5)',
               ...(
                 isHovering
                   ?{
@@ -91,6 +90,8 @@ function VideoPreview(props:TypeProps, ref:React.ReactNode){
                     top: '50%',
                     width: '128px',
                     height: '128px',
+                    background: 'rgba(181,135,60,0.5)',
+                    borderColor: 'var(--color-golden-900)',
                     transform: `translate(calc(-50% + ${mousePos.x - (previewBlock.width/2)}px), calc(-50% + ${mousePos.y - (previewBlock.height/2)}px))`,
                     transition: 'transform .4s cubic-bezier(0.215, 0.610, 0.355, 1.000), width 1.6s cubic-bezier(0.215, 0.610, 0.355, 1.000), height 1.6s cubic-bezier(0.215, 0.610, 0.355, 1.000)'
                   }
@@ -99,6 +100,8 @@ function VideoPreview(props:TypeProps, ref:React.ReactNode){
                     top: '50%',
                     width: '64px',
                     height: '64px',
+                    background: 'rgba(255,255,255,0.5)',
+                    borderColor: 'white',
                     marginLeft: '-32px',
                     marginTop: '-32px',
                     transition: 'all 1.6s cubic-bezier(0.215, 0.610, 0.355, 1.000)'
@@ -107,7 +110,7 @@ function VideoPreview(props:TypeProps, ref:React.ReactNode){
             }}>
               <i className="bi bi-play-fill text-[24px] text-white"
               style={{
-                transform: `scale(${isHovering ?2 :1})`,
+                transform: `scale(${isHovering ?1.33 :1})`,
                 transition: 'all 1.6s cubic-bezier(0.215, 0.610, 0.355, 1.000)'
               }}></i>
             </div>

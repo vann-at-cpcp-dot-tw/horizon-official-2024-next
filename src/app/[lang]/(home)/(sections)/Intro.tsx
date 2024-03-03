@@ -8,8 +8,8 @@ import buttonStyles from '@src/components/ui/button.module.sass'
 import { Button } from "@src/components/ui/button"
 import { useParams } from "next/navigation"
 import OverflowContent from "@src/components/custom/OverflowContent"
-import { useInView } from "framer-motion"
-import { motion } from "framer-motion"
+import { motion, useInView } from "framer-motion"
+import useWindowSize from "@src/hooks/useWindowSize"
 
 interface TypeProps {}
 interface TypeState {}
@@ -17,9 +17,10 @@ interface TypeState {}
 function Intro(props:TypeProps, ref:React.ReactNode){
 
   const { lang } = useParams()
+  const viewport = useWindowSize()
   const animateAnchorRef = useRef(null)
   const animateAnchorIsInView = useInView(animateAnchorRef, {
-    margin: `0px 0px -${window.innerHeight/4}px 0px`
+    margin: `0px 0px -${(viewport.height || 0)/4}px 0px`
   })
 
   return <Suspense fallback={null}>

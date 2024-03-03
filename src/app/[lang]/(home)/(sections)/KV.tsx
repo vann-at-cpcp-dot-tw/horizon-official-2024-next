@@ -14,6 +14,13 @@ interface TypeProps {
   imageNode?: React.ReactNode
   video?: string
   title?: string
+  achievements: {
+    image?: {
+      node?: {
+        mediaItemUrl?: string
+      }
+    }
+  }[]
 }
 interface TypeState {}
 
@@ -88,7 +95,11 @@ function KV(props:TypeProps, ref:React.ReactNode){
         </div>
 
         <div className="absolute bottom-5 right-5 hidden lg:block">
-          <Image src={`${BASE_PATH}/assets/img/icon_sybass.svg`} width={108} height={40} alt=""/>
+          {
+            props?.achievements?.map((node, index)=>{
+              return <Image key={index} src={node?.image?.node?.mediaItemUrl || ''} width={100} height={37} alt=""/>
+            })
+          }
         </div>
       </motion.div>
     </div>

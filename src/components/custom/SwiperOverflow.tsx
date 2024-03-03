@@ -2,7 +2,7 @@
 
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 import Image from "next/image"
-import { Suspense, useMemo, useEffect, useState } from 'react'
+import { Suspense, useMemo, useEffect, useState, ReactNode } from 'react'
 import { useParams } from 'next/navigation'
 import RatioArea from "@src/components/custom/RatioArea"
 import useDomNodeSize from "@src/hooks/useDomNodeSize"
@@ -15,6 +15,7 @@ interface TypeProps {
   list?: {
     slug: string
     label: string
+    content?: string | ReactNode
     link?: string
     mediaItemUrl?: string
     placeholder?: string
@@ -85,7 +86,7 @@ function SwiperOverflow(props:TypeProps, ref:React.ReactNode){
                   }
 
                   <LinkWithLang className="absolute left-0 top-0 z-0 size-full" href={node?.link || ''} lang={lang}>
-                    {
+                    <>
                       <Image className="absolute left-0 top-0 z-0 size-full object-cover"
                       fill={true}
                       src={node?.mediaItemUrl || ''}
@@ -94,7 +95,9 @@ function SwiperOverflow(props:TypeProps, ref:React.ReactNode){
                       blurDataURL={node?.placeholder}
                       priority={true}
                       alt="" />
-                    }
+
+                      <div className="absolute left-0 top-0 z-10 size-full">{ node?.content }</div>
+                    </>
                   </LinkWithLang>
                 </RatioArea>
               </SwiperSlide>

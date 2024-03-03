@@ -35,7 +35,7 @@ function Milestone(props:TypeProps, ref:React.ReactNode){
           <div className="absolute left-0 top-0 z-10 flex size-full items-center justify-center p-5">
             <div className="flex flex-col items-center text-white">
               <LinkWithLang className="serif mb-2 text-[32px] italic" href="/about/horizon/milestone" lang={props.lang}>Milestone</LinkWithLang>
-              <LinkWithLang className="border-b-[3px] border-b-white pb-1" href="/about/horizon/milestone" lang={props.lang}>Discover</LinkWithLang>
+              <LinkWithLang className="btn-text btn-opacity" href="/about/horizon/milestone" lang={props.lang}>Discover</LinkWithLang>
             </div>
           </div>
 
