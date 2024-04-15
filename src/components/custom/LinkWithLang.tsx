@@ -10,7 +10,7 @@ interface TypeProps {
 
 export default function LinkWithLangWrapper({href, lang, children, ...props}:TypeProps, ref:React.ReactNode){
   if( !href ){
-    return <span {...props}>{}</span>
+    return <span {...props}>{children}</span>
   }
 
   const isDefaultLang = lang === i18n.defaultLocale.shortCode
