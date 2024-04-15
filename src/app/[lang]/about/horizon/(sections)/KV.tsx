@@ -4,12 +4,12 @@ const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
 import Image from "next/image"
 import { Suspense, useRef } from 'react'
-import { useStore } from '@src/store'
+import { useStore } from '~/store'
 import { twMerge } from 'tailwind-merge'
-import { isEmpty } from '@src/lib/helpers'
+import { isEmpty } from '~/lib/helpers'
 import { motion, useInView } from "framer-motion"
-import OverflowContent from "@src/components/custom/OverflowContent"
-import useWindowSize from "@src/hooks/useWindowSize"
+import OverflowContent from '~/components/custom/OverflowContent'
+import { useWindowSize } from 'vanns-common-modules/dist/use/react'
 
 interface TypeProps {
   background: string

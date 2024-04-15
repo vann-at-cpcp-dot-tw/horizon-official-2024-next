@@ -1,0 +1,12 @@
+query QueryTranslations(
+  $language: LanguageCodeFilterEnum = EN,
+) {
+  translationSettings(language: $language) {
+    translationFields {
+      translations {
+        key
+        value
+      }
+    }
+  }
+}

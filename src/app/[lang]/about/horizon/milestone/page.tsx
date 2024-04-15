@@ -1,12 +1,12 @@
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
 import Image from "next/image"
-import { fetchGQL } from "@src/lib/apollo"
-import { QueryMilestone } from '@src/queries/components/milestone.gql'
+import { fetchGQL } from '~/lib/apollo'
+import { QueryMilestone } from '~/queries/components/milestone.gql'
 import SwiperMilestone from "./(sections)/SwiperMilestone"
-import LinkWithLang from "@src/components/custom/LinkWithLang"
-import { genImageBlurHash } from "@root/src/lib/genImageBlurHash"
-import ContentLightbox from "@src/components/custom/ContentLightbox"
+import LinkWithLang from '~/components/custom/LinkWithLang'
+import { genImageBlurHash } from 'vanns-common-modules/dist/lib/next'
+import ContentLightbox from '~/components/custom/ContentLightbox'
 
 export default async function PageHome({
   params

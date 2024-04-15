@@ -6,15 +6,15 @@ const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
 
 import { Suspense, useState, useEffect } from 'react'
 import Image from "next/image"
-import LinkWithLang from "@src/components/custom/LinkWithLang"
+import LinkWithLang from '~/components/custom/LinkWithLang'
 import { twMerge } from 'tailwind-merge'
-import { isEmpty } from '@src/lib/helpers'
+import { isEmpty } from '~/lib/helpers'
 import { motion } from "framer-motion"
-import { useStore } from '@src/store'
+import { useStore } from '~/store'
 
 // import { useRouter } from 'next/navigation'
-// import { useStore } from '@src/store'
-// import useWindowSize from "@src/hooks/useWindowSize"
+// import { useStore } from '~/store'
+// import useWindowSize from '~/use/useWindowSize"
 
 interface TypeProps {
   title: string
@@ -81,7 +81,7 @@ function CoverTitle(props:TypeProps, ref:React.ReactNode){
         initial="exit"
         exit="exit"
         animate={KVEnterAble ?'enter' :'exit'}>
-          <LinkWithLang href={`/news/cover-story`} lang={props.lang}>Cover Story</LinkWithLang>
+          <LinkWithLang href={`/news/cover-story/${props.slug}`} lang={props.lang}>Cover Story</LinkWithLang>
         </motion.div>
         <motion.div className="serif btn relative text-center text-[28px] text-minor-900 hover:text-golden-900 lg:text-[43px]"
         variants={{

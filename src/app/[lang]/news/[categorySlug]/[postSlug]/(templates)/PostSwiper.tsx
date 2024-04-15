@@ -4,16 +4,17 @@ const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
 import { Suspense, useMemo, useState } from 'react'
 import Image from "next/image"
-import LinkWithLang from "@src/components/custom/LinkWithLang"
+import LinkWithLang from '~/components/custom/LinkWithLang'
 import { twMerge } from 'tailwind-merge'
-import { isEmpty } from '@src/lib/helpers'
-import RatioArea from "@src/components/custom/RatioArea"
+import { isEmpty } from '~/lib/helpers'
+import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { SwiperClass } from "swiper/react"
+import { Autoplay } from 'swiper/modules'
 
 // import { useRouter } from 'next/navigation'
-// import { useStore } from '@src/store'
-// import useWindowSize from "@src/hooks/useWindowSize"
+// import { useStore } from '~/store'
+// import useWindowSize from '~/use/useWindowSize"
 
 interface TypeProps {
   gallery: {
@@ -43,7 +44,11 @@ function PostSwiper(props:TypeProps, ref:React.ReactNode){
         <Swiper
         speed={1000}
         // spaceBetween={0}
+        modules={[Autoplay]}
         slidesPerView={1}
+        autoplay={{
+          delay: 3000,
+        }}
         onSwiper={(e)=>{
           setSwiper(e)
         }}
@@ -86,6 +91,18 @@ function PostSwiper(props:TypeProps, ref:React.ReactNode){
                     className="btn relative py-2"
                     onClick={()=>{
                       swiper.slideTo(index)
+                    }}
+                    onTouchStart={()=>{
+                      swiper?.autoplay?.pause?.()
+                    }}
+                    onTouchEnd={()=>{
+                      swiper?.autoplay?.resume?.()
+                    }}
+                    onMouseEnter={()=>{
+                      swiper?.autoplay?.pause?.()
+                    }}
+                    onMouseLeave={()=>{
+                      swiper?.autoplay?.resume?.()
                     }}>
                     <div className="absolute top-1/2 w-full -translate-y-1/2 group-hover:!h-[2px] group-active:!h-[2px]"
                     style={{

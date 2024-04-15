@@ -7,12 +7,12 @@ const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
 import { Suspense, useRef, useReducer, useEffect, useState, useContext } from 'react'
 
 import { twMerge } from 'tailwind-merge'
-import { isEmpty } from '@src/lib/helpers'
-import { Button } from '@src/components/ui/button'
+import { isEmpty } from '~/lib/helpers'
+import { Button } from '~/components/ui/button'
 import LinkWithLang from "./LinkWithLang"
 import { useParams } from "next/navigation"
-import { CommonDataContext } from '@src/app/[lang]/providers'
-import useWindowSize from "@src/hooks/useWindowSize"
+import { CommonDataContext } from '~/app/[lang]/providers'
+import { useWindowSize } from 'vanns-common-modules/dist/use/react'
 interface TypeProps {
   className?: string
 }

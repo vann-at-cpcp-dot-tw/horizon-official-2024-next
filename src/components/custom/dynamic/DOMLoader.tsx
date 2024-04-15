@@ -7,13 +7,13 @@ import Image from "next/image"
 import { useEffect, useState } from 'react'
 
 // store
-import { useStore } from '@src/store'
+import { useStore } from '~/store'
 
 // use
 import { twMerge } from 'tailwind-merge'
 
 // methods & components
-import { isEmpty } from '@src/lib/helpers'
+import { isEmpty } from '~/lib/helpers'
 
 import imagesLoaded from 'imagesloaded'
 import { motion } from 'framer-motion'

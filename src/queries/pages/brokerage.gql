@@ -14,11 +14,9 @@ query QueryBrokeragePage(
         minValue
         maxValue
       }
-      yearOptions:brokerageYearOptions {
-        value
-      }
     }
   }
+  yachtYears(postType: "brokerage")
   posts:brokerages(
     first: $first,
   ) {

@@ -3,13 +3,13 @@
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
 import { Suspense, useContext, useEffect, useMemo } from 'react'
-import { CommonDataContext } from '@src/app/[lang]/providers'
+import { CommonDataContext } from '~/app/[lang]/providers'
 import { useRouter } from 'next/navigation'
-import { useStore } from '@src/store'
-import useWindowSize from "@src/hooks/useWindowSize"
+import { useStore } from '~/store'
+import { useWindowSize } from 'vanns-common-modules/dist/use/react'
 import { twMerge } from 'tailwind-merge'
-import { isEmpty } from '@src/lib/helpers'
-import Breadcrumb from "@src/components/custom/Breadcrumb"
+import { isEmpty } from '~/lib/helpers'
+import Breadcrumb from '~/components/custom/Breadcrumb'
 
 interface TypeProps {
   slug: string

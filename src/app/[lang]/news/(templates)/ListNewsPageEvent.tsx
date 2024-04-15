@@ -2,13 +2,13 @@ const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
 import { Suspense } from 'react'
 import Image from "next/image"
-import LinkWithLang from "@src/components/custom/LinkWithLang"
+import LinkWithLang from '~/components/custom/LinkWithLang'
 import { twMerge } from 'tailwind-merge'
-import { isEmpty } from '@src/lib/helpers'
-import RatioArea from "@src/components/custom/RatioArea"
+import { isEmpty } from '~/lib/helpers'
+import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'
 // import { useRouter } from 'next/navigation'
-// import { useStore } from '@src/store'
-// import useWindowSize from "@src/hooks/useWindowSize"
+// import { useStore } from '~/store'
+// import useWindowSize from '~/use/useWindowSize"
 import NewsListItem from "./ListItem"
 
 interface TypeProps {

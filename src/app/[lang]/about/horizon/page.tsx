@@ -1,8 +1,8 @@
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
-import { Button } from '@src/components/ui/button'
-import { fetchGQL } from "@src/lib/apollo"
-import { QueryPageAboutHorizon } from '@src/queries/pages/about-horizon.gql'
+import { Button } from '~/components/ui/button'
+import { fetchGQL } from '~/lib/apollo'
+import { QueryPageAboutHorizon } from '~/queries/pages/about-horizon.gql'
 import Image from "next/image"
 
 import KV from "./(sections)/KV"
@@ -10,7 +10,7 @@ import Discover from "./(sections)/Discover"
 import NumericalData from "./(sections)/NumericalData"
 import Achievement from "./(sections)/Achievement"
 import History from "./(sections)/History"
-import ImageAutoPlaceholder from "@root/src/components/custom/ImageAutoPlaceholder"
+import ImageAutoPlaceholder from "~/components/custom/ImageAutoPlaceholder"
 import Milestone from "./(sections)/Milestone"
 
 export default async function PageAboutHorizon({

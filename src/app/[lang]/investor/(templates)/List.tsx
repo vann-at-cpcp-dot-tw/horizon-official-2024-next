@@ -7,12 +7,12 @@ const postsPerPage = 10
 
 import { Suspense, useState, useMemo, useEffect } from 'react'
 import Image from "next/image"
-import LinkWithLang from "@src/components/custom/LinkWithLang"
+import LinkWithLang from '~/components/custom/LinkWithLang'
 import { twMerge } from 'tailwind-merge'
-import { QueryInvestorPage } from '@src/queries/pages/investor.gql'
+import { QueryInvestorPage } from '~/queries/pages/investor.gql'
 import { useLazyQuery } from "@apollo/client"
-import PageNav from "@src/components/custom/PageNav"
-import Loading from "@src/components/custom/icons/Loading"
+import PageNav from '~/components/custom/PageNav'
+import Loading from '~/components/custom/icons/Loading'
 
 interface TypePostNode {
   [key:string]: any

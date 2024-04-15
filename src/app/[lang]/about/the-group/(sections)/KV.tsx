@@ -3,11 +3,11 @@ const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 import Image from "next/image"
 
 import { Suspense } from 'react'
-import { useStore } from '@src/store'
+import { useStore } from '~/store'
 import { twMerge } from 'tailwind-merge'
-import { isEmpty } from '@src/lib/helpers'
-import RatioArea from "@src/components/custom/RatioArea"
-import ImageAutoPlaceholder from "@root/src/components/custom/ImageAutoPlaceholder"
+import { isEmpty } from '~/lib/helpers'
+import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'
+import ImageAutoPlaceholder from "~/components/custom/ImageAutoPlaceholder"
 interface TypeProps {
   heroImage: string
   heroImagePlaceHolder?: string

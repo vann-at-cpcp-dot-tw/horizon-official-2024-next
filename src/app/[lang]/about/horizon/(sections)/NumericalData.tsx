@@ -4,13 +4,13 @@ const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
 import { Suspense, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { useStore } from '@src/store'
-import useWindowSize from "@src/hooks/useWindowSize"
+import { useStore } from '~/store'
+import { useWindowSize } from "vanns-common-modules/dist/use/react"
 import { twMerge } from 'tailwind-merge'
-import { isEmpty, numberWithCommas } from '@src/lib/helpers'
+import { isEmpty, numberFormat } from '~/lib/helpers'
 import { animate } from "framer-motion"
 import dynamic from "next/dynamic"
-const AniCounter = dynamic(() => import('@src/components/custom/dynamic/AniCounter'), {ssr: false})
+const AniCounter = dynamic(() => import('~/components/custom/dynamic/AniCounter'), {ssr: false})
 
 interface TypeProps {
   yachtsBuild?: string | number

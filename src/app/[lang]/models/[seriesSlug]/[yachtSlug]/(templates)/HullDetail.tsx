@@ -4,18 +4,18 @@ const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
 import { Suspense, useEffect, useMemo, useState } from 'react'
 import Image from "next/image"
-import LinkWithLang from "@src/components/custom/LinkWithLang"
-import Loading from "@src/components/custom/icons/Loading"
+import LinkWithLang from '~/components/custom/LinkWithLang'
+import Loading from '~/components/custom/icons/Loading'
 import { twMerge } from 'tailwind-merge'
-import { isEmpty, convertYoutubeUrlToEmbed } from '@src/lib/helpers'
-import SwiperFullHeight from "@src/components/custom/SwiperFullHeight"
-import SpecTable from "@src/components/custom/SpecTable"
+import { isEmpty, convertYoutubeUrlToEmbed } from '~/lib/helpers'
+import SwiperFullHeight from '~/components/custom/SwiperFullHeight'
+import SpecTable from '~/components/custom/SpecTable'
 import GAGalleryNav from "./GAGalleryNav"
 import { useRouter, usePathname } from 'next/navigation'
 import { motion } from "framer-motion"
-import ContentLightbox from "@src/components/custom/ContentLightbox"
-import useWindowSize from "@src/hooks/useWindowSize"
-import RatioArea from "@src/components/custom/RatioArea"
+import ContentLightbox from '~/components/custom/ContentLightbox'
+import { useWindowSize } from 'vanns-common-modules/dist/use/react'
+import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'
 
 interface TypeProps {
   hullName: string

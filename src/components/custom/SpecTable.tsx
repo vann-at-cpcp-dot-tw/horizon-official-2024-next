@@ -3,10 +3,10 @@
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 import { Suspense, useMemo } from 'react'
 import { useRouter } from 'next/navigation'
-import { useStore } from '@src/store'
-import useWindowSize from "@src/hooks/useWindowSize"
+import { useStore } from '~/store'
+import { useWindowSize } from 'vanns-common-modules/dist/use/react'
 import { twMerge } from 'tailwind-merge'
-import { isEmpty } from '@src/lib/helpers'
+import { isEmpty } from '~/lib/helpers'
 import { motion } from "framer-motion"
 
 const termsConfig = [

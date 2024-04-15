@@ -4,19 +4,19 @@ const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
 import { Suspense, useMemo, useState, useEffect } from 'react'
 import Image from "next/image"
-import LinkWithLang from "@src/components/custom/LinkWithLang"
+import LinkWithLang from '~/components/custom/LinkWithLang'
 import { twMerge } from 'tailwind-merge'
-import { isEmpty } from '@src/lib/helpers'
+import { isEmpty } from '~/lib/helpers'
 import { usePathname, useRouter, useParams } from 'next/navigation'
 import { gql, useQuery } from "@apollo/client"
-import RatioArea from "@src/components/custom/RatioArea"
-import buttonStyles from '@src/components/ui/button.module.sass'
-import { Button } from "@src/components/ui/button"
-import HullDetail from "@src/app/[lang]/models/[seriesSlug]/[yachtSlug]/(templates)/HullDetail"
-import ContentLightbox from "@src/components/custom/ContentLightbox"
+import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'
+import buttonStyles from '~/components/ui/button.module.sass'
+import { Button } from '~/components/ui/button'
+import HullDetail from '~/app/[lang]/models/[seriesSlug]/[yachtSlug]/(templates)/HullDetail'
+import ContentLightbox from '~/components/custom/ContentLightbox'
 
-// import { useStore } from '@src/store'
-// import useWindowSize from "@src/hooks/useWindowSize"
+// import { useStore } from '~/store'
+// import useWindowSize from '~/use/useWindowSize"
 
 interface TypeHullNode {
   // exteriorImages?: {
@@ -233,7 +233,7 @@ function ComingEventDetail(props:TypeProps, ref:React.ReactNode){
         <div className="mb-4 text-gray-500">Coming Event</div>
         <div className="serif mb-2 text-[32px] leading-[1.2] text-major-900 lg:text-[40px]">{props.title}</div>
         <div className="mb-3 text-[14px] text-gray-900">{props.subtitle}</div>
-        <div className="text-[14px] text-gray-500">{props.scheduleDate}</div>
+        <div className="font-300 text-golden-700 lg:text-[20px]">{props.scheduleDate}</div>
       </div>
 
       <div className="MCE-CONTENT mb-8 lg:mb-16">

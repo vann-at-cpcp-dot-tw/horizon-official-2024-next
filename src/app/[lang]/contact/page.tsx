@@ -4,10 +4,10 @@ const CONTENT_TYPE = process.env.NEXT_PUBLIC_CONTENT_TYPE || 'hq'
 const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
 
 import Image from "next/image"
-import LinkWithLang from "@src/components/custom/LinkWithLang"
-import { isEmpty } from '@src/lib/helpers'
-import { QuerySingleDealer } from "@src/queries/pages/dealers.gql"
-import { fetchGQL } from "@src/lib/apollo"
+import LinkWithLang from '~/components/custom/LinkWithLang'
+import { isEmpty } from '~/lib/helpers'
+import { QuerySingleDealer } from '~/queries/pages/dealers.gql'
+import { fetchGQL } from '~/lib/apollo'
 import { headers } from 'next/headers'
 import Form from "./(templates)/Form"
 

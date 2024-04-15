@@ -4,10 +4,10 @@ const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
 import Image from "next/image"
 import { Suspense, useEffect, useMemo, useState } from 'react'
-import { isEmpty } from '@src/lib/helpers'
+import { isEmpty } from '~/lib/helpers'
 import { motion } from 'framer-motion'
 import Loading from "../icons/Loading"
-import useImageBlurHashes from "@root/src/hooks/useImageBlurHashes"
+import { useImageBlurHashes } from 'vanns-common-modules/dist/use/next'
 
 const variants = {
   enter: {

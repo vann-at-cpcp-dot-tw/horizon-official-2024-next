@@ -2,13 +2,13 @@ const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
 import { Suspense } from 'react'
 import Image from "next/image"
-import LinkWithLang from "@src/components/custom/LinkWithLang"
+import LinkWithLang from '~/components/custom/LinkWithLang'
 import { twMerge } from 'tailwind-merge'
-import { isEmpty } from '@src/lib/helpers'
+import { isEmpty } from '~/lib/helpers'
 
 // import { useRouter } from 'next/navigation'
-// import { useStore } from '@src/store'
-// import useWindowSize from "@src/hooks/useWindowSize"
+// import { useStore } from '~/store'
+// import useWindowSize from '~/use/useWindowSize"
 
 interface TypeProps {
   image: string
@@ -31,7 +31,7 @@ function OwnerPerspective(props:TypeProps, ref:React.ReactNode){
               <div className="mb-3 text-[15px] text-gray-300 lg:mb-1.5 lg:text-[17px]">OWNER PERSPECTIVE</div>
               <div className="serif text-[32px] text-major-900 lg:text-[60px]">ADVENTURE</div>
             </div>
-            <div className="mx-auto w-full max-w-[600px] py-6 text-center text-[13px] text-gray-300 lg:pt-0">
+            <div className="mx-auto w-full max-w-[600px] py-6 text-center text-[15px] text-gray-300 lg:pt-0">
               { props?.description }
             </div>
           </div>

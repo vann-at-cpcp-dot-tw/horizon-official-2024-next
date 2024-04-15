@@ -3,11 +3,11 @@
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
 import { Suspense, useRef } from 'react'
-import RatioArea from "@src/components/custom/RatioArea"
-import LinkWithLang from "@src/components/custom/LinkWithLang"
-import OverflowContent from "@src/components/custom/OverflowContent"
+import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'
+import LinkWithLang from '~/components/custom/LinkWithLang'
+import OverflowContent from '~/components/custom/OverflowContent'
 import { useInView } from "framer-motion"
-import useWindowSize from "@root/src/hooks/useWindowSize"
+import { useWindowSize } from "vanns-common-modules/dist/use/react"
 
 interface TypeProps {
   smallVideo: string
@@ -42,7 +42,7 @@ function IntroAfterSeries(props:TypeProps, ref:React.ReactNode){
             </div>
           </div>
           <div className="w-full px-2.5 lg:w-[55%]" ref={animateAnchorRef}>
-            <div className="pl-0 lg:pl-9" style={{maxWidth:'516px'}}>
+            <div className="mx-auto pl-0 lg:pl-9" style={{maxWidth:'530px'}}>
               <OverflowContent
               animate={animateAnchorIsInView}>
                 <div className="serif mb-1 text-center text-[24px] leading-[1.2] text-major-700 lg:text-[48px]">Bring <i>Your</i> Yachting<br/>Dreams <i>to</i> Life</div>

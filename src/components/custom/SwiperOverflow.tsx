@@ -4,11 +4,12 @@ const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 import Image from "next/image"
 import { Suspense, useMemo, useEffect, useState, ReactNode } from 'react'
 import { useParams } from 'next/navigation'
-import RatioArea from "@src/components/custom/RatioArea"
-import useDomNodeSize from "@src/hooks/useDomNodeSize"
+import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'
+import { useDomNodeSize } from 'vanns-common-modules/dist/use/react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { SwiperClass } from "swiper/react"
-import LinkWithLang from "@src/components/custom/LinkWithLang"
+import { Autoplay } from 'swiper/modules'
+import LinkWithLang from '~/components/custom/LinkWithLang'
 
 interface TypeProps {
   listTitle: string
@@ -21,6 +22,11 @@ interface TypeProps {
     placeholder?: string
     srcSet?: string
   }[]
+  swiperOptions?: {
+    autoplay?: {
+      [key:string]: any
+    }
+  }
   onSlideChange?: Function
 }
 
@@ -37,6 +43,14 @@ function SwiperOverflow(props:TypeProps, ref:React.ReactNode){
   const centerRight = useMemo(()=>{
     return (bodyWidth - centerSize.width) / 2
   }, [bodyWidth])
+
+  const useModules = useMemo(()=>{
+    let useModules = []
+    if( props?.swiperOptions?.autoplay ){
+      useModules.push(Autoplay)
+    }
+    return useModules
+  }, [props.swiperOptions])
 
   useEffect(()=> {
     const observer = new ResizeObserver(mutationRecords => {
@@ -57,6 +71,8 @@ function SwiperOverflow(props:TypeProps, ref:React.ReactNode){
       }}>
         <Swiper className="!overflow-visible"
         // loop
+        modules={useModules}
+        autoplay={props?.swiperOptions?.autoplay}
         speed={1000}
         spaceBetween={20}
         slidesPerView={1}
@@ -71,7 +87,27 @@ function SwiperOverflow(props:TypeProps, ref:React.ReactNode){
         }}>
           {
             props?.list?.map?.((node, index)=>{
-              return <SwiperSlide key={index}>
+              return <SwiperSlide key={index}
+              onTouchStart={()=>{
+                if( props?.swiperOptions?.autoplay ){
+                  swiper?.autoplay?.pause?.()
+                }
+              }}
+              onTouchEnd={()=>{
+                if( props?.swiperOptions?.autoplay ){
+                  swiper?.autoplay?.resume?.()
+                }
+              }}
+              onMouseEnter={()=>{
+                if( props?.swiperOptions?.autoplay ){
+                  swiper?.autoplay?.pause?.()
+                }
+              }}
+              onMouseLeave={()=>{
+                if( props?.swiperOptions?.autoplay ){
+                  swiper?.autoplay?.resume?.()
+                }
+              }}>
                 <RatioArea className="group" ratio="56.25">
                   {
                     node?.link && <div className="pointer-events-none absolute left-0 top-0 z-10 flex size-full items-center justify-center opacity-0 group-hover:opacity-100 group-active:opacity-100"
@@ -121,6 +157,26 @@ function SwiperOverflow(props:TypeProps, ref:React.ReactNode){
                       <div className={`serif btn text-[21px] leading-none lg:text-[28px] ${realIndex === index ?'text-minor-900' :'text-gray-300'}`}
                       onClick={()=>{
                         swiper.slideTo(index)
+                      }}
+                      onTouchStart={()=>{
+                        if( props?.swiperOptions?.autoplay ){
+                          swiper?.autoplay?.pause?.()
+                        }
+                      }}
+                      onTouchEnd={()=>{
+                        if( props?.swiperOptions?.autoplay ){
+                          swiper?.autoplay?.resume?.()
+                        }
+                      }}
+                      onMouseEnter={()=>{
+                        if( props?.swiperOptions?.autoplay ){
+                          swiper?.autoplay?.pause?.()
+                        }
+                      }}
+                      onMouseLeave={()=>{
+                        if( props?.swiperOptions?.autoplay ){
+                          swiper?.autoplay?.resume?.()
+                        }
                       }}>{node?.label}</div>
                     </div>
                   })

@@ -5,22 +5,19 @@ const postsPerPage = 6
 
 import { Suspense, useMemo, useEffect, useContext, useState } from 'react'
 import Image from "next/image"
-import LinkWithLang from "@src/components/custom/LinkWithLang"
+import LinkWithLang from '~/components/custom/LinkWithLang'
 import { twMerge } from 'tailwind-merge'
-import { isEmpty } from '@src/lib/helpers'
-import RatioArea from "@src/components/custom/RatioArea"
+import { isEmpty } from '~/lib/helpers'
+import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'
 import { useRouter, useSearchParams } from 'next/navigation'
-import usePathnameWithoutLang from "@src/hooks/usePathnameWithoutLang"
+import { usePathnameWithoutLang } from 'vanns-common-modules/dist/use/next'
 import { useLazyQuery } from "@apollo/client"
-import { QueryNews } from '@src/queries/categories/news.gql'
-import PageNav from "@src/components/custom/PageNav"
-import Loading from "@src/components/custom/icons/Loading"
+import { QueryNews } from '~/queries/categories/news.gql'
+import PageNav from '~/components/custom/PageNav'
+import Loading from '~/components/custom/icons/Loading'
 import NewsListItem from "./ListItem"
-import { CommonDataContext } from '@src/app/[lang]/providers'
+import { CommonDataContext, CommonDataContextType } from '~/app/[lang]/providers'
 import { formatCategories } from "./ListItem"
-
-// import { useStore } from '@src/store'
-// import useWindowSize from "@src/hooks/useWindowSize"
 
 export interface TypePostNode {
   slug: string
@@ -199,8 +196,9 @@ function List(props:TypeProps, ref:React.ReactNode){
                         router.push(`${pathname}?category=${queryCategory || ''}&series=${e.target.value}`, {scroll:false})
                       }}>
                     <option value="">All Series</option>
+
                     {
-                      yachtSeriesList?.nodes?.map((node, index:number)=>{
+                      yachtSeriesList?.nodes?.map((node:CommonDataContextType['yachtSeriesList']['nodes'][number], index:number)=>{
                         return <option key={index} value={node.slug}>{node.name} Series</option>
                       })
                     }

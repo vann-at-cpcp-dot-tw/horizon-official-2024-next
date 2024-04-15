@@ -4,17 +4,17 @@ const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
 import { Suspense, useMemo, useContext, useState } from 'react'
 import Image from "next/image"
-import LinkWithLang from "@src/components/custom/LinkWithLang"
+import LinkWithLang from '~/components/custom/LinkWithLang'
 import { useParams } from "next/navigation"
 import { twMerge } from 'tailwind-merge'
-import { isEmpty } from '@src/lib/helpers'
-import { CommonDataContext } from '@src/app/[lang]/providers'
+import { isEmpty } from '~/lib/helpers'
+import { CommonDataContext, CommonDataContextType } from '~/app/[lang]/providers'
 import { useLazyQuery } from "@apollo/client"
-import { QueryPublicationCategory } from '@src/queries/pages/publications-[publicationCategorySlug].gql'
+import { QueryPublicationCategory } from '~/queries/pages/publications-[publicationCategorySlug].gql'
 import { TypePublicationCategoryNode, TypePublicationNode } from "../layout"
-import useImageBlurHashes from "@src/hooks/useImageBlurHashes"
-import Loading from "@src/components/custom/icons/Loading"
-import PageNav from "@src/components/custom/PageNav"
+import { useImageBlurHashes } from 'vanns-common-modules/dist/use/next'
+import Loading from '~/components/custom/icons/Loading'
+import PageNav from '~/components/custom/PageNav'
 
 interface TypeProps {
   publicationCategory: {
@@ -99,7 +99,7 @@ function SingleCategory(props:TypeProps, ref:React.ReactNode){
               }}>
                 <option value="">All Series</option>
                 {
-                  yachtSeriesList?.nodes?.map((node, index:number)=>{
+                  yachtSeriesList?.nodes?.map((node:CommonDataContextType['yachtSeriesList']['nodes'][number], index:number)=>{
                     return <option key={index} value={node.slug}>{node.name} Series</option>
                   })
                 }

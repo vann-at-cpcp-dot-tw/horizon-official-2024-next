@@ -1,10 +1,10 @@
-import { Button } from '@src/components/ui/button'
-import { fetchGQL } from "@src/lib/apollo"
-import { QueryPageAboutDesignAndCraft } from '@src/queries/pages/about-design.gql'
+import { Button } from '~/components/ui/button'
+import { fetchGQL } from '~/lib/apollo'
+import { QueryPageAboutDesignAndCraft } from '~/queries/pages/about-design.gql'
 import FeaturedVideo from "../(templates)/FeaturedVideo"
 // import ContentList from "./(sections)/ContentList"
 import ContentList from "../(templates)/ContentList"
-import { genImageBlurHash } from "@src/lib/genImageBlurHash"
+import { genImageBlurHash } from 'vanns-common-modules/dist/lib/next'
 
 export default async function PageAboutDesign(){
 

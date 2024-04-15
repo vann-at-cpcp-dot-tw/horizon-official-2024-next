@@ -22,7 +22,7 @@
     "jquery": "^3.7.1",
     "lodash-es": "^4.17.21",
     "lucide-react": "^0.292.0",
-    "next": "^14.1.0",
+    "next": "^14.1.4",
     "nprogress": "^0.2.0",
     "react": "^18",
     "react-dom": "^18",
@@ -33,6 +33,7 @@
     "swiper": "^11.0.5",
     "tailwind-merge": "^2.0.0",
     "tailwindcss-animate": "^1.0.7",
+    "vanns-common-modules": "https://github.com/vann-at-cpcp-dot-tw/vanns-common-modules.git",
     "zustand": "^4.4.6"
   },
   "devDependencies": {
@@ -43,7 +44,7 @@
     "@types/negotiator": "^0.6.3",
     "@types/node": "^20",
     "@types/nprogress": "^0.2.3",
-    "@types/react": "^18",
+    "@types/react": "^18.2.78",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",

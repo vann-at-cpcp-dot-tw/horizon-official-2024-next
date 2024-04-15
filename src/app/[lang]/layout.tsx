@@ -1,14 +1,15 @@
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
-import '@root/public/import.css'
+import '~~/public/external-import.css'
 
-import { isEmpty } from '@src/lib/helpers'
-import { fetchGQL } from "@root/src/lib/apollo"
-import { QueryCommonData } from '@src/queries/categories/commonData.gql'
-import Header from '@src/components/custom/Header'
-import Footer from '@src/components/custom/Footer'
+import { isEmpty } from '~/lib/helpers'
+import { fetchGQL } from "~/lib/apollo"
+import { QueryCommonData } from '~/queries/categories/commonData.gql'
+import { QueryTranslations } from '~/queries/components/translations.gql'
+import Header from '~/components/custom/Header'
+import Footer from '~/components/custom/Footer'
 import Providers from './providers'
-import PageTransition from "@src/components/custom/PageTransition"
-import CookiePolicy from "@src/components/custom/CookiePolicy"
+import PageTransition from "~/components/custom/PageTransition"
+import CookiePolicy from "~/components/custom/CookiePolicy"
 
 
 
@@ -28,22 +29,51 @@ export const metadata = {
 }
 
 async function getCommonData(){
-  const data = fetchGQL(QueryCommonData)
+  const data = await fetchGQL(QueryCommonData)
   return data
 }
 
+async function getTranslations(lang:string){
+  const data = await fetchGQL(QueryTranslations, {
+    variables: {
+      language: (lang || 'EN').toUpperCase()
+    }
+  })
+
+  // 整理成 key-value 形式
+  const translations:any[] = data?.translationSettings?.translationFields?.translations || []
+  return translations.reduce<Record<string, string>>((acc:Record<string, string>, node:{key:string, value:string})=>{
+    const { key, value } = node ?? {}
+    if( !key || !value ){
+      return acc
+    }
+    return {
+      ...acc,
+      [key]: value
+    }
+  }, {})
+}
+
 export default async function RootLayout({
+  params,
   children
 }: {
+  params: {
+    lang: string
+  }
   children: React.ReactNode
 }) {
 
   // fetch data from server side
+  const { lang } = params
   const commonData = await getCommonData()
+  const translations = await getTranslations(lang)
 
   return <html>
     <body>
-      <Providers commonData={commonData}>
+      <Providers
+      commonData={commonData}
+      translations={translations}>
         <div id="app">
           <Header />
           <PageTransition>

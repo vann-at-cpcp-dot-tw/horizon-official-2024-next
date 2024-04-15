@@ -5,16 +5,16 @@ const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 import { Suspense, useContext, useState, useRef, useMemo, useEffect } from 'react'
 import Image from "next/image"
 import { useRouter } from "next/navigation"
-import LinkWithLang from "@src/components/custom/LinkWithLang"
+import LinkWithLang from '~/components/custom/LinkWithLang'
 import { twMerge } from 'tailwind-merge'
-import { isEmpty } from '@src/lib/helpers'
+import { isEmpty } from '~/lib/helpers'
 import { TypePublicationNode, TypePublicationCategoryNode } from "../layout"
 import { LocalDataContext } from "../(templates)/LocalDataProvider"
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { SwiperClass } from "swiper/react"
-import useWindowSize from "@src/hooks/useWindowSize"
-// import useImageBlurHashes from "@src/hooks/useImageBlurHashes"
-import { genImageBlurHash } from "@src/lib/genImageBlurHash"
+import { useWindowSize } from 'vanns-common-modules/dist/use/react'
+// import useImageBlurHashes from '~/use/useImageBlurHashes"
+import { genImageBlurHash } from 'vanns-common-modules/dist/lib/next'
 
 interface TypeProps {
   [key:string]: any

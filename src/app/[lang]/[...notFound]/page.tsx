@@ -3,8 +3,8 @@ const CONTENT_TYPE = process.env.NEXT_PUBLIC_CONTENT_TYPE || 'hq'
 const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
 
 import Image from "next/image"
-import LinkWithLang from "@src/components/custom/LinkWithLang"
-import { isEmpty } from '@src/lib/helpers'
+import LinkWithLang from '~/components/custom/LinkWithLang'
+import { isEmpty } from '~/lib/helpers'
 
 interface TypeProps {
   params: {

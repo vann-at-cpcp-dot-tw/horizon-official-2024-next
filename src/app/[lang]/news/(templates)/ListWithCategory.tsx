@@ -5,21 +5,21 @@ const postsPerPage = 10
 
 import { Suspense, useMemo, useEffect, useContext } from 'react'
 import Image from "next/image"
-import LinkWithLang from "@src/components/custom/LinkWithLang"
+import LinkWithLang from '~/components/custom/LinkWithLang'
 import { twMerge } from 'tailwind-merge'
-import { isEmpty } from '@src/lib/helpers'
+import { isEmpty } from '~/lib/helpers'
 import { useParams, useRouter, useSearchParams } from 'next/navigation'
-import usePathnameWithoutLang from "@src/hooks/usePathnameWithoutLang"
+import { usePathnameWithoutLang } from 'vanns-common-modules/dist/use/next'
 import { useLazyQuery } from "@apollo/client"
-import { QueryPostsByCategory } from '@src/queries/pages/news-[categorySlug].gql'
-import PageNav from "@src/components/custom/PageNav"
-import Loading from "@src/components/custom/icons/Loading"
+import { QueryPostsByCategory } from '~/queries/pages/news-[categorySlug].gql'
+import PageNav from '~/components/custom/PageNav'
+import Loading from '~/components/custom/icons/Loading'
 import NewsListItem from "./ListItem"
-import { CommonDataContext } from '@src/app/[lang]/providers'
+import { CommonDataContext, CommonDataContextType } from '~/app/[lang]/providers'
 import { TypePostNode } from "./ListNewsPage"
 
-// import { useStore } from '@src/store'
-// import useWindowSize from "@src/hooks/useWindowSize"
+// import { useStore } from '~/store'
+// import useWindowSize from '~/use/useWindowSize"
 
 interface TypeProps {
   lang: string
@@ -127,7 +127,7 @@ function ListWithCategory(props:TypeProps, ref:React.ReactNode){
                   }}>
                     <option value="">All Series</option>
                     {
-                      yachtSeriesList?.nodes?.map((node, index:number)=>{
+                      yachtSeriesList?.nodes?.map((node:CommonDataContextType['yachtSeriesList']['nodes'][number], index:number)=>{
                         return <option key={index} value={node.slug}>{node.name} Series</option>
                       })
                     }

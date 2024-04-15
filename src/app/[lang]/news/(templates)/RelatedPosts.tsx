@@ -5,16 +5,16 @@ const postsPerPage = 3
 
 import { Suspense, useMemo } from 'react'
 import Image from "next/image"
-import LinkWithLang from "@src/components/custom/LinkWithLang"
+import LinkWithLang from '~/components/custom/LinkWithLang'
 import { twMerge } from 'tailwind-merge'
-import { isEmpty } from '@src/lib/helpers'
+import { isEmpty } from '~/lib/helpers'
 import { useQuery } from "@apollo/client"
-import { QueryRelatedPosts } from "@src/queries/pages/news-[categorySlug]-[postSlug].gql"
+import { QueryRelatedPosts } from '~/queries/pages/news-[categorySlug]-[postSlug].gql'
 import NewsListItem from "./ListItem"
 import { formatCategories } from "./ListItem"
 // import { useRouter } from 'next/navigation'
-// import { useStore } from '@src/store'
-// import useWindowSize from "@src/hooks/useWindowSize"
+// import { useStore } from '~/store'
+// import useWindowSize from '~/use/useWindowSize"
 
 interface TypeProps {
   categorySlug: string

@@ -4,14 +4,11 @@ const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
 import { Suspense, useState } from 'react'
 import Image from "next/image"
-import LinkWithLang from "@src/components/custom/LinkWithLang"
+import LinkWithLang from '~/components/custom/LinkWithLang'
 import { twMerge } from 'tailwind-merge'
-import { isEmpty } from '@src/lib/helpers'
-import SpecTable from "@src/components/custom/SpecTable"
-import TermsTable from "@src/components/custom/TermsTable"
-// import { useRouter } from 'next/navigation'
-// import { useStore } from '@src/store'
-// import useWindowSize from "@src/hooks/useWindowSize"
+import { isEmpty } from '~/lib/helpers'
+import SpecTable from '~/components/custom/SpecTable'
+import TermsTable from '~/components/custom/TermsTable'
 
 interface TypeProps {
   title?: string

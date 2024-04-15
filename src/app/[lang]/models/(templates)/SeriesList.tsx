@@ -2,12 +2,12 @@ const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
 import Image from "next/image"
 import { Suspense, useContext, useEffect } from 'react'
-import { QueryYachtsWithSeries } from '@src/queries/pages/models.gql'
-import { fetchGQL } from "@src/lib/apollo"
-import { isEmpty } from '@src/lib/helpers'
-import RatioArea from "@src/components/custom/RatioArea"
-import LinkWithLang from "@src/components/custom/LinkWithLang"
-import { genImageBlurHash } from "@src/lib/genImageBlurHash"
+import { QueryYachtsWithSeries } from '~/queries/pages/models.gql'
+import { fetchGQL } from '~/lib/apollo'
+import { isEmpty } from '~/lib/helpers'
+import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'
+import LinkWithLang from '~/components/custom/LinkWithLang'
+import { genImageBlurHash } from 'vanns-common-modules/dist/lib/next'
 
 interface TypeProps {
   lang: string

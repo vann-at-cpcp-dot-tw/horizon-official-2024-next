@@ -4,10 +4,7 @@ const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
 import Image from "next/image"
 import { Suspense, useRef, useEffect, useState } from 'react'
-import { useRouter } from 'next/navigation'
-import { useStore } from '@src/store'
-import useWindowSize from "@src/hooks/useWindowSize"
-import { isEmpty } from '@src/lib/helpers'
+import { useStore } from '~/store'
 import { motion } from "framer-motion"
 
 interface TypeProps {

@@ -1,43 +1,25 @@
 "use client"
 
-const API_URL = `${process.env.NEXT_PUBLIC_API_BASE}graphql`
-
-import { useState, ReactNode, createContext } from 'react'
-import { QueryClient, QueryClientProvider } from 'react-query'
-import dynamic from "next/dynamic"
-const DOMLoader = dynamic(() => import('@src/components/custom/dynamic/DOMLoader'), {ssr: false})
-
-import { ApolloLink, HttpLink } from "@apollo/client"
-import { ApolloNextAppProvider, NextSSRInMemoryCache, NextSSRApolloClient, SSRMultipartLink } from "@apollo/experimental-nextjs-app-support/ssr"
-
-import '@src/styles/main.sass'
+import '~/styles/index.sass'
 import 'swiper/css'
 import 'swiper/css/autoplay'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import 'swiper/css/scrollbar'
 
-function makeClient() {
-  const httpLink = new HttpLink({
-    uri: API_URL,
-  })
 
-  return new NextSSRApolloClient({
-    cache: new NextSSRInMemoryCache(),
-    link: typeof window === "undefined"
-      ? ApolloLink.from([
-        new SSRMultipartLink({
-          stripDefer: true,
-        }),
-        httpLink,
-      ])
-      : httpLink,
-  })
-}
+const API_URL = `${process.env.NEXT_PUBLIC_API_BASE}graphql`
+
+import { useState, ReactNode, createContext } from 'react'
+import dynamic from "next/dynamic"
+import ApolloClientProvider from "~/providers/Apollo"
+import { TranslateProvider } from "vanns-common-modules/dist/providers/react/Translate"
+import { createCommonDataContext } from "vanns-common-modules/dist/providers/react/CommonData"
+const DOMLoader = dynamic(() => import('~/components/custom/dynamic/DOMLoader'), {ssr: false})
 
 export interface CommonDataContextType {
-  yachtSeriesList?: {
-    nodes?: {
+  yachtSeriesList: {
+    nodes: {
       slug: string
       name: string
       description?: string
@@ -48,25 +30,29 @@ export interface CommonDataContextType {
   }
   [key: string]: any
 }
-export const CommonDataContext = createContext<CommonDataContextType>({})
+
+export const { Context: CommonDataContext, Provider: CommonDataProvider } = createCommonDataContext<CommonDataContextType>()
 
 export default function Providers({
   children,
   commonData,
+  translations,
 }:{
   children:ReactNode,
   commonData: {
     [key: string]: any
+  },
+  translations: {
+    [key: string]: string
   }
 }) {
-  const [queryClient] = useState(() => new QueryClient())
 
-  return <ApolloNextAppProvider makeClient={makeClient}>
-    <QueryClientProvider client={queryClient}>
-      <CommonDataContext.Provider value={commonData}>
+  return <ApolloClientProvider>
+    <CommonDataProvider commonData={commonData}>
+      <TranslateProvider translation={translations}>
         <DOMLoader />
         { children }
-      </CommonDataContext.Provider>
-    </QueryClientProvider>
-  </ApolloNextAppProvider>
+      </TranslateProvider>
+    </CommonDataProvider>
+  </ApolloClientProvider>
 }

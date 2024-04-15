@@ -4,9 +4,9 @@ const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
 import { useEffect, useRef } from 'react'
 import { twMerge } from 'tailwind-merge'
-import { isEmpty, numberWithCommas } from '@src/lib/helpers'
+import { isEmpty, numberFormat } from '~/lib/helpers'
 import { animate, useInView } from "framer-motion"
-import useWindowSize from "@src/hooks/useWindowSize"
+import { useWindowSize } from 'vanns-common-modules/dist/use/react'
 
 interface TypeProps {
   from: number
@@ -34,14 +34,14 @@ function DynamicAniCounter(props:TypeProps, ref:React.ReactNode){
     }
 
     if( !isInView ){
-      node.textContent = props.from === 0 ?'-' :numberWithCommas(props.from)
+      node.textContent = props.from === 0 ?'-' :numberFormat(props.from)
       return
     }
 
     const controls = animate(from, to,{
       duration: props?.duration || 1,
       onUpdate(value) {
-        node.textContent = numberWithCommas(value)
+        node.textContent = numberFormat(value)
       },
     })
 

@@ -4,12 +4,12 @@ const CONTENT_TYPE = process.env.NEXT_PUBLIC_CONTENT_TYPE || 'hq'
 const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
 
 import Image from "next/image"
-import LinkWithLang from "@src/components/custom/LinkWithLang"
-import { isEmpty } from '@src/lib/helpers'
+import LinkWithLang from '~/components/custom/LinkWithLang'
+import { isEmpty } from '~/lib/helpers'
 import { redirect } from "next/navigation"
-import { QueryTeamPage } from '@src/queries/pages/team.gql'
-import { fetchGQL } from "@src/lib/apollo"
-import RatioArea from "@src/components/custom/RatioArea"
+import { QueryTeamPage } from '~/queries/pages/team.gql'
+import { fetchGQL } from '~/lib/apollo'
+import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'
 
 interface TypeProps {
   params: {

@@ -1,14 +1,14 @@
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
 import Image from "next/image"
-import LinkWithLang from "@src/components/custom/LinkWithLang"
-import { isEmpty } from '@src/lib/helpers'
-import { QuerySinglePost, QueryPrevPosts, QueryNextPosts  } from '@src/queries/pages/news-[categorySlug]-[postSlug].gql'
-import { fetchGQL } from "@src/lib/apollo"
-import Breadcrumb from "@src/components/custom/Breadcrumb"
+import LinkWithLang from '~/components/custom/LinkWithLang'
+import { isEmpty } from '~/lib/helpers'
+import { QuerySinglePost, QueryPrevPosts, QueryNextPosts  } from '~/queries/pages/news-[categorySlug]-[postSlug].gql'
+import { fetchGQL } from '~/lib/apollo'
+import Breadcrumb from '~/components/custom/Breadcrumb'
 import PostSwiper from "./(templates)/PostSwiper"
 import RelatedPosts from "../../(templates)/RelatedPosts"
-import { genImageBlurHash } from "@src/lib/genImageBlurHash"
+import { genImageBlurHash } from 'vanns-common-modules/dist/lib/next'
 
 interface TypeProps {
   params: {

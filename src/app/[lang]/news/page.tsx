@@ -4,16 +4,16 @@ const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 const postsPerPage = 6
 
 import Image from "next/image"
-import LinkWithLang from "@src/components/custom/LinkWithLang"
-import { isEmpty } from '@src/lib/helpers'
-import { fetchGQL } from "@src/lib/apollo"
-import { QueryNewsPage } from '@src/queries/pages/news.gql'
+import LinkWithLang from '~/components/custom/LinkWithLang'
+import { isEmpty } from '~/lib/helpers'
+import { fetchGQL } from '~/lib/apollo'
+import { QueryNewsPage } from '~/queries/pages/news.gql'
 import CoverStory from "./(templates)/CoverStory"
 import ListNewsPage from "./(templates)/ListNewsPage"
 import ListNewsPageEvent from "./(templates)/ListNewsPageEvent"
 import BrandPublication from "./(templates)/BrandPublication"
 import OwnerPerspective from "./(templates)/OwnerPerspective"
-import { genImageBlurHash } from "@src/lib/genImageBlurHash"
+import { genImageBlurHash } from 'vanns-common-modules/dist/lib/next'
 
 interface TypeProps {
   params: {

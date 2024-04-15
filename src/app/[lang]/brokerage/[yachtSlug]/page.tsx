@@ -4,21 +4,21 @@ const CONTENT_TYPE = process.env.NEXT_PUBLIC_CONTENT_TYPE || 'hq'
 const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
 
 import Image from "next/image"
-import LinkWithLang from "@src/components/custom/LinkWithLang"
-import { isEmpty } from '@src/lib/helpers'
-import { QuerySingleBrokerage } from "@src/queries/pages/brokerage-[yachtSlug].gql"
-import { QuerySinglePublication } from '@src/queries/categories/publication.gql'
-import { fetchGQL } from "@root/src/lib/apollo"
-import Breadcrumb from "@root/src/components/custom/Breadcrumb"
-import SectionNav from "@src/app/[lang]/models/[seriesSlug]/[yachtSlug]/(templates)/SectionNav"
-import KV from "@src/app/[lang]/models/[seriesSlug]/[yachtSlug]/(sections)/KV"
-import Intro from "@src/app/[lang]/models/[seriesSlug]/[yachtSlug]/(sections)/Intro"
-import YachtsExteriorSwiper from "@src/app/[lang]/models/[seriesSlug]/[yachtSlug]/(sections)/YachtExteriorSwiper"
-import YachtInteriorSwiper from "@src/app/[lang]/models/[seriesSlug]/[yachtSlug]/(sections)/YachtInteriorSwiper"
-import SpecAndFeatures from "@src/app/[lang]/brokerage/(templates)/SpecAndFeatures"
-import Publication from "@src/app/[lang]/models/[seriesSlug]/[yachtSlug]/(sections)/Publication"
-import buttonStyles from '@src/components/ui/button.module.sass'
-import { Button } from "@src/components/ui/button"
+import LinkWithLang from '~/components/custom/LinkWithLang'
+import { isEmpty } from '~/lib/helpers'
+import { QuerySingleBrokerage } from '~/queries/pages/brokerage-[yachtSlug].gql'
+import { QuerySinglePublication } from '~/queries/categories/publication.gql'
+import { fetchGQL } from "~/lib/apollo"
+import Breadcrumb from "~/components/custom/Breadcrumb"
+import SectionNav from '~/app/[lang]/models/[seriesSlug]/[yachtSlug]/(templates)/SectionNav'
+import KV from '~/app/[lang]/models/[seriesSlug]/[yachtSlug]/(sections)/KV'
+import Intro from '~/app/[lang]/models/[seriesSlug]/[yachtSlug]/(sections)/Intro'
+import YachtsExteriorSwiper from '~/app/[lang]/models/[seriesSlug]/[yachtSlug]/(sections)/YachtExteriorSwiper'
+import YachtInteriorSwiper from '~/app/[lang]/models/[seriesSlug]/[yachtSlug]/(sections)/YachtInteriorSwiper'
+import SpecAndFeatures from '~/app/[lang]/brokerage/(templates)/SpecAndFeatures'
+import Publication from '~/app/[lang]/models/[seriesSlug]/[yachtSlug]/(sections)/Publication'
+import buttonStyles from '~/components/ui/button.module.sass'
+import { Button } from '~/components/ui/button'
 
 interface TypeProps {
   params: {

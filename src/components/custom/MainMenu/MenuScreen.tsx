@@ -7,13 +7,13 @@ import { Suspense, useContext, useMemo } from 'react'
 import { motion, AnimatePresence } from "framer-motion"
 import MenuVision from "./MenuVision"
 import { TypeMenuListNode } from "./index"
-import buttonStyles from '@src/components/ui/button.module.sass'
-import { Button } from "@src/components/ui/button"
+import buttonStyles from '~/components/ui/button.module.sass'
+import { Button } from '~/components/ui/button'
 import { useParams } from "next/navigation"
-import LinkWithLang from "@src/components/custom/LinkWithLang"
-import usePathnameWithoutLang from "@src/hooks/usePathnameWithoutLang"
-import useWindowSize from "@src/hooks/useWindowSize"
-import Loading from "@src/components/custom/icons/Loading"
+import LinkWithLang from '~/components/custom/LinkWithLang'
+import { usePathnameWithoutLang } from 'vanns-common-modules/dist/use/next'
+import { useWindowSize } from 'vanns-common-modules/dist/use/react'
+import Loading from '~/components/custom/icons/Loading'
 
 interface TypeProps {
   list: TypeMenuListNode[]

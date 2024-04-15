@@ -7,15 +7,11 @@ const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
 
 import { Suspense, useCallback } from 'react'
 import Image from "next/image"
-import LinkWithLang from "@src/components/custom/LinkWithLang"
+import LinkWithLang from '~/components/custom/LinkWithLang'
 import { twMerge } from 'tailwind-merge'
-import { isEmpty } from '@src/lib/helpers'
-
 import { useRouter, useSearchParams } from 'next/navigation'
-import usePathnameWithoutLang from "@root/src/hooks/usePathnameWithoutLang"
-// import { useStore } from '@src/store'
-// import useWindowSize from "@src/hooks/useWindowSize"
-
+import { usePathnameWithoutLang } from 'vanns-common-modules/dist/use/next'
+import { isEmpty } from "vanns-common-modules/dist/lib/helpers"
 interface TypeProps {
   yachtConditions?: {
     slug: string
@@ -31,9 +27,7 @@ interface TypeProps {
     minValue: string | number
     maxValue: string | number
   }[]
-  yearOptions?: {
-    value: string | number
-  }[]
+  yearOptions?: (string | number)[]
   [key:string]: any
 }
 interface TypeState {}
@@ -139,7 +133,7 @@ function ListFilters(props:TypeProps, ref:React.ReactNode){
           }
 
           {
-            props?.yearOptions && <div className="col-6 shrink lg:col-auto">
+            !isEmpty(props?.yearOptions) && <div className="col-6 shrink lg:col-auto">
               <div className="w-screen max-w-full lg:max-w-[177px]">
                 <select className="w-full border-b border-gray-700 bg-transparent text-gray-700"
                 value={queryYachtYear || ''}
@@ -148,8 +142,8 @@ function ListFilters(props:TypeProps, ref:React.ReactNode){
                 }}>
                   <option value="">All Years</option>
                   {
-                    props.yearOptions.map((node, index)=>{
-                      return <option key={index} value={`${node?.value}`}>{node?.value}</option>
+                    props?.yearOptions?.map((node, index)=>{
+                      return <option key={index} value={`${node}`}>{node}</option>
                     })
                   }
                 </select>

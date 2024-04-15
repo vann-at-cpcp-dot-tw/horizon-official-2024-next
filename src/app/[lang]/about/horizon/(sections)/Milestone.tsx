@@ -6,15 +6,12 @@ const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
 
 import { Suspense } from 'react'
 import Image from "next/image"
-import LinkWithLang from "@src/components/custom/LinkWithLang"
+import LinkWithLang from '~/components/custom/LinkWithLang'
 import { twMerge } from 'tailwind-merge'
-import { isEmpty } from '@src/lib/helpers'
-import RatioArea from "@root/src/components/custom/RatioArea"
-// import { useRouter } from 'next/navigation'
-// import { useStore } from '@src/store'
-import useWindowSize from "@root/src/hooks/useWindowSize"
-
-import milestonePic from '@root/public/assets/img/bg_about_milestone.jpg'
+import { isEmpty } from '~/lib/helpers'
+import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'
+import { useWindowSize } from "vanns-common-modules/dist/use/react"
+import milestonePic from '~~/public/assets/img/bg_about_milestone.jpg'
 
 interface TypeProps {
   lang: string

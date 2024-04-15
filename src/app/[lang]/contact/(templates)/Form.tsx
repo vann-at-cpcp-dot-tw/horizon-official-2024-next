@@ -7,14 +7,16 @@ const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
 
 import { Suspense, useCallback } from 'react'
 import Image from "next/image"
-import LinkWithLang from "@src/components/custom/LinkWithLang"
+import LinkWithLang from '~/components/custom/LinkWithLang'
 import { twMerge } from 'tailwind-merge'
-import { isEmpty, pathnameWithLang } from '@src/lib/helpers'
+import { i18n } from '~~/i18n.config'
+import { tools as langTools } from "vanns-common-modules/dist/use/next/useLangGuard"
+const { pathnameWithLang } = langTools(i18n)
 import { useRouter } from "next/navigation"
-import RatioArea from "@root/src/components/custom/RatioArea"
-import buttonStyles from '@src/components/ui/button.module.sass'
-import { Button } from "@src/components/ui/button"
-import ContentLightbox from "@src/components/custom/ContentLightbox"
+import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'
+import buttonStyles from '~/components/ui/button.module.sass'
+import { Button } from '~/components/ui/button'
+import ContentLightbox from '~/components/custom/ContentLightbox'
 
 interface TypeProps {
   children?: React.ReactNode

@@ -1,9 +1,9 @@
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
-import { Button } from '@src/components/ui/button'
-import { fetchGQL } from "@src/lib/apollo"
-import { QueryPageAboutTheGroup } from '@src/queries/pages/about-the-group.gql'
-import { isEmpty } from '@src/lib/helpers'
+import { Button } from '~/components/ui/button'
+import { fetchGQL } from '~/lib/apollo'
+import { QueryPageAboutTheGroup } from '~/queries/pages/about-the-group.gql'
+import { isEmpty } from '~/lib/helpers'
 import KV from "./(sections)/KV"
 import CompaniesGrids from "./(sections)/CompaniesGrids"
 import GroupIntroduction from "./(sections)/GroupIntroduction"

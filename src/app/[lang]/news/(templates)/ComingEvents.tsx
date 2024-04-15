@@ -4,16 +4,16 @@ const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
 import { Suspense, useMemo, useEffect } from 'react'
 import Image from "next/image"
-import LinkWithLang from "@src/components/custom/LinkWithLang"
+import LinkWithLang from '~/components/custom/LinkWithLang'
 import { twMerge } from 'tailwind-merge'
-import { isEmpty } from '@src/lib/helpers'
-import { QueryComingEvents } from '@src/queries/categories/coming-events.gql'
+import { isEmpty } from '~/lib/helpers'
+import { QueryComingEvents } from '~/queries/categories/coming-events.gql'
 import { useQuery } from "@apollo/client"
 import { usePathname, useSearchParams, useRouter } from "next/navigation"
 import ComingEventDetail from "./ComingEventDetail"
 
-// import { useStore } from '@src/store'
-// import useWindowSize from "@src/hooks/useWindowSize"
+// import { useStore } from '~/store'
+// import useWindowSize from '~/use/useWindowSize"
 
 interface TypeProps {
   isSmallLayout?: boolean
@@ -94,7 +94,7 @@ function ComingEvents(props:TypeProps, ref:React.ReactNode){
               <div className="serif mb-1 text-[21px] italic leading-[1.2] text-minor-900 lg:text-[32px]">{node?.title}</div>
               <div className="row !flex-nowrap items-end">
                 <div className="col-12 shrink">
-                  <div className="text-[14px] font-300 text-golden-700 lg:text-[20px]">{node?.comingEventCustomFields?.scheduleDate}</div>
+                  <div className="font-300 text-golden-700 lg:text-[20px]">{node?.comingEventCustomFields?.scheduleDate}</div>
                 </div>
                 <div className="col-auto hidden lg:flex">
                   <div className="btn-text border-gray-700 text-[13px] text-gray-700 lg:text-[16px]">More info</div>

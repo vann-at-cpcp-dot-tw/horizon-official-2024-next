@@ -4,15 +4,15 @@ const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
 import { Suspense, useEffect, useState, useCallback, useMemo } from 'react'
 import Image from "next/image"
-import LinkWithLang from "@src/components/custom/LinkWithLang"
+import LinkWithLang from '~/components/custom/LinkWithLang'
 import { twMerge } from 'tailwind-merge'
-import { isEmpty } from '@src/lib/helpers'
+import { isEmpty } from '~/lib/helpers'
 import { useScroll, useMotionValueEvent } from "framer-motion"
 
 
 // import { useRouter } from 'next/navigation'
-import { useStore } from '@src/store'
-// import useWindowSize from "@src/hooks/useWindowSize"
+import { useStore } from '~/store'
+// import useWindowSize from '~/use/useWindowSize"
 
 interface TypeProps {
   allowed?: string[]

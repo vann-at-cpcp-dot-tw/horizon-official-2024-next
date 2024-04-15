@@ -33,7 +33,6 @@ module.exports = defineConfig({
         // CallExpression: { arguments: 1 },
       },
     ],
-    "react-hooks/exhaustive-deps": 'off',
     "jsx-a11y/alt-text": ['off'],
     // from eslint-plugin-tailwind
     'tailwindcss/no-custom-classname': 'off',

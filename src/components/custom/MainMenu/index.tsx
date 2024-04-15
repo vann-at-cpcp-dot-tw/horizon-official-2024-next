@@ -5,16 +5,18 @@ const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
 
 import Image from "next/image"
 import { Suspense, useContext, useState, useEffect, useMemo, useReducer } from 'react'
-import { CommonDataContext } from '@src/app/[lang]/providers'
+import { CommonDataContext } from '~/app/[lang]/providers'
 import { useParams, useRouter } from 'next/navigation'
-import { useStore } from '@src/store'
-import useWindowSize from "@src/hooks/useWindowSize"
+import { useStore } from '~/store'
+import { useWindowSize } from 'vanns-common-modules/dist/use/react'
 import { usePathname } from "next/navigation"
-import { isEmpty, pathnameWithLang } from '@src/lib/helpers'
+import { i18n } from '~~/i18n.config'
+import { tools as langTools } from "vanns-common-modules/dist/use/next/useLangGuard"
+const { pathnameWithLang } = langTools(i18n)
 import { motion, AnimatePresence } from "framer-motion"
 import MenuScreen from "./MenuScreen"
-import Portal from "@src/components/custom/Portal"
-import usePathnameWithoutLang from "@src/hooks/usePathnameWithoutLang"
+import Portal from 'vanns-common-modules/dist/components/react/Portal'
+import { usePathnameWithoutLang } from 'vanns-common-modules/dist/use/next'
 
 interface TypeProps {}
 interface TypeState {}
@@ -273,7 +275,7 @@ function MainMenu(props:TypeProps, ref:React.ReactNode){
                     }
 
                     setIsPageChanging(true)
-                    router.push(pathnameWithLang(`/models/${seriesData?.slug}/${yachtData.slug}`, lang))
+                    router.push(pathnameWithLang(`/models/${seriesData?.slug}/${yachtData.slug}`, lang as string))
                   }
                 }
               }

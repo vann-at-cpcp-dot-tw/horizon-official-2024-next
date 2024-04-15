@@ -2,13 +2,13 @@
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
 import Image from "next/image"
-import LinkWithLang from "@src/components/custom/LinkWithLang"
-import { isEmpty } from '@src/lib/helpers'
-import { fetchGQL } from "@src/lib/apollo"
-import { QueryPublicationsPage } from '@src/queries/pages/publications.gql'
+import LinkWithLang from '~/components/custom/LinkWithLang'
+import { isEmpty } from '~/lib/helpers'
+import { fetchGQL } from '~/lib/apollo'
+import { QueryPublicationsPage } from '~/queries/pages/publications.gql'
 import LocalDataProvider from "./(templates)/LocalDataProvider"
 import PageTop from './(templates)/PageTop'
-import { genImageBlurHash } from "@src/lib/genImageBlurHash"
+import { genImageBlurHash } from 'vanns-common-modules/dist/lib/next'
 
 
 export interface TypePublicationNode {

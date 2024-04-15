@@ -3,13 +3,13 @@
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
 import { Suspense, useRef } from 'react'
-import LinkWithLang from "@src/components/custom/LinkWithLang"
-import buttonStyles from '@src/components/ui/button.module.sass'
-import { Button } from "@src/components/ui/button"
+import LinkWithLang from '~/components/custom/LinkWithLang'
+import buttonStyles from '~/components/ui/button.module.sass'
+import { Button } from '~/components/ui/button'
 import { useParams } from "next/navigation"
-import OverflowContent from "@src/components/custom/OverflowContent"
+import OverflowContent from '~/components/custom/OverflowContent'
 import { motion, useInView } from "framer-motion"
-import useWindowSize from "@src/hooks/useWindowSize"
+import { useWindowSize } from 'vanns-common-modules/dist/use/react'
 
 interface TypeProps {}
 interface TypeState {}
@@ -28,7 +28,7 @@ function Intro(props:TypeProps, ref:React.ReactNode){
       <div className="container mb-5 lg:mb-10" ref={animateAnchorRef}>
         <OverflowContent
         animate={animateAnchorIsInView}>
-          <div className="serif mb-3 text-center text-[24px] text-major-700 lg:mb-6 lg:text-[48px]">Exploring <span className="italic">Possibilities</span>, Daring to   <span className="italic">Challenge</span>,<br/>and Pursuing Excellence.</div>
+          <div className="serif mb-3 text-center text-[24px] text-major-700 lg:mb-6 lg:text-[48px]">Exploring <span className="italic">Possibilities</span>, Daring to <span className="italic">Challenge</span>,<br/>and Pursuing Excellence.</div>
         </OverflowContent>
         <OverflowContent
         animate={animateAnchorIsInView}

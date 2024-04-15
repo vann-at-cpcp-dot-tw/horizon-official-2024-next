@@ -6,14 +6,14 @@ const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
 
 import Image from "next/image"
 import { Suspense, useEffect, useMemo } from 'react'
-import { useStore } from '@src/store'
-import useDomNodeSize from "@src/hooks/useDomNodeSize"
+import { useStore } from '~/store'
+import { useDomNodeSize } from 'vanns-common-modules/dist/use/react'
 import { useParams, usePathname } from "next/navigation"
 import { twMerge } from 'tailwind-merge'
 import MainMenu from "./MainMenu"
 import LinkWithLang from "./LinkWithLang"
 import { useWindowScroll } from 'react-use'
-import usePathnameWithoutLang from "@src/hooks/usePathnameWithoutLang"
+import { usePathnameWithoutLang } from 'vanns-common-modules/dist/use/next'
 
 interface TypeProps {
   className?: string

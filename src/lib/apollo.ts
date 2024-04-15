@@ -1,54 +1,40 @@
-import { HttpLink } from "@apollo/client"
-import { NextSSRInMemoryCache, NextSSRApolloClient} from "@apollo/experimental-nextjs-app-support/ssr"
-import { registerApolloClient } from "@apollo/experimental-nextjs-app-support/rsc"
-import { TypedDocumentNode } from "@graphql-typed-document-node/core"
-
 const API_URL = `${process.env.NEXT_PUBLIC_API_BASE}graphql`
-const revalidate = Number(process.env.NEXT_PUBLIC_REVALIDATE || 60)
+const REVALIDATE = Number(process.env.NEXT_PUBLIC_REVALIDATE || 60)
 
-interface TypeFetchQLArgs {
-  variables?:{
-    [key:string]: any
-  }
-  context?:{
-    [key:string]: any
-  }
-}
+import { IFetchGQLArgs } from "vanns-common-modules/dist/lib/next/apollo"
+import { makeApolloClient, makeFetcher } from "vanns-common-modules/dist/lib/next/apollo/server"
+import { TypedDocumentNode } from "@graphql-typed-document-node/core"
+import { i18n } from "~~/i18n.config"
+import { tools as langTools } from "vanns-common-modules/dist/use/next/useLangGuard"
 
+const { convertLocaleCode } = langTools(i18n)
 
-
-export const { getClient } = registerApolloClient(() => {
-  return new NextSSRApolloClient({
-    cache: new NextSSRInMemoryCache(),
-    link: new HttpLink({
-      uri: API_URL,
-    }),
-  })
+const { getClient } = makeApolloClient({
+  uri: API_URL,
+  revalidate: REVALIDATE
+  // memoryCacheOptions: {
+  //   typePolicies: {
+  //     myElementNode: {
+  //       keyFields: ['id', 'name'],
+  //     },
+  //   },
+  // },
 })
 
-export const fetchGQL = async function(query:TypedDocumentNode, args?:TypeFetchQLArgs){
-  const { variables, context } = args ?? { variables:{}, context:null }
+const fetchGQLWrapper = makeFetcher(getClient)
 
-  const result = await getClient().query({
-    query,
-    variables: variables ?variables :{},
-    context: context
-      ? {
-        fetchOptions: {
-          next: {
-            revalidate
-          },
-        },
-        ...context
+export async function fetchGQL(query:TypedDocumentNode, args?:IFetchGQLArgs){
+  const { context, ...restArgs } = args ?? {}
+  const headers = context?.headers || {}
+  // const localeCode = convertLocaleCode(lang, 'long')
+  return await fetchGQLWrapper(query, {
+    ...restArgs,
+    context: {
+      ...(context || {}),
+      headers: {
+        ...headers
+        // "accept-language": localeCode
       }
-      : {
-        fetchOptions: {
-          next: {
-            revalidate
-          },
-        },
-      },
+    }
   })
-
-  return result?.data
 }

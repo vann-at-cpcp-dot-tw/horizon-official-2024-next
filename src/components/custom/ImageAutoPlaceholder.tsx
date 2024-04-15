@@ -1,6 +1,6 @@
 import Image from "next/image"
 // import { twMerge } from 'tailwind-merge'
-import { genImageBlurHash } from "@root/src/lib/genImageBlurHash"
+import { genImageBlurHash } from 'vanns-common-modules/dist/lib/next'
 
 interface TypeProps {
   [key:string]: any

@@ -3,10 +3,10 @@ const CONTENT_TYPE = process.env.NEXT_PUBLIC_CONTENT_TYPE || 'hq'
 const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
 
 import Image from "next/image"
-import LinkWithLang from "@src/components/custom/LinkWithLang"
-import { isEmpty } from '@src/lib/helpers'
-import { QueryQA } from '@src/queries/pages/QA.gql'
-import { fetchGQL } from "@root/src/lib/apollo"
+import LinkWithLang from '~/components/custom/LinkWithLang'
+import { isEmpty } from '~/lib/helpers'
+import { QueryQA } from '~/queries/pages/QA.gql'
+import { fetchGQL } from "~/lib/apollo"
 import QAList from "./(templates)/QAList"
 
 interface TypeProps {

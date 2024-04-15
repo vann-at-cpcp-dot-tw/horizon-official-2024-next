@@ -5,15 +5,15 @@ const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 import { Suspense, useState, useMemo, useEffect } from 'react'
 import Image from "next/image"
 import { twMerge } from 'tailwind-merge'
-import RatioArea from "@src/components/custom/RatioArea"
-import useDomNodeSize from "@src/hooks/useDomNodeSize"
+import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'
+import { useDomNodeSize } from 'vanns-common-modules/dist/use/react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { SwiperClass } from "swiper/react"
 import { EffectFade } from 'swiper/modules'
-import useWindowSize from "@root/src/hooks/useWindowSize"
-import useImageBlurHashes from "@src/hooks/useImageBlurHashes"
-import ContentLightbox from "@src/components/custom/ContentLightbox"
-import SwiperFullHeight from "@src/components/custom/SwiperFullHeight"
+import { useWindowSize } from 'vanns-common-modules/dist/use/react'
+import { useImageBlurHashes } from 'vanns-common-modules/dist/use/next'
+import ContentLightbox from '~/components/custom/ContentLightbox'
+import SwiperFullHeight from '~/components/custom/SwiperFullHeight'
 
 interface TypeProps {
   list: {

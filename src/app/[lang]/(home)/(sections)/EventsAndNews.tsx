@@ -2,9 +2,9 @@ const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
 import { Suspense } from 'react'
 import { useRouter } from 'next/navigation'
-import { useStore } from '@src/store'
-import useWindowSize from "@src/hooks/useWindowSize"
-import { isEmpty } from '@src/lib/helpers'
+import { useStore } from '~/store'
+import { useWindowSize } from 'vanns-common-modules/dist/use/react'
+import { isEmpty } from '~/lib/helpers'
 
 interface TypeProps {}
 interface TypeState {}

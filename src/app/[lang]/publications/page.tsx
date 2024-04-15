@@ -2,9 +2,9 @@
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
 import Image from "next/image"
-import LinkWithLang from "@src/components/custom/LinkWithLang"
-import { isEmpty } from '@src/lib/helpers'
-import { fetchGQL } from "@src/lib/apollo"
+import LinkWithLang from '~/components/custom/LinkWithLang'
+import { isEmpty } from '~/lib/helpers'
+import { fetchGQL } from '~/lib/apollo'
 import All from "./(sections)/All"
 
 interface TypeProps {

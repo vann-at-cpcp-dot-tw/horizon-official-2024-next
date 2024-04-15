@@ -2,13 +2,13 @@ const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 const postsPerPage = 10
 
 import Image from "next/image"
-import LinkWithLang from "@src/components/custom/LinkWithLang"
-import { isEmpty } from '@src/lib/helpers'
-import { fetchGQL } from "@src/lib/apollo"
-import { QueryPostsByCategory } from '@src/queries/pages/news-[categorySlug].gql'
+import LinkWithLang from '~/components/custom/LinkWithLang'
+import { isEmpty } from '~/lib/helpers'
+import { fetchGQL } from '~/lib/apollo'
+import { QueryPostsByCategory } from '~/queries/pages/news-[categorySlug].gql'
 import ListWithCategory from "../(templates)/ListWithCategory"
 import ComingEvents from "../(templates)/ComingEvents"
-import Breadcrumb from "@src/components/custom/Breadcrumb"
+import Breadcrumb from '~/components/custom/Breadcrumb'
 
 interface TypeProps {
   params: {

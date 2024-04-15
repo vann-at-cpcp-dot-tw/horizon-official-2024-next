@@ -4,12 +4,12 @@ const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
 import { Suspense, useState, useEffect } from 'react'
 import Image from "next/image"
-import LinkWithLang from "@src/components/custom/LinkWithLang"
+import LinkWithLang from '~/components/custom/LinkWithLang'
 import { twMerge } from 'tailwind-merge'
-import Loading from "@src/components/custom/icons/Loading"
-import { calcSizeByRatio } from "@src/lib/helpers"
-import useDomNodeSize from "@src/hooks/useDomNodeSize"
-import ContentLightbox from "@src/components/custom/ContentLightbox"
+import Loading from '~/components/custom/icons/Loading'
+import { calcSizeByRatio } from '~/lib/helpers'
+import { useDomNodeSize } from 'vanns-common-modules/dist/use/react'
+import ContentLightbox from '~/components/custom/ContentLightbox'
 
 interface TypeProps {
   list: {
@@ -48,7 +48,7 @@ function IFrameGallery(props:TypeProps, ref:React.ReactNode){
     const heightBasedSize = calcSizeByRatio({w:null, h:contentWrapperSize.height, ratio:props.iframeRatio})
 
     // 如果寬撐滿時高會超出，那就改成高撐滿模式
-    if( widthBasedSize?.h > contentWrapperSize.height ){
+    if( widthBasedSize?.h && (widthBasedSize?.h > contentWrapperSize.height) ){
       setIframeSize(heightBasedSize || iframeSize)
     }else{
       setIframeSize(widthBasedSize || iframeSize)

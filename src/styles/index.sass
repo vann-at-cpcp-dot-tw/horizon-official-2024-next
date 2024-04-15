@@ -1,6 +1,6 @@
-@import before-after.sass
-@import bootstrap-icons.sass
-@import btn.sass
+@import variables
+@import "~~/node_modules/vanns-common-modules/src/styles/index.sass"
+@import variables
 
 *
   box-sizing: border-box
@@ -35,14 +35,6 @@ body
   // Bold 700
   // Heavy 900
 
-.serif
-  font-family: 'kepler-std-display', serif
-
-// html
-//   &.lg-on
-//     overflow: hidden
-//     body
-//       overflow: hidden
 
 body
   opacity: 0
@@ -70,18 +62,8 @@ body
   position: relative
   @apply h-screen flex flex-col flex-nowrap
 
-.sticky
-  position: relative
-  position: sticky
-
-.disabled
-  pointer-events: none
-
-.flex
-  flex-wrap: wrap
-
-.flex-col
-  flex-wrap: nowrap
+.serif
+  font-family: 'kepler-std-display', serif
 
 a
   color: inherit
@@ -92,24 +74,10 @@ a
   &:visited
     text-decoration: none
 
-hr
-  padding: 0px
-  margin: 0px
-  border: none
-  border-top: solid 1px
+.btn-text
+  @apply border-b-[3px] inline
+  // @apply pb-[0.05em]
 
-img
-  max-width: 100%
-  display: block
-  user-drag: none
-  user-select: none
-  -webkit-user-drag: none
-
-h1, h2, h3, h4
-  text-wrap: balance
-
-p
-  text-wrap: pretty
 
 #nprogress
   visibility: hidden
@@ -176,16 +144,16 @@ p
   .swiper-wrapper
     display: flex
     align-items: center
-    transition-duration: .8s !important
+    transition-duration: 1.2s !important
   .swiper-slide
     width: auto !important
     display: flex
     align-items: center
     .slide-inner
       position: relative
-      width: 39vw
+      width: 62vw
       padding: 0px 20px
-      transition: all .8s cubic-bezier(0.215, 0.610, 0.355, 1.000)
+      transition: all 1.2s cubic-bezier(0.215, 0.610, 0.355, 1.000)
       @media(max-width: 991px)
         width: 75vw
         padding: 0px 8px

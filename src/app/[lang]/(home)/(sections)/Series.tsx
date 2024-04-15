@@ -3,8 +3,8 @@
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
 import { Suspense, useMemo, useContext } from 'react'
-import SwiperOverflow from "@src/components/custom/SwiperOverflow"
-import { CommonDataContext } from '@src/app/[lang]/providers'
+import SwiperOverflow from '~/components/custom/SwiperOverflow'
+import { CommonDataContext, CommonDataContextType } from '~/app/[lang]/providers'
 
 interface TypeProps {}
 interface TypeState {}
@@ -12,10 +12,10 @@ interface TypeState {}
 function Series(props:TypeProps, ref:React.ReactNode){
 
   const commonData = useContext(CommonDataContext)
-  const { yachtSeriesList } = commonData
+  const { yachtSeriesList } = commonData ?? {}
 
   const seriesList = useMemo(()=>{
-    return yachtSeriesList?.nodes?.map?.((listNode)=>{
+    return yachtSeriesList?.nodes?.map?.((listNode:CommonDataContextType['yachtSeriesList']['nodes'][number])=>{
       return {
         slug: listNode.slug,
         label: listNode.name,
@@ -25,14 +25,20 @@ function Series(props:TypeProps, ref:React.ReactNode){
           <div className="mb-2 text-[12px] font-700 lg:text-[15px]">{listNode?.name} Series</div>
           <div className="serif mb-2 text-[16px] leading-[1.2] lg:text-[24px]">{listNode?.yachtsSeriesCustomFields?.seriesSimpleDescription}</div>
         </div>
-
-
       }
     })
   }, [yachtSeriesList])
 
   return <Suspense fallback={null}>
-    <SwiperOverflow list={seriesList} listTitle="Series"/>
+    <SwiperOverflow list={seriesList} listTitle="Series"
+    swiperOptions={{
+      autoplay: {
+        delay: 5000,
+        // disableOnInteraction: true,
+        // disableOnInteraction: false,
+        // pauseOnMouseEnter: true,
+      }
+    }}/>
   </Suspense>
 }
 

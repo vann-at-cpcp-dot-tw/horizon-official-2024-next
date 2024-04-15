@@ -7,17 +7,17 @@ const postsPerPage = 30
 
 import { Suspense, useState, useMemo, useEffect } from 'react'
 import Image from "next/image"
-import LinkWithLang from "@src/components/custom/LinkWithLang"
+import LinkWithLang from '~/components/custom/LinkWithLang'
 import { twMerge } from 'tailwind-merge'
-import { isEmpty } from '@src/lib/helpers'
-import { QueryBrokerages } from '@src/queries/pages/brokerage.gql'
-import { QueryCharters } from '@src/queries/pages/charter.gql'
+import { isEmpty } from '~/lib/helpers'
+import { QueryBrokerages } from '~/queries/pages/brokerage.gql'
+import { QueryCharters } from '~/queries/pages/charter.gql'
 import { useLazyQuery } from "@apollo/client"
 import { useRouter, useParams, useSearchParams } from 'next/navigation'
 import ListFilters from "./ListFilters"
 import ListItem from "./ListItem"
-import PageNav from "@src/components/custom/PageNav"
-import Loading from "@src/components/custom/icons/Loading"
+import PageNav from '~/components/custom/PageNav'
+import Loading from '~/components/custom/icons/Loading'
 
 interface TypeUsedYachtNode {
   [key:string]: any
@@ -46,9 +46,7 @@ interface TypeProps {
     minValue: string | number
     maxValue: string | number
   }[]
-  yearOptions?: {
-    value: string | number
-  }[]
+  yearOptions?: (string | number)[]
   [key:string]: any
 }
 

@@ -5,12 +5,12 @@ const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
 const postsPerPage = 30
 
 import Image from "next/image"
-import LinkWithLang from "@src/components/custom/LinkWithLang"
+import LinkWithLang from '~/components/custom/LinkWithLang'
 import { redirect } from "next/navigation"
-import { isEmpty } from '@src/lib/helpers'
-import { QueryCharterPage } from '@src/queries/pages/charter.gql'
-import { fetchGQL } from "@src/lib/apollo"
-import List from "@src/app/[lang]/brokerage/(templates)/List"
+import { isEmpty } from '~/lib/helpers'
+import { QueryCharterPage } from '~/queries/pages/charter.gql'
+import { fetchGQL } from '~/lib/apollo'
+import List from '~/app/[lang]/brokerage/(templates)/List'
 
 interface TypeProps {
   params: {
@@ -44,7 +44,7 @@ async function PageCharters({params}:TypeProps){
     yachtConditions={yachtConditions}
     lengthOptions={settings?.lengthOptions}
     priceOptions={settings?.priceOptions}
-    yearOptions={settings?.yearOptions}
+    yearOptions={data?.yachtYears}
     list={posts}
     pageInfo={data?.posts?.pageInfo} />
 

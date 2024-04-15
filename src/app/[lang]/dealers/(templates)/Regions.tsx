@@ -7,13 +7,10 @@ const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
 
 import { Suspense, useState } from 'react'
 import Image from "next/image"
-import LinkWithLang from "@src/components/custom/LinkWithLang"
+import LinkWithLang from '~/components/custom/LinkWithLang'
 import { twMerge } from 'tailwind-merge'
-import { isEmpty } from '@src/lib/helpers'
+import { isEmpty } from '~/lib/helpers'
 import { motion, AnimatePresence } from "framer-motion"
-// import { useRouter } from 'next/navigation'
-// import { useStore } from '@src/store'
-// import useWindowSize from "@src/hooks/useWindowSize"
 
 interface TypeProps {
   [key:string]: any
@@ -94,10 +91,13 @@ function RegionsNav(props:TypeProps, ref:React.ReactNode){
                       node?.dealers?.nodes?.map((dealerNode:{[key:string]:any}, dealerIndex:number)=>{
                         return <div className="item mb-8" key={`${index}-${dealerIndex}`}>
                           <div className="text-[14px] text-gray-300">{ dealerNode?.dealerRegions?.nodes?.[0]?.name }</div>
-                          <div className="flex flex-nowrap items-center">
-                            <div className="mb-1 shrink text-[20px] text-gray-700">{ dealerNode?.title }</div>
+                          <div className="mb-1 flex flex-nowrap items-center">
+                            <div className="shrink text-[20px] text-gray-700">{ dealerNode?.title }</div>
                             {
-                              dealerNode?.dealerCustomFields?.website && <a className="btn-opacity ml-2 text-golden-900" href={dealerNode?.dealerCustomFields?.website}>Website</a>
+                              dealerNode?.dealerCustomFields?.website && <a className="btn-opacity ml-2 mt-0.5 text-golden-900" href={dealerNode?.dealerCustomFields?.website}>Website</a>
+                            }
+                            {
+                              dealerNode.dealerCustomFields?.address && <a className="btn-opacity ml-2 mt-0.5 text-golden-900" href={`https://www.google.com/maps/search/${encodeURI(dealerNode.dealerCustomFields?.address)}`} target="_blank">Map</a>
                             }
                           </div>
                           {
@@ -111,12 +111,7 @@ function RegionsNav(props:TypeProps, ref:React.ReactNode){
                             </div>
                           }
                           {
-                            dealerNode.dealerCustomFields?.address && <>
-                              <div className="mb-0.5 font-300 text-gray-700">{dealerNode.dealerCustomFields?.address}</div>
-                              <div className="flex">
-                                <a className="btn-text font-300 text-gray-700" href={`https://www.google.com/maps/search/${encodeURI(dealerNode.dealerCustomFields?.address)}`} target="_blank">map</a>
-                              </div>
-                            </>
+                            dealerNode.dealerCustomFields?.address && <div className="mb-0.5 font-300 text-gray-700">{dealerNode.dealerCustomFields?.address}</div>
                           }
                         </div>
                       })

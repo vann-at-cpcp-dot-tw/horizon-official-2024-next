@@ -5,9 +5,9 @@ const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 import { Suspense, useRef, useState, useEffect } from 'react'
 import Image from "next/image"
 import { twMerge } from 'tailwind-merge'
-import RatioArea from "@src/components/custom/RatioArea"
+import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'
 import { motion } from "framer-motion"
-import { useStore } from '@src/store'
+import { useStore } from '~/store'
 
 interface TypeProps {
   video: string

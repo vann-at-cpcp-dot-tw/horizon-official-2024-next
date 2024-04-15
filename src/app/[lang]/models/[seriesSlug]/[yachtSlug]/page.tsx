@@ -1,11 +1,11 @@
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
-import LinkWithLang from "@src/components/custom/LinkWithLang"
-import { isEmpty, convertYoutubeUrlToEmbed } from '@src/lib/helpers'
-import { fetchGQL } from "@src/lib/apollo"
-import { QuerySingleYachtPage } from '@src/queries/pages/models-[seriesSlug]-[yachtSlug].gql'
+import LinkWithLang from '~/components/custom/LinkWithLang'
+import { isEmpty, convertYoutubeUrlToEmbed } from '~/lib/helpers'
+import { fetchGQL } from '~/lib/apollo'
+import { QuerySingleYachtPage } from '~/queries/pages/models-[seriesSlug]-[yachtSlug].gql'
 import { notFound } from "next/navigation"
-import Breadcrumb from "@src/components/custom/Breadcrumb"
+import Breadcrumb from '~/components/custom/Breadcrumb'
 import SectionNav from "./(templates)/SectionNav"
 import KV from "./(sections)/KV"
 import Intro from "./(sections)/Intro"
@@ -17,9 +17,9 @@ import VRPreview from "./(sections)/VRPreview"
 import VideoPreview from "./(sections)/VideoPreview"
 import Hulls from "./(sections)/Hulls"
 import Publication from "./(sections)/Publication"
-import buttonStyles from '@src/components/ui/button.module.sass'
-import { Button } from "@src/components/ui/button"
-import News from "@src/app/[lang]/(home)/(sections)/News"
+import buttonStyles from '~/components/ui/button.module.sass'
+import { Button } from '~/components/ui/button'
+import News from '~/app/[lang]/(home)/(sections)/News'
 
 interface TypeProps {
   params: {

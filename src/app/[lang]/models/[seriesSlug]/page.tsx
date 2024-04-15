@@ -2,11 +2,11 @@ const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
 import { Suspense } from 'react'
 import { useRouter } from 'next/navigation'
-import { useStore } from '@src/store'
-import useWindowSize from "@src/hooks/useWindowSize"
-import { isEmpty } from '@src/lib/helpers'
-import { fetchGQL } from '@src/lib/apollo'
-import { QuerySingleSeriesPage } from '@src/queries/pages/models-[seriesSlug].gql'
+import { useStore } from '~/store'
+import { useWindowSize } from 'vanns-common-modules/dist/use/react'
+import { isEmpty } from '~/lib/helpers'
+import { fetchGQL } from '~/lib/apollo'
+import { QuerySingleSeriesPage } from '~/queries/pages/models-[seriesSlug].gql'
 import SingleSeriesTop from "./(sections)/SingleSeriesTop"
 import YachtsSwiper from "./(sections)/YachtsSwiper"
 

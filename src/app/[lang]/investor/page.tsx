@@ -5,10 +5,10 @@ const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
 const postsPerPage = 10
 
 import Image from "next/image"
-import LinkWithLang from "@src/components/custom/LinkWithLang"
-import { isEmpty } from '@src/lib/helpers'
-import { QueryInvestorPage } from '@src/queries/pages/investor.gql'
-import { fetchGQL } from "@src/lib/apollo"
+import LinkWithLang from '~/components/custom/LinkWithLang'
+import { isEmpty } from '~/lib/helpers'
+import { QueryInvestorPage } from '~/queries/pages/investor.gql'
+import { fetchGQL } from '~/lib/apollo'
 import List from "./(templates)/List"
 
 interface TypeProps {

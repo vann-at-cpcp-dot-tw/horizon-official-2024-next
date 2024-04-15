@@ -1,7 +1,7 @@
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
 import { Suspense } from 'react'
-import { isEmpty } from '@src/lib/helpers'
+import { isEmpty } from '~/lib/helpers'
 import SeriesList from "./(templates)/SeriesList"
 
 interface TypeProps {
