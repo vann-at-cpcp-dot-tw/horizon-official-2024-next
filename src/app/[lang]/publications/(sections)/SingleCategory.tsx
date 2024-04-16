@@ -13,6 +13,7 @@ import { useLazyQuery } from "@apollo/client"
 import { QueryPublicationCategory } from '~/queries/pages/publications-[publicationCategorySlug].gql'
 import { TypePublicationCategoryNode, TypePublicationNode } from "../layout"
 import { useImageBlurHashes } from 'vanns-common-modules/dist/use/next'
+import { useWindowSize } from 'vanns-common-modules/dist/use/react'
 import Loading from '~/components/custom/icons/Loading'
 import PageNav from '~/components/custom/PageNav'
 
@@ -70,6 +71,7 @@ function SingleCategory(props:TypeProps, ref:React.ReactNode){
       return node?.publicationCustomFields?.publication?.publicationCover?.node?.mediaItemUrl || ''
     }) || []
   }, [publicationCategory])
+  const viewport = useWindowSize()
   const placeholders = useImageBlurHashes(images)
 
   if( loading ){
@@ -123,13 +125,17 @@ function SingleCategory(props:TypeProps, ref:React.ReactNode){
                         <i className="bi bi-plus-lg text-[24px] text-white"></i>
                       </div>
                     </div>
-                    <Image className="mb-2 h-auto w-full lg:h-[320px] lg:w-auto"
+                    <Image className="mb-2"
                     src={`${node.publicationCustomFields?.publication?.publicationCover?.node?.mediaItemUrl || ''}`}
                     alt=""
+                    style={{
+                      width: viewport.width && viewport.width>=992 ?'auto' :'66vw',
+                      height: viewport.width && viewport.width>=992 ?`${publicationCategorySlug === 'brand-publication' ?525 :320}px` :'auto',
+                    }}
+                    width={380}
+                    height={publicationCategory.slug === 'brand-publication' ?525 :320}
                     placeholder={placeholders?.[index] ?'blur' :'empty'}
-                    blurDataURL={placeholders?.[index]}
-                    width={640}
-                    height={320} />
+                    blurDataURL={placeholders?.[index]} />
                   </div>
                   <div className="relative h-8 text-gray-500">
                     <div className="absolute line-clamp-2 w-full">{ node.title }</div>
