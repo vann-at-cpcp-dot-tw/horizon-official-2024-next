@@ -14,10 +14,10 @@ import { useState, ReactNode, createContext } from 'react'
 import dynamic from "next/dynamic"
 import ApolloClientProvider from "~/providers/Apollo"
 import { TranslateProvider } from "vanns-common-modules/dist/providers/react/Translate"
-import { createCommonDataContext } from "vanns-common-modules/dist/providers/react/CommonData"
+import { createScopeStoreProvider } from "vanns-common-modules/dist/providers/react"
 const DOMLoader = dynamic(() => import('~/components/custom/dynamic/DOMLoader'), {ssr: false})
 
-export interface CommonDataContextType {
+export interface ICommonData {
   yachtSeriesList: {
     nodes: {
       slug: string
@@ -31,7 +31,7 @@ export interface CommonDataContextType {
   [key: string]: any
 }
 
-export const { Context: CommonDataContext, Provider: CommonDataProvider } = createCommonDataContext<CommonDataContextType>()
+export const { ScopeStoreProvider:CommonDataProvider, useScopeStore:useCommonData } = createScopeStoreProvider<ICommonData>()
 
 export default function Providers({
   children,
@@ -39,16 +39,14 @@ export default function Providers({
   translations,
 }:{
   children:ReactNode,
-  commonData: {
-    [key: string]: any
-  },
+  commonData: ICommonData,
   translations: {
     [key: string]: string
   }
 }) {
 
   return <ApolloClientProvider>
-    <CommonDataProvider commonData={commonData}>
+    <CommonDataProvider state={commonData}>
       <TranslateProvider translation={translations}>
         <DOMLoader />
         { children }

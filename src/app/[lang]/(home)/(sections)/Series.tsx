@@ -4,18 +4,18 @@ const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
 import { Suspense, useMemo, useContext } from 'react'
 import SwiperOverflow from '~/components/custom/SwiperOverflow'
-import { CommonDataContext, CommonDataContextType } from '~/app/[lang]/providers'
+import { ICommonData, useCommonData } from "~/app/[lang]/providers"
 
 interface TypeProps {}
 interface TypeState {}
 
 function Series(props:TypeProps, ref:React.ReactNode){
 
-  const commonData = useContext(CommonDataContext)
+  const commonData = useCommonData()
   const { yachtSeriesList } = commonData ?? {}
 
   const seriesList = useMemo(()=>{
-    return yachtSeriesList?.nodes?.map?.((listNode:CommonDataContextType['yachtSeriesList']['nodes'][number])=>{
+    return yachtSeriesList?.nodes?.map?.((listNode:ICommonData['yachtSeriesList']['nodes'][number])=>{
       return {
         slug: listNode.slug,
         label: listNode.name,

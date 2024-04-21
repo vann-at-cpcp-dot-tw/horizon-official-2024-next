@@ -5,7 +5,7 @@ const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
 
 import Image from "next/image"
 import { Suspense, useContext, useState, useEffect, useMemo, useReducer } from 'react'
-import { CommonDataContext } from '~/app/[lang]/providers'
+import { ICommonData, useCommonData } from "~/app/[lang]/providers"
 import { useParams, useRouter } from 'next/navigation'
 import { useStore } from '~/store'
 import { useWindowSize } from 'vanns-common-modules/dist/use/react'
@@ -106,7 +106,7 @@ function MainMenu(props:TypeProps, ref:React.ReactNode){
   const { lang } = params
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isPageChanging, setIsPageChanging] = useState(false)
-  const commonData = useContext(CommonDataContext)
+  const commonData = useCommonData()
   const { menuItemImages, series:menuSeries } = commonData?.globalSettings?.mainMenu
   const [menuScreen, setMenuScreen] = useReducer((state:{key:string, seriesSlug?:string, yachtSlug?:string}, updateState:{})=>({...state, ...updateState}), {
     key: 'main',

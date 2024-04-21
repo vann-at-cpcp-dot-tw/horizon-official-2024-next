@@ -11,7 +11,7 @@ import { isEmpty } from '~/lib/helpers'
 import { Button } from '~/components/ui/button'
 import LinkWithLang from "./LinkWithLang"
 import { useParams } from "next/navigation"
-import { CommonDataContext } from '~/app/[lang]/providers'
+import { ICommonData, useCommonData } from "~/app/[lang]/providers"
 import { useWindowSize } from 'vanns-common-modules/dist/use/react'
 interface TypeProps {
   className?: string
@@ -30,7 +30,7 @@ function Footer(props:TypeProps, ref:React.ReactNode){
   const [subscriptionInputFocus, setSubscriptionInputFocus] = useState(false)
   const { lang } = useParams()
 
-  const commonData = useContext(CommonDataContext)
+  const commonData = useCommonData()
   const { externalLinks } = commonData?.globalSettings ?? {}
   useEffect(()=>{
     setState({

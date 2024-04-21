@@ -8,7 +8,7 @@ import LinkWithLang from '~/components/custom/LinkWithLang'
 import { useParams } from "next/navigation"
 import { twMerge } from 'tailwind-merge'
 import { isEmpty } from '~/lib/helpers'
-import { CommonDataContext, CommonDataContextType } from '~/app/[lang]/providers'
+import { ICommonData, useCommonData } from "~/app/[lang]/providers"
 import { useLazyQuery } from "@apollo/client"
 import { QueryPublicationCategory } from '~/queries/pages/publications-[publicationCategorySlug].gql'
 import { TypePublicationCategoryNode, TypePublicationNode } from "../layout"
@@ -59,7 +59,7 @@ function SingleCategory(props:TypeProps, ref:React.ReactNode){
   const { className } = props
   const params = useParams()
   const { lang, publicationCategorySlug } = params
-  const commonData = useContext(CommonDataContext)
+  const commonData = useCommonData()
   const { yachtSeriesList } = commonData ?? {}
   const[getData, { data, loading }] = useLazyQuery<{publicationCategory:TypePublicationCategoryNode}>(QueryPublicationCategory)
   const [queryYachtSeries, setQueryYachtSeries] = useState('')
@@ -101,7 +101,7 @@ function SingleCategory(props:TypeProps, ref:React.ReactNode){
               }}>
                 <option value="">All Series</option>
                 {
-                  yachtSeriesList?.nodes?.map((node:CommonDataContextType['yachtSeriesList']['nodes'][number], index:number)=>{
+                  yachtSeriesList?.nodes?.map((node:ICommonData['yachtSeriesList']['nodes'][number], index:number)=>{
                     return <option key={index} value={node.slug}>{node.name} Series</option>
                   })
                 }

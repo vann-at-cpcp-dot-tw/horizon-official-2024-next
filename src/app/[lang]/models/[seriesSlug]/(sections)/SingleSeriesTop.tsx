@@ -2,8 +2,8 @@
 
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
-import { Suspense, useContext, useEffect, useMemo } from 'react'
-import { CommonDataContext } from '~/app/[lang]/providers'
+import { Suspense, useMemo } from 'react'
+import { useCommonData } from "~/app/[lang]/providers"
 import { useRouter } from 'next/navigation'
 import { useStore } from '~/store'
 import { useWindowSize } from 'vanns-common-modules/dist/use/react'
@@ -22,7 +22,7 @@ function SingleSeriesTop(props:TypeProps, ref:React.ReactNode){
   const store = useStore()
   const router = useRouter()
   const viewport = useWindowSize()
-  const commonData = useContext(CommonDataContext)
+  const commonData = useCommonData()
   const { yachtSeriesList:allSeries } = commonData
   const seriesData = useMemo(()=>{
     return allSeries?.nodes?.find((node:{slug:string})=>node.slug === props.slug)

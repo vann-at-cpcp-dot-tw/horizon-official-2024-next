@@ -16,7 +16,7 @@ import { QueryNews } from '~/queries/categories/news.gql'
 import PageNav from '~/components/custom/PageNav'
 import Loading from '~/components/custom/icons/Loading'
 import NewsListItem from "./ListItem"
-import { CommonDataContext, CommonDataContextType } from '~/app/[lang]/providers'
+import { ICommonData, useCommonData } from "~/app/[lang]/providers"
 import { formatCategories } from "./ListItem"
 
 export interface TypePostNode {
@@ -95,7 +95,7 @@ function List(props:TypeProps, ref:React.ReactNode){
 
   const queryCategory = searchParams.get('category')
   const querySeries = searchParams.get('series')
-  const commonData = useContext(CommonDataContext)
+  const commonData = useCommonData()
   const { yachtSeriesList } = commonData ?? {}
 
   const pageInfo = useMemo(()=>{
@@ -198,7 +198,7 @@ function List(props:TypeProps, ref:React.ReactNode){
                     <option value="">All Series</option>
 
                     {
-                      yachtSeriesList?.nodes?.map((node:CommonDataContextType['yachtSeriesList']['nodes'][number], index:number)=>{
+                      yachtSeriesList?.nodes?.map((node:ICommonData['yachtSeriesList']['nodes'][number], index:number)=>{
                         return <option key={index} value={node.slug}>{node.name} Series</option>
                       })
                     }
