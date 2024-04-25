@@ -33,6 +33,10 @@ query QuerySingleYachtPage(
     where: {
       language: $language
       relatedYacht: $yachtSlugForRelatedPost,
+      orderby: {
+        field: MENU_ORDER,
+        order: ASC,
+      },
       # 無論是否有分類皆撈取
       # taxQuery: {
       #   relation: AND,

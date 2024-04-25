@@ -17,6 +17,10 @@ query QueryNewsPage(
     after: $after,
     before: $before,
     where: {
+      orderby: {
+        field: MENU_ORDER,
+        order: ASC,
+      }
       language: $language
       taxQuery: {
         relation: AND,
@@ -64,6 +68,8 @@ query QueryNewsPage(
   categories(
     first: 99,
     where: {
+      orderby: TERM_ORDER,
+      order: ASC,
       language: $language
     }
   ) {

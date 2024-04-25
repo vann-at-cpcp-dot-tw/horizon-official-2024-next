@@ -5,6 +5,12 @@ query QueryInvestorPage(
   posts:investors(
     first: $first,
     after: $after
+    where: {
+      orderby: {
+        field: MENU_ORDER,
+        order: ASC,
+      },
+    }
   ) {
     nodes {
       date

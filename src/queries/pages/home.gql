@@ -39,10 +39,13 @@ query QueryHomePage(
       }
     }
   }
-
   posts(
     first: 3
     where: {
+      orderby: {
+        field: MENU_ORDER,
+        order: ASC,
+      },
       taxQuery: {
         relation: AND,
         taxArray: [

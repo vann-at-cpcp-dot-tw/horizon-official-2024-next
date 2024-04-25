@@ -19,6 +19,12 @@ query QueryBrokeragePage(
   yachtYears(postType: "brokerage")
   posts:brokerages(
     first: $first,
+    where: {
+      orderby: {
+        field: MENU_ORDER,
+        order: ASC,
+      },
+    }
   ) {
     nodes {
       slug
@@ -84,6 +90,10 @@ query QueryBrokerages(
     first: $first,
     after: $after,
     where: {
+      orderby: {
+        field: MENU_ORDER,
+        order: ASC,
+      },
       taxQuery: {
         relation: AND,
         taxArray: {

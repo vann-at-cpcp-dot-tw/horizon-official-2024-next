@@ -110,7 +110,9 @@ query QueryCommonData(
   yachtSeriesList(
     first: 99,
     where: {
-      language: $language
+      language: $language,
+      orderby: TERM_ORDER,
+      order: ASC,
     }
   ) {
     nodes {

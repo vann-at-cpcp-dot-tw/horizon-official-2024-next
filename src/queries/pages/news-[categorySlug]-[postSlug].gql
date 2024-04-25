@@ -1,12 +1,28 @@
 query QuerySinglePost($categorySlug: ID!, $postSlug: String) {
   category(id: $categorySlug, idType: SLUG) {
     id
-    posts(where: {name: $postSlug}, first: 1) {
+    posts(
+      first: 1,
+      where: {
+        name: $postSlug,
+        orderby: {
+          field: MENU_ORDER,
+          order: ASC,
+        }
+      },
+    ){
       nodes {
         title
         date
         content(format: RENDERED)
-        categories(where: {parent: 0}, first: 1) {
+        categories(
+          first: 1
+          where: {
+            parent: 0,
+            orderby: TERM_ORDER,
+            order: ASC,
+          },
+        ) {
           nodes {
             slug
             name
@@ -40,12 +56,25 @@ query QueryRelatedPosts($categorySlug:ID!, $after:String, $before:String, $first
       before: $before
       first: $first
       last: $last
+      where: {
+        orderby: {
+          field: MENU_ORDER,
+          order: ASC,
+        },
+      }
     ) {
       nodes {
         slug
         title
         date
-        categories(where: {parent: 0}, first: 1) {
+        categories(
+          first: 1
+          where: {
+            parent: 0
+            orderby: TERM_ORDER,
+            order: ASC,
+          },
+        ) {
           nodes {
             slug
             name

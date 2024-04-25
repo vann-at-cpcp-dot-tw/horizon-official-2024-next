@@ -32,6 +32,10 @@ query QuerySingleDealer(
     first: 1,
     where: {
       language: $language
+      orderby: {
+        field: MENU_ORDER,
+        order: ASC,
+      },
     }
   ) {
     nodes {

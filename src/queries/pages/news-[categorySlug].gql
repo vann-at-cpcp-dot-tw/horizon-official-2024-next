@@ -17,11 +17,22 @@ query QueryPostsByCategory(
         before: $before,
         where: {
           relatedYachtSeries: $relatedYachtSeries
+          orderby: {
+            field: MENU_ORDER,
+            order: ASC,
+          }
         }
       ) {
         nodes {
           ...postBasic
-          categories(where: {parent: 0}, first: 1) {
+          categories(
+            first: 1,
+            where: {
+              parent: 0,
+              orderby: TERM_ORDER,
+              order: ASC,
+            }
+          ) {
             nodes {
               slug
               name

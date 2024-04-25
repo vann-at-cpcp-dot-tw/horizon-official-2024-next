@@ -1,8 +1,16 @@
 #import '../fragments/yacht.gql'
 
-query QuerySingleSeriesPage($slug:ID!) {
+query QuerySingleSeriesPage($slug: ID!) {
   yachtSeries(id: $slug, idType: SLUG) {
-    yachts(first: 99) {
+    yachts(
+      first: 99,
+      where: {
+        orderby: {
+          field: MENU_ORDER,
+          order: ASC,
+        }
+      }
+    ){
       nodes {
         ...yachtBasic
         yachtCustomFields {
