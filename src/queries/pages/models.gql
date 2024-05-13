@@ -11,7 +11,15 @@ query QueryYachtsWithSeries {
           }
         }
       }
-      yachts {
+      yachts(
+        first: 99,
+        where: {
+          orderby: {
+            field: MENU_ORDER,
+            order: ASC,
+          }
+        }
+      ) {
         nodes {
           slug
           title
