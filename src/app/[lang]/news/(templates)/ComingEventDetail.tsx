@@ -147,10 +147,6 @@ function createHullGQLString(list:{yachtSlug:string, hullName:string}[] | undefi
                   metric
                   imperial
                 }
-                recommendedCapacity {
-                  metric
-                  imperial
-                }
                 cabins {
                   metric
                   imperial

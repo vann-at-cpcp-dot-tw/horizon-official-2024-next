@@ -87,10 +87,6 @@ query QuerySingleCharter(
             metric
             imperial
           }
-          recommendedCapacity {
-            metric
-            imperial
-          }
           cabins {
             metric
             imperial

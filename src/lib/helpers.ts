@@ -43,7 +43,6 @@ export const convertFeetInchesToDecimal = function(feetInches:string){
   return decimal.toFixed(4)
 }
 
-
 export const generatePriceRange = function(prices:(number)[], step:number, max:number) {
   // 建立一個空的陣列，用來儲存價格範圍
   let priceRanges = []
@@ -65,4 +64,12 @@ export const generatePriceRange = function(prices:(number)[], step:number, max:n
   }
   // 回傳價格範圍的陣列
   return priceRanges
+}
+
+export const genSpecString = function(list:{title?:string, metric?:string, imperial?:string}[], divider=' | '){
+  return list?.reduce<string>((acc, node, index)=>{
+    const isLastNode = index+1 >= list.length
+    const currentSpecString = `${node.metric || ''}${node.imperial ?`(${node.imperial})`:''}${!isLastNode ? divider :''}`
+    return `${acc}${currentSpecString}`
+  }, '')
 }

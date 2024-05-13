@@ -2,12 +2,10 @@
 
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 import { Suspense, useMemo } from 'react'
-import { useRouter } from 'next/navigation'
-import { useStore } from '~/store'
-import { useWindowSize } from 'vanns-common-modules/dist/use/react'
 import { twMerge } from 'tailwind-merge'
 import { isEmpty } from '~/lib/helpers'
 import { motion } from "framer-motion"
+import { genSpecString } from "~/lib/helpers"
 
 const termsConfig = [
   {
@@ -45,10 +43,6 @@ const termsConfig = [
   {
     key: 'waterCapacity',
     label: 'Water Capacity',
-  },
-  {
-    key: 'recommendedCapacity',
-    label: 'Recommended Capacity',
   },
   {
     key: 'cabins',
@@ -111,6 +105,10 @@ function SpecTable(props:TypeProps, ref:React.ReactNode){
       termList && <div className={twMerge('', className)}>
         {
           termList.map((node, index)=>{
+            if(!node?.spec?.metric  && !node?.spec?.imperial ){
+              return null
+            }
+
             return <motion.div className="border-b border-gray-500 py-3 text-gray-700" key={index}
             variants={{
               enter: {
@@ -141,12 +139,10 @@ function SpecTable(props:TypeProps, ref:React.ReactNode){
                 <div className="col-12 shrink text-[15px]">
                   {
                     props.merged
-                      ?<div>
-                        {`${node?.spec?.metric} (${node?.spec?.imperial})`}
-                      </div>
+                      ?<div>{ genSpecString([{metric: node?.spec?.metric, imperial: node?.spec?.imperial}]) }</div>
                       :<div className="row">
-                        <div className="col-6">{node?.spec?.metric}</div>
-                        <div className="col-6">{node?.spec?.imperial}</div>
+                        <div className="col-6">{node?.spec?.metric || ''}</div>
+                        <div className="col-6">{node?.spec?.imperial || ''}</div>
                       </div>
                   }
                 </div>

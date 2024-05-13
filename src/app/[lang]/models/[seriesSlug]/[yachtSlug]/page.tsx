@@ -129,7 +129,9 @@ async function PageSingleYacht(props:TypeProps, ref:React.ReactNode){
     </div>
 
     <div id="SECTION_HULLS">
-      <Hulls yachtName={yachtTitle} list={hulls}/>
+      {
+        hulls?.length > 0 && <Hulls yachtName={yachtTitle} list={hulls}/>
+      }
     </div>
 
     <Publication {...(relatedPublication?.nodes?.[0] || {})} />

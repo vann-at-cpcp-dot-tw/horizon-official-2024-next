@@ -17,6 +17,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import MenuScreen from "./MenuScreen"
 import Portal from 'vanns-common-modules/dist/components/react/Portal'
 import { usePathnameWithoutLang } from 'vanns-common-modules/dist/use/next'
+import { genSpecString } from '~/lib/helpers'
 
 interface TypeProps {}
 interface TypeState {}
@@ -259,7 +260,18 @@ function MainMenu(props:TypeProps, ref:React.ReactNode){
                   video: menuChildNode?.video?.node?.mediaItemUrl,
                   content: {
                     title: yachtData?.title,
-                    subtitle: `${spec?.loa?.metric}(${spec?.loa?.imperial}) | ${spec?.engines?.metric} | ${spec?.cabins?.metric}`,
+                    subtitle: genSpecString([
+                      {
+                        metric: spec?.loa?.metric,
+                        imperial: spec?.loa?.imperial
+                      },
+                      {
+                        metric: spec?.engines?.metric
+                      },
+                      {
+                        metric: spec?.cabins?.metric,
+                      }
+                    ])
                   }
                 },
                 onClick: ()=>{

@@ -4,7 +4,6 @@ const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
 import { Suspense, useContext, useState, useRef, useMemo, useEffect } from 'react'
 import Image from "next/image"
-import { useRouter } from "next/navigation"
 import LinkWithLang from '~/components/custom/LinkWithLang'
 import { twMerge } from 'tailwind-merge'
 import { isEmpty } from '~/lib/helpers'
@@ -15,7 +14,7 @@ import { SwiperClass } from "swiper/react"
 import { useWindowSize } from 'vanns-common-modules/dist/use/react'
 // import useImageBlurHashes from '~/use/useImageBlurHashes"
 import { genImageBlurHash } from 'vanns-common-modules/dist/lib/next'
-
+import { useParams } from "next/navigation"
 interface TypeProps {
   [key:string]: any
 }
@@ -26,6 +25,8 @@ interface TypeState {}
 function All(props:TypeProps, ref:React.ReactNode){
 
   const { className } = props
+  const params = useParams()
+  const { lang } = params
   const localData = useContext(LocalDataContext)
   const { publicationCategories } = localData ?? {}
   const swiperRefs = useRef<SwiperClass[]>([])
@@ -158,6 +159,37 @@ function All(props:TypeProps, ref:React.ReactNode){
                     </a>
                   </SwiperSlide>
                 })
+              }
+              {
+                categoryNode?.publications?.nodes?.length >= 6 && <SwiperSlide className="!w-auto">
+                  <LinkWithLang className="btn group relative block" href={`/publications/${categoryNode.slug}`} lang={lang}>
+                    <div className="relative">
+                      <div className="absolute flex size-full items-center justify-center bg-gray-300 text-white">READ MORE</div>
+                      <div className="pointer-events-none absolute left-0 top-0 z-10 flex size-full items-center justify-center opacity-0 group-hover:opacity-100 group-active:opacity-100"
+                        style={{
+                          background: 'rgba(0, 46, 79, 0.5)',
+                          transition: 'all .4s'
+                        }}>
+                        <div className="flex size-[56px] items-center justify-center rounded-full bg-golden-700 text-white">
+                          <i className="bi bi-plus-lg text-[24px] text-white"></i>
+                        </div>
+                      </div>
+
+                      <Image className="opacity-0"
+                      src={`${categoryNode?.publications?.nodes?.[5]?.publicationCustomFields?.publication?.publicationCover?.node?.mediaItemUrl || ''}`}
+                      style={{
+                        width: viewport.width && viewport.width>=992 ?'auto' :'66vw',
+                        height: viewport.width && viewport.width>=992 ?`${categoryIndex === 0 ?525 :320}px` :'auto',
+                      }}
+                      width={380}
+                      height={categoryIndex === 0 ?525 :320}
+                      placeholder={placeholderGroups?.[categoryIndex]?.[0] ?'blur' :'empty'}
+                      blurDataURL={placeholderGroups?.[categoryIndex]?.[0]}
+                      priority={true}
+                      alt="" />
+                    </div>
+                  </LinkWithLang>
+                </SwiperSlide>
               }
             </Swiper>
           </div>

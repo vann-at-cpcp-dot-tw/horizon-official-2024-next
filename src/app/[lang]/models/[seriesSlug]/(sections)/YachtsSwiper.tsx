@@ -78,7 +78,7 @@ function YachtsSwiper(props:TypeProps, ref:React.ReactNode){
             animate={'enter'}>
               <SpecTable
               specTerms={node.specTerms}
-              displayTermKeys={['loa', 'lwl', 'engines', 'recommendedCapacity', 'cabins']}
+              displayTermKeys={['loa', 'lwl', 'engines', 'cabins']}
               merged />
             </motion.div>
           }

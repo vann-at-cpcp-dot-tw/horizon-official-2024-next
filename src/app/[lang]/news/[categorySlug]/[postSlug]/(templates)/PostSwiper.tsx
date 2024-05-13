@@ -43,7 +43,7 @@ function PostSwiper(props:TypeProps, ref:React.ReactNode){
       <div className="mb-5">
         <Swiper
         speed={1000}
-        // spaceBetween={0}
+        spaceBetween={0}
         modules={[Autoplay]}
         slidesPerView={1}
         autoplay={{
@@ -69,7 +69,6 @@ function PostSwiper(props:TypeProps, ref:React.ReactNode){
                     blurDataURL={node?.placeholder}
                     alt="" />
                   }
-
                 </RatioArea>
               </SwiperSlide>
             })

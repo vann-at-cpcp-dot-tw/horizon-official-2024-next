@@ -12,7 +12,6 @@ import SwiperFullHeight from '~/components/custom/SwiperFullHeight'
 import SpecTable from '~/components/custom/SpecTable'
 import GAGalleryNav from "./GAGalleryNav"
 import { useRouter, usePathname } from 'next/navigation'
-import { motion } from "framer-motion"
 import ContentLightbox from '~/components/custom/ContentLightbox'
 import { useWindowSize } from 'vanns-common-modules/dist/use/react'
 import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'

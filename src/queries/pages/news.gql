@@ -128,7 +128,7 @@ query QueryNewsPage(
       }
     }
   }
-  newsPageSettings {
+  newsPageSettings(language: $language) {
     ownerPerspective {
       description
       image {
