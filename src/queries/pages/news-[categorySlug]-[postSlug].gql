@@ -5,10 +5,6 @@ query QuerySinglePost($categorySlug: ID!, $postSlug: String) {
       first: 1,
       where: {
         name: $postSlug,
-        orderby: {
-          field: MENU_ORDER,
-          order: ASC,
-        }
       },
     ){
       nodes {
@@ -56,12 +52,6 @@ query QueryRelatedPosts($categorySlug:ID!, $after:String, $before:String, $first
       before: $before
       first: $first
       last: $last
-      where: {
-        orderby: {
-          field: MENU_ORDER,
-          order: ASC,
-        },
-      }
     ) {
       nodes {
         slug

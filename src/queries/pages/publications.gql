@@ -5,7 +5,15 @@ query QueryPublicationsPage(
     nodes {
       slug
       name
-      publications(first: 6) {
+      publications(
+        first: 6,
+        where: {
+          orderby: {
+            field: MENU_ORDER,
+            order: ASC
+          }
+        }
+      ) {
         nodes {
           slug
           title

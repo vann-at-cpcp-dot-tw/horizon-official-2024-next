@@ -17,10 +17,6 @@ query QueryPostsByCategory(
         before: $before,
         where: {
           relatedYachtSeries: $relatedYachtSeries
-          orderby: {
-            field: MENU_ORDER,
-            order: ASC,
-          }
         }
       ) {
         nodes {
