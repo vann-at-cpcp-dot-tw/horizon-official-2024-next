@@ -139,7 +139,7 @@ function SpecTable(props:TypeProps, ref:React.ReactNode){
                 <div className="col-12 shrink text-[15px]">
                   {
                     props.merged
-                      ?<div>{ genSpecString([{metric: node?.spec?.metric, imperial: node?.spec?.imperial}]) }</div>
+                      ?<div>{ genSpecString([{value:[node?.spec?.metric, node?.spec?.imperial]}]) }</div>
                       :<div className="row">
                         <div className="col-6">{node?.spec?.metric || ''}</div>
                         <div className="col-6">{node?.spec?.imperial || ''}</div>

@@ -66,10 +66,10 @@ export const generatePriceRange = function(prices:(number)[], step:number, max:n
   return priceRanges
 }
 
-export const genSpecString = function(list:{title?:string, metric?:string, imperial?:string}[], divider=' | '){
+export const genSpecString = function(list:{label?:string, value:[(string|undefined|null)?, (string|undefined|null)?]}[], divider=' | '){
   return list?.reduce<string>((acc, node, index)=>{
     const isLastNode = index+1 >= list.length
-    const currentSpecString = `${node.metric || ''}${node.imperial ?`(${node.imperial})`:''}${!isLastNode ? divider :''}`
+    const currentSpecString = `${node.value?.[0] || ''}${node.value?.[1] ?` (${node.value?.[1]})`:''}${!isLastNode ? divider :''}`
     return `${acc}${currentSpecString}`
   }, '')
 }

@@ -266,14 +266,20 @@ function MainMenu(props:TypeProps, ref:React.ReactNode){
                     title: yachtData?.title,
                     subtitle: genSpecString([
                       {
-                        metric: spec?.loa?.metric,
-                        imperial: spec?.loa?.imperial
+                        value: [
+                          spec?.loa?.metric,
+                          spec?.loa?.imperial
+                        ]
                       },
                       {
-                        metric: spec?.engines?.metric
+                        value: [
+                          spec?.engines?.metric
+                        ]
                       },
                       {
-                        metric: spec?.cabins?.metric,
+                        value: [
+                          spec?.cabins?.metric,
+                        ]
                       }
                     ])
                   }

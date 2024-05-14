@@ -14,6 +14,7 @@ import { QueryBrokerages } from '~/queries/pages/brokerage.gql'
 import { QueryCharters } from '~/queries/pages/charter.gql'
 import { useLazyQuery } from "@apollo/client"
 import { useRouter, useParams, useSearchParams } from 'next/navigation'
+import { genSpecString } from "~/lib/helpers"
 import ListFilters from "./ListFilters"
 import ListItem from "./ListItem"
 import PageNav from '~/components/custom/PageNav'
@@ -160,9 +161,23 @@ function List(props:TypeProps, ref:React.ReactNode){
                 lang={lang}
                 href={`/${props?.queryPostType === 'charter' ?'charter' :'brokerage'}/${node.slug}`}
                 infos={[
-                  `${node?.customFields?.specTerms?.loa?.imperial || ''} (${node?.customFields?.specTerms?.loa?.metric || ''})`,
-                  `${node?.customFields?.specTerms?.beam?.imperial || ''} (${node?.customFields?.specTerms?.beam?.metric || ''})`,
-                  `${node?.customFields?.specTerms?.engines?.imperial || ''}`,
+                  genSpecString([{
+                    value: [
+                      node?.customFields?.specTerms?.loa?.metric,
+                      node?.customFields?.specTerms?.loa?.imperial,
+                    ]
+                  }]),
+                  genSpecString([{
+                    value: [
+                      node?.customFields?.specTerms?.beam?.metric,
+                      node?.customFields?.specTerms?.beam?.imperial,
+                    ]
+                  }]),
+                  genSpecString([{
+                    value: [
+                      node?.customFields?.specTerms?.engines?.metric
+                    ]
+                  }]),
                 ]} />
               </div>
             })
