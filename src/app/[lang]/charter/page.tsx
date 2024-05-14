@@ -31,9 +31,10 @@ async function PageCharters({params}:TypeProps){
   const posts = data?.posts?.nodes
   const yachtConditions = data?.yachtConditions?.nodes
 
-  if( CONTENT_TYPE === 'hq'){
-    redirect('/')
-  }
+  // TODO: open if production
+  // if( CONTENT_TYPE === 'hq'){
+  //   redirect('/')
+  // }
 
   return <main className="pb-24">
 

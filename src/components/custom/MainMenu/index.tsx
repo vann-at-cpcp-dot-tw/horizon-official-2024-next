@@ -134,7 +134,9 @@ function MainMenu(props:TypeProps, ref:React.ReactNode){
             }
           },
           ...(
-            CONTENT_TYPE === 'dealer'
+            // TODO: open if production
+            // CONTENT_TYPE === 'dealer'
+            true
               ?[
                 {
                   key: 'team',
@@ -180,7 +182,9 @@ function MainMenu(props:TypeProps, ref:React.ReactNode){
               : []
           ),
           ...(
-            CONTENT_TYPE === 'dealer'
+            // TODO: open if production
+            // CONTENT_TYPE === 'dealer'
+            true
               ?[
                 {
                   key: 'brokerage',

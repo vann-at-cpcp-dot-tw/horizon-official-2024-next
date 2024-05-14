@@ -24,9 +24,10 @@ async function PageTeam({params}:TypeProps){
   const { lang } = params
   const data = await fetchGQL(QueryTeamPage)
 
-  if( CONTENT_TYPE === 'hq '){
-    redirect('/')
-  }
+  // TODO: open if production
+  // if( CONTENT_TYPE === 'hq '){
+  //   redirect('/')
+  // }
 
   return <main className="pb-24">
 
