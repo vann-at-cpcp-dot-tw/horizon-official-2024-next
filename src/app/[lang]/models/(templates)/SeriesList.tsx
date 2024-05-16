@@ -19,7 +19,7 @@ interface TypeYachtNode {
 }
 
 async function SeriesList(props:TypeProps, ref:React.ReactNode){
-
+  const { lang } = props
   const data = await fetchGQL(QueryYachtsWithSeries)
   const { yachtSeriesList } = data ?? {}
   const yachtSeriesListWithPlaceholder = await Promise.all(

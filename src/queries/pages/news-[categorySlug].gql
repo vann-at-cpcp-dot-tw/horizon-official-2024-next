@@ -7,44 +7,51 @@ query QueryPostsByCategory(
   $after: String
   $before: String
   $relatedYachtSeries: String
+  $year: Int
+  $translation: LanguageCodeEnum!
 ) {
     category(id:$slug, idType: SLUG) {
-      name
-      posts(
-        first: $first
-        last: $last,
-        after: $after,
-        before: $before,
-        where: {
-          relatedYachtSeries: $relatedYachtSeries
-        }
-      ) {
-        nodes {
-          ...postBasic
-          categories(
-            first: 1,
-            where: {
-              parent: 0,
-              orderby: TERM_ORDER,
-              order: ASC,
-            }
-          ) {
-            nodes {
-              slug
-              name
+      translation(language: $translation) {
+        name
+        posts(
+          first: $first
+          last: $last,
+          after: $after,
+          before: $before,
+          where: {
+            relatedYachtSeries: $relatedYachtSeries
+            dateQuery: {
+              year: $year
             }
           }
-          postCustomFields {
-            ...postCoverImage
-            ...postGallery
-            ...postRelatedYachts
+        ) {
+          nodes {
+            ...postBasic
+            categories(
+              first: 1,
+              where: {
+                parent: 0,
+                orderby: TERM_ORDER,
+                order: ASC,
+              }
+            ) {
+              nodes {
+                slug
+                name
+              }
+            }
+            postCustomFields {
+              ...postCoverImage
+              ...postGallery
+              ...postRelatedYachts
+            }
           }
-        }
-        pageInfo {
-          endCursor
-          hasNextPage
-          hasPreviousPage
-          startCursor
+          pageInfo {
+            endCursor
+            hasNextPage
+            hasPreviousPage
+            startCursor
+          }
         }
       }
     }

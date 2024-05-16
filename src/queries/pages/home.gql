@@ -1,5 +1,5 @@
 query QueryHomePage(
-  $language: LanguageCodeFilterEnum = EN
+  $language: LanguageCodeFilterEnum
 ) {
   homePageSettings(
     language: $language
@@ -42,6 +42,7 @@ query QueryHomePage(
   posts(
     first: 3
     where: {
+      language: $language
       taxQuery: {
         relation: AND,
         taxArray: [

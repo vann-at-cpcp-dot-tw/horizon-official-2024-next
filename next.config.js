@@ -4,7 +4,7 @@ const path = require('path')
 const webpack = require('webpack')
 
 const nextConfig = {
-  basePath: process.env.NEXT_PUBLIC_BASE_PATH || '',
+  // basePath: process.env.NEXT_PUBLIC_BASE_PATH || '',
   reactStrictMode: true,
   swcMinify: true,
   env: {},
@@ -36,11 +36,22 @@ const nextConfig = {
     // domains: ['wp-horizon-official.ddev.site']
   },
   webpack: (config, { dev, isServer })=>{
-    config.module.rules.push({
-      test: /\.(graphql|gql)/,
-      exclude: /node_modules/,
-      loader: "graphql-tag/loader"
-    })
+    config.module.rules.push(
+      {
+        test: /\.(graphql|gql)/,
+        exclude: /node_modules/,
+        loader: "graphql-tag/loader"
+      },
+      {
+        test: /\.(js|jsx)$/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-react'],
+          },
+        },
+      }
+    )
 
     config.plugins.push(
       new webpack.ProvidePlugin({

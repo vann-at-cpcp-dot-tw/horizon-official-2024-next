@@ -3,13 +3,13 @@
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 const postsPerPage = 10
 
-import { Suspense, useMemo, useEffect, useContext } from 'react'
+import { Suspense, useMemo, useEffect, useState } from 'react'
 import Image from "next/image"
 import LinkWithLang from '~/components/custom/LinkWithLang'
 import { twMerge } from 'tailwind-merge'
-import { isEmpty } from '~/lib/helpers'
-import { useParams, useRouter, useSearchParams } from 'next/navigation'
-import { usePathnameWithoutLang } from 'vanns-common-modules/dist/use/next'
+import { isEmpty, arrayGenerate } from '~/lib/helpers'
+import { useParams, useSearchParams } from 'next/navigation'
+import { useSearchObject, usePathnameWithoutLang } from 'vanns-common-modules/dist/use/next'
 import { useLazyQuery } from "@apollo/client"
 import { QueryPostsByCategory } from '~/queries/pages/news-[categorySlug].gql'
 import PageNav from '~/components/custom/PageNav'
@@ -17,9 +17,6 @@ import Loading from '~/components/custom/icons/Loading'
 import NewsListItem from "./ListItem"
 import { ICommonData, useCommonData } from "~/app/[lang]/providers"
 import { TypePostNode } from "./ListNewsPage"
-
-// import { useStore } from '~/store'
-// import useWindowSize from '~/use/useWindowSize"
 
 interface TypeProps {
   lang: string
@@ -41,22 +38,17 @@ interface TypeProps {
 interface TypeState {}
 
 function ListWithCategory(props:TypeProps, ref:React.ReactNode){
-  // const store = useStore()
-  // const viewport = useWindowSize()
-  const router = useRouter()
-  const pathname = usePathnameWithoutLang()
-  const searchParams = useSearchParams()
+  const { searchObject, updateSearch } = useSearchObject()
+  const [isFilterChanged, setIsFilterChanged] = useState(false)
   const params = useParams()
+  const commonData = useCommonData()
+  const { categorySlug } = params
   const { className, lang } = props
   const[getData, { data, loading }] = useLazyQuery(QueryPostsByCategory)
-  const querySeries = searchParams.get('series')
-  const { categorySlug } = params
-  const commonData = useCommonData()
   const { yachtSeriesList } = commonData ?? {}
-
   const listData = useMemo(()=>{
-    const originList = data?.category?.posts?.nodes || props?.list
-    const list = originList?.map((node:{[key:string]:any})=>{
+    let list = data?.category?.translation?.posts?.nodes || props?.list
+    list = list?.map((node:{[key:string]:any})=>{
       return {
         ...node,
         filteredCategories: node?.categories?.nodes?.map((catNode:{[key:string]:any})=>{
@@ -69,9 +61,9 @@ function ListWithCategory(props:TypeProps, ref:React.ReactNode){
     })
     return {
       list,
-      pageInfo: data?.category?.posts?.pageInfo || props?.pageInfo,
+      pageInfo: data?.category?.translation?.posts?.pageInfo || props?.pageInfo,
     }
-  }, [data, props.list, props.pageInfo, props.categories ])
+  }, [data, props?.list, props?.pageInfo, categorySlug])
 
   const highlightList = useMemo(()=>{
     return listData?.list?.slice(0, 4)
@@ -81,27 +73,25 @@ function ListWithCategory(props:TypeProps, ref:React.ReactNode){
     return listData?.list?.slice(4, listData?.list?.length || 999)
   }, [listData?.list])
 
-
   const queryVariables = useMemo(()=>{
     return {
       slug: categorySlug,
       first: postsPerPage,
-      relatedYachtSeries: querySeries || null,
+      relatedYachtSeries: searchObject.series || null,
+      year: searchObject.year ?Number(searchObject.year) :null,
     }
-  }, [querySeries])
+  }, [categorySlug, searchObject])
 
   useEffect(()=>{
-
-    // 第一次進頁面，URL 還未做過任何查詢時
-    if( querySeries === null){
+    // 非手動調整 filter 的話不動作
+    if( !isFilterChanged ){
       return
     }
 
     getData({
       variables: queryVariables
     })
-
-  }, [querySeries, pathname])
+  },[getData, searchObject.series, searchObject.year, isFilterChanged])
 
   if( loading ){
     return <div className="py-20">
@@ -113,22 +103,47 @@ function ListWithCategory(props:TypeProps, ref:React.ReactNode){
   return <Suspense fallback={null}>
     <div className={twMerge('', className)}>
 
-      <div className="container mb-4">
-        <div className="row flex-nowrap justify-end">
-          <div className="col-auto shrink">
-            <div className="row row-gap-2 !flex-nowrap items-baseline">
-              {/* <div className="col-auto text-gray-700">Series</div> */}
-              <div className="col-auto shrink">
-                <div className="w-screen max-w-[160px]">
+      <div className="container mb-6">
+        <div className="row items-center lg:flex-nowrap">
+          <div className="col-auto">
+            <div className="text-[24px] font-300 text-minor-900">Latest News</div>
+          </div>
+          <div className="col-12 mt-2 shrink lg:mt-0">
+            <div className="row !flex-nowrap justify-end">
+              <div className="col-4 shrink lg:col-auto">
+                <div className="w-full lg:w-screen lg:max-w-[130px]">
                   <select className="w-full border-b border-gray-700 bg-transparent text-gray-700"
-                  value={querySeries || ''}
+                  value={String(searchObject.series || '')}
                   onChange={(e)=>{
-                    router.push(`${pathname}?series=${e.target.value}`, {scroll:false})
+                    updateSearch({
+                      series: e.target.value
+                    })
+                    setIsFilterChanged(true)
                   }}>
                     <option value="">All Series</option>
+
                     {
                       yachtSeriesList?.nodes?.map((node:ICommonData['yachtSeriesList']['nodes'][number], index:number)=>{
                         return <option key={index} value={node.slug}>{node.name} Series</option>
+                      })
+                    }
+                  </select>
+                </div>
+              </div>
+              <div className="col-4 shrink lg:col-auto">
+                <div className="w-full lg:w-screen lg:max-w-[130px]">
+                  <select className="w-full border-b border-gray-700 bg-transparent text-gray-700"
+                      value={String(searchObject.year || '')}
+                      onChange={(e)=>{
+                        updateSearch({
+                          year: e.target.value
+                        })
+                        setIsFilterChanged(true)
+                      }}>
+                    <option value="">All Years</option>
+                    {
+                      arrayGenerate(2018, new Date().getFullYear()).reverse()?.map((node:number, index:number)=>{
+                        return <option key={index} value={node}>{node}</option>
                       })
                     }
                   </select>

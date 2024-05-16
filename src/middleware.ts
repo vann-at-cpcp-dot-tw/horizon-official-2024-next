@@ -1,49 +1,37 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { i18n } from '~~/i18n.config'
-import { match as matchLocale } from '@formatjs/intl-localematcher'
-import Negotiator from 'negotiator'
+import { isPathnameStartWithLang } from 'vanns-common-modules/dist/use/next/usePathnameWithoutLang'
 
-function getLocale(request: NextRequest): string | undefined {
-  const negotiatorHeaders: Record<string, string> = {}
-  request.headers.forEach((value, key) => (negotiatorHeaders[key] = value))
+export async function middleware(request:NextRequest){
 
-  // @ts-ignore locales are readonly
-  const locales: string[] = i18n.locales.map((node)=>node.shortCode)
-  const languages = new Negotiator({ headers: negotiatorHeaders }).languages()
-
-  const locale = matchLocale(languages, locales, i18n.defaultLocale.shortCode)
-  return locale
-}
-
-export function middleware(request: NextRequest) {
+  let response = NextResponse.next()
+  const requestHeaders = request.headers
   const pathname = request.nextUrl.pathname
-  const pathnameIsMissingLocale = i18n.locales.every(locale => !pathname.startsWith(`/${locale.shortCode}/`) && pathname !== `/${locale.shortCode}`)
+  const { searchParams } = request.nextUrl
 
   // Redirect if there is no locale
+  const pathnameIsMissingLocale = i18n.locales.every((locale, index) => {
+    return !isPathnameStartWithLang(pathname,locale.shortCode) && pathname !== `/${locale.shortCode}`
+  })
+
   if (pathnameIsMissingLocale) {
-
-    const locale = getLocale(request)
-
-    if( locale === i18n.defaultLocale.shortCode ){
-      return NextResponse.rewrite(
-        new URL(`/${locale}${pathname.startsWith('/') ?'' :'/'}${pathname}`, request.url)
-      )
-    }
-
-    return NextResponse.redirect(
-      new URL(
-        `/${locale}${pathname.startsWith('/') ? '' : '/'}${pathname}`,
-        request.url
-      )
-    )
+    const url = new URL(`/${i18n.defaultLocale.shortCode}${pathname.startsWith('/') ?'' : '/'}${pathname}`, request.url)
+    // TODO:導轉語言時，將 query 帶著各有優缺點
+    url.search = searchParams.toString()
+    response = NextResponse.rewrite(url)
   }
+
+  const requestLang = pathname.split('/')[1] || ''
+  const isSupportedLang = i18n.locales.find((node)=>node.shortCode === requestLang)
+  response.headers.set('x-lang', isSupportedLang ?requestLang :i18n.defaultLocale.shortCode)
+  response.headers.set('x-url', request.url)
+
+  return response
 }
 
 export const config = {
   // Matcher ignoring `/_next/` and `/api/`
-  // .*\\..* matches "url.extension"
-  // https://github.com/vercel/next.js/discussions/36308#discussioncomment-3758041
+  // matcher: ['/((?!api|_next/static|_next/image|_next|assets|favicon.ico).*)']
   matcher: ["/((?!api|static|.*\\..*|_next|favicon.ico).*)"]
-  // matcher: ['/((?!api|_next/static|_next/image|_next|.*\\..*|favicon.ico).*)']
 }

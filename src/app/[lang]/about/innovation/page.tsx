@@ -4,9 +4,16 @@ import { QueryPageAboutInnovation } from '~/queries/pages/about-innovation.gql'
 import FeaturedVideo from "../(templates)/FeaturedVideo"
 import ContentList from "../(templates)/ContentList"
 import { genImageBlurHash } from 'vanns-common-modules/dist/lib/next'
+import { param } from "jquery"
 
-export default async function PageAboutInnovation(){
-
+export default async function PageAboutInnovation({
+  params
+}:{
+  params: {
+    lang: string
+  }
+}){
+  const { lang } = params
   const data = await fetchGQL(QueryPageAboutInnovation)
   const { featuredVideo, contentList } = data?.aboutInnovation?.aboutInnovationCustomFields ?? {}
   const contentListWithPlaceholder = await Promise.all(

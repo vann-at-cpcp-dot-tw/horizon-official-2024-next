@@ -1,6 +1,7 @@
 const API_URL = `${process.env.NEXT_PUBLIC_API_BASE}graphql`
 const REVALIDATE = Number(process.env.NEXT_PUBLIC_REVALIDATE || 60)
 
+import { headers } from 'next/headers'
 import { IFetchGQLArgs } from "vanns-common-modules/dist/lib/next/apollo"
 import { makeApolloClient, makeFetcher } from "vanns-common-modules/dist/lib/next/apollo/server"
 import { TypedDocumentNode } from "@graphql-typed-document-node/core"
@@ -25,16 +26,22 @@ const fetchGQLWrapper = makeFetcher(getClient)
 
 export async function fetchGQL(query:TypedDocumentNode, args?:IFetchGQLArgs){
   const { context, ...restArgs } = args ?? {}
-  const headers = context?.headers || {}
+  const contextHeaders = context?.headers || {}
+  const requestLang = headers().get('x-lang') || i18n.defaultLocale.shortCode
   // const localeCode = convertLocaleCode(lang, 'long')
   return await fetchGQLWrapper(query, {
     ...restArgs,
     context: {
       ...(context || {}),
       headers: {
-        ...headers
+        ...contextHeaders
         // "accept-language": localeCode
       }
+    },
+    variables: {
+      ...(args?.variables || {}),
+      language: requestLang.toUpperCase(),
+      translation: requestLang.toUpperCase(),
     }
   })
 }

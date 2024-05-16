@@ -1,5 +1,5 @@
 query QueryPageAboutDesignAndCraft(
-  $language: LanguageCodeFilterEnum = EN
+  $language: LanguageCodeFilterEnum
 ){
   aboutDesignAndCraft(
     language: $language

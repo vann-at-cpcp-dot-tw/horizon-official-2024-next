@@ -1,5 +1,5 @@
 query QueryPublicationsPage(
-	$language: LanguageCodeFilterEnum = EN,
+	$language: LanguageCodeFilterEnum
 ) {
   publicationCategories(where: {language: $language}) {
     nodes {

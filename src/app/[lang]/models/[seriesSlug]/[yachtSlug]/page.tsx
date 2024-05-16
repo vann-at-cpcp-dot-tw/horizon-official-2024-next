@@ -43,7 +43,6 @@ async function PageSingleYacht(props:TypeProps, ref:React.ReactNode){
     variables: {
       slug: yachtSlug,
       yachtSlugForRelatedPost: yachtSlug, // 因為線上不明原因，不認 ID! 這個 type，故再加傳一次 String
-      language: lang.toUpperCase()
     }
   })
 

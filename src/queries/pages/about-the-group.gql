@@ -1,5 +1,5 @@
 query QueryPageAboutTheGroup(
-  $language: LanguageCodeFilterEnum = EN
+  $language: LanguageCodeFilterEnum
 ) {
   aboutTheGroup(
     language: $language

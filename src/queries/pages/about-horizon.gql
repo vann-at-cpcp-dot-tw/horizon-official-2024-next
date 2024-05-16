@@ -1,5 +1,5 @@
 query QueryPageAboutHorizon(
-  $language: LanguageCodeFilterEnum = EN
+  $language: LanguageCodeFilterEnum
 ) {
   aboutHorizon(
     language: $language

@@ -246,7 +246,7 @@ function MainMenu(props:TypeProps, ref:React.ReactNode){
           image: menuItemImages.models?.image?.node?.mediaItemUrl,
           video: menuItemImages.models?.video?.node?.mediaItemUrl,
         },
-        list: menuSeries.map((seriesNode:TypeMenuSeriesNode)=>{
+        list: menuSeries?.map((seriesNode:TypeMenuSeriesNode)=>{
 
           const seriesData = seriesNode?.series?.nodes?.[0]?.translation
           let children

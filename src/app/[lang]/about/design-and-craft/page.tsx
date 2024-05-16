@@ -6,8 +6,14 @@ import FeaturedVideo from "../(templates)/FeaturedVideo"
 import ContentList from "../(templates)/ContentList"
 import { genImageBlurHash } from 'vanns-common-modules/dist/lib/next'
 
-export default async function PageAboutDesign(){
-
+export default async function PageAboutDesign({
+  params
+}:{
+  params: {
+    lang: string
+  }
+}){
+  const { lang } = params
   const data = await fetchGQL(QueryPageAboutDesignAndCraft)
   const { featuredVideo, contentList } = data?.aboutDesignAndCraft?.aboutDesignCustomFields ?? {}
   const contentListWithPlaceholder = await Promise.all(

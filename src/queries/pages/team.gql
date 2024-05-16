@@ -1,5 +1,5 @@
 query QueryTeamPage(
-  $language: LanguageCodeFilterEnum = EN
+  $language: LanguageCodeFilterEnum
 ) {
   teamPageSettings(
     language: $language

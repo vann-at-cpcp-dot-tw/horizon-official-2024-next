@@ -32,10 +32,7 @@ interface TypeProps {
 }
 interface TypeState {}
 
-function EventSmallList(props:TypeProps, ref:React.ReactNode){
-  // const store = useStore()
-  // const router = useRouter()
-  // const viewport = useWindowSize()
+function NewsPageEventsBlock(props:TypeProps, ref:React.ReactNode){
   const { className } = props
   return <Suspense fallback={null}>
     <div className={twMerge('', className)}>
@@ -80,4 +77,4 @@ function EventSmallList(props:TypeProps, ref:React.ReactNode){
   </Suspense>
 }
 
-export default EventSmallList
+export default NewsPageEventsBlock

@@ -73,3 +73,14 @@ export const genSpecString = function(list:{label?:string, value:[(string|undefi
     return `${acc}${currentSpecString}`
   }, '')
 }
+
+export function formatPostCategories(categories:{[key:string]:any} | undefined, postType:string = 'news'){
+  const array = categories ?Array.isArray(categories?.nodes) ?categories.nodes :categories :[]
+  return array?.map((catNode:{[key:string]:any})=>{
+    return {
+      name: catNode?.name,
+      slug: catNode.slug,
+      href: `/${postType}/${catNode.slug}`
+    }
+  }) || []
+}

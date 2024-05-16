@@ -3,6 +3,7 @@
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 const postsPerPage = 6
 
+import { headers } from 'next/headers'
 import Image from "next/image"
 import LinkWithLang from '~/components/custom/LinkWithLang'
 import { isEmpty } from '~/lib/helpers'
@@ -10,10 +11,11 @@ import { fetchGQL } from '~/lib/apollo'
 import { QueryNewsPage } from '~/queries/pages/news.gql'
 import CoverStory from "./(templates)/CoverStory"
 import ListNewsPage from "./(templates)/ListNewsPage"
-import ListNewsPageEvent from "./(templates)/ListNewsPageEvent"
+import NewsPageEventsBlock from "./(templates)/NewsPageEventsBlock"
 import BrandPublication from "./(templates)/BrandPublication"
 import OwnerPerspective from "./(templates)/OwnerPerspective"
 import { genImageBlurHash } from 'vanns-common-modules/dist/lib/next'
+import { formatPostCategories } from "~/lib/helpers"
 
 interface TypeProps {
   params: {
@@ -31,8 +33,30 @@ async function PageNews({params, searchParams}:TypeProps){
   const data = await fetchGQL(QueryNewsPage, {
     variables: {
       first: postsPerPage,
-      language: lang.toUpperCase(),
-      translation: lang.toUpperCase(),
+      relatedYachtSeries: searchParams.series || null,
+      year: searchParams.year ?Number(searchParams.year) :null,
+      ...(
+        searchParams.category
+          ? {
+            categories: [searchParams.category],
+            categoriesOperator: 'IN'
+          }:{
+            categories: [],
+            categoriesOperator: 'NOT_IN'
+          }
+      )
+    }
+  })
+  const formattedNewsList = data?.posts?.nodes?.map((node:any)=>{
+    return {
+      ...node,
+      filteredCategories: formatPostCategories(node?.categories?.nodes)
+    }
+  })
+  const formattedEventBlockList = data?.events?.posts?.nodes?.map((node:any)=>{
+    return {
+      ...node,
+      filteredCategories: formatPostCategories(node?.categories?.nodes)
     }
   })
 
@@ -51,13 +75,12 @@ async function PageNews({params, searchParams}:TypeProps){
       image={data?.coverStory?.posts?.nodes?.[0]?.translation?.postCustomFields?.coverImage?.node?.mediaItemUrl} />
     }
 
-
     <div className="mb-20">
-      <ListNewsPage list={data?.posts?.nodes} pageInfo={data?.posts?.pageInfo} lang={lang} categories={data?.categories}/>
+      <ListNewsPage list={formattedNewsList} pageInfo={data?.posts?.pageInfo} lang={lang} categories={data?.categories}/>
     </div>
 
     <div className="mb-20">
-      <ListNewsPageEvent list={data?.events?.posts?.nodes} lang={lang} />
+      <NewsPageEventsBlock list={formattedEventBlockList} lang={lang} />
     </div>
 
     <BrandPublication

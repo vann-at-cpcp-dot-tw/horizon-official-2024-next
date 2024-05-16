@@ -1,5 +1,5 @@
 query QueryMilestone(
-  $language: LanguageCodeFilterEnum = EN
+  $language: LanguageCodeFilterEnum
 ) {
   aboutHorizon(
     language: $language

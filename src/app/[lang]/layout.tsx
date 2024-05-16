@@ -33,12 +33,8 @@ async function getCommonData(){
   return data
 }
 
-async function getTranslations(lang:string){
-  const data = await fetchGQL(QueryTranslations, {
-    variables: {
-      language: (lang || 'EN').toUpperCase()
-    }
-  })
+async function getTranslations(){
+  const data = await fetchGQL(QueryTranslations)
 
   // 整理成 key-value 形式
   const translations:any[] = data?.translationSettings?.translationFields?.translations || []
@@ -67,7 +63,7 @@ export default async function RootLayout({
   // fetch data from server side
   const { lang } = params
   const commonData = await getCommonData()
-  const translations = await getTranslations(lang)
+  const translations = await getTranslations()
 
   return <html>
     <body>

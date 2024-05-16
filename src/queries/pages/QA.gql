@@ -1,5 +1,5 @@
 query QueryQA(
-  $language: LanguageCodeFilterEnum = EN
+  $language: LanguageCodeFilterEnum
 ){
   globalSettings(
     language: $language

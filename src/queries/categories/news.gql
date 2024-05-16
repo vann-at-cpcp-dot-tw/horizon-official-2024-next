@@ -7,7 +7,9 @@ query QueryNews(
   $before: String
   $relatedYachtSeries: String
   $categories: [String]
+  $year: Int
   $categoriesOperator: TaxQueryOperator = NOT_IN
+  $language: LanguageCodeFilterEnum
 ) {
   posts(
     first: $first
@@ -15,6 +17,10 @@ query QueryNews(
     after: $after,
     before: $before,
     where: {
+      language: $language
+      dateQuery: {
+        year: $year
+      }
       taxQuery: {
         relation: AND,
         taxArray: [

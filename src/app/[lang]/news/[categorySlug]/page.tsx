@@ -15,17 +15,22 @@ interface TypeProps {
     categorySlug: string
     lang: string
   }
+  searchParams: {
+    [key:string]: string
+  }
 }
 
 interface TypeState {}
 
-async function PageNewsWithCategory({params}:TypeProps){
+async function PageNewsWithCategory({params, searchParams}:TypeProps){
   const { lang, categorySlug } = params
 
   const data = await fetchGQL(QueryPostsByCategory, {
     variables: {
       slug: categorySlug,
-      first: postsPerPage
+      first: postsPerPage,
+      relatedYachtSeries: searchParams.series || null,
+      year: searchParams.year ?Number(searchParams.year) :null,
     }
   })
 
@@ -37,14 +42,14 @@ async function PageNewsWithCategory({params}:TypeProps){
         href: '/news'
       },
       {
-        label: data.category?.name
+        label: data.category?.translation?.name
       }
     ]} />
     {
       categorySlug === 'events' && <ComingEvents className="mb-10 mt-6 lg:mb-20 lg:mt-12" />
     }
-    <div className="container serif mb-2 text-center text-[28px] text-major-900 lg:mb-10 lg:text-[32px]">{data.category?.name}</div>
-    <ListWithCategory list={data?.category?.posts?.nodes} pageInfo={data?.posts?.pageInfo} lang={lang} />
+    <div className="container serif mb-2 text-center text-[28px] text-major-900 lg:mb-10 lg:text-[32px]">{data.category?.translation?.name}</div>
+    <ListWithCategory list={data.category?.translation?.posts?.nodes} pageInfo={data.category?.translation?.posts?.pageInfo} lang={lang} />
   </main>
 }
 

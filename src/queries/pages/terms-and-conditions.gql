@@ -1,5 +1,5 @@
 query QueryTermsPage(
-  $language: LanguageCodeFilterEnum = EN
+  $language: LanguageCodeFilterEnum
 ){
   globalSettings(
     language: $language

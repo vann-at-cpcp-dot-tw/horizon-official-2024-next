@@ -1,8 +1,8 @@
 #import '../fragments/yacht.gql'
 
 query QueryCommonData(
-  $language: LanguageCodeFilterEnum = EN,
-  $translation: LanguageCodeEnum = EN
+  $language: LanguageCodeFilterEnum,
+  $translation: LanguageCodeEnum!
 ){
   globalSettings(
     language: $language

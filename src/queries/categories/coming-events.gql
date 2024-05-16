@@ -1,5 +1,13 @@
-query QueryComingEvents($first:Int = 99) {
-  comingEvents(first:$first) {
+query QueryComingEvents(
+  $first:Int = 99,
+  $language: LanguageCodeFilterEnum,
+) {
+  comingEvents(
+    first:$first,
+    where: {
+      language: $language
+    }
+  ) {
     nodes {
       slug
       date

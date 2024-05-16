@@ -3,14 +3,12 @@
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 const postsPerPage = 6
 
-import { Suspense, useMemo, useEffect, useContext, useState } from 'react'
+import { Suspense, useMemo, useEffect, useContext, useRef, useState, useCallback } from 'react'
 import Image from "next/image"
 import LinkWithLang from '~/components/custom/LinkWithLang'
 import { twMerge } from 'tailwind-merge'
-import { isEmpty } from '~/lib/helpers'
-import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'
-import { useRouter, useSearchParams } from 'next/navigation'
-import { usePathnameWithoutLang } from 'vanns-common-modules/dist/use/next'
+import { isEmpty, arrayGenerate } from '~/lib/helpers'
+import { useSearchObject } from 'vanns-common-modules/dist/use/next'
 import { useLazyQuery } from "@apollo/client"
 import { QueryNews } from '~/queries/categories/news.gql'
 import PageNav from '~/components/custom/PageNav'
@@ -66,14 +64,10 @@ interface TypeProps {
 interface TypeState {}
 
 function List(props:TypeProps, ref:React.ReactNode){
-  // const store = useStore()
-  // const viewport = useWindowSize()
-  const router = useRouter()
-  const pathname = usePathnameWithoutLang()
-  const searchParams = useSearchParams()
+  const { searchObject, updateSearch } = useSearchObject()
   const { className, lang } = props
-
-  const [mergedList, setMergedList] = useState<TypePostNode[] | null>(null)
+  const [isFilterChanged, setIsFilterChanged] = useState(false)
+  const [mergedList, setMergedList] = useState<TypePostNode[] | null>(props.list)
 
   const[getData, { data, loading }] = useLazyQuery(QueryNews, {
     fetchPolicy: 'cache-and-network',
@@ -93,14 +87,12 @@ function List(props:TypeProps, ref:React.ReactNode){
     },
   })
 
-  const queryCategory = searchParams.get('category')
-  const querySeries = searchParams.get('series')
   const commonData = useCommonData()
   const { yachtSeriesList } = commonData ?? {}
 
   const pageInfo = useMemo(()=>{
     return data?.posts?.pageInfo || props?.pageInfo
-  }, [data, props.list, props.pageInfo, props.categories ])
+  }, [data?.posts?.pageInfo, props.pageInfo])
 
   const allowedCategories = useMemo<{slug:string, name:string}[] | undefined>(()=>{
     return props?.categories?.nodes?.filter((node:{slug:string, name:string})=>{
@@ -108,16 +100,15 @@ function List(props:TypeProps, ref:React.ReactNode){
     })
   }, [props?.categories])
 
-
-
   const queryVariables = useMemo(()=>{
     return {
       first: postsPerPage,
-      relatedYachtSeries: querySeries || null,
+      relatedYachtSeries: searchObject.series || null,
+      year: searchObject.year ?Number(searchObject.year) :null,
       ...(
-        queryCategory
+        searchObject.category
           ? {
-            categories: [queryCategory],
+            categories: [searchObject.category],
             categoriesOperator: 'IN'
           }:{
             categories: [],
@@ -125,42 +116,20 @@ function List(props:TypeProps, ref:React.ReactNode){
           }
       )
     }
-  }, [queryCategory, querySeries])
+  }, [searchObject.series, searchObject.year, searchObject.category])
 
   useEffect(()=>{
-
-    setMergedList(null)
-
-    // 第一次進頁面，URL 還未做過任何查詢時
-    if( queryCategory === null && querySeries === null && props.list){
-      setMergedList((prev)=>{
-        const uniqueSet = new Set()
-        const uniqueList = [
-          ...(prev === null ?[] :prev),
-          ...props?.list
-        ].filter(item => {
-          if (!uniqueSet.has(item.slug)) {
-            uniqueSet.add(item.slug)
-            return true
-          }
-          return false
-        })?.map((node:TypePostNode)=>{
-          return {
-            ...node,
-            filteredCategories: formatCategories(node?.categories?.nodes)
-          }
-        })
-
-        return uniqueList
-      })
+    // 非手動調整 filter 的話不動作
+    if( !isFilterChanged ){
       return
     }
 
+    // 手動調整 filter 的話，需先重置 mergedList，因為 mergedList 只有在 按下 more 的時候，才需要被累加
+    setMergedList(null)
     getData({
       variables: queryVariables
     })
-
-  }, [queryCategory, querySeries, pathname, props.list])
+  },[getData, searchObject.series, searchObject.year, searchObject.category, isFilterChanged])
 
   return <Suspense fallback={null}>
     <div className={twMerge('', className)}>
@@ -171,14 +140,17 @@ function List(props:TypeProps, ref:React.ReactNode){
             <div className="text-[24px] font-300 text-minor-900">Latest News</div>
           </div>
           <div className="col-12 mt-2 shrink lg:mt-0">
-            <div className="row lg:row-gap-8 !flex-nowrap justify-end">
-              <div className="col-6 shrink lg:col-auto">
-                <div className="w-full max-w-[160px] lg:w-screen">
+            <div className="row !flex-nowrap justify-end">
+              <div className="col-4 shrink lg:col-auto">
+                <div className="w-full lg:w-screen lg:max-w-[130px]">
                   <select className="w-full border-b border-gray-700 bg-transparent text-gray-700"
-                      value={queryCategory || ''}
-                      onChange={(e)=>{
-                        router.push(`${pathname}?category=${e.target.value}&series=${querySeries || ''}`, {scroll:false})
-                      }}>
+                  value={String(searchObject.category || '')}
+                  onChange={(e)=>{
+                    updateSearch({
+                      category: e.target.value
+                    })
+                    setIsFilterChanged(true)
+                  }}>
                     <option value="">All Categories</option>
                     {
                       allowedCategories?.map((node, index:number)=>{
@@ -188,18 +160,42 @@ function List(props:TypeProps, ref:React.ReactNode){
                   </select>
                 </div>
               </div>
-              <div className="col-6 shrink lg:col-auto">
-                <div className="w-full max-w-[160px] lg:w-screen">
+              <div className="col-4 shrink lg:col-auto">
+                <div className="w-full lg:w-screen lg:max-w-[130px]">
                   <select className="w-full border-b border-gray-700 bg-transparent text-gray-700"
-                      value={querySeries || ''}
-                      onChange={(e)=>{
-                        router.push(`${pathname}?category=${queryCategory || ''}&series=${e.target.value}`, {scroll:false})
-                      }}>
+                  value={String(searchObject.series || '')}
+                  onChange={(e)=>{
+                    updateSearch({
+                      series: e.target.value
+                    })
+                    setIsFilterChanged(true)
+                  }}>
                     <option value="">All Series</option>
-
                     {
                       yachtSeriesList?.nodes?.map((node:ICommonData['yachtSeriesList']['nodes'][number], index:number)=>{
                         return <option key={index} value={node.slug}>{node.name} Series</option>
+                      })
+                    }
+                  </select>
+                </div>
+              </div>
+              <div className="col-4 shrink lg:col-auto">
+                <div className="w-full lg:w-screen lg:max-w-[130px]">
+                  <select className="w-full border-b border-gray-700 bg-transparent text-gray-700"
+                  value={String(searchObject.year || '')}
+                  onChange={(e)=>{
+                    updateSearch({
+                      year: e.target.value
+                    })
+                    setTimeout(() => {
+                      setIsFilterChanged(true)
+
+                    },100)
+                  }}>
+                    <option value="">All Years</option>
+                    {
+                      arrayGenerate(2018, new Date().getFullYear()).reverse()?.map((node:number, index:number)=>{
+                        return <option key={index} value={node}>{node}</option>
                       })
                     }
                   </select>
