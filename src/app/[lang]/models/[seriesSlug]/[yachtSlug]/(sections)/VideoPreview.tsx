@@ -118,7 +118,7 @@ function VideoPreview(props:TypeProps, ref:React.ReactNode){
           {
             props?.preview?.previewVideo?.node?.mediaItemUrl
               ? <video className="absolute left-0 top-0 z-0 size-full object-cover" src={props?.preview?.previewVideo?.node?.mediaItemUrl} autoPlay playsInline muted loop></video>
-              : <Image className="absolute left-0 top-0 z-0 size-full object-cover" fill={true} sizes="100vw" src={props?.image || ''} alt=""/>
+              : <Image className="absolute left-0 top-0 z-0 size-full object-cover" fill={true} sizes="100vw" src={props?.preview?.previewImage?.node?.mediaItemUrl || ''} alt=""/>
           }
         </div>
       </RatioArea>
