@@ -31,13 +31,16 @@ export default function ApolloProvider({
       //     "accept-language": localeCode
       //   }
       // },
-      // memoryCacheOptions: {
-      //   typePolicies: {
-      //     myElementNode: {
-      //       keyFields: ['id', 'name'],
-      //     },
-      //   },
-      // },
+      memoryCacheOptions: {
+        typePolicies: {
+          Yacht: {
+            merge: true,
+            // merge(existing:any, incoming:any) {
+            //   return { ...existing, ...incoming }
+            // }
+          },
+        },
+      },
       middlewares: [
         languageLink
       ]

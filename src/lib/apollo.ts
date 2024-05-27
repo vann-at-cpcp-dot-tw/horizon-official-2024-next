@@ -12,14 +12,17 @@ const { convertLocaleCode } = langTools(i18n)
 
 const { getClient } = makeApolloClient({
   uri: API_URL,
-  revalidate: REVALIDATE
-  // memoryCacheOptions: {
-  //   typePolicies: {
-  //     myElementNode: {
-  //       keyFields: ['id', 'name'],
-  //     },
-  //   },
-  // },
+  revalidate: REVALIDATE,
+  memoryCacheOptions: {
+    typePolicies: {
+      Yacht: {
+        merge: true,
+        // merge(existing:any, incoming:any) {
+        //   return { ...existing, ...incoming }
+        // }
+      },
+    },
+  },
 })
 
 const fetchGQLWrapper = makeFetcher(getClient)

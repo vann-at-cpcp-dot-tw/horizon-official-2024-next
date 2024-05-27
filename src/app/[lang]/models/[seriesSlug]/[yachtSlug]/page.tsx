@@ -3,8 +3,8 @@ const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 import LinkWithLang from '~/components/custom/LinkWithLang'
 import { isEmpty, convertYoutubeUrlToEmbed } from '~/lib/helpers'
 import { fetchGQL } from '~/lib/apollo'
-import { QuerySingleYachtPage } from '~/queries/pages/models-[seriesSlug]-[yachtSlug].gql'
-import { notFound } from "next/navigation"
+import { QuerySingleYachtPage, QuerySingleYachtHulls } from '~/queries/pages/models-[seriesSlug]-[yachtSlug].gql'
+import NotFound from "~/components/custom/NotFound"
 import Breadcrumb from '~/components/custom/Breadcrumb'
 import SectionNav from "./(templates)/SectionNav"
 import KV from "./(sections)/KV"
@@ -33,9 +33,6 @@ interface TypeProps {
 interface TypeState {}
 
 async function PageSingleYacht(props:TypeProps, ref:React.ReactNode){
-  // const store = useStore()
-  // const router = useRouter()
-  // const viewport = useWindowSize()
   const { params, searchParams } = props
   const { yachtSlug, seriesSlug, lang } = params
 
@@ -46,9 +43,16 @@ async function PageSingleYacht(props:TypeProps, ref:React.ReactNode){
     }
   })
 
+  const hullsData = await fetchGQL(QuerySingleYachtHulls, {
+    variables: {
+      slug: yachtSlug,
+    }
+  })
+
   const { relatedPublication } = data?.yacht?.yachtCustomFields ?? {}
   const { title:yachtTitle, yachtSeriesList, yachtCustomFields } = data?.yacht ?? {}
-  const { heroVideo, heroImage, yachtDescription, exteriorImages, interiorImages, specsTable, generalArrangementImages, vrPreview, videosPreview, embedVideosGallery, hulls } = yachtCustomFields ?? {}
+  const { heroVideo, heroImage, yachtDescription, exteriorImages, interiorImages, specsTable, generalArrangementImages, vrPreview, videosPreview, embedVideosGallery } = yachtCustomFields ?? {}
+  const hulls = hullsData?.yacht?.yachtCustomFields?.hulls
   const parentSeries = yachtSeriesList?.nodes?.[0]
 
   const vrGallery = hulls?.reduce((acc:{hullName?:string, vrEmbedUrl?:string}[], node:{hullName?:string, vrEmbedUrl?:string})=>{
@@ -77,7 +81,7 @@ async function PageSingleYacht(props:TypeProps, ref:React.ReactNode){
   }, [])
 
   if( isEmpty(yachtTitle) ){
-    notFound()
+    return <NotFound />
   }
 
   return <main className="relative">
