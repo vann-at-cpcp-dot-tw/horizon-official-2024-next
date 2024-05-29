@@ -3,7 +3,7 @@ const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 import LinkWithLang from '~/components/custom/LinkWithLang'
 import { isEmpty, convertYoutubeUrlToEmbed } from '~/lib/helpers'
 import { fetchGQL } from '~/lib/apollo'
-import { QuerySingleYachtPage, QuerySingleYachtHulls } from '~/queries/pages/models-[seriesSlug]-[yachtSlug].gql'
+import { QuerySingleYachtPage, QuerySingleYachtHullsList } from '~/queries/pages/models-[seriesSlug]-[yachtSlug].gql'
 import NotFound from "~/components/custom/NotFound"
 import Breadcrumb from '~/components/custom/Breadcrumb'
 import SectionNav from "./(templates)/SectionNav"
@@ -43,7 +43,7 @@ async function PageSingleYacht(props:TypeProps, ref:React.ReactNode){
     }
   })
 
-  const hullsData = await fetchGQL(QuerySingleYachtHulls, {
+  const hullsData = await fetchGQL(QuerySingleYachtHullsList, {
     variables: {
       slug: yachtSlug,
     }

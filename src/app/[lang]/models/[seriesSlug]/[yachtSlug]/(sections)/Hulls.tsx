@@ -7,70 +7,38 @@ import Image from "next/image"
 import LinkWithLang from '~/components/custom/LinkWithLang'
 import { twMerge } from 'tailwind-merge'
 import { isEmpty } from '~/lib/helpers'
-import { useRouter, usePathname, useSearchParams } from "next/navigation"
+import { useRouter, usePathname, useSearchParams, useParams } from "next/navigation"
 import HullDetail from "../(templates)/HullDetail"
-
-// import { useRouter } from 'next/navigation'
-// import { useStore } from '~/store'
-// import useWindowSize from '~/use/useWindowSize"
-
+import { useQuery } from "@apollo/client"
+import { QuerySingleHull } from '~/queries/categories/hull.gql'
 interface TypeProps {
   yachtName?: string
   list: {
     hullName: string
     vrEmbedUrl: string
-    exteriorImages: {
-      image: {
-        node?: {
-          mediaItemUrl: string
-        }
-      }
-    }[]
-    interiorImages: {
-      image: {
-        node?: {
-          mediaItemUrl: string
-        }
-      }
-    }[]
-    generalArrangementImages: {
-      title: string
-      image: {
-        node?: {
-          mediaItemUrl: string
-        }
-      }
-      imageM: {
-        node?: {
-          mediaItemUrl: string
-        }
-      }
-    }[]
-    embedVideosGallery: {
-      embedUrl: string
-    }[]
-    specTerms: {
-      [key:string]: {
-        metric: string
-        imperial: string
-      }
-    }
   }[]
   [key:string]: any
 }
 interface TypeState {}
 
 function Hulls(props:TypeProps, ref:React.ReactNode){
-  // const store = useStore()
   const router = useRouter()
-  // const viewport = useWindowSize()
   const { className } = props
+  const params = useParams()
+  const { yachtSlug } = params
   const searchParams = useSearchParams()
   const queryHullName  = decodeURI(searchParams.get('hull') || '')
   const pathname = usePathname()
   const targetHull = useMemo(()=>{
-    return props?.list?.find((node)=>node?.hullName?.toLowerCase() === queryHullName.toLowerCase())
-  }, [queryHullName])
+    return props?.list?.find?.((node)=>node?.hullName?.toLowerCase() === queryHullName.toLowerCase())
+  }, [queryHullName, props.list])
+  const { data:openHullData } = useQuery(QuerySingleHull, {
+    skip: !yachtSlug || !targetHull?.hullName,
+    variables: {
+      yachtSlug,
+      hullName: targetHull?.hullName
+    }
+  })
 
   return <Suspense fallback={null}>
     <div className={twMerge('lg:py-24 py-12', className)}>
@@ -100,7 +68,7 @@ function Hulls(props:TypeProps, ref:React.ReactNode){
     </div>
 
     {
-      targetHull && <HullDetail yachtName={props.yachtName} {...targetHull}/>
+      openHullData?.hull && <HullDetail yachtName={props.yachtName} {...(openHullData?.hull || {})}/>
     }
   </Suspense>
 }

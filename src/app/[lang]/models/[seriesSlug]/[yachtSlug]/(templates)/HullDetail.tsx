@@ -1,7 +1,6 @@
 "use client"
 
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
-
 import { Suspense, useEffect, useMemo, useState } from 'react'
 import Image from "next/image"
 import LinkWithLang from '~/components/custom/LinkWithLang'
@@ -57,7 +56,7 @@ interface TypeProps {
     embedUrl: string
   }[]
   yachtName?: string
-  isComponent?: boolean
+  asComponent?: boolean
   onClose?: Function
   onUnMounted?: Function
   [key:string]: any
@@ -161,7 +160,7 @@ function HullDetail(props:TypeProps, ref:React.ReactNode){
     </>
   }
   onClose={()=>{
-    if( !props?.isComponent ){
+    if( !props?.asComponent ){
       router.push(pathname, {scroll:false})
     }
     props?.onClose?.()

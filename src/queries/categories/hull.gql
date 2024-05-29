@@ -1,0 +1,23 @@
+#import '../fragments/hull.gql'
+
+query QuerySingleHull(
+  $yachtSlug: String,
+  $hullName: String,
+  $language: LanguageCodeFilterEnum,
+) {
+  hull(
+    yachtSlug: $yachtSlug,
+    hullName: $hullName,
+    language: $language
+  ) {
+    hullName
+    vrEmbedUrl
+    ...hullExteriorImages
+    ...hullInteriorImages
+    ...hullGeneralArrangementImages
+    ...hullEmbedVideosGallery
+    specTerms {
+      ...hullSpecTerms
+    }
+  }
+}

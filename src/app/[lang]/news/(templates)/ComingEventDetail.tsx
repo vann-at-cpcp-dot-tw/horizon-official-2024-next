@@ -9,6 +9,7 @@ import { twMerge } from 'tailwind-merge'
 import { isEmpty } from '~/lib/helpers'
 import { usePathname, useRouter, useParams } from 'next/navigation'
 import { gql, useQuery } from "@apollo/client"
+import { QuerySingleHull } from '~/queries/categories/hull.gql'
 import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'
 import buttonStyles from '~/components/ui/button.module.sass'
 import { Button } from '~/components/ui/button'
@@ -31,6 +32,7 @@ interface TypeHullNode {
 
 interface TypeYachtNode {
   translation: {
+    slug: string
     title: string
     yachtCustomFields: {
       hulls?: TypeHullNode[]
@@ -73,85 +75,12 @@ function createHullGQLString(list:{yachtSlug:string, hullName:string}[] | undefi
     return `
       ${acc}
       yacht${index}:yacht(id:"${node?.yachtSlug}", idType: SLUG){
-        translation(language: ${(lang || 'EN').toUpperCase()}){
+        translation(language: ${lang.toUpperCase()}){
+          slug
           title
           yachtCustomFields {
             hulls {
               hullName
-              vrEmbedUrl
-              exteriorImages {
-                image {
-                  node {
-                    mediaItemUrl
-                  }
-                }
-              }
-              interiorImages {
-                image {
-                  node {
-                    mediaItemUrl
-                  }
-                }
-                description
-              }
-              generalArrangementImages {
-                title
-                image {
-                  node {
-                    mediaItemUrl
-                  }
-                }
-                imageM {
-                  node {
-                    mediaItemUrl
-                  }
-                }
-              }
-              embedVideosGallery {
-                embedUrl
-              }
-              specTerms {
-                loa {
-                  metric
-                  imperial
-                }
-                lwl {
-                  metric
-                  imperial
-                }
-                beam {
-                  metric
-                  imperial
-                }
-                draft {
-                  metric
-                  imperial
-                }
-                engines {
-                  metric
-                  imperial
-                }
-                generator {
-                  metric
-                  imperial
-                }
-                displacement {
-                  metric
-                  imperial
-                }
-                fuelCapacity {
-                  metric
-                  imperial
-                }
-                waterCapacity {
-                  metric
-                  imperial
-                }
-                cabins {
-                  metric
-                  imperial
-                }
-              }
             }
           }
         }
@@ -166,24 +95,31 @@ function ComingEventDetail(props:TypeProps, ref:React.ReactNode){
   const pathname = usePathname()
   const params = useParams()
   const { lang } = params
-  const [openHullIndex, setOpenHullIndex] = useState<number | null>(null)
-
+  const [openHull, setOpenHull] = useState<{yachtSlug:string | null, hullName:string|null} | null>(null)
   const hullGQLString = useMemo(()=>{
     return createHullGQLString(props?.relatedHulls, (lang as string))
   }, [props?.relatedHulls, lang])
 
-  const { data:hullData } = useQuery<{[key:string]:TypeYachtNode}>(gql `query QueryHulls {
+  const { data:hullListData } = useQuery<{[key:string]:TypeYachtNode}>(gql `query QueryHulls {
     ${hullGQLString}
   }`, {
     skip: !hullGQLString
   })
 
+  const { data:openHullData } = useQuery(QuerySingleHull, {
+    skip: !openHull?.yachtSlug || !openHull?.hullName,
+    variables: {
+      yachtSlug: openHull?.yachtSlug,
+      hullName: openHull?.hullName
+    }
+  })
+
   const hullList = useMemo(()=>{
-    if( !props?.relatedHulls || !hullData){
+    if( !props?.relatedHulls || !hullListData){
       return []
     }
 
-    const reduced =  Object.values(hullData).reduce<{yachtName:string, hull:TypeHullNode}[]>((acc, yachtNode:TypeYachtNode, index:number)=>{
+    const reduced = Object.values(hullListData).reduce<{yachtName:string, yachtSlug:string, hull:TypeHullNode}[]>((acc, yachtNode:TypeYachtNode, index:number)=>{
       const findHullName = props?.relatedHulls?.[index]?.hullName
       const foundedHull = yachtNode?.translation?.yachtCustomFields?.hulls?.find?.((hullNode)=>hullNode?.hullName === findHullName)
 
@@ -194,6 +130,7 @@ function ComingEventDetail(props:TypeProps, ref:React.ReactNode){
       return [
         ...acc,
         {
+          yachtSlug: yachtNode?.translation?.slug,
           yachtName: yachtNode?.translation?.title,
           hull: foundedHull
         }
@@ -202,15 +139,7 @@ function ComingEventDetail(props:TypeProps, ref:React.ReactNode){
 
     return reduced
 
-  }, [hullData, props?.relatedHulls])
-
-  const openHullData = useMemo(()=>{
-    if( openHullIndex === null ){
-      return null
-    }
-    return hullList?.[openHullIndex]
-  }, [openHullIndex, hullList])
-
+  }, [hullListData, props?.relatedHulls])
 
   useEffect(()=>{
     document.body.classList.add('lb-open')
@@ -253,7 +182,10 @@ function ComingEventDetail(props:TypeProps, ref:React.ReactNode){
                     <div className="flex justify-center">
                       <Button variant="outline" className={`${buttonStyles['rounded-outline']}`}
                         onClick={()=>{
-                          setOpenHullIndex(index)
+                          setOpenHull({
+                            yachtSlug: node.yachtSlug,
+                            hullName: node.hull?.hullName,
+                          })
                         }}>
                           MORE DETAIL
                       </Button>
@@ -315,17 +247,11 @@ function ComingEventDetail(props:TypeProps, ref:React.ReactNode){
 
     {
       openHullData && <HullDetail className="fixed z-[99999]"
-      hullName={openHullData.hull?.hullName}
-      vrEmbedUrl={openHullData.hull?.vrEmbedUrl}
-      exteriorImages={openHullData.hull?.exteriorImages}
-      interiorImages={openHullData.hull?.interiorImages}
-      specTerms={openHullData.hull?.specTerms}
-      generalArrangementImages={openHullData.hull?.generalArrangementImages}
-      embedVideosGallery={openHullData.hull?.embedVideosGallery}
+      {...(openHullData?.hull || {})}
       yachtName={openHullData?.yachtName}
-      isComponent
+      asComponent
       onClose={()=>{
-        setOpenHullIndex(null)
+        setOpenHull(null)
       }}
       onUnMounted={()=>{
         document.body.classList.add('lb-open')

@@ -1,5 +1,5 @@
 query QueryComingEvents(
-  $first:Int = 99,
+  $first: Int = 99,
   $language: LanguageCodeFilterEnum,
 ) {
   comingEvents(

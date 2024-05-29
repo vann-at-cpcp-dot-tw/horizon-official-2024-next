@@ -68,12 +68,15 @@ query QuerySingleYachtPage(
   }
 }
 
-query QuerySingleYachtHulls(
+query QuerySingleYachtHullsList(
   $slug: ID!,
 ){
   yacht(id:$slug, idType: SLUG) {
     yachtCustomFields {
-      ...yachtHulls
+      hulls {
+        hullName
+        vrEmbedUrl
+      }
     }
   }
 }
