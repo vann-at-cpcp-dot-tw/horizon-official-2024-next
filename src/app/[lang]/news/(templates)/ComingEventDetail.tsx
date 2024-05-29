@@ -81,6 +81,13 @@ function createHullGQLString(list:{yachtSlug:string, hullName:string}[] | undefi
           yachtCustomFields {
             hulls {
               hullName
+              exteriorImages {
+                image {
+                  node {
+                    mediaItemUrl
+                  }
+                }
+              }
             }
           }
         }
