@@ -182,10 +182,13 @@ function HullDetail(props:TypeProps, ref:React.ReactNode){
       {(function(){
         switch(activeSection){
           case 'Exterior':
-            return <div className="relative z-10 grow overflow-hidden">
+            return <div className={`relative z-10 grow overflow-hidden ${isLoading ?'opacity-0' :'opacity-100'}`}
+            style={{
+              transition: 'all 0.8s cubic-bezier(0.215, 0.610, 0.355, 1.000)'
+            }}>
               {
                 props?.exteriorImages && <SwiperFullHeight
-                list={props.exteriorImages?.map((node)=>{
+                list={props.exteriorImages.map((node)=>{
                   return {
                     content: <Image src={node?.image?.node?.mediaItemUrl || ''}
                     fill={viewport.width && viewport.width >= 992 ?true :false}
@@ -207,10 +210,13 @@ function HullDetail(props:TypeProps, ref:React.ReactNode){
             </div>
 
           case 'Interior':
-            return <div className="relative z-10 grow overflow-hidden">
+            return <div className={`relative z-10 grow overflow-hidden ${isLoading ?'opacity-0' :'opacity-100'}`}
+            style={{
+              transition: 'all 0.8s cubic-bezier(0.215, 0.610, 0.355, 1.000)'
+            }}>
               {
-                props.interiorImages && <SwiperFullHeight
-                list={props.interiorImages?.map((node)=>{
+                props?.interiorImages && <SwiperFullHeight
+                list={props.interiorImages.map((node)=>{
                   return {
                     content: <Image src={node?.image?.node?.mediaItemUrl || ''}
                     fill={viewport.width && viewport.width >= 992 ?true :false}
@@ -230,7 +236,6 @@ function HullDetail(props:TypeProps, ref:React.ReactNode){
                   }
                 })} />
               }
-
             </div>
 
           case 'SPECS':
@@ -241,7 +246,10 @@ function HullDetail(props:TypeProps, ref:React.ReactNode){
             </div>
 
           case 'GA':
-            return <div className="container-fluid relative z-10 flex grow flex-col pb-5">
+            return <div className={`container-fluid relative z-10 flex grow flex-col pb-5 ${isLoading ?'opacity-0' :'opacity-100'}`}
+            style={{
+              transition: 'all 0.8s cubic-bezier(0.215, 0.610, 0.355, 1.000)'
+            }}>
               {
                 gaItemTitles && <GAGalleryNav
                 className="mt-2"
@@ -291,9 +299,9 @@ function HullDetail(props:TypeProps, ref:React.ReactNode){
           case 'Videos':
             return <div className="relative z-10 grow">
               {
-                props.embedVideosGallery && <SwiperFullHeight
+                props?.embedVideosGallery && <SwiperFullHeight
                 iframeRatio={1.78}
-                list={props.embedVideosGallery?.map((node)=>{
+                list={props.embedVideosGallery.map((node)=>{
                   return {
                     content: <RatioArea ratio="56.25">
                       <iframe className="absolute left-0 top-0 z-10 size-full"
