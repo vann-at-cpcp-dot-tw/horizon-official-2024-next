@@ -102,7 +102,7 @@ function ComingEventDetail(props:TypeProps, ref:React.ReactNode){
   const pathname = usePathname()
   const params = useParams()
   const { lang } = params
-  const [openHull, setOpenHull] = useState<{yachtSlug:string | null, hullName:string|null} | null>(null)
+  const [openHull, setOpenHull] = useState<{yachtSlug:string | null, yachtName:string|null, hullName:string|null} | null>(null)
   const hullGQLString = useMemo(()=>{
     return createHullGQLString(props?.relatedHulls, (lang as string))
   }, [props?.relatedHulls, lang])
@@ -113,7 +113,7 @@ function ComingEventDetail(props:TypeProps, ref:React.ReactNode){
     skip: !hullGQLString
   })
 
-  const { data:openHullData } = useQuery(QuerySingleHull, {
+  const { data:openHullData, error:openHullError, loading:openHullLoading } = useQuery(QuerySingleHull, {
     skip: !openHull?.yachtSlug || !openHull?.hullName,
     variables: {
       yachtSlug: openHull?.yachtSlug,
@@ -191,6 +191,7 @@ function ComingEventDetail(props:TypeProps, ref:React.ReactNode){
                         onClick={()=>{
                           setOpenHull({
                             yachtSlug: node.yachtSlug,
+                            yachtName: node.yachtName,
                             hullName: node.hull?.hullName,
                           })
                         }}>
@@ -253,9 +254,10 @@ function ComingEventDetail(props:TypeProps, ref:React.ReactNode){
     </ContentLightbox>
 
     {
-      openHullData && <HullDetail className="fixed z-[99999]"
+      openHull?.hullName && <HullDetail className="fixed z-[99999]"
+      hullName={openHull?.hullName}
+      yachtName={openHull?.yachtName}
       {...(openHullData?.hull || {})}
-      yachtName={openHullData?.yachtName}
       asComponent
       onClose={()=>{
         setOpenHull(null)

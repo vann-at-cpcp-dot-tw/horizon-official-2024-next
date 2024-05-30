@@ -29,10 +29,12 @@ function Hulls(props:TypeProps, ref:React.ReactNode){
   const searchParams = useSearchParams()
   const queryHullName  = decodeURI(searchParams.get('hull') || '')
   const pathname = usePathname()
+
   const targetHull = useMemo(()=>{
     return props?.list?.find?.((node)=>node?.hullName?.toLowerCase() === queryHullName.toLowerCase())
   }, [queryHullName, props.list])
-  const { data:openHullData } = useQuery(QuerySingleHull, {
+
+  const { data:openHullData, error:openHullError, loading:openHullLoading } = useQuery(QuerySingleHull, {
     skip: !yachtSlug || !targetHull?.hullName,
     variables: {
       yachtSlug,
@@ -68,7 +70,7 @@ function Hulls(props:TypeProps, ref:React.ReactNode){
     </div>
 
     {
-      openHullData?.hull && <HullDetail yachtName={props.yachtName} {...(openHullData?.hull || {})}/>
+      targetHull?.hullName && <HullDetail yachtName={props.yachtName} hullName={targetHull?.hullName} {...(openHullData?.hull || {})}/>
     }
   </Suspense>
 }

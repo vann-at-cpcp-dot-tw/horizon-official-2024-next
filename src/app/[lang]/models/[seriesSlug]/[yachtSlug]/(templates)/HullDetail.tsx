@@ -17,15 +17,16 @@ import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'
 
 interface TypeProps {
   hullName: string
-  vrEmbedUrl: string
-  exteriorImages: {
+  yachtName?: string
+  vrEmbedUrl?: string
+  exteriorImages?: {
     image: {
       node?: {
         mediaItemUrl: string
       }
     }
   }[]
-  interiorImages: {
+  interiorImages?: {
     image: {
       node?: {
         mediaItemUrl: string
@@ -33,13 +34,13 @@ interface TypeProps {
     }
     description?: string
   }[]
-  specTerms: {
+  specTerms?: {
     [key:string]: {
       metric: string
       imperial: string
     }
   }
-  generalArrangementImages: {
+  generalArrangementImages?: {
     title: string
     image: {
       node?: {
@@ -52,10 +53,9 @@ interface TypeProps {
       }
     }
   }[]
-  embedVideosGallery: {
+  embedVideosGallery?: {
     embedUrl: string
   }[]
-  yachtName?: string
   asComponent?: boolean
   onClose?: Function
   onUnMounted?: Function
@@ -64,7 +64,6 @@ interface TypeProps {
 interface TypeState {}
 
 function HullDetail(props:TypeProps, ref:React.ReactNode){
-  // const store = useStore()
   const viewport = useWindowSize()
   const { className, background='var(--color-golden-300)' } = props
   const router = useRouter()
@@ -81,32 +80,32 @@ function HullDetail(props:TypeProps, ref:React.ReactNode){
       },
       {
         label: 'SPECS',
-        hasContent: Object?.values?.(props.specTerms)?.some?.((node)=>(node.metric || node.imperial))
+        hasContent: Object?.values?.(props?.specTerms || {})?.some?.((node)=>(node.metric || node.imperial))
       },
       {
         label: 'GA',
-        hasContent: props.generalArrangementImages?.some?.((node)=>node?.image?.node?.mediaItemUrl)
+        hasContent: props?.generalArrangementImages?.some?.((node)=>node?.image?.node?.mediaItemUrl)
       },
       {
         label: 'VR',
-        hasContent: !isEmpty(props.vrEmbedUrl)
+        hasContent: !isEmpty(props?.vrEmbedUrl)
       },
       {
         label: 'Videos',
-        hasContent: props.embedVideosGallery?.some?.((node)=>node.embedUrl)
+        hasContent: props?.embedVideosGallery?.some?.((node)=>node.embedUrl)
       }
     ].filter((node)=>node.hasContent)
-
     return nav
   }, [
-    props.exteriorImages,
-    props.interiorImages,
-    props.specTerms,
-    props.generalArrangementImages,
-    props.vrEmbedUrl,
-    props.embedVideosGallery,
+    props?.exteriorImages,
+    props?.interiorImages,
+    props?.specTerms,
+    props?.generalArrangementImages,
+    props?.vrEmbedUrl,
+    props?.embedVideosGallery,
   ])
-  const [activeSection, setActiveSection] = useState(hullNav?.[0]?.label || '')
+
+  const [activeSection, setActiveSection] = useState('')
   const [activeGAIndex, setActiveGAIndex] = useState(0)
   const [isLoading, setIsLoading] = useState(false)
 
@@ -119,12 +118,19 @@ function HullDetail(props:TypeProps, ref:React.ReactNode){
   }, [props.generalArrangementImages, activeGAIndex])
 
   useEffect(()=>{
+    if( isEmpty(hullNav?.[0]?.label) || activeSection ){
+      return
+    }
+    setActiveSection(hullNav[0].label)
+  }, [hullNav, activeSection])
+
+  useEffect(()=>{
     document.body.classList.add('lb-open')
     return ()=>{
       document.body.classList.remove('lb-open')
       props?.onUnMounted?.()
     }
-  }, [props.onUnMounted])
+  }, [props?.onUnMounted])
 
 
   useEffect(()=>{
@@ -177,49 +183,54 @@ function HullDetail(props:TypeProps, ref:React.ReactNode){
         switch(activeSection){
           case 'Exterior':
             return <div className="relative z-10 grow overflow-hidden">
-              <SwiperFullHeight
-              list={props.exteriorImages?.map((node)=>{
-                return {
-                  content: <Image src={node?.image?.node?.mediaItemUrl || ''}
-                  fill={viewport.width && viewport.width >= 992 ?true :false}
-                  width={viewport.width && viewport.width >= 992 ?0 :1920}
-                  height={viewport.width && viewport.width >= 992 ?0 :1080}
-                  sizes="100vw"
-                  style={{
-                    objectFit: viewport.width && viewport.width >= 992 ?'contain' :'cover',
-                    width: '100%',
-                    height: viewport.width && viewport.width >= 992 ?'100%' :'auto'
-                  }}
-                  alt=""
-                  onLoad={()=>{
-                    setIsLoading(false)
-                  }} />,
-                }
-              })} />
+              {
+                props?.exteriorImages && <SwiperFullHeight
+                list={props.exteriorImages?.map((node)=>{
+                  return {
+                    content: <Image src={node?.image?.node?.mediaItemUrl || ''}
+                    fill={viewport.width && viewport.width >= 992 ?true :false}
+                    width={viewport.width && viewport.width >= 992 ?0 :1920}
+                    height={viewport.width && viewport.width >= 992 ?0 :1080}
+                    sizes="100vw"
+                    style={{
+                      objectFit: viewport.width && viewport.width >= 992 ?'contain' :'cover',
+                      width: '100%',
+                      height: viewport.width && viewport.width >= 992 ?'100%' :'auto'
+                    }}
+                    alt=""
+                    onLoad={()=>{
+                      setIsLoading(false)
+                    }} />,
+                  }
+                })} />
+              }
             </div>
 
           case 'Interior':
             return <div className="relative z-10 grow overflow-hidden">
-              <SwiperFullHeight
-              list={props.interiorImages?.map((node)=>{
-                return {
-                  content: <Image src={node?.image?.node?.mediaItemUrl || ''}
-                  fill={viewport.width && viewport.width >= 992 ?true :false}
-                  width={viewport.width && viewport.width >= 992 ?0 :1920}
-                  height={viewport.width && viewport.width >= 992 ?0 :1080}
-                  sizes="100vw"
-                  style={{
-                    objectFit: viewport.width && viewport.width >= 992 ?'contain' :'cover',
-                    width: '100%',
-                    height: viewport.width && viewport.width >= 992 ?'100%' :'auto'
-                  }}
-                  alt=""
-                  onLoad={()=>{
-                    setIsLoading(false)
-                  }}/>,
-                  title: node.description
-                }
-              })} />
+              {
+                props.interiorImages && <SwiperFullHeight
+                list={props.interiorImages?.map((node)=>{
+                  return {
+                    content: <Image src={node?.image?.node?.mediaItemUrl || ''}
+                    fill={viewport.width && viewport.width >= 992 ?true :false}
+                    width={viewport.width && viewport.width >= 992 ?0 :1920}
+                    height={viewport.width && viewport.width >= 992 ?0 :1080}
+                    sizes="100vw"
+                    style={{
+                      objectFit: viewport.width && viewport.width >= 992 ?'contain' :'cover',
+                      width: '100%',
+                      height: viewport.width && viewport.width >= 992 ?'100%' :'auto'
+                    }}
+                    alt=""
+                    onLoad={()=>{
+                      setIsLoading(false)
+                    }}/>,
+                    title: node.description
+                  }
+                })} />
+              }
+
             </div>
 
           case 'SPECS':
@@ -231,11 +242,13 @@ function HullDetail(props:TypeProps, ref:React.ReactNode){
 
           case 'GA':
             return <div className="container-fluid relative z-10 flex grow flex-col pb-5">
-              <GAGalleryNav
-              className="mt-2"
-              itemTitles={gaItemTitles}
-              activeItem={activeGAIndex}
-              setActiveItem={setActiveGAIndex} />
+              {
+                gaItemTitles && <GAGalleryNav
+                className="mt-2"
+                itemTitles={gaItemTitles}
+                activeItem={activeGAIndex}
+                setActiveItem={setActiveGAIndex} />
+              }
 
               <div className="relative grow">
                 {
@@ -277,16 +290,18 @@ function HullDetail(props:TypeProps, ref:React.ReactNode){
 
           case 'Videos':
             return <div className="relative z-10 grow">
-              <SwiperFullHeight
-              iframeRatio={1.78}
-              list={props.embedVideosGallery?.map((node)=>{
-                return {
-                  content: <RatioArea ratio="56.25">
-                    <iframe className="absolute left-0 top-0 z-10 size-full"
-                    src={convertYoutubeUrlToEmbed(node.embedUrl)} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
-                  </RatioArea>
-                }
-              })} />
+              {
+                props.embedVideosGallery && <SwiperFullHeight
+                iframeRatio={1.78}
+                list={props.embedVideosGallery?.map((node)=>{
+                  return {
+                    content: <RatioArea ratio="56.25">
+                      <iframe className="absolute left-0 top-0 z-10 size-full"
+                      src={convertYoutubeUrlToEmbed(node.embedUrl)} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
+                    </RatioArea>
+                  }
+                })} />
+              }
             </div>
         }
       }())}
