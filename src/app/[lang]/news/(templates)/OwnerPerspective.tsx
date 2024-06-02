@@ -31,7 +31,7 @@ function OwnerPerspective(props:TypeProps, ref:React.ReactNode){
               <div className="mb-3 text-[15px] text-gray-300 lg:mb-1.5 lg:text-[17px]">OWNER PERSPECTIVE</div>
               <div className="serif text-[32px] text-major-900 lg:text-[60px]">ADVENTURE</div>
             </div>
-            <div className="mx-auto w-full max-w-[600px] py-6 text-center text-[15px] text-gray-300 lg:pt-0">
+            <div className="mx-auto w-full max-w-[640px] px-5 py-6 text-center text-[15px] text-gray-300 lg:pt-0">
               { props?.description }
             </div>
           </div>

@@ -90,22 +90,23 @@ function ContentList(props:TypeProps, ref:React.ReactNode){
         props?.list?.map((node, index)=>{
           return <div className="container mb-14 lg:mb-20" key={index}>
             <div className="mx-auto w-full max-w-[900px]">
-              <RatioArea className="group mb-3 overflow-hidden lg:mb-5" ratio="56.25">
-                {
-                  node?.content && <div className="absolute left-0 top-0 z-10 flex size-full cursor-pointer items-center justify-center opacity-0 group-hover:opacity-100 group-active:opacity-100"
-                  onClick={()=>{
-                    router.push(`${pathname}?open=${index}`, {scroll:false})
-                  }}
+
+              <div onClick={()=>{
+                router.push(`${pathname}?open=${index}`, {scroll:false})
+              }}>
+                <RatioArea className="group mb-3 overflow-hidden lg:mb-5" ratio="56.25">
+                  {
+                    node?.content && <div className="absolute left-0 top-0 z-10 flex size-full cursor-pointer items-center justify-center opacity-0 group-hover:opacity-100 group-active:opacity-100"
                   style={{
                     background: 'rgba(0, 46, 79, 0.5)',
                     transition: 'all .4s'
                   }}>
-                    <div className="flex size-[56px] items-center justify-center rounded-full bg-golden-700">
-                      <i className="bi bi-plus-lg text-[24px] text-white"></i>
+                      <div className="flex size-[56px] items-center justify-center rounded-full bg-golden-700">
+                        <i className="bi bi-plus-lg text-[24px] text-white"></i>
+                      </div>
                     </div>
-                  </div>
-                }
-                <Image className={`pointer-events-none absolute left-1/2 top-1/2 z-0 size-full -translate-x-1/2 -translate-y-1/2 object-cover ${ node?.content ?'group-hover:scale-[1.2] group-active:scale-[1.2]' :''}`}
+                  }
+                  <Image className={`pointer-events-none absolute left-1/2 top-1/2 z-0 size-full -translate-x-1/2 -translate-y-1/2 object-cover ${ node?.content ?'group-hover:scale-[1.2] group-active:scale-[1.2]' :''}`}
                 src={node?.basic?.keyImage?.node?.mediaItemUrl || ''}
                 width={900}
                 height={506}
@@ -116,7 +117,9 @@ function ContentList(props:TypeProps, ref:React.ReactNode){
                 style={{
                   transition: 'all 1.6s cubic-bezier(0.215, 0.610, 0.355, 1.000)'
                 }} />
-              </RatioArea>
+                </RatioArea>
+              </div>
+
               <div className="serif mb-1 text-center text-[24px] text-minor-900 lg:mb-2 lg:text-[32px]">{node?.basic?.title}</div>
               <div className="mb-3 text-gray-700 lg:mb-5">{node?.basic?.description}</div>
               {
