@@ -1,5 +1,4 @@
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
-const postsPerPage = 10
 
 import Image from "next/image"
 import LinkWithLang from '~/components/custom/LinkWithLang'
@@ -24,6 +23,7 @@ interface TypeState {}
 
 async function PageNewsWithCategory({params, searchParams}:TypeProps){
   const { lang, categorySlug } = params
+  const postsPerPage = params.categorySlug === 'events' ?12 :10
 
   const data = await fetchGQL(QueryPostsByCategory, {
     variables: {
