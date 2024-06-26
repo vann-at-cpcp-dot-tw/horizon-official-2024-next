@@ -1,7 +1,7 @@
 
 "use client"
 
-const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
+const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 const CONTENT_TYPE = process.env.NEXT_PUBLIC_CONTENT_TYPE || 'hq'
 const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
 
@@ -9,7 +9,7 @@ import { Suspense, useEffect, useState } from 'react'
 import Image from "next/image"
 import LinkWithLang from '~/components/custom/LinkWithLang'
 import { twMerge } from 'tailwind-merge'
-import { isEmpty } from '~/lib/helpers'
+import { isEmpty } from '~/lib/utils'
 import { useWindowSize } from 'vanns-common-modules/dist/use/react'
 import { motion } from "framer-motion"
 import { useIsClient } from 'vanns-common-modules/dist/use/react'

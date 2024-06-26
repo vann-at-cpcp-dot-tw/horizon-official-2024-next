@@ -1,11 +1,11 @@
 
-const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
+const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 import Image from "next/image"
 
 import { Suspense } from 'react'
 import { useStore } from '~/store'
 import { twMerge } from 'tailwind-merge'
-import { isEmpty } from '~/lib/helpers'
+import { isEmpty } from '~/lib/utils'
 import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'
 import ImageAutoPlaceholder from "~/components/custom/ImageAutoPlaceholder"
 interface TypeProps {

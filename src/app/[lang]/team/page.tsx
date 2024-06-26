@@ -1,11 +1,11 @@
 
-const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
+const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 const CONTENT_TYPE = process.env.NEXT_PUBLIC_CONTENT_TYPE || 'hq'
 const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
 
 import Image from "next/image"
 import LinkWithLang from '~/components/custom/LinkWithLang'
-import { isEmpty } from '~/lib/helpers'
+import { isEmpty } from '~/lib/utils'
 import { redirect } from "next/navigation"
 import { QueryTeamPage } from '~/queries/pages/team.gql'
 import { fetchGQL } from '~/lib/apollo'
@@ -33,7 +33,7 @@ async function PageTeam({params}:TypeProps){
 
     <div className="container serif my-10 text-center text-[32px] text-minor-900">{data?.teamPageSettings?.teamPageCustomFields?.pageTitle}</div>
 
-    <div className="MCE-CONTENT container" style={{maxWidth:'940px'}} dangerouslySetInnerHTML={{__html:data?.teamPageSettings?.teamPageCustomFields?.teamIntroduction}}></div>
+    <pre className="MCE-CONTENT container" style={{maxWidth:'940px'}} dangerouslySetInnerHTML={{__html:data?.teamPageSettings?.teamPageCustomFields?.teamIntroduction}}></pre>
 
     {
       data?.teamPageSettings?.teamPageCustomFields?.teamMembers?.length > 0 && <div className="container pb-16 pt-24" style={{maxWidth:'1240px'}}>

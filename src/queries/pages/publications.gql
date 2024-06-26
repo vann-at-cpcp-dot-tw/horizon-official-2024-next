@@ -9,8 +9,8 @@ query QueryPublicationsPage(
         first: 6,
         where: {
           orderby: {
-            field: MENU_ORDER,
-            order: ASC
+            field: DATE,
+            order: DESC
           }
         }
       ) {

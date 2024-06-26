@@ -1,13 +1,13 @@
 "use client"
 
-const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
+const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 const postsPerPage = 6
 
 import { Suspense, useMemo, useEffect, useContext, useRef, useState, useCallback } from 'react'
 import Image from "next/image"
 import LinkWithLang from '~/components/custom/LinkWithLang'
 import { twMerge } from 'tailwind-merge'
-import { isEmpty, arrayGenerate } from '~/lib/helpers'
+import { isEmpty, arrayGenerate } from '~/lib/utils'
 import { useSearchObject } from 'vanns-common-modules/dist/use/next'
 import { useLazyQuery } from "@apollo/client"
 import { QueryNews } from '~/queries/categories/news.gql'

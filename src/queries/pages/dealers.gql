@@ -11,6 +11,7 @@ query QueryDealersWithRegion {
             contactNumber
             contactEmail
             address
+            googleMapLink
             website
           }
           dealerRegions(where: {childless: true}) {
@@ -45,6 +46,7 @@ query QuerySingleDealer(
         contactNumber
         contactEmail
         address
+        googleMapLink
         website
       }
     }

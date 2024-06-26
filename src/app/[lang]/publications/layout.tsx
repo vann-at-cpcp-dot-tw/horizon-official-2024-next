@@ -1,9 +1,9 @@
 
-const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
+const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
 import Image from "next/image"
 import LinkWithLang from '~/components/custom/LinkWithLang'
-import { isEmpty } from '~/lib/helpers'
+import { isEmpty } from '~/lib/utils'
 import { fetchGQL } from '~/lib/apollo'
 import { QueryPublicationsPage } from '~/queries/pages/publications.gql'
 import LocalDataProvider from "./(templates)/LocalDataProvider"

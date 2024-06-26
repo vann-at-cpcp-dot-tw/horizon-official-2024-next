@@ -1,6 +1,6 @@
 "use client"
 
-const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
+const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
 import Image from "next/image"
 import { Suspense, useState, useRef } from 'react'
@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation'
 import { useStore } from '~/store'
 import { useWindowSize, useDomNodeSize } from "vanns-common-modules/dist/use/react"
 import { twMerge } from 'tailwind-merge'
-import { isEmpty } from '~/lib/helpers'
+import { isEmpty } from '~/lib/utils'
 import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { SwiperClass } from "swiper/react"

@@ -1,13 +1,13 @@
 "use client"
 
-const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
+const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 const CONTENT_TYPE = process.env.NEXT_PUBLIC_CONTENT_TYPE || 'hq'
 const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
 
 import { Suspense, useRef, useReducer, useEffect, useState, useContext } from 'react'
 
 import { twMerge } from 'tailwind-merge'
-import { isEmpty } from '~/lib/helpers'
+import { isEmpty } from '~/lib/utils'
 import { Button } from '~/components/ui/button'
 import LinkWithLang from "./LinkWithLang"
 import { useParams } from "next/navigation"

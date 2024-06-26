@@ -1,12 +1,12 @@
 "use client"
 
-const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
+const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
 import { Suspense, useState, useEffect, useMemo } from 'react'
 import Image from "next/image"
 import LinkWithLang from '~/components/custom/LinkWithLang'
 import { twMerge } from 'tailwind-merge'
-import { isEmpty } from '~/lib/helpers'
+import { isEmpty } from '~/lib/utils'
 import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'
 import { useRouter, usePathname, useSearchParams } from "next/navigation"
 import { motion } from "framer-motion"
@@ -141,7 +141,7 @@ function ContentList(props:TypeProps, ref:React.ReactNode){
                 <div className="pt-6 lg:pt-12">
                   <div className="MCE-CONTENT mb-6">
                     <div className="container">
-                      <div className="mx-auto w-full max-w-[900px]" dangerouslySetInnerHTML={{__html:node?.content}}></div>
+                      <pre className="mx-auto w-full max-w-[900px]" dangerouslySetInnerHTML={{__html:node?.content}}></pre>
                     </div>
                   </div>
 

@@ -1,6 +1,5 @@
 "use client"
-
-const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
+const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
 import { Suspense, useRef, useState, useEffect } from 'react'
 import Image from "next/image"
@@ -8,7 +7,7 @@ import { twMerge } from 'tailwind-merge'
 import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'
 import { motion } from "framer-motion"
 import { useStore } from '~/store'
-
+import { useWindowSize } from "vanns-common-modules/dist/use/react"
 interface TypeProps {
   video: string
   image: string
@@ -17,13 +16,12 @@ interface TypeProps {
 interface TypeState {}
 
 function KV(props:TypeProps, ref:React.ReactNode){
-  // const store = useStore()
-  // const router = useRouter()
-  // const viewport = useWindowSize()
+  const viewport = useWindowSize()
   const { className } = props
   const store = useStore()
   const videoRef = useRef(null)
   const [KVEnterAble, setKVEnterAble] = useState(false)
+
   useEffect(()=>{
     if( !videoRef.current ){ return }
     if( store.isLoadingScreenFadedOut ){
@@ -39,7 +37,7 @@ function KV(props:TypeProps, ref:React.ReactNode){
 
   return <Suspense fallback={null}>
     <div className={twMerge('', className)}>
-      <RatioArea className="mb-6 lg:mb-12" ratio="42.85">
+      <RatioArea className="mb-6 lg:mb-12" ratio={viewport.width && viewport.width >= 992 ?'42.85' :'56.25'}>
         <motion.div className="absolute left-1/2 top-0 size-full -translate-x-1/2"
         variants={{
           enter: {

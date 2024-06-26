@@ -1,10 +1,10 @@
 "use client"
 
-const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
+const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
 import { useEffect, useRef } from 'react'
 import { twMerge } from 'tailwind-merge'
-import { isEmpty, numberFormat } from '~/lib/helpers'
+import { isEmpty, numberFormat } from '~/lib/utils'
 import { animate, useInView } from "framer-motion"
 import { useWindowSize } from 'vanns-common-modules/dist/use/react'
 

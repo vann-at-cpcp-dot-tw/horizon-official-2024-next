@@ -1,6 +1,6 @@
 "use client"
 
-const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
+const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
 import { Suspense, useMemo, useContext } from 'react'
 import SwiperOverflow from '~/components/custom/SwiperOverflow'
@@ -33,7 +33,7 @@ function Series(props:TypeProps, ref:React.ReactNode){
     <SwiperOverflow list={seriesList} listTitle="Series"
     swiperOptions={{
       autoplay: {
-        delay: 5000,
+        delay: 3000,
         // disableOnInteraction: true,
         // disableOnInteraction: false,
         // pauseOnMouseEnter: true,

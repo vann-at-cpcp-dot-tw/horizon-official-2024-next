@@ -1,13 +1,13 @@
 "use client"
 
-const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
+const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
 import { Suspense, useState, useEffect } from 'react'
 import Image from "next/image"
 import LinkWithLang from '~/components/custom/LinkWithLang'
 import { twMerge } from 'tailwind-merge'
 import Loading from '~/components/custom/icons/Loading'
-import { calcSizeByRatio } from '~/lib/helpers'
+import { calcSizeByRatio } from '~/lib/utils'
 import { useDomNodeSize } from 'vanns-common-modules/dist/use/react'
 import ContentLightbox from '~/components/custom/ContentLightbox'
 

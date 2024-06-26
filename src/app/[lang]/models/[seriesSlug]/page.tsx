@@ -1,10 +1,10 @@
-const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
+const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
 import { Suspense } from 'react'
 import { useRouter } from 'next/navigation'
 import { useStore } from '~/store'
 import { useWindowSize } from 'vanns-common-modules/dist/use/react'
-import { isEmpty } from '~/lib/helpers'
+import { isEmpty } from '~/lib/utils'
 import { fetchGQL } from '~/lib/apollo'
 import { QuerySingleSeriesPage } from '~/queries/pages/models-[seriesSlug].gql'
 import SingleSeriesTop from "./(sections)/SingleSeriesTop"

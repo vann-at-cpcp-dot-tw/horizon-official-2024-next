@@ -1,10 +1,10 @@
 "use client"
 
-const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
+const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
 import Image from "next/image"
 import { Suspense, useEffect, useMemo, useState } from 'react'
-import { isEmpty } from '~/lib/helpers'
+import { isEmpty } from '~/lib/utils'
 import { motion } from 'framer-motion'
 import Loading from "../icons/Loading"
 import { useImageBlurHashes } from 'vanns-common-modules/dist/use/next'

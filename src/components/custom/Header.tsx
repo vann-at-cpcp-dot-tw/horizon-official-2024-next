@@ -1,6 +1,6 @@
 "use client"
 
-const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
+const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 const CONTENT_TYPE = process.env.NEXT_PUBLIC_CONTENT_TYPE || 'hq'
 const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
 
@@ -86,9 +86,9 @@ function Header(props:TypeProps, ref:React.ReactNode){
 
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 ">
             <LinkWithLang className="flex h-[48px] flex-nowrap items-center" href="/" lang={lang}>
-              <Image className="mx-1.5 w-[44px] lg:w-[54px]" src={`${BASE_PATH}/assets/img/logo_mark.svg`} width={54} height={34} alt="" />
+              <Image className="mx-1.5 w-[44px] lg:w-[54px]" src={`${APP_BASE}assets/img/logo_mark.svg`} width={54} height={34} alt="" />
               {
-                pageScrollY < headerSize.height && <Image className="mx-1.5 hidden lg:block" src={`${BASE_PATH}/assets/img/logo_text.svg`} width={140} height={17} style={{width:'140px'}} priority={true} alt="" />
+                pageScrollY < headerSize.height && <Image className="mx-1.5 hidden lg:block" src={`${APP_BASE}assets/img/logo_text.svg`} width={140} height={17} style={{width:'140px'}} priority={true} alt="" />
               }
             </LinkWithLang>
           </div>

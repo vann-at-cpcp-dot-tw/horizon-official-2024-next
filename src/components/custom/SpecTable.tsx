@@ -1,11 +1,11 @@
 "use client"
 
-const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
+const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 import { Suspense, useMemo } from 'react'
 import { twMerge } from 'tailwind-merge'
-import { isEmpty } from '~/lib/helpers'
+import { isEmpty } from '~/lib/utils'
 import { motion } from "framer-motion"
-import { genSpecString } from "~/lib/helpers"
+import { genSpecString } from "~/lib/utils"
 
 const termsConfig = [
   {

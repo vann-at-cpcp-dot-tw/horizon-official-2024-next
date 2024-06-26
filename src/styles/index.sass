@@ -1,6 +1,12 @@
-@import variables
-@import "~~/node_modules/vanns-common-modules/src/styles/index.sass"
-@import variables
+@import "~~/node_modules/vanns-common-modules/src/styles/_variables.sass"
+@import "~/styles/_variables.sass"
+
+@import "~~/node_modules/vanns-common-modules/src/styles/row-col.sass"
+@import "~~/node_modules/vanns-common-modules/src/styles/tailwind.sass"
+@import "~~/node_modules/vanns-common-modules/src/styles/before-after.sass"
+@import "~~/node_modules/vanns-common-modules/src/styles/bootstrap-icons.sass"
+@import "~~/node_modules/vanns-common-modules/src/styles/btn.sass"
+@import "~~/node_modules/vanns-common-modules/src/styles/global.sass"
 
 *
   box-sizing: border-box
@@ -14,8 +20,10 @@
   &:focus
     outline: none
 
-h1,h2,h3,h4,div,p,.block,.flex
+pre
   white-space: pre-wrap
+  display: flex
+  flex-direction: column
 
 html,
 body
@@ -165,10 +173,6 @@ a
         width: 76.35vw
         @media(max-width: 991px)
           width: calc(100vw - 40px)
-
-.lg-container
-  *
-    white-space: normal
 
 .lg-backdrop
   background-color: rgba(0, 0, 0, 0.9) !important

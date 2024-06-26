@@ -1,6 +1,6 @@
 "use client"
 
-const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
+const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 const CONTENT_TYPE = process.env.NEXT_PUBLIC_CONTENT_TYPE || 'hq'
 const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
 
@@ -8,7 +8,7 @@ import { Suspense, useCallback, useEffect, useMemo } from 'react'
 import Image from "next/image"
 import LinkWithLang from '~/components/custom/LinkWithLang'
 import { twMerge } from 'tailwind-merge'
-import { isEmpty } from '~/lib/helpers'
+import { isEmpty } from '~/lib/utils'
 import { motion } from "framer-motion"
 
 interface TypeProps {
@@ -37,8 +37,8 @@ function ContentLightbox(props:TypeProps, ref:React.ReactNode){
 
   const CloseIcon = useCallback(()=>{
     const icons = {
-      light: <Image src={`${BASE_PATH}/assets/img/icon_menu_x.svg`} width={48} height={48} alt=""/>,
-      dark: <Image src={`${BASE_PATH}/assets/img/icon_menu_x.svg`} width={48} height={48} alt=""
+      light: <Image src={`${APP_BASE}assets/img/icon_menu_x.svg`} width={48} height={48} alt=""/>,
+      dark: <Image src={`${APP_BASE}assets/img/icon_menu_x.svg`} width={48} height={48} alt=""
       style={{
         filter: theme === 'light' ?'' :'grayscale(100) brightness(1000)',
       }} />

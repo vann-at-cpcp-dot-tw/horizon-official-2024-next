@@ -1,13 +1,13 @@
 "use client"
 
-const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
+const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
 import { Suspense, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useStore } from '~/store'
 import { useWindowSize } from "vanns-common-modules/dist/use/react"
 import { twMerge } from 'tailwind-merge'
-import { isEmpty, numberFormat } from '~/lib/helpers'
+import { isEmpty, numberFormat } from '~/lib/utils'
 import { animate } from "framer-motion"
 import dynamic from "next/dynamic"
 const AniCounter = dynamic(() => import('~/components/custom/dynamic/AniCounter'), {ssr: false})

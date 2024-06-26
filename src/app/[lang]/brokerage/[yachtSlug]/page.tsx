@@ -1,11 +1,11 @@
 
-const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
+const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 const CONTENT_TYPE = process.env.NEXT_PUBLIC_CONTENT_TYPE || 'hq'
 const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
 
 import Image from "next/image"
 import LinkWithLang from '~/components/custom/LinkWithLang'
-import { isEmpty } from '~/lib/helpers'
+import { isEmpty } from '~/lib/utils'
 import { QuerySingleBrokerage } from '~/queries/pages/brokerage-[yachtSlug].gql'
 import { QuerySinglePublication } from '~/queries/categories/publication.gql'
 import { fetchGQL } from "~/lib/apollo"
@@ -39,16 +39,7 @@ async function PageSingleBrokerage({params}:TypeProps){
 
   const { title:postTitle, customFields } = data?.post ?? {}
   const { priceCurrency } = data?.settings?.customFields ?? {}
-
-  const publicationData = customFields?.relatedPublicationSlug
-    ? await fetchGQL(QuerySinglePublication, {
-      variables: {
-        slug: customFields?.relatedPublicationSlug
-      }
-    })
-    : null
-  const { publication } = publicationData ?? {}
-
+  const { relatedPublication } = data?.post?.customFields ?? {}
 
   return <main className="relative">
     <Breadcrumb className="pb-5 pt-2.5 lg:pt-10"
@@ -85,7 +76,7 @@ async function PageSingleBrokerage({params}:TypeProps){
     </div>
 
 
-    <Publication {...publication} />
+    <Publication list={relatedPublication?.nodes|| []} />
 
     <div className="container py-24 text-center">
       <div className="serif mb-6 text-[32px] text-minor-900">Personal <span className="italic">and</span>  Virtual Tours  <span className="italic">available.</span></div>

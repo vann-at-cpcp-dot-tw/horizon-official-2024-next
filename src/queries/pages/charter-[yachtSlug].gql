@@ -15,7 +15,27 @@ query QuerySingleCharter(
       year
       price
       yachtDescription
-      relatedPublicationSlug
+      relatedPublication {
+        nodes {
+          ... on Publication {
+            title
+            publicationCustomFields {
+              publication {
+                publicationCover {
+                  node {
+                    mediaItemUrl
+                  }
+                }
+                pdf {
+                  node {
+                    mediaItemUrl
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
       heroImage {
         node {
           mediaItemUrl

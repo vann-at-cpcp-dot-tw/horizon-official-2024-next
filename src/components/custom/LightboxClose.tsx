@@ -10,7 +10,7 @@ import { useWindowSize } from 'vanns-common-modules/dist/use/react'
 import { twMerge } from 'tailwind-merge'
 
 // methods & components
-import { isEmpty } from '~/lib/helpers'
+import { isEmpty } from '~/lib/utils'
 
 // styles
 import styles from '~/components/custom/styles/index.module.sass'

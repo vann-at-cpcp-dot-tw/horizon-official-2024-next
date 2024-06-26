@@ -4,7 +4,7 @@ const path = require('path')
 const webpack = require('webpack')
 
 const nextConfig = {
-  // basePath: process.env.NEXT_PUBLIC_BASE_PATH || '',
+  // basePath: process.env.NEXT_PUBLIC_APP_BASE || '/',
   reactStrictMode: true,
   swcMinify: true,
   env: {},

@@ -1,10 +1,10 @@
-const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
+const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
 import Image from "next/image"
 import { Suspense, useContext, useEffect } from 'react'
 import { QueryYachtsWithSeries } from '~/queries/pages/models.gql'
 import { fetchGQL } from '~/lib/apollo'
-import { isEmpty } from '~/lib/helpers'
+import { isEmpty } from '~/lib/utils'
 import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'
 import LinkWithLang from '~/components/custom/LinkWithLang'
 import { genImageBlurHash } from 'vanns-common-modules/dist/lib/next'

@@ -1,12 +1,12 @@
 // export const dynamic = 'force-dynamic'
 // 'auto' | 'force-dynamic' | 'error' | 'force-static'
-const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
+const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 const postsPerPage = 6
 
 import { headers } from 'next/headers'
 import Image from "next/image"
 import LinkWithLang from '~/components/custom/LinkWithLang'
-import { isEmpty } from '~/lib/helpers'
+import { isEmpty } from '~/lib/utils'
 import { fetchGQL } from '~/lib/apollo'
 import { QueryNewsPage } from '~/queries/pages/news.gql'
 import CoverStory from "./(templates)/CoverStory"
@@ -15,7 +15,7 @@ import NewsPageEventsBlock from "./(templates)/NewsPageEventsBlock"
 import BrandPublication from "./(templates)/BrandPublication"
 import OwnerPerspective from "./(templates)/OwnerPerspective"
 import { genImageBlurHash } from 'vanns-common-modules/dist/lib/next'
-import { formatPostCategories } from "~/lib/helpers"
+import { formatPostCategories } from "~/lib/utils"
 
 interface TypeProps {
   params: {

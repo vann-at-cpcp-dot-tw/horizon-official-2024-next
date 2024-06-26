@@ -1,12 +1,12 @@
 "use client"
 
-const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
+const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
 import Image from "next/image"
 import { Suspense, useRef } from 'react'
 import { useStore } from '~/store'
 import { twMerge } from 'tailwind-merge'
-import { isEmpty } from '~/lib/helpers'
+import { isEmpty } from '~/lib/utils'
 import { motion, useInView } from "framer-motion"
 import OverflowContent from '~/components/custom/OverflowContent'
 import { useWindowSize } from 'vanns-common-modules/dist/use/react'

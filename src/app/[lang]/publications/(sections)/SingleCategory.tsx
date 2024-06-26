@@ -1,13 +1,13 @@
 "use client"
 
-const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
+const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
 import { Suspense, useMemo, useContext, useState } from 'react'
 import Image from "next/image"
 import LinkWithLang from '~/components/custom/LinkWithLang'
 import { useParams } from "next/navigation"
 import { twMerge } from 'tailwind-merge'
-import { isEmpty } from '~/lib/helpers'
+import { isEmpty } from '~/lib/utils'
 import { ICommonData, useCommonData } from "~/app/[lang]/providers"
 import { useLazyQuery } from "@apollo/client"
 import { QueryPublicationCategory } from '~/queries/pages/publications-[publicationCategorySlug].gql'

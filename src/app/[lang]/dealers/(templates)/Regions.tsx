@@ -1,7 +1,7 @@
 
 "use client"
 
-const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
+const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 const CONTENT_TYPE = process.env.NEXT_PUBLIC_CONTENT_TYPE || 'hq'
 const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
 
@@ -9,7 +9,7 @@ import { Suspense, useState } from 'react'
 import Image from "next/image"
 import LinkWithLang from '~/components/custom/LinkWithLang'
 import { twMerge } from 'tailwind-merge'
-import { isEmpty } from '~/lib/helpers'
+import { isEmpty } from '~/lib/utils'
 import { motion, AnimatePresence } from "framer-motion"
 
 interface TypeProps {
@@ -97,7 +97,7 @@ function RegionsNav(props:TypeProps, ref:React.ReactNode){
                               dealerNode?.dealerCustomFields?.website && <a className="btn-opacity ml-2 mt-0.5 text-golden-900" href={dealerNode?.dealerCustomFields?.website}>Website</a>
                             }
                             {
-                              dealerNode.dealerCustomFields?.address && <a className="btn-opacity ml-2 mt-0.5 text-golden-900" href={`https://www.google.com/maps/search/${encodeURI(dealerNode.dealerCustomFields?.address)}`} target="_blank">Map</a>
+                              dealerNode.dealerCustomFields?.googleMapLink && <a className="btn-opacity ml-2 mt-0.5 text-golden-900" href={dealerNode.dealerCustomFields.googleMapLink} target="_blank">Map</a>
                             }
                           </div>
                           {

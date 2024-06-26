@@ -1,8 +1,8 @@
-const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
+const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
 import Image from "next/image"
 import LinkWithLang from '~/components/custom/LinkWithLang'
-import { isEmpty } from '~/lib/helpers'
+import { isEmpty } from '~/lib/utils'
 import { fetchGQL } from '~/lib/apollo'
 import { QueryPostsByCategory } from '~/queries/pages/news-[categorySlug].gql'
 import ListWithCategory from "../(templates)/ListWithCategory"

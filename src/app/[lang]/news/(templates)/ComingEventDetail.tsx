@@ -1,12 +1,12 @@
 "use client"
 
-const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
+const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
 import { Suspense, useMemo, useState, useEffect } from 'react'
 import Image from "next/image"
 import LinkWithLang from '~/components/custom/LinkWithLang'
 import { twMerge } from 'tailwind-merge'
-import { isEmpty } from '~/lib/helpers'
+import { isEmpty } from '~/lib/utils'
 import { usePathname, useRouter, useParams } from 'next/navigation'
 import { gql, useQuery } from "@apollo/client"
 import { QuerySingleHull } from '~/queries/categories/hull.gql'
@@ -170,7 +170,7 @@ function ComingEventDetail(props:TypeProps, ref:React.ReactNode){
 
       <div className="MCE-CONTENT mb-8 lg:mb-16">
         <div className="container">
-          <div className="mx-auto w-full max-w-[900px]" dangerouslySetInnerHTML={{__html:props?.content}}></div>
+          <pre className="mx-auto w-full max-w-[900px]" dangerouslySetInnerHTML={{__html:props?.content}}></pre>
         </div>
       </div>
 

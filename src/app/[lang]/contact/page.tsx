@@ -1,11 +1,11 @@
 
-const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
+const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 const CONTENT_TYPE = process.env.NEXT_PUBLIC_CONTENT_TYPE || 'hq'
 const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
 
 import Image from "next/image"
 import LinkWithLang from '~/components/custom/LinkWithLang'
-import { isEmpty } from '~/lib/helpers'
+import { isEmpty } from '~/lib/utils'
 import { QuerySingleDealer } from '~/queries/pages/dealers.gql'
 import { fetchGQL } from '~/lib/apollo'
 import { headers } from 'next/headers'
@@ -40,7 +40,7 @@ async function PageContact({params}:TypeProps){
               <div className="flex flex-nowrap items-center justify-center">
                 <div className="serif mb-1 shrink text-[24px] text-white lg:text-[32px]">{ dealer.title }</div>
                 {
-                  dealer.dealerCustomFields?.address && <a className="btn-text -mt-2.5 ml-4 text-[13px] font-300 text-white lg:ml-4 lg:text-[15px]" href={`https://www.google.com/maps/search/${encodeURI(dealer.dealerCustomFields?.address)}`} target="_blank">map</a>
+                  dealer.dealerCustomFields?.googleMapLink && <a className="btn-text -mt-2.5 ml-4 text-[13px] font-300 text-white lg:ml-4 lg:text-[15px]" href={dealer.dealerCustomFields.googleMapLink} target="_blank">map</a>
                 }
               </div>
               {

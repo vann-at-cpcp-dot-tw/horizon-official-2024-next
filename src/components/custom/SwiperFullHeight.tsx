@@ -1,21 +1,18 @@
 "use client"
 
-const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
+const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
 import { Suspense, useState, useEffect } from 'react'
 import Image from "next/image"
 import LinkWithLang from '~/components/custom/LinkWithLang'
 import { twMerge } from 'tailwind-merge'
-import { isEmpty, calcSizeByRatio } from '~/lib/helpers'
+import { isEmpty, calcSizeByRatio } from '~/lib/utils'
 import { useDomNodeSize } from 'vanns-common-modules/dist/use/react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { EffectFade } from 'swiper/modules'
 import { SwiperClass } from "swiper/react"
 import 'swiper/css/effect-fade'
-
-// import { useRouter } from 'next/navigation'
-// import { useStore } from '~/store'
-// import useWindowSize from '~/use/useWindowSize"
+import IconMenuBack from "./icons/MenuBack"
 
 interface TypeProps {
   iframeRatio?: number
@@ -65,10 +62,10 @@ function SwiperFullHeight(props:TypeProps, ref:React.ReactNode){
       <div className="flex grow !flex-nowrap overflow-hidden p-5 lg:px-10">
         <div className="hidden flex-none items-center lg:flex">
           <div className={`btn group flex size-8 items-center justify-center rounded-full border border-gray-900 hover:border-golden-900 hover:bg-golden-900 active:border-golden-900 active:bg-golden-900 lg:size-12 ${swiper.isBeginning ?'disabled opacity-50' :''}`}
-              onClick={()=>{
-                swiper.slidePrev()
-              }}>
-            <Image className="grayscale group-hover:brightness-[1000] group-active:brightness-[1000]" src={`${BASE_PATH}/assets/img/icon_menu_back.svg`} width={48} height={48} alt="" />
+          onClick={()=>{
+            swiper.slidePrev()
+          }}>
+            <IconMenuBack className="stroke-black group-hover:!stroke-white group-active:!stroke-white" />
           </div>
         </div>
 
@@ -113,13 +110,13 @@ function SwiperFullHeight(props:TypeProps, ref:React.ReactNode){
 
         <div className="hidden flex-none items-center lg:flex">
           <div className={`btn group flex size-8 items-center justify-center rounded-full border border-gray-900 hover:border-golden-900 hover:bg-golden-900 active:border-golden-900 active:bg-golden-900 lg:size-12 ${swiper.isEnd ?'disabled opacity-50' :''}`}
-              onClick={()=>{
-                swiper.slideNext()
-              }}>
-            <Image className="grayscale group-hover:brightness-[1000] group-active:brightness-[1000]" src={`${BASE_PATH}/assets/img/icon_menu_back.svg`} width={48} height={48} alt=""
-                style={{
-                  transform: 'rotate(180deg)'
-                }}/>
+            onClick={()=>{
+              swiper.slideNext()
+            }}>
+            <IconMenuBack className="stroke-black group-hover:!stroke-white group-active:!stroke-white"
+            style={{
+              transform: 'rotate(180deg)'
+            }}/>
           </div>
         </div>
       </div>
@@ -131,7 +128,7 @@ function SwiperFullHeight(props:TypeProps, ref:React.ReactNode){
               onClick={()=>{
                 swiper.slidePrev()
               }}>
-              <Image className="grayscale group-hover:brightness-[1000] group-active:brightness-[1000]" src={`${BASE_PATH}/assets/img/icon_menu_back.svg`} width={48} height={48} alt="" />
+              <IconMenuBack className="stroke-black group-hover:!stroke-white group-active:!stroke-white" />
             </div>
           </div>
 
@@ -140,10 +137,10 @@ function SwiperFullHeight(props:TypeProps, ref:React.ReactNode){
               onClick={()=>{
                 swiper.slideNext()
               }}>
-              <Image className="grayscale group-hover:brightness-[1000] group-active:brightness-[1000]" src={`${BASE_PATH}/assets/img/icon_menu_back.svg`} width={48} height={48} alt=""
-                style={{
-                  transform: 'rotate(180deg)'
-                }}/>
+              <IconMenuBack className="stroke-black group-hover:!stroke-white group-active:!stroke-white"
+              style={{
+                transform: 'rotate(180deg)'
+              }}/>
             </div>
           </div>
         </div>

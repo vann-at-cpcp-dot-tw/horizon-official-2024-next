@@ -1,9 +1,9 @@
-const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
+const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
 import { Button } from '~/components/ui/button'
 import { fetchGQL } from '~/lib/apollo'
 import { QueryPageAboutTheGroup } from '~/queries/pages/about-the-group.gql'
-import { isEmpty } from '~/lib/helpers'
+import { isEmpty } from '~/lib/utils'
 import KV from "./(sections)/KV"
 import CompaniesGrids from "./(sections)/CompaniesGrids"
 import GroupIntroduction from "./(sections)/GroupIntroduction"

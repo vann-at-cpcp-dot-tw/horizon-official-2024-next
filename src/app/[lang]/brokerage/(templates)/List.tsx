@@ -1,6 +1,6 @@
 "use client"
 
-const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
+const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 const CONTENT_TYPE = process.env.NEXT_PUBLIC_CONTENT_TYPE || 'hq'
 const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
 const postsPerPage = 30
@@ -9,12 +9,12 @@ import { Suspense, useState, useMemo, useEffect } from 'react'
 import Image from "next/image"
 import LinkWithLang from '~/components/custom/LinkWithLang'
 import { twMerge } from 'tailwind-merge'
-import { isEmpty } from '~/lib/helpers'
+import { isEmpty } from '~/lib/utils'
 import { QueryBrokerages } from '~/queries/pages/brokerage.gql'
 import { QueryCharters } from '~/queries/pages/charter.gql'
 import { useLazyQuery } from "@apollo/client"
 import { useRouter, useParams, useSearchParams } from 'next/navigation'
-import { genSpecString } from "~/lib/helpers"
+import { genSpecString } from "~/lib/utils"
 import ListFilters from "./ListFilters"
 import ListItem from "./ListItem"
 import PageNav from '~/components/custom/PageNav'

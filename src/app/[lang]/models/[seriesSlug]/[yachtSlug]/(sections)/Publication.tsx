@@ -1,63 +1,72 @@
-const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
+const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
 import { Suspense } from 'react'
 import Image from "next/image"
 import LinkWithLang from '~/components/custom/LinkWithLang'
 import { twMerge } from 'tailwind-merge'
-import { isEmpty } from '~/lib/helpers'
+import { isEmpty } from '~/lib/utils'
 import { genImageBlurHash } from 'vanns-common-modules/dist/lib/next'
 
 interface TypeProps {
-  title: string
-  publicationCustomFields?: {
-    publication: {
-      publicationCover: {
-        node?: {
-          mediaItemUrl?: string
+  list: {
+    title: string
+    publicationCustomFields?: {
+      publication: {
+        publicationCover: {
+          node?: {
+            mediaItemUrl?: string
+          }
         }
-      }
-      pdf: {
-        node?: {
-          mediaItemUrl?: string
+        pdf: {
+          node?: {
+            mediaItemUrl?: string
+          }
         }
       }
     }
-  }
+  }[]
   [key:string]: any
 }
 interface TypeState {}
 
 async function Publication(props:TypeProps, ref:React.ReactNode){
   const { className } = props
-  const coverImage = props?.publicationCustomFields?.publication?.publicationCover?.node?.mediaItemUrl || ''
-  const placeholder = await genImageBlurHash(coverImage)
-
-  if( !props.title || !coverImage){
+  if( isEmpty(props?.list) ){
     return null
   }
+  const listWithPlaceholder = await Promise.all(props?.list?.map(async (node) => {
+    return {
+      ...node,
+      placeholder: await genImageBlurHash(node?.publicationCustomFields?.publication?.publicationCover?.node?.mediaItemUrl || '')
+    }
+  }))
 
   return <Suspense fallback={null}>
-    <div className={twMerge('bg-[#E6E3DD] lg:py-20 py-12 pb-16', className)}>
+    <div className={twMerge('bg-[#E6E3DD] lg:py-20 py-12', className)}>
       <div className="container mb-6 text-center text-[17px] text-gray-500">Brochure</div>
       <div className="container">
-        <div className="row justify-center">
+        <div className={`row ${listWithPlaceholder?.length < 4 ?'lg:justify-center' :''}`}>
           {
-            <div className="col-12 flex justify-center lg:col-auto">
-              <a className="btn block"
-              href={props?.publicationCustomFields?.publication?.pdf?.node?.mediaItemUrl}
-              target="_blank"
-              style={{
-                boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.5)'
-              }}>
-                <Image
-                src={coverImage}
-                width={420}
-                height={300}
-                alt=""
-                placeholder={placeholder ?'blur' :'empty'}
-                blurDataURL={placeholder} />
-              </a>
-            </div>
+            listWithPlaceholder?.map((node, index)=>{
+              return <div className="col-6 lg:col-3 mb-6 flex" key={index}>
+                <a className="btn block"
+                href={node?.publicationCustomFields?.publication?.pdf?.node?.mediaItemUrl}
+                target="_blank"
+                style={{
+                  boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.5)'
+                }}>
+                  <Image
+                  src={node?.publicationCustomFields?.publication?.publicationCover?.node?.mediaItemUrl || ''}
+                  className="w-full"
+                  width={330}
+                  height={238}
+                  alt=""
+                  placeholder={node?.placeholder ?'blur' :'empty'}
+                  blurDataURL={node?.placeholder} />
+                </a>
+              </div>
+            })
+
           }
         </div>
       </div>

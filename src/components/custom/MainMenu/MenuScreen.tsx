@@ -1,6 +1,6 @@
 "use client"
 
-const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
+const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
 import Image from "next/image"
 import { Suspense, useContext, useMemo } from 'react'
@@ -14,6 +14,7 @@ import LinkWithLang from '~/components/custom/LinkWithLang'
 import { usePathnameWithoutLang } from 'vanns-common-modules/dist/use/next'
 import { useWindowSize } from 'vanns-common-modules/dist/use/react'
 import Loading from '~/components/custom/icons/Loading'
+import IconMenuBack from "../icons/MenuBack"
 
 interface TypeProps {
   list: TypeMenuListNode[]
@@ -54,13 +55,13 @@ function MenuScreen(props:TypeProps, ref:React.ReactNode){
             onClick={()=>{
               props?.onBackClick?.()
             }}>
-              <Image src={`${BASE_PATH}/assets/img/icon_menu_back.svg`} width={48} height={48} alt="" />
+              <IconMenuBack />
             </div>
             :<div className="btn -ml-5 -mt-5"
             onClick={()=>{
               props?.onCloseClick?.()
             }}>
-              <Image src={`${BASE_PATH}/assets/img/icon_menu_x.svg`} width={48} height={48} alt="" />
+              <Image src={`${APP_BASE}assets/img/icon_menu_x.svg`} width={48} height={48} alt="" />
             </div>
         }
 

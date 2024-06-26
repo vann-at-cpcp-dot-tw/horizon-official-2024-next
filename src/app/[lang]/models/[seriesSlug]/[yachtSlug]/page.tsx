@@ -1,7 +1,7 @@
-const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
+const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
 import LinkWithLang from '~/components/custom/LinkWithLang'
-import { isEmpty, convertYoutubeUrlToEmbed } from '~/lib/helpers'
+import { isEmpty, convertYoutubeUrlToEmbed } from '~/lib/utils'
 import { fetchGQL } from '~/lib/apollo'
 import { QuerySingleYachtPage, QuerySingleYachtHullsList } from '~/queries/pages/models-[seriesSlug]-[yachtSlug].gql'
 import NotFound from "~/components/custom/NotFound"
@@ -52,7 +52,7 @@ async function PageSingleYacht(props:TypeProps, ref:React.ReactNode){
   const { relatedPublication } = data?.yacht?.yachtCustomFields ?? {}
   const { title:yachtTitle, yachtSeriesList, yachtCustomFields } = data?.yacht ?? {}
   const { heroVideo, heroImage, yachtDescription, exteriorImages, interiorImages, specsTable, generalArrangementImages, vrPreview, videosPreview, embedVideosGallery } = yachtCustomFields ?? {}
-  const hulls = hullsData?.yacht?.yachtCustomFields?.hulls
+  const hulls = hullsData?.yacht?.yachtCustomFields?.hulls?.filter?.((node:any)=>!node?.isHidden)
   const parentSeries = yachtSeriesList?.nodes?.[0]
 
   const vrGallery = hulls?.reduce((acc:{hullName?:string, vrEmbedUrl?:string}[], node:{hullName?:string, vrEmbedUrl?:string})=>{
@@ -137,7 +137,7 @@ async function PageSingleYacht(props:TypeProps, ref:React.ReactNode){
       }
     </div>
 
-    <Publication {...(relatedPublication?.nodes?.[0] || {})} />
+    <Publication list={relatedPublication?.nodes|| []} />
 
     {
       data?.posts?.nodes && <div className="bg-gray-200 py-20">

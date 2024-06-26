@@ -1,6 +1,6 @@
 "use client"
 
-const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
+const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
 import Image from "next/image"
 
@@ -13,7 +13,7 @@ import { useStore } from '~/store'
 import { twMerge } from 'tailwind-merge'
 
 // methods & components
-import { isEmpty } from '~/lib/helpers'
+import { isEmpty } from '~/lib/utils'
 
 import imagesLoaded from 'imagesloaded'
 import { motion } from 'framer-motion'
@@ -100,8 +100,8 @@ function DOMLoader(props:TypeProps, ref:React.ReactNode){
     animate={'enter'}
     exit="exit">
       <div className="flex flex-nowrap items-center justify-center bg-golden-100 px-2">
-        <Image className="mx-1.5 w-[44px] lg:w-[54px]" src={`${BASE_PATH}/assets/img/logo_mark.svg`} width={54} height={34} priority={true} alt="" />
-        <Image className="mx-1.5 w-[130px] lg:w-[140px]" src={`${BASE_PATH}/assets/img/logo_text.svg`} width={140} height={17} priority={true} alt="" />
+        <Image className="mx-1.5 w-[44px] lg:w-[54px]" src={`${APP_BASE}assets/img/logo_mark.svg`} width={54} height={34} priority={true} alt="" />
+        <Image className="mx-1.5 w-[130px] lg:w-[140px]" src={`${APP_BASE}assets/img/logo_text.svg`} width={140} height={17} priority={true} alt="" />
       </div>
     </motion.div>
 

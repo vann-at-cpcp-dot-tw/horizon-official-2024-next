@@ -1,12 +1,12 @@
 "use client"
 
-const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
+const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 import { Suspense, useEffect, useMemo, useState } from 'react'
 import Image from "next/image"
 import LinkWithLang from '~/components/custom/LinkWithLang'
 import Loading from '~/components/custom/icons/Loading'
 import { twMerge } from 'tailwind-merge'
-import { isEmpty, convertYoutubeUrlToEmbed } from '~/lib/helpers'
+import { isEmpty, convertYoutubeUrlToEmbed } from '~/lib/utils'
 import SwiperFullHeight from '~/components/custom/SwiperFullHeight'
 import SpecTable from '~/components/custom/SpecTable'
 import GAGalleryNav from "./GAGalleryNav"

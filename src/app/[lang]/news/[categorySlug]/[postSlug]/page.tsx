@@ -1,8 +1,8 @@
-const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
+const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
 import Image from "next/image"
 import LinkWithLang from '~/components/custom/LinkWithLang'
-import { isEmpty } from '~/lib/helpers'
+import { isEmpty } from '~/lib/utils'
 import { QuerySinglePost, QueryPrevPosts, QueryNextPosts  } from '~/queries/pages/news-[categorySlug]-[postSlug].gql'
 import { fetchGQL } from '~/lib/apollo'
 import Breadcrumb from '~/components/custom/Breadcrumb'
@@ -68,7 +68,7 @@ async function PageSinglePost({params}:TypeProps){
 
     <div className="MCE-CONTENT mb-10">
       <div className="container" style={{ maxWidth:'940px' }}>
-        <div className="mx-auto w-full" dangerouslySetInnerHTML={{__html:post?.content || ''}}></div>
+        <pre className="mx-auto w-full" dangerouslySetInnerHTML={{__html:post?.content || ''}}></pre>
       </div>
     </div>
 

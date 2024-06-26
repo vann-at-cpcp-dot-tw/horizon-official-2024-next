@@ -1,6 +1,6 @@
 "use client"
 
-const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
+const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 import Image from "next/image"
 import { Suspense, useMemo, useEffect, useState, ReactNode } from 'react'
 import { useParams } from 'next/navigation'
@@ -10,7 +10,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import { SwiperClass } from "swiper/react"
 import { Autoplay } from 'swiper/modules'
 import LinkWithLang from '~/components/custom/LinkWithLang'
-
+import IconMenuBack from "./icons/MenuBack"
 interface TypeProps {
   listTitle: string
   list?: {
@@ -69,8 +69,30 @@ function SwiperOverflow(props:TypeProps, ref:React.ReactNode){
       style={{
         maxWidth: 'calc(100% - 80px)'
       }}>
+        {
+          swiper?.isLocked === false && <div className="absolute left-5 top-1/2 z-10 -translate-y-1/2">
+            <div className={`btn group flex size-8 items-center justify-center rounded-full border  border-white hover:border-golden-900 hover:bg-golden-900 active:border-golden-900 active:bg-golden-900 lg:size-12 ${swiper.isBeginning ?'disabled opacity-50' :''}`}
+              onClick={()=>{
+                swiper.slidePrev()
+              }}>
+              <IconMenuBack stroke="white"/>
+            </div>
+          </div>
+        }
+
+        { swiper?.isLocked === false &&<div className="absolute right-5 top-1/2 z-10 -translate-y-1/2">
+          <div className={`btn group flex size-8 items-center justify-center rounded-full border border-white hover:border-golden-900 hover:bg-golden-900 active:border-golden-900 active:bg-golden-900 lg:size-12 ${swiper.isEnd ?'disabled opacity-50' :''}`}
+              onClick={()=>{
+                swiper.slideNext()
+              }}>
+            <IconMenuBack stroke="white"
+            style={{
+              transform: 'rotate(180deg)'
+            }} />
+          </div>
+        </div>
+        }
         <Swiper className="!overflow-visible"
-        // loop
         modules={useModules}
         autoplay={props?.swiperOptions?.autoplay}
         speed={1000}

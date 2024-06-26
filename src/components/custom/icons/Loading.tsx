@@ -1,14 +1,10 @@
-const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
+const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
 import { Suspense } from 'react'
 import Image from "next/image"
 import LinkWithLang from '~/components/custom/LinkWithLang'
 import { twMerge } from 'tailwind-merge'
-import { isEmpty } from '~/lib/helpers'
-
-// import { useRouter } from 'next/navigation'
-// import { useStore } from '~/store'
-// import useWindowSize from '~/use/useWindowSize"
+import { isEmpty } from '~/lib/utils'
 
 interface TypeProps {
   fill?: string
@@ -16,10 +12,7 @@ interface TypeProps {
 }
 interface TypeState {}
 
-function Loading(props:TypeProps, ref:React.ReactNode){
-  // const store = useStore()
-  // const router = useRouter()
-  // const viewport = useWindowSize()
+export default function Loading(props:TypeProps, ref:React.ReactNode){
   const { fill='#ffffff' } = props
   const { className, style={} } = props
   return <Suspense fallback={null}>
@@ -43,5 +36,3 @@ function Loading(props:TypeProps, ref:React.ReactNode){
     </div>
   </Suspense>
 }
-
-export default Loading

@@ -1,5 +1,5 @@
 "use client"
-const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
+const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 const CONTENT_TYPE = process.env.NEXT_PUBLIC_CONTENT_TYPE || 'hq'
 const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
 
@@ -17,7 +17,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import MenuScreen from "./MenuScreen"
 import Portal from 'vanns-common-modules/dist/components/react/Portal'
 import { usePathnameWithoutLang } from 'vanns-common-modules/dist/use/next'
-import { genSpecString } from '~/lib/helpers'
+import { genSpecString } from '~/lib/utils'
 
 interface TypeProps {}
 interface TypeState {}
@@ -357,7 +357,7 @@ function MainMenu(props:TypeProps, ref:React.ReactNode){
           yachtSlug: '',
         })
       }}>
-      <Image src={`${BASE_PATH}/assets/img/icon_menu.svg`} width={48} height={48} alt="" />
+      <Image src={`${APP_BASE}assets/img/icon_menu.svg`} width={48} height={48} alt="" />
       <div className="hidden text-[15px] leading-none text-minor-900 lg:block">MENU</div>
     </div>
 

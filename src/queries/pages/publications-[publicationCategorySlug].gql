@@ -16,8 +16,8 @@ query QueryPublicationCategory(
       before: $before,
       where: {
         orderby: {
-          field: MENU_ORDER,
-          order: ASC
+          field: DATE,
+          order: DESC
         }
         relatedYachtSeries: $relatedYachtSeries
       }

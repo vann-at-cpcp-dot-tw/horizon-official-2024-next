@@ -1,4 +1,4 @@
-const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
+const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
 import Image from "next/image"
 import dynamic from "next/dynamic"
@@ -7,7 +7,7 @@ import { Suspense } from 'react'
 // import { useStore } from '~/store'
 // import useWindowSize from '~/use/useWindowSize"
 import { twMerge } from 'tailwind-merge'
-import { isEmpty } from '~/lib/helpers'
+import { isEmpty } from '~/lib/utils'
 const AniCounter = dynamic(() => import('~/components/custom/dynamic/AniCounter'), {ssr: false})
 
 import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'
