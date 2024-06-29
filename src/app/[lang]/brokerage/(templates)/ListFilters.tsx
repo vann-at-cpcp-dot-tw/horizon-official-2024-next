@@ -22,11 +22,6 @@ interface TypeProps {
     minValue: string | number
     maxValue: string | number
   }[]
-  priceOptions?: {
-    label: string
-    minValue: string | number
-    maxValue: string | number
-  }[]
   yearOptions?: (string | number)[]
   [key:string]: any
 }
@@ -114,25 +109,6 @@ function ListFilters(props:TypeProps, ref:React.ReactNode){
           }
 
           {
-            props?.priceOptions && <div className="col-6 shrink lg:col-auto">
-              <div className="w-screen max-w-full lg:max-w-[177px]">
-                <select className="w-full border-b border-gray-700 bg-transparent text-gray-700"
-                value={queryYachtPrice || ''}
-                onChange={(e)=>{
-                  router.push(`${pathname}?${genQueryString({key:'price', value:e.target.value})}`, {scroll:false})
-                }}>
-                  <option value="">All Prices</option>
-                  {
-                    props.priceOptions.map((node, index)=>{
-                      return <option key={index} value={`${node?.minValue},${node?.maxValue}`}>{node?.label}</option>
-                    })
-                  }
-                </select>
-              </div>
-            </div>
-          }
-
-          {
             !isEmpty(props?.yearOptions) && <div className="col-6 shrink lg:col-auto">
               <div className="w-screen max-w-full lg:max-w-[177px]">
                 <select className="w-full border-b border-gray-700 bg-transparent text-gray-700"
@@ -164,8 +140,6 @@ function ListFilters(props:TypeProps, ref:React.ReactNode){
                   router.push(`${pathname}?${genQueryString({key:'orderby', value:e.target.value})}`, {scroll:false})
                 }}>
                 <option value="">Latest Listing</option>
-                <option value="price,desc">Price - Hight to Low</option>
-                <option value="price,asc">Price - Low to Hight</option>
                 <option value="length,desc">Length - Hight to Low</option>
                 <option value="length,asc">Length - Low to Hight</option>
               </select>

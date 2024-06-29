@@ -45,7 +45,6 @@ async function PageBrokerage({params}:TypeProps){
     <List
     yachtConditions={yachtConditions}
     lengthOptions={settings?.lengthOptions}
-    priceOptions={settings?.priceOptions}
     yearOptions={data?.yachtYears}
     list={posts}
     pageInfo={data?.posts?.pageInfo} />

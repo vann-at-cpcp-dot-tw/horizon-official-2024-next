@@ -42,11 +42,6 @@ interface TypeProps {
     minValue: string | number
     maxValue: string | number
   }[]
-  priceOptions?: {
-    label: string
-    minValue: string | number
-    maxValue: string | number
-  }[]
   yearOptions?: (string | number)[]
   [key:string]: any
 }
@@ -146,7 +141,6 @@ function List(props:TypeProps, ref:React.ReactNode){
       className="mb-4"
       yachtConditions={props.yachtConditions}
       lengthOptions={props.lengthOptions}
-      priceOptions={props.priceOptions}
       yearOptions={props.yearOptions} />
 
       <div className="container">

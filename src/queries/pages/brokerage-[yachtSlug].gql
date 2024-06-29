@@ -1,11 +1,6 @@
 query QuerySingleBrokerage(
   $slug: ID!
 ) {
-  settings:brokerageSettings {
-    customFields:brokerageSettingCustomFields {
-      priceCurrency:brokeragePriceCurrency
-    }
-  }
   post:brokerage(
     id: $slug
     idType: SLUG
@@ -13,7 +8,7 @@ query QuerySingleBrokerage(
     title
     customFields:brokerageCustomFields {
       year
-      price
+      displayPrice
       yachtDescription
       relatedPublication {
         nodes {

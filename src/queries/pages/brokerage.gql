@@ -3,13 +3,7 @@ query QueryBrokeragePage(
 ) {
   settings:brokerageSettings {
     customFields:brokerageSettingCustomFields {
-      priceCurrency:brokeragePriceCurrency
       lengthOptions:brokerageLengthOptions {
-        label
-        minValue
-        maxValue
-      }
-      priceOptions:brokeragePriceOptions {
         label
         minValue
         maxValue
@@ -31,7 +25,7 @@ query QueryBrokeragePage(
       title
       customFields:brokerageCustomFields {
         year
-        price
+        displayPrice
         exteriorImages {
           image {
             node {
@@ -82,7 +76,6 @@ query QueryBrokerages(
   $yachtConditions: [String]
   $yachtConditionsOperator: TaxQueryOperator = NOT_IN
   $yachtYear: String = ""
-  $yachtPriceRange: String = "",
   $yachtLengthRange: String = "",
   $customOrderby: String = "",
 ) {
@@ -105,7 +98,6 @@ query QueryBrokerages(
       }
       yachtYear: $yachtYear,
       yachtLengthRange: $yachtLengthRange,
-      yachtPriceRange: $yachtPriceRange,
       customOrderby: $customOrderby,
     }
   ) {
@@ -114,7 +106,7 @@ query QueryBrokerages(
       title
       customFields:brokerageCustomFields {
         year
-        price
+        displayPrice
         exteriorImages {
           image {
             node {

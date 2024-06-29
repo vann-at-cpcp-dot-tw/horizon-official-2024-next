@@ -3,13 +3,7 @@ query QueryCharterPage(
 ) {
   settings:charterSettings {
     customFields:charterSettingCustomFields {
-      priceCurrency:charterPriceCurrency
       lengthOptions:charterLengthOptions {
-        label
-        minValue
-        maxValue
-      }
-      priceOptions:charterPriceOptions {
         label
         minValue
         maxValue
@@ -31,7 +25,7 @@ query QueryCharterPage(
       title
       customFields:charterCustomFields {
         year
-        price
+        displayPrice
         exteriorImages {
           image {
             node {
@@ -82,7 +76,6 @@ query QueryCharters(
   $yachtConditions: [String]
   $yachtConditionsOperator: TaxQueryOperator = NOT_IN
   $yachtYear: String = ""
-  $yachtPriceRange: String = "",
   $yachtLengthRange: String = "",
   $customOrderby: String = "",
 ) {
@@ -105,7 +98,6 @@ query QueryCharters(
       }
       yachtYear: $yachtYear,
       yachtLengthRange: $yachtLengthRange,
-      yachtPriceRange: $yachtPriceRange,
       customOrderby: $customOrderby,
     }
   ) {
@@ -114,7 +106,7 @@ query QueryCharters(
       title
       customFields:brokerageCustomFields {
         year
-        price
+        displayPrice
         exteriorImages {
           image {
             node {

@@ -1,11 +1,6 @@
 query QuerySingleCharter(
   $slug: ID!
 ) {
-  settings:charterSettings {
-    customFields:charterSettingCustomFields {
-      priceCurrency:charterPriceCurrency
-    }
-  }
   post:charter(
     id: $slug
     idType: SLUG
@@ -13,7 +8,7 @@ query QuerySingleCharter(
     title
     customFields:charterCustomFields {
       year
-      price
+      displayPrice
       yachtDescription
       relatedPublication {
         nodes {
