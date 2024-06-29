@@ -30,6 +30,10 @@ query QueryPublicationCategory(
             publicationCover {
               node {
                 mediaItemUrl
+                mediaDetails {
+                  width
+                  height
+                }
               }
             }
             pdf {

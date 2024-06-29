@@ -22,6 +22,10 @@ query QueryPublicationsPage(
               publicationCover {
                 node {
                   mediaItemUrl
+                  mediaDetails {
+                    width
+                    height
+                  }
                 }
               }
               pdf {

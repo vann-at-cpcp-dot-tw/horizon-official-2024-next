@@ -15,6 +15,7 @@ import { useWindowSize } from 'vanns-common-modules/dist/use/react'
 // import useImageBlurHashes from '~/use/useImageBlurHashes"
 import { genImageBlurHash } from 'vanns-common-modules/dist/lib/next'
 import { useParams } from "next/navigation"
+import RatioArea from "vanns-common-modules/dist/components/react/RatioArea"
 interface TypeProps {
   [key:string]: any
 }
@@ -94,7 +95,7 @@ function All(props:TypeProps, ref:React.ReactNode){
               </div>
               <div className="col">
                 <div className="relative size-full">
-                  <div className="absolute left-0 top-1/2 h-[1px] w-full -translate-y-1/2 bg-[#D0D0D0]"></div>
+                  <div className="absolute left-0 top-1/2 h-px w-full -translate-y-1/2 bg-[#D0D0D0]"></div>
                   <div className="absolute left-0 top-1/2 h-[3px] -translate-y-1/2 bg-golden-900"
                   style={{
                     width: `${swiperProgress[categoryIndex]}%`,
@@ -104,7 +105,7 @@ function All(props:TypeProps, ref:React.ReactNode){
               </div>
             </div>
             <Swiper
-            className="!overflow-visible"
+            className="swiper-publication-all !overflow-visible"
             // modules={[FreeMode]}
             // freeMode
             // centeredSlides={true}
@@ -126,7 +127,10 @@ function All(props:TypeProps, ref:React.ReactNode){
               {
                 categoryNode?.publications?.nodes?.map?.((publicationNode:TypePublicationNode, publicationIndex)=>{
 
-                  return <SwiperSlide className="!w-auto" key={`${categoryIndex}-${publicationIndex}`}>
+                  return <SwiperSlide key={`${categoryIndex}-${publicationIndex}`}
+                  style={{
+                    width: viewport.width && viewport.width >= 992 ?'calc(25vw - 80px)' :'calc(50vw - 80px)'
+                  }}>
                     <a className="btn group relative block" href={publicationNode.publicationCustomFields?.publication?.pdf?.node?.mediaItemUrl} target="_blank">
                       <div className="relative">
                         <div className="pointer-events-none absolute left-0 top-0 z-10 flex size-full items-center justify-center opacity-0 group-hover:opacity-100 group-active:opacity-100"
@@ -138,19 +142,24 @@ function All(props:TypeProps, ref:React.ReactNode){
                             <i className="bi bi-plus-lg text-[24px] text-white"></i>
                           </div>
                         </div>
+                        {
 
-                        <Image className="mb-2"
-                        src={`${publicationNode.publicationCustomFields?.publication?.publicationCover?.node?.mediaItemUrl || ''}`}
-                        style={{
-                          width: viewport.width && viewport.width>=992 ?'auto' :'66vw',
-                          height: viewport.width && viewport.width>=992 ?`${categoryIndex === 0 ?525 :320}px` :'auto',
-                        }}
-                        width={380}
-                        height={categoryIndex === 0 ?525 :320}
-                        placeholder={placeholderGroups?.[categoryIndex]?.[publicationIndex] ?'blur' :'empty'}
-                        blurDataURL={placeholderGroups?.[categoryIndex]?.[publicationIndex]}
-                        priority={true}
-                        alt="" />
+                          publicationNode?.publicationCustomFields?.publication?.publicationCover?.node?.mediaDetails?.width && <div className="mb-2">
+                            <RatioArea ratio={(publicationNode.publicationCustomFields.publication.publicationCover.node.mediaDetails?.height / publicationNode.publicationCustomFields.publication.publicationCover.node.mediaDetails.width * 100) as number}>
+                              <Image className="absolute size-full"
+                              src={`${publicationNode.publicationCustomFields?.publication?.publicationCover?.node?.mediaItemUrl || ''}`}
+                              alt=""
+                              fill
+                              sizes={viewport.width && viewport.width >= 992 ?'25vw' :'50vw'}
+                              style={{
+                                objectFit: 'cover',
+                              }}
+                              placeholder={placeholderGroups?.[categoryIndex]?.[publicationIndex] ?'blur' :'empty'}
+                              blurDataURL={placeholderGroups?.[categoryIndex]?.[publicationIndex]}
+                              priority={true} />
+                            </RatioArea>
+                          </div>
+                        }
                       </div>
 
                       <div className="relative h-8 text-gray-500">
@@ -174,7 +183,6 @@ function All(props:TypeProps, ref:React.ReactNode){
                           <i className="bi bi-plus-lg text-[24px] text-white"></i>
                         </div>
                       </div>
-
                       <Image className="opacity-0"
                       src={`${categoryNode?.publications?.nodes?.[5]?.publicationCustomFields?.publication?.publicationCover?.node?.mediaItemUrl || ''}`}
                       style={{

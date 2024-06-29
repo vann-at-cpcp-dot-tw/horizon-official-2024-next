@@ -16,6 +16,7 @@ import { useImageBlurHashes } from 'vanns-common-modules/dist/use/next'
 import { useWindowSize } from 'vanns-common-modules/dist/use/react'
 import Loading from '~/components/custom/icons/Loading'
 import PageNav from '~/components/custom/PageNav'
+import RatioArea from "vanns-common-modules/dist/components/react/RatioArea"
 
 interface TypeProps {
   publicationCategory: {
@@ -110,10 +111,10 @@ function SingleCategory(props:TypeProps, ref:React.ReactNode){
           </div>
         </div>
 
-        <div className="row lg:row-gap-8">
+        <div className="row lg:row-gap-8 items-end">
           {
             publicationCategory?.publications?.nodes?.map((node:TypePublicationNode, index:number)=>{
-              return <div className="col-12 mb-10 lg:col-auto lg:mb-8" key={index}>
+              return <div className="col-6 lg:col-3 mb-10 lg:mb-8" key={index}>
                 <a className="btn group relative block" href={node.publicationCustomFields?.publication?.pdf?.node?.mediaItemUrl} target="_blank">
                   <div className="relative">
                     <div className="pointer-events-none absolute left-0 top-0 z-10 flex size-full items-center justify-center opacity-0 group-hover:opacity-100 group-active:opacity-100"
@@ -125,17 +126,24 @@ function SingleCategory(props:TypeProps, ref:React.ReactNode){
                         <i className="bi bi-plus-lg text-[24px] text-white"></i>
                       </div>
                     </div>
-                    <Image className="mb-2"
-                    src={`${node.publicationCustomFields?.publication?.publicationCover?.node?.mediaItemUrl || ''}`}
-                    alt=""
-                    style={{
-                      width: viewport.width && viewport.width>=992 ?'auto' :'66vw',
-                      height: viewport.width && viewport.width>=992 ?`${publicationCategorySlug === 'brand-publication' ?525 :320}px` :'auto',
-                    }}
-                    width={380}
-                    height={publicationCategory.slug === 'brand-publication' ?525 :320}
-                    placeholder={placeholders?.[index] ?'blur' :'empty'}
-                    blurDataURL={placeholders?.[index]} />
+                    {
+                      node?.publicationCustomFields?.publication?.publicationCover?.node?.mediaDetails?.width && <div className="relative mb-2">
+                        <RatioArea ratio={(node.publicationCustomFields.publication.publicationCover.node.mediaDetails?.height / node.publicationCustomFields.publication.publicationCover.node.mediaDetails.width * 100) as number}>
+                          <Image className="absolute size-full"
+                          src={`${node.publicationCustomFields?.publication?.publicationCover?.node?.mediaItemUrl || ''}`}
+                          alt=""
+                          fill
+                          sizes={viewport.width && viewport.width >= 992 ?'25vw' :'50vw'}
+                          style={{
+                            objectFit: 'cover',
+                          }}
+                          placeholder={placeholders?.[index] ?'blur' :'empty'}
+                          blurDataURL={placeholders?.[index]} />
+                        </RatioArea>
+                      </div>
+                    }
+
+
                   </div>
                   <div className="relative h-8 text-gray-500">
                     <div className="absolute line-clamp-2 w-full">{ node.title }</div>

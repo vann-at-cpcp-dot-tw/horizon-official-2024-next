@@ -19,6 +19,10 @@ export interface TypePublicationNode {
       publicationCover: {
         node?: {
           mediaItemUrl?: string
+          mediaDetails?: {
+            width: number
+            height: number
+          }
         }
       }
       pdf: {
