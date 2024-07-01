@@ -35,7 +35,7 @@ function OwnerPerspective(props:TypeProps, ref:React.ReactNode){
               { props?.description }
             </div>
             <div className="mt-4 flex justify-center">
-              <LinkWithLang className="btn-text text-[15px] text-gray-300" href="/news?category=stories">More Owner’s Story</LinkWithLang>
+              <LinkWithLang className="btn-text text-[15px] text-gray-300" href="/news/stories">More Owner’s Story</LinkWithLang>
             </div>
           </div>
           <div className="lg:col-6 col-12 relative">
