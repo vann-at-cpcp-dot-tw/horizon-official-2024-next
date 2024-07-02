@@ -11,6 +11,7 @@ import { SwiperClass } from "swiper/react"
 import { Autoplay } from 'swiper/modules'
 import LinkWithLang from '~/components/custom/LinkWithLang'
 import IconMenuBack from "./icons/MenuBack"
+
 interface TypeProps {
   listTitle: string
   list?: {
@@ -39,7 +40,7 @@ function SwiperOverflow(props:TypeProps, ref:React.ReactNode){
   const [swiper, setSwiper] = useState<SwiperClass>(({} as SwiperClass))
   const [realIndex, setRealIndex] = useState(0)
   const { size:centerSize, setNode:setCenterNode } = useDomNodeSize()
-
+  const { size:paginationSize, setNode:setPaginationNode } = useDomNodeSize()
   const centerRight = useMemo(()=>{
     return (bodyWidth - centerSize.width) / 2
   }, [bodyWidth])
@@ -70,28 +71,36 @@ function SwiperOverflow(props:TypeProps, ref:React.ReactNode){
         maxWidth: 'calc(100% - 80px)'
       }}>
         {
-          swiper?.isLocked === false && <div className="absolute left-5 top-1/2 z-10 -translate-y-1/2">
-            <div className={`btn group flex size-8 items-center justify-center rounded-full border  border-white hover:border-golden-900 hover:bg-golden-900 active:border-golden-900 active:bg-golden-900 lg:size-12 ${swiper.isBeginning ?'disabled opacity-50' :''}`}
+          swiper?.isLocked === false && <div className="absolute left-5 top-1/2 z-10 -translate-y-1/2"
+          style={{
+            marginTop: `-${paginationSize?.height}px`
+          }}>
+            <div className={`btn group flex size-8 items-center justify-center rounded-full border  border-white hover:border-golden-900 hover:bg-golden-900 active:border-golden-900 active:bg-golden-900 lg:size-12 ${swiper.isBeginning ?'disabled opacity-50' :''} mt-[18px] lg:mt-[14px]`}
               onClick={()=>{
                 swiper.slidePrev()
               }}>
-              <IconMenuBack stroke="white"/>
+              <IconMenuBack className="w-8 lg:w-12" stroke="white"/>
             </div>
           </div>
         }
 
-        { swiper?.isLocked === false &&<div className="absolute right-5 top-1/2 z-10 -translate-y-1/2">
-          <div className={`btn group flex size-8 items-center justify-center rounded-full border border-white hover:border-golden-900 hover:bg-golden-900 active:border-golden-900 active:bg-golden-900 lg:size-12 ${swiper.isEnd ?'disabled opacity-50' :''}`}
+        {
+          swiper?.isLocked === false &&<div className="absolute right-5 top-1/2 z-10 -translate-y-1/2"
+          style={{
+            marginTop: `-${paginationSize?.height}px`
+          }}>
+            <div className={`btn group flex size-8 items-center justify-center rounded-full border border-white hover:border-golden-900 hover:bg-golden-900 active:border-golden-900 active:bg-golden-900 lg:size-12 ${swiper.isEnd ?'disabled opacity-50' :''} mt-[18px] lg:mt-[14px]`}
               onClick={()=>{
                 swiper.slideNext()
               }}>
-            <IconMenuBack stroke="white"
-            style={{
-              transform: 'rotate(180deg)'
-            }} />
+              <IconMenuBack className="w-8 lg:w-12" stroke="white"
+              style={{
+                transform: 'rotate(180deg)'
+              }} />
+            </div>
           </div>
-        </div>
         }
+
         <Swiper className="!overflow-visible"
         modules={useModules}
         autoplay={props?.swiperOptions?.autoplay}
@@ -164,6 +173,7 @@ function SwiperOverflow(props:TypeProps, ref:React.ReactNode){
         </Swiper>
 
         <div className="my-4 flex !flex-nowrap items-center"
+        ref={setPaginationNode}
         style={{
           width: `${centerSize.width + centerRight}px`
         }}>
