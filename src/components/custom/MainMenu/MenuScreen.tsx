@@ -55,7 +55,7 @@ function MenuScreen(props:TypeProps, ref:React.ReactNode){
             onClick={()=>{
               props?.onBackClick?.()
             }}>
-              <IconMenuBack />
+              <IconMenuBack className="w-12" />
             </div>
             :<div className="btn -ml-5 -mt-5"
             onClick={()=>{

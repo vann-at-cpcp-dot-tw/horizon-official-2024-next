@@ -27,7 +27,7 @@ query QueryNews(
           {
             taxonomy: CATEGORY,
             field: SLUG,
-            terms: ["uncategorized", "cover-story", "events"]
+            terms: ["uncategorized", "cover-story"]
             operator: NOT_IN,
           },
           {

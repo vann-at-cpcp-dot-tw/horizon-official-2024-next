@@ -65,7 +65,7 @@ function SwiperFullHeight(props:TypeProps, ref:React.ReactNode){
           onClick={()=>{
             swiper.slidePrev()
           }}>
-            <IconMenuBack className="stroke-black group-hover:!stroke-white group-active:!stroke-white" />
+            <IconMenuBack className="w-12 stroke-black group-hover:!stroke-white group-active:!stroke-white" />
           </div>
         </div>
 
@@ -113,7 +113,7 @@ function SwiperFullHeight(props:TypeProps, ref:React.ReactNode){
             onClick={()=>{
               swiper.slideNext()
             }}>
-            <IconMenuBack className="stroke-black group-hover:!stroke-white group-active:!stroke-white"
+            <IconMenuBack className="w-12 stroke-black group-hover:!stroke-white group-active:!stroke-white"
             style={{
               transform: 'rotate(180deg)'
             }}/>
@@ -128,7 +128,7 @@ function SwiperFullHeight(props:TypeProps, ref:React.ReactNode){
               onClick={()=>{
                 swiper.slidePrev()
               }}>
-              <IconMenuBack className="stroke-black group-hover:!stroke-white group-active:!stroke-white" />
+              <IconMenuBack className="w-12 stroke-black group-hover:!stroke-white group-active:!stroke-white" />
             </div>
           </div>
 
@@ -137,7 +137,7 @@ function SwiperFullHeight(props:TypeProps, ref:React.ReactNode){
               onClick={()=>{
                 swiper.slideNext()
               }}>
-              <IconMenuBack className="stroke-black group-hover:!stroke-white group-active:!stroke-white"
+              <IconMenuBack className="w-12 stroke-black group-hover:!stroke-white group-active:!stroke-white"
               style={{
                 transform: 'rotate(180deg)'
               }}/>
