@@ -15,7 +15,7 @@ interface TypeState {}
 export default function MenuBack(props:TypeProps, ref:React.ReactNode){
   const { className, style={}, stroke='#002E4F' } = props
   return <Suspense fallback={null}>
-    <svg className={twMerge('', className)} width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"
+    <svg className={twMerge('', className)} viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"
     style={{
       stroke,
       ...style

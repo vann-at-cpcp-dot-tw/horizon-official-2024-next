@@ -170,7 +170,10 @@ function All(props:TypeProps, ref:React.ReactNode){
                 })
               }
               {
-                categoryNode?.publications?.nodes?.length >= 6 && <SwiperSlide className="!w-auto">
+                categoryNode?.publications?.nodes?.length >= 6 && <SwiperSlide
+                style={{
+                  width: viewport.width && viewport.width >= 992 ?'calc(25vw - 80px)' :'calc(50vw - 80px)'
+                }}>
                   <LinkWithLang className="btn group relative block" href={`/publications/${categoryNode.slug}`} lang={lang}>
                     <div className="relative">
                       <div className="absolute flex size-full items-center justify-center bg-gray-300 text-white">READ MORE</div>
@@ -183,18 +186,27 @@ function All(props:TypeProps, ref:React.ReactNode){
                           <i className="bi bi-plus-lg text-[24px] text-white"></i>
                         </div>
                       </div>
-                      <Image className="opacity-0"
-                      src={`${categoryNode?.publications?.nodes?.[5]?.publicationCustomFields?.publication?.publicationCover?.node?.mediaItemUrl || ''}`}
-                      style={{
-                        width: viewport.width && viewport.width>=992 ?'auto' :'66vw',
-                        height: viewport.width && viewport.width>=992 ?`${categoryIndex === 0 ?525 :320}px` :'auto',
-                      }}
-                      width={380}
-                      height={categoryIndex === 0 ?525 :320}
-                      placeholder={placeholderGroups?.[categoryIndex]?.[0] ?'blur' :'empty'}
-                      blurDataURL={placeholderGroups?.[categoryIndex]?.[0]}
-                      priority={true}
-                      alt="" />
+                      {
+                        categoryNode?.publications?.nodes?.[5]?.publicationCustomFields?.publication?.publicationCover?.node?.mediaDetails?.width && <div className="mb-2">
+                          <RatioArea ratio={(categoryNode.publications.nodes[5].publicationCustomFields.publication.publicationCover.node.mediaDetails.height / categoryNode.publications.nodes[5].publicationCustomFields.publication.publicationCover.node.mediaDetails.width * 100) as number}>
+                            <Image className="absolute size-full opacity-0"
+                              src={`${categoryNode.publications.nodes[5].publicationCustomFields.publication.publicationCover.node.mediaItemUrl || ''}`}
+                              alt=""
+                              fill
+                              sizes={viewport.width && viewport.width >= 992 ?'25vw' :'50vw'}
+                              style={{
+                                objectFit: 'cover',
+                              }}
+                              placeholder={placeholderGroups?.[categoryIndex]?.[0] ?'blur' :'empty'}
+                              blurDataURL={placeholderGroups?.[categoryIndex]?.[0]}
+                              priority={true} />
+                          </RatioArea>
+                        </div>
+                      }
+                    </div>
+
+                    <div className="relative h-8 text-gray-500 opacity-0">
+                      <div className="absolute line-clamp-2 w-full">{  categoryNode?.publications?.nodes?.[5]?.title }</div>
                     </div>
                   </LinkWithLang>
                 </SwiperSlide>
