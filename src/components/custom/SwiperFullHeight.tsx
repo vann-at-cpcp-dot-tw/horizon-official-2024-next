@@ -61,11 +61,11 @@ function SwiperFullHeight(props:TypeProps, ref:React.ReactNode){
 
       <div className="flex grow !flex-nowrap overflow-hidden p-5 lg:px-10">
         <div className="hidden flex-none items-center lg:flex">
-          <div className={`btn group flex size-8 items-center justify-center rounded-full border border-gray-900 hover:border-golden-900 hover:bg-golden-900 active:border-golden-900 active:bg-golden-900 lg:size-12 ${swiper.isBeginning ?'disabled opacity-50' :''}`}
+          <div className={`btn group flex size-12 items-center justify-center rounded-full border border-gray-900 hover:border-golden-900 hover:bg-golden-900 active:border-golden-900 active:bg-golden-900 ${swiper.isBeginning ?'disabled opacity-50' :''}`}
           onClick={()=>{
             swiper.slidePrev()
           }}>
-            <IconMenuBack className="w-12 stroke-black group-hover:!stroke-white group-active:!stroke-white" />
+            <IconMenuBack className="w-12 !stroke-black hover:!stroke-white active:!stroke-white" />
           </div>
         </div>
 
@@ -109,11 +109,11 @@ function SwiperFullHeight(props:TypeProps, ref:React.ReactNode){
         </div>
 
         <div className="hidden flex-none items-center lg:flex">
-          <div className={`btn group flex size-8 items-center justify-center rounded-full border border-gray-900 hover:border-golden-900 hover:bg-golden-900 active:border-golden-900 active:bg-golden-900 lg:size-12 ${swiper.isEnd ?'disabled opacity-50' :''}`}
+          <div className={`btn group flex size-12 items-center justify-center rounded-full border border-gray-900 hover:border-golden-900 hover:bg-golden-900 active:border-golden-900 active:bg-golden-900 ${swiper.isEnd ?'disabled opacity-50' :''}`}
             onClick={()=>{
               swiper.slideNext()
             }}>
-            <IconMenuBack className="w-12 stroke-black group-hover:!stroke-white group-active:!stroke-white"
+            <IconMenuBack className="w-12 !stroke-black hover:!stroke-white active:!stroke-white"
             style={{
               transform: 'rotate(180deg)'
             }}/>
@@ -124,20 +124,20 @@ function SwiperFullHeight(props:TypeProps, ref:React.ReactNode){
       <div className="pb-5 lg:pb-10">
         <div className="flex justify-center lg:hidden">
           <div className="mx-2 flex flex-none items-center">
-            <div className={`btn group flex size-9 items-center justify-center rounded-full border border-gray-900 hover:border-golden-900 hover:bg-golden-900 active:border-golden-900 active:bg-golden-900 lg:size-12 ${swiper.isBeginning ?'disabled opacity-50' :''}`}
+            <div className={`btn group flex size-9 items-center justify-center rounded-full border border-gray-900 hover:border-golden-900 hover:bg-golden-900 active:border-golden-900 active:bg-golden-900 ${swiper.isBeginning ?'disabled opacity-50' :''}`}
               onClick={()=>{
                 swiper.slidePrev()
               }}>
-              <IconMenuBack className="w-12 stroke-black group-hover:!stroke-white group-active:!stroke-white" />
+              <IconMenuBack className="w-9 !stroke-black hover:!stroke-white active:!stroke-white" />
             </div>
           </div>
 
           <div className="mx-2 flex flex-none items-center">
-            <div className={`btn group flex size-9 items-center justify-center rounded-full border border-gray-900 hover:border-golden-900 hover:bg-golden-900 active:border-golden-900 active:bg-golden-900 lg:size-12 ${swiper.isEnd ?'disabled opacity-50' :''}`}
+            <div className={`btn group flex size-9 items-center justify-center rounded-full border border-gray-900 hover:border-golden-900 hover:bg-golden-900 active:border-golden-900 active:bg-golden-900 ${swiper.isEnd ?'disabled opacity-50' :''}`}
               onClick={()=>{
                 swiper.slideNext()
               }}>
-              <IconMenuBack className="w-12 stroke-black group-hover:!stroke-white group-active:!stroke-white"
+              <IconMenuBack className="w-9 !stroke-black hover:!stroke-white active:!stroke-white"
               style={{
                 transform: 'rotate(180deg)'
               }}/>
