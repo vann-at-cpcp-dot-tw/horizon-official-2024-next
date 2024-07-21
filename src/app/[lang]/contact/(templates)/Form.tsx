@@ -1,4 +1,3 @@
-
 "use client"
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE
@@ -20,6 +19,8 @@ import { Button } from '~/components/ui/button'
 import ContentLightbox from '~/components/custom/ContentLightbox'
 import useForm from "~/use/useForm"
 import Loading from '~/components/custom/icons/Loading'
+import Alert from "~/components/custom/Alert"
+import { useStore } from "~/store"
 
 interface TypeProps {
   children?: React.ReactNode
@@ -29,6 +30,7 @@ interface TypeProps {
 interface TypeState {}
 
 function Form(props:TypeProps, ref:React.ReactNode){
+  const store = useStore()
   const router = useRouter()
   const { referer, lang, children } = props
 
@@ -60,6 +62,9 @@ function Form(props:TypeProps, ref:React.ReactNode){
   return <ContentLightbox
   onClose={handleClose}>
     <>
+      <Alert id="ContactForm" title="Success">
+        <div className="text-center text-[#4A4A4A]">We will get in touch with you soon.</div>
+      </Alert>
       <div className="mb-10">
         <div className="hidden">{referer}</div>
         <div className="container serif text-center text-[40px] text-major-900">Contact Us</div>
@@ -74,7 +79,9 @@ function Form(props:TypeProps, ref:React.ReactNode){
       onSubmit={(e)=>{
         e.preventDefault()
         handleSubmit(form).then((result)=>{
-          console.log(result)
+          if( result.success ){
+            store.lightboxOpen('ContactForm')
+          }
         })
       }}>
         <div className="mb-8">

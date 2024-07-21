@@ -2,26 +2,21 @@
 
 import { Suspense, useState, useEffect, useMemo, useCallback } from 'react'
 
-// store
+import { twMerge } from 'tailwind-merge'
+import { useWindowSize } from "vanns-common-modules/dist/use/react"
+
+import styles from '~/components/custom/styles/index.module.sass'
+import { isEmpty } from '~/lib/utils'
 import { useStore } from '~/store'
 
-// use
-import { useWindowSize } from 'vanns-common-modules/dist/use/react'
-import { twMerge } from 'tailwind-merge'
-
-// methods & components
-import { isEmpty } from '~/lib/utils'
-
-// styles
-import styles from '~/components/custom/styles/index.module.sass'
-
-interface TypeProps {
-  id: string
+interface IProps {
+  id?: string
   className?: string
   color?: string
+  onClose?: Function
 }
 
-function LightboxClose(props:TypeProps){
+function LightboxClose(props:IProps){
 
   const store = useStore()
   const viewport = useWindowSize()
@@ -31,7 +26,12 @@ function LightboxClose(props:TypeProps){
       const target = e.target as HTMLElement
       const targetId = target.id
       if( target.dataset.el === 'lightbox' ){
-        store.lightboxClose(targetId)
+        if( props?.id ){
+          store.lightboxClose(props.id)
+        }else{
+          store.lightboxClose(targetId)
+        }
+        props?.onClose?.()
       }
     }
 
@@ -40,12 +40,19 @@ function LightboxClose(props:TypeProps){
     return function(){
       document.body.removeEventListener('click', lightboxClickHandler)
     }
-  }, [])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.id])
 
   return <div className={twMerge('close flex justify-end', props?.className)}>
     <div className="btn flex size-10 items-center justify-center"
-    onClick={()=>{
-      store.lightboxClose(props.id)
+    onClick={(e)=>{
+      const targetId = (e.target as HTMLDivElement)?.closest?.('[data-el="lightbox"]')?.id
+      if( props?.id ){
+        store.lightboxClose(props.id)
+      }else{
+        store.lightboxClose(targetId)
+      }
+      props?.onClose?.()
     }}
     style={{
       marginRight: viewport.width && viewport.width >= 992 ?'-20px' :'-10px',

@@ -13,6 +13,8 @@ import { useParams } from "next/navigation"
 import { ICommonData, useCommonData } from "~/app/[lang]/providers"
 import { useWindowSize } from 'vanns-common-modules/dist/use/react'
 import Loading from '~/components/custom/icons/Loading'
+import Alert from "~/components/custom/Alert"
+import { useStore } from "~/store"
 
 interface TypeProps {
   className?: string
@@ -24,6 +26,7 @@ interface TypeState {
 function Footer(props:TypeProps, ref:React.ReactNode){
   const viewport = useWindowSize()
   const footerRef = useRef<HTMLDivElement>(null)
+  const store = useStore()
   const [state, setState] = useReducer((state:TypeState, updateState:{})=>({...state, ...updateState}), {
     // init state
     footerHeight: 0,
@@ -59,6 +62,9 @@ function Footer(props:TypeProps, ref:React.ReactNode){
   }, [])
 
   return <Suspense fallback={null}>
+    <Alert id="Subscription" title="Success">
+      <div className="text-center text-[#4A4A4A]">You have successfully subscribed to the newsletter.</div>
+    </Alert>
     <div className={twMerge('text-white relative bg-major-900', props?.className)} ref={footerRef}>
       <div className="container-fluid mb-16 pt-20 lg:mb-32">
         <div className="serif mb-2.5 text-center text-[21px] font-300 lg:mb-5">BRAND PUBLICATION <br className="block lg:hidden"/>SUBSCRIPTION</div>
@@ -66,7 +72,9 @@ function Footer(props:TypeProps, ref:React.ReactNode){
         onSubmit={(e)=>{
           e.preventDefault()
           handleSubmit(form).then((result)=>{
-            console.log(result)
+            if( result.success ){
+              store.lightboxOpen('Subscription')
+            }
           })
         }}>
           <div className="col-12 shrink" style={{maxWidth:'220px'}}>

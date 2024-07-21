@@ -14,6 +14,7 @@ import { Button } from '~/components/ui/button'
 import { useParams } from "next/navigation"
 import useForm from "~/use/useForm"
 import Loading from '~/components/custom/icons/Loading'
+import { useStore } from "~/store"
 
 interface TypeProps {
   publicationCover: string
@@ -25,6 +26,7 @@ interface TypeProps {
 interface TypeState {}
 
 function BrandPublication(props:TypeProps, ref:React.ReactNode){
+  const store = useStore()
   const { className } = props
   const params = useParams()
   const { lang } = params
@@ -93,7 +95,9 @@ function BrandPublication(props:TypeProps, ref:React.ReactNode){
               onSubmit={(e)=>{
                 e.preventDefault()
                 handleSubmit(form).then((result)=>{
-                  console.log(result)
+                  if( result.success ){
+                    store.lightboxOpen('Subscription')
+                  }
                 })
               }}>
                 <div className="col-12 shrink" style={{maxWidth:'220px'}}>
