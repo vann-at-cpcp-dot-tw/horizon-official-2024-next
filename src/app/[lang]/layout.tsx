@@ -10,23 +10,7 @@ import Footer from '~/components/custom/Footer'
 import Providers from './providers'
 import PageTransition from "~/components/custom/PageTransition"
 import CookiePolicy from "~/components/custom/CookiePolicy"
-
-
-
-
-export const metadata = {
-  // metadataBase: `${process.env.DOMAIN}`,
-  title: 'HORIZON',
-  description: '',
-  icons: {
-    icon: `${APP_BASE}assets/img/fav.png`,
-  },
-  openGraph: {
-    title: 'HORIZON',
-    description: '',
-    // images: [`${APP_BASE}assets/img/og.jpg`],
-  },
-}
+import { GoogleTagManager, GoogleAnalytics } from '@next/third-parties/google'
 
 async function getCommonData(){
   const data = await fetchGQL(QueryCommonData)
@@ -66,7 +50,15 @@ export default async function RootLayout({
   const translations = await getTranslations()
 
   return <html>
+    <head>
+      <title>Horizon Yachts | Fifth Largest Global Custom Luxury Yacht Builder</title>
+      <meta name="description" content="From pioneering new yacht designs to employing the latest advanced composites technologies, Horizon simply backs style with substance." />
+      <meta property="og:image" content="/assets/img/og.jpg" />
+      {/* <link rel="icon" type="image/x-icon" href="/assets/img/fav.png" /> */}
+      <GoogleTagManager gtmId="G-1XQZBRX0PE" />
+    </head>
     <body>
+      <GoogleAnalytics gaId="G-1XQZBRX0PE" />
       <Providers
       commonData={commonData}
       translations={translations}>

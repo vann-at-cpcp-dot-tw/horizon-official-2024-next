@@ -41,7 +41,7 @@ function KV(props:TypeProps, ref:React.ReactNode){
         <div style={{
           padding: `${store.headerHeight}px 0px`,
         }}>
-          <motion.div className="relative mx-auto mb-8 w-full max-w-[956px] xl:w-[69%] xl:max-w-[1920px]" ref={animateAnchorRef}
+          <motion.div className="relative mx-auto mb-8 w-full max-w-[956px] xl:w-[69%] xl:max-w-screen-4xl" ref={animateAnchorRef}
            variants={{
              enter: {
                opacity: 1,
@@ -66,7 +66,7 @@ function KV(props:TypeProps, ref:React.ReactNode){
           animate={animateAnchorIsInView}
           delay={0.25}>
             <div className="relative mx-auto w-full max-w-[600px]">
-              <div className="serif text-center text-[20px] text-white lg:leading-[1.8]">{props?.description}</div>
+              <pre className="serif text-center text-[20px] text-white lg:leading-[1.8]" dangerouslySetInnerHTML={{__html: props?.description || ''}}></pre>
             </div>
           </OverflowContent>
         </div>

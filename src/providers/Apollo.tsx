@@ -1,6 +1,6 @@
 "use client"
-
 const API_URL = `${process.env.NEXT_PUBLIC_API_BASE}graphql`
+const HQ_API_URL = `${process.env.NEXT_PUBLIC_HQ_API_BASE}graphql`
 
 import { makeApolloClient, ApolloClientProvider } from "vanns-common-modules/dist/lib/next/apollo/client"
 import { ApolloLink } from "@apollo/client"
@@ -22,6 +22,7 @@ export default function ApolloProvider({
     }
     return forward(operation)
   })
+
 
   return <ApolloClientProvider makeClient={()=>{
     const { getClient } = makeApolloClient({

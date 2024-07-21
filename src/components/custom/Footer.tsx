@@ -1,11 +1,10 @@
 "use client"
-
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
+const HQ_API_BASE = process.env.NEXT_PUBLIC_HQ_API_BASE
 const CONTENT_TYPE = process.env.NEXT_PUBLIC_CONTENT_TYPE || 'hq'
-const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
 
 import { Suspense, useRef, useReducer, useEffect, useState, useContext } from 'react'
-
+import useForm from "~/use/useForm"
 import { twMerge } from 'tailwind-merge'
 import { isEmpty } from '~/lib/utils'
 import { Button } from '~/components/ui/button'
@@ -13,6 +12,8 @@ import LinkWithLang from "./LinkWithLang"
 import { useParams } from "next/navigation"
 import { ICommonData, useCommonData } from "~/app/[lang]/providers"
 import { useWindowSize } from 'vanns-common-modules/dist/use/react'
+import Loading from '~/components/custom/icons/Loading'
+
 interface TypeProps {
   className?: string
 }
@@ -28,33 +29,65 @@ function Footer(props:TypeProps, ref:React.ReactNode){
     footerHeight: 0,
   })
   const [subscriptionInputFocus, setSubscriptionInputFocus] = useState(false)
+
+  const {form, setForm, loading:submitLoading, handleSubmit} = useForm(`${HQ_API_BASE}wp-json/api/v1/subscription-log/push`, {
+    email: '',
+    dealer_region: process.env.NEXT_PUBLIC_DEALER_REGION || 'GLOBAL',
+  })
+
   const { lang } = useParams()
 
   const commonData = useCommonData()
   const { externalLinks } = commonData?.globalSettings ?? {}
+
   useEffect(()=>{
     setState({
       footerHeight: footerRef.current?.clientHeight || 0,
     })
   }, [viewport.width, viewport.height, footerRef?.current?.clientHeight])
 
+  useEffect(()=>{
+    function inputBlurHandler(e:any){
+      if( e.target.id !== 'SubscriptionButtonFooter' && e.target.id !== 'SubscriptionInputFooter'){
+        setSubscriptionInputFocus(false)
+      }
+    }
+    document.body.addEventListener('click', inputBlurHandler)
+    return ()=>{
+      document.body.removeEventListener('click', inputBlurHandler)
+    }
+  }, [])
+
   return <Suspense fallback={null}>
     <div className={twMerge('text-white relative bg-major-900', props?.className)} ref={footerRef}>
       <div className="container-fluid mb-16 pt-20 lg:mb-32">
         <div className="serif mb-2.5 text-center text-[21px] font-300 lg:mb-5">BRAND PUBLICATION <br className="block lg:hidden"/>SUBSCRIPTION</div>
-        <form className="row row-gap-0 flex-nowrap items-end justify-center">
+        <form className="row row-gap-0 flex-nowrap items-end justify-center"
+        onSubmit={(e)=>{
+          e.preventDefault()
+          handleSubmit(form).then((result)=>{
+            console.log(result)
+          })
+        }}>
           <div className="col-12 shrink" style={{maxWidth:'220px'}}>
-            <input className="serif h-[44px] w-full border-b border-golden-700 bg-transparent p-0 pb-2 text-center placeholder:text-gray-700" type="email" placeholder="Your email" required
+            <input id="SubscriptionInputFooter" className="serif h-[44px] w-full border-b border-golden-700 bg-transparent p-0 pb-2 text-center placeholder:text-gray-700" type="email" placeholder="Your email" required
+            value={form.email}
+            onChange={(e)=>{
+              setForm({
+                email: e.target.value
+              })
+            }}
             onFocus={()=>{
               setSubscriptionInputFocus(true)
-            }}
-            onBlur={()=>{
-              setSubscriptionInputFocus(false)
-            }}/>
+            }} />
           </div>
           {
             subscriptionInputFocus && <div className="col-auto">
-              <Button type="submit" className="rounded-none border border-golden-700 bg-major-900 text-golden-700 hover:bg-golden-700 hover:text-white active:bg-golden-700 active:text-white">SUBMIT</Button>
+              {
+                submitLoading
+                  ? <Loading style={{width:'44px'}} fill="var(--color-golden-900)"/>
+                  : <Button id="SubscriptionButtonFooter" type="submit" className="rounded-none border border-golden-700 bg-major-900 text-golden-700 hover:bg-golden-700 hover:text-white active:bg-golden-700 active:text-white">SUBMIT</Button>
+              }
             </div>
           }
         </form>
