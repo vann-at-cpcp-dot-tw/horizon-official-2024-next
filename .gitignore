@@ -43,5 +43,5 @@ i18n.config.ts
 next-env.d.ts
 
 # 總部 VR 上傳用
-/public/mobilevr
-/public/mobilevr/*
+/public/*
+!/public/assets/

@@ -1,5 +1,5 @@
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
-import '~~/public/external-import.css'
+import '~~/public/assets/external-import.css'
 
 import { isEmpty } from '~/lib/utils'
 import { fetchGQL } from "~/lib/apollo"
