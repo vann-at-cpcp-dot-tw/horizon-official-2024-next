@@ -6,7 +6,7 @@ const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
 import Image from "next/image"
 import LinkWithLang from '~/components/custom/LinkWithLang'
 import { isEmpty } from '~/lib/utils'
-import { QuerySingleDealer } from '~/queries/pages/dealers.gql'
+import { QueryDealersWithRegion } from '~/queries/pages/dealers.gql'
 import { fetchGQL } from '~/lib/apollo'
 import { headers } from 'next/headers'
 import Form from "./(templates)/Form"
@@ -25,36 +25,52 @@ async function PageContact({params}:TypeProps){
   const referer = headersList.get('referer')
 
   let data
-  let dealer
   if( CONTENT_TYPE === 'dealer' ){
-    data = await fetchGQL(QuerySingleDealer)
-    dealer = data?.dealers?.nodes?.[0]
+    data = await fetchGQL(QueryDealersWithRegion)
   }
 
   return <>
     <Form lang={lang} referer={referer}>
       {
-        dealer?.title && <div className="mt-10 bg-major-900 py-20 text-white">
+        CONTENT_TYPE === 'dealer' && <div className="mt-10 bg-major-900 py-20 text-white">
           <div className="container">
-            <div className="item mb-8">
-              <div className="flex flex-nowrap items-center justify-center">
-                <div className="serif mb-1 shrink text-[24px] text-white lg:text-[32px]">{ dealer.title }</div>
-                {
-                  dealer.dealerCustomFields?.googleMapLink && <a className="btn-text -mt-2.5 ml-4 text-[13px] font-300 text-white lg:ml-4 lg:text-[15px]" href={dealer.dealerCustomFields.googleMapLink} target="_blank">map</a>
-                }
-              </div>
+            <div className="serif mb-8 text-center text-[32px] font-300 text-white">Personal <i>and</i>  Virtual Tours  <i>available.</i></div>
+          </div>
+
+          <div className="container">
+            <div className="row">
               {
-                dealer?.dealerCustomFields?.contactNumber && <div className="mb-2 text-center text-[14px] font-300 lg:text-[16px]">
-                  <a href={`tel:${dealer.dealerCustomFields.contactNumber.replace(' ', '').replace('-', '')}`}>{ dealer.dealerCustomFields.contactNumber }</a>
-                </div>
-              }
-              {
-                dealer?.dealerCustomFields?.contactEmail && <div className="mb-2 text-center text-[14px] font-300 lg:text-[16px]">
-                  <a href={`mailto:${dealer.dealerCustomFields.contactEmail}`}>{dealer.dealerCustomFields.contactEmail}</a>
-                </div>
-              }
-              {
-                dealer.dealerCustomFields?.address && <div className="mb-2 text-center text-[14px] font-300 lg:text-[16px]">{dealer.dealerCustomFields?.address}</div>
+                data?.dealerRegions?.nodes?.map?.((node:any, index:number)=>{
+                  return <div className="lg:col-6 col-12 mb-5" key={index}>
+                    <div className="mb-2 text-[14px] text-white">{ node?.name }</div>
+                    {
+                      node?.dealers?.nodes?.map((dealerNode:{[key:string]:any}, dealerIndex:number)=>{
+                        return <div className="mb-5" key={`${index}-${dealerIndex}`}>
+                          {/* <div className="text-[14px] text-gray-300">{ dealerNode?.dealerRegions?.nodes?.[0]?.name }</div> */}
+                          <div className="mb-1 flex flex-nowrap items-center">
+                            <div className="shrink text-[20px] text-golden-700">{ dealerNode?.title }</div>
+                            {
+                              dealerNode.dealerCustomFields?.googleMapLink && <a className="btn-opacity ml-2 mt-0.5 text-golden-500" href={dealerNode.dealerCustomFields.googleMapLink} target="_blank">Map</a>
+                            }
+                          </div>
+                          {
+                            dealerNode?.dealerCustomFields?.contactNumber && <div className="mb-0.5 font-300 text-white">
+                              <a href={`tel:${dealerNode.dealerCustomFields.contactNumber.replace(' ', '').replace('-', '')}`}>{ dealerNode.dealerCustomFields.contactNumber }</a>
+                            </div>
+                          }
+                          {
+                            dealerNode?.dealerCustomFields?.contactEmail && <div className="mb-0.5 font-300 text-white">
+                              <a href={`mailto:${dealerNode.dealerCustomFields.contactEmail}`}>{dealerNode.dealerCustomFields.contactEmail}</a>
+                            </div>
+                          }
+                          {
+                            dealerNode.dealerCustomFields?.address && <div className="mb-0.5 font-300 text-white">{dealerNode.dealerCustomFields?.address}</div>
+                          }
+                        </div>
+                      })
+                    }
+                  </div>
+                })
               }
             </div>
           </div>

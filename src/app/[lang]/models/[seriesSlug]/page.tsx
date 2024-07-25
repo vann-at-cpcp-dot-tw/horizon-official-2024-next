@@ -1,4 +1,6 @@
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
+const HQ_API_BASE = process.env.NEXT_PUBLIC_HQ_API_BASE
+const HQ_API_URL = `${HQ_API_BASE}graphql`
 
 import { Suspense } from 'react'
 import { useRouter } from 'next/navigation'
@@ -41,16 +43,19 @@ interface TypeYachtNode {
   }
 }
 
-async function PageSingleSeries(props:TypeProps, ref:React.ReactNode){
+export default async function PageSingleSeries(props:TypeProps, ref:React.ReactNode){
   const { params } = props
   const { seriesSlug } = params
   const data = await fetchGQL(QuerySingleSeriesPage, {
+    context: {
+      uri: HQ_API_URL
+    },
     variables: {
       slug: seriesSlug
     }
   })
-  const { yachtSeries } = data
-  const { yachts } = yachtSeries
+  const { yachtSeries } = data ?? {}
+  const { yachts } = yachtSeries?.translation ?? {}
   const yachtsSwiperList = yachts.nodes?.map?.((node:TypeYachtNode)=>{
     return {
       slug: node.slug,
@@ -68,4 +73,3 @@ async function PageSingleSeries(props:TypeProps, ref:React.ReactNode){
   </Suspense>
 }
 
-export default PageSingleSeries

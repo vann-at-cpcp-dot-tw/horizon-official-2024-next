@@ -1,28 +1,38 @@
-query QueryYachtsWithSeries {
-  yachtSeriesList(first: 99) {
+query QueryYachtsWithSeries(
+  $language: LanguageCodeFilterEnum
+  $translation: LanguageCodeEnum!
+) {
+  yachtSeriesList(
+    first: 99,
+    where: {
+      language: $language
+    }
+  ) {
     nodes {
-      slug
-      name
-      yachtsSeriesCustomFields {
-        seriesSimpleDescription
-        seriesKeyImage {
-          node {
-            mediaItemUrl
+      translation(language: $translation){
+        slug
+        name
+        yachtsSeriesCustomFields {
+          seriesSimpleDescription
+          seriesKeyImage {
+            node {
+              mediaItemUrl
+            }
           }
         }
-      }
-      yachts(
-        first: 99,
-        where: {
-          orderby: {
-            field: MENU_ORDER,
-            order: ASC,
+        yachts(
+          first: 99,
+          where: {
+            orderby: {
+              field: MENU_ORDER,
+              order: ASC,
+            }
           }
-        }
-      ) {
-        nodes {
-          slug
-          title
+        ) {
+          nodes {
+            slug
+            title
+          }
         }
       }
     }

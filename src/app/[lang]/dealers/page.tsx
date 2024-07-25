@@ -1,6 +1,8 @@
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 const CONTENT_TYPE = process.env.NEXT_PUBLIC_CONTENT_TYPE || 'hq'
 const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
+const HQ_API_BASE = process.env.NEXT_PUBLIC_HQ_API_BASE
+const HQ_API_URL = `${HQ_API_BASE}graphql`
 
 import Image from "next/image"
 import LinkWithLang from '~/components/custom/LinkWithLang'
@@ -21,27 +23,29 @@ interface TypeProps {
 
 interface TypeState {}
 
-async function PageDealers({params}:TypeProps){
-
+export default async function PageDealers({params}:TypeProps){
   const { lang } = params
-
-  if( CONTENT_TYPE === 'dealer'){
+  const access = CONTENT_TYPE === 'hq'
+  if( !access ){
     if( lang === i18n.defaultLocale.shortCode ){
       redirect('/contact')
     }else{
-      redirect(`${lang}/contact`)
+      redirect(`/${lang}/contact`)
     }
   }
 
-  const data = await fetchGQL(QueryDealersWithRegion)
+
+  const data = await fetchGQL(QueryDealersWithRegion, {
+    context: {
+      uri: HQ_API_URL
+    }
+  })
   const dealerRegions = data?.dealerRegions?.nodes || []
 
   return <main className="pb-28">
-
     <Regions className="pb-28 pt-16" regions={dealerRegions} />
-
     <div className="container text-center">
-      <div className="serif mb-6 text-[32px] text-minor-900">Personal <span className="italic">and</span>  Virtual Tours  <span className="italic">available.</span></div>
+      <div className="serif mb-6 text-[32px] text-minor-900">Personal <i>and</i>  Virtual Tours  <i>available.</i></div>
       <div className="flex justify-center">
         <LinkWithLang href="/contact" lang={lang}>
           <Button className={`${buttonStyles['rounded-golden']}`}>Contact Us</Button>
@@ -50,5 +54,3 @@ async function PageDealers({params}:TypeProps){
     </div>
   </main>
 }
-
-export default PageDealers

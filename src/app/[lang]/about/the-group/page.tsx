@@ -1,4 +1,6 @@
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
+const HQ_API_BASE = process.env.NEXT_PUBLIC_HQ_API_BASE
+const HQ_API_URL = `${HQ_API_BASE}graphql`
 
 import { Button } from '~/components/ui/button'
 import { fetchGQL } from '~/lib/apollo'
@@ -18,7 +20,11 @@ interface TypeState {}
 async function PageAboutTheGroup({params}:TypeProps){
 
   const { lang } = params
-  const data = await fetchGQL(QueryPageAboutTheGroup)
+  const data = await fetchGQL(QueryPageAboutTheGroup, {
+    context: {
+      uri: HQ_API_URL
+    }
+  })
   const {
     atgpHeroImage:heroImage,
     atgpGroupIntroduction:groupIntroduction,

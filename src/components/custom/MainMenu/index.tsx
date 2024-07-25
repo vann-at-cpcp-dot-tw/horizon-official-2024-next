@@ -187,11 +187,17 @@ function MainMenu(props:TypeProps, ref:React.ReactNode){
                   label: DEALER_REGION !== 'US' ?'Brokerage' :'Inventory',
                   href: '/brokerage'
                 },
-                {
-                  key: 'charter',
-                  label: 'Charter',
-                  href: '/charter'
-                }
+                ...(
+                  DEALER_REGION == 'AU'
+                    ? [
+                      {
+                        key: 'charter',
+                        label: 'Charter',
+                        href: '/charter'
+                      }
+                    ]
+                    :[]
+                )
               ]
               :[]
           ),

@@ -8,9 +8,7 @@ import LinkWithLang from '~/components/custom/LinkWithLang'
 import { twMerge } from 'tailwind-merge'
 import { isEmpty } from '~/lib/utils'
 import { useParams } from "next/navigation"
-// import { useRouter } from 'next/navigation'
 import { useStore } from '~/store'
-// import useWindowSize from '~/use/useWindowSize"
 
 interface TypeProps {
   publicationCategories: {

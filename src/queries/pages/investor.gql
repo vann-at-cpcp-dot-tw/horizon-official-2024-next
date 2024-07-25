@@ -1,11 +1,14 @@
 query QueryInvestorPage(
   $first: Int
   $after: String
+  $language: LanguageCodeFilterEnum
+  $translation: LanguageCodeEnum!
 ) {
   posts:investors(
     first: $first,
     after: $after
     where: {
+      language: $language
       orderby: {
         field: MENU_ORDER,
         order: ASC,
@@ -13,13 +16,15 @@ query QueryInvestorPage(
     }
   ) {
     nodes {
-      date
-      title
-      slug
-      customFields:investorCustomFields {
-        pdfFile {
-          node {
-            mediaItemUrl
+      translation(language: $translation){
+        date
+        title
+        slug
+        customFields:investorCustomFields {
+          pdfFile {
+            node {
+              mediaItemUrl
+            }
           }
         }
       }

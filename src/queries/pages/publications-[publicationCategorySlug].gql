@@ -6,49 +6,56 @@ query QueryPublicationCategory(
   $before: String
   $relatedYachtSeries: String
 ) {
-  publicationCategory(id:$slug, idType:SLUG) {
-    id
-    name
-    publications(
-      first: $first,
-      last: $last,
-      after: $after,
-      before: $before,
-      where: {
-        orderby: {
-          field: DATE,
-          order: DESC
+  publicationCategory(
+    id:$slug,
+    idType:SLUG
+  ){
+    translation(
+      language: EN #只接英文版
+    ){
+      id
+      name
+      publications(
+        first: $first,
+        last: $last,
+        after: $after,
+        before: $before,
+        where: {
+          orderby: {
+            field: DATE,
+            order: DESC
+          }
+          relatedYachtSeries: $relatedYachtSeries
         }
-        relatedYachtSeries: $relatedYachtSeries
-      }
-    ) {
-      nodes {
-        slug
-        title
-        publicationCustomFields {
-          publication {
-            publicationCover {
-              node {
-                mediaItemUrl
-                mediaDetails {
-                  width
-                  height
+      ) {
+        nodes {
+          slug
+          title
+          publicationCustomFields {
+            publication {
+              publicationCover {
+                node {
+                  mediaItemUrl
+                  mediaDetails {
+                    width
+                    height
+                  }
                 }
               }
-            }
-            pdf {
-              node {
-                mediaItemUrl
+              pdf {
+                node {
+                  mediaItemUrl
+                }
               }
             }
           }
         }
-      }
-      pageInfo {
-        hasNextPage
-        hasPreviousPage
-        startCursor
-        endCursor
+        pageInfo {
+          hasNextPage
+          hasPreviousPage
+          startCursor
+          endCursor
+        }
       }
     }
   }

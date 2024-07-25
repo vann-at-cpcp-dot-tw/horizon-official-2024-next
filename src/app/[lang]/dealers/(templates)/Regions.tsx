@@ -1,6 +1,5 @@
 
 "use client"
-
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 const CONTENT_TYPE = process.env.NEXT_PUBLIC_CONTENT_TYPE || 'hq'
 const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
@@ -18,9 +17,7 @@ interface TypeProps {
 interface TypeState {}
 
 function RegionsNav(props:TypeProps, ref:React.ReactNode){
-  // const store = useStore()
-  // const router = useRouter()
-  // const viewport = useWindowSize()
+
   const { className } = props
   const [activeRegionIndex, setActiveRegionIndex] = useState<number | null>(null)
 

@@ -22,11 +22,11 @@ interface TypeState {}
 async function PageTeam({params}:TypeProps){
 
   const { lang } = params
-  const data = await fetchGQL(QueryTeamPage)
-
-  if( CONTENT_TYPE === 'hq '){
+  const access = CONTENT_TYPE === 'dealer'
+  if( !access ){
     redirect('/')
   }
+  const data = await fetchGQL(QueryTeamPage)
 
   return <main className="pb-24">
 

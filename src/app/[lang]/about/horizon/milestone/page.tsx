@@ -1,4 +1,6 @@
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
+const HQ_API_BASE = process.env.NEXT_PUBLIC_HQ_API_BASE
+const HQ_API_URL = `${HQ_API_BASE}graphql`
 
 import Image from "next/image"
 import { fetchGQL } from '~/lib/apollo'
@@ -19,7 +21,11 @@ export default async function PageHome({
   }
 }){
   const { lang } = params
-  const data = await fetchGQL(QueryMilestone)
+  const data = await fetchGQL(QueryMilestone, {
+    context: {
+      uri: HQ_API_URL
+    }
+  })
   const { milestone } = data?.aboutHorizon?.aboutHorizonCustomFields ?? {}
   const milestoneList = await Promise.all(
     milestone?.map(async (node:any)=>{

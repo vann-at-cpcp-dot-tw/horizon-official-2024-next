@@ -1,3 +1,6 @@
+const HQ_API_BASE = process.env.NEXT_PUBLIC_HQ_API_BASE
+const HQ_API_URL = `${HQ_API_BASE}graphql`
+
 import { fetchGQL } from '~/lib/apollo'
 import { QueryHomePage } from '~/queries/pages/home.gql'
 import dynamic from "next/dynamic"
@@ -18,7 +21,11 @@ export default async function PageHome({
   }
 }){
   const { lang } = params
-  const data = await fetchGQL(QueryHomePage)
+  const data = await fetchGQL(QueryHomePage, {
+    context: {
+      uri: HQ_API_URL
+    }
+  })
   const { homePageKeyVision, homePageIntroduction, homePageAchievements } = data?.homePageSettings?.homePageCustomFields ?? {}
   const { heroImage:kvImage, heroVideo:kvVideo, mainTitle:kvTitle } = homePageKeyVision ?? {}
 

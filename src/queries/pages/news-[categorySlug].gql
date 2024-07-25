@@ -10,7 +10,10 @@ query QueryPostsByCategory(
   $year: Int
   $translation: LanguageCodeEnum!
 ) {
-    category(id:$slug, idType: SLUG) {
+    category(
+      id:$slug,
+      idType: SLUG
+    ){
       translation(language: $translation) {
         name
         posts(

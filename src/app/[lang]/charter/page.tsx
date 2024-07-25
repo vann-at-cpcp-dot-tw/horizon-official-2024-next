@@ -21,6 +21,11 @@ interface TypeState {}
 
 async function PageCharters({params}:TypeProps){
 
+  const access = CONTENT_TYPE === 'dealer' && DEALER_REGION === 'AU'
+  if( !access ){
+    redirect('/')
+  }
+
   const { lang } = params
   const data = await fetchGQL(QueryCharterPage, {
     variables: {
@@ -30,10 +35,6 @@ async function PageCharters({params}:TypeProps){
   const settings = data?.settings?.customFields
   const posts = data?.posts?.nodes
   const yachtConditions = data?.yachtConditions?.nodes
-
-  if( CONTENT_TYPE === 'hq'){
-    redirect('/')
-  }
 
   return <main className="pb-24">
 

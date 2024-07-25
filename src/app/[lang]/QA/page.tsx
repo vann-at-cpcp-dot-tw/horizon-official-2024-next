@@ -1,6 +1,8 @@
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 const CONTENT_TYPE = process.env.NEXT_PUBLIC_CONTENT_TYPE || 'hq'
 const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
+const HQ_API_BASE = process.env.NEXT_PUBLIC_HQ_API_BASE
+const HQ_API_URL = `${HQ_API_BASE}graphql`
 
 import Image from "next/image"
 import LinkWithLang from '~/components/custom/LinkWithLang'
@@ -18,7 +20,11 @@ interface TypeState {}
 
 async function PageTerms({params}:TypeProps){
   const { lang } = params
-  const data = await fetchGQL(QueryQA)
+  const data = await fetchGQL(QueryQA, {
+    context: {
+      uri: HQ_API_URL
+    }
+  })
   const { qaList } = data?.globalSettings?.additionalContent ?? {}
 
   return <main className="pb-24">

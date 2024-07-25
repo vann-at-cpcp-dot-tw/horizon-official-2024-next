@@ -1,3 +1,6 @@
+const HQ_API_BASE = process.env.NEXT_PUBLIC_HQ_API_BASE
+const HQ_API_URL = `${HQ_API_BASE}graphql`
+
 import { Button } from '~/components/ui/button'
 import { fetchGQL } from '~/lib/apollo'
 import { QueryPageAboutInnovation } from '~/queries/pages/about-innovation.gql'
@@ -14,7 +17,11 @@ export default async function PageAboutInnovation({
   }
 }){
   const { lang } = params
-  const data = await fetchGQL(QueryPageAboutInnovation)
+  const data = await fetchGQL(QueryPageAboutInnovation, {
+    context: {
+      uri: HQ_API_URL
+    }
+  })
   const { featuredVideo, contentList } = data?.aboutInnovation?.aboutInnovationCustomFields ?? {}
   const contentListWithPlaceholder = await Promise.all(
     contentList.map(async (node:any) => {

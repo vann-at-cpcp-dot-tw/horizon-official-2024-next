@@ -1,4 +1,6 @@
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
+const HQ_API_BASE = process.env.NEXT_PUBLIC_HQ_API_BASE
+const HQ_API_URL = `${HQ_API_BASE}graphql`
 
 import Image from "next/image"
 import LinkWithLang from '~/components/custom/LinkWithLang'
@@ -21,11 +23,14 @@ interface TypeProps {
 
 interface TypeState {}
 
-async function PageNewsWithCategory({params, searchParams}:TypeProps){
+export default async function PageNewsWithCategory({params, searchParams}:TypeProps){
   const { lang, categorySlug } = params
   const postsPerPage = params.categorySlug === 'events' ?12 :10
 
   const data = await fetchGQL(QueryPostsByCategory, {
+    context: {
+      uri: HQ_API_URL
+    },
     variables: {
       slug: categorySlug,
       first: postsPerPage,
@@ -52,5 +57,3 @@ async function PageNewsWithCategory({params, searchParams}:TypeProps){
     <ListWithCategory list={data.category?.translation?.posts?.nodes} pageInfo={data.category?.translation?.posts?.pageInfo} lang={lang} />
   </main>
 }
-
-export default PageNewsWithCategory

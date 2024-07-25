@@ -4,27 +4,33 @@ query QuerySingleYachtPage(
   $slug: ID!,
   $yachtSlugForRelatedPost: String,
   $language: LanguageCodeFilterEnum,
+  $translation: LanguageCodeEnum!
 ){
-  yacht(id:$slug, idType: SLUG) {
-    ...yachtBasic
-    yachtSeriesList {
-      nodes {
-        slug
-        name
+  yacht(
+    id: $slug,
+    idType: SLUG
+  ){
+    translation(language: $translation){
+      ...yachtBasic
+      yachtSeriesList {
+        nodes {
+          slug
+          name
+        }
       }
-    }
-    yachtCustomFields {
-      yachtDescription
-      ...yachtRelatedPublications
-      ...yachtHeroVideo
-      ...yachtHeroImage
-      ...yachtExteriorImages
-      ...yachtInteriorImages
-      ...yachtGeneralArrangementImages
-      ...yachtVRPreview
-      ...yachtVideosPreview
-      ...yachtEmbedVideosGallery
-      ...yachtSpecsTable
+      yachtCustomFields {
+        yachtDescription
+        ...yachtRelatedPublications
+        ...yachtHeroVideo
+        ...yachtHeroImage
+        ...yachtExteriorImages
+        ...yachtInteriorImages
+        ...yachtGeneralArrangementImages
+        ...yachtVRPreview
+        ...yachtVideosPreview
+        ...yachtEmbedVideosGallery
+        ...yachtSpecsTable
+      }
     }
   }
   posts(
@@ -69,14 +75,20 @@ query QuerySingleYachtPage(
 }
 
 query QuerySingleYachtHullsList(
-  $slug: ID!,
+  $slug: ID!
+  $translation: LanguageCodeEnum!
 ){
-  yacht(id:$slug, idType: SLUG) {
-    yachtCustomFields {
-      hulls {
-        hullName
-        isHidden
-        vrEmbedUrl
+  yacht(
+    id: $slug,
+    idType: SLUG
+  ){
+    translation(language: $translation){
+      yachtCustomFields {
+        hulls {
+          hullName
+          isHidden
+          vrEmbedUrl
+        }
       }
     }
   }

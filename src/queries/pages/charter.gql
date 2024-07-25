@@ -1,7 +1,10 @@
 query QueryCharterPage(
   $first: Int
+  $language: LanguageCodeFilterEnum
 ) {
-  settings:charterSettings {
+  settings:charterSettings(
+    language: $language
+  ) {
     customFields:charterSettingCustomFields {
       lengthOptions:charterLengthOptions {
         label
@@ -10,10 +13,14 @@ query QueryCharterPage(
       }
     }
   }
-  yachtYears(postType: "brokerage")
+  yachtYears(
+    postType: "brokerage",
+    language: $language
+  )
   posts:charters(
     first: $first,
     where: {
+      language: $language
       orderby: {
         field: MENU_ORDER,
         order: ASC,
@@ -62,7 +69,12 @@ query QueryCharterPage(
       startCursor
     }
   }
-  yachtConditions(first: 99) {
+  yachtConditions(
+    first: 99,
+    where: {
+      language: $language
+    }
+  ) {
     nodes {
       slug
       name

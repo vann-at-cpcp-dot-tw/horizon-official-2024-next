@@ -1,5 +1,4 @@
 "use client"
-
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
 import { Suspense, useContext, useState, useRef, useMemo, useEffect } from 'react'
@@ -12,10 +11,10 @@ import { LocalDataContext } from "../(templates)/LocalDataProvider"
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { SwiperClass } from "swiper/react"
 import { useWindowSize } from 'vanns-common-modules/dist/use/react'
-// import useImageBlurHashes from '~/use/useImageBlurHashes"
 import { genImageBlurHash } from 'vanns-common-modules/dist/lib/next'
 import { useParams } from "next/navigation"
 import RatioArea from "vanns-common-modules/dist/components/react/RatioArea"
+
 interface TypeProps {
   [key:string]: any
 }

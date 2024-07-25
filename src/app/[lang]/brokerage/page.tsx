@@ -31,7 +31,8 @@ async function PageBrokerage({params}:TypeProps){
   const posts = data?.posts?.nodes
   const yachtConditions = data?.yachtConditions?.nodes
 
-  if( CONTENT_TYPE === 'hq'){
+  const access = CONTENT_TYPE === 'dealer'
+  if( !access ){
     redirect('/')
   }
 

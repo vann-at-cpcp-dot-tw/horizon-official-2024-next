@@ -1,6 +1,6 @@
-// export const dynamic = 'force-dynamic'
-// 'auto' | 'force-dynamic' | 'error' | 'force-static'
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
+const HQ_API_BASE = process.env.NEXT_PUBLIC_HQ_API_BASE
+const HQ_API_URL = `${HQ_API_BASE}graphql`
 const postsPerPage = 6
 
 import { headers } from 'next/headers'
@@ -28,9 +28,12 @@ interface TypeProps {
 
 interface TypeState {}
 
-async function PageNews({params, searchParams}:TypeProps){
+export default async function PageNews({params, searchParams}:TypeProps){
   const { lang } = params
   const data = await fetchGQL(QueryNewsPage, {
+    context: {
+      uri: HQ_API_URL
+    },
     variables: {
       first: postsPerPage,
       relatedYachtSeries: searchParams.series || null,
@@ -91,5 +94,3 @@ async function PageNews({params, searchParams}:TypeProps){
     <OwnerPerspective image={data.newsPageSettings.ownerPerspective.image?.node?.mediaItemUrl} description={data.newsPageSettings.ownerPerspective?.description} />
   </main>
 }
-
-export default PageNews

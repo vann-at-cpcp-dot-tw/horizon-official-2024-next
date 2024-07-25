@@ -1,5 +1,11 @@
-query QuerySinglePost($categorySlug: ID!, $postSlug: String) {
-  category(id: $categorySlug, idType: SLUG) {
+query QuerySinglePost(
+  $categorySlug: ID!,
+  $postSlug: String,
+) {
+  category(
+    id: $categorySlug,
+    idType: SLUG
+  ) {
     id
     posts(
       first: 1,
@@ -29,10 +35,10 @@ query QuerySinglePost($categorySlug: ID!, $postSlug: String) {
               image {
                 node {
                   mediaItemUrl
-                }
               }
             }
           }
+        }
       }
       pageInfo {
         startCursor
@@ -44,8 +50,17 @@ query QuerySinglePost($categorySlug: ID!, $postSlug: String) {
   }
 }
 
-query QueryRelatedPosts($categorySlug:ID!, $after:String, $before:String, $first:Int, $last:Int) {
-  category(id:$categorySlug, idType: SLUG) {
+query QueryRelatedPosts(
+  $categorySlug:ID!,
+  $after:String,
+  $before:String,
+  $first:Int,
+  $last:Int
+) {
+  category(
+    id:$categorySlug,
+    idType: SLUG
+  ) {
     id
     posts(
       after: $after

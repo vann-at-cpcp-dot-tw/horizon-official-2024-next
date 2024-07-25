@@ -1,110 +1,115 @@
 query QuerySingleBrokerage(
   $slug: ID!
+  $translation: LanguageCodeEnum!
 ) {
   post:brokerage(
     id: $slug
     idType: SLUG
   ) {
-    title
-    customFields:brokerageCustomFields {
-      year
-      displayPrice
-      yachtDescription
-      relatedPublication {
-        nodes {
-          ... on Publication {
-            title
-            publicationCustomFields {
-              publication {
-                publicationCover {
-                  node {
-                    mediaItemUrl
+    translation(language: $translation){
+      title
+      customFields:brokerageCustomFields {
+        year
+        displayPrice
+        yachtDescription
+        relatedPublication {
+          nodes {
+            ... on Publication {
+              title
+              publicationCustomFields {
+                publication {
+                  publicationCover {
+                    node {
+                      mediaItemUrl
+                    }
                   }
-                }
-                pdf {
-                  node {
-                    mediaItemUrl
+                  pdf {
+                    node {
+                      mediaItemUrl
+                    }
                   }
                 }
               }
             }
           }
         }
-      }
-      heroImage {
-        node {
-          mediaItemUrl
-        }
-      }
-      exteriorImages {
-        image {
+        heroImage {
           node {
             mediaItemUrl
           }
         }
-      }
-      interiorImages {
-        description
-        image {
-          node {
-            mediaItemUrl
+        exteriorImages {
+          image {
+            node {
+              mediaItemUrl
+            }
           }
         }
-      }
-      featuresTable {
-        tableType
-        terms {
-          termName
-          termValue
+        interiorImages {
+          description
+          image {
+            node {
+              mediaItemUrl
+            }
+          }
+        }
+        featuresTable {
+          tableType
+          terms {
+            termName
+            termValue
+          }
+        }
+        specTerms {
+            loa {
+              metric
+              imperial
+            }
+            lwl {
+              metric
+              imperial
+            }
+            beam {
+              metric
+              imperial
+            }
+            draft {
+              metric
+              imperial
+            }
+            engines {
+              metric
+              imperial
+            }
+            generator {
+              metric
+              imperial
+            }
+            displacement {
+              metric
+              imperial
+            }
+            fuelCapacity {
+              metric
+              imperial
+            }
+            waterCapacity {
+              metric
+              imperial
+            }
+            cabins {
+              metric
+              imperial
+            }
         }
       }
-      specTerms {
-          loa {
-            metric
-            imperial
+      yachtConditions {
+        nodes {
+          translation(language: $translation){
+            slug
+            name
           }
-          lwl {
-            metric
-            imperial
-          }
-          beam {
-            metric
-            imperial
-          }
-          draft {
-            metric
-            imperial
-          }
-          engines {
-            metric
-            imperial
-          }
-          generator {
-            metric
-            imperial
-          }
-          displacement {
-            metric
-            imperial
-          }
-          fuelCapacity {
-            metric
-            imperial
-          }
-          waterCapacity {
-            metric
-            imperial
-          }
-          cabins {
-            metric
-            imperial
-          }
-      }
-    }
-    yachtConditions {
-      nodes {
-        slug
-        name
+        }
       }
     }
   }

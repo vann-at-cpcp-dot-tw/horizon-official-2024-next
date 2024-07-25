@@ -1,4 +1,6 @@
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
+const HQ_API_BASE = process.env.NEXT_PUBLIC_HQ_API_BASE
+const HQ_API_URL = `${HQ_API_BASE}graphql`
 
 import LinkWithLang from '~/components/custom/LinkWithLang'
 import { isEmpty, convertYoutubeUrlToEmbed } from '~/lib/utils'
@@ -37,6 +39,9 @@ async function PageSingleYacht(props:TypeProps, ref:React.ReactNode){
   const { yachtSlug, seriesSlug, lang } = params
 
   const data = await fetchGQL(QuerySingleYachtPage, {
+    context: {
+      uri: HQ_API_URL
+    },
     variables: {
       slug: yachtSlug,
       yachtSlugForRelatedPost: yachtSlug, // 因為線上不明原因，不認 ID! 這個 type，故再加傳一次 String
@@ -44,15 +49,19 @@ async function PageSingleYacht(props:TypeProps, ref:React.ReactNode){
   })
 
   const hullsData = await fetchGQL(QuerySingleYachtHullsList, {
+    context: {
+      uri: HQ_API_URL
+    },
     variables: {
       slug: yachtSlug,
     }
   })
 
-  const { relatedPublication } = data?.yacht?.yachtCustomFields ?? {}
-  const { title:yachtTitle, yachtSeriesList, yachtCustomFields } = data?.yacht ?? {}
+  const { relatedPublication } = data?.yacht?.translation?.yachtCustomFields ?? {}
+  const { title:yachtTitle, yachtSeriesList, yachtCustomFields } = data?.yacht?.translation ?? {}
   const { heroVideo, heroImage, yachtDescription, exteriorImages, interiorImages, specsTable, generalArrangementImages, vrPreview, videosPreview, embedVideosGallery } = yachtCustomFields ?? {}
-  const hulls = hullsData?.yacht?.yachtCustomFields?.hulls?.filter?.((node:any)=>!node?.isHidden)
+
+  const hulls = hullsData?.yacht?.translation?.yachtCustomFields?.hulls?.filter?.((node:any)=>!node?.isHidden)
   const parentSeries = yachtSeriesList?.nodes?.[0]
 
   const vrGallery = hulls?.reduce((acc:{hullName?:string, vrEmbedUrl?:string}[], node:{hullName?:string, vrEmbedUrl?:string})=>{
@@ -147,7 +156,7 @@ async function PageSingleYacht(props:TypeProps, ref:React.ReactNode){
     }
 
     <div className="container py-24 text-center">
-      <div className="serif mb-6 text-[32px] text-minor-900">Personal <span className="italic">and</span>  Virtual Tours  <span className="italic">available.</span></div>
+      <div className="serif mb-6 text-[32px] text-minor-900">Personal <i>and</i>  Virtual Tours  <i>available.</i></div>
       <div className="flex justify-center">
         <LinkWithLang href="/contact" lang={lang}>
           <Button className={`${buttonStyles['rounded-golden']}`}>Contact Us</Button>

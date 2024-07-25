@@ -9,8 +9,6 @@ query QueryNewsPage(
   $categories: [String]
   $year: Int
   $categoriesOperator: TaxQueryOperator = NOT_IN
-  $language: LanguageCodeFilterEnum
-  $translation: LanguageCodeEnum!
 ) {
   posts(
     first: $first
@@ -18,7 +16,7 @@ query QueryNewsPage(
     after: $after,
     before: $before,
     where: {
-      language: $language
+      language: EN #只接英文版
       dateQuery: {
         year: $year
       }
@@ -68,9 +66,9 @@ query QueryNewsPage(
   categories(
     first: 99,
     where: {
+      language: EN #只接英文版
       orderby: TERM_ORDER,
       order: ASC,
-      language: $language
     }
   ) {
     nodes {
@@ -78,10 +76,15 @@ query QueryNewsPage(
       name
     }
   }
-  coverStory:category(id: "cover-story", idType: SLUG) {
-    posts(first: 1) {
-      nodes {
-        translation(language: $translation){
+  coverStory:category(
+    id: "cover-story",
+    idType: SLUG
+  ) {
+    translation(
+      language: EN #只接英文版
+    ){
+      posts(first: 1) {
+        nodes {
           slug
           title
           date
@@ -93,9 +96,11 @@ query QueryNewsPage(
     }
   }
   events:category(id: "events", idType: SLUG) {
-    posts(first: 3) {
-      nodes {
-        translation(language: $translation){
+    translation(
+      language: EN #只接英文版
+    ){
+      posts(first: 3) {
+        nodes {
           slug
           title
           date
@@ -117,7 +122,9 @@ query QueryNewsPage(
       }
     ) {
       nodes {
-        translation(language: $translation){
+        translation(
+          language: EN #只接英文版
+        ){
           publicationCustomFields {
             publication {
               publicationCover {
@@ -136,7 +143,9 @@ query QueryNewsPage(
       }
     }
   }
-  newsPageSettings(language: $language) {
+  newsPageSettings(
+    language: EN #只接英文版
+  ) {
     ownerPerspective {
       description
       image {

@@ -1,8 +1,10 @@
+const HQ_API_BASE = process.env.NEXT_PUBLIC_HQ_API_BASE
+const HQ_API_URL = `${HQ_API_BASE}graphql`
+
 import { Button } from '~/components/ui/button'
 import { fetchGQL } from '~/lib/apollo'
 import { QueryPageAboutDesignAndCraft } from '~/queries/pages/about-design.gql'
 import FeaturedVideo from "../(templates)/FeaturedVideo"
-// import ContentList from "./(sections)/ContentList"
 import ContentList from "../(templates)/ContentList"
 import { genImageBlurHash } from 'vanns-common-modules/dist/lib/next'
 
@@ -14,7 +16,11 @@ export default async function PageAboutDesign({
   }
 }){
   const { lang } = params
-  const data = await fetchGQL(QueryPageAboutDesignAndCraft)
+  const data = await fetchGQL(QueryPageAboutDesignAndCraft, {
+    context: {
+      uri: HQ_API_URL
+    }
+  })
   const { featuredVideo, contentList } = data?.aboutDesignAndCraft?.aboutDesignCustomFields ?? {}
   const contentListWithPlaceholder = await Promise.all(
     contentList.map(async (node:any) => {

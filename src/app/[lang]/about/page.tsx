@@ -12,6 +12,6 @@ export default function PageAbout({
   if( lang === i18n.defaultLocale.shortCode ){
     redirect('/about/horizon')
   }else{
-    redirect(`${lang}/about/horizon`)
+    redirect(`/${lang}/about/horizon`)
   }
 }

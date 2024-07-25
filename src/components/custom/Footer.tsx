@@ -41,7 +41,7 @@ function Footer(props:TypeProps, ref:React.ReactNode){
   const { lang } = useParams()
 
   const commonData = useCommonData()
-  const { externalLinks } = commonData?.globalSettings ?? {}
+  const { externalLinks } = commonData ?? {}
 
   useEffect(()=>{
     setState({

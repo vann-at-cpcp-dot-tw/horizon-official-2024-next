@@ -1,8 +1,9 @@
 "use client"
-
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 const CONTENT_TYPE = process.env.NEXT_PUBLIC_CONTENT_TYPE || 'hq'
 const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
+const HQ_API_BASE = process.env.NEXT_PUBLIC_HQ_API_BASE
+const HQ_API_URL = `${HQ_API_BASE}graphql`
 const postsPerPage = 10
 
 import { Suspense, useState, useMemo, useEffect } from 'react'
@@ -39,6 +40,9 @@ function List(props:TypeProps, ref:React.ReactNode){
   const[getData, { data, loading }] = useLazyQuery(QueryInvestorPage, {
     fetchPolicy: 'cache-and-network',
     notifyOnNetworkStatusChange: true,
+    context: {
+      uri: HQ_API_URL
+    },
     onCompleted: (data) => {
       setMergedList((prev)=>{
         return [

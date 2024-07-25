@@ -1,5 +1,7 @@
 
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
+const HQ_API_BASE = process.env.NEXT_PUBLIC_HQ_API_BASE
+const HQ_API_URL = `${HQ_API_BASE}graphql`
 
 import Image from "next/image"
 import LinkWithLang from '~/components/custom/LinkWithLang'
@@ -66,9 +68,13 @@ interface TypeProps {
 
 interface TypeState {}
 
-async function LayoutPublications({params, children}:TypeProps){
+export default async function LayoutPublications({params, children}:TypeProps){
 
-  const data = await fetchGQL(QueryPublicationsPage)
+  const data = await fetchGQL(QueryPublicationsPage, {
+    context: {
+      uri: HQ_API_URL
+    }
+  })
   const { publicationCategories } = data ?? {}
 
   return <main
@@ -82,5 +88,3 @@ async function LayoutPublications({params, children}:TypeProps){
     </LocalDataProvider>
   </main>
 }
-
-export default LayoutPublications

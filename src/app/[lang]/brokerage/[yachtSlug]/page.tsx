@@ -7,7 +7,6 @@ import Image from "next/image"
 import LinkWithLang from '~/components/custom/LinkWithLang'
 import { isEmpty } from '~/lib/utils'
 import { QuerySingleBrokerage } from '~/queries/pages/brokerage-[yachtSlug].gql'
-import { QuerySinglePublication } from '~/queries/categories/publication.gql'
 import { fetchGQL } from "~/lib/apollo"
 import Breadcrumb from "~/components/custom/Breadcrumb"
 import SectionNav from '~/app/[lang]/models/[seriesSlug]/[yachtSlug]/(templates)/SectionNav'
@@ -37,8 +36,8 @@ async function PageSingleBrokerage({params}:TypeProps){
     }
   })
 
-  const { title:postTitle, customFields } = data?.post ?? {}
-  const { relatedPublication } = data?.post?.customFields ?? {}
+  const { title:postTitle, customFields } = data?.post?.translation ?? {}
+  const { relatedPublication } = data?.post?.translation?.customFields ?? {}
 
   return <main className="relative">
     <Breadcrumb className="pb-5 pt-2.5 lg:pt-10"
@@ -78,7 +77,7 @@ async function PageSingleBrokerage({params}:TypeProps){
     <Publication list={relatedPublication?.nodes|| []} />
 
     <div className="container py-24 text-center">
-      <div className="serif mb-6 text-[32px] text-minor-900">Personal <span className="italic">and</span>  Virtual Tours  <span className="italic">available.</span></div>
+      <div className="serif mb-6 text-[32px] text-minor-900">Personal <i>and</i>  Virtual Tours  <i>available.</i></div>
       <div className="flex justify-center">
         <LinkWithLang href="/contact" lang={lang}>
           <Button className={`${buttonStyles['rounded-golden']}`}>Contact Us</Button>

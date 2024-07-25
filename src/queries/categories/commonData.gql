@@ -1,11 +1,10 @@
 #import '../fragments/yacht.gql'
-
 query QueryCommonData(
   $language: LanguageCodeFilterEnum,
   $translation: LanguageCodeEnum!
 ){
   globalSettings(
-    language: $language
+    language: EN #只接英文版
   ) {
     mainMenu {
       menuItemImages {
@@ -94,16 +93,6 @@ query QueryCommonData(
             }
           }
         }
-      }
-    }
-    externalLinks {
-      career
-      socialMedia {
-        facebook
-        instagram
-        linkedin
-        twitter
-        youtube
       }
     }
   }

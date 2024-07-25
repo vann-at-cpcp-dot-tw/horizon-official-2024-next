@@ -1,0 +1,20 @@
+#import '../fragments/yacht.gql'
+
+query QueryExternalLinks(
+  $language: LanguageCodeFilterEnum,
+){
+  globalSettings(
+    language: $language
+  ) {
+    externalLinks {
+      career
+      socialMedia {
+        facebook
+        instagram
+        linkedin
+        twitter
+        youtube
+      }
+    }
+  }
+}

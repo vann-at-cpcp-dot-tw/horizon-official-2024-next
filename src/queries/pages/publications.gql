@@ -1,7 +1,9 @@
-query QueryPublicationsPage(
-	$language: LanguageCodeFilterEnum
-) {
-  publicationCategories(where: {language: $language}) {
+query QueryPublicationsPage {
+  publicationCategories(
+    where: {
+      language: EN #只接英文版
+    }
+  ) {
     nodes {
       slug
       name

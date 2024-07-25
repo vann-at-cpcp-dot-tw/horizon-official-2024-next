@@ -1,21 +1,31 @@
 #import '../fragments/yacht.gql'
 
-query QuerySingleSeriesPage($slug: ID!) {
-  yachtSeries(id: $slug, idType: SLUG) {
-    yachts(
-      first: 99,
-      where: {
-        orderby: {
-          field: MENU_ORDER,
-          order: ASC,
-        }
-      }
+query QuerySingleSeriesPage(
+  $slug: ID!
+  $translation: LanguageCodeEnum!
+) {
+  yachtSeries(
+    id: $slug,
+    idType: SLUG
+  ){
+    translation(
+      language: $translation
     ){
-      nodes {
-        ...yachtBasic
-        yachtCustomFields {
-          ...yachtExteriorImages
-          ...yachtSpecsTable
+      yachts(
+        first: 99,
+        where: {
+          orderby: {
+            field: MENU_ORDER,
+            order: ASC,
+          }
+        }
+      ){
+        nodes {
+          ...yachtBasic
+          yachtCustomFields {
+            ...yachtExteriorImages
+            ...yachtSpecsTable
+          }
         }
       }
     }

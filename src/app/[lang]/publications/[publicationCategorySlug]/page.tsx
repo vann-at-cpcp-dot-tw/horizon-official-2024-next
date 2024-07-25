@@ -1,4 +1,6 @@
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
+const HQ_API_BASE = process.env.NEXT_PUBLIC_HQ_API_BASE
+const HQ_API_URL = `${HQ_API_BASE}graphql`
 
 import Image from "next/image"
 import LinkWithLang from '~/components/custom/LinkWithLang'
@@ -23,6 +25,9 @@ async function PagePublications({params}:TypeProps){
 
   const { publicationCategorySlug, lang } = params
   const data = await fetchGQL(QueryPublicationCategory, {
+    context: {
+      uri: HQ_API_URL
+    },
     variables: {
       slug: publicationCategorySlug,
       first: 12
@@ -34,7 +39,7 @@ async function PagePublications({params}:TypeProps){
   style={{
     background: '#EEEBE6',
   }}>
-    <SingleCategory publicationCategory={publicationCategory} />
+    <SingleCategory publicationCategory={publicationCategory?.translation} />
   </div>
 }
 

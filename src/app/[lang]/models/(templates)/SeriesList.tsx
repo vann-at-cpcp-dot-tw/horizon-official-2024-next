@@ -1,9 +1,6 @@
-const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
 import Image from "next/image"
-import { Suspense, useContext, useEffect } from 'react'
-import { QueryYachtsWithSeries } from '~/queries/pages/models.gql'
-import { fetchGQL } from '~/lib/apollo'
+import { Suspense } from 'react'
 import { isEmpty } from '~/lib/utils'
 import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'
 import LinkWithLang from '~/components/custom/LinkWithLang'
@@ -11,6 +8,9 @@ import { genImageBlurHash } from 'vanns-common-modules/dist/lib/next'
 
 interface TypeProps {
   lang: string
+  list: {
+    [key:string]:any
+  }[]
 }
 interface TypeState {}
 interface TypeYachtNode {
@@ -18,12 +18,10 @@ interface TypeYachtNode {
   title: string
 }
 
-async function SeriesList(props:TypeProps, ref:React.ReactNode){
+export default async function SeriesList(props:TypeProps, ref:React.ReactNode){
   const { lang } = props
-  const data = await fetchGQL(QueryYachtsWithSeries)
-  const { yachtSeriesList } = data ?? {}
-  const yachtSeriesListWithPlaceholder = await Promise.all(
-    yachtSeriesList?.nodes?.map?.(async (node:any) => {
+  const listWithPlaceholder = await Promise.all(
+    props?.list?.map?.(async (node:any) => {
       return {
         ...node,
         image: node?.image?.node?.mediaItemUrl || '',
@@ -35,9 +33,8 @@ async function SeriesList(props:TypeProps, ref:React.ReactNode){
   return <Suspense fallback={null}>
     <div className="flex">
       {
-        yachtSeriesListWithPlaceholder?.map((node:any, index:number)=>{
+        listWithPlaceholder?.map((node:any, index:number)=>{
           return <div className="mb-10 w-full lg:w-1/2" key={index}>
-
             <RatioArea className="mb-4" ratio="63.47">
               <LinkWithLang className="absolute left-0 top-0 size-full" href={`/models/${node.slug}`} lang={props.lang}>
                 <Image className="absolute left-0 top-0 z-0 size-full object-cover"
@@ -79,5 +76,3 @@ async function SeriesList(props:TypeProps, ref:React.ReactNode){
     </div>
   </Suspense>
 }
-
-export default SeriesList

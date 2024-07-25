@@ -22,6 +22,9 @@ const { getClient } = makeApolloClient({
         //   return { ...existing, ...incoming }
         // }
       },
+      GlobalSettings: {
+        merge: true
+      },
     },
   },
 })

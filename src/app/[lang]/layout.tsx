@@ -1,9 +1,13 @@
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
+const HQ_API_BASE = process.env.NEXT_PUBLIC_HQ_API_BASE
+const HQ_API_URL = `${HQ_API_BASE}graphql`
+
 import '~~/public/assets/external-import.css'
 
 import { isEmpty } from '~/lib/utils'
 import { fetchGQL } from "~/lib/apollo"
 import { QueryCommonData } from '~/queries/categories/commonData.gql'
+import { QueryExternalLinks } from '~/queries/categories/externalLinks.gql'
 import { QueryTranslations } from '~/queries/components/translations.gql'
 import Header from '~/components/custom/Header'
 import Footer from '~/components/custom/Footer'
@@ -13,7 +17,16 @@ import CookiePolicy from "~/components/custom/CookiePolicy"
 import { GoogleTagManager, GoogleAnalytics } from '@next/third-parties/google'
 
 async function getCommonData(){
-  const data = await fetchGQL(QueryCommonData)
+  const data = await fetchGQL(QueryCommonData, {
+    context: {
+      uri: HQ_API_URL
+    },
+  })
+  return data
+}
+
+async function getExternalLinks(){
+  const data = await fetchGQL(QueryExternalLinks)
   return data
 }
 
@@ -47,6 +60,7 @@ export default async function RootLayout({
   // fetch data from server side
   const { lang } = params
   const commonData = await getCommonData()
+  const externalLinks = await getExternalLinks()
   const translations = await getTranslations()
 
   return <html>
@@ -54,13 +68,16 @@ export default async function RootLayout({
       <title>Horizon Yachts | Fifth Largest Global Custom Luxury Yacht Builder</title>
       <meta name="description" content="From pioneering new yacht designs to employing the latest advanced composites technologies, Horizon simply backs style with substance." />
       <meta property="og:image" content="/assets/img/og.jpg" />
-      {/* <link rel="icon" type="image/x-icon" href="/assets/img/fav.png" /> */}
+      <link rel="icon" type="image/x-icon" href="/assets/img/fav.png" />
       <GoogleTagManager gtmId="G-1XQZBRX0PE" />
     </head>
     <body>
       <GoogleAnalytics gaId="G-1XQZBRX0PE" />
       <Providers
-      commonData={commonData}
+      commonData={{
+        ...(commonData || {}),
+        externalLinks: externalLinks?.globalSettings?.externalLinks
+      }}
       translations={translations}>
         <div id="app">
           <Header />
