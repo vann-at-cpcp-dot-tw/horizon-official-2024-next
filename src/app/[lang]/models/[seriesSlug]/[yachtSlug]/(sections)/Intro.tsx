@@ -27,7 +27,7 @@ function Intro(props:TypeProps, ref:React.ReactNode){
       <div className="container">
         <div className="mx-auto w-full max-w-[900px]">
           <div className="serif text-center text-[28px] text-golden-900 lg:mb-4 lg:text-[32px]">{props.title}</div>
-          <div className="text-center text-[15px] leading-[1.6] text-gray-700">{props.description}</div>
+          <pre className="text-center text-[15px] leading-[1.6] text-gray-700" dangerouslySetInnerHTML={{__html: props.description || ''}}></pre>
         </div>
       </div>
     </div>

@@ -62,7 +62,7 @@ async function PageSingleCharter({params}:TypeProps){
     <Intro className="mb-6" title={postTitle} description={customFields?.yachtDescription} />
 
     <div className="container mb-10 max-w-[940px]">
-      <div className="serif text-[24px] leading-[1.6] text-gray-700">{customFields?.displayPrice}</div>
+      <div className="serif text-right text-[24px] leading-[1.6] text-gray-700">{customFields?.displayPrice}</div>
     </div>
 
     <SectionNav allowed={['Exterior', 'Interior', 'Features', 'Pricing & Toys']} />
