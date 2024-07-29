@@ -1,11 +1,10 @@
 query QueryComingEvents(
   $first: Int = 99,
-  $language: LanguageCodeFilterEnum,
 ) {
   comingEvents(
     first:$first,
     where: {
-      language: $language
+      language: EN #只接英文版
     }
   ) {
     nodes {

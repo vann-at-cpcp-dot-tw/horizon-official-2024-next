@@ -1,5 +1,7 @@
 "use client"
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
+const HQ_API_BASE = process.env.NEXT_PUBLIC_HQ_API_BASE
+const HQ_API_URL = `${HQ_API_BASE}graphql`
 
 import { Suspense, useMemo, useEffect } from 'react'
 import Image from "next/image"
@@ -24,11 +26,13 @@ interface TypeState {}
 
 
 function ComingEvents(props:TypeProps, ref:React.ReactNode){
-  // const store = useStore()
-  // const viewport = useWindowSize()
   const router = useRouter()
   const { className } = props
-  const { data } = useQuery(QueryComingEvents)
+  const { data } = useQuery(QueryComingEvents, {
+    context: {
+      uri: HQ_API_URL
+    }
+  })
   const { nodes:list }:{nodes:{[key:string]:any}[]} = data?.comingEvents ?? {}
   const searchParams = useSearchParams()
   const pathname = usePathname()

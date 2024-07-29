@@ -69,10 +69,14 @@ export default async function RootLayout({
       <meta name="description" content="From pioneering new yacht designs to employing the latest advanced composites technologies, Horizon simply backs style with substance." />
       <meta property="og:image" content="/assets/img/og.jpg" />
       <link rel="icon" type="image/x-icon" href="/assets/img/fav.png" />
-      <GoogleTagManager gtmId="G-1XQZBRX0PE" />
+      {
+        process.env.NEXT_PUBLIC_GTM_ID && <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID} />
+      }
     </head>
     <body>
-      <GoogleAnalytics gaId="G-1XQZBRX0PE" />
+      {
+        process.env.NEXT_PUBLIC_GA_ID && <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
+      }
       <Providers
       commonData={{
         ...(commonData || {}),

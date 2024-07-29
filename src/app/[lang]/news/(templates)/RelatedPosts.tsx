@@ -26,9 +26,6 @@ interface TypeState {}
 
 
 function RelatedPosts(props:TypeProps, ref:React.ReactNode){
-  // const store = useStore()
-  // const router = useRouter()
-  // const viewport = useWindowSize()
   const { className } = props
 
   const { data:nextPosts } = useQuery(QueryRelatedPosts, {

@@ -116,7 +116,11 @@ async function PageSingleYacht(props:TypeProps, ref:React.ReactNode){
 
     <KV video={heroVideo?.node?.mediaItemUrl || ''} image={heroImage?.node?.mediaItemUrl || ''} />
 
-    <Intro title={yachtTitle} description={yachtDescription} />
+    <Intro title={yachtTitle}
+    description={yachtDescription}
+    classes={{
+      description: 'text-center'
+    }}/>
 
     <SectionNav />
 

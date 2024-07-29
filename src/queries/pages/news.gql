@@ -79,7 +79,7 @@ query QueryNewsPage(
   coverStory:category(
     id: "cover-story",
     idType: SLUG
-  ) {
+  ){
     translation(
       language: EN #只接英文版
     ){
@@ -95,7 +95,10 @@ query QueryNewsPage(
       }
     }
   }
-  events:category(id: "events", idType: SLUG) {
+  events:category(
+    id: "events",
+    idType: SLUG
+  ){
     translation(
       language: EN #只接英文版
     ){

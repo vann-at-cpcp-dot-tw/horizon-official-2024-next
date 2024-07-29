@@ -56,7 +56,8 @@ export default async function PageNews({params, searchParams}:TypeProps){
       filteredCategories: formatPostCategories(node?.categories?.nodes)
     }
   })
-  const formattedEventBlockList = data?.events?.posts?.nodes?.map((node:any)=>{
+
+  const formattedEventBlockList = data?.events?.translation?.posts?.nodes?.map((node:any)=>{
     return {
       ...node,
       filteredCategories: formatPostCategories(node?.categories?.nodes)
@@ -70,12 +71,12 @@ export default async function PageNews({params, searchParams}:TypeProps){
   return <main className="grow pb-5">
 
     {
-      data?.coverStory?.posts?.nodes?.[0]?.translation?.slug && <CoverStory
-      slug={data?.coverStory?.posts?.nodes?.[0]?.translation?.slug}
-      title={data?.coverStory?.posts?.nodes?.[0]?.translation?.title}
-      date={data?.coverStory?.posts?.nodes?.[0]?.translation?.date}
+      data?.coverStory?.translation?.posts?.nodes?.[0]?.slug && <CoverStory
+      slug={data?.coverStory?.translation?.posts?.nodes?.[0]?.slug}
+      title={data?.coverStory?.translation?.posts?.nodes?.[0]?.title}
+      date={data?.coverStory?.translation?.posts?.nodes?.[0]?.date}
       lang={lang}
-      image={data?.coverStory?.posts?.nodes?.[0]?.translation?.postCustomFields?.coverImage?.node?.mediaItemUrl} />
+      image={data?.coverStory?.translation?.posts?.nodes?.[0]?.postCustomFields?.coverImage?.node?.mediaItemUrl} />
     }
 
     <div className="mb-20">
