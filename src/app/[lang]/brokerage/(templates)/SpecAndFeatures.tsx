@@ -1,5 +1,4 @@
 "use client"
-
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
 import { Suspense, useState } from 'react'
@@ -31,9 +30,7 @@ interface TypeProps {
 interface TypeState {}
 
 function SpecAndFeatures(props:TypeProps, ref:React.ReactNode){
-  // const store = useStore()
-  // const router = useRouter()
-  // const viewport = useWindowSize()
+
   const { className } = props
   const [active, setActive] = useState<string | number>(props?.activeDefault || 0)
 
@@ -43,7 +40,6 @@ function SpecAndFeatures(props:TypeProps, ref:React.ReactNode){
     style={{
       background: 'rgba(238, 235, 230, 1)'
     }}>
-
       <div className="container mb-6">
         <div className="serif text-center text-[24px] text-gray-900">{props?.title}</div>
       </div>
@@ -77,7 +73,7 @@ function SpecAndFeatures(props:TypeProps, ref:React.ReactNode){
       <div className="container">
         <div className="mx-auto w-full max-w-[900px]">
           {
-            active === 'spec' && <SpecTable specTerms={props?.specTerms}/>
+            active === 'spec' && props?.specTerms && <SpecTable specTerms={props?.specTerms}/>
           }
 
           {

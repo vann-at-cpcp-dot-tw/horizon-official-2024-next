@@ -82,7 +82,6 @@ async function PageSingleCharter({params}:TypeProps){
     <div id="SECTION_PRICING_TOYS">
       <SpecAndFeatures
       title="Pricing & Toys"
-      activeDefault="spec"
       list={customFields?.pricingToysTable} />
     </div>
 
