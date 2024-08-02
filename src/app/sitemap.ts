@@ -70,7 +70,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     {
       url: APP_URL,
       lastModified: new Date(),
-      changeFrequency: 'yearly',
+      changeFrequency: 'monthly',
     },
     ...['design-and-craft', 'horizon', 'innovation', 'the-group'].map<{url:string, changeFrequency:'monthly'}>((pathname)=>{
       return {
