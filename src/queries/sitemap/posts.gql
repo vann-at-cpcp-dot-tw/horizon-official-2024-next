@@ -1,0 +1,67 @@
+query QueryPostsForSiteMap {
+  news:posts(
+    first: 50
+    where: {
+      language: EN #只接英文版
+      taxQuery: {
+        relation: AND,
+        taxArray: [
+          {
+            taxonomy: CATEGORY,
+            field: SLUG,
+            terms: ["uncategorized", "events"]
+            operator: NOT_IN,
+          },
+        ]
+      }
+    }
+  ) {
+    nodes {
+      slug
+      categories {
+        nodes {
+          slug
+        }
+      }
+    }
+  }
+  categoryEvents:category(
+    id: "events",
+    idType: SLUG
+  ){
+    translation(
+      language: EN #只接英文版
+    ){
+      posts(
+        first: 50
+      ) {
+        nodes {
+          slug
+        }
+      }
+    }
+  },
+  yachtSeriesList(
+    first: 99,
+    where: {
+      language: EN #只接英文版
+    }
+  ) {
+    nodes {
+      slug
+      yachts(
+        first: 99,
+        where: {
+          orderby: {
+            field: MENU_ORDER,
+            order: ASC,
+          }
+        }
+      ) {
+        nodes {
+          slug
+        }
+      }
+    }
+  }
+}
