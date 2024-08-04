@@ -62,7 +62,7 @@ export default async function SeriesList(props:TypeProps, ref:React.ReactNode){
                 {
                   node?.yachts?.nodes?.map((yachtNode:TypeYachtNode, yachtNodeIndex:number)=>{
                     return <div className="pr-2.5" key={yachtNodeIndex}>
-                      <LinkWithLang className="block pb-1.5 text-gray-500" href={`/models/${node.slug}`} lang={props.lang}>
+                      <LinkWithLang className="block pb-1.5 text-gray-500" href={`/models/${node.slug}/${yachtNode.slug}`} lang={props.lang}>
                         { yachtNode.title }
                       </LinkWithLang>
                     </div>
