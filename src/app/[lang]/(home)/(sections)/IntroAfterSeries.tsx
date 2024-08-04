@@ -8,9 +8,11 @@ import LinkWithLang from '~/components/custom/LinkWithLang'
 import OverflowContent from '~/components/custom/OverflowContent'
 import { useInView } from "framer-motion"
 import { useWindowSize } from "vanns-common-modules/dist/use/react"
+import Image from "next/image"
 
 interface TypeProps {
   smallVideo: string
+  smallImg: string
   wideVideo: string
   lang: string
 }
@@ -33,11 +35,16 @@ function IntroAfterSeries(props:TypeProps, ref:React.ReactNode){
           <div className="mb-6 w-full px-2.5 lg:mb-0 lg:w-[45%]">
             <div className="px-5 lg:pl-0 lg:pr-9">
               <RatioArea ratio="74.84">
-                <video className="absolute left-0 top-0 z-0 size-full border-[8px] border-white object-cover" autoPlay playsInline muted loop
-              src={props?.smallVideo}
-              style={{
-                filter: 'grayscale()',
-              }}></video>
+                {
+                  props?.smallVideo
+                    ? <video className="absolute left-0 top-0 z-0 size-full border-8 border-white object-cover"
+                  src={props?.smallVideo}
+                  autoPlay
+                  playsInline
+                  muted
+                  loop></video>
+                    :<Image className="absolute left-0 top-0 z-0 size-full border-8 border-white object-cover" src={props?.smallImg || ''} alt="" width={450} height={337}/>
+                }
               </RatioArea>
             </div>
           </div>

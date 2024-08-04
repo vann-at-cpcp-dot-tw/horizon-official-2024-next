@@ -42,7 +42,13 @@ export default async function PageHome({
     achievements={homePageAchievements} />
     <Intro />
     <Series />
-    <IntroAfterSeries smallVideo={homePageIntroduction?.smallVideo?.node?.mediaItemUrl} wideVideo={homePageIntroduction?.innovationVideo?.node?.mediaItemUrl} lang={lang}/>
+
+    <IntroAfterSeries
+    smallVideo={homePageIntroduction?.smallVideo?.node?.mediaItemUrl}
+    smallImg={homePageIntroduction?.smallImg?.node?.mediaItemUrl}
+    wideVideo={homePageIntroduction?.innovationVideo?.node?.mediaItemUrl}
+    lang={lang}/>
+
     <ComingEvents className="mb-8 lg:mb-16" isSmallLayout />
     <News list={data?.posts?.nodes} lang={lang}/>
   </main>
