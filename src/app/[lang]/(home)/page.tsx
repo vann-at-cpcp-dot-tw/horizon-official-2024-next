@@ -21,11 +21,7 @@ export default async function PageHome({
   }
 }){
   const { lang } = params
-  const data = await fetchGQL(QueryHomePage, {
-    context: {
-      uri: HQ_API_URL
-    }
-  })
+  const data = await fetchGQL(QueryHomePage)
   const { homePageKeyVision, homePageIntroduction, homePageAchievements } = data?.homePageSettings?.homePageCustomFields ?? {}
   const { heroImage:kvImage, heroVideo:kvVideo, mainTitle:kvTitle } = homePageKeyVision ?? {}
 
