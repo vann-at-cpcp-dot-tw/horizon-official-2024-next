@@ -43,6 +43,10 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'eu-cms.horizonyacht.com'
+      },
+      {
+        protocol: 'https',
+        hostname: 'eu-horizon-cms.cpcp.tw'
       }
     ],
     // domains: ['wp-horizon-official.ddev.site']
