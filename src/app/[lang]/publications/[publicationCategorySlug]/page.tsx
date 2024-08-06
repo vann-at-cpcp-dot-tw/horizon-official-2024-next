@@ -39,7 +39,7 @@ async function PagePublications({params}:TypeProps){
   style={{
     background: '#EEEBE6',
   }}>
-    <SingleCategory publicationCategory={publicationCategory?.translation} />
+    <SingleCategory publicationCategory={publicationCategory} />
   </div>
 }
 

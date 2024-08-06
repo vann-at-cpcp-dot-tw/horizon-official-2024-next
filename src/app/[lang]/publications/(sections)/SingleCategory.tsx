@@ -1,6 +1,8 @@
 "use client"
-
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
+const HQ_API_BASE = process.env.NEXT_PUBLIC_HQ_API_BASE
+const HQ_API_URL = `${HQ_API_BASE}graphql`
+
 
 import { Suspense, useMemo, useContext, useState } from 'react'
 import Image from "next/image"
@@ -20,31 +22,33 @@ import RatioArea from "vanns-common-modules/dist/components/react/RatioArea"
 
 interface TypeProps {
   publicationCategory: {
-    name: string
-    publications: {
-      nodes: {
-        slug: string
-        title: string
-        publicationCustomFields: {
-          publication: {
-            publicationCover: {
-              node?: {
-                mediaItemUrl?: string
+    translation: {
+      name: string
+      publications: {
+        nodes: {
+          slug: string
+          title: string
+          publicationCustomFields: {
+            publication: {
+              publicationCover: {
+                node?: {
+                  mediaItemUrl?: string
+                }
               }
-            }
-            pdf: {
-              node?: {
-                mediaItemUrl?: string
+              pdf: {
+                node?: {
+                  mediaItemUrl?: string
+                }
               }
             }
           }
+        }[]
+        pageInfo: {
+          hasNextPage: boolean
+          hasPreviousPage: boolean
+          startCursor: string
+          endCursor: string
         }
-      }[]
-      pageInfo: {
-        hasNextPage: boolean
-        hasPreviousPage: boolean
-        startCursor: string
-        endCursor: string
       }
     }
   }
@@ -62,17 +66,27 @@ function SingleCategory(props:TypeProps, ref:React.ReactNode){
   const { lang, publicationCategorySlug } = params
   const commonData = useCommonData()
   const { yachtSeriesList } = commonData ?? {}
-  const[getData, { data, loading }] = useLazyQuery<{publicationCategory:TypePublicationCategoryNode}>(QueryPublicationCategory)
+
+  const[getData, { data, loading }] = useLazyQuery<{publicationCategory:TypePublicationCategoryNode}>(QueryPublicationCategory, {
+    context: {
+      uri: HQ_API_URL
+    }
+  })
+
   const [queryYachtSeries, setQueryYachtSeries] = useState('')
+
   const publicationCategory = useMemo<TypePublicationCategoryNode>(()=>{
-    return (data?.publicationCategory || props?.publicationCategory)
+    return (data?.publicationCategory?.translation || props?.publicationCategory?.translation)
   }, [props.publicationCategory, data])
+
   const images = useMemo<string[]>(()=>{
     return publicationCategory?.publications?.nodes?.map?.((node:any)=>{
       return node?.publicationCustomFields?.publication?.publicationCover?.node?.mediaItemUrl || ''
     }) || []
   }, [publicationCategory])
+
   const viewport = useWindowSize()
+
   const placeholders = useImageBlurHashes(images)
 
   if( loading ){
