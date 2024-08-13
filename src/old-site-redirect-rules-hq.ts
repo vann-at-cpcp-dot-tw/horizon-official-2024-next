@@ -85,9 +85,6 @@ export const resolveRedirectUrlFromOldSite = function(request:NextRequest){
   }
 
   // P
-  if( pathname.includes('/product/17071014023979/') || pathname.endsWith('/product/17071014023979') ){
-    return new URL('/models', request.url)
-  }
 
   // Q R S
   if( pathname.includes('/qa/') || pathname.endsWith('/qa') ){
@@ -113,6 +110,10 @@ export const resolveRedirectUrlFromOldSite = function(request:NextRequest){
 
 
   // 特定船頁面
+  if( pathname.includes('/product/17071014023979/') || pathname.endsWith('/product/17071014023979') ){
+    return new URL('/models', request.url)
+  }
+
   if(
     pathname.includes('/model/17021615182922/')
     || pathname.endsWith('/model/17021615182922')
