@@ -44,7 +44,7 @@ async function PageSingleBrokerage({params}:TypeProps){
     list={[
       {
         label: DEALER_REGION === 'US' ?'Inventory' :'Brokerage',
-        href: '/brokerage'
+        href: DEALER_REGION === 'US' ?'/inventory' :'/brokerage'
       },
       {
         label: postTitle,

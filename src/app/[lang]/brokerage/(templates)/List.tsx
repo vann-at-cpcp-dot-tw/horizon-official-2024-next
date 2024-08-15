@@ -153,7 +153,7 @@ function List(props:TypeProps, ref:React.ReactNode){
                 slug={node.slug}
                 thumbnail={node?.customFields?.exteriorImages?.[0]?.image?.node?.mediaItemUrl}
                 lang={lang}
-                href={`/${props?.queryPostType === 'charter' ?'charter' :'brokerage'}/${node.slug}`}
+                href={`/${props?.queryPostType === 'charter' ?'charter' :DEALER_REGION === 'US' ?'inventory' :'brokerage'}/${node.slug}`}
                 infos={[
                   genSpecString([{
                     value: [

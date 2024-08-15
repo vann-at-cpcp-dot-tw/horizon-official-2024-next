@@ -16,7 +16,6 @@ export async function middleware(request:NextRequest){
   const requestHeaders = request.headers
   const pathname = request.nextUrl.pathname
   const { searchParams } = request.nextUrl
-  console.log(111, pathname)
 
   // Redirect if there is no locale
   const pathnameIsMissingLocale = i18n.locales.every((locale, index) => {
