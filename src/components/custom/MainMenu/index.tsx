@@ -184,8 +184,8 @@ function MainMenu(props:TypeProps, ref:React.ReactNode){
               ?[
                 {
                   key: 'brokerage',
-                  label: DEALER_REGION !== 'US' ?'Brokerage' :'Inventory',
-                  href: '/brokerage'
+                  label: DEALER_REGION === 'US' ?'Inventory' :'Brokerage',
+                  href: DEALER_REGION === 'US' ?'/inventory' :'/brokerage'
                 },
                 ...(
                   DEALER_REGION == 'AU'

@@ -45,3 +45,6 @@ next-env.d.ts
 # 總部 VR 上傳用
 /public/*
 !/public/assets/
+
+# 舊官網網址導轉
+old-site-redirect-rules.ts

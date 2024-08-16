@@ -2,8 +2,15 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { i18n } from '~~/i18n.config'
 import { isPathnameStartWithLang } from 'vanns-common-modules/dist/use/next/usePathnameWithoutLang'
+import { resolveRedirectUrlFromOldSite } from '~/old-site-redirect-rules'
 
 export async function middleware(request:NextRequest){
+
+  const redirectUrlFromOldSite = resolveRedirectUrlFromOldSite(request)
+  if( redirectUrlFromOldSite ){
+    return NextResponse.redirect(redirectUrlFromOldSite as URL)
+  }
+
 
   let response = NextResponse.next()
   const requestHeaders = request.headers
@@ -15,7 +22,7 @@ export async function middleware(request:NextRequest){
     return !isPathnameStartWithLang(pathname,locale.shortCode) && pathname !== `/${locale.shortCode}`
   })
 
-  if (pathnameIsMissingLocale) {
+  if ( pathnameIsMissingLocale ){
     const url = new URL(`/${i18n.defaultLocale.shortCode}${pathname.startsWith('/') ?'' : '/'}${pathname}`, request.url)
     // TODO:導轉語言時，將 query 帶著各有優缺點
     url.search = searchParams.toString()
