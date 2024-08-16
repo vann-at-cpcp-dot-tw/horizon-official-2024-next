@@ -117,6 +117,10 @@ const nextConfig = {
         {
           source: '/:lang/inventory',
           destination: '/:lang/brokerage',
+        },
+        {
+          source: '/:lang/inventory/:yachtSlug',
+          destination: '/:lang/brokerage/:yachtSlug',
         }
       ]:[],
       // fallback: [

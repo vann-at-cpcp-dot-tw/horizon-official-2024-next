@@ -2,7 +2,7 @@ const HQ_API_BASE = process.env.NEXT_PUBLIC_HQ_API_BASE
 const HQ_API_URL = `${HQ_API_BASE}graphql`
 
 import { fetchGQL } from '~/lib/apollo'
-import { QueryHomePage } from '~/queries/pages/home.gql'
+import { QueryHomePage, QueryHomeNews } from '~/queries/pages/home.gql'
 import dynamic from "next/dynamic"
 
 import KV from "./(sections)/KV"
@@ -22,6 +22,11 @@ export default async function PageHome({
 }){
   const { lang } = params
   const data = await fetchGQL(QueryHomePage)
+  const newsData = await fetchGQL(QueryHomeNews, {
+    context: {
+      uri: HQ_API_URL
+    },
+  })
   const { homePageKeyVision, homePageIntroduction, homePageAchievements } = data?.homePageSettings?.homePageCustomFields ?? {}
   const { heroImage:kvImage, heroVideo:kvVideo, mainTitle:kvTitle } = homePageKeyVision ?? {}
 
@@ -46,6 +51,7 @@ export default async function PageHome({
     lang={lang}/>
 
     <ComingEvents className="mb-8 lg:mb-16" isSmallLayout />
-    <News list={data?.posts?.nodes} lang={lang}/>
+
+    <News list={newsData?.posts?.nodes} lang={lang}/>
   </main>
 }

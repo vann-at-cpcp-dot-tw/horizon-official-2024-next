@@ -83,3 +83,44 @@ query QueryHomePage(
     }
   }
 }
+
+query QueryHomeNews{
+  posts(
+    first: 3
+    where: {
+      language: EN #只接英文版
+      taxQuery: {
+        relation: AND,
+        taxArray: [
+          {
+            taxonomy: CATEGORY,
+            field: SLUG,
+            terms: ["uncategorized"]
+            operator: NOT_IN,
+          },
+        ]
+      }
+    }
+  ) {
+    nodes {
+      slug
+      title
+      date
+      categories {
+        nodes {
+          slug
+          name
+        }
+      }
+      postCustomFields {
+        gallery {
+          image {
+            node {
+              mediaItemUrl
+            }
+          }
+        }
+      }
+    }
+  }
+}
