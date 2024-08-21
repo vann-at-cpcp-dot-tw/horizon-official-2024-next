@@ -1,6 +1,6 @@
 "use client"
-
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
+
 import Image from "next/image"
 import { Suspense, useMemo, useEffect, useState, ReactNode } from 'react'
 import { useParams } from 'next/navigation'

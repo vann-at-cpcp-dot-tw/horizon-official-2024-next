@@ -11,7 +11,7 @@ import { useParams } from "next/navigation"
 
 interface TypeProps {
   list: {
-    label: string
+    label: string | React.ReactNode
     href?: string
   }[]
   [key:string]: any

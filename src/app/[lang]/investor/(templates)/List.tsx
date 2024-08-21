@@ -33,8 +33,6 @@ interface TypeProps {
 interface TypeState {}
 
 function List(props:TypeProps, ref:React.ReactNode){
-  // const store = useStore()
-  // const viewport = useWindowSize()
   const { className } = props
   const [mergedList, setMergedList] = useState<TypePostNode[] | null>(null)
   const[getData, { data, loading }] = useLazyQuery(QueryInvestorPage, {

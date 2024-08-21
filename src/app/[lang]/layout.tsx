@@ -31,7 +31,11 @@ async function getExternalLinks(){
 }
 
 async function getTranslations(){
-  const data = await fetchGQL(QueryTranslations)
+  const data = await fetchGQL(QueryTranslations, {
+    context: {
+      uri: HQ_API_URL
+    },
+  })
 
   // 整理成 key-value 形式
   const translations:any[] = data?.translationSettings?.translationFields?.translations || []

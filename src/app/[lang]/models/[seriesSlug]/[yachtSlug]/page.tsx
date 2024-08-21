@@ -22,6 +22,7 @@ import Publication from "./(sections)/Publication"
 import buttonStyles from '~/components/ui/button.module.sass'
 import { Button } from '~/components/ui/button'
 import News from '~/app/[lang]/(home)/(sections)/News'
+import T from 'vanns-common-modules/dist/components/react/T'
 
 interface TypeProps {
   params: {
@@ -97,7 +98,7 @@ async function PageSingleYacht(props:TypeProps, ref:React.ReactNode){
     <Breadcrumb className="pb-5 pt-2.5 lg:pt-10"
       list={[
         {
-          label: 'Models',
+          label: <T text="Models"/>,
           href: '/models'
         },
         ...(parentSeries?.name
@@ -154,16 +155,22 @@ async function PageSingleYacht(props:TypeProps, ref:React.ReactNode){
 
     {
       data?.posts?.nodes && <div className="bg-gray-200 py-20">
-        <div className="serif mb-4 text-center text-[24px] text-gray-900">NEWS</div>
+        <div className="serif mb-4 text-center text-[24px] text-gray-900">
+          <T text="NEWS" />
+        </div>
         <News className="pb-0 lg:pb-0" list={data?.posts?.nodes} lang={lang} />
       </div>
     }
 
     <div className="container py-24 text-center">
-      <div className="serif mb-6 text-[32px] text-minor-900">Personal <i>and</i>  Virtual Tours  <i>available.</i></div>
+      <div className="serif mb-6 text-[32px] text-minor-900">
+        <T text="Personal <i>and</i>  Virtual Tours  <i>available.</i>" />
+      </div>
       <div className="flex justify-center">
         <LinkWithLang href="/contact" lang={lang}>
-          <Button className={`${buttonStyles['rounded-golden']}`}>Contact Us</Button>
+          <Button className={`${buttonStyles['rounded-golden']}`}>
+            <T text="Contact Us" />
+          </Button>
         </LinkWithLang>
       </div>
     </div>

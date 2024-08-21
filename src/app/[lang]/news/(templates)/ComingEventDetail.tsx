@@ -16,9 +16,7 @@ import buttonStyles from '~/components/ui/button.module.sass'
 import { Button } from '~/components/ui/button'
 import HullDetail from '~/app/[lang]/models/[seriesSlug]/[yachtSlug]/(templates)/HullDetail'
 import ContentLightbox from '~/components/custom/ContentLightbox'
-
-// import { useStore } from '~/store'
-// import useWindowSize from '~/use/useWindowSize"
+import { useTranslate } from "vanns-common-modules/dist/use/react"
 
 interface TypeHullNode {
   // exteriorImages?: {
@@ -99,6 +97,7 @@ function createHullGQLString(list:{yachtSlug:string, hullName:string}[] | undefi
 
 function ComingEventDetail(props:TypeProps, ref:React.ReactNode){
   const router = useRouter()
+  const { __ } = useTranslate()
   const { className } = props
   const pathname = usePathname()
   const params = useParams()
@@ -169,7 +168,7 @@ function ComingEventDetail(props:TypeProps, ref:React.ReactNode){
     }}>
 
       <div className="container mb-10 text-center">
-        <div className="mb-4 text-gray-500">Coming Event</div>
+        <div className="mb-4 text-gray-500">{ __('Coming Event') }</div>
         <div className="serif mb-2 text-[32px] leading-[1.2] text-major-900 lg:text-[40px]">{props.title}</div>
         <div className="mb-3 text-[14px] text-gray-900">{props.subtitle}</div>
         <div className="font-300 text-golden-700 lg:text-[20px]">{props.scheduleDate}</div>
@@ -183,7 +182,9 @@ function ComingEventDetail(props:TypeProps, ref:React.ReactNode){
 
       {
         !isEmpty(hullList) && <>
-          <div className="container serif mb-3 text-center text-[32px] italic text-major-900 lg:mb-6 lg:text-[40px]">ON DISPLAY</div>
+          <div className="container serif mb-3 text-center text-[32px] italic text-major-900 lg:mb-6 lg:text-[40px]">
+            { __('ON DISPLAY') }
+          </div>
           <div className="container-fluid mb-6 lg:mb-20">
             <div className="row justify-center">
               {
@@ -202,7 +203,7 @@ function ComingEventDetail(props:TypeProps, ref:React.ReactNode){
                             hullName: node.hull?.hullName,
                           })
                         }}>
-                          MORE DETAIL
+                        { __('MORE DETAIL') }
                       </Button>
                     </div>
                   </div>
@@ -225,7 +226,7 @@ function ComingEventDetail(props:TypeProps, ref:React.ReactNode){
 
       <div className="container">
         <div className="relative mx-auto w-full max-w-[900px]">
-          <div className="serif text-[21px] italic text-major-900 lg:text-[24px]">Show Info</div>
+          <div className="serif text-[21px] italic text-major-900 lg:text-[24px]">{ __('Show Info') }</div>
           {
             props?.showInfoTable?.dateAndTimeRows?.map((node, index:number)=>{
               return <div className="border-b border-gray-500 py-3 text-gray-700" key={index}>
@@ -242,7 +243,7 @@ function ComingEventDetail(props:TypeProps, ref:React.ReactNode){
             props?.showInfoTable?.dockNumber && <div className="border-b border-gray-500 py-3 text-gray-700">
               <div className="row lg:flex-nowrap">
                 <div className="col-12 lg:col-auto">
-                  <div className="serif w-full lg:w-[190px]">Dock no.</div>
+                  <div className="serif w-full lg:w-[190px]">{ __('Dock no.') }</div>
                 </div>
                 <div className="col-12 shrink text-[15px]">{ props?.showInfoTable?.dockNumber }</div>
               </div>
@@ -256,7 +257,7 @@ function ComingEventDetail(props:TypeProps, ref:React.ReactNode){
       onClick={(e)=>{
         e.stopPropagation()
         router.push(`${pathname}`, {scroll:false})
-      }}>Close</div>
+      }}>{ __('Close') }</div>
       </div>
     </ContentLightbox>
 

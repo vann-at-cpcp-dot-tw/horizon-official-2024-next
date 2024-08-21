@@ -6,6 +6,8 @@ import { twMerge } from 'tailwind-merge'
 import { isEmpty } from '~/lib/utils'
 import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'
 import ImageAutoPlaceholder from "~/components/custom/ImageAutoPlaceholder"
+import T from 'vanns-common-modules/dist/components/react/T'
+
 interface TypeProps {
   content: string
   imageAfterContent: string
@@ -18,7 +20,7 @@ function Discover(props:TypeProps, ref:React.ReactNode){
   return <Suspense fallback={null}>
     <div className={twMerge('lg:py-20 py-16', className)}>
       <div className="container-fluid mb-6 lg:mb-[110px]">
-        <div className="mb-4 text-center text-gray-300">Discover Horizon</div>
+        <div className="mb-4 text-center text-gray-300"><T text="Discover Horizon"/></div>
         <pre className="mx-auto w-full max-w-[900px] leading-[1.6] text-gray-700"
         dangerouslySetInnerHTML={{__html: props?.content || ''}}>
         </pre>

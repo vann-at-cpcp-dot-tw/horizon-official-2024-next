@@ -1,5 +1,4 @@
 "use client"
-
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 const postsPerPage = 10
 
@@ -17,6 +16,7 @@ import Loading from '~/components/custom/icons/Loading'
 import NewsListItem from "./ListItem"
 import { ICommonData, useCommonData } from "~/app/[lang]/providers"
 import { TypePostNode } from "./ListNewsPage"
+import { useTranslate } from "vanns-common-modules/dist/use/react"
 
 interface TypeProps {
   lang: string
@@ -39,6 +39,7 @@ interface TypeState {}
 
 function ListWithCategory(props:TypeProps, ref:React.ReactNode){
   const { searchObject, updateSearch } = useSearchObject()
+  const { __ } = useTranslate()
   const [isFilterChanged, setIsFilterChanged] = useState(false)
   const params = useParams()
   const commonData = useCommonData()
@@ -106,7 +107,9 @@ function ListWithCategory(props:TypeProps, ref:React.ReactNode){
       <div className="container mb-6">
         <div className="row items-center lg:flex-nowrap">
           <div className="col-auto">
-            <div className="text-[24px] font-300 text-minor-900">Latest News</div>
+            <div className="text-[24px] font-300 text-minor-900">
+              { __('Latest News') }
+            </div>
           </div>
           <div className="col-12 mt-2 shrink lg:mt-0">
             <div className="row !flex-nowrap justify-end">
@@ -120,7 +123,7 @@ function ListWithCategory(props:TypeProps, ref:React.ReactNode){
                     })
                     setIsFilterChanged(true)
                   }}>
-                    <option value="">All Series</option>
+                    <option value="">{ __('All Series') }</option>
 
                     {
                       yachtSeriesList?.nodes?.map((node:ICommonData['yachtSeriesList']['nodes'][number], index:number)=>{
@@ -140,7 +143,7 @@ function ListWithCategory(props:TypeProps, ref:React.ReactNode){
                         })
                         setIsFilterChanged(true)
                       }}>
-                    <option value="">All Years</option>
+                    <option value="">{ __('All Years') }</option>
                     {
                       arrayGenerate(2018, new Date().getFullYear()).reverse()?.map((node:number, index:number)=>{
                         return <option key={index} value={node}>{node}</option>

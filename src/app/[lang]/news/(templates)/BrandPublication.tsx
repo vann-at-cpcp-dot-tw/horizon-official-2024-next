@@ -15,6 +15,7 @@ import { useParams } from "next/navigation"
 import useForm from "~/use/useForm"
 import Loading from '~/components/custom/icons/Loading'
 import { useStore } from "~/store"
+import { useTranslate } from "vanns-common-modules/dist/use/react"
 
 interface TypeProps {
   publicationCover: string
@@ -27,6 +28,7 @@ interface TypeState {}
 
 function BrandPublication(props:TypeProps, ref:React.ReactNode){
   const store = useStore()
+  const { __ } = useTranslate()
   const { className } = props
   const params = useParams()
   const { lang } = params
@@ -74,22 +76,24 @@ function BrandPublication(props:TypeProps, ref:React.ReactNode){
                 </a>
               </div>
               <div className="lg:col-6 col-12 mb-5 text-gray-500 lg:mb-0">
-                <div className="mb-4 text-center text-[21px] font-300 lg:text-[28px]">The Newest Issue</div>
+                <div className="mb-4 text-center text-[21px] font-300 lg:text-[28px]">{ __('The Newest Issue') }</div>
                 <div className="mb-6 flex justify-center lg:mb-8">
                   <a className="btn" href={props.pdf} target="_blank">
-                    <Button variant="outline" className={buttonStyles['rounded-outline']}>READ</Button>
+                    <Button variant="outline" className={buttonStyles['rounded-outline']}>{ __('READ') }</Button>
                   </a>
                 </div>
                 <div className="flex justify-center">
                   <LinkWithLang href="/publications/brand-publication" lang={lang}>
-                    <div className="btn-text text-gray-500">More Brand Publication</div>
+                    <div className="btn-text text-gray-500">{__('More Brand Publication') }</div>
                   </LinkWithLang>
                 </div>
               </div>
             </div>
           </div>
           <div className="lg:col-6 col-12 mb-6 lg:mb-0">
-            <div className="serif mb-2 text-center text-[28px] font-300 text-gray-500 lg:mb-10 lg:text-[36px]">BRAND PUBLICATION<br/>SUBSCRIPTION</div>
+            <div className="serif mb-2 text-center text-[28px] font-300 text-gray-500 lg:mb-10 lg:text-[36px]">
+              <div dangerouslySetInnerHTML={{ __html: __('BRAND PUBLICATION<br/>SUBSCRIPTION') || '' }}></div>
+            </div>
             <div className="flex justify-center">
               <form className="row row-gap-0 w-full flex-nowrap items-end justify-center"
               onSubmit={(e)=>{
@@ -101,7 +105,7 @@ function BrandPublication(props:TypeProps, ref:React.ReactNode){
                 })
               }}>
                 <div className="col-12 shrink" style={{maxWidth:'220px'}}>
-                  <input id="SubscriptionInput" className="serif h-[44px] w-full border-b border-gray-500 bg-transparent p-0 pb-2 text-center placeholder:text-gray-500" type="email" placeholder="Your email" required
+                  <input id="SubscriptionInput" className="serif h-[44px] w-full border-b border-gray-500 bg-transparent p-0 pb-2 text-center placeholder:text-gray-500" type="email" placeholder={ __('Your email') } required
                   value={form.email}
                   onChange={(e)=>{
                     setForm({
@@ -117,7 +121,7 @@ function BrandPublication(props:TypeProps, ref:React.ReactNode){
                     {
                       submitLoading
                         ? <Loading style={{width:'44px'}} fill="var(--color-golden-900)"/>
-                        : <Button id="SubscriptionButton" type="submit" className="rounded-none border border-gray-500 bg-transparent text-gray-500 hover:border-golden-700 hover:bg-golden-700 hover:text-white active:border-golden-700 active:bg-golden-700 active:text-white">SUBMIT</Button>
+                        : <Button id="SubscriptionButton" type="submit" className="rounded-none border border-gray-500 bg-transparent text-gray-500 hover:border-golden-700 hover:bg-golden-700 hover:text-white active:border-golden-700 active:bg-golden-700 active:text-white">{ __('SUBMIT') }</Button>
                     }
                   </div>
                 }

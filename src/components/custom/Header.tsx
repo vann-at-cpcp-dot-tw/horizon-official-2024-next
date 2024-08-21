@@ -16,6 +16,7 @@ import { usePathnameWithoutLang } from 'vanns-common-modules/dist/use/next'
 import { i18n } from "~~/i18n.config"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "~/components/ui/dropdown-menu"
 import { useRouter } from "next/navigation"
+import { useTranslate } from "vanns-common-modules/dist/use/react"
 
 interface TypeProps {
   className?: string
@@ -26,6 +27,7 @@ interface TypeState {}
 function Header(props:TypeProps, ref:React.ReactNode){
   const store = useStore()
   const router = useRouter()
+  const { __ } = useTranslate()
   const { size:headerSize, setNode:setHeaderNode } = useDomNodeSize()
   const { lang } = useParams()
   const { y:pageScrollY } = useWindowScroll()
@@ -121,7 +123,7 @@ function Header(props:TypeProps, ref:React.ReactNode){
                 </div>
               }
               <div className="col-auto">
-                <LinkWithLang className="btn-opacity text-[15px] text-minor-900" href={CONTENT_TYPE === 'hq' ?'/dealers' :'/contact'} lang={lang}>CONTACT</LinkWithLang>
+                <LinkWithLang className="btn-opacity text-[15px] text-minor-900" href={CONTENT_TYPE === 'hq' ?'/dealers' :'/contact'} lang={lang}>{ __('CONTACT') }</LinkWithLang>
               </div>
             </div>
           </div>

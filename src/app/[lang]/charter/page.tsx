@@ -11,6 +11,7 @@ import { isEmpty } from '~/lib/utils'
 import { QueryCharterPage } from '~/queries/pages/charter.gql'
 import { fetchGQL } from '~/lib/apollo'
 import List from '~/app/[lang]/brokerage/(templates)/List'
+import T from 'vanns-common-modules/dist/components/react/T'
 
 interface TypeProps {
   params: {
@@ -38,7 +39,9 @@ async function PageCharters({params}:TypeProps){
 
   return <main className="pb-24">
 
-    <div className="container serif my-10 text-center text-[32px] text-minor-900">Charter</div>
+    <div className="container serif my-10 text-center text-[32px] text-minor-900">
+      <T text="Charter" />
+    </div>
 
     <List
     queryPostType="charter"

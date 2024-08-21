@@ -9,6 +9,7 @@ import SwiperMilestone from "./(sections)/SwiperMilestone"
 import LinkWithLang from '~/components/custom/LinkWithLang'
 import { genImageBlurHash } from 'vanns-common-modules/dist/lib/next'
 import ContentLightbox from '~/components/custom/ContentLightbox'
+import T from 'vanns-common-modules/dist/components/react/T'
 
 export default async function PageHome({
   params
@@ -42,7 +43,7 @@ export default async function PageHome({
   background="#040922"
   stickyHeader={
     <div className="container py-10">
-      <div className="serif text-center text-[24px] text-white">Milestone</div>
+      <div className="serif text-center text-[24px] text-white"><T text="Milestone"/></div>
     </div>
   }
   closeIcon={

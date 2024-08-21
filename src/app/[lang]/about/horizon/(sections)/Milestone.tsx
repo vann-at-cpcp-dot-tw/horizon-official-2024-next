@@ -1,5 +1,4 @@
 "use client"
-
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 const CONTENT_TYPE = process.env.NEXT_PUBLIC_CONTENT_TYPE || 'hq'
 const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
@@ -12,6 +11,7 @@ import { isEmpty } from '~/lib/utils'
 import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'
 import { useWindowSize } from "vanns-common-modules/dist/use/react"
 import milestonePic from '~~/public/assets/img/bg_about_milestone.jpg'
+import { useTranslate } from "vanns-common-modules/dist/use/react"
 
 interface TypeProps {
   lang: string
@@ -20,8 +20,7 @@ interface TypeProps {
 interface TypeState {}
 
 function Milestone(props:TypeProps, ref:React.ReactNode){
-  // const store = useStore()
-  // const router = useRouter()
+  const { __ } = useTranslate()
   const viewport = useWindowSize()
   const { className } = props
 
@@ -31,8 +30,12 @@ function Milestone(props:TypeProps, ref:React.ReactNode){
         <RatioArea ratio={viewport.width && viewport.width >= 992 ?'39' :'56.25'}>
           <div className="absolute left-0 top-0 z-10 flex size-full items-center justify-center p-5">
             <div className="flex flex-col items-center text-white">
-              <LinkWithLang className="serif mb-2 text-[32px] italic" href="/about/horizon/milestone" lang={props.lang}>Milestone</LinkWithLang>
-              <LinkWithLang className="btn-text btn-opacity" href="/about/horizon/milestone" lang={props.lang}>Discover</LinkWithLang>
+              <LinkWithLang className="serif mb-2 text-[32px] italic" href="/about/horizon/milestone" lang={props.lang}>
+                { __('Milestone') }
+              </LinkWithLang>
+              <LinkWithLang className="btn-text btn-opacity" href="/about/horizon/milestone" lang={props.lang}>
+                { __('Discover') }
+              </LinkWithLang>
             </div>
           </div>
 

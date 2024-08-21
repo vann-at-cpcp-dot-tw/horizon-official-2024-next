@@ -14,6 +14,7 @@ import { Button } from '~/components/ui/button'
 import Regions from "./(templates)/Regions"
 import { redirect } from "next/navigation"
 import { i18n } from "~~/i18n.config"
+import T from 'vanns-common-modules/dist/components/react/T'
 
 interface TypeProps {
   params: {
@@ -45,10 +46,14 @@ export default async function PageDealers({params}:TypeProps){
   return <main className="pb-28">
     <Regions className="pb-28 pt-16" regions={dealerRegions} />
     <div className="container text-center">
-      <div className="serif mb-6 text-[32px] text-minor-900">Personal <i>and</i>  Virtual Tours  <i>available.</i></div>
+      <div className="serif mb-6 text-[32px] text-minor-900">
+        <T text="Personal <i>and</i>  Virtual Tours  <i>available.</i>" />
+      </div>
       <div className="flex justify-center">
         <LinkWithLang href="/contact" lang={lang}>
-          <Button className={`${buttonStyles['rounded-golden']}`}>Contact Us</Button>
+          <Button className={`${buttonStyles['rounded-golden']}`}>
+            <T text="Contact Us" />
+          </Button>
         </LinkWithLang>
       </div>
     </div>

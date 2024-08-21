@@ -1,5 +1,4 @@
 "use client"
-
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
 import { Suspense, useState, useMemo, useEffect } from 'react'
@@ -28,8 +27,6 @@ interface TypeProps {
 interface TypeState {}
 
 function YachtsExteriorSwiper(props:TypeProps, ref:React.ReactNode){
-  // const store = useStore()
-  // const router = useRouter()
   const viewport = useWindowSize()
   const { className } = props
   const {size:slideFrameSize, setNode:setSlideFrameNode} = useDomNodeSize()

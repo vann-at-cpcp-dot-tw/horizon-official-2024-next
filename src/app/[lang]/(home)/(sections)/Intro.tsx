@@ -1,5 +1,4 @@
 "use client"
-
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
 import { Suspense, useRef } from 'react'
@@ -10,6 +9,7 @@ import { useParams } from "next/navigation"
 import OverflowContent from '~/components/custom/OverflowContent'
 import { motion, useInView } from "framer-motion"
 import { useWindowSize } from 'vanns-common-modules/dist/use/react'
+import { useTranslate } from "vanns-common-modules/dist/use/react"
 
 interface TypeProps {}
 interface TypeState {}
@@ -17,6 +17,7 @@ interface TypeState {}
 function Intro(props:TypeProps, ref:React.ReactNode){
 
   const { lang } = useParams()
+  const { __ } = useTranslate()
   const viewport = useWindowSize()
   const animateAnchorRef = useRef(null)
   const animateAnchorIsInView = useInView(animateAnchorRef, {
@@ -28,19 +29,24 @@ function Intro(props:TypeProps, ref:React.ReactNode){
       <div className="container mb-5 lg:mb-10" ref={animateAnchorRef}>
         <OverflowContent
         animate={animateAnchorIsInView}>
-          <div className="serif mb-3 text-center text-[24px] text-major-700 lg:mb-6 lg:text-[48px]">Exploring <span className="italic">Possibilities</span>, Daring to <span className="italic">Challenge</span>,<br/>and Pursuing Excellence.</div>
+          <div className="serif mb-3 text-center text-[24px] text-major-700 lg:mb-6 lg:text-[48px]">
+            <span dangerouslySetInnerHTML={{__html: __('Exploring <i>Possibilities</i>, Daring to <i>Challenge</i>,<br/>and Pursuing Excellence.') || ''}}></span>
+          </div>
         </OverflowContent>
         <OverflowContent
         animate={animateAnchorIsInView}
         delay={0.25}>
-          <div className="serif relative mx-auto max-w-[770px] text-center text-[15px] text-major-700 lg:text-[24px]">Innovation, technology, craftsmanship, design—these are the core tenants of Horizon, a leading luxury yacht builder that has been setting the industry standard for nearly four decades. From pioneering new yacht designs to employing the latest advanced composites technologies, Horizon, simply put, backs style with substance.
+          <div className="serif relative mx-auto max-w-[770px] text-center text-[15px] text-major-700 lg:text-[24px]">
+            { __('Innovation, technology, craftsmanship, design-these are the core tenants of Horizon, a leading luxury yacht builder that has been setting the industry standard for nearly four decades. From pioneering new yacht designs to employing the latest advanced composites technologies, Horizon, simply put, backs style with substance.') }
           </div>
         </OverflowContent>
         <br/><br className="hidden lg:block"/>
         <OverflowContent
         animate={animateAnchorIsInView}
         delay={0.5}>
-          <div className="serif relative mx-auto max-w-[770px] text-center text-[15px] text-major-700 lg:text-[24px]">Whether you’re a seasoned owner or just beginning your journey, we invite you to discover new worlds with Horizon.</div>
+          <div className="serif relative mx-auto max-w-[770px] text-center text-[15px] text-major-700 lg:text-[24px]">
+            { __('Whether you’re a seasoned owner or just beginning your journey, we invite you to discover new worlds with Horizon.') }
+          </div>
         </OverflowContent>
       </div>
 
@@ -65,7 +71,7 @@ function Intro(props:TypeProps, ref:React.ReactNode){
         initial="exit"
         animate={animateAnchorIsInView ?'enter' :'exit'}>
         <LinkWithLang href="/about" lang={lang}>
-          <Button variant="outline" className={buttonStyles['rounded-outline']}>About</Button>
+          <Button variant="outline" className={buttonStyles['rounded-outline']}>{ __('About') }</Button>
         </LinkWithLang>
       </motion.div>
     </div>

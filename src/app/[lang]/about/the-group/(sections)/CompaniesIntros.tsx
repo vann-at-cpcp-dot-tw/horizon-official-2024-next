@@ -7,11 +7,6 @@ import { twMerge } from 'tailwind-merge'
 import { isEmpty } from '~/lib/utils'
 import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'
 import ImageAutoPlaceholder from "~/components/custom/ImageAutoPlaceholder"
-
-// import { useRouter } from 'next/navigation'
-// import { useStore } from '~/store'
-// import useWindowSize from '~/use/useWindowSize"
-
 import { TypeCompanyNode } from './CompaniesGrids'
 
 interface TypeProps {

@@ -10,6 +10,7 @@ import { isEmpty } from '~/lib/utils'
 import SwiperOverflow from '~/components/custom/SwiperOverflow'
 import SpecTable from '~/components/custom/SpecTable'
 import { motion, AnimatePresence } from "framer-motion"
+import { useTranslate } from "vanns-common-modules/dist/use/react"
 
 interface TypeProps {
   [key:string]: any
@@ -31,17 +32,16 @@ interface TypeSwiperSlideNode {
 }
 
 function YachtsSwiper(props:TypeProps, ref:React.ReactNode){
-  const store = useStore()
-  const router = useRouter()
   const viewport = useWindowSize()
   const [realIndex, setRealIndex] = useState(0)
   const { className } = props
+  const { __ } = useTranslate()
   return <Suspense fallback={null}>
     <div className={twMerge('mb-[120px]', className)}>
       <div className="mb-4">
         <SwiperOverflow
         list={props?.list}
-        listTitle="Models"
+        listTitle={ __('Models') as string }
         onSlideChange={(e:{realIndex:number})=>{
           setRealIndex(e.realIndex)
         }}/>

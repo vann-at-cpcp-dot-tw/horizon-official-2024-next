@@ -12,9 +12,7 @@ import { QueryComingEvents } from '~/queries/categories/coming-events.gql'
 import { useQuery } from "@apollo/client"
 import { usePathname, useSearchParams, useRouter } from "next/navigation"
 import ComingEventDetail from "./ComingEventDetail"
-
-// import { useStore } from '~/store'
-// import useWindowSize from '~/use/useWindowSize"
+import { useTranslate } from "vanns-common-modules/dist/use/react"
 
 interface TypeProps {
   isSmallLayout?: boolean
@@ -27,6 +25,7 @@ interface TypeState {}
 
 function ComingEvents(props:TypeProps, ref:React.ReactNode){
   const router = useRouter()
+  const { __ } = useTranslate()
   const { className } = props
   const { data } = useQuery(QueryComingEvents, {
     context: {
@@ -75,10 +74,15 @@ function ComingEvents(props:TypeProps, ref:React.ReactNode){
     <div className={twMerge('', className)}>
       {
         !isEmpty(list) && <div className="container serif mb-4 text-center font-300 text-minor-900 lg:mb-8">
-          <div className={`mb-1 ${props?.isSmallLayout ?'text-[21px] lg:text-[28px]' :'text-[20px] lg:text-[40px]'} italic`}>- ON THE -</div>
-          <div className={`leading-none ${props?.isSmallLayout ?'text-[32px] lg:text-[53px]' :'text-[40px] lg:text-[80px]'}`}>CALENDER</div>
+          <div className={`mb-1 ${props?.isSmallLayout ?'text-[21px] lg:text-[28px]' :'text-[20px] lg:text-[40px]'} italic`}>
+            { __('- ON THE -') }</div>
+          <div className={`leading-none ${props?.isSmallLayout ?'text-[32px] lg:text-[53px]' :'text-[40px] lg:text-[80px]'}`}>
+            { __('CALENDER') }
+          </div>
           {
-            props?.isSmallLayout && <div className="text-gray-500">Coming Events</div>
+            props?.isSmallLayout && <div className="text-gray-500">
+              { __('Coming Events') }
+            </div>
           }
         </div>
       }
@@ -100,7 +104,9 @@ function ComingEvents(props:TypeProps, ref:React.ReactNode){
                   <div className="font-300 text-golden-700 lg:text-[20px]">{node?.comingEventCustomFields?.scheduleDate}</div>
                 </div>
                 <div className="col-auto hidden lg:flex">
-                  <div className="btn-text border-gray-700 text-[13px] text-gray-700 lg:text-[16px]">More info</div>
+                  <div className="btn-text border-gray-700 text-[13px] text-gray-700 lg:text-[16px]">
+                    { __('More info') }
+                  </div>
                 </div>
               </div>
 

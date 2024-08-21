@@ -1,5 +1,4 @@
 "use client"
-
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
 import { Suspense } from 'react'
@@ -16,9 +15,6 @@ interface TypeProps {
 interface TypeState {}
 
 function PageTransition(props:TypeProps, ref:React.ReactNode){
-  // const store = useStore()
-  // const router = useRouter()
-  // const viewport = useWindowSize()
   const { className } = props
   return <Suspense fallback={null}>
     {/* <AnimatePresence> */}

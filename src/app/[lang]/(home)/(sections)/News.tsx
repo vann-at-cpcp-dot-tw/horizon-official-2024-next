@@ -1,5 +1,4 @@
 "use client"
-
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 const CONTENT_TYPE = process.env.NEXT_PUBLIC_CONTENT_TYPE || 'hq'
 const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
@@ -9,10 +8,7 @@ import Image from "next/image"
 import LinkWithLang from '~/components/custom/LinkWithLang'
 import { twMerge } from 'tailwind-merge'
 import NewsListItem from "../../news/(templates)/ListItem"
-
-// import { useRouter } from 'next/navigation'
-// import { useStore } from '~/store'
-// import useWindowSize from '~/use/useWindowSize"
+import { useTranslate } from "vanns-common-modules/dist/use/react"
 
 interface TypeProps {
   list?: {
@@ -24,9 +20,7 @@ interface TypeProps {
 interface TypeState {}
 
 function News(props:TypeProps, ref:React.ReactNode){
-  // const store = useStore()
-  // const router = useRouter()
-  // const viewport = useWindowSize()
+  const { __ } = useTranslate()
   const { className } = props
   const posts = useMemo<{
     [key:string]: any
@@ -43,7 +37,6 @@ function News(props:TypeProps, ref:React.ReactNode){
         })
       }
     })
-
     return list || []
   }, [props.list])
 
@@ -67,7 +60,7 @@ function News(props:TypeProps, ref:React.ReactNode){
       </div>
       <div className="container flex justify-center">
         <LinkWithLang href="/news" lang={props.lang}>
-          <span className="btn-text text-gray-700">More News</span>
+          <span className="btn-text text-gray-700">{ __('More News') }</span>
         </LinkWithLang>
       </div>
     </div>

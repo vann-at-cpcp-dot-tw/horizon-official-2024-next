@@ -1,4 +1,3 @@
-
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 const CONTENT_TYPE = process.env.NEXT_PUBLIC_CONTENT_TYPE || 'hq'
 const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
@@ -18,6 +17,7 @@ import SpecAndFeatures from '~/app/[lang]/brokerage/(templates)/SpecAndFeatures'
 import Publication from '~/app/[lang]/models/[seriesSlug]/[yachtSlug]/(sections)/Publication'
 import buttonStyles from '~/components/ui/button.module.sass'
 import { Button } from '~/components/ui/button'
+import T from 'vanns-common-modules/dist/components/react/T'
 
 interface TypeProps {
   params: {
@@ -67,7 +67,7 @@ async function PageSingleBrokerage({params}:TypeProps){
 
     <div id="SECTION_FEATURES">
       <SpecAndFeatures
-      title="Features"
+      title={<T text="Features"/>}
       activeDefault="spec"
       specTerms={customFields?.specTerms}
       list={customFields?.featuresTable} />
@@ -77,10 +77,14 @@ async function PageSingleBrokerage({params}:TypeProps){
     <Publication list={relatedPublication?.nodes|| []} />
 
     <div className="container py-24 text-center">
-      <div className="serif mb-6 text-[32px] text-minor-900">Personal <i>and</i>  Virtual Tours  <i>available.</i></div>
+      <div className="serif mb-6 text-[32px] text-minor-900">
+        <T text="Personal <i>and</i>  Virtual Tours  <i>available.</i>"/>
+      </div>
       <div className="flex justify-center">
         <LinkWithLang href="/contact" lang={lang}>
-          <Button className={`${buttonStyles['rounded-golden']}`}>Contact Us</Button>
+          <Button className={`${buttonStyles['rounded-golden']}`}>
+            <T text="Contact Us"/>
+          </Button>
         </LinkWithLang>
       </div>
     </div>

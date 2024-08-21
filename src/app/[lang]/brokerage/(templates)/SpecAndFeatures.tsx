@@ -8,9 +8,10 @@ import { twMerge } from 'tailwind-merge'
 import { isEmpty } from '~/lib/utils'
 import SpecTable from '~/components/custom/SpecTable'
 import TermsTable from '~/components/custom/TermsTable'
+import { useTranslate } from "vanns-common-modules/dist/use/react"
 
 interface TypeProps {
-  title?: string
+  title?: string | React.ReactNode
   activeDefault?: string | number
   specTerms?: {
     [key:string]: {
@@ -33,6 +34,7 @@ function SpecAndFeatures(props:TypeProps, ref:React.ReactNode){
 
   const { className } = props
   const [active, setActive] = useState<string | number>(props?.activeDefault || 0)
+  const { __ } = useTranslate()
 
   return <Suspense fallback={null}>
 
@@ -41,7 +43,7 @@ function SpecAndFeatures(props:TypeProps, ref:React.ReactNode){
       background: 'rgba(238, 235, 230, 1)'
     }}>
       <div className="container mb-6">
-        <div className="serif text-center text-[24px] text-gray-900">{props?.title}</div>
+        <div className="serif text-center text-[24px] text-gray-900">{ props?.title }</div>
       </div>
 
       <div className="container">
@@ -52,7 +54,7 @@ function SpecAndFeatures(props:TypeProps, ref:React.ReactNode){
                 <div className={`btn ${active === 'spec' ?'text-gray-900' :'text-gray-300'}`}
                 onClick={()=>{
                   setActive('spec')
-                }}>SPEC</div>
+                }}>{ __('SPEC') }</div>
               </div>
             }
 

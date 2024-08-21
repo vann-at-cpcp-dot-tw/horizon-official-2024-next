@@ -14,6 +14,7 @@ import { useWindowSize } from 'vanns-common-modules/dist/use/react'
 import { genImageBlurHash } from 'vanns-common-modules/dist/lib/next'
 import { useParams } from "next/navigation"
 import RatioArea from "vanns-common-modules/dist/components/react/RatioArea"
+import { useTranslate } from "vanns-common-modules/dist/use/react"
 
 interface TypeProps {
   [key:string]: any
@@ -23,8 +24,8 @@ interface TypeState {}
 
 
 function All(props:TypeProps, ref:React.ReactNode){
-
   const { className } = props
+  const { __ } = useTranslate()
   const params = useParams()
   const { lang } = params
   const localData = useContext(LocalDataContext)
@@ -175,7 +176,9 @@ function All(props:TypeProps, ref:React.ReactNode){
                 }}>
                   <LinkWithLang className="btn group relative block" href={`/publications/${categoryNode.slug}`} lang={lang}>
                     <div className="relative">
-                      <div className="absolute flex size-full items-center justify-center bg-gray-300 text-white">READ MORE</div>
+                      <div className="absolute flex size-full items-center justify-center bg-gray-300 text-white">
+                        { __('READ MORE') }
+                      </div>
                       <div className="pointer-events-none absolute left-0 top-0 z-10 flex size-full items-center justify-center opacity-0 group-hover:opacity-100 group-active:opacity-100"
                         style={{
                           background: 'rgba(0, 46, 79, 0.5)',

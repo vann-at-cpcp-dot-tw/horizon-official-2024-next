@@ -10,10 +10,6 @@ import { genImageBlurHash } from 'vanns-common-modules/dist/lib/next'
 import CoverImage from "./CoverImage"
 import CoverTitle from "./CoverTitle"
 
-// import { useRouter } from 'next/navigation'
-// import { useStore } from '~/store'
-// import useWindowSize from '~/use/useWindowSize"
-
 interface TypeProps {
   slug: string
   title: string
@@ -24,10 +20,7 @@ interface TypeProps {
 }
 interface TypeState {}
 
-async function CoverStory(props:TypeProps, ref:React.ReactNode){
-  // const store = useStore()
-  // const router = useRouter()
-  // const viewport = useWindowSize()
+export default async function CoverStory(props:TypeProps, ref:React.ReactNode){
   const { className } = props
   const placeholder = await genImageBlurHash(props?.image)
 
@@ -57,5 +50,3 @@ async function CoverStory(props:TypeProps, ref:React.ReactNode){
     </div>
   </Suspense>
 }
-
-export default CoverStory

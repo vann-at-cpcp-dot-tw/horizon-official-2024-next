@@ -10,6 +10,7 @@ import { QueryPostsByCategory } from '~/queries/pages/news-[categorySlug].gql'
 import ListWithCategory from "../(templates)/ListWithCategory"
 import ComingEvents from "../(templates)/ComingEvents"
 import Breadcrumb from '~/components/custom/Breadcrumb'
+import T from 'vanns-common-modules/dist/components/react/T'
 
 interface TypeProps {
   params: {
@@ -43,7 +44,7 @@ export default async function PageNewsWithCategory({params, searchParams}:TypePr
     <Breadcrumb
     list={[
       {
-        label: 'News',
+        label: <T text="News" />,
         href: '/news'
       },
       {

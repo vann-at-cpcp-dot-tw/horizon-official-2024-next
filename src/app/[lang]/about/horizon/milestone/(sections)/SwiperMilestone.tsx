@@ -1,5 +1,4 @@
 "use client"
-
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
 import Image from "next/image"
@@ -26,9 +25,6 @@ interface TypeProps {
 interface TypeState {}
 
 function SwiperMilestone(props:TypeProps, ref:React.ReactNode){
-  // const store = useStore()
-  // const router = useRouter()
-  // const viewport = useWindowSize()
   const [swiper, setSwiper] = useState<SwiperClass>(({} as SwiperClass))
   const [swiperTimeline, setSwiperTimeline] = useState<SwiperClass>(({} as SwiperClass))
   const [realIndex, setRealIndex] = useState(0)

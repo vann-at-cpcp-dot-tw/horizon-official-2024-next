@@ -10,6 +10,7 @@ import { isEmpty } from '~/lib/utils'
 import { QueryQA } from '~/queries/pages/QA.gql'
 import { fetchGQL } from "~/lib/apollo"
 import QAList from "./(templates)/QAList"
+import T from "vanns-common-modules/dist/components/react/T"
 
 interface TypeProps {
   params: {
@@ -28,7 +29,9 @@ async function PageTerms({params}:TypeProps){
   const { qaList } = data?.globalSettings?.additionalContent ?? {}
 
   return <main className="pb-24">
-    <div className="serif pb-10 pt-16 text-center text-[32px] leading-none text-major-900">Q & A</div>
+    <div className="serif pb-10 pt-16 text-center text-[32px] leading-none text-major-900">
+      <T text="Q & A"/>
+    </div>
     <div className="container max-w-[940px]">
       <QAList list={qaList}/>
     </div>

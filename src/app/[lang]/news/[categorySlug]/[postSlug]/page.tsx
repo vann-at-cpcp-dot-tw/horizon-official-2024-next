@@ -11,6 +11,7 @@ import Breadcrumb from '~/components/custom/Breadcrumb'
 import PostSwiper from "./(templates)/PostSwiper"
 import RelatedPosts from "../../(templates)/RelatedPosts"
 import { genImageBlurHash } from 'vanns-common-modules/dist/lib/next'
+import T from 'vanns-common-modules/dist/components/react/T'
 
 interface TypeProps {
   params: {
@@ -46,7 +47,7 @@ export default async function PageSinglePost({params}:TypeProps){
     <Breadcrumb className="pb-5 pt-2.5 lg:pt-10"
     list={[
       {
-        label: 'News',
+        label: <T text="News" />,
         href: '/news'
       },
       ...(
@@ -79,7 +80,9 @@ export default async function PageSinglePost({params}:TypeProps){
 
     <div className="container pb-5 text-center">
       <LinkWithLang href="/news" lang={lang}>
-        <span className="btn-text text-gray-700">Back to News</span>
+        <span className="btn-text text-gray-700">
+          <T text="Back to News" />
+        </span>
       </LinkWithLang>
     </div>
 

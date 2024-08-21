@@ -18,6 +18,7 @@ import MenuScreen from "./MenuScreen"
 import Portal from 'vanns-common-modules/dist/components/react/Portal'
 import { usePathnameWithoutLang } from 'vanns-common-modules/dist/use/next'
 import { genSpecString } from '~/lib/utils'
+import { useTranslate } from "vanns-common-modules/dist/use/react"
 
 interface TypeProps {}
 interface TypeState {}
@@ -99,6 +100,7 @@ interface TypeMenuSeriesNode {
 }
 
 function MainMenu(props:TypeProps, ref:React.ReactNode){
+  const { __ } = useTranslate()
   const store = useStore()
   const router = useRouter()
   const viewport = useWindowSize()
@@ -126,7 +128,7 @@ function MainMenu(props:TypeProps, ref:React.ReactNode){
         list: [
           {
             key: 'about',
-            label: 'About',
+            label: __('About') as string,
             onClick: ()=>{
               setMenuScreen({
                 key: 'about'
@@ -138,7 +140,7 @@ function MainMenu(props:TypeProps, ref:React.ReactNode){
               [
                 {
                   key: 'team',
-                  label: 'Team',
+                  label: __('Team') as string,
                   href: '/team'
                 }
               ]
@@ -146,7 +148,7 @@ function MainMenu(props:TypeProps, ref:React.ReactNode){
           ),
           {
             key: 'models',
-            label: 'Models',
+            label: __('Models') as string,
             onClick: ()=>{
               setMenuScreen({
                 key: 'models'
@@ -155,17 +157,17 @@ function MainMenu(props:TypeProps, ref:React.ReactNode){
           },
           {
             key: 'news',
-            label: 'News',
+            label: __('News') as string,
             href: '/news'
           },
           {
             key: 'events',
-            label: 'Events',
+            label: __('Events') as string,
             href: '/news/events'
           },
           {
             key: 'publications',
-            label: 'Publications',
+            label: __('Publications') as string,
             href: '/publications'
           },
           ...(
@@ -173,7 +175,7 @@ function MainMenu(props:TypeProps, ref:React.ReactNode){
               ?[
                 {
                   key: 'dealers',
-                  label: 'Dealers',
+                  label: __('Dealers') as string,
                   href: '/dealers'
                 },
               ]
@@ -184,7 +186,7 @@ function MainMenu(props:TypeProps, ref:React.ReactNode){
               ?[
                 {
                   key: 'brokerage',
-                  label: DEALER_REGION === 'US' ?'Inventory' :'Brokerage',
+                  label: DEALER_REGION === 'US' ?__('Inventory') as string :__('Brokerage') as string,
                   href: DEALER_REGION === 'US' ?'/inventory' :'/brokerage'
                 },
                 ...(
@@ -192,7 +194,7 @@ function MainMenu(props:TypeProps, ref:React.ReactNode){
                     ? [
                       {
                         key: 'charter',
-                        label: 'Charter',
+                        label: __('Charter') as string,
                         href: '/charter'
                       }
                     ]
@@ -216,22 +218,22 @@ function MainMenu(props:TypeProps, ref:React.ReactNode){
         list: [
           {
             key: 'about-horizon',
-            label: 'About Horizon',
+            label: __('About Horizon') as string,
             href: '/about/horizon'
           },
           {
             key: 'about-the-group',
-            label: 'The Horizon Group',
+            label: __('The Horizon Group') as string,
             href: '/about/the-group'
           },
           {
             key: 'about-innovation',
-            label: 'Innovation',
+            label: __('Innovation') as string,
             href: '/about/innovation'
           },
           {
             key: 'about-design-and-craft',
-            label: 'Design and Craftsmanship',
+            label: __('Design and Craftsmanship') as string,
             href: '/about/design-and-craft'
           },
         ]
@@ -308,13 +310,13 @@ function MainMenu(props:TypeProps, ref:React.ReactNode){
 
           return {
             key: seriesData?.slug,
-            label: `${seriesData?.name} Series`,
+            label: `${seriesData?.name} ${__('Series')}`,
             slug: seriesData?.slug,
             vision: {
               image: seriesNode.image?.node?.mediaItemUrl,
               video: seriesNode.video?.node?.mediaItemUrl,
               content: {
-                title: `${seriesData?.name} Series`,
+                title: `${seriesData?.name} ${__('Series')}`,
                 subtitle: seriesData?.yachtsSeriesCustomFields?.seriesSimpleDescription,
               }
             },
@@ -330,7 +332,7 @@ function MainMenu(props:TypeProps, ref:React.ReactNode){
         })
       },
     }
-  }, [menuSeries, viewport.width])
+  }, [menuSeries, viewport.width, __])
 
   useEffect(()=>{
     if( isMenuOpen ){
@@ -360,7 +362,7 @@ function MainMenu(props:TypeProps, ref:React.ReactNode){
         })
       }}>
       <Image src={`${APP_BASE}assets/img/icon_menu.svg`} width={48} height={48} alt="" />
-      <div className="hidden text-[15px] leading-none text-minor-900 lg:block">MENU</div>
+      <div className="hidden text-[15px] leading-none text-minor-900 lg:block">{ __('MENU') }</div>
     </div>
 
     {

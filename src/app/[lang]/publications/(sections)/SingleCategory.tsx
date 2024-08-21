@@ -3,7 +3,6 @@ const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 const HQ_API_BASE = process.env.NEXT_PUBLIC_HQ_API_BASE
 const HQ_API_URL = `${HQ_API_BASE}graphql`
 
-
 import { Suspense, useMemo, useContext, useState } from 'react'
 import Image from "next/image"
 import LinkWithLang from '~/components/custom/LinkWithLang'
@@ -16,6 +15,7 @@ import { QueryPublicationCategory } from '~/queries/pages/publications-[publicat
 import { TypePublicationCategoryNode, TypePublicationNode } from "../layout"
 import { useImageBlurHashes } from 'vanns-common-modules/dist/use/next'
 import { useWindowSize } from 'vanns-common-modules/dist/use/react'
+import { useTranslate } from "vanns-common-modules/dist/use/react"
 import Loading from '~/components/custom/icons/Loading'
 import PageNav from '~/components/custom/PageNav'
 import RatioArea from "vanns-common-modules/dist/components/react/RatioArea"
@@ -58,10 +58,8 @@ interface TypeProps {
 interface TypeState {}
 
 function SingleCategory(props:TypeProps, ref:React.ReactNode){
-  // const store = useStore()
-  // const router = useRouter()
-  // const viewport = useWindowSize()
   const { className } = props
+  const { __ } = useTranslate()
   const params = useParams()
   const { lang, publicationCategorySlug } = params
   const commonData = useCommonData()
@@ -99,7 +97,7 @@ function SingleCategory(props:TypeProps, ref:React.ReactNode){
     <div className={twMerge('', className)}>
       <div className="container-fluid mb-8 px-5 lg:px-20">
         <div className="row row-gap-2 -mt-12 mb-12 !flex-nowrap items-baseline justify-center">
-          <div className="col-auto text-gray-700">Select by</div>
+          <div className="col-auto text-gray-700">{ __('Select by') }</div>
           <div className="col-auto shrink">
             <div className="w-screen max-w-[180px]">
               <select className="w-full border-b border-gray-700 bg-transparent text-gray-700"
@@ -114,10 +112,10 @@ function SingleCategory(props:TypeProps, ref:React.ReactNode){
                   }
                 })
               }}>
-                <option value="">All Series</option>
+                <option value="">{ __('All Series') }</option>
                 {
                   yachtSeriesList?.nodes?.map((node:ICommonData['yachtSeriesList']['nodes'][number], index:number)=>{
-                    return <option key={index} value={node.slug}>{node.name} Series</option>
+                    return <option key={index} value={node.slug}>{node.name} { __('Series') }</option>
                   })
                 }
               </select>

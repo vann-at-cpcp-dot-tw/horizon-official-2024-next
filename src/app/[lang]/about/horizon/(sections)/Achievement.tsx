@@ -5,6 +5,7 @@ import LinkWithLang from '~/components/custom/LinkWithLang'
 import { Suspense } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { isEmpty } from '~/lib/utils'
+import T from 'vanns-common-modules/dist/components/react/T'
 
 interface TypeProps {
   items: string[]
@@ -17,7 +18,7 @@ function Achievement(props:TypeProps, ref:React.ReactNode){
   return <Suspense fallback={null}>
     <div className={twMerge('lg:mb-20 mb-16', className)}>
       <div className="container">
-        <div className="mb-4 text-center text-gray-300">Achievement</div>
+        <div className="mb-4 text-center text-gray-300"><T text="Achievement"/></div>
         <div className="row row-gap-4 justify-center">
           {
             props?.items?.map?.((node, index)=>{

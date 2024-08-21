@@ -1,5 +1,4 @@
 "use client"
-
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
 import { Suspense, useMemo, useState } from 'react'
@@ -11,10 +10,6 @@ import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { SwiperClass } from "swiper/react"
 import { Autoplay } from 'swiper/modules'
-
-// import { useRouter } from 'next/navigation'
-// import { useStore } from '~/store'
-// import useWindowSize from '~/use/useWindowSize"
 
 interface TypeProps {
   gallery: {
@@ -30,9 +25,6 @@ interface TypeProps {
 interface TypeState {}
 
 function PostSwiper(props:TypeProps, ref:React.ReactNode){
-  // const store = useStore()
-  // const router = useRouter()
-  // const viewport = useWindowSize()
   const { className } = props
   const [swiper, setSwiper] = useState<SwiperClass>(({} as SwiperClass))
   const [realIndex, setRealIndex] = useState(0)

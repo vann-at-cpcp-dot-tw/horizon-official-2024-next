@@ -6,6 +6,7 @@ import LinkWithLang from '~/components/custom/LinkWithLang'
 import { twMerge } from 'tailwind-merge'
 import { isEmpty } from '~/lib/utils'
 import { genImageBlurHash } from 'vanns-common-modules/dist/lib/next'
+import T from 'vanns-common-modules/dist/components/react/T'
 
 interface TypeProps {
   list: {
@@ -43,7 +44,9 @@ async function Publication(props:TypeProps, ref:React.ReactNode){
 
   return <Suspense fallback={null}>
     <div className={twMerge('bg-[#E6E3DD] lg:py-20 py-12', className)}>
-      <div className="container mb-6 text-center text-[17px] text-gray-500">Brochure</div>
+      <div className="container mb-6 text-center text-[17px] text-gray-500">
+        <T text="Brochure" />
+      </div>
       <div className="container">
         <div className={`row ${listWithPlaceholder?.length < 4 ?'lg:justify-center' :''}`}>
           {

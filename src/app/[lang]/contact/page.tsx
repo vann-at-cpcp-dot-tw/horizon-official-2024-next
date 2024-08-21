@@ -1,4 +1,3 @@
-
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 const CONTENT_TYPE = process.env.NEXT_PUBLIC_CONTENT_TYPE || 'hq'
 const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
@@ -10,6 +9,7 @@ import { QueryDealersWithRegion } from '~/queries/pages/dealers.gql'
 import { fetchGQL } from '~/lib/apollo'
 import { headers } from 'next/headers'
 import Form from "./(templates)/Form"
+import T from 'vanns-common-modules/dist/components/react/T'
 
 interface TypeProps {
   params: {
@@ -44,7 +44,9 @@ async function PageContact({params}:TypeProps){
       {
         CONTENT_TYPE === 'dealer' && <div className="mt-10 bg-major-900 py-20 text-white">
           <div className="container">
-            <div className="serif mb-14 text-center text-[32px] font-300 text-white lg:mb-20">Personal <i>and</i>  Virtual Tours  <i>available.</i></div>
+            <div className="serif mb-14 text-center text-[32px] font-300 text-white lg:mb-20">
+              <T text="Personal <i>and</i>  Virtual Tours  <i>available.</i>" />
+            </div>
           </div>
 
           <div className="container">
@@ -56,10 +58,14 @@ async function PageContact({params}:TypeProps){
                     <div className="mb-1 flex flex-nowrap items-center">
                       <div className="shrink text-[20px] text-golden-700">{ dealerNode?.title }</div>
                       {
-                        dealerNode?.dealerCustomFields?.website && <a className="btn-opacity ml-2 mt-0.5 text-golden-500" href={dealerNode?.dealerCustomFields?.website}>Website</a>
+                        dealerNode?.dealerCustomFields?.website && <a className="btn-opacity ml-2 mt-0.5 text-golden-500" href={dealerNode?.dealerCustomFields?.website}>
+                          <T text="Website" />
+                        </a>
                       }
                       {
-                        dealerNode.dealerCustomFields?.googleMapLink && <a className="btn-opacity ml-2 mt-0.5 text-golden-500" href={dealerNode.dealerCustomFields.googleMapLink} target="_blank">Map</a>
+                        dealerNode.dealerCustomFields?.googleMapLink && <a className="btn-opacity ml-2 mt-0.5 text-golden-500" href={dealerNode.dealerCustomFields.googleMapLink} target="_blank">
+                          <T text="Map" />
+                        </a>
                       }
                     </div>
                     {
@@ -79,17 +85,6 @@ async function PageContact({params}:TypeProps){
                 })
               }
             </div>
-            {
-              data?.dealerRegions?.nodes?.map?.((node:any, index:number)=>{
-                return <div className="row" key={index}>
-                  {
-                    node?.dealers?.nodes?.map((dealerNode:{[key:string]:any}, dealerIndex:number)=>{
-
-                    })
-                  }
-                </div>
-              })
-            }
           </div>
         </div>
       }

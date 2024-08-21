@@ -1,5 +1,4 @@
 "use client"
-
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
 import { Suspense } from 'react'
@@ -9,6 +8,7 @@ import { twMerge } from 'tailwind-merge'
 import { isEmpty } from '~/lib/utils'
 import { useParams } from "next/navigation"
 import { useStore } from '~/store'
+import { useTranslate } from "vanns-common-modules/dist/use/react"
 
 interface TypeProps {
   publicationCategories: {
@@ -29,6 +29,7 @@ interface TypeState {}
 
 function PageTop(props:TypeProps, ref:React.ReactNode){
   const store = useStore()
+  const { __ } = useTranslate()
   const { className } = props
   const params = useParams()
   const { lang, publicationCategorySlug }  = params
@@ -41,11 +42,13 @@ function PageTop(props:TypeProps, ref:React.ReactNode){
       paddingTop: `${store.headerHeight}px`,
       marginTop: `-${store.headerHeight}px`,
     }}>
-      <div className="container serif mb-6 pt-16 text-center text-[32px] text-minor-900">PUBLICATION</div>
+      <div className="container serif mb-6 pt-16 text-center text-[32px] text-minor-900">{ __('PUBLICATION') }</div>
       <div className="container">
         <div className="row justify-center">
           <div className="col-auto">
-            <LinkWithLang href="/publications" lang={lang} className={`btn ${!publicationCategorySlug ?'text-gray-900' :'text-gray-300'}`}>All</LinkWithLang>
+            <LinkWithLang href="/publications" lang={lang} className={`btn ${!publicationCategorySlug ?'text-gray-900' :'text-gray-300'}`}>
+              { __('All') }
+            </LinkWithLang>
           </div>
           {
             props?.publicationCategories?.nodes?.map((node, index:number)=>{
