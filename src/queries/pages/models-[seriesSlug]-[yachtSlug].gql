@@ -20,7 +20,6 @@ query QuerySingleYachtPage(
       }
       yachtCustomFields {
         yachtDescription
-        ...yachtRelatedPublications
         ...yachtHeroVideo
         ...yachtHeroImage
         ...yachtExteriorImages
@@ -30,6 +29,11 @@ query QuerySingleYachtPage(
         ...yachtVideosPreview
         ...yachtEmbedVideosGallery
         ...yachtSpecsTable
+      }
+    }
+    EN:translation(language: EN){
+      yachtCustomFields {
+        ...yachtRelatedPublications
       }
     }
   }

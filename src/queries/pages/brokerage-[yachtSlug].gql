@@ -12,27 +12,27 @@ query QuerySingleBrokerage(
         year
         displayPrice
         yachtDescription
-        relatedPublication {
-          nodes {
-            ... on Publication {
-              title
-              publicationCustomFields {
-                publication {
-                  publicationCover {
-                    node {
-                      mediaItemUrl
-                    }
-                  }
-                  pdf {
-                    node {
-                      mediaItemUrl
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
+        # relatedPublication {
+        #   nodes {
+        #     ... on Publication {
+        #       title
+        #       publicationCustomFields {
+        #         publication {
+        #           publicationCover {
+        #             node {
+        #               mediaItemUrl
+        #             }
+        #           }
+        #           pdf {
+        #             node {
+        #               mediaItemUrl
+        #             }
+        #           }
+        #         }
+        #       }
+        #     }
+        #   }
+        # }
         heroImage {
           node {
             mediaItemUrl

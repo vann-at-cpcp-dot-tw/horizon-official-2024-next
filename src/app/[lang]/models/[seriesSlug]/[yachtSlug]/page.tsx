@@ -58,7 +58,7 @@ async function PageSingleYacht(props:TypeProps, ref:React.ReactNode){
     }
   })
 
-  const { relatedPublication } = data?.yacht?.translation?.yachtCustomFields ?? {}
+  const { relatedPublication } = data?.yacht?.EN?.yachtCustomFields ?? {}
   const { title:yachtTitle, yachtSeriesList, yachtCustomFields } = data?.yacht?.translation ?? {}
   const { heroVideo, heroImage, yachtDescription, exteriorImages, interiorImages, specsTable, generalArrangementImages, vrPreview, videosPreview, embedVideosGallery } = yachtCustomFields ?? {}
 
