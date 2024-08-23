@@ -70,7 +70,7 @@ function Footer(props:TypeProps, ref:React.ReactNode){
     <div className={twMerge('text-white relative bg-major-900', props?.className)} ref={footerRef}>
       <div className="container-fluid mb-16 pt-20 lg:mb-32">
         <div className="serif mb-2.5 text-center text-[21px] font-300 lg:mb-5">
-          <div dangerouslySetInnerHTML={{ __html:__('BRAND PUBLICATION <br class="block lg:hidden"/>SUBSCRIPTION') || ''}}></div>
+          <div dangerouslySetInnerHTML={{ __html:__(`BRAND PUBLICATION <br class='block lg:hidden'/>SUBSCRIPTION`) || ''}}></div>
         </div>
         <form className="row row-gap-0 flex-nowrap items-end justify-center"
         onSubmit={(e)=>{
