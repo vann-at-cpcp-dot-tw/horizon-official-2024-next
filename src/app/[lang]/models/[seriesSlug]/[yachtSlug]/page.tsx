@@ -164,7 +164,7 @@ async function PageSingleYacht(props:TypeProps, ref:React.ReactNode){
 
     <div className="container py-24 text-center">
       <div className="serif mb-6 text-[32px] text-minor-900">
-        <T text="Personal <i>and</i>  Virtual Tours  <i>available.</i>" />
+        <T text="Personal and Virtual Tours <i>available.</i>" />
       </div>
       <div className="flex justify-center">
         <LinkWithLang href="/contact" lang={lang}>

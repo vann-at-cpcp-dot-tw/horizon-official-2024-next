@@ -69,7 +69,7 @@ function ListFilters(props:TypeProps, ref:React.ReactNode){
   return <Suspense fallback={null}>
     <div className={twMerge('', className)}>
       <div className="container mb-10">
-        <div className="row justify-center lg:flex-nowrap">
+        <div className="row lg:flex-nowrap lg:justify-center">
           {
             props?.yachtConditions && <div className="col-6 shrink lg:col-auto">
               <div className="w-screen max-w-full lg:max-w-[177px]">

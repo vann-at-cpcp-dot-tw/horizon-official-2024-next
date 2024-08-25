@@ -82,7 +82,7 @@ function Footer(props:TypeProps, ref:React.ReactNode){
           })
         }}>
           <div className="col-12 shrink" style={{maxWidth:'220px'}}>
-            <input id="SubscriptionInputFooter" className="serif h-[44px] w-full border-b border-golden-700 bg-transparent p-0 pb-2 text-center placeholder:text-gray-700" type="email" placeholder="Your email" required
+            <input id="SubscriptionInputFooter" className="serif h-[44px] w-full border-b border-golden-700 bg-transparent p-0 pb-2 text-center placeholder:text-gray-700" type="email" placeholder={__('Your email')} required
             value={form.email}
             onChange={(e)=>{
               setForm({
@@ -98,7 +98,9 @@ function Footer(props:TypeProps, ref:React.ReactNode){
               {
                 submitLoading
                   ? <Loading style={{width:'44px'}} fill="var(--color-golden-900)"/>
-                  : <Button id="SubscriptionButtonFooter" type="submit" className="rounded-none border border-golden-700 bg-major-900 text-golden-700 hover:bg-golden-700 hover:text-white active:bg-golden-700 active:text-white">SUBMIT</Button>
+                  : <Button id="SubscriptionButtonFooter" type="submit" className="rounded-none border border-golden-700 bg-major-900 text-golden-700 hover:bg-golden-700 hover:text-white active:bg-golden-700 active:text-white">
+                    { __('SUBMIT') }
+                  </Button>
               }
             </div>
           }
@@ -110,25 +112,35 @@ function Footer(props:TypeProps, ref:React.ReactNode){
           <div className="lg:col-8 col-12">
             <div className="row lg:row-gap-8">
               <div className="col-12 lg:col-auto lg:border-r">
-                <LinkWithLang className="btn-opacity block py-2.5 leading-none lg:py-0" href="/QA" lang={lang}>Q<span className="text-[13px]">&</span>A</LinkWithLang>
+                <LinkWithLang className="btn-opacity block py-2.5 leading-none lg:py-0" href="/QA" lang={lang}>
+                  Q<span className='text-[13px]'>&</span>A
+                </LinkWithLang>
               </div>
 
               {
                 externalLinks?.career && <div className="col-12 lg:col-auto lg:border-r">
-                  <a className="btn-opacity block py-2.5 leading-none lg:py-0" href={externalLinks?.career} target="_blank">Career</a>
+                  <a className="btn-opacity block py-2.5 leading-none lg:py-0" href={externalLinks?.career} target="_blank">
+                    { __('Career') }
+                  </a>
                 </div>
               }
 
               {
                 CONTENT_TYPE === 'hq' && <div className="col-12 lg:col-auto lg:border-r">
-                  <LinkWithLang className="btn-opacity block py-2.5 leading-none lg:py-0" href="/investor" lang={lang}>Investor</LinkWithLang>
+                  <LinkWithLang className="btn-opacity block py-2.5 leading-none lg:py-0" href="/investor" lang={lang}>
+                    { __('Investor') }
+                  </LinkWithLang>
                 </div>
               }
               <div className="col-12 lg:col-auto lg:border-r">
-                <LinkWithLang className="btn-opacity block py-2.5 leading-none lg:py-0" href="/privacy-policy" lang={lang}>Privacy Policy</LinkWithLang>
+                <LinkWithLang className="btn-opacity block py-2.5 leading-none lg:py-0" href="/privacy-policy" lang={lang}>
+                  { __('Privacy Policy') }
+                </LinkWithLang>
               </div>
               <div className="col-12 lg:col-auto">
-                <LinkWithLang className="btn-opacity block py-2.5 leading-none lg:py-0" href="/terms-and-conditions" lang={lang}>Terms and Conditions</LinkWithLang>
+                <LinkWithLang className="btn-opacity block py-2.5 leading-none lg:py-0" href="/terms-and-conditions" lang={lang}>
+                  { __('Terms and Conditions') }
+                </LinkWithLang>
               </div>
             </div>
           </div>

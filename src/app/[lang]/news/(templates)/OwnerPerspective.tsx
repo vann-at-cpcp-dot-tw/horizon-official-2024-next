@@ -4,7 +4,6 @@ import Image from "next/image"
 import LinkWithLang from '~/components/custom/LinkWithLang'
 import { twMerge } from 'tailwind-merge'
 import { isEmpty } from '~/lib/utils'
-import { useTranslate } from "vanns-common-modules/dist/use/react"
 import T from "vanns-common-modules/dist/components/react/T"
 
 interface TypeProps {
@@ -16,7 +15,6 @@ interface TypeState {}
 
 function OwnerPerspective(props:TypeProps, ref:React.ReactNode){
   const { className } = props
-  const { __ } = useTranslate()
 
   return <Suspense fallback={null}>
     <div className={twMerge('', className)}>

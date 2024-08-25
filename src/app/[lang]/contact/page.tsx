@@ -45,7 +45,7 @@ async function PageContact({params}:TypeProps){
         CONTENT_TYPE === 'dealer' && <div className="mt-10 bg-major-900 py-20 text-white">
           <div className="container">
             <div className="serif mb-14 text-center text-[32px] font-300 text-white lg:mb-20">
-              <T text="Personal <i>and</i>  Virtual Tours  <i>available.</i>" />
+              <T text="Personal and Virtual Tours <i>available.</i>" />
             </div>
           </div>
 

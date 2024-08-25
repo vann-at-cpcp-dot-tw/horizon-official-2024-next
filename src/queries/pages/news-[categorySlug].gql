@@ -8,13 +8,15 @@ query QueryPostsByCategory(
   $before: String
   $relatedYachtSeries: String
   $year: Int
-  $translation: LanguageCodeEnum!
+  # $translation: LanguageCodeEnum!
 ) {
     category(
       id:$slug,
       idType: SLUG
     ){
-      translation(language: $translation) {
+      translation(
+        language: EN #只接英文版
+      ) {
         name
         posts(
           first: $first

@@ -47,7 +47,7 @@ export default async function PageDealers({params}:TypeProps){
     <Regions className="pb-28 pt-16" regions={dealerRegions} />
     <div className="container text-center">
       <div className="serif mb-6 text-[32px] text-minor-900">
-        <T text="Personal <i>and</i>  Virtual Tours  <i>available.</i>" />
+        <T text="Personal and Virtual Tours <i>available.</i>" />
       </div>
       <div className="flex justify-center">
         <LinkWithLang href="/contact" lang={lang}>
