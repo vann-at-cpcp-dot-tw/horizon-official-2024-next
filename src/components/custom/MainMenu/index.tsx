@@ -190,7 +190,7 @@ function MainMenu(props:TypeProps, ref:React.ReactNode){
                   href: DEALER_REGION === 'US' ?'/inventory' :'/brokerage'
                 },
                 ...(
-                  DEALER_REGION == 'AU'
+                  ['AU', 'EU'].includes(DEALER_REGION as string)
                     ? [
                       {
                         key: 'charter',

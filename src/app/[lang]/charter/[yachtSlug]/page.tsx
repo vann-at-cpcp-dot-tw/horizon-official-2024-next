@@ -30,7 +30,7 @@ interface TypeProps {
 interface TypeState {}
 
 async function PageSingleCharter({params}:TypeProps){
-  const access = CONTENT_TYPE === 'dealer' && DEALER_REGION === 'AU'
+  const access = CONTENT_TYPE === 'dealer' && ['AU', 'EU'].includes(DEALER_REGION as string)
   if( !access ){
     redirect('/')
   }
