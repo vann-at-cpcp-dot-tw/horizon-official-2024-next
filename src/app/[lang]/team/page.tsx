@@ -7,7 +7,7 @@ import { redirect } from "next/navigation"
 import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'
 
 import LinkWithLang from '~/components/custom/LinkWithLang'
-import { fetchGQL } from '~/lib/apollo'
+import { fetchGQL } from "~/lib/apollo/server"
 import { isEmpty } from '~/lib/utils'
 import { QueryTeamPage } from '~/queries/pages/team.gql'
 

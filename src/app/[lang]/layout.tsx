@@ -10,7 +10,7 @@ import CookiePolicy from "~/components/custom/CookiePolicy"
 import Footer from '~/components/custom/Footer'
 import Header from '~/components/custom/Header'
 import PageTransition from "~/components/custom/PageTransition"
-import { fetchGQL } from "~/lib/apollo"
+import { fetchGQL } from "~/lib/apollo/server"
 import { isEmpty } from '~/lib/utils'
 import { QueryCommonData } from '~/queries/categories/commonData.gql'
 import { QueryExternalLinks } from '~/queries/categories/externalLinks.gql'

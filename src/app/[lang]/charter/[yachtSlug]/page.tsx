@@ -17,7 +17,7 @@ import Breadcrumb from "~/components/custom/Breadcrumb"
 import LinkWithLang from '~/components/custom/LinkWithLang'
 import { Button } from '~/components/ui/button'
 import buttonStyles from '~/components/ui/button.module.sass'
-import { fetchGQL } from "~/lib/apollo"
+import { fetchGQL } from "~/lib/apollo/server"
 import { isEmpty } from '~/lib/utils'
 import { QuerySingleCharter } from '~/queries/pages/charter-[yachtSlug].gql'
 

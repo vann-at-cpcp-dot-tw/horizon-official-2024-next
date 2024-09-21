@@ -5,7 +5,7 @@ const HQ_API_URL = `${HQ_API_BASE}graphql`
 
 import { MetadataRoute } from 'next'
 
-import { fetchGQL } from "~/lib/apollo"
+import { fetchGQL } from "~/lib/apollo/server"
 import { formatPostCategories } from "~/lib/utils"
 import { QueryPostsForSiteMap } from '~/queries/sitemap/posts.gql'
 

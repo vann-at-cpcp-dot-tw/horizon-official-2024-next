@@ -7,7 +7,7 @@ import Image from "next/image"
 import T from 'vanns-common-modules/dist/components/react/T'
 
 import LinkWithLang from '~/components/custom/LinkWithLang'
-import { fetchGQL } from '~/lib/apollo'
+import { fetchGQL } from "~/lib/apollo/server"
 import { isEmpty } from '~/lib/utils'
 import { QueryDealersWithRegion } from '~/queries/pages/dealers.gql'
 

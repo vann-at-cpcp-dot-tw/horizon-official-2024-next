@@ -8,7 +8,7 @@ import { genImageBlurHash } from 'vanns-common-modules/dist/lib/next'
 
 import ContentLightbox from '~/components/custom/ContentLightbox'
 import LinkWithLang from '~/components/custom/LinkWithLang'
-import { fetchGQL } from '~/lib/apollo'
+import { fetchGQL } from "~/lib/apollo/server"
 import { QueryMilestone } from '~/queries/components/milestone.gql'
 
 import SwiperMilestone from "./(sections)/SwiperMilestone"

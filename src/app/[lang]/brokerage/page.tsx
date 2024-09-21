@@ -9,7 +9,7 @@ import { redirect } from "next/navigation"
 
 import List from '~/app/[lang]/brokerage/(templates)/List'
 import LinkWithLang from '~/components/custom/LinkWithLang'
-import { fetchGQL } from '~/lib/apollo'
+import { fetchGQL } from "~/lib/apollo/server"
 import { isEmpty } from '~/lib/utils'
 import { QueryBrokeragePage } from '~/queries/pages/brokerage.gql'
 

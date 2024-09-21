@@ -6,7 +6,7 @@ import Image from "next/image"
 
 import ImageAutoPlaceholder from "~/components/custom/ImageAutoPlaceholder"
 import { Button } from '~/components/ui/button'
-import { fetchGQL } from '~/lib/apollo'
+import { fetchGQL } from "~/lib/apollo/server"
 import { QueryPageAboutHorizon } from '~/queries/pages/about-horizon.gql'
 
 import Achievement from "./(sections)/Achievement"

@@ -10,7 +10,7 @@ import LinkWithLang from '~/components/custom/LinkWithLang'
 import NotFound from "~/components/custom/NotFound"
 import { Button } from '~/components/ui/button'
 import buttonStyles from '~/components/ui/button.module.sass'
-import { fetchGQL } from '~/lib/apollo'
+import { fetchGQL } from "~/lib/apollo/server"
 import { isEmpty, convertYoutubeUrlToEmbed } from '~/lib/utils'
 import { QuerySingleYachtPage, QuerySingleYachtHullsList } from '~/queries/pages/models-[seriesSlug]-[yachtSlug].gql'
 

@@ -5,7 +5,7 @@ import T from 'vanns-common-modules/dist/components/react/T'
 import { genImageBlurHash } from 'vanns-common-modules/dist/lib/next'
 
 import { Button } from '~/components/ui/button'
-import { fetchGQL } from '~/lib/apollo'
+import { fetchGQL } from "~/lib/apollo/server"
 import { QueryPageAboutInnovation } from '~/queries/pages/about-innovation.gql'
 
 import ContentList from "../(templates)/ContentList"

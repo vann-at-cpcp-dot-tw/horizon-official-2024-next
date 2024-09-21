@@ -14,7 +14,7 @@ import dynamic from "next/dynamic"
 import { createScopeStoreProvider } from "vanns-common-modules/dist/providers/react"
 import { TranslateProvider } from "vanns-common-modules/dist/providers/react/Translate"
 
-import ApolloClientProvider from "~/providers/Apollo"
+import { ApolloProvider }  from "~/lib/apollo/client"
 
 const DOMLoader = dynamic(() => import('~/components/custom/dynamic/DOMLoader'), {ssr: false})
 
@@ -46,12 +46,12 @@ export default function Providers({
   }
 }) {
 
-  return <ApolloClientProvider>
+  return <ApolloProvider>
     <CommonDataProvider state={commonData}>
       <TranslateProvider translation={translations}>
         <DOMLoader />
         { children }
       </TranslateProvider>
     </CommonDataProvider>
-  </ApolloClientProvider>
+  </ApolloProvider>
 }

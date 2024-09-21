@@ -8,7 +8,7 @@ import { genImageBlurHash } from 'vanns-common-modules/dist/lib/next'
 
 import Breadcrumb from '~/components/custom/Breadcrumb'
 import LinkWithLang from '~/components/custom/LinkWithLang'
-import { fetchGQL } from '~/lib/apollo'
+import { fetchGQL } from "~/lib/apollo/server"
 import { isEmpty } from '~/lib/utils'
 import { QuerySinglePost, QueryPrevPosts, QueryNextPosts  } from '~/queries/pages/news-[categorySlug]-[postSlug].gql'
 

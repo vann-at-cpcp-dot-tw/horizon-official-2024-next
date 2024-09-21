@@ -8,7 +8,7 @@ import Image from "next/image"
 import { genImageBlurHash } from 'vanns-common-modules/dist/lib/next'
 
 import LinkWithLang from '~/components/custom/LinkWithLang'
-import { fetchGQL } from '~/lib/apollo'
+import { fetchGQL } from "~/lib/apollo/server"
 import { isEmpty } from '~/lib/utils'
 import { formatPostCategories } from "~/lib/utils"
 import { QueryNewsPage } from '~/queries/pages/news.gql'

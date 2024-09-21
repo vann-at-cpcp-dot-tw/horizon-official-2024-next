@@ -48,8 +48,14 @@ function makeApolloClient(args?:IMakeApolloClient){
     return new ApolloClient({
       cache: new InMemoryCache({
         typePolicies: {
-          ZipDTO: {
-            keyFields: ['id', 'name'],
+          Yacht: {
+            merge: true,
+            // merge(existing:any, incoming:any) {
+            //   return { ...existing, ...incoming }
+            // }
+          },
+          GlobalSettings: {
+            merge: true
           },
         },
       }),
@@ -74,22 +80,25 @@ const { getClient } = makeApolloClient()
 export async function fetchGQL(query:TypedDocumentNode, args?:IFetchGQLArgs){
   const requestLang = headers().get('x-lang') || i18n.defaultLocale.shortCode
   const localeCode = convertLocaleCode(requestLang, 'long')
-  const headersList = headers()
-  const cookieStore = cookies()
-  const accessToken = cookieStore.get('accessToken')?.value || ''
   const { variables = {}, context = {} } = args ?? {}
-
+  const { contextHeaders = {} } = context
 
   try {
     const result = await getClient().query({
       query,
-      variables,
-      context: {
+      context: { // 添加自定義 context 範例
+        ...context,
         headers: {
-          "accept-language": localeCode,
-          // "Authorization": `Bearer ${ accessToken }`,
+          ...contextHeaders
+          // "accept-language": localeCode
         }
       },
+      variables: {
+        ...variables,
+        // for WPGraphQL 的 語言參數，如未使用 WPGraphQL 可以刪除
+        language: requestLang.toUpperCase(),
+        translation: requestLang.toUpperCase(),
+      }
     })
     return result?.data
 

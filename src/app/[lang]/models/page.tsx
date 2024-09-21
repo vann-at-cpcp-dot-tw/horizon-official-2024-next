@@ -6,7 +6,7 @@ import { Suspense } from 'react'
 
 import T from 'vanns-common-modules/dist/components/react/T'
 
-import { fetchGQL } from '~/lib/apollo'
+import { fetchGQL } from "~/lib/apollo/server"
 import { isEmpty } from '~/lib/utils'
 import { QueryYachtsWithSeries } from '~/queries/pages/models.gql'
 

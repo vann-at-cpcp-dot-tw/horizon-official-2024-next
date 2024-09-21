@@ -7,7 +7,7 @@ import T from 'vanns-common-modules/dist/components/react/T'
 
 import Breadcrumb from '~/components/custom/Breadcrumb'
 import LinkWithLang from '~/components/custom/LinkWithLang'
-import { fetchGQL } from '~/lib/apollo'
+import { fetchGQL } from "~/lib/apollo/server"
 import { isEmpty } from '~/lib/utils'
 import { QueryPostsByCategory } from '~/queries/pages/news-[categorySlug].gql'
 

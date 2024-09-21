@@ -7,7 +7,7 @@ import { Suspense } from 'react'
 import { useRouter } from 'next/navigation'
 import { useWindowSize } from 'vanns-common-modules/dist/use/react'
 
-import { fetchGQL } from '~/lib/apollo'
+import { fetchGQL } from "~/lib/apollo/server"
 import { isEmpty } from '~/lib/utils'
 import { QuerySingleSeriesPage } from '~/queries/pages/models-[seriesSlug].gql'
 import { useStore } from '~/store'

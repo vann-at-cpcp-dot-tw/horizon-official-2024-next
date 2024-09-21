@@ -10,7 +10,7 @@ import { redirect } from "next/navigation"
 import T from 'vanns-common-modules/dist/components/react/T'
 
 import LinkWithLang from '~/components/custom/LinkWithLang'
-import { fetchGQL } from '~/lib/apollo'
+import { fetchGQL } from "~/lib/apollo/server"
 import { isEmpty } from '~/lib/utils'
 import { QueryInvestorPage } from '~/queries/pages/investor.gql'
 import { i18n } from "~~/i18n.config"

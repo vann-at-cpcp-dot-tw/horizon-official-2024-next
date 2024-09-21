@@ -10,7 +10,7 @@ import T from 'vanns-common-modules/dist/components/react/T'
 
 import List from '~/app/[lang]/brokerage/(templates)/List'
 import LinkWithLang from '~/components/custom/LinkWithLang'
-import { fetchGQL } from '~/lib/apollo'
+import { fetchGQL } from "~/lib/apollo/server"
 import { isEmpty } from '~/lib/utils'
 import { QueryCharterPage } from '~/queries/pages/charter.gql'
 

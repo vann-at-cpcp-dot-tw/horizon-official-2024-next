@@ -4,7 +4,7 @@ const HQ_API_URL = `${HQ_API_BASE}graphql`
 import dynamic from "next/dynamic"
 
 import ImageAutoPlaceholder from "~/components/custom/ImageAutoPlaceholder"
-import { fetchGQL } from '~/lib/apollo'
+import { fetchGQL } from "~/lib/apollo/server"
 import { QueryHomePage, QueryHomeNews } from '~/queries/pages/home.gql'
 
 import KV from "./(sections)/KV"

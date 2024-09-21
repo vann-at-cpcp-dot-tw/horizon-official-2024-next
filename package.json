@@ -7,7 +7,7 @@
     "sdev": "next dev --experimental-https",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint --quiet"
+    "lint": "tsc && next lint --quiet"
   },
   "dependencies": {
     "@apollo/client": "^3.9.5",
