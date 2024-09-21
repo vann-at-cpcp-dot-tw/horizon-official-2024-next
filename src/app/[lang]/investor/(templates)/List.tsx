@@ -7,13 +7,15 @@ const HQ_API_URL = `${HQ_API_BASE}graphql`
 const postsPerPage = 10
 
 import { Suspense, useState, useMemo, useEffect } from 'react'
-import Image from "next/image"
-import LinkWithLang from '~/components/custom/LinkWithLang'
-import { twMerge } from 'tailwind-merge'
-import { QueryInvestorPage } from '~/queries/pages/investor.gql'
+
 import { useLazyQuery } from "@apollo/client"
-import PageNav from '~/components/custom/PageNav'
+import Image from "next/image"
+import { twMerge } from 'tailwind-merge'
+
 import Loading from '~/components/custom/icons/Loading'
+import LinkWithLang from '~/components/custom/LinkWithLang'
+import PageNav from '~/components/custom/PageNav'
+import { QueryInvestorPage } from '~/queries/pages/investor.gql'
 
 interface TypePostNode {
   [key:string]: any

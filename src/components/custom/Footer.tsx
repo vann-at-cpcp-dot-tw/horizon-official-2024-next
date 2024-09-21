@@ -4,18 +4,21 @@ const HQ_API_BASE = process.env.NEXT_PUBLIC_HQ_API_BASE
 const CONTENT_TYPE = process.env.NEXT_PUBLIC_CONTENT_TYPE || 'hq'
 
 import { Suspense, useRef, useReducer, useEffect, useState, useContext } from 'react'
-import useForm from "~/use/useForm"
-import { twMerge } from 'tailwind-merge'
-import { isEmpty } from '~/lib/utils'
-import { Button } from '~/components/ui/button'
-import LinkWithLang from "./LinkWithLang"
+
 import { useParams } from "next/navigation"
-import { ICommonData, useCommonData } from "~/app/[lang]/providers"
+import { twMerge } from 'tailwind-merge'
 import { useWindowSize } from 'vanns-common-modules/dist/use/react'
-import Loading from '~/components/custom/icons/Loading'
-import Alert from "~/components/custom/Alert"
-import { useStore } from "~/store"
 import { useTranslate } from "vanns-common-modules/dist/use/react"
+
+import { ICommonData, useCommonData } from "~/app/[lang]/providers"
+import Alert from "~/components/custom/Alert"
+import Loading from '~/components/custom/icons/Loading'
+import { Button } from '~/components/ui/button'
+import { isEmpty } from '~/lib/utils'
+import { useStore } from "~/store"
+import useForm from "~/use/useForm"
+
+import LinkWithLang from "./LinkWithLang"
 
 interface TypeProps {
   className?: string

@@ -2,19 +2,22 @@
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
 import { Suspense, useContext, useState, useRef, useMemo, useEffect } from 'react'
+
 import Image from "next/image"
-import LinkWithLang from '~/components/custom/LinkWithLang'
-import { twMerge } from 'tailwind-merge'
-import { isEmpty } from '~/lib/utils'
-import { TypePublicationNode, TypePublicationCategoryNode } from "../layout"
-import { LocalDataContext } from "../(templates)/LocalDataProvider"
+import { useParams } from "next/navigation"
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { SwiperClass } from "swiper/react"
-import { useWindowSize } from 'vanns-common-modules/dist/use/react'
-import { genImageBlurHash } from 'vanns-common-modules/dist/lib/next'
-import { useParams } from "next/navigation"
+import { twMerge } from 'tailwind-merge'
 import RatioArea from "vanns-common-modules/dist/components/react/RatioArea"
+import { genImageBlurHash } from 'vanns-common-modules/dist/lib/next'
+import { useWindowSize } from 'vanns-common-modules/dist/use/react'
 import { useTranslate } from "vanns-common-modules/dist/use/react"
+
+import LinkWithLang from '~/components/custom/LinkWithLang'
+import { isEmpty } from '~/lib/utils'
+
+import { LocalDataContext } from "../(templates)/LocalDataProvider"
+import { TypePublicationNode, TypePublicationCategoryNode } from "../layout"
 
 interface TypeProps {
   [key:string]: any

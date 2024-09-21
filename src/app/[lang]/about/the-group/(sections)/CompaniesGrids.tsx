@@ -1,15 +1,16 @@
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
-import Image from "next/image"
-import dynamic from "next/dynamic"
 import { Suspense } from 'react'
-import { twMerge } from 'tailwind-merge'
-import { isEmpty } from '~/lib/utils'
-import T from 'vanns-common-modules/dist/components/react/T'
-const AniCounter = dynamic(() => import('~/components/custom/dynamic/AniCounter'), {ssr: false})
 
+import dynamic from "next/dynamic"
+import Image from "next/image"
+import { twMerge } from 'tailwind-merge'
 import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'
+import T from 'vanns-common-modules/dist/components/react/T'
+
 import ImageAutoPlaceholder from "~/components/custom/ImageAutoPlaceholder"
+import { isEmpty } from '~/lib/utils'
+const AniCounter = dynamic(() => import('~/components/custom/dynamic/AniCounter'), {ssr: false})
 
 export interface TypeCompanyNode {
   basic:{

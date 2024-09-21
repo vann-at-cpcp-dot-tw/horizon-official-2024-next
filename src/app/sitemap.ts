@@ -3,10 +3,11 @@ const API_BASE = process.env.NEXT_PUBLIC_API_BASE
 const HQ_API_BASE = process.env.NEXT_PUBLIC_HQ_API_BASE
 const HQ_API_URL = `${HQ_API_BASE}graphql`
 
-import { QueryPostsForSiteMap } from '~/queries/sitemap/posts.gql'
+import { MetadataRoute } from 'next'
+
 import { fetchGQL } from "~/lib/apollo"
 import { formatPostCategories } from "~/lib/utils"
-import { MetadataRoute } from 'next'
+import { QueryPostsForSiteMap } from '~/queries/sitemap/posts.gql'
 
 const genSitemapObjects = async () => {
 

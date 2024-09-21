@@ -5,16 +5,18 @@ const HQ_API_BASE = process.env.NEXT_PUBLIC_HQ_API_BASE
 const HQ_API_URL = `${HQ_API_BASE}graphql`
 
 import Image from "next/image"
+import { redirect } from "next/navigation"
+import T from 'vanns-common-modules/dist/components/react/T'
+
 import LinkWithLang from '~/components/custom/LinkWithLang'
+import { Button } from '~/components/ui/button'
+import buttonStyles from '~/components/ui/button.module.sass'
+import { fetchGQL } from "~/lib/apollo"
 import { isEmpty } from '~/lib/utils'
 import { QueryDealersWithRegion } from '~/queries/pages/dealers.gql'
-import { fetchGQL } from "~/lib/apollo"
-import buttonStyles from '~/components/ui/button.module.sass'
-import { Button } from '~/components/ui/button'
-import Regions from "./(templates)/Regions"
-import { redirect } from "next/navigation"
 import { i18n } from "~~/i18n.config"
-import T from 'vanns-common-modules/dist/components/react/T'
+
+import Regions from "./(templates)/Regions"
 
 interface TypeProps {
   params: {

@@ -5,13 +5,15 @@ const CONTENT_TYPE = process.env.NEXT_PUBLIC_CONTENT_TYPE || 'hq'
 const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
 
 import { Suspense, useCallback } from 'react'
+
 import Image from "next/image"
-import LinkWithLang from '~/components/custom/LinkWithLang'
-import { twMerge } from 'tailwind-merge'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { usePathnameWithoutLang } from 'vanns-common-modules/dist/use/next'
+import { twMerge } from 'tailwind-merge'
 import { isEmpty } from "vanns-common-modules/dist/lib/utils"
+import { usePathnameWithoutLang } from 'vanns-common-modules/dist/use/next'
 import { useTranslate } from "vanns-common-modules/dist/use/react"
+
+import LinkWithLang from '~/components/custom/LinkWithLang'
 
 interface TypeProps {
   yachtConditions?: {

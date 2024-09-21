@@ -2,12 +2,14 @@
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
 import { Suspense, useState } from 'react'
+
 import Image from "next/image"
-import LinkWithLang from '~/components/custom/LinkWithLang'
 import { twMerge } from 'tailwind-merge'
-import { isEmpty } from '~/lib/utils'
-import SpecTable from '~/components/custom/SpecTable'
 import { useTranslate } from "vanns-common-modules/dist/use/react"
+
+import LinkWithLang from '~/components/custom/LinkWithLang'
+import SpecTable from '~/components/custom/SpecTable'
+import { isEmpty } from '~/lib/utils'
 
 interface TypeProps {
   list: {

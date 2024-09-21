@@ -1,11 +1,12 @@
 "use client"
-
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
-import Image from "next/image"
 import { Suspense, useRef, useEffect, useState } from 'react'
-import { useStore } from '~/store'
+
 import { motion } from "framer-motion"
+import Image from "next/image"
+
+import { useStore } from '~/store'
 
 interface TypeProps {
   imageNode?: React.ReactNode

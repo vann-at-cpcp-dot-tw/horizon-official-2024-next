@@ -4,21 +4,24 @@ const HQ_API_BASE = process.env.NEXT_PUBLIC_HQ_API_BASE
 const HQ_API_URL = `${HQ_API_BASE}graphql`
 
 import { Suspense, useMemo, useContext, useState } from 'react'
+
+import { useLazyQuery } from "@apollo/client"
 import Image from "next/image"
-import LinkWithLang from '~/components/custom/LinkWithLang'
 import { useParams } from "next/navigation"
 import { twMerge } from 'tailwind-merge'
-import { isEmpty } from '~/lib/utils'
-import { ICommonData, useCommonData } from "~/app/[lang]/providers"
-import { useLazyQuery } from "@apollo/client"
-import { QueryPublicationCategory } from '~/queries/pages/publications-[publicationCategorySlug].gql'
-import { TypePublicationCategoryNode, TypePublicationNode } from "../layout"
+import RatioArea from "vanns-common-modules/dist/components/react/RatioArea"
 import { useImageBlurHashes } from 'vanns-common-modules/dist/use/next'
 import { useWindowSize } from 'vanns-common-modules/dist/use/react'
 import { useTranslate } from "vanns-common-modules/dist/use/react"
+
+import { ICommonData, useCommonData } from "~/app/[lang]/providers"
 import Loading from '~/components/custom/icons/Loading'
+import LinkWithLang from '~/components/custom/LinkWithLang'
 import PageNav from '~/components/custom/PageNav'
-import RatioArea from "vanns-common-modules/dist/components/react/RatioArea"
+import { isEmpty } from '~/lib/utils'
+import { QueryPublicationCategory } from '~/queries/pages/publications-[publicationCategorySlug].gql'
+
+import { TypePublicationCategoryNode, TypePublicationNode } from "../layout"
 
 interface TypeProps {
   publicationCategory: {

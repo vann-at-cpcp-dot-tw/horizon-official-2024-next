@@ -3,15 +3,17 @@ const HQ_API_BASE = process.env.NEXT_PUBLIC_HQ_API_BASE
 const HQ_API_URL = `${HQ_API_BASE}graphql`
 
 import Image from "next/image"
+import T from 'vanns-common-modules/dist/components/react/T'
+import { genImageBlurHash } from 'vanns-common-modules/dist/lib/next'
+
+import Breadcrumb from '~/components/custom/Breadcrumb'
 import LinkWithLang from '~/components/custom/LinkWithLang'
+import { fetchGQL } from '~/lib/apollo'
 import { isEmpty } from '~/lib/utils'
 import { QuerySinglePost, QueryPrevPosts, QueryNextPosts  } from '~/queries/pages/news-[categorySlug]-[postSlug].gql'
-import { fetchGQL } from '~/lib/apollo'
-import Breadcrumb from '~/components/custom/Breadcrumb'
+
 import PostSwiper from "./(templates)/PostSwiper"
 import RelatedPosts from "../../(templates)/RelatedPosts"
-import { genImageBlurHash } from 'vanns-common-modules/dist/lib/next'
-import T from 'vanns-common-modules/dist/components/react/T'
 
 interface TypeProps {
   params: {

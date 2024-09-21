@@ -3,20 +3,23 @@ const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 const CONTENT_TYPE = process.env.NEXT_PUBLIC_CONTENT_TYPE || 'hq'
 const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
 
-import Image from "next/image"
 import { Suspense, useEffect, useMemo } from 'react'
-import { useStore } from '~/store'
-import { useDomNodeSize } from 'vanns-common-modules/dist/use/react'
+
+import Image from "next/image"
 import { useParams, usePathname } from "next/navigation"
-import { twMerge } from 'tailwind-merge'
-import MainMenu from "./MainMenu"
-import LinkWithLang from "./LinkWithLang"
-import { useWindowScroll } from 'react-use'
-import { usePathnameWithoutLang } from 'vanns-common-modules/dist/use/next'
-import { i18n } from "~~/i18n.config"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "~/components/ui/dropdown-menu"
 import { useRouter } from "next/navigation"
+import { useWindowScroll } from 'react-use'
+import { twMerge } from 'tailwind-merge'
+import { usePathnameWithoutLang } from 'vanns-common-modules/dist/use/next'
+import { useDomNodeSize } from 'vanns-common-modules/dist/use/react'
 import { useTranslate } from "vanns-common-modules/dist/use/react"
+
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "~/components/ui/dropdown-menu"
+import { useStore } from '~/store'
+import { i18n } from "~~/i18n.config"
+
+import LinkWithLang from "./LinkWithLang"
+import MainMenu from "./MainMenu"
 
 interface TypeProps {
   className?: string

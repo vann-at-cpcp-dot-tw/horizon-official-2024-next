@@ -5,13 +5,14 @@ const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
 const postsPerPage = 30
 
 import Image from "next/image"
-import LinkWithLang from '~/components/custom/LinkWithLang'
 import { redirect } from "next/navigation"
+import T from 'vanns-common-modules/dist/components/react/T'
+
+import List from '~/app/[lang]/brokerage/(templates)/List'
+import LinkWithLang from '~/components/custom/LinkWithLang'
+import { fetchGQL } from '~/lib/apollo'
 import { isEmpty } from '~/lib/utils'
 import { QueryCharterPage } from '~/queries/pages/charter.gql'
-import { fetchGQL } from '~/lib/apollo'
-import List from '~/app/[lang]/brokerage/(templates)/List'
-import T from 'vanns-common-modules/dist/components/react/T'
 
 interface TypeProps {
   params: {

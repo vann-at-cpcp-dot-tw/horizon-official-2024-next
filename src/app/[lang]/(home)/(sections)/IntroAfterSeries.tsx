@@ -2,13 +2,15 @@
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
 import { Suspense, useRef } from 'react'
-import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'
-import LinkWithLang from '~/components/custom/LinkWithLang'
-import OverflowContent from '~/components/custom/OverflowContent'
+
 import { useInView } from "framer-motion"
+import Image from "next/image"
+import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'
 import { useWindowSize } from "vanns-common-modules/dist/use/react"
 import { useTranslate } from "vanns-common-modules/dist/use/react"
-import Image from "next/image"
+
+import LinkWithLang from '~/components/custom/LinkWithLang'
+import OverflowContent from '~/components/custom/OverflowContent'
 
 interface TypeProps {
   smallVideo: string

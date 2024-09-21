@@ -4,17 +4,19 @@ const HQ_API_URL = `${HQ_API_BASE}graphql`
 
 import '~~/public/assets/external-import.css'
 
-import { isEmpty } from '~/lib/utils'
+import { GoogleTagManager, GoogleAnalytics } from '@next/third-parties/google'
+
+import CookiePolicy from "~/components/custom/CookiePolicy"
+import Footer from '~/components/custom/Footer'
+import Header from '~/components/custom/Header'
+import PageTransition from "~/components/custom/PageTransition"
 import { fetchGQL } from "~/lib/apollo"
+import { isEmpty } from '~/lib/utils'
 import { QueryCommonData } from '~/queries/categories/commonData.gql'
 import { QueryExternalLinks } from '~/queries/categories/externalLinks.gql'
 import { QueryTranslations } from '~/queries/components/translations.gql'
-import Header from '~/components/custom/Header'
-import Footer from '~/components/custom/Footer'
+
 import Providers from './providers'
-import PageTransition from "~/components/custom/PageTransition"
-import CookiePolicy from "~/components/custom/CookiePolicy"
-import { GoogleTagManager, GoogleAnalytics } from '@next/third-parties/google'
 
 async function getCommonData(){
   const data = await fetchGQL(QueryCommonData, {

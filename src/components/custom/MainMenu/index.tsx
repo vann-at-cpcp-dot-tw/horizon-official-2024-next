@@ -3,23 +3,26 @@ const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 const CONTENT_TYPE = process.env.NEXT_PUBLIC_CONTENT_TYPE || 'hq'
 const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
 
-import Image from "next/image"
 import { Suspense, useContext, useState, useEffect, useMemo, useReducer } from 'react'
-import { ICommonData, useCommonData } from "~/app/[lang]/providers"
-import { useParams, useRouter } from 'next/navigation'
-import { useStore } from '~/store'
-import { useWindowSize } from 'vanns-common-modules/dist/use/react'
-import { usePathname } from "next/navigation"
-import { i18n } from '~~/i18n.config'
-import { tools as langTools } from "vanns-common-modules/dist/use/next/useLangGuard"
-const { pathnameWithLang } = langTools(i18n)
+
 import { motion, AnimatePresence } from "framer-motion"
-import MenuScreen from "./MenuScreen"
+import Image from "next/image"
+import { useParams, useRouter } from 'next/navigation'
+import { usePathname } from "next/navigation"
 import Portal from 'vanns-common-modules/dist/components/react/Portal'
 import { usePathnameWithoutLang } from 'vanns-common-modules/dist/use/next'
-import { genSpecString } from '~/lib/utils'
+import { tools as langTools } from "vanns-common-modules/dist/use/next/useLangGuard"
+import { useWindowSize } from 'vanns-common-modules/dist/use/react'
 import { useTranslate } from "vanns-common-modules/dist/use/react"
 
+import { ICommonData, useCommonData } from "~/app/[lang]/providers"
+import { genSpecString } from '~/lib/utils'
+import { useStore } from '~/store'
+import { i18n } from '~~/i18n.config'
+
+import MenuScreen from "./MenuScreen"
+
+const { pathnameWithLang } = langTools(i18n)
 interface TypeProps {}
 interface TypeState {}
 

@@ -2,14 +2,17 @@
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
 import { Suspense, useState, useMemo, useEffect } from 'react'
-import Image from "next/image"
-import LinkWithLang from '~/components/custom/LinkWithLang'
-import { twMerge } from 'tailwind-merge'
-import { isEmpty } from '~/lib/utils'
+
 import { motion } from "framer-motion"
-import GAGalleryNav from "../(templates)/GAGalleryNav"
+import Image from "next/image"
+import { twMerge } from 'tailwind-merge'
 import { useWindowSize } from 'vanns-common-modules/dist/use/react'
+
 import ContentLightbox from '~/components/custom/ContentLightbox'
+import LinkWithLang from '~/components/custom/LinkWithLang'
+import { isEmpty } from '~/lib/utils'
+
+import GAGalleryNav from "../(templates)/GAGalleryNav"
 
 export interface TypeGAImageNode {
   title?: string

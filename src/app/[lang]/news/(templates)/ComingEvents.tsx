@@ -4,15 +4,18 @@ const HQ_API_BASE = process.env.NEXT_PUBLIC_HQ_API_BASE
 const HQ_API_URL = `${HQ_API_BASE}graphql`
 
 import { Suspense, useMemo, useEffect } from 'react'
+
+import { useQuery } from "@apollo/client"
 import Image from "next/image"
-import LinkWithLang from '~/components/custom/LinkWithLang'
+import { usePathname, useSearchParams, useRouter } from "next/navigation"
 import { twMerge } from 'tailwind-merge'
+import { useTranslate } from "vanns-common-modules/dist/use/react"
+
+import LinkWithLang from '~/components/custom/LinkWithLang'
 import { isEmpty } from '~/lib/utils'
 import { QueryComingEvents } from '~/queries/categories/coming-events.gql'
-import { useQuery } from "@apollo/client"
-import { usePathname, useSearchParams, useRouter } from "next/navigation"
+
 import ComingEventDetail from "./ComingEventDetail"
-import { useTranslate } from "vanns-common-modules/dist/use/react"
 
 interface TypeProps {
   isSmallLayout?: boolean

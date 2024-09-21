@@ -2,14 +2,16 @@ const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 const CONTENT_TYPE = process.env.NEXT_PUBLIC_CONTENT_TYPE || 'hq'
 const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
 
+import { headers } from 'next/headers'
 import Image from "next/image"
+import T from 'vanns-common-modules/dist/components/react/T'
+
 import LinkWithLang from '~/components/custom/LinkWithLang'
+import { fetchGQL } from '~/lib/apollo'
 import { isEmpty } from '~/lib/utils'
 import { QueryDealersWithRegion } from '~/queries/pages/dealers.gql'
-import { fetchGQL } from '~/lib/apollo'
-import { headers } from 'next/headers'
+
 import Form from "./(templates)/Form"
-import T from 'vanns-common-modules/dist/components/react/T'
 
 interface TypeProps {
   params: {

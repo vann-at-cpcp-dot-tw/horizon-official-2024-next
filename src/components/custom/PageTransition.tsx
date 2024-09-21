@@ -2,11 +2,13 @@
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
 import { Suspense } from 'react'
-import Image from "next/image"
-import LinkWithLang from '~/components/custom/LinkWithLang'
-import { twMerge } from 'tailwind-merge'
-import { isEmpty } from '~/lib/utils'
+
 import { motion, AnimatePresence } from "framer-motion"
+import Image from "next/image"
+import { twMerge } from 'tailwind-merge'
+
+import LinkWithLang from '~/components/custom/LinkWithLang'
+import { isEmpty } from '~/lib/utils'
 
 interface TypeProps {
   children: React.ReactNode

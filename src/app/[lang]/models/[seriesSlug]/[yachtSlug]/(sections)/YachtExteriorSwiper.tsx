@@ -2,15 +2,17 @@
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
 import { Suspense, useState, useMemo, useEffect } from 'react'
+
 import Image from "next/image"
-import { twMerge } from 'tailwind-merge'
-import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'
-import { useDomNodeSize } from 'vanns-common-modules/dist/use/react'
+import { EffectFade } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { SwiperClass } from "swiper/react"
-import { EffectFade } from 'swiper/modules'
-import { useWindowSize } from 'vanns-common-modules/dist/use/react'
+import { twMerge } from 'tailwind-merge'
+import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'
 import { useImageBlurHashes } from 'vanns-common-modules/dist/use/next'
+import { useDomNodeSize } from 'vanns-common-modules/dist/use/react'
+import { useWindowSize } from 'vanns-common-modules/dist/use/react'
+
 import ContentLightbox from '~/components/custom/ContentLightbox'
 import SwiperFullHeight from '~/components/custom/SwiperFullHeight'
 

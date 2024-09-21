@@ -2,27 +2,29 @@ const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 const HQ_API_BASE = process.env.NEXT_PUBLIC_HQ_API_BASE
 const HQ_API_URL = `${HQ_API_BASE}graphql`
 
-import LinkWithLang from '~/components/custom/LinkWithLang'
-import { isEmpty, convertYoutubeUrlToEmbed } from '~/lib/utils'
-import { fetchGQL } from '~/lib/apollo'
-import { QuerySingleYachtPage, QuerySingleYachtHullsList } from '~/queries/pages/models-[seriesSlug]-[yachtSlug].gql'
-import NotFound from "~/components/custom/NotFound"
+import T from 'vanns-common-modules/dist/components/react/T'
+
+import News from '~/app/[lang]/(home)/(sections)/News'
 import Breadcrumb from '~/components/custom/Breadcrumb'
-import SectionNav from "./(templates)/SectionNav"
-import KV from "./(sections)/KV"
+import LinkWithLang from '~/components/custom/LinkWithLang'
+import NotFound from "~/components/custom/NotFound"
+import { Button } from '~/components/ui/button'
+import buttonStyles from '~/components/ui/button.module.sass'
+import { fetchGQL } from '~/lib/apollo'
+import { isEmpty, convertYoutubeUrlToEmbed } from '~/lib/utils'
+import { QuerySingleYachtPage, QuerySingleYachtHullsList } from '~/queries/pages/models-[seriesSlug]-[yachtSlug].gql'
+
+import GAGallery from "./(sections)/GAGallery"
+import Hulls from "./(sections)/Hulls"
 import Intro from "./(sections)/Intro"
+import KV from "./(sections)/KV"
+import Publication from "./(sections)/Publication"
+import SpecTable from "./(sections)/SpecTable"
+import VideoPreview from "./(sections)/VideoPreview"
+import VRPreview from "./(sections)/VRPreview"
 import YachtsExteriorSwiper from "./(sections)/YachtExteriorSwiper"
 import YachtInteriorSwiper from "./(sections)/YachtInteriorSwiper"
-import SpecTable from "./(sections)/SpecTable"
-import GAGallery from "./(sections)/GAGallery"
-import VRPreview from "./(sections)/VRPreview"
-import VideoPreview from "./(sections)/VideoPreview"
-import Hulls from "./(sections)/Hulls"
-import Publication from "./(sections)/Publication"
-import buttonStyles from '~/components/ui/button.module.sass'
-import { Button } from '~/components/ui/button'
-import News from '~/app/[lang]/(home)/(sections)/News'
-import T from 'vanns-common-modules/dist/components/react/T'
+import SectionNav from "./(templates)/SectionNav"
 
 interface TypeProps {
   params: {
@@ -57,7 +59,6 @@ async function PageSingleYacht(props:TypeProps, ref:React.ReactNode){
       slug: yachtSlug,
     }
   })
-
   const { relatedPublication } = data?.yacht?.EN?.yachtCustomFields ?? {}
   const { title:yachtTitle, yachtSeriesList, yachtCustomFields } = data?.yacht?.translation ?? {}
   const { heroVideo, heroImage, yachtDescription, exteriorImages, interiorImages, specsTable, generalArrangementImages, vrPreview, videosPreview, embedVideosGallery } = yachtCustomFields ?? {}

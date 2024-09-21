@@ -2,9 +2,11 @@
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
 import { Suspense, useMemo, useContext } from 'react'
-import SwiperOverflow from '~/components/custom/SwiperOverflow'
-import { ICommonData, useCommonData } from "~/app/[lang]/providers"
+
 import { useTranslate } from "vanns-common-modules/dist/use/react"
+
+import { ICommonData, useCommonData } from "~/app/[lang]/providers"
+import SwiperOverflow from '~/components/custom/SwiperOverflow'
 
 interface TypeProps {}
 interface TypeState {}

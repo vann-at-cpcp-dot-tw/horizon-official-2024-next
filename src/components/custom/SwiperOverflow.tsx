@@ -1,15 +1,18 @@
 "use client"
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
-import Image from "next/image"
 import { Suspense, useMemo, useEffect, useState, ReactNode } from 'react'
+
+import Image from "next/image"
 import { useParams } from 'next/navigation'
-import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'
-import { useDomNodeSize } from 'vanns-common-modules/dist/use/react'
+import { Autoplay } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { SwiperClass } from "swiper/react"
-import { Autoplay } from 'swiper/modules'
+import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'
+import { useDomNodeSize } from 'vanns-common-modules/dist/use/react'
+
 import LinkWithLang from '~/components/custom/LinkWithLang'
+
 import IconMenuBack from "./icons/MenuBack"
 
 interface TypeProps {

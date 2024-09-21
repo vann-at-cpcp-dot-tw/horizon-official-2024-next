@@ -1,13 +1,15 @@
 const HQ_API_BASE = process.env.NEXT_PUBLIC_HQ_API_BASE
 const HQ_API_URL = `${HQ_API_BASE}graphql`
 
+import T from 'vanns-common-modules/dist/components/react/T'
+import { genImageBlurHash } from 'vanns-common-modules/dist/lib/next'
+
 import { Button } from '~/components/ui/button'
 import { fetchGQL } from '~/lib/apollo'
 import { QueryPageAboutDesignAndCraft } from '~/queries/pages/about-design.gql'
-import FeaturedVideo from "../(templates)/FeaturedVideo"
+
 import ContentList from "../(templates)/ContentList"
-import { genImageBlurHash } from 'vanns-common-modules/dist/lib/next'
-import T from 'vanns-common-modules/dist/components/react/T'
+import FeaturedVideo from "../(templates)/FeaturedVideo"
 
 export default async function PageAboutDesign({
   params

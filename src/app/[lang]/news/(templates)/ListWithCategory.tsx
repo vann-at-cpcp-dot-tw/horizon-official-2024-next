@@ -3,20 +3,23 @@ const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 const postsPerPage = 10
 
 import { Suspense, useMemo, useEffect, useState } from 'react'
-import Image from "next/image"
-import LinkWithLang from '~/components/custom/LinkWithLang'
-import { twMerge } from 'tailwind-merge'
-import { isEmpty, arrayGenerate } from '~/lib/utils'
-import { useParams, useSearchParams } from 'next/navigation'
-import { useSearchObject, usePathnameWithoutLang } from 'vanns-common-modules/dist/use/next'
+
 import { useLazyQuery } from "@apollo/client"
-import { QueryPostsByCategory } from '~/queries/pages/news-[categorySlug].gql'
-import PageNav from '~/components/custom/PageNav'
-import Loading from '~/components/custom/icons/Loading'
-import NewsListItem from "./ListItem"
-import { ICommonData, useCommonData } from "~/app/[lang]/providers"
-import { TypePostNode } from "./ListNewsPage"
+import Image from "next/image"
+import { useParams, useSearchParams } from 'next/navigation'
+import { twMerge } from 'tailwind-merge'
+import { useSearchObject, usePathnameWithoutLang } from 'vanns-common-modules/dist/use/next'
 import { useTranslate } from "vanns-common-modules/dist/use/react"
+
+import { ICommonData, useCommonData } from "~/app/[lang]/providers"
+import Loading from '~/components/custom/icons/Loading'
+import LinkWithLang from '~/components/custom/LinkWithLang'
+import PageNav from '~/components/custom/PageNav'
+import { isEmpty, arrayGenerate } from '~/lib/utils'
+import { QueryPostsByCategory } from '~/queries/pages/news-[categorySlug].gql'
+
+import NewsListItem from "./ListItem"
+import { TypePostNode } from "./ListNewsPage"
 
 interface TypeProps {
   lang: string

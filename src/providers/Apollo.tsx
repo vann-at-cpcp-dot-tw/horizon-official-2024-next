@@ -2,10 +2,11 @@
 const API_URL = `${process.env.NEXT_PUBLIC_API_BASE}graphql`
 const HQ_API_URL = `${process.env.NEXT_PUBLIC_HQ_API_BASE}graphql`
 
-import { makeApolloClient, ApolloClientProvider } from "vanns-common-modules/dist/lib/next/apollo/client"
 import { ApolloLink } from "@apollo/client"
-import { i18n } from "~~/i18n.config"
+import { makeApolloClient, ApolloClientProvider } from "vanns-common-modules/dist/lib/next/apollo/client"
 import { useLangGuard } from "vanns-common-modules/dist/use/next/useLangGuard"
+
+import { i18n } from "~~/i18n.config"
 
 export default function ApolloProvider({
   children

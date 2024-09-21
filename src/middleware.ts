@@ -1,8 +1,9 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
-import { i18n } from '~~/i18n.config'
 import { isPathnameStartWithLang } from 'vanns-common-modules/dist/use/next/usePathnameWithoutLang'
+
 import { resolveRedirectUrlFromOldSite } from '~/old-site-redirect-rules'
+import { i18n } from '~~/i18n.config'
 
 export async function middleware(request:NextRequest){
 

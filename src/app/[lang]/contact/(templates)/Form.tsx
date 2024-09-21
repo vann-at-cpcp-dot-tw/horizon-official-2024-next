@@ -6,23 +6,25 @@ const CONTENT_TYPE = process.env.NEXT_PUBLIC_CONTENT_TYPE || 'hq'
 const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
 
 import { Suspense, useCallback } from 'react'
+
 import Image from "next/image"
-import LinkWithLang from '~/components/custom/LinkWithLang'
-import { twMerge } from 'tailwind-merge'
-import { i18n } from '~~/i18n.config'
-import { tools as langTools } from "vanns-common-modules/dist/use/next/useLangGuard"
-const { pathnameWithLang } = langTools(i18n)
 import { useRouter } from "next/navigation"
+import { twMerge } from 'tailwind-merge'
 import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'
-import buttonStyles from '~/components/ui/button.module.sass'
-import { Button } from '~/components/ui/button'
-import ContentLightbox from '~/components/custom/ContentLightbox'
-import useForm from "~/use/useForm"
-import Loading from '~/components/custom/icons/Loading'
-import Alert from "~/components/custom/Alert"
-import { useStore } from "~/store"
+import { tools as langTools } from "vanns-common-modules/dist/use/next/useLangGuard"
 import { useTranslate } from "vanns-common-modules/dist/use/react"
 
+import Alert from "~/components/custom/Alert"
+import ContentLightbox from '~/components/custom/ContentLightbox'
+import Loading from '~/components/custom/icons/Loading'
+import LinkWithLang from '~/components/custom/LinkWithLang'
+import { Button } from '~/components/ui/button'
+import buttonStyles from '~/components/ui/button.module.sass'
+import { useStore } from "~/store"
+import useForm from "~/use/useForm"
+import { i18n } from '~~/i18n.config'
+
+const { pathnameWithLang } = langTools(i18n)
 interface TypeProps {
   children?: React.ReactNode
   [key:string]: any

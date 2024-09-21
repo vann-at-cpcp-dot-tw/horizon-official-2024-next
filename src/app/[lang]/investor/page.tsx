@@ -6,14 +6,16 @@ const HQ_API_URL = `${HQ_API_BASE}graphql`
 const postsPerPage = 10
 
 import Image from "next/image"
+import { redirect } from "next/navigation"
+import T from 'vanns-common-modules/dist/components/react/T'
+
 import LinkWithLang from '~/components/custom/LinkWithLang'
+import { fetchGQL } from '~/lib/apollo'
 import { isEmpty } from '~/lib/utils'
 import { QueryInvestorPage } from '~/queries/pages/investor.gql'
-import { fetchGQL } from '~/lib/apollo'
-import List from "./(templates)/List"
-import { redirect } from "next/navigation"
 import { i18n } from "~~/i18n.config"
-import T from 'vanns-common-modules/dist/components/react/T'
+
+import List from "./(templates)/List"
 
 interface TypeProps {
   params: {

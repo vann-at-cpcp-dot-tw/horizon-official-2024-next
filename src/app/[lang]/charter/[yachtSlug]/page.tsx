@@ -3,22 +3,23 @@ const CONTENT_TYPE = process.env.NEXT_PUBLIC_CONTENT_TYPE || 'hq'
 const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
 
 import Image from "next/image"
-import LinkWithLang from '~/components/custom/LinkWithLang'
-import { isEmpty } from '~/lib/utils'
-import { QuerySingleCharter } from '~/queries/pages/charter-[yachtSlug].gql'
 import { redirect } from "next/navigation"
-import { fetchGQL } from "~/lib/apollo"
-import Breadcrumb from "~/components/custom/Breadcrumb"
-import SectionNav from '~/app/[lang]/models/[seriesSlug]/[yachtSlug]/(templates)/SectionNav'
-import KV from '~/app/[lang]/models/[seriesSlug]/[yachtSlug]/(sections)/KV'
+import T from 'vanns-common-modules/dist/components/react/T'
+
+import SpecAndFeatures from '~/app/[lang]/brokerage/(templates)/SpecAndFeatures'
 import Intro from '~/app/[lang]/models/[seriesSlug]/[yachtSlug]/(sections)/Intro'
+import KV from '~/app/[lang]/models/[seriesSlug]/[yachtSlug]/(sections)/KV'
+import Publication from '~/app/[lang]/models/[seriesSlug]/[yachtSlug]/(sections)/Publication'
 import YachtsExteriorSwiper from '~/app/[lang]/models/[seriesSlug]/[yachtSlug]/(sections)/YachtExteriorSwiper'
 import YachtInteriorSwiper from '~/app/[lang]/models/[seriesSlug]/[yachtSlug]/(sections)/YachtInteriorSwiper'
-import SpecAndFeatures from '~/app/[lang]/brokerage/(templates)/SpecAndFeatures'
-import Publication from '~/app/[lang]/models/[seriesSlug]/[yachtSlug]/(sections)/Publication'
-import buttonStyles from '~/components/ui/button.module.sass'
+import SectionNav from '~/app/[lang]/models/[seriesSlug]/[yachtSlug]/(templates)/SectionNav'
+import Breadcrumb from "~/components/custom/Breadcrumb"
+import LinkWithLang from '~/components/custom/LinkWithLang'
 import { Button } from '~/components/ui/button'
-import T from 'vanns-common-modules/dist/components/react/T'
+import buttonStyles from '~/components/ui/button.module.sass'
+import { fetchGQL } from "~/lib/apollo"
+import { isEmpty } from '~/lib/utils'
+import { QuerySingleCharter } from '~/queries/pages/charter-[yachtSlug].gql'
 
 interface TypeProps {
   params: {

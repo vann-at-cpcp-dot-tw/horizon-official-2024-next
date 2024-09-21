@@ -4,15 +4,18 @@ const HQ_API_BASE = process.env.NEXT_PUBLIC_HQ_API_BASE
 const HQ_API_URL = `${HQ_API_BASE}graphql`
 
 import { Suspense, useEffect, useMemo } from 'react'
-import Image from "next/image"
-import LinkWithLang from '~/components/custom/LinkWithLang'
-import { twMerge } from 'tailwind-merge'
-import { isEmpty } from '~/lib/utils'
-import { useRouter, usePathname, useSearchParams, useParams } from "next/navigation"
-import HullDetail from "../(templates)/HullDetail"
+
 import { useQuery } from "@apollo/client"
-import { QuerySingleHull } from '~/queries/categories/hull.gql'
+import Image from "next/image"
+import { useRouter, usePathname, useSearchParams, useParams } from "next/navigation"
+import { twMerge } from 'tailwind-merge'
 import { useTranslate } from "vanns-common-modules/dist/use/react"
+
+import LinkWithLang from '~/components/custom/LinkWithLang'
+import { isEmpty } from '~/lib/utils'
+import { QuerySingleHull } from '~/queries/categories/hull.gql'
+
+import HullDetail from "../(templates)/HullDetail"
 
 interface TypeProps {
   yachtName?: string

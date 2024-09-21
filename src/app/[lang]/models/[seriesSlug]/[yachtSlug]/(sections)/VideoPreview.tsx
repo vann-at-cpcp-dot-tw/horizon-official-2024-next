@@ -2,13 +2,16 @@
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
 import { Suspense, useMemo, useState, useEffect } from 'react'
+
 import Image from "next/image"
-import LinkWithLang from '~/components/custom/LinkWithLang'
 import { twMerge } from 'tailwind-merge'
-import { isEmpty } from '~/lib/utils'
 import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'
-import IFrameGallery from "../(templates)/IFrameGallery"
 import { useDomNodeSize } from 'vanns-common-modules/dist/use/react'
+
+import LinkWithLang from '~/components/custom/LinkWithLang'
+import { isEmpty } from '~/lib/utils'
+
+import IFrameGallery from "../(templates)/IFrameGallery"
 
 interface TypeProps {
   preview: {

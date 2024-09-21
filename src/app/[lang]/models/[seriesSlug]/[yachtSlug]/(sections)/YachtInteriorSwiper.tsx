@@ -2,19 +2,21 @@
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
 import { Suspense, useEffect, useState, useMemo } from 'react'
+
 import Image from "next/image"
+import Marquee from "react-fast-marquee"
+import { EffectFade } from 'swiper/modules'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { SwiperClass } from "swiper/react"
 import { twMerge } from 'tailwind-merge'
 import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { EffectFade } from 'swiper/modules'
-import { SwiperClass } from "swiper/react"
 import 'swiper/css/effect-fade'
-import Marquee from "react-fast-marquee"
-import ContentLightbox from '~/components/custom/ContentLightbox'
 import { useImageBlurHashes } from 'vanns-common-modules/dist/use/next'
-import SwiperFullHeight from '~/components/custom/SwiperFullHeight'
 import { useWindowSize } from 'vanns-common-modules/dist/use/react'
 import { useTranslate } from "vanns-common-modules/dist/use/react"
+
+import ContentLightbox from '~/components/custom/ContentLightbox'
+import SwiperFullHeight from '~/components/custom/SwiperFullHeight'
 
 interface TypeProps {
   list: {

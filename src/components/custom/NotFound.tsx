@@ -5,9 +5,10 @@ const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
 
 import Image from "next/image"
 import { useParams } from "next/navigation"
+import { useTranslate } from "vanns-common-modules/dist/use/react"
+
 import LinkWithLang from '~/components/custom/LinkWithLang'
 import { isEmpty } from '~/lib/utils'
-import { useTranslate } from "vanns-common-modules/dist/use/react"
 
 function NotFound(){
   const { __ } = useTranslate()

@@ -3,11 +3,14 @@ const HQ_API_BASE = process.env.NEXT_PUBLIC_HQ_API_BASE
 const HQ_API_URL = `${HQ_API_BASE}graphql`
 
 import { Suspense } from 'react'
-import { isEmpty } from '~/lib/utils'
-import SeriesList from "./(templates)/SeriesList"
-import { fetchGQL } from '~/lib/apollo'
-import { QueryYachtsWithSeries } from '~/queries/pages/models.gql'
+
 import T from 'vanns-common-modules/dist/components/react/T'
+
+import { fetchGQL } from '~/lib/apollo'
+import { isEmpty } from '~/lib/utils'
+import { QueryYachtsWithSeries } from '~/queries/pages/models.gql'
+
+import SeriesList from "./(templates)/SeriesList"
 
 interface TypeProps {
   params: {

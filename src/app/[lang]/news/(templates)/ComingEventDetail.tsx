@@ -4,19 +4,21 @@ const HQ_API_BASE = process.env.NEXT_PUBLIC_HQ_API_BASE
 const HQ_API_URL = `${HQ_API_BASE}graphql`
 
 import { Suspense, useMemo, useState, useEffect } from 'react'
-import Image from "next/image"
-import LinkWithLang from '~/components/custom/LinkWithLang'
-import { twMerge } from 'tailwind-merge'
-import { isEmpty } from '~/lib/utils'
-import { usePathname, useRouter, useParams } from 'next/navigation'
+
 import { gql, useQuery } from "@apollo/client"
-import { QuerySingleHull } from '~/queries/categories/hull.gql'
+import Image from "next/image"
+import { usePathname, useRouter, useParams } from 'next/navigation'
+import { twMerge } from 'tailwind-merge'
 import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'
-import buttonStyles from '~/components/ui/button.module.sass'
-import { Button } from '~/components/ui/button'
+import { useTranslate } from "vanns-common-modules/dist/use/react"
+
 import HullDetail from '~/app/[lang]/models/[seriesSlug]/[yachtSlug]/(templates)/HullDetail'
 import ContentLightbox from '~/components/custom/ContentLightbox'
-import { useTranslate } from "vanns-common-modules/dist/use/react"
+import LinkWithLang from '~/components/custom/LinkWithLang'
+import { Button } from '~/components/ui/button'
+import buttonStyles from '~/components/ui/button.module.sass'
+import { isEmpty } from '~/lib/utils'
+import { QuerySingleHull } from '~/queries/categories/hull.gql'
 
 interface TypeHullNode {
   // exteriorImages?: {

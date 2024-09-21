@@ -2,14 +2,16 @@
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
 import { Suspense, useMemo, useState } from 'react'
+
 import Image from "next/image"
-import LinkWithLang from '~/components/custom/LinkWithLang'
-import { twMerge } from 'tailwind-merge'
-import { isEmpty } from '~/lib/utils'
-import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'
+import { Autoplay } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { SwiperClass } from "swiper/react"
-import { Autoplay } from 'swiper/modules'
+import { twMerge } from 'tailwind-merge'
+import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'
+
+import LinkWithLang from '~/components/custom/LinkWithLang'
+import { isEmpty } from '~/lib/utils'
 
 interface TypeProps {
   gallery: {

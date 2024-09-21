@@ -3,12 +3,12 @@ const CONTENT_TYPE = process.env.NEXT_PUBLIC_CONTENT_TYPE || 'hq'
 const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
 
 import Image from "next/image"
-import LinkWithLang from '~/components/custom/LinkWithLang'
-import { isEmpty } from '~/lib/utils'
-import { QueryTermsPage } from '~/queries/pages/terms-and-conditions.gql'
-import { fetchGQL } from "~/lib/apollo"
 import T from "vanns-common-modules/dist/components/react/T"
 
+import LinkWithLang from '~/components/custom/LinkWithLang'
+import { fetchGQL } from "~/lib/apollo"
+import { isEmpty } from '~/lib/utils'
+import { QueryTermsPage } from '~/queries/pages/terms-and-conditions.gql'
 
 interface TypeProps {
   params: {

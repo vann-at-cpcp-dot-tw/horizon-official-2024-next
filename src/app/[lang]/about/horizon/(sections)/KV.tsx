@@ -1,15 +1,16 @@
 "use client"
-
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
-import Image from "next/image"
 import { Suspense, useRef } from 'react'
-import { useStore } from '~/store'
-import { twMerge } from 'tailwind-merge'
-import { isEmpty } from '~/lib/utils'
+
 import { motion, useInView } from "framer-motion"
-import OverflowContent from '~/components/custom/OverflowContent'
+import Image from "next/image"
+import { twMerge } from 'tailwind-merge'
 import { useWindowSize } from 'vanns-common-modules/dist/use/react'
+
+import OverflowContent from '~/components/custom/OverflowContent'
+import { isEmpty } from '~/lib/utils'
+import { useStore } from '~/store'
 
 interface TypeProps {
   background: string

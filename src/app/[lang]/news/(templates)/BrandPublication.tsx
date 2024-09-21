@@ -5,17 +5,19 @@ const HQ_API_URL = `${HQ_API_BASE}graphql`
 const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
 
 import { Suspense, useEffect, useState } from 'react'
+
 import Image from "next/image"
-import LinkWithLang from '~/components/custom/LinkWithLang'
-import { twMerge } from 'tailwind-merge'
-import { isEmpty } from '~/lib/utils'
-import buttonStyles from '~/components/ui/button.module.sass'
-import { Button } from '~/components/ui/button'
 import { useParams } from "next/navigation"
-import useForm from "~/use/useForm"
-import Loading from '~/components/custom/icons/Loading'
-import { useStore } from "~/store"
+import { twMerge } from 'tailwind-merge'
 import { useTranslate } from "vanns-common-modules/dist/use/react"
+
+import Loading from '~/components/custom/icons/Loading'
+import LinkWithLang from '~/components/custom/LinkWithLang'
+import { Button } from '~/components/ui/button'
+import buttonStyles from '~/components/ui/button.module.sass'
+import { isEmpty } from '~/lib/utils'
+import { useStore } from "~/store"
+import useForm from "~/use/useForm"
 
 interface TypeProps {
   publicationCover: string

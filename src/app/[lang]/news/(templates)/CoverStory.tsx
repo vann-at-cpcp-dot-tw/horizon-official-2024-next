@@ -1,12 +1,15 @@
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
 import { Suspense } from 'react'
+
 import Image from "next/image"
-import LinkWithLang from '~/components/custom/LinkWithLang'
 import { twMerge } from 'tailwind-merge'
-import { isEmpty } from '~/lib/utils'
 import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'
 import { genImageBlurHash } from 'vanns-common-modules/dist/lib/next'
+
+import LinkWithLang from '~/components/custom/LinkWithLang'
+import { isEmpty } from '~/lib/utils'
+
 import CoverImage from "./CoverImage"
 import CoverTitle from "./CoverTitle"
 
