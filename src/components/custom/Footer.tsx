@@ -4,17 +4,21 @@ const HQ_API_BASE = process.env.NEXT_PUBLIC_HQ_API_BASE
 const CONTENT_TYPE = process.env.NEXT_PUBLIC_CONTENT_TYPE || 'hq'
 
 import { Suspense, useRef, useReducer, useEffect, useState, useContext } from 'react'
-import useForm from "~/use/useForm"
-import { twMerge } from 'tailwind-merge'
-import { isEmpty } from '~/lib/utils'
-import { Button } from '~/components/ui/button'
-import LinkWithLang from "./LinkWithLang"
+
 import { useParams } from "next/navigation"
-import { ICommonData, useCommonData } from "~/app/[lang]/providers"
+import { twMerge } from 'tailwind-merge'
 import { useWindowSize } from 'vanns-common-modules/dist/use/react'
-import Loading from '~/components/custom/icons/Loading'
+import { useTranslate } from "vanns-common-modules/dist/use/react"
+
+import { ICommonData, useCommonData } from "~/app/[lang]/providers"
 import Alert from "~/components/custom/Alert"
+import Loading from '~/components/custom/icons/Loading'
+import { Button } from '~/components/ui/button'
+import { isEmpty } from '~/lib/utils'
 import { useStore } from "~/store"
+import useForm from "~/use/useForm"
+
+import LinkWithLang from "./LinkWithLang"
 
 interface TypeProps {
   className?: string
@@ -27,6 +31,7 @@ function Footer(props:TypeProps, ref:React.ReactNode){
   const viewport = useWindowSize()
   const footerRef = useRef<HTMLDivElement>(null)
   const store = useStore()
+  const { __ } = useTranslate()
   const [state, setState] = useReducer((state:TypeState, updateState:{})=>({...state, ...updateState}), {
     // init state
     footerHeight: 0,
@@ -63,11 +68,13 @@ function Footer(props:TypeProps, ref:React.ReactNode){
 
   return <Suspense fallback={null}>
     <Alert id="Subscription" title="Success">
-      <div className="text-center text-[#4A4A4A]">You have successfully subscribed to the newsletter.</div>
+      <div className="text-center text-[#4A4A4A]">{ __('You have successfully subscribed to the newsletter.') }</div>
     </Alert>
     <div className={twMerge('text-white relative bg-major-900', props?.className)} ref={footerRef}>
       <div className="container-fluid mb-16 pt-20 lg:mb-32">
-        <div className="serif mb-2.5 text-center text-[21px] font-300 lg:mb-5">BRAND PUBLICATION <br className="block lg:hidden"/>SUBSCRIPTION</div>
+        <div className="serif mb-2.5 text-center text-[21px] font-300 lg:mb-5">
+          <div dangerouslySetInnerHTML={{ __html:__(`BRAND PUBLICATION <br class='block lg:hidden'/>SUBSCRIPTION`) || ''}}></div>
+        </div>
         <form className="row row-gap-0 flex-nowrap items-end justify-center"
         onSubmit={(e)=>{
           e.preventDefault()
@@ -78,7 +85,7 @@ function Footer(props:TypeProps, ref:React.ReactNode){
           })
         }}>
           <div className="col-12 shrink" style={{maxWidth:'220px'}}>
-            <input id="SubscriptionInputFooter" className="serif h-[44px] w-full border-b border-golden-700 bg-transparent p-0 pb-2 text-center placeholder:text-gray-700" type="email" placeholder="Your email" required
+            <input id="SubscriptionInputFooter" className="serif h-[44px] w-full border-b border-golden-700 bg-transparent p-0 pb-2 text-center placeholder:text-gray-700" type="email" placeholder={__('Your email')} required
             value={form.email}
             onChange={(e)=>{
               setForm({
@@ -94,7 +101,9 @@ function Footer(props:TypeProps, ref:React.ReactNode){
               {
                 submitLoading
                   ? <Loading style={{width:'44px'}} fill="var(--color-golden-900)"/>
-                  : <Button id="SubscriptionButtonFooter" type="submit" className="rounded-none border border-golden-700 bg-major-900 text-golden-700 hover:bg-golden-700 hover:text-white active:bg-golden-700 active:text-white">SUBMIT</Button>
+                  : <Button id="SubscriptionButtonFooter" type="submit" className="rounded-none border border-golden-700 bg-major-900 text-golden-700 hover:bg-golden-700 hover:text-white active:bg-golden-700 active:text-white">
+                    { __('SUBMIT') }
+                  </Button>
               }
             </div>
           }
@@ -106,25 +115,35 @@ function Footer(props:TypeProps, ref:React.ReactNode){
           <div className="lg:col-8 col-12">
             <div className="row lg:row-gap-8">
               <div className="col-12 lg:col-auto lg:border-r">
-                <LinkWithLang className="btn-opacity block py-2.5 leading-none lg:py-0" href="/QA" lang={lang}>Q<span className="text-[13px]">&</span>A</LinkWithLang>
+                <LinkWithLang className="btn-opacity block py-2.5 leading-none lg:py-0" href="/QA" lang={lang}>
+                  Q<span className='text-[13px]'>&</span>A
+                </LinkWithLang>
               </div>
 
               {
                 externalLinks?.career && <div className="col-12 lg:col-auto lg:border-r">
-                  <a className="btn-opacity block py-2.5 leading-none lg:py-0" href={externalLinks?.career} target="_blank">Career</a>
+                  <a className="btn-opacity block py-2.5 leading-none lg:py-0" href={externalLinks?.career} target="_blank">
+                    { __('Career') }
+                  </a>
                 </div>
               }
 
               {
                 CONTENT_TYPE === 'hq' && <div className="col-12 lg:col-auto lg:border-r">
-                  <LinkWithLang className="btn-opacity block py-2.5 leading-none lg:py-0" href="/investor" lang={lang}>Investor</LinkWithLang>
+                  <LinkWithLang className="btn-opacity block py-2.5 leading-none lg:py-0" href="/investor" lang={lang}>
+                    { __('Investor') }
+                  </LinkWithLang>
                 </div>
               }
               <div className="col-12 lg:col-auto lg:border-r">
-                <LinkWithLang className="btn-opacity block py-2.5 leading-none lg:py-0" href="/privacy-policy" lang={lang}>Privacy Policy</LinkWithLang>
+                <LinkWithLang className="btn-opacity block py-2.5 leading-none lg:py-0" href="/privacy-policy" lang={lang}>
+                  { __('Privacy Policy') }
+                </LinkWithLang>
               </div>
               <div className="col-12 lg:col-auto">
-                <LinkWithLang className="btn-opacity block py-2.5 leading-none lg:py-0" href="/terms-and-conditions" lang={lang}>Terms and Conditions</LinkWithLang>
+                <LinkWithLang className="btn-opacity block py-2.5 leading-none lg:py-0" href="/terms-and-conditions" lang={lang}>
+                  { __('Terms and Conditions') }
+                </LinkWithLang>
               </div>
             </div>
           </div>

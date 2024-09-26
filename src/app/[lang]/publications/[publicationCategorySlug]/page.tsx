@@ -3,10 +3,12 @@ const HQ_API_BASE = process.env.NEXT_PUBLIC_HQ_API_BASE
 const HQ_API_URL = `${HQ_API_BASE}graphql`
 
 import Image from "next/image"
+
 import LinkWithLang from '~/components/custom/LinkWithLang'
+import { fetchGQL } from "~/lib/apollo/server"
 import { isEmpty } from '~/lib/utils'
-import { fetchGQL } from '~/lib/apollo'
 import { QueryPublicationCategory } from '~/queries/pages/publications-[publicationCategorySlug].gql'
+
 import SingleCategory from "../(sections)/SingleCategory"
 
 interface TypeProps {

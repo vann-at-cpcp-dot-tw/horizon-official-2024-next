@@ -3,16 +3,23 @@ const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 const CONTENT_TYPE = process.env.NEXT_PUBLIC_CONTENT_TYPE || 'hq'
 const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
 
-import Image from "next/image"
 import { Suspense, useEffect, useMemo } from 'react'
-import { useStore } from '~/store'
-import { useDomNodeSize } from 'vanns-common-modules/dist/use/react'
+
+import Image from "next/image"
 import { useParams, usePathname } from "next/navigation"
-import { twMerge } from 'tailwind-merge'
-import MainMenu from "./MainMenu"
-import LinkWithLang from "./LinkWithLang"
+import { useRouter } from "next/navigation"
 import { useWindowScroll } from 'react-use'
+import { twMerge } from 'tailwind-merge'
 import { usePathnameWithoutLang } from 'vanns-common-modules/dist/use/next'
+import { useDomNodeSize } from 'vanns-common-modules/dist/use/react'
+import { useTranslate } from "vanns-common-modules/dist/use/react"
+
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "~/components/ui/dropdown-menu"
+import { useStore } from '~/store'
+import { i18n } from "~~/i18n.config"
+
+import LinkWithLang from "./LinkWithLang"
+import MainMenu from "./MainMenu"
 
 interface TypeProps {
   className?: string
@@ -22,6 +29,8 @@ interface TypeState {}
 
 function Header(props:TypeProps, ref:React.ReactNode){
   const store = useStore()
+  const router = useRouter()
+  const { __ } = useTranslate()
   const { size:headerSize, setNode:setHeaderNode } = useDomNodeSize()
   const { lang } = useParams()
   const { y:pageScrollY } = useWindowScroll()
@@ -93,7 +102,33 @@ function Header(props:TypeProps, ref:React.ReactNode){
           </div>
 
           <div className="col-auto -mr-1">
-            <LinkWithLang className="btn-opacity text-[15px] text-minor-900" href={CONTENT_TYPE === 'hq' ?'/dealers' :'/contact'} lang={lang}>CONTACT</LinkWithLang>
+            <div className="row row-gap-4 flex-nowrap items-center">
+              {
+                i18n.locales.length > 1 && <div className="col-auto">
+                  <DropdownMenu>
+                    <DropdownMenuTrigger><i className="bi bi-globe2 btn text-[21px]"></i></DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                      {
+                        i18n.locales.map((node, index)=>{
+                          return <DropdownMenuItem key={index}
+                          className={lang === node.shortCode ?'pointer-events-none bg-major text-white' :'cursor-pointer'}
+                          onClick={()=>{
+                            localStorage.setItem('lang', node.shortCode)
+                            router.push(`/${node.shortCode}${pathnameWithoutLang}`)
+                            // window.location.href = `/${node.shortCode}${pathnameWithoutLang}`
+                          }}>
+                            { node.name }
+                          </DropdownMenuItem>
+                        })
+                      }
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </div>
+              }
+              <div className="col-auto">
+                <LinkWithLang className="btn-opacity text-[15px] text-minor-900" href={CONTENT_TYPE === 'hq' ?'/dealers' :'/contact'} lang={lang}>{ __('CONTACT') }</LinkWithLang>
+              </div>
+            </div>
           </div>
         </div>
       </div>

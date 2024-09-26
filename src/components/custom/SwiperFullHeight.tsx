@@ -1,16 +1,18 @@
 "use client"
-
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
 import { Suspense, useState, useEffect } from 'react'
+
 import Image from "next/image"
-import LinkWithLang from '~/components/custom/LinkWithLang'
-import { twMerge } from 'tailwind-merge'
-import { isEmpty, calcSizeByRatio } from '~/lib/utils'
-import { useDomNodeSize } from 'vanns-common-modules/dist/use/react'
-import { Swiper, SwiperSlide } from 'swiper/react'
 import { EffectFade } from 'swiper/modules'
+import { Swiper, SwiperSlide } from 'swiper/react'
 import { SwiperClass } from "swiper/react"
+import { twMerge } from 'tailwind-merge'
+import { useDomNodeSize } from 'vanns-common-modules/dist/use/react'
+
+import LinkWithLang from '~/components/custom/LinkWithLang'
+import { isEmpty, calcSizeByRatio } from '~/lib/utils'
+
 import 'swiper/css/effect-fade'
 import IconMenuBack from "./icons/MenuBack"
 
@@ -26,9 +28,6 @@ interface TypeProps {
 interface TypeState {}
 
 function SwiperFullHeight(props:TypeProps, ref:React.ReactNode){
-  // const store = useStore()
-  // const router = useRouter()
-  // const viewport = useWindowSize()
   const { className } = props
   const [swiper, setSwiper] = useState<SwiperClass>(({} as SwiperClass))
   const [realIndex, setRealIndex] = useState(0)

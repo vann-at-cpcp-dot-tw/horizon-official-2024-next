@@ -1,10 +1,11 @@
+import { Suspense } from 'react'
 
 import Image from "next/image"
-import { Suspense } from 'react'
-import { isEmpty } from '~/lib/utils'
 import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'
-import LinkWithLang from '~/components/custom/LinkWithLang'
 import { genImageBlurHash } from 'vanns-common-modules/dist/lib/next'
+
+import LinkWithLang from '~/components/custom/LinkWithLang'
+import { isEmpty } from '~/lib/utils'
 
 interface TypeProps {
   lang: string

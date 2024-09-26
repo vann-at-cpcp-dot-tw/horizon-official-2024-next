@@ -1,20 +1,19 @@
 "use client"
-
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 const postsPerPage = 3
 
 import { Suspense, useMemo } from 'react'
-import Image from "next/image"
-import LinkWithLang from '~/components/custom/LinkWithLang'
-import { twMerge } from 'tailwind-merge'
-import { isEmpty } from '~/lib/utils'
+
 import { useQuery } from "@apollo/client"
+import Image from "next/image"
+import { twMerge } from 'tailwind-merge'
+
+import LinkWithLang from '~/components/custom/LinkWithLang'
+import { isEmpty } from '~/lib/utils'
 import { QueryRelatedPosts } from '~/queries/pages/news-[categorySlug]-[postSlug].gql'
+
 import NewsListItem from "./ListItem"
 import { formatCategories } from "./ListItem"
-// import { useRouter } from 'next/navigation'
-// import { useStore } from '~/store'
-// import useWindowSize from '~/use/useWindowSize"
 
 interface TypeProps {
   categorySlug: string

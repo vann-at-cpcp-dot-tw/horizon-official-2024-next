@@ -1,12 +1,13 @@
 "use client"
-
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
 import { useEffect, useRef } from 'react'
-import { twMerge } from 'tailwind-merge'
-import { isEmpty, numberFormat } from '~/lib/utils'
+
 import { animate, useInView } from "framer-motion"
+import { twMerge } from 'tailwind-merge'
 import { useWindowSize } from 'vanns-common-modules/dist/use/react'
+
+import { isEmpty, numberFormat } from '~/lib/utils'
 
 interface TypeProps {
   from: number

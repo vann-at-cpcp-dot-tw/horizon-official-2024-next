@@ -5,15 +5,18 @@ const HQ_API_BASE = process.env.NEXT_PUBLIC_HQ_API_BASE
 const HQ_API_URL = `${HQ_API_BASE}graphql`
 
 import Image from "next/image"
+import { redirect } from "next/navigation"
+import T from 'vanns-common-modules/dist/components/react/T'
+
 import LinkWithLang from '~/components/custom/LinkWithLang'
+import { Button } from '~/components/ui/button'
+import buttonStyles from '~/components/ui/button.module.sass'
+import { fetchGQL } from "~/lib/apollo/server"
 import { isEmpty } from '~/lib/utils'
 import { QueryDealersWithRegion } from '~/queries/pages/dealers.gql'
-import { fetchGQL } from "~/lib/apollo"
-import buttonStyles from '~/components/ui/button.module.sass'
-import { Button } from '~/components/ui/button'
-import Regions from "./(templates)/Regions"
-import { redirect } from "next/navigation"
 import { i18n } from "~~/i18n.config"
+
+import Regions from "./(templates)/Regions"
 
 interface TypeProps {
   params: {
@@ -45,10 +48,14 @@ export default async function PageDealers({params}:TypeProps){
   return <main className="pb-28">
     <Regions className="pb-28 pt-16" regions={dealerRegions} />
     <div className="container text-center">
-      <div className="serif mb-6 text-[32px] text-minor-900">Personal <i>and</i>  Virtual Tours  <i>available.</i></div>
+      <div className="serif mb-6 text-[32px] text-minor-900">
+        <T text="Personal and Virtual Tours <i>available.</i>" />
+      </div>
       <div className="flex justify-center">
         <LinkWithLang href="/contact" lang={lang}>
-          <Button className={`${buttonStyles['rounded-golden']}`}>Contact Us</Button>
+          <Button className={`${buttonStyles['rounded-golden']}`}>
+            <T text="Contact Us" />
+          </Button>
         </LinkWithLang>
       </div>
     </div>

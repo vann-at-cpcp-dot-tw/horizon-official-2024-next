@@ -1,19 +1,23 @@
 "use client"
-
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
+
 import { Suspense, useEffect, useMemo, useState } from 'react'
+
 import Image from "next/image"
-import LinkWithLang from '~/components/custom/LinkWithLang'
-import Loading from '~/components/custom/icons/Loading'
-import { twMerge } from 'tailwind-merge'
-import { isEmpty, convertYoutubeUrlToEmbed } from '~/lib/utils'
-import SwiperFullHeight from '~/components/custom/SwiperFullHeight'
-import SpecTable from '~/components/custom/SpecTable'
-import GAGalleryNav from "./GAGalleryNav"
 import { useRouter, usePathname } from 'next/navigation'
-import ContentLightbox from '~/components/custom/ContentLightbox'
-import { useWindowSize } from 'vanns-common-modules/dist/use/react'
+import { twMerge } from 'tailwind-merge'
 import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'
+import { useWindowSize } from 'vanns-common-modules/dist/use/react'
+import { useTranslate } from "vanns-common-modules/dist/use/react"
+
+import ContentLightbox from '~/components/custom/ContentLightbox'
+import Loading from '~/components/custom/icons/Loading'
+import LinkWithLang from '~/components/custom/LinkWithLang'
+import SpecTable from '~/components/custom/SpecTable'
+import SwiperFullHeight from '~/components/custom/SwiperFullHeight'
+import { isEmpty, convertYoutubeUrlToEmbed } from '~/lib/utils'
+
+import GAGalleryNav from "./GAGalleryNav"
 
 interface TypeProps {
   hullName: string
@@ -68,30 +72,31 @@ function HullDetail(props:TypeProps, ref:React.ReactNode){
   const { className, background='var(--color-golden-300)' } = props
   const router = useRouter()
   const pathname = usePathname()
+  const { __ } = useTranslate()
   const hullNav = useMemo(()=>{
     const nav = [
       {
-        label: 'Exterior',
+        label: __('Exterior') as string,
         hasContent: !isEmpty(props?.exteriorImages?.[0]?.image?.node?.mediaItemUrl)
       },
       {
-        label: 'Interior',
+        label: __('Interior') as string,
         hasContent: !isEmpty(props?.interiorImages?.[0]?.image?.node?.mediaItemUrl)
       },
       {
-        label: 'SPECS',
+        label: __('SPECS') as string,
         hasContent: Object?.values?.(props?.specTerms || {})?.some?.((node)=>(node.metric || node.imperial))
       },
       {
-        label: 'GA',
+        label: __('GA') as string,
         hasContent: props?.generalArrangementImages?.some?.((node)=>node?.image?.node?.mediaItemUrl)
       },
       {
-        label: 'VR',
+        label: __('VR') as string,
         hasContent: !isEmpty(props?.vrEmbedUrl)
       },
       {
-        label: 'Videos',
+        label: __('Videos') as string,
         hasContent: props?.embedVideosGallery?.some?.((node)=>node.embedUrl)
       }
     ].filter((node)=>node.hasContent)
@@ -103,6 +108,7 @@ function HullDetail(props:TypeProps, ref:React.ReactNode){
     props?.generalArrangementImages,
     props?.vrEmbedUrl,
     props?.embedVideosGallery,
+    __
   ])
 
   const [activeSection, setActiveSection] = useState('')

@@ -3,12 +3,15 @@ const HQ_API_BASE = process.env.NEXT_PUBLIC_HQ_API_BASE
 const HQ_API_URL = `${HQ_API_BASE}graphql`
 
 import Image from "next/image"
-import { fetchGQL } from '~/lib/apollo'
-import { QueryMilestone } from '~/queries/components/milestone.gql'
-import SwiperMilestone from "./(sections)/SwiperMilestone"
-import LinkWithLang from '~/components/custom/LinkWithLang'
+import T from 'vanns-common-modules/dist/components/react/T'
 import { genImageBlurHash } from 'vanns-common-modules/dist/lib/next'
+
 import ContentLightbox from '~/components/custom/ContentLightbox'
+import LinkWithLang from '~/components/custom/LinkWithLang'
+import { fetchGQL } from "~/lib/apollo/server"
+import { QueryMilestone } from '~/queries/components/milestone.gql'
+
+import SwiperMilestone from "./(sections)/SwiperMilestone"
 
 export default async function PageHome({
   params
@@ -42,7 +45,7 @@ export default async function PageHome({
   background="#040922"
   stickyHeader={
     <div className="container py-10">
-      <div className="serif text-center text-[24px] text-white">Milestone</div>
+      <div className="serif text-center text-[24px] text-white"><T text="Milestone"/></div>
     </div>
   }
   closeIcon={

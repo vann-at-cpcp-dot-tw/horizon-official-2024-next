@@ -5,12 +5,14 @@ const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
 const postsPerPage = 30
 
 import Image from "next/image"
-import LinkWithLang from '~/components/custom/LinkWithLang'
 import { redirect } from "next/navigation"
+import T from 'vanns-common-modules/dist/components/react/T'
+
+import List from '~/app/[lang]/brokerage/(templates)/List'
+import LinkWithLang from '~/components/custom/LinkWithLang'
+import { fetchGQL } from "~/lib/apollo/server"
 import { isEmpty } from '~/lib/utils'
 import { QueryCharterPage } from '~/queries/pages/charter.gql'
-import { fetchGQL } from '~/lib/apollo'
-import List from '~/app/[lang]/brokerage/(templates)/List'
 
 interface TypeProps {
   params: {
@@ -21,7 +23,7 @@ interface TypeState {}
 
 async function PageCharters({params}:TypeProps){
 
-  const access = CONTENT_TYPE === 'dealer' && DEALER_REGION === 'AU'
+  const access = CONTENT_TYPE === 'dealer' && ['AU', 'EU'].includes(DEALER_REGION as string)
   if( !access ){
     redirect('/')
   }
@@ -38,7 +40,9 @@ async function PageCharters({params}:TypeProps){
 
   return <main className="pb-24">
 
-    <div className="container serif my-10 text-center text-[32px] text-minor-900">Charter</div>
+    <div className="container serif my-10 text-center text-[32px] text-minor-900">
+      <T text="Charter" />
+    </div>
 
     <List
     queryPostType="charter"

@@ -1,16 +1,17 @@
 const { defineConfig } = require('eslint-define-config')
 
 module.exports = defineConfig({
-  extends: [
-    "next/core-web-vitals",
-    "plugin:tailwindcss/recommended"
-  ],
   globals: {
     $: 'readonly',
     jQuery: 'readonly',
     _: 'readonly',
     lodash: 'readonly',
   },
+  extends: [
+    "next/core-web-vitals",
+    "plugin:tailwindcss/recommended"
+  ],
+  plugins: ["import"],
   settings: {
     tailwindcss: {
       removeDuplicates: true,
@@ -19,6 +20,25 @@ module.exports = defineConfig({
     }
   },
   rules: {
+    "import/order": [
+      "error",
+      {
+        "groups": ["builtin", "external", "internal"],
+        "pathGroups": [
+          {
+            "pattern": "react",
+            "group": "external",
+            "position": "before"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": ["react"],
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
+      }
+    ],
     semi: ['error', 'never', { beforeStatementContinuationChars: 'always' }],
     indent: [
       'warn',

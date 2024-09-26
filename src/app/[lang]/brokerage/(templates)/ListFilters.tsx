@@ -1,17 +1,20 @@
 
 "use client"
-
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 const CONTENT_TYPE = process.env.NEXT_PUBLIC_CONTENT_TYPE || 'hq'
 const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
 
 import { Suspense, useCallback } from 'react'
+
 import Image from "next/image"
-import LinkWithLang from '~/components/custom/LinkWithLang'
-import { twMerge } from 'tailwind-merge'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { usePathnameWithoutLang } from 'vanns-common-modules/dist/use/next'
+import { twMerge } from 'tailwind-merge'
 import { isEmpty } from "vanns-common-modules/dist/lib/utils"
+import { usePathnameWithoutLang } from 'vanns-common-modules/dist/use/next'
+import { useTranslate } from "vanns-common-modules/dist/use/react"
+
+import LinkWithLang from '~/components/custom/LinkWithLang'
+
 interface TypeProps {
   yachtConditions?: {
     slug: string
@@ -30,11 +33,10 @@ interface TypeState {}
 
 
 function ListFilters(props:TypeProps, ref:React.ReactNode){
-  // const store = useStore()
-  const router = useRouter()
-  // const viewport = useWindowSize()
-  const { className } = props
 
+  const router = useRouter()
+  const { className } = props
+  const { __ } = useTranslate()
   const searchParams = useSearchParams()
   const pathname = usePathnameWithoutLang()
   const queryCondition = searchParams.get('condition')
@@ -69,7 +71,7 @@ function ListFilters(props:TypeProps, ref:React.ReactNode){
   return <Suspense fallback={null}>
     <div className={twMerge('', className)}>
       <div className="container mb-10">
-        <div className="row justify-center lg:flex-nowrap">
+        <div className="row lg:flex-nowrap lg:justify-center">
           {
             props?.yachtConditions && <div className="col-6 shrink lg:col-auto">
               <div className="w-screen max-w-full lg:max-w-[177px]">
@@ -78,7 +80,7 @@ function ListFilters(props:TypeProps, ref:React.ReactNode){
                 onChange={(e)=>{
                   router.push(`${pathname}?${genQueryString({key:'condition', value:e.target.value})}`, {scroll:false})
                 }}>
-                  <option value="">All Categories</option>
+                  <option value="">{ __('All Categories') }</option>
                   {
                     props.yachtConditions.map((node, index)=>{
                       return <option key={index} value={node.slug}>{node.name}</option>
@@ -97,10 +99,10 @@ function ListFilters(props:TypeProps, ref:React.ReactNode){
                 onChange={(e)=>{
                   router.push(`${pathname}?${genQueryString({key:'length', value:e.target.value})}`, {scroll:false})
                 }}>
-                  <option value="">All Lengths</option>
+                  <option value="">{ __('All Lengths') }</option>
                   {
                     props.lengthOptions.map((node, index)=>{
-                      return <option key={index} value={`${node?.minValue},${node?.maxValue}`}>{node?.label}</option>
+                      return <option key={index} value={`${node?.minValue || 0},${node?.maxValue || 0}`}>{node?.label}</option>
                     })
                   }
                 </select>
@@ -116,7 +118,7 @@ function ListFilters(props:TypeProps, ref:React.ReactNode){
                 onChange={(e)=>{
                   router.push(`${pathname}?${genQueryString({key:'year', value:e.target.value})}`, {scroll:false})
                 }}>
-                  <option value="">All Years</option>
+                  <option value="">{ __('All Years') }</option>
                   {
                     props?.yearOptions?.map((node, index)=>{
                       return <option key={index} value={`${node}`}>{node}</option>

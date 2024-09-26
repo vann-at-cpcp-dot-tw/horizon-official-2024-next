@@ -3,14 +3,17 @@ const HQ_API_BASE = process.env.NEXT_PUBLIC_HQ_API_BASE
 const HQ_API_URL = `${HQ_API_BASE}graphql`
 
 import Image from "next/image"
+import T from 'vanns-common-modules/dist/components/react/T'
+import { genImageBlurHash } from 'vanns-common-modules/dist/lib/next'
+
+import Breadcrumb from '~/components/custom/Breadcrumb'
 import LinkWithLang from '~/components/custom/LinkWithLang'
+import { fetchGQL } from "~/lib/apollo/server"
 import { isEmpty } from '~/lib/utils'
 import { QuerySinglePost, QueryPrevPosts, QueryNextPosts  } from '~/queries/pages/news-[categorySlug]-[postSlug].gql'
-import { fetchGQL } from '~/lib/apollo'
-import Breadcrumb from '~/components/custom/Breadcrumb'
+
 import PostSwiper from "./(templates)/PostSwiper"
 import RelatedPosts from "../../(templates)/RelatedPosts"
-import { genImageBlurHash } from 'vanns-common-modules/dist/lib/next'
 
 interface TypeProps {
   params: {
@@ -46,7 +49,7 @@ export default async function PageSinglePost({params}:TypeProps){
     <Breadcrumb className="pb-5 pt-2.5 lg:pt-10"
     list={[
       {
-        label: 'News',
+        label: <T text="News" />,
         href: '/news'
       },
       ...(
@@ -79,7 +82,9 @@ export default async function PageSinglePost({params}:TypeProps){
 
     <div className="container pb-5 text-center">
       <LinkWithLang href="/news" lang={lang}>
-        <span className="btn-text text-gray-700">Back to News</span>
+        <span className="btn-text text-gray-700">
+          <T text="Back to News" />
+        </span>
       </LinkWithLang>
     </div>
 

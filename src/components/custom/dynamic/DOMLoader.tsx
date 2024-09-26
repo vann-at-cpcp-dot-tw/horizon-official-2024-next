@@ -1,26 +1,17 @@
 "use client"
-
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
-
-import Image from "next/image"
 
 import { useEffect, useState } from 'react'
 
-// store
-import { useStore } from '~/store'
-
-// use
+import { motion } from 'framer-motion'
+import imagesLoaded from 'imagesloaded'
+import Image from "next/image"
+import NProgress from 'nprogress'
+import { useInterval } from 'react-use'
 import { twMerge } from 'tailwind-merge'
 
-// methods & components
 import { isEmpty } from '~/lib/utils'
-
-import imagesLoaded from 'imagesloaded'
-import { motion } from 'framer-motion'
-
-import { useInterval } from 'react-use'
-
-import NProgress from 'nprogress'
+import { useStore } from '~/store'
 import 'nprogress/nprogress.css'
 
 interface TypeProps {
@@ -105,7 +96,7 @@ function DOMLoader(props:TypeProps, ref:React.ReactNode){
       </div>
     </motion.div>
 
-    <motion.div className="absolute left-1/2 top-1/2 h-[1px] -translate-x-1/2 -translate-y-1/2 bg-[#002E4F]"
+    <motion.div className="absolute left-1/2 top-1/2 h-px -translate-x-1/2 -translate-y-1/2 bg-[#002E4F]"
         variants={{
           enter: {
             opacity: 0,

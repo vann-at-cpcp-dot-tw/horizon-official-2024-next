@@ -1,18 +1,16 @@
 "use client"
-
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
 import { Suspense, useEffect, useState, useCallback, useMemo } from 'react'
-import Image from "next/image"
-import LinkWithLang from '~/components/custom/LinkWithLang'
-import { twMerge } from 'tailwind-merge'
-import { isEmpty } from '~/lib/utils'
+
 import { useScroll, useMotionValueEvent } from "framer-motion"
+import Image from "next/image"
+import { twMerge } from 'tailwind-merge'
+import { useTranslate } from "vanns-common-modules/dist/use/react"
 
-
-// import { useRouter } from 'next/navigation'
+import LinkWithLang from '~/components/custom/LinkWithLang'
+import { isEmpty } from '~/lib/utils'
 import { useStore } from '~/store'
-// import useWindowSize from '~/use/useWindowSize"
 
 interface TypeProps {
   allowed?: string[]
@@ -36,8 +34,7 @@ function scrollTo(targetSelector:string, offset=0){
 function SectionNav(props:TypeProps, ref:React.ReactNode){
   const topOffset = 8
   const store = useStore()
-  // const router = useRouter()
-  // const viewport = useWindowSize()
+  const { __ } = useTranslate()
   const [navRefNode, setNavRefNode] = useState<HTMLDivElement | null>(null)
   const { className } = props
   const { scrollY } = useScroll()
@@ -84,7 +81,7 @@ function SectionNav(props:TypeProps, ref:React.ReactNode){
               <div className="btn text-gray-700"
               onClick={()=>{
                 scrollTo('#SECTION_EXTERIOR')
-              }}>Exterior</div>
+              }}>{ __('Exterior') }</div>
             </div>
           }
 
@@ -94,7 +91,7 @@ function SectionNav(props:TypeProps, ref:React.ReactNode){
               <div className="btn text-gray-700"
               onClick={()=>{
                 scrollTo('#SECTION_INTERIOR', -20)
-              }}>Interior</div>
+              }}>{ __('Interior') }</div>
             </div>
           }
 
@@ -103,7 +100,7 @@ function SectionNav(props:TypeProps, ref:React.ReactNode){
               <div className="btn text-gray-700"
               onClick={()=>{
                 scrollTo('#SECTION_FEATURES', -50)
-              }}>Features</div>
+              }}>{ __('Features') }</div>
             </div>
           }
 
@@ -112,7 +109,7 @@ function SectionNav(props:TypeProps, ref:React.ReactNode){
               <div className="btn text-gray-700"
               onClick={()=>{
                 scrollTo('#SECTION_PRICING_TOYS', -50)
-              }}>Pricing & Toys</div>
+              }}>{ __('Pricing & Toys') }</div>
             </div>
           }
 
@@ -121,7 +118,7 @@ function SectionNav(props:TypeProps, ref:React.ReactNode){
               <div className="btn text-gray-700"
               onClick={()=>{
                 scrollTo('#SECTION_SPEC', -50)
-              }}>SPEC</div>
+              }}>{ __('SPEC') }</div>
             </div>
           }
 
@@ -130,7 +127,7 @@ function SectionNav(props:TypeProps, ref:React.ReactNode){
               <div className="btn text-gray-700"
               onClick={()=>{
                 scrollTo('#SECTION_GA', -50)
-              }}>GA</div>
+              }}>{ __('GA') }</div>
             </div>
           }
 
@@ -139,7 +136,7 @@ function SectionNav(props:TypeProps, ref:React.ReactNode){
               <div className="btn text-gray-700"
               onClick={()=>{
                 scrollTo('#SECTION_VR', -50)
-              }}>VR</div>
+              }}>{ __('VR') }</div>
             </div>
           }
 
@@ -148,7 +145,7 @@ function SectionNav(props:TypeProps, ref:React.ReactNode){
               <div className="btn text-gray-700"
               onClick={()=>{
                 scrollTo('#SECTION_VIDEO', -50)
-              }}>Video</div>
+              }}>{ __('Video') }</div>
             </div>
           }
         </div>

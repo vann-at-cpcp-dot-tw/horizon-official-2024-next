@@ -1,24 +1,26 @@
 "use client"
-
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 const CONTENT_TYPE = process.env.NEXT_PUBLIC_CONTENT_TYPE || 'hq'
 const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
 const postsPerPage = 30
 
 import { Suspense, useState, useMemo, useEffect } from 'react'
+
+import { useLazyQuery } from "@apollo/client"
 import Image from "next/image"
-import LinkWithLang from '~/components/custom/LinkWithLang'
+import { useRouter, useParams, useSearchParams } from 'next/navigation'
 import { twMerge } from 'tailwind-merge'
+
+import Loading from '~/components/custom/icons/Loading'
+import LinkWithLang from '~/components/custom/LinkWithLang'
+import PageNav from '~/components/custom/PageNav'
 import { isEmpty } from '~/lib/utils'
+import { genSpecString } from "~/lib/utils"
 import { QueryBrokerages } from '~/queries/pages/brokerage.gql'
 import { QueryCharters } from '~/queries/pages/charter.gql'
-import { useLazyQuery } from "@apollo/client"
-import { useRouter, useParams, useSearchParams } from 'next/navigation'
-import { genSpecString } from "~/lib/utils"
+
 import ListFilters from "./ListFilters"
 import ListItem from "./ListItem"
-import PageNav from '~/components/custom/PageNav'
-import Loading from '~/components/custom/icons/Loading'
 
 interface TypeUsedYachtNode {
   [key:string]: any
@@ -49,8 +51,6 @@ interface TypeProps {
 interface TypeState {}
 
 function List(props:TypeProps, ref:React.ReactNode){
-  // const store = useStore()
-  // const viewport = useWindowSize()
   const { className } = props
   const params = useParams()
   const { lang } = params
@@ -61,10 +61,15 @@ function List(props:TypeProps, ref:React.ReactNode){
     notifyOnNetworkStatusChange: true,
     onCompleted: (data) => {
       setMergedList((prev)=>{
-        return [
-          ...(prev === null ?[] :prev),
-          ...data?.posts?.nodes
-        ]
+        const uniqueNodes = [...(prev === null ? [] : prev), ...data?.posts?.nodes]
+        const slugSet = new Set()
+        return uniqueNodes.filter(node => {
+          if (!slugSet.has(node.slug)) {
+            slugSet.add(node.slug)
+            return true
+          }
+          return false
+        })
       })
     },
   })
@@ -94,7 +99,7 @@ function List(props:TypeProps, ref:React.ReactNode){
       ),
       yachtYear: queryYachtYear,
       yachtPriceRange: queryYachtPrice,
-      yachtLengthRange: queryYachtYear,
+      yachtLengthRange: queryYachtLength,
       customOrderby: queryOrderby,
     }
   }, [queryCondition, queryYachtLength, queryYachtPrice, queryYachtYear, queryOrderby])

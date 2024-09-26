@@ -2,18 +2,19 @@ const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 const HQ_API_BASE = process.env.NEXT_PUBLIC_HQ_API_BASE
 const HQ_API_URL = `${HQ_API_BASE}graphql`
 
-import { Button } from '~/components/ui/button'
-import { fetchGQL } from '~/lib/apollo'
-import { QueryPageAboutHorizon } from '~/queries/pages/about-horizon.gql'
 import Image from "next/image"
 
-import KV from "./(sections)/KV"
-import Discover from "./(sections)/Discover"
-import NumericalData from "./(sections)/NumericalData"
-import Achievement from "./(sections)/Achievement"
-import History from "./(sections)/History"
 import ImageAutoPlaceholder from "~/components/custom/ImageAutoPlaceholder"
+import { Button } from '~/components/ui/button'
+import { fetchGQL } from "~/lib/apollo/server"
+import { QueryPageAboutHorizon } from '~/queries/pages/about-horizon.gql'
+
+import Achievement from "./(sections)/Achievement"
+import Discover from "./(sections)/Discover"
+import History from "./(sections)/History"
+import KV from "./(sections)/KV"
 import Milestone from "./(sections)/Milestone"
+import NumericalData from "./(sections)/NumericalData"
 
 export default async function PageAboutHorizon({
   params

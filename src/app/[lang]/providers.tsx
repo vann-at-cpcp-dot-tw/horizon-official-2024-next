@@ -1,4 +1,5 @@
 "use client"
+const API_URL = `${process.env.NEXT_PUBLIC_API_BASE}graphql`
 
 import '~/styles/index.sass'
 import 'swiper/css'
@@ -7,14 +8,14 @@ import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import 'swiper/css/scrollbar'
 
-
-const API_URL = `${process.env.NEXT_PUBLIC_API_BASE}graphql`
-
 import { useState, ReactNode, createContext } from 'react'
+
 import dynamic from "next/dynamic"
-import ApolloClientProvider from "~/providers/Apollo"
-import { TranslateProvider } from "vanns-common-modules/dist/providers/react/Translate"
 import { createScopeStoreProvider } from "vanns-common-modules/dist/providers/react"
+import { TranslateProvider } from "vanns-common-modules/dist/providers/react/Translate"
+
+import { ApolloProvider }  from "~/lib/apollo/client"
+
 const DOMLoader = dynamic(() => import('~/components/custom/dynamic/DOMLoader'), {ssr: false})
 
 export interface ICommonData {
@@ -45,12 +46,12 @@ export default function Providers({
   }
 }) {
 
-  return <ApolloClientProvider>
+  return <ApolloProvider>
     <CommonDataProvider state={commonData}>
       <TranslateProvider translation={translations}>
         <DOMLoader />
         { children }
       </TranslateProvider>
     </CommonDataProvider>
-  </ApolloClientProvider>
+  </ApolloProvider>
 }

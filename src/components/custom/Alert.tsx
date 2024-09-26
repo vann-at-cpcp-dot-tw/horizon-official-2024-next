@@ -8,8 +8,9 @@ import { twMerge } from 'tailwind-merge'
 
 import LinkWithLang from "~/components/custom/LinkWithLang"
 import { isEmpty } from '~/lib/utils'
-import Lightbox from "./Lightbox"
 import { useStore } from "~/store"
+
+import Lightbox from "./Lightbox"
 
 interface IProps {
   id: string

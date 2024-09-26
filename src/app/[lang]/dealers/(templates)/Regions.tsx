@@ -1,15 +1,17 @@
-
 "use client"
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 const CONTENT_TYPE = process.env.NEXT_PUBLIC_CONTENT_TYPE || 'hq'
 const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
 
 import { Suspense, useState } from 'react'
-import Image from "next/image"
-import LinkWithLang from '~/components/custom/LinkWithLang'
-import { twMerge } from 'tailwind-merge'
-import { isEmpty } from '~/lib/utils'
+
 import { motion, AnimatePresence } from "framer-motion"
+import Image from "next/image"
+import { twMerge } from 'tailwind-merge'
+import { useTranslate } from "vanns-common-modules/dist/use/react"
+
+import LinkWithLang from '~/components/custom/LinkWithLang'
+import { isEmpty } from '~/lib/utils'
 
 interface TypeProps {
   [key:string]: any
@@ -20,12 +22,15 @@ function RegionsNav(props:TypeProps, ref:React.ReactNode){
 
   const { className } = props
   const [activeRegionIndex, setActiveRegionIndex] = useState<number | null>(null)
+  const { __ } = useTranslate()
 
   return <Suspense fallback={null}>
     <div className={twMerge('', className)}>
       <div className="mb-16">
         <div className="container text-center">
-          <div className="serif mb-4 text-[32px] text-minor-900">Contact Your Local Representative</div>
+          <div className="serif mb-4 text-[32px] text-minor-900">
+            { __('Contact Your Local Representative') }
+          </div>
         </div>
         <div className="container overflow-auto overflow-y-hidden">
           <div className="row flex-nowrap">
@@ -33,14 +38,16 @@ function RegionsNav(props:TypeProps, ref:React.ReactNode){
               <div className={`btn ${activeRegionIndex === null ?'text-major-900' :'text-gray-500'}`}
             onClick={()=>{
               setActiveRegionIndex(null)
-            }}>Global</div>
+            }}>
+                { __('Global') }
+              </div>
             </div>
             {
               props?.regions?.map((node:{[key:string]:any}, index:number)=>{
                 return <div className="col-auto" key={index}
-              style={{
-                marginRight: index+1 === props?.regions?.length ?'auto' :'0'
-              }}>
+                style={{
+                  marginRight: index+1 === props?.regions?.length ?'auto' :'0'
+                }}>
                   <div className={`btn ${activeRegionIndex === index ?'text-major-900' :'text-gray-500'}`}
                 onClick={()=>{
                   setActiveRegionIndex(index)

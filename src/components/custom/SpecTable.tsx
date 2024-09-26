@@ -1,54 +1,14 @@
 "use client"
-
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
-import { Suspense, useMemo } from 'react'
-import { twMerge } from 'tailwind-merge'
-import { isEmpty } from '~/lib/utils'
-import { motion } from "framer-motion"
-import { genSpecString } from "~/lib/utils"
 
-const termsConfig = [
-  {
-    key: 'loa',
-    label: 'L.O.A',
-  },
-  {
-    key: 'lwl',
-    label: 'L.W.L'
-  },
-  {
-    key: 'beam',
-    label: 'Beam',
-  },
-  {
-    key: 'draft',
-    label: 'Draft',
-  },
-  {
-    key: 'engines',
-    label: 'Engines',
-  },
-  {
-    key: 'generator',
-    label: 'Generator',
-  },
-  {
-    key: 'displacement',
-    label: 'Displacement',
-  },
-  {
-    key: 'fuelCapacity',
-    label: 'Fuel Capacity',
-  },
-  {
-    key: 'waterCapacity',
-    label: 'Water Capacity',
-  },
-  {
-    key: 'cabins',
-    label: 'Cabins',
-  }
-]
+import { Suspense, useMemo } from 'react'
+
+import { motion } from "framer-motion"
+import { twMerge } from 'tailwind-merge'
+import { useTranslate } from "vanns-common-modules/dist/use/react"
+
+import { isEmpty } from '~/lib/utils'
+import { genSpecString } from "~/lib/utils"
 
 interface TypeTermListNode {
   key: string
@@ -74,10 +34,52 @@ interface TypeProps {
 interface TypeState {}
 
 function SpecTable(props:TypeProps, ref:React.ReactNode){
-  // const store = useStore()
-  // const router = useRouter()
-  // const viewport = useWindowSize()
   const { className } = props
+  const { __ } = useTranslate()
+  const termsConfig = useMemo(()=>{
+    return [
+      {
+        key: 'loa',
+        label: __('L.O.A') as string,
+      },
+      {
+        key: 'lwl',
+        label: __('L.W.L')  as string,
+      },
+      {
+        key: 'beam',
+        label: __('Beam') as string,
+      },
+      {
+        key: 'draft',
+        label: __('Draft') as string,
+      },
+      {
+        key: 'engines',
+        label: __('Engines') as string,
+      },
+      {
+        key: 'generator',
+        label: __('Generator') as string,
+      },
+      {
+        key: 'displacement',
+        label: __('Displacement') as string,
+      },
+      {
+        key: 'fuelCapacity',
+        label: __('Fuel Capacity') as string,
+      },
+      {
+        key: 'waterCapacity',
+        label: __('Water Capacity') as string,
+      },
+      {
+        key: 'cabins',
+        label: __('Cabins') as string,
+      }
+    ]
+  }, [__])
   const termList = useMemo(()=>{
     return termsConfig.reduce((acc:TypeTermListNode[], node, index)=>{
       const fieldKey = node.key

@@ -1,15 +1,15 @@
-
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 const CONTENT_TYPE = process.env.NEXT_PUBLIC_CONTENT_TYPE || 'hq'
 const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
 
 import Image from "next/image"
-import LinkWithLang from '~/components/custom/LinkWithLang'
-import { isEmpty } from '~/lib/utils'
 import { redirect } from "next/navigation"
-import { QueryTeamPage } from '~/queries/pages/team.gql'
-import { fetchGQL } from '~/lib/apollo'
 import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'
+
+import LinkWithLang from '~/components/custom/LinkWithLang'
+import { fetchGQL } from "~/lib/apollo/server"
+import { isEmpty } from '~/lib/utils'
+import { QueryTeamPage } from '~/queries/pages/team.gql'
 
 interface TypeProps {
   params: {

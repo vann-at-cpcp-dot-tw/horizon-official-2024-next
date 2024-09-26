@@ -3,13 +3,15 @@ const HQ_API_BASE = process.env.NEXT_PUBLIC_HQ_API_BASE
 const HQ_API_URL = `${HQ_API_BASE}graphql`
 
 import { Button } from '~/components/ui/button'
-import { fetchGQL } from '~/lib/apollo'
-import { QueryPageAboutTheGroup } from '~/queries/pages/about-the-group.gql'
+import { fetchGQL } from "~/lib/apollo/server"
 import { isEmpty } from '~/lib/utils'
-import KV from "./(sections)/KV"
+import { QueryPageAboutTheGroup } from '~/queries/pages/about-the-group.gql'
+
 import CompaniesGrids from "./(sections)/CompaniesGrids"
-import GroupIntroduction from "./(sections)/GroupIntroduction"
 import CompaniesIntros from "./(sections)/CompaniesIntros"
+import GroupIntroduction from "./(sections)/GroupIntroduction"
+import KV from "./(sections)/KV"
+
 interface TypeProps {
   params: {
     lang: string

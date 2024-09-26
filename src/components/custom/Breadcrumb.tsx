@@ -1,17 +1,18 @@
 "use client"
-
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
 import { Suspense } from 'react'
+
 import Image from "next/image"
-import LinkWithLang from '~/components/custom/LinkWithLang'
-import { twMerge } from 'tailwind-merge'
-import { isEmpty } from '~/lib/utils'
 import { useParams } from "next/navigation"
+import { twMerge } from 'tailwind-merge'
+
+import LinkWithLang from '~/components/custom/LinkWithLang'
+import { isEmpty } from '~/lib/utils'
 
 interface TypeProps {
   list: {
-    label: string
+    label: string | React.ReactNode
     href?: string
   }[]
   [key:string]: any

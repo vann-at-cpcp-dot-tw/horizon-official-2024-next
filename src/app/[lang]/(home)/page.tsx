@@ -1,15 +1,16 @@
 const HQ_API_BASE = process.env.NEXT_PUBLIC_HQ_API_BASE
 const HQ_API_URL = `${HQ_API_BASE}graphql`
 
-import { fetchGQL } from '~/lib/apollo'
-import { QueryHomePage, QueryHomeNews } from '~/queries/pages/home.gql'
 import dynamic from "next/dynamic"
 
+import ImageAutoPlaceholder from "~/components/custom/ImageAutoPlaceholder"
+import { fetchGQL } from "~/lib/apollo/server"
+import { QueryHomePage, QueryHomeNews } from '~/queries/pages/home.gql'
+
 import KV from "./(sections)/KV"
+import News from "./(sections)/News"
 import Series from "./(sections)/Series"
 import ComingEvents from "../news/(templates)/ComingEvents"
-import News from "./(sections)/News"
-import ImageAutoPlaceholder from "~/components/custom/ImageAutoPlaceholder"
 const Intro = dynamic(() => import("./(sections)/Intro"), {ssr: false})
 const IntroAfterSeries = dynamic(() => import("./(sections)/IntroAfterSeries"), {ssr: false})
 

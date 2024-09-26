@@ -5,17 +5,19 @@ const postsPerPage = 6
 
 import { headers } from 'next/headers'
 import Image from "next/image"
+import { genImageBlurHash } from 'vanns-common-modules/dist/lib/next'
+
 import LinkWithLang from '~/components/custom/LinkWithLang'
+import { fetchGQL } from "~/lib/apollo/server"
 import { isEmpty } from '~/lib/utils'
-import { fetchGQL } from '~/lib/apollo'
+import { formatPostCategories } from "~/lib/utils"
 import { QueryNewsPage } from '~/queries/pages/news.gql'
+
+import BrandPublication from "./(templates)/BrandPublication"
 import CoverStory from "./(templates)/CoverStory"
 import ListNewsPage from "./(templates)/ListNewsPage"
 import NewsPageEventsBlock from "./(templates)/NewsPageEventsBlock"
-import BrandPublication from "./(templates)/BrandPublication"
 import OwnerPerspective from "./(templates)/OwnerPerspective"
-import { genImageBlurHash } from 'vanns-common-modules/dist/lib/next'
-import { formatPostCategories } from "~/lib/utils"
 
 interface TypeProps {
   params: {

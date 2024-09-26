@@ -1,14 +1,13 @@
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
 import { Suspense, useMemo } from 'react'
-import Image from "next/image"
-import LinkWithLang from '~/components/custom/LinkWithLang'
-import { twMerge } from 'tailwind-merge'
-import { isEmpty } from '~/lib/utils'
 
-// import { useRouter } from 'next/navigation'
-// import { useStore } from '~/store'
-// import useWindowSize from '~/use/useWindowSize"
+import Image from "next/image"
+import { twMerge } from 'tailwind-merge'
+import T from 'vanns-common-modules/dist/components/react/T'
+
+import LinkWithLang from '~/components/custom/LinkWithLang'
+import { isEmpty } from '~/lib/utils'
 
 interface TypeProps {
   itemTitles: string[]
@@ -22,15 +21,15 @@ interface TypeProps {
 interface TypeState {}
 
 function GAGalleryNav(props:TypeProps, ref:React.ReactNode){
-  // const store = useStore()
-  // const router = useRouter()
-  // const viewport = useWindowSize()
+
   const { className } = props
 
   return <Suspense fallback={null}>
     <div className={twMerge('lg:mb-8 mb-6', className)}>
 
-      <div className="container serif mb-0 text-center text-[18px] text-gray-900 lg:mb-2 lg:text-[24px]">General Arrangement</div>
+      <div className="container serif mb-0 text-center text-[18px] text-gray-900 lg:mb-2 lg:text-[24px]">
+        <T text="General Arrangement" />
+      </div>
 
       <div className="container overflow-auto">
         <div className="row flex-nowrap">

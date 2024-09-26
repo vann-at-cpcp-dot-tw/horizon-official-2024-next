@@ -1,17 +1,16 @@
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
-import Image from "next/image"
-import dynamic from "next/dynamic"
 import { Suspense } from 'react'
-// import { useRouter } from 'next/navigation'
-// import { useStore } from '~/store'
-// import useWindowSize from '~/use/useWindowSize"
+
+import dynamic from "next/dynamic"
+import Image from "next/image"
 import { twMerge } from 'tailwind-merge'
+import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'
+import T from 'vanns-common-modules/dist/components/react/T'
+
+import ImageAutoPlaceholder from "~/components/custom/ImageAutoPlaceholder"
 import { isEmpty } from '~/lib/utils'
 const AniCounter = dynamic(() => import('~/components/custom/dynamic/AniCounter'), {ssr: false})
-
-import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'
-import ImageAutoPlaceholder from "~/components/custom/ImageAutoPlaceholder"
 
 export interface TypeCompanyNode {
   basic:{
@@ -78,7 +77,7 @@ function CompaniesGrids(props:TypeProps, ref:React.ReactNode){
                     }
                     {
                       node?.basic?.since && <div className="serif -mt-1 mb-1 text-center text-minor-900 lg:-mt-2">
-                        <span className="text-[17px] lg:text-[24px]">since</span><span className="text-[18px] lg:text-[27px]">&nbsp;{node?.basic?.since}</span>
+                        <span className="text-[17px] lg:text-[24px]"><T text="since"/></span><span className="text-[18px] lg:text-[27px]">&nbsp;{node?.basic?.since}</span>
                       </div>
                     }
                     {

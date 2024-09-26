@@ -1,16 +1,15 @@
 "use client"
-
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
 import { Suspense, useState } from 'react'
+
 import Image from "next/image"
-import LinkWithLang from '~/components/custom/LinkWithLang'
 import { twMerge } from 'tailwind-merge'
-import { isEmpty } from '~/lib/utils'
+import { useTranslate } from "vanns-common-modules/dist/use/react"
+
+import LinkWithLang from '~/components/custom/LinkWithLang'
 import SpecTable from '~/components/custom/SpecTable'
-// import { useRouter } from 'next/navigation'
-// import { useStore } from '~/store'
-// import useWindowSize from '~/use/useWindowSize"
+import { isEmpty } from '~/lib/utils'
 
 interface TypeProps {
   list: {
@@ -27,11 +26,10 @@ interface TypeProps {
 interface TypeState {}
 
 function SpecTableSection(props:TypeProps, ref:React.ReactNode){
-  // const store = useStore()
-  // const router = useRouter()
-  // const viewport = useWindowSize()
+
   const { className } = props
   const [active, setActive] = useState(0)
+  const { __ } = useTranslate()
 
   return <Suspense fallback={null}>
 
@@ -41,7 +39,7 @@ function SpecTableSection(props:TypeProps, ref:React.ReactNode){
     }}>
 
       <div className="container mb-6">
-        <div className="serif text-center text-[24px] text-gray-900">SPEC</div>
+        <div className="serif text-center text-[24px] text-gray-900">{ __('SPEC') }</div>
       </div>
 
       <div className="container">

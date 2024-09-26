@@ -4,17 +4,19 @@ const HQ_API_URL = `${HQ_API_BASE}graphql`
 
 import '~~/public/assets/external-import.css'
 
+import { GoogleTagManager, GoogleAnalytics } from '@next/third-parties/google'
+
+import CookiePolicy from "~/components/custom/CookiePolicy"
+import Footer from '~/components/custom/Footer'
+import Header from '~/components/custom/Header'
+import PageTransition from "~/components/custom/PageTransition"
+import { fetchGQL } from "~/lib/apollo/server"
 import { isEmpty } from '~/lib/utils'
-import { fetchGQL } from "~/lib/apollo"
 import { QueryCommonData } from '~/queries/categories/commonData.gql'
 import { QueryExternalLinks } from '~/queries/categories/externalLinks.gql'
 import { QueryTranslations } from '~/queries/components/translations.gql'
-import Header from '~/components/custom/Header'
-import Footer from '~/components/custom/Footer'
+
 import Providers from './providers'
-import PageTransition from "~/components/custom/PageTransition"
-import CookiePolicy from "~/components/custom/CookiePolicy"
-import { GoogleTagManager, GoogleAnalytics } from '@next/third-parties/google'
 
 async function getCommonData(){
   const data = await fetchGQL(QueryCommonData, {
@@ -31,7 +33,11 @@ async function getExternalLinks(){
 }
 
 async function getTranslations(){
-  const data = await fetchGQL(QueryTranslations)
+  const data = await fetchGQL(QueryTranslations, {
+    context: {
+      uri: HQ_API_URL
+    },
+  })
 
   // 整理成 key-value 形式
   const translations:any[] = data?.translationSettings?.translationFields?.translations || []

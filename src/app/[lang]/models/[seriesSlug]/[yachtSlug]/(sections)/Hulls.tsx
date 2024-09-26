@@ -4,14 +4,19 @@ const HQ_API_BASE = process.env.NEXT_PUBLIC_HQ_API_BASE
 const HQ_API_URL = `${HQ_API_BASE}graphql`
 
 import { Suspense, useEffect, useMemo } from 'react'
-import Image from "next/image"
-import LinkWithLang from '~/components/custom/LinkWithLang'
-import { twMerge } from 'tailwind-merge'
-import { isEmpty } from '~/lib/utils'
-import { useRouter, usePathname, useSearchParams, useParams } from "next/navigation"
-import HullDetail from "../(templates)/HullDetail"
+
 import { useQuery } from "@apollo/client"
+import Image from "next/image"
+import { useRouter, usePathname, useSearchParams, useParams } from "next/navigation"
+import { twMerge } from 'tailwind-merge'
+import { useTranslate } from "vanns-common-modules/dist/use/react"
+
+import LinkWithLang from '~/components/custom/LinkWithLang'
+import { isEmpty } from '~/lib/utils'
 import { QuerySingleHull } from '~/queries/categories/hull.gql'
+
+import HullDetail from "../(templates)/HullDetail"
+
 interface TypeProps {
   yachtName?: string
   list: {
@@ -30,7 +35,7 @@ function Hulls(props:TypeProps, ref:React.ReactNode){
   const searchParams = useSearchParams()
   const queryHullName  = decodeURI(searchParams.get('hull') || '')
   const pathname = usePathname()
-
+  const { __ } = useTranslate()
   const targetHull = useMemo(()=>{
     return props?.list?.find?.((node)=>node?.hullName?.toLowerCase() === queryHullName.toLowerCase())
   }, [queryHullName, props.list])
@@ -49,8 +54,8 @@ function Hulls(props:TypeProps, ref:React.ReactNode){
   return <Suspense fallback={null}>
     <div className={twMerge('lg:py-24 py-12', className)}>
       <div className="container mb-4">
-        <div className="mb-2 text-center text-gray-300">All Customization Detail</div>
-        <div className="serif text-center text-[32px] text-gray-900">View by Crafts</div>
+        <div className="mb-2 text-center text-gray-300">{ __('All Customization Detail') }</div>
+        <div className="serif text-center text-[32px] text-gray-900">{ __('View by Crafts') }</div>
       </div>
 
       <div className="container">

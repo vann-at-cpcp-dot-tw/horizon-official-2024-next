@@ -1,17 +1,17 @@
-
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 const HQ_API_BASE = process.env.NEXT_PUBLIC_HQ_API_BASE
 const HQ_API_URL = `${HQ_API_BASE}graphql`
 
 import Image from "next/image"
-import LinkWithLang from '~/components/custom/LinkWithLang'
-import { isEmpty } from '~/lib/utils'
-import { fetchGQL } from '~/lib/apollo'
-import { QueryPublicationsPage } from '~/queries/pages/publications.gql'
-import LocalDataProvider from "./(templates)/LocalDataProvider"
-import PageTop from './(templates)/PageTop'
 import { genImageBlurHash } from 'vanns-common-modules/dist/lib/next'
 
+import LinkWithLang from '~/components/custom/LinkWithLang'
+import { fetchGQL } from "~/lib/apollo/server"
+import { isEmpty } from '~/lib/utils'
+import { QueryPublicationsPage } from '~/queries/pages/publications.gql'
+
+import LocalDataProvider from "./(templates)/LocalDataProvider"
+import PageTop from './(templates)/PageTop'
 
 export interface TypePublicationNode {
   slug: string

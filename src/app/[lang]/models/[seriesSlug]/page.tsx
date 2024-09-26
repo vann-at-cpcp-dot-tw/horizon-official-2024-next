@@ -3,12 +3,15 @@ const HQ_API_BASE = process.env.NEXT_PUBLIC_HQ_API_BASE
 const HQ_API_URL = `${HQ_API_BASE}graphql`
 
 import { Suspense } from 'react'
+
 import { useRouter } from 'next/navigation'
-import { useStore } from '~/store'
 import { useWindowSize } from 'vanns-common-modules/dist/use/react'
+
+import { fetchGQL } from "~/lib/apollo/server"
 import { isEmpty } from '~/lib/utils'
-import { fetchGQL } from '~/lib/apollo'
 import { QuerySingleSeriesPage } from '~/queries/pages/models-[seriesSlug].gql'
+import { useStore } from '~/store'
+
 import SingleSeriesTop from "./(sections)/SingleSeriesTop"
 import YachtsSwiper from "./(sections)/YachtsSwiper"
 

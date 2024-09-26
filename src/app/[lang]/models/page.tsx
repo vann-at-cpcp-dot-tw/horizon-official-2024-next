@@ -3,10 +3,14 @@ const HQ_API_BASE = process.env.NEXT_PUBLIC_HQ_API_BASE
 const HQ_API_URL = `${HQ_API_BASE}graphql`
 
 import { Suspense } from 'react'
+
+import T from 'vanns-common-modules/dist/components/react/T'
+
+import { fetchGQL } from "~/lib/apollo/server"
 import { isEmpty } from '~/lib/utils'
-import SeriesList from "./(templates)/SeriesList"
-import { fetchGQL } from '~/lib/apollo'
 import { QueryYachtsWithSeries } from '~/queries/pages/models.gql'
+
+import SeriesList from "./(templates)/SeriesList"
 
 interface TypeProps {
   params: {
@@ -27,7 +31,9 @@ export default async function PageModels(props:TypeProps, ref:React.ReactNode){
 
   return <Suspense fallback={null}>
     <div className="py-8 lg:py-16">
-      <div className="serif text-center text-[32px] leading-[1.2] text-minor-900 lg:text-[40px]">Our Series <span className="font-300 italic">Defined</span></div>
+      <div className="serif text-center text-[32px] leading-[1.2] text-minor-900 lg:text-[40px]">
+        <T text="Our Series <i class='font-300'>Defined</i>" />
+      </div>
     </div>
     {
       translatedList && <SeriesList list={translatedList} lang={lang} />

@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 
 const path = require('path')
+
 const webpack = require('webpack')
 
 const nextConfig = {
@@ -51,7 +52,38 @@ const nextConfig = {
     ],
     // domains: ['wp-horizon-official.ddev.site']
   },
+  trailingSlash: false, // for exportPathMap
+  // 記憶體優化
+  productionBrowserSourceMaps: false,
+  experimental: {
+    serverSourceMaps: false,
+  },
+  // TODO: 目前是在建構期間不檢查語法，依賴開發者在推版前自行 npm run lint，待 next v15 時，若框架的記憶體管理有進一步優化，應嘗試拿掉
+  eslint: {
+    // Warning: This allows production builds to successfully complete even if
+    // your project has ESLint errors.
+    ignoreDuringBuilds: true,
+  },
+  typescript: {
+    // !! WARN !!
+    // Dangerously allow production builds to successfully complete even if
+    // your project has type errors.
+    // !! WARN !!
+    ignoreBuildErrors: true,
+  },
   webpack: (config, { dev, isServer })=>{
+    // build 的時候禁用 cache，減少 memory
+    // https://nextjs.org/docs/app/building-your-application/optimizing/memory-usage
+    if (config.cache && !dev) {
+      config.cache = Object.freeze({
+        type: 'memory',
+      })
+    }
+
+    if( dev ){
+      config.resolve.symlinks = false // 由於專案為了節約記憶體，改用 pnpm 來管理套件，但 pnpm 使用 symbol link 和嵌套結構來管理依賴，這與 npm 和 yarn 的扁平結構不同，這讓 git+ssh 的私有套件，在 dev 時會出現路徑解析錯誤，故加上這行避免問題
+    }
+
     config.module.rules.push(
       {
         test: /\.(graphql|gql)/,
@@ -87,7 +119,6 @@ const nextConfig = {
 
     return config
   },
-  trailingSlash: false, // for exportPathMap
   // exportPathMap: process.env.NODE_ENV === 'production'
   // ?async function(defaultPathMap, { dev, dir, outDir, distDir, buildId }){
   //     defaultPathMap['404'] = defaultPathMap['/_error']

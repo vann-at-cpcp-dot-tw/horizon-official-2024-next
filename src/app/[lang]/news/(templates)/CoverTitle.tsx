@@ -1,20 +1,18 @@
 "use client"
-
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 const CONTENT_TYPE = process.env.NEXT_PUBLIC_CONTENT_TYPE || 'hq'
 const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
 
 import { Suspense, useState, useEffect } from 'react'
-import Image from "next/image"
-import LinkWithLang from '~/components/custom/LinkWithLang'
-import { twMerge } from 'tailwind-merge'
-import { isEmpty } from '~/lib/utils'
-import { motion } from "framer-motion"
-import { useStore } from '~/store'
 
-// import { useRouter } from 'next/navigation'
-// import { useStore } from '~/store'
-// import useWindowSize from '~/use/useWindowSize"
+import { motion } from "framer-motion"
+import Image from "next/image"
+import { twMerge } from 'tailwind-merge'
+import { useTranslate } from "vanns-common-modules/dist/use/react"
+
+import LinkWithLang from '~/components/custom/LinkWithLang'
+import { isEmpty } from '~/lib/utils'
+import { useStore } from '~/store'
 
 interface TypeProps {
   title: string
@@ -24,10 +22,9 @@ interface TypeProps {
 }
 interface TypeState {}
 
-function CoverTitle(props:TypeProps, ref:React.ReactNode){
+export default function CoverTitle(props:TypeProps, ref:React.ReactNode){
   const store = useStore()
-  // const router = useRouter()
-  // const viewport = useWindowSize()
+  const { __ } = useTranslate()
   const { className } = props
   const [KVEnterAble, setKVEnterAble] = useState(false)
   useEffect(()=>{
@@ -81,7 +78,9 @@ function CoverTitle(props:TypeProps, ref:React.ReactNode){
         initial="exit"
         exit="exit"
         animate={KVEnterAble ?'enter' :'exit'}>
-          <LinkWithLang href={`/news/cover-story/${props.slug}`} lang={props.lang}>Cover Story</LinkWithLang>
+          <LinkWithLang href={`/news/cover-story/${props.slug}`} lang={props.lang}>
+            { __('Cover Story') }
+          </LinkWithLang>
         </motion.div>
         <motion.div className="serif btn relative text-center text-[28px] text-minor-900 hover:text-golden-900 lg:text-[43px]"
         variants={{
@@ -135,5 +134,3 @@ function CoverTitle(props:TypeProps, ref:React.ReactNode){
     </div>
   </Suspense>
 }
-
-export default CoverTitle
