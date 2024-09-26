@@ -102,7 +102,7 @@ function ListFilters(props:TypeProps, ref:React.ReactNode){
                   <option value="">{ __('All Lengths') }</option>
                   {
                     props.lengthOptions.map((node, index)=>{
-                      return <option key={index} value={`${node?.minValue},${node?.maxValue}`}>{node?.label}</option>
+                      return <option key={index} value={`${node?.minValue || 0},${node?.maxValue || 0}`}>{node?.label}</option>
                     })
                   }
                 </select>

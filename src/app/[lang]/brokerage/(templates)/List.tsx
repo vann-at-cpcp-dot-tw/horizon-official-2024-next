@@ -51,8 +51,6 @@ interface TypeProps {
 interface TypeState {}
 
 function List(props:TypeProps, ref:React.ReactNode){
-  // const store = useStore()
-  // const viewport = useWindowSize()
   const { className } = props
   const params = useParams()
   const { lang } = params
@@ -63,10 +61,15 @@ function List(props:TypeProps, ref:React.ReactNode){
     notifyOnNetworkStatusChange: true,
     onCompleted: (data) => {
       setMergedList((prev)=>{
-        return [
-          ...(prev === null ?[] :prev),
-          ...data?.posts?.nodes
-        ]
+        const uniqueNodes = [...(prev === null ? [] : prev), ...data?.posts?.nodes]
+        const slugSet = new Set()
+        return uniqueNodes.filter(node => {
+          if (!slugSet.has(node.slug)) {
+            slugSet.add(node.slug)
+            return true
+          }
+          return false
+        })
       })
     },
   })
@@ -96,7 +99,7 @@ function List(props:TypeProps, ref:React.ReactNode){
       ),
       yachtYear: queryYachtYear,
       yachtPriceRange: queryYachtPrice,
-      yachtLengthRange: queryYachtYear,
+      yachtLengthRange: queryYachtLength,
       customOrderby: queryOrderby,
     }
   }, [queryCondition, queryYachtLength, queryYachtPrice, queryYachtYear, queryOrderby])
