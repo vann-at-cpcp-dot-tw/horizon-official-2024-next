@@ -55,7 +55,7 @@ query QueryCharterPage(
           }
         }
       }
-      yachtConditions {
+      yachtConditions:yachtConditionsCharter {
         nodes {
           slug
           name
@@ -69,7 +69,7 @@ query QueryCharterPage(
       startCursor
     }
   }
-  yachtConditions(
+  yachtConditions:yachtConditionsCharter(
     first: 99,
     where: {
       language: $language
@@ -102,7 +102,7 @@ query QueryCharters(
       taxQuery: {
         relation: AND,
         taxArray: {
-          taxonomy: YACHTCONDITION,
+          taxonomy: YACHTCONDITIONCHARTER,
           field: SLUG,
           terms: $yachtConditions,
           operator: $yachtConditionsOperator
@@ -141,7 +141,7 @@ query QueryCharters(
           }
         }
       }
-      yachtConditions {
+      yachtConditions:yachtConditionsCharter {
         nodes {
           slug
           name

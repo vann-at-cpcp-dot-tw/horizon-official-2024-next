@@ -110,7 +110,7 @@ query QuerySingleCharter(
             }
         }
       }
-      yachtConditions {
+      yachtConditions:yachtConditionsCharter {
         nodes {
           translation(language: $translation){
             slug
