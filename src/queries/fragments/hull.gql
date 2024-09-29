@@ -70,11 +70,6 @@ fragment hullGeneralArrangementImages on YachtCustomFieldsHulls {
         mediaItemUrl
       }
     }
-    imageM {
-      node {
-        mediaItemUrl
-      }
-    }
   }
 }
 

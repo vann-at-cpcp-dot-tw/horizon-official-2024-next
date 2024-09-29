@@ -21,11 +21,6 @@ export interface TypeGAImageNode {
       mediaItemUrl: string
     }
   }
-  imageM?: {
-    node?: {
-      mediaItemUrl: string
-    }
-  }
 }
 interface TypeProps {
   list: {
@@ -44,13 +39,13 @@ function GAGallery(props:TypeProps, ref:React.ReactNode){
   const [activeType, setActiveType] = useState(0)
   const [activeItem ,setActiveItem] = useState(0)
   const [isOpen, setIsOpen] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+  const [isLightboxLoading, setIsLightboxLoading] = useState(false)
   const [imgPaddingBottom, setImgPaddingBottom] = useState('0')
   const images = useMemo<TypeGAImageNode[]>(()=>{
     return props?.list?.[activeType]?.images || []
   }, [props?.list, activeType])
   const imageItem = useMemo(()=>images?.[activeItem]?.image?.node?.mediaItemUrl, [images,activeItem])
-  const imageItemM = useMemo(()=>images?.[activeItem]?.imageM?.node?.mediaItemUrl, [images,activeItem])
-
 
   useEffect(()=>{
     if( isOpen ){
@@ -59,6 +54,11 @@ function GAGallery(props:TypeProps, ref:React.ReactNode){
       document.body.classList.remove('lb-open')
     }
   }, [isOpen])
+
+  useEffect(()=>{
+    setIsLoading(true)
+    setIsLightboxLoading(true)
+  }, [activeType, activeItem])
 
   return <Suspense fallback={null}>
     <div className={twMerge('', className)}>
@@ -91,13 +91,17 @@ function GAGallery(props:TypeProps, ref:React.ReactNode){
                 </div>
               </div>
               <Image
-              className="group-hover:brightness-50"
+              className={`group-hover:brightness-50 ${isLoading ?'opacity-0' :'opacity-1'}`}
               src={imageItem}
               fill={true}
               sizes="90vw"
+              style={{
+                transition: 'all 0.5s cubic-bezier(0.215, 0.610, 0.355, 1.000)'
+              }}
               onLoad={({ target }) => {
                 const { naturalWidth, naturalHeight } = target as HTMLImageElement
                 setImgPaddingBottom(`calc(100% / (${naturalWidth} / ${naturalHeight})`)
+                setIsLoading(false)
               }}
               alt="" />
             </div>
@@ -122,19 +126,16 @@ function GAGallery(props:TypeProps, ref:React.ReactNode){
               <div className="flex grow !flex-nowrap overflow-hidden">
                 <div className="size-full shrink px-5 pb-5 lg:px-10 lg:pb-10">
                   <div className="relative size-full">
-                    {
-                      (viewport.width && viewport.width <= 991) && imageItemM
-                        ?<div className="px-20">
-                          <Image
-                          src={imageItemM}
-                          fill={viewport.width && viewport.width >= 992 ?true :false}
-                          width={viewport.width && viewport.width >= 992 ?0 :1920}
-                          height={viewport.width && viewport.width >= 992 ?0 :1080}
-                          sizes="100vw"
-                          alt="" />
-                        </div>
-                        :<Image src={imageItem} fill={true} sizes="100vw" style={{objectFit: "contain"}} alt="" />
-                    }
+                    <Image className={`${isLightboxLoading ?'opacity-0' :'opacity-1'}`} src={imageItem} fill={true} sizes="100vw"
+                    style={{
+                      objectFit: "contain",
+                      objectPosition: "top",
+                      transition: 'all 0.5s cubic-bezier(0.215, 0.610, 0.355, 1.000)'
+                    }}
+                    alt=""
+                    onLoad={()=>{
+                      setIsLightboxLoading(false)
+                    }} />
                   </div>
                 </div>
               </div>

@@ -63,8 +63,8 @@ function Hulls(props:TypeProps, ref:React.ReactNode){
           <div className="row xl:row-gap-15 lg:row-gap-10 justify-center">
             {
               props?.list?.map((node, index)=>{
-                return <div className="col-auto" key={index}>
-                  <div className="btn serif py-3 text-[40px] italic text-gray-300 hover:text-major-900"
+                return <div className="col-auto shrink" key={index}>
+                  <div className="btn serif py-3 text-[23px] italic text-gray-300 hover:text-major-900 lg:text-[40px]"
                   onClick={()=>{
                     router.push(`${pathname}?hull=${node.hullName}`, {scroll:false})
                   }}>

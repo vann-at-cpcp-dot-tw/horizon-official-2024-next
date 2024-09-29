@@ -52,11 +52,6 @@ fragment yachtGeneralArrangementImages on YachtCustomFields {
           mediaItemUrl
         }
       }
-      imageM {
-        node {
-          mediaItemUrl
-        }
-      }
     }
   }
 }
