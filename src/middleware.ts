@@ -1,13 +1,14 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { isPathnameStartWithLang } from 'vanns-common-modules/dist/use/next/usePathnameWithoutLang'
-
-import { resolveRedirectUrlFromOldSite } from '~/old-site-redirect-rules'
 import { i18n } from '~~/i18n.config'
 
-export async function middleware(request:NextRequest){
+const oldSiteRedirectRules = require(`${process.env.OLD_SITE_REDIRECT_RULES_PATH}`)
 
+export async function middleware(request:NextRequest){
+  const { resolveRedirectUrlFromOldSite } = oldSiteRedirectRules
   const redirectUrlFromOldSite = resolveRedirectUrlFromOldSite(request)
+  console.log(111, redirectUrlFromOldSite)
   if( redirectUrlFromOldSite ){
     return NextResponse.redirect(redirectUrlFromOldSite as URL)
   }

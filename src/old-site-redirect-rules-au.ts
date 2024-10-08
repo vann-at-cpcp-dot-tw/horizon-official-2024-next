@@ -1,8 +1,8 @@
 import type { NextRequest } from 'next/server'
 
+//【舊官網導轉專用】
 export const resolveRedirectUrlFromOldSite = function(request:NextRequest){
   const pathname = request.nextUrl.pathname
-
   // A
   if(
     pathname.includes('/about-us/discover-horizon-yachts/')

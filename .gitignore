@@ -27,7 +27,9 @@ yarn-debug.log*
 yarn-error.log*
 
 # local env files
-.env*.local
+.env
+.env.*
+!.env.example
 
 # i18n setting
 i18n.config.ts
@@ -46,5 +48,5 @@ next-env.d.ts
 /public/*
 !/public/assets/
 
-# 舊官網網址導轉
-old-site-redirect-rules.ts
+# DDEV
+/.ddev/
