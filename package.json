@@ -5,12 +5,10 @@
   "scripts": {
     "dev": "cp ./env/.env.dev .env && next dev",
     "sdev": "cp ./env/.env.dev .env && next dev --experimental-https",
-
     "build:hq": "cp ./env/.env.prod.hq .env && next build",
     "build:au": "cp ./env/.env.prod.au .env && next build",
     "build:eu": "cp ./env/.env.prod.eu .env && next build",
     "build:us": "cp ./env/.env.prod.us .env && next build",
-
     "deploy:hq": "chmod +x deploy.sh && ./deploy.sh ./env/.env.deploy.hq",
     "deploy:au": "chmod +x deploy.sh && ./deploy.sh ./env/.env.deploy.au",
     "deploy:eu": "chmod +x deploy.sh && ./deploy.sh ./env/.env.deploy.eu",
@@ -44,7 +42,7 @@
     "react-fast-marquee": "^1.6.4",
     "react-query": "^3.39.3",
     "react-use": "^17.4.0",
-    "sharp": "^0.33.3",
+    "sharp": "^0.33.5",
     "swiper": "^11.0.5",
     "tailwind-merge": "^2.0.0",
     "tailwindcss-animate": "^1.0.7",
