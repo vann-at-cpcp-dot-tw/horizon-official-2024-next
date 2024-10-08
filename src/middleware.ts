@@ -9,7 +9,6 @@ const oldSiteRedirectRules = require(`${process.env.OLD_SITE_REDIRECT_RULES_PATH
 export async function middleware(request:NextRequest){
   const { resolveRedirectUrlFromOldSite } = oldSiteRedirectRules
   const redirectUrlFromOldSite = resolveRedirectUrlFromOldSite(request)
-  console.log(111, redirectUrlFromOldSite)
   if( redirectUrlFromOldSite ){
     return NextResponse.redirect(redirectUrlFromOldSite as URL)
   }
