@@ -60,9 +60,11 @@ echo "創建新的 tmp 資料夾..."
 mkdir tmp
 EOF
 
-# 使用 SCP 上傳 .next 資料夾，先上傳到 tmp 資料夾待命
+# 使用 SCP 上傳 .next 壓縮檔，先上傳到 tmp 資料夾待命
 echo "上傳 .next 資料夾到遠端主機..."
-scp -r .next "${SSH_USER_HOST}:${REMOTE_DIR}/tmp"
+tar -czf .next.tar.gz .next
+scp .next.tar.gz "${SSH_USER_HOST}:${REMOTE_DIR}/tmp"
+rm -rf .next.tar.gz
 
 # 上傳完成後，執行遠端命令
 ssh "${SSH_USER_HOST}" << EOF
@@ -78,12 +80,14 @@ fi
 echo "npm install"
 npm install
 
-if [ -d "tmp/.next" ]; then
-    echo "找到新的 .next (tmp/.next)，準備刪除舊的 .next 資料夾..."
+if [ -f "tmp/.next.tar.gz" ]; then
+    echo "找到新的 .next.tar.gz，準備解壓縮..."
     rm -rf .next
+    tar -xzf tmp/.next.tar.gz
+    mv .next tmp/
 else
-    echo "找不到 tmp/.next，請檢查上傳是否成功。"
-    exit 1  # 若找不到檔案，退出腳本並返回錯誤碼
+    echo "找不到 tmp/.next.tar.gz，請檢查上傳是否成功。"
+    exit 1
 fi
 
 echo "將新的 .next 移動到 ${REMOTE_DIR} 目錄..."

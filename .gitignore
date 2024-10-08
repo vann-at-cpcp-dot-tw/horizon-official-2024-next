@@ -50,3 +50,6 @@ next-env.d.ts
 
 # DDEV
 /.ddev/
+
+# deploy
+/tmp/
