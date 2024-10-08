@@ -28,13 +28,18 @@ if [ -z "$PM2_PROCESS_NAME" ]; then
     exit 1
 fi
 
+if [ -z "$BUILD_TARGET" ]; then
+    echo "錯誤：未定義 BUILD_TARGET 變數。"
+    exit 1
+fi
+
 # 刪除舊的 .next 資料夾並建置新的
 echo "刪除舊的 .next 資料夾..."
 rm -rf .next
 
 echo "開始建置新的 .next 資料夾..."
 npm install
-npm run build
+npm run build:${BUILD_TARGET}
 
 # 先連到主機，將舊的 tmp 資料夾清空
 ssh "${SSH_USER_HOST}" << EOF
@@ -50,7 +55,7 @@ EOF
 
 # 使用 SCP 上傳 .next 資料夾，先上傳到 tmp 資料夾待命
 echo "上傳 .next 資料夾到遠端主機..."
-scp -r .next "${SSH_USER_HOST}:/home/ec2-user/${REMOTE_DIR}/tmp"
+scp -r .next "${SSH_USER_HOST}:${REMOTE_DIR}/tmp"
 
 # 上傳完成後，執行遠端命令
 ssh "${SSH_USER_HOST}" << EOF
