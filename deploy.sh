@@ -89,7 +89,8 @@ else
     exit 1
 fi
 
-echo "將新的 .next 移動到 ${REMOTE_DIR} 目錄..."
+echo "將舊的 .next 資料夾刪除，並將 tmp/.next 移動到 ${REMOTE_DIR} ..."
+rm -rf .next
 mv tmp/.next .
 
 echo "pm2 restart..."
