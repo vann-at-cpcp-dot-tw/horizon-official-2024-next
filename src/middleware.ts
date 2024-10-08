@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { isPathnameStartWithLang } from 'vanns-common-modules/dist/use/next/usePathnameWithoutLang'
+
 import { i18n } from '~~/i18n.config'
 
 const oldSiteRedirectRules = require(`${process.env.OLD_SITE_REDIRECT_RULES_PATH}`)

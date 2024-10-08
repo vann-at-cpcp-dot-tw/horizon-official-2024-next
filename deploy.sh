@@ -38,8 +38,15 @@ echo "刪除舊的 .next 資料夾..."
 rm -rf .next
 
 echo "開始建置新的 .next 資料夾..."
-npm install
-npm run build:${BUILD_TARGET}
+if ! npm install; then
+    echo "npm install 失敗！"
+    exit 1
+fi
+
+if ! npm run build:${BUILD_TARGET}; then
+    echo "建置失敗！"
+    exit 1
+fi
 
 # 先連到主機，將舊的 tmp 資料夾清空
 ssh "${SSH_USER_HOST}" << EOF
@@ -79,7 +86,7 @@ else
     exit 1  # 若找不到檔案，退出腳本並返回錯誤碼
 fi
 
-echo "將新的 .next 移動到 living 目錄..."
+echo "將新的 .next 移動到 ${REMOTE_DIR} 目錄..."
 mv tmp/.next .
 
 echo "pm2 restart..."
