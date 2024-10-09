@@ -53,4 +53,6 @@ next-env.d.ts
 
 # deploy
 /tmp/
-pm2.js
+
+# pm2
+ecosystem.config.js
