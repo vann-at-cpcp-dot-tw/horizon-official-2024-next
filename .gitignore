@@ -53,3 +53,4 @@ next-env.d.ts
 
 # deploy
 /tmp/
+pm2.js
