@@ -12,25 +12,24 @@ if [ -f "${ENV_FILE}" ]; then
     export $(grep -v '^#' "${ENV_FILE}" | xargs)
 fi
 
-# 確保 REMOTE_DIR 變數已經定義
-if [ -z "$REMOTE_DIR" ]; then
-    echo "錯誤：未定義 REMOTE_DIR 變數。"
-    exit 1
+# 確保必要的變數已經定義
+for var in REMOTE_DIR SSH_USER_HOST PM2_PROCESS_NAME BUILD_COMMAND; do
+    if [ -z "${!var}" ]; then
+        echo "錯誤：未定義 $var 變數。"
+        exit 1
+    fi
+done
+
+# 先切換到 main 分支
+if ! git checkout main; then
+    echo "git checkout mian 失敗！"
+    exit 1  # 若 git checkout main 失敗，退出腳本並返回錯誤碼
 fi
 
-if [ -z "$SSH_USER_HOST" ]; then
-    echo "錯誤：未定義 SSH_USER_HOST 變數。"
-    exit 1
-fi
-
-if [ -z "$PM2_PROCESS_NAME" ]; then
-    echo "錯誤：未定義 PM2_PROCESS_NAME 變數。"
-    exit 1
-fi
-
-if [ -z "$BUILD_TARGET" ]; then
-    echo "錯誤：未定義 BUILD_TARGET 變數。"
-    exit 1
+# 拉最新的 code
+if ! git pull; then
+    echo "git pull 失敗！"
+    exit 1  # 若 git pull 失敗，退出腳本並返回錯誤碼
 fi
 
 # 刪除舊的 .next 資料夾並建置新的
@@ -43,7 +42,10 @@ if ! npm install; then
     exit 1
 fi
 
-if ! npm run build:${BUILD_TARGET}; then
+# 從環境變數中讀取 BUILD_COMMAND 並解碼 BUILD_COMMAND
+decoded_build_command=$(printf '%b' "${BUILD_COMMAND//%/\\x}")
+echo "執行建置命令: $decoded_build_command"
+if ! eval $decoded_build_command; then
     echo "建置失敗！"
     exit 1
 fi
