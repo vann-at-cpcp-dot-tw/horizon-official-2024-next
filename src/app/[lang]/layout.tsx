@@ -1,6 +1,7 @@
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 const HQ_API_BASE = process.env.NEXT_PUBLIC_HQ_API_BASE
 const HQ_API_URL = `${HQ_API_BASE}graphql`
+const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
 
 import '~~/public/assets/external-import.css'
 
@@ -68,10 +69,14 @@ export default async function RootLayout({
   const commonData = await getCommonData()
   const externalLinks = await getExternalLinks()
   const translations = await getTranslations()
-
+  const titleRegion: Record<string, string> = {
+    AU: 'Australia',
+    EU: 'Europe',
+    US: 'USA',
+  }
   return <html>
     <head>
-      <title>Horizon Yachts | Fifth Largest Global Custom Luxury Yacht Builder</title>
+      <title>{`Horizon Yachts ${titleRegion?.[DEALER_REGION as string] ?`${titleRegion[DEALER_REGION as string]} ` :''} | Fifth Largest Global Custom Luxury Yacht Builder`}</title>
       <meta name="description" content="From pioneering new yacht designs to employing the latest advanced composites technologies, Horizon simply backs style with substance." />
       <meta property="og:image" content="/assets/img/og.jpg" />
       <link rel="icon" type="image/x-icon" href="/assets/img/fav.png" />

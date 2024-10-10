@@ -4,13 +4,15 @@ import { isPathnameStartWithLang } from 'vanns-common-modules/dist/use/next/useP
 
 import { i18n } from '~~/i18n.config'
 
-const oldSiteRedirectRules = require(`${process.env.OLD_SITE_REDIRECT_RULES_PATH}`)
+const oldSiteRedirectRules = require(`./old-site-redirect-rules-${process.env.NEXT_PUBLIC_DEALER_REGION?.toLowerCase()}.ts`)
 
 export async function middleware(request:NextRequest){
-  const { resolveRedirectUrlFromOldSite } = oldSiteRedirectRules
-  const redirectUrlFromOldSite = resolveRedirectUrlFromOldSite(request)
-  if( redirectUrlFromOldSite ){
-    return NextResponse.redirect(redirectUrlFromOldSite as URL)
+  if( oldSiteRedirectRules ){
+    const { resolveRedirectUrlFromOldSite } = oldSiteRedirectRules
+    const redirectUrlFromOldSite = resolveRedirectUrlFromOldSite(request)
+    if( redirectUrlFromOldSite ){
+      return NextResponse.redirect(redirectUrlFromOldSite as URL)
+    }
   }
 
 
