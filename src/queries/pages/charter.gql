@@ -89,12 +89,14 @@ query QueryCharters(
   $yachtConditionsOperator: TaxQueryOperator = NOT_IN
   $yachtYear: String = ""
   $yachtLengthRange: String = "",
-  $customOrderby: String = "",
+  $customOrderby: String = ""
+  $language: LanguageCodeFilterEnum
 ) {
   posts:charters(
     first: $first,
     after: $after,
     where: {
+      language: $language,
       orderby: {
         field: MENU_ORDER,
         order: ASC,
@@ -116,7 +118,7 @@ query QueryCharters(
     nodes {
       slug
       title
-      customFields:brokerageCustomFields {
+      customFields:charterCustomFields {
         year
         displayPrice
         exteriorImages {

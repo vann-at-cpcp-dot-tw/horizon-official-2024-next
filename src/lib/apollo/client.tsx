@@ -120,15 +120,14 @@ export function ApolloProvider({
     //   }
     // })
 
-    // for WPGraphQL 的 語言參數，如未使用 WPGraphQL 可以刪除
-    const languageLink = new ApolloLink((operation:any, forward:any) => {
-      operation.setContext({
-        variables: {
-          ...operation.variables,
-          language: (lang as string).toUpperCase(),
-          translation: (lang as string).toUpperCase(),
-        },
-      })
+    // 為 WPGraphQL 增加語言參數，如不需要可拿掉
+    const languageLink = new ApolloLink((operation, forward) => {
+      const { variables } = operation.getContext()
+      operation.variables = {
+        ...operation.variables,
+        language: (lang as string).toUpperCase(),
+        translation: (lang as string).toUpperCase(),
+      }
       return forward(operation)
     })
 
