@@ -14,7 +14,7 @@ query QueryCharterPage(
     }
   }
   yachtYears(
-    postType: "brokerage",
+    postType: "charter",
     language: $language
   )
   posts:charters(
