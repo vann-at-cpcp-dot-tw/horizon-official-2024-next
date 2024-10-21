@@ -25,14 +25,17 @@ interface TypeProps {
     minValue: string | number
     maxValue: string | number
   }[]
+  yachtConditionSettings?: {
+    dropdownTitle: string
+  },
   yearOptions?: (string | number)[]
   [key:string]: any
 }
+
 interface TypeState {}
 
 
-
-function ListFilters(props:TypeProps, ref:React.ReactNode){
+export default function ListFilters(props:TypeProps, ref:React.ReactNode){
 
   const router = useRouter()
   const { className } = props
@@ -80,7 +83,7 @@ function ListFilters(props:TypeProps, ref:React.ReactNode){
                 onChange={(e)=>{
                   router.push(`${pathname}?${genQueryString({key:'condition', value:e.target.value})}`, {scroll:false})
                 }}>
-                  <option value="">{ __('All Categories') }</option>
+                  <option value="">{ __(props?.yachtConditionSettings?.dropdownTitle || 'All Categories') }</option>
                   {
                     props.yachtConditions.map((node, index)=>{
                       return <option key={index} value={node.slug}>{node.name}</option>
@@ -152,5 +155,3 @@ function ListFilters(props:TypeProps, ref:React.ReactNode){
     </div>
   </Suspense>
 }
-
-export default ListFilters

@@ -44,13 +44,16 @@ interface TypeProps {
     minValue: string | number
     maxValue: string | number
   }[]
+  yachtConditionSettings?: {
+    dropdownTitle: string
+  },
   yearOptions?: (string | number)[]
   [key:string]: any
 }
 
 interface TypeState {}
 
-function List(props:TypeProps, ref:React.ReactNode){
+export default function List(props:TypeProps, ref:React.ReactNode){
   const { className } = props
   const params = useParams()
   const { lang } = params
@@ -142,10 +145,12 @@ function List(props:TypeProps, ref:React.ReactNode){
 
   return <Suspense fallback={null}>
     <div className={twMerge('', className)}>
+
       <ListFilters
       className="mb-4"
       yachtConditions={props.yachtConditions}
       lengthOptions={props.lengthOptions}
+      yachtConditionSettings={props.yachtConditionSettings}
       yearOptions={props.yearOptions} />
 
       <div className="container">
@@ -208,5 +213,3 @@ function List(props:TypeProps, ref:React.ReactNode){
     </div>
   </Suspense>
 }
-
-export default List

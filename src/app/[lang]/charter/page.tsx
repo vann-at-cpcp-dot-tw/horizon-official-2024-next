@@ -48,6 +48,7 @@ async function PageCharters({params}:TypeProps){
     queryPostType="charter"
     yachtConditions={yachtConditions}
     lengthOptions={settings?.lengthOptions}
+    yachtConditionSettings={settings?.yachtConditionSettings}
     yearOptions={data?.yachtYears}
     list={posts}
     pageInfo={data?.posts?.pageInfo} />

@@ -10,6 +10,9 @@ query QueryCharterPage(
         label
         minValue
         maxValue
+      },
+      yachtConditionSettings {
+        dropdownTitle
       }
     }
   }
