@@ -2,12 +2,12 @@ const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 const HQ_API_BASE = process.env.NEXT_PUBLIC_HQ_API_BASE
 const HQ_API_URL = `${HQ_API_BASE}graphql`
 
-import Image from "next/image"
 import T from 'vanns-common-modules/dist/components/react/T'
 import { genImageBlurHash } from 'vanns-common-modules/dist/lib/next'
 
 import Breadcrumb from '~/components/custom/Breadcrumb'
 import LinkWithLang from '~/components/custom/LinkWithLang'
+import NotFound from "~/components/custom/NotFound"
 import { fetchGQL } from "~/lib/apollo/server"
 import { isEmpty } from '~/lib/utils'
 import { QuerySinglePost, QueryPrevPosts, QueryNextPosts  } from '~/queries/pages/news-[categorySlug]-[postSlug].gql'
@@ -44,6 +44,10 @@ export default async function PageSinglePost({params}:TypeProps){
       }
     }) || []
   )
+
+  if( isEmpty(post?.title) ){
+    return <NotFound />
+  }
 
   return <main className="relative pb-[60px]">
     <Breadcrumb className="pb-5 pt-2.5 lg:pt-10"

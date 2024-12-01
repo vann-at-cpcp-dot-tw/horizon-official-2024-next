@@ -6,6 +6,7 @@ const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
 import '~~/public/assets/external-import.css'
 
 import { GoogleTagManager, GoogleAnalytics } from '@next/third-parties/google'
+import Script from "next/script"
 
 import CookiePolicy from "~/components/custom/CookiePolicy"
 import Footer from '~/components/custom/Footer'
@@ -86,6 +87,7 @@ export default async function RootLayout({
       {
         process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION && <meta name="google-site-verification" content={process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION} />
       }
+      <Script src="https://cdn.userway.org/widget.js" data-account="rthndQjodt"/>
     </head>
     <body>
       {

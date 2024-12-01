@@ -157,7 +157,7 @@ function Footer(props:TypeProps, ref:React.ReactNode){
                   { key: 'youtube', icon: 'youtube'},
                   { key: 'linkedin', icon: 'linkedin'}
                 ].map((node, index)=>{
-                  if( !externalLinks.socialMedia?.[node.key] ){
+                  if( !externalLinks?.socialMedia?.[node.key] ){
                     return
                   }
 
