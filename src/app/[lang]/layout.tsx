@@ -87,7 +87,9 @@ export default async function RootLayout({
       {
         process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION && <meta name="google-site-verification" content={process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION} />
       }
-      <Script src="https://cdn.userway.org/widget.js" data-account="rthndQjodt"/>
+      {
+        process.env.NEXT_PUBLIC_USERWAY_ACCOUNT && <Script src="https://cdn.userway.org/widget.js" data-account="rthndQjodt"/>
+      }
     </head>
     <body>
       {

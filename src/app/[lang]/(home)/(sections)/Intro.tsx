@@ -38,7 +38,7 @@ function Intro(props:TypeProps, ref:React.ReactNode){
         <OverflowContent
         animate={animateAnchorIsInView}
         delay={0.25}>
-          <div className="serif relative mx-auto max-w-[770px] text-center text-[15px] text-major-700 lg:text-[24px]">
+          <div className="serif relative mx-auto max-w-[760px] text-center text-[15px] text-major-700 lg:text-[24px]">
             { __('Innovation, technology, craftsmanship, design-these are the core tenants of Horizon, a leading luxury yacht builder that has been setting the industry standard for nearly four decades. From pioneering new yacht designs to employing the latest advanced composites technologies, Horizon, simply put, backs style with substance.') }
           </div>
         </OverflowContent>
