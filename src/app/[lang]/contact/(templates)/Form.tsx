@@ -73,12 +73,10 @@ function Form(props:TypeProps, ref:React.ReactNode){
         <div className="hidden">{referer}</div>
         <div className="container serif text-center text-[40px] text-major-900">{ __('Contact Us') }</div>
         <div className="container serif mb-2 text-center text-[26px] italic leading-[1.2] text-gray-900 lg:mb-4">
-          { __('Thank you for visiting the our website.') }
+          { __('Thank you for visiting our website.') }
         </div>
         <div className="container text-center text-[14px] text-gray-700">
-          {
-            __('If you have any comments, inquiries or questions concerning our products & services,<br/>please complete the following form and we will get in touch with you soon.')
-          }
+          <span dangerouslySetInnerHTML={{__html: __('If you have any comments, inquiries or questions concerning our products & services,<br/>please complete the following form and we will get in touch with you soon.') || ''}}></span>
         </div>
       </div>
 
