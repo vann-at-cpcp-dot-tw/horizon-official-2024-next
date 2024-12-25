@@ -148,7 +148,7 @@ function ListWithCategory(props:TypeProps, ref:React.ReactNode){
                       }}>
                     <option value="">{ __('All Years') }</option>
                     {
-                      arrayGenerate(2018, new Date().getFullYear()).reverse()?.map((node:number, index:number)=>{
+                      arrayGenerate(2020, new Date().getFullYear()).reverse()?.map((node:number, index:number)=>{
                         return <option key={index} value={node}>{node}</option>
                       })
                     }
