@@ -8,6 +8,7 @@ import Image from "next/image"
 import { useRouter, usePathname, useSearchParams } from "next/navigation"
 import { twMerge } from 'tailwind-merge'
 import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'
+import { useTranslate } from "vanns-common-modules/dist/use/react"
 
 import ContentLightbox from '~/components/custom/ContentLightbox'
 import LinkWithLang from '~/components/custom/LinkWithLang'
@@ -49,6 +50,7 @@ function ContentList(props:TypeProps, ref:React.ReactNode){
   const searchParams = useSearchParams()
   const router = useRouter()
   const pathname = usePathname()
+  const { __ } = useTranslate()
   const lightboxQuery = searchParams.get('open')
   const { className } = props
 
@@ -128,7 +130,7 @@ function ContentList(props:TypeProps, ref:React.ReactNode){
                   <div className="cursor-pointer text-gray-300 underline"
                   onClick={()=>{
                     router.push(`${pathname}?open=${index}`, {scroll:false})
-                  }}>Read more</div>
+                  }}>{ __('Read more') }</div>
                 </div>
               }
             </div>

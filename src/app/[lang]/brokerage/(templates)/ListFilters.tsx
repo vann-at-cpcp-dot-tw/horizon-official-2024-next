@@ -136,7 +136,7 @@ export default function ListFilters(props:TypeProps, ref:React.ReactNode){
 
       <div className="container">
         <div className="row row-gap-2 flex-nowrap items-center justify-end">
-          <div className="col-auto text-gray-700">Sort By:</div>
+          <div className="col-auto text-gray-700">{__('Sort By')}:</div>
           <div className="col-6 shrink lg:col-auto">
             <div className="w-screen max-w-full lg:max-w-[177px]">
               <select className="w-full border-b border-gray-700 bg-transparent text-gray-700"
@@ -144,9 +144,9 @@ export default function ListFilters(props:TypeProps, ref:React.ReactNode){
                 onChange={(e)=>{
                   router.push(`${pathname}?${genQueryString({key:'orderby', value:e.target.value})}`, {scroll:false})
                 }}>
-                <option value="">Latest Listing</option>
-                <option value="length,desc">Length - Hight to Low</option>
-                <option value="length,asc">Length - Low to Hight</option>
+                <option value="">{ __('Latest Listing') }</option>
+                <option value="length,desc">{ __('Length - Hight to Low') }</option>
+                <option value="length,asc">{ __('Length - Low to Hight') }</option>
               </select>
             </div>
           </div>
