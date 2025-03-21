@@ -33,7 +33,9 @@ function Series(props:TypeProps, ref:React.ReactNode){
   }, [yachtSeriesList])
 
   return <Suspense fallback={null}>
-    <SwiperOverflow list={seriesList} listTitle="Series"
+    <SwiperOverflow
+    list={seriesList}
+    listTitle={__('Series') || ''}
     swiperOptions={{
       autoplay: {
         delay: 3000,

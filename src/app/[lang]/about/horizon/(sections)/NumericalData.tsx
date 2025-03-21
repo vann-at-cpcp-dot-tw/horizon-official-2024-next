@@ -42,7 +42,7 @@ function NumericalData(props:TypeProps, ref:React.ReactNode){
           <div className="col-12 py-1 lg:col-auto lg:py-0">
             <div className="serif flex !flex-nowrap items-end justify-center px-2 text-minor-900">
               <AniCounter className="text-[32px] italic lg:text-[48px]" from={0} to={Number(props?.overSqftArea)}/>
-              <span className="serif text-[32px] italic lg:text-[48px]">&nbsp;sqft&nbsp;</span>
+              <span className="serif text-[32px] italic lg:text-[48px]">&nbsp;{ __('sqft') }&nbsp;</span>
               <span className="serif relative -top-2 block text-[17px] lg:-top-4 lg:text-[22px]">{ __('area') }</span>
             </div>
           </div>

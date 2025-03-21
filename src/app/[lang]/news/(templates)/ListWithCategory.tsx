@@ -130,7 +130,7 @@ function ListWithCategory(props:TypeProps, ref:React.ReactNode){
 
                     {
                       yachtSeriesList?.nodes?.map((node:ICommonData['yachtSeriesList']['nodes'][number], index:number)=>{
-                        return <option key={index} value={node.slug}>{node.name} Series</option>
+                        return <option key={index} value={node.slug}>{node.name} { __('Series') }</option>
                       })
                     }
                   </select>
