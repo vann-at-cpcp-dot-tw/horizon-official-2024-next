@@ -8,7 +8,6 @@ import { Suspense, useMemo, useState, useEffect } from 'react'
 import { gql, useQuery } from "@apollo/client"
 import Image from "next/image"
 import { usePathname, useRouter, useParams } from 'next/navigation'
-import { twMerge } from 'tailwind-merge'
 import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'
 import { useTranslate } from "vanns-common-modules/dist/use/react"
 
@@ -106,7 +105,7 @@ function ComingEventDetail(props:TypeProps, ref:React.ReactNode){
   const { lang } = params
   const [openHull, setOpenHull] = useState<{yachtSlug:string | null, yachtName:string|null, hullName:string|null} | null>(null)
   const hullGQLString = useMemo(()=>{
-    return createHullGQLString(props?.relatedHulls, (lang as string))
+    return createHullGQLString(props?.relatedHulls, 'EN') // 20250426 新增需求：Hull 只接英文版
   }, [props?.relatedHulls, lang])
 
   const { data:hullListData } = useQuery<{[key:string]:TypeYachtNode}>(gql `query QueryHulls {

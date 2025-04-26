@@ -3,7 +3,7 @@
 query QuerySingleYachtPage(
   $slug: ID!,
   $yachtSlugForRelatedPost: String,
-  $language: LanguageCodeFilterEnum,
+  # $language: LanguageCodeFilterEnum, # 20250426 新增需求：相關 news 只接英文版
   $translation: LanguageCodeEnum!
 ){
   yacht(
@@ -40,7 +40,7 @@ query QuerySingleYachtPage(
   posts(
     first: 3,
     where: {
-      language: $language
+      language: EN # 20250426 新增需求：相關 news 只接英文版
       relatedYacht: $yachtSlugForRelatedPost,
       # 無論是否有分類皆撈取
       # taxQuery: {
@@ -80,13 +80,15 @@ query QuerySingleYachtPage(
 
 query QuerySingleYachtHullsList(
   $slug: ID!
-  $translation: LanguageCodeEnum!
+  # $translation: LanguageCodeEnum! # 20250426 新增需求：Hull 只接英文版
 ){
   yacht(
     id: $slug,
     idType: SLUG
   ){
-    translation(language: $translation){
+    translation(
+      language: EN # 20250426 新增需求：Hull 只接英文版
+    ){
       yachtCustomFields {
         hulls {
           hullName
