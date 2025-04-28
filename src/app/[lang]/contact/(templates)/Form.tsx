@@ -176,6 +176,7 @@ function Form(props:TypeProps, ref:React.ReactNode){
           maxWidth: '450px',
         }}>
           { __('By submitting a contact request, you provide consent for us to collect and use your information pursuant to our') }
+          &nbsp;
           <LinkWithLang className="btn-opacity underline hover:underline" href="/privacy-policy" lang={lang}>
             { __('Privacy Policy and Terms of Use') }
           </LinkWithLang>
