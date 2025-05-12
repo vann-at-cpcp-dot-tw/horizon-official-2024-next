@@ -85,6 +85,28 @@ export default async function RootLayout({
         process.env.NEXT_PUBLIC_GTM_ID && <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID} />
       }
       {
+        // 20250512 新增第二組 GTM ID
+        process.env.NEXT_PUBLIC_GTM_ID_2 && <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID_2} />
+      }
+      {
+        // 20250512 歐洲根據不同語系新增不同的 GTM ID
+        process.env.NEXT_PUBLIC_GTM_ID_EU_en
+        && lang === 'en'
+        && <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID_EU_en} />
+      }
+      {
+        // 20250512 歐洲根據不同語系新增不同的 GTM ID
+        process.env.NEXT_PUBLIC_GTM_ID_EU_de
+        && lang === 'de'
+        && <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID_EU_de} />
+      }
+      {
+        // 20250512 歐洲根據不同語系新增不同的 GTM ID
+        process.env.NEXT_PUBLIC_GTM_ID_EU_es
+        && lang === 'es'
+        && <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID_EU_es} />
+      }
+      {
         process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION && <meta name="google-site-verification" content={process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION} />
       }
       {
