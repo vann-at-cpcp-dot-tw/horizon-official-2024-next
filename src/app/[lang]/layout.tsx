@@ -5,7 +5,7 @@ const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
 
 import '~~/public/assets/external-import.css'
 
-import { GoogleTagManager } from '@next/third-parties/google'
+import { GoogleTagManager, GoogleAnalytics } from '@next/third-parties/google'
 import Script from "next/script"
 
 import CookiePolicy from "~/components/custom/CookiePolicy"
@@ -76,31 +76,6 @@ export default async function RootLayout({
     US: 'USA',
   }
   return <html>
-    {/* {
-        process.env.NEXT_PUBLIC_GTM_ID && <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID} />
-      } */}
-    {
-      // 20250512 新增第二組 GTM ID
-      process.env.NEXT_PUBLIC_GTM_ID_2 && <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID_2} />
-    }
-    {
-      // 20250512 歐洲根據不同語系新增不同的 GTM ID
-      process.env.NEXT_PUBLIC_GTM_ID_en
-        && lang === 'en'
-        && <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID_en} />
-    }
-    {
-      // 20250512 歐洲根據不同語系新增不同的 GTM ID
-      process.env.NEXT_PUBLIC_GTM_ID_de
-        && lang === 'de'
-        && <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID_de} />
-    }
-    {
-      // 20250512 歐洲根據不同語系新增不同的 GTM ID
-      process.env.NEXT_PUBLIC_GTM_ID_es
-        && lang === 'es'
-        && <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID_es} />
-    }
     <head>
       <title>{`Horizon Yachts ${titleRegion?.[DEALER_REGION as string] ?`${titleRegion[DEALER_REGION as string]} ` :''} | Fifth Largest Global Custom Luxury Yacht Builder`}</title>
       <meta name="description" content="From pioneering new yacht designs to employing the latest advanced composites technologies, Horizon simply backs style with substance." />
@@ -112,11 +87,51 @@ export default async function RootLayout({
       {
         process.env.NEXT_PUBLIC_USERWAY_ACCOUNT && <Script src="https://cdn.userway.org/widget.js" data-account={process.env.NEXT_PUBLIC_USERWAY_ACCOUNT}/>
       }
+
+      {
+        process.env.NEXT_PUBLIC_GTM_ID && <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID} />
+      }
+      {
+        process.env.NEXT_PUBLIC_GTM_ID_2 && <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID_2} />
+      }
+      {
+        process.env.NEXT_PUBLIC_GTM_ID_en
+        && lang === 'en'
+        && <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID_en} />
+      }
+      {
+        process.env.NEXT_PUBLIC_GTM_ID_de
+        && lang === 'de'
+        && <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID_de} />
+      }
+      {
+        process.env.NEXT_PUBLIC_GTM_ID_es
+        && lang === 'es'
+        && <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID_es} />
+      }
     </head>
     <body>
-      {/* {
-        process.env.NEXT_PUBLIC_GA_ID && <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
-      } */}
+      {
+        process.env.NEXT_PUBLIC_GTM_ID && <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GTM_ID} />
+      }
+      {
+        process.env.NEXT_PUBLIC_GTM_ID_2 && <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GTM_ID_2} />
+      }
+      {
+        process.env.NEXT_PUBLIC_GTM_ID_en
+        && lang === 'en'
+        && <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GTM_ID_en} />
+      }
+      {
+        process.env.NEXT_PUBLIC_GTM_ID_de
+        && lang === 'de'
+        && <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GTM_ID_de} />
+      }
+      {
+        process.env.NEXT_PUBLIC_GTM_ID_es
+        && lang === 'es'
+        && <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GTM_ID_es} />
+      }
       <Providers
       commonData={{
         ...(commonData || {}),
