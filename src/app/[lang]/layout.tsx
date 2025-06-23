@@ -76,36 +76,36 @@ export default async function RootLayout({
     US: 'USA',
   }
   return <html>
+    {/* {
+        process.env.NEXT_PUBLIC_GTM_ID && <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID} />
+      } */}
+    {
+      // 20250512 新增第二組 GTM ID
+      process.env.NEXT_PUBLIC_GTM_ID_2 && <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID_2} />
+    }
+    {
+      // 20250512 歐洲根據不同語系新增不同的 GTM ID
+      process.env.NEXT_PUBLIC_GTM_ID_en
+        && lang === 'en'
+        && <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID_en} />
+    }
+    {
+      // 20250512 歐洲根據不同語系新增不同的 GTM ID
+      process.env.NEXT_PUBLIC_GTM_ID_de
+        && lang === 'de'
+        && <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID_de} />
+    }
+    {
+      // 20250512 歐洲根據不同語系新增不同的 GTM ID
+      process.env.NEXT_PUBLIC_GTM_ID_es
+        && lang === 'es'
+        && <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID_es} />
+    }
     <head>
       <title>{`Horizon Yachts ${titleRegion?.[DEALER_REGION as string] ?`${titleRegion[DEALER_REGION as string]} ` :''} | Fifth Largest Global Custom Luxury Yacht Builder`}</title>
       <meta name="description" content="From pioneering new yacht designs to employing the latest advanced composites technologies, Horizon simply backs style with substance." />
       <meta property="og:image" content="/assets/img/og.jpg" />
       <link rel="icon" type="image/x-icon" href="/assets/img/fav.png" />
-      {/* {
-        process.env.NEXT_PUBLIC_GTM_ID && <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID} />
-      } */}
-      {
-        // 20250512 新增第二組 GTM ID
-        process.env.NEXT_PUBLIC_GTM_ID_2 && <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID_2} />
-      }
-      {
-        // 20250512 歐洲根據不同語系新增不同的 GTM ID
-        process.env.NEXT_PUBLIC_GTM_ID_en
-        && lang === 'en'
-        && <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID_en} />
-      }
-      {
-        // 20250512 歐洲根據不同語系新增不同的 GTM ID
-        process.env.NEXT_PUBLIC_GTM_ID_de
-        && lang === 'de'
-        && <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID_de} />
-      }
-      {
-        // 20250512 歐洲根據不同語系新增不同的 GTM ID
-        process.env.NEXT_PUBLIC_GTM_ID_es
-        && lang === 'es'
-        && <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID_es} />
-      }
       {
         process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION && <meta name="google-site-verification" content={process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION} />
       }
