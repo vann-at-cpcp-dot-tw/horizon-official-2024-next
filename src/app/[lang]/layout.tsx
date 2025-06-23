@@ -5,7 +5,7 @@ const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
 
 import '~~/public/assets/external-import.css'
 
-import { GoogleTagManager, GoogleAnalytics } from '@next/third-parties/google'
+import { GoogleTagManager } from '@next/third-parties/google'
 import Script from "next/script"
 
 import CookiePolicy from "~/components/custom/CookiePolicy"
@@ -114,9 +114,9 @@ export default async function RootLayout({
       }
     </head>
     <body>
-      {
+      {/* {
         process.env.NEXT_PUBLIC_GA_ID && <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
-      }
+      } */}
       <Providers
       commonData={{
         ...(commonData || {}),
