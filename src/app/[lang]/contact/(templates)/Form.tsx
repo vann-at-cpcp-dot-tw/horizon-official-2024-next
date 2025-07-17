@@ -42,8 +42,10 @@ function Form(props:TypeProps, ref:React.ReactNode){
     first_name: '',
     last_name: '',
     country: '',
+    postcode: '',
     email: '',
     phone: '',
+    current_boat_owned: '',
     message: '',
   })
 
@@ -133,6 +135,19 @@ function Form(props:TypeProps, ref:React.ReactNode){
 
         <div className="mb-8">
           <div className="serif text-major-900">
+            <span className="text-[24px] italic">{ __('Postcode') } *</span>
+          </div>
+          <input className="w-full border-b border-gray-500 bg-transparent pb-2 placeholder:text-gray-300" type="text" required
+          value={form.postcode}
+          onChange={(e)=>{
+            setForm({
+              postcode: e.target.value
+            })
+          }}/>
+        </div>
+
+        <div className="mb-8">
+          <div className="serif text-major-900">
             <span className="text-[24px] italic">{ __('Email') } *</span>
           </div>
           <input className="w-full border-b border-gray-500 bg-transparent pb-2 placeholder:text-gray-300" type="email" required
@@ -146,13 +161,26 @@ function Form(props:TypeProps, ref:React.ReactNode){
 
         <div className="mb-8">
           <div className="serif text-major-900">
-            <span className="text-[24px] italic">{ __('Phone') }</span>
+            <span className="text-[24px] italic">{ __('Phone') } *</span>
           </div>
-          <input className="w-full border-b border-gray-500 bg-transparent pb-2 placeholder:text-gray-300" type="tel"
+          <input className="w-full border-b border-gray-500 bg-transparent pb-2 placeholder:text-gray-300" type="tel" required
           value={form.phone}
           onChange={(e)=>{
             setForm({
               phone: e.target.value
+            })
+          }}/>
+        </div>
+
+        <div className="mb-8">
+          <div className="serif text-major-900">
+            <span className="text-[24px] italic">{ __('Current Boat Owned') }</span>
+          </div>
+          <input className="w-full border-b border-gray-500 bg-transparent pb-2 placeholder:text-gray-300" type="text"
+          value={form.current_boat_owned}
+          onChange={(e)=>{
+            setForm({
+              current_boat_owned: e.target.value
             })
           }}/>
         </div>
