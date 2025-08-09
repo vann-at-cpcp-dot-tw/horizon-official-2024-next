@@ -111,6 +111,7 @@ function ComingEventDetail(props:TypeProps, ref:React.ReactNode){
   const { data:hullListData } = useQuery<{[key:string]:TypeYachtNode}>(gql `query QueryHulls {
     ${hullGQLString}
   }`, {
+    fetchPolicy: 'cache-and-network',
     skip: !hullGQLString,
     context: {
       uri: HQ_API_URL,
@@ -118,6 +119,7 @@ function ComingEventDetail(props:TypeProps, ref:React.ReactNode){
   })
 
   const { data:openHullData, error:openHullError, loading:openHullLoading } = useQuery(QuerySingleHull, {
+    fetchPolicy: 'cache-and-network',
     skip: !openHull?.yachtSlug || !openHull?.hullName,
     context: {
       uri: HQ_API_URL,

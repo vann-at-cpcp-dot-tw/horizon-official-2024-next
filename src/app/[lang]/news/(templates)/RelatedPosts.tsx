@@ -28,6 +28,7 @@ function RelatedPosts(props:TypeProps, ref:React.ReactNode){
   const { className } = props
 
   const { data:nextPosts } = useQuery(QueryRelatedPosts, {
+    fetchPolicy: 'cache-and-network',
     skip: !props.postCursor || !props.categorySlug,
     variables: {
       categorySlug: props.categorySlug,
@@ -37,6 +38,7 @@ function RelatedPosts(props:TypeProps, ref:React.ReactNode){
   })
 
   const { data:prevPosts } = useQuery(QueryRelatedPosts, {
+    fetchPolicy: 'cache-and-network',
     skip: !props.postCursor || !props.categorySlug,
     variables: {
       categorySlug: props.categorySlug,

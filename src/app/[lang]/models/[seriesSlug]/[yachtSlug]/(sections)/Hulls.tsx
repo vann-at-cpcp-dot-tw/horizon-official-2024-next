@@ -41,6 +41,7 @@ function Hulls(props:TypeProps, ref:React.ReactNode){
   }, [queryHullName, props.list])
 
   const { data:openHullData, error:openHullError, loading:openHullLoading } = useQuery(QuerySingleHull, {
+    fetchPolicy: 'cache-and-network',
     skip: !yachtSlug || !targetHull?.hullName,
     context: {
       uri: HQ_API_URL
