@@ -174,7 +174,7 @@ function Form(props:TypeProps, ref:React.ReactNode){
 
         <div className="mb-8">
           <div className="serif text-major-900">
-            <span className="text-[24px] italic">{ __('Current Boat Owned') }</span>
+            <span className="text-[24px] italic">{ __('Current Boat Owned / Boat interested in') }</span>
           </div>
           <input className="w-full border-b border-gray-500 bg-transparent pb-2 placeholder:text-gray-300" type="text"
           value={form.current_boat_owned}
