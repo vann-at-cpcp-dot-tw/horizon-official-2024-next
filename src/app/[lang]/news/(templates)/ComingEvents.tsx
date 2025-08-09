@@ -31,6 +31,7 @@ function ComingEvents(props:TypeProps, ref:React.ReactNode){
   const { __ } = useTranslate()
   const { className } = props
   const { data } = useQuery(QueryComingEvents, {
+    fetchPolicy: 'cache-and-network',
     context: {
       uri: HQ_API_URL
     }
