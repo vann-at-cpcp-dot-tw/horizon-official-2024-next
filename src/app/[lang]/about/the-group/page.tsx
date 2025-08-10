@@ -13,15 +13,15 @@ import GroupIntroduction from "./(sections)/GroupIntroduction"
 import KV from "./(sections)/KV"
 
 interface TypeProps {
-  params: {
+  params: Promise<{
     lang: string
-  }
+  }>
 }
 interface TypeState {}
 
 async function PageAboutTheGroup({params}:TypeProps){
 
-  const { lang } = params
+  const { lang } = await params
   const data = await fetchGQL(QueryPageAboutTheGroup, {
     context: {
       uri: HQ_API_URL

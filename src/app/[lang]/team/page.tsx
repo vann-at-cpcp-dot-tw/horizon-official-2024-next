@@ -12,16 +12,16 @@ import { isEmpty } from '~/lib/utils'
 import { QueryTeamPage } from '~/queries/pages/team.gql'
 
 interface TypeProps {
-  params: {
+  params: Promise<{
     lang: string
-  }
+  }>
 }
 
 interface TypeState {}
 
 async function PageTeam({params}:TypeProps){
 
-  const { lang } = params
+  const { lang } = await params
   const access = CONTENT_TYPE === 'dealer'
   if( !access ){
     redirect('/')

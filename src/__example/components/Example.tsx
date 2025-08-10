@@ -17,7 +17,7 @@ interface IState {
   [key:string]: any
 }
 
-export default function Example(props:IProps, ref:React.ReactNode){
+export default function Example(props:IProps){
   const { id, className } = props ?? {}
 
   return <Suspense fallback={null}>

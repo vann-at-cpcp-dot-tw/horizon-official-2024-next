@@ -14,7 +14,7 @@ interface TypeProps {
 }
 interface TypeState {}
 
-function GroupIntroduction(props:TypeProps, ref:React.ReactNode){
+function GroupIntroduction(props:TypeProps){
   const { className } = props
   return <Suspense fallback={null}>
     <div className={twMerge('', className)}>

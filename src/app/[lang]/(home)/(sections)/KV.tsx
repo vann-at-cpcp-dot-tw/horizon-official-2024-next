@@ -22,7 +22,7 @@ interface TypeProps {
 }
 interface TypeState {}
 
-function KV(props:TypeProps, ref:React.ReactNode){
+function KV(props:TypeProps){
   const store = useStore()
   const videoRef = useRef(null)
   const [KVEnterAble, setKVEnterAble] = useState(false)

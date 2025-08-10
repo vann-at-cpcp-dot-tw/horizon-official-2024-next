@@ -17,12 +17,12 @@ interface TypeProps {
 }
 interface TypeState {}
 
-function DynamicAniCounter(props:TypeProps, ref:React.ReactNode){
+function DynamicAniCounter(props:TypeProps){
   const { className } = props
   const nodeRef = useRef<HTMLDivElement>(null)
   const viewport = useWindowSize()
   const isInView = useInView(nodeRef, {
-    margin: `0px 0px -${(viewport.height || 0) / 4}px 0px`,
+    margin: `0px 0px -${(viewport.height || 0) / 4}px 0px` as any,
     // once: viewport.width <= 991,
   })
   const { from, to } = props

@@ -16,9 +16,9 @@ import SingleSeriesTop from "./(sections)/SingleSeriesTop"
 import YachtsSwiper from "./(sections)/YachtsSwiper"
 
 interface TypeProps {
-  params: {
+  params: Promise<{
     seriesSlug: string
-  }
+  }>
 }
 
 interface TypeState {}
@@ -46,9 +46,9 @@ interface TypeYachtNode {
   }
 }
 
-export default async function PageSingleSeries(props:TypeProps, ref:React.ReactNode){
+export default async function PageSingleSeries(props:TypeProps){
   const { params } = props
-  const { seriesSlug } = params
+  const { seriesSlug } = await params
   const data = await fetchGQL(QuerySingleSeriesPage, {
     context: {
       uri: HQ_API_URL

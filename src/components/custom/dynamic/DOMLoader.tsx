@@ -20,7 +20,7 @@ interface TypeProps {
 
 interface TypeState {}
 
-function DOMLoader(props:TypeProps, ref:React.ReactNode){
+function DOMLoader(props:TypeProps){
   const store = useStore()
   const [progressNumber, setProgressNumber] = useState(0.01)
   const [enterAniable, setEnerAniable] = useState(false)

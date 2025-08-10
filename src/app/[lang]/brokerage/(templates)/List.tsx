@@ -53,7 +53,7 @@ interface TypeProps {
 
 interface TypeState {}
 
-export default function List(props:TypeProps, ref:React.ReactNode){
+export default function List(props:TypeProps){
   const { className } = props
   const params = useParams()
   const { lang } = params
@@ -162,7 +162,7 @@ export default function List(props:TypeProps, ref:React.ReactNode){
                 title={node.title}
                 slug={node.slug}
                 thumbnail={node?.customFields?.exteriorImages?.[0]?.image?.node?.mediaItemUrl}
-                lang={lang}
+                lang={lang as string}
                 href={`/${props?.queryPostType === 'charter' ?'charter' :DEALER_REGION === 'US' ?'inventory' :'brokerage'}/${node.slug}`}
                 infos={[
                   genSpecString([{

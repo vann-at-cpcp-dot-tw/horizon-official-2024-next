@@ -17,7 +17,7 @@ interface TypeProps {
 }
 interface TypeState {}
 
-function Discover(props:TypeProps, ref:React.ReactNode){
+function Discover(props:TypeProps){
   const { className } = props
   return <Suspense fallback={null}>
     <div className={twMerge('lg:py-20 py-16', className)}>

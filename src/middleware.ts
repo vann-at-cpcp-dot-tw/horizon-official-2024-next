@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
-import { isPathnameStartWithLang } from 'vanns-common-modules/dist/use/next/usePathnameWithoutLang'
+import { isPathnameStartWithLang } from 'vanns-common-modules/dist/utils/pathname'
 
 import { i18n } from '~~/i18n.config'
 

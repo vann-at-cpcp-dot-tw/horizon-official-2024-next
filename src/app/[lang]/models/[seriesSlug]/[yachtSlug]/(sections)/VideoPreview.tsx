@@ -35,7 +35,7 @@ interface TypeProps {
 
 interface TypeState {}
 
-function VideoPreview(props:TypeProps, ref:React.ReactNode){
+function VideoPreview(props:TypeProps){
   const { className } = props
   const hasContent = useMemo(()=>{
     return props?.gallery?.length > 0 && (props?.preview?.previewVideo?.node?.mediaItemUrl || props?.preview?.previewImage?.node?.mediaItemUrl)

@@ -5,12 +5,13 @@ import { ApolloLink, createHttpLink, makeVar, useReactiveVar } from "@apollo/cli
 import { loadErrorMessages, loadDevMessages } from "@apollo/client/dev"
 import { setContext } from "@apollo/client/link/context"
 import { onError } from '@apollo/client/link/error'
-import { NextSSRInMemoryCache, NextSSRApolloClient, SSRMultipartLink, ApolloNextAppProvider } from "@apollo/experimental-nextjs-app-support/ssr"
+import { SSRMultipartLink, InMemoryCache, ApolloClient, ApolloNextAppProvider } from "@apollo/client-integration-nextjs"
 import { useLangGuard } from "vanns-common-modules/dist/use/next/useLangGuard"
 
 import { i18n } from "~~/i18n.config"
 
 import { REVALIDATE, FETCH_URI, IMakeApolloClient } from './index'
+
 
 if (process.env.NODE_ENV === 'development') {
   loadDevMessages()
@@ -63,8 +64,8 @@ function makeApolloClient(args?:IMakeApolloClient){
   })
 
 
-  const getClient = ()=> new NextSSRApolloClient({
-    cache: new NextSSRInMemoryCache({
+  const getClient = ()=> new ApolloClient({
+    cache: new InMemoryCache({
       typePolicies: {
         Yacht: {
           merge: true,

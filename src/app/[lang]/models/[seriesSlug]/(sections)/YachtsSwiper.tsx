@@ -33,7 +33,7 @@ interface TypeSwiperSlideNode {
   }
 }
 
-function YachtsSwiper(props:TypeProps, ref:React.ReactNode){
+function YachtsSwiper(props:TypeProps){
   const viewport = useWindowSize()
   const [realIndex, setRealIndex] = useState(0)
   const { className } = props

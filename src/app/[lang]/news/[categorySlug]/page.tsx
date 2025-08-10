@@ -15,20 +15,21 @@ import ComingEvents from "../(templates)/ComingEvents"
 import ListWithCategory from "../(templates)/ListWithCategory"
 
 interface TypeProps {
-  params: {
+  params: Promise<{
     categorySlug: string
     lang: string
-  }
-  searchParams: {
+  }>
+  searchParams: Promise<{
     [key:string]: string
-  }
+  }>
 }
 
 interface TypeState {}
 
 export default async function PageNewsWithCategory({params, searchParams}:TypeProps){
-  const { lang, categorySlug } = params
-  const postsPerPage = params.categorySlug === 'events' ?12 :10
+  const { lang, categorySlug } = await params
+  const resolvedSearchParams = await searchParams
+  const postsPerPage = categorySlug === 'events' ?12 :10
 
   const data = await fetchGQL(QueryPostsByCategory, {
     context: {
@@ -37,8 +38,8 @@ export default async function PageNewsWithCategory({params, searchParams}:TypePr
     variables: {
       slug: categorySlug,
       first: postsPerPage,
-      relatedYachtSeries: searchParams.series || null,
-      year: searchParams.year ?Number(searchParams.year) :null,
+      relatedYachtSeries: resolvedSearchParams.series || null,
+      year: resolvedSearchParams.year ?Number(resolvedSearchParams.year) :null,
     }
   })
 

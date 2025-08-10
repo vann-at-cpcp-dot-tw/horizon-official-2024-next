@@ -36,7 +36,7 @@ export function formatCategories(categories:{[key:string]:any} | undefined){
   }) || []
 }
 
-export default function ListItem(props:TypeProps, ref:React.ReactNode){
+export default function ListItem(props:TypeProps){
   const { className } = props
   const params = useParams()
   const { lang } = params

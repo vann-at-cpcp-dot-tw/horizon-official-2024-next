@@ -14,15 +14,15 @@ import { isEmpty } from '~/lib/utils'
 import { QueryBrokeragePage } from '~/queries/pages/brokerage.gql'
 
 interface TypeProps {
-  params: {
+  params: Promise<{
     lang: string
-  }
+  }>
 }
 interface TypeState {}
 
 async function PageBrokerage({params}:TypeProps){
 
-  const { lang } = params
+  const { lang } = await params
   const data = await fetchGQL(QueryBrokeragePage, {
     variables: {
       first: postsPerPage

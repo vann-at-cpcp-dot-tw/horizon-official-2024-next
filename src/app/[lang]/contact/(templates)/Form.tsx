@@ -32,7 +32,7 @@ interface TypeProps {
 
 interface TypeState {}
 
-function Form(props:TypeProps, ref:React.ReactNode){
+function Form(props:TypeProps){
   const store = useStore()
   const router = useRouter()
   const { __ } = useTranslate()

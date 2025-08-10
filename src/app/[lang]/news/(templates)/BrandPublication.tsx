@@ -28,7 +28,7 @@ interface TypeProps {
 
 interface TypeState {}
 
-function BrandPublication(props:TypeProps, ref:React.ReactNode){
+function BrandPublication(props:TypeProps){
   const store = useStore()
   const { __ } = useTranslate()
   const { className } = props

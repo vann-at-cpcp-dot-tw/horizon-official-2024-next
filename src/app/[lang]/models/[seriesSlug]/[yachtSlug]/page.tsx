@@ -27,19 +27,16 @@ import YachtInteriorSwiper from "./(sections)/YachtInteriorSwiper"
 import SectionNav from "./(templates)/SectionNav"
 
 interface TypeProps {
-  params: {
+  params: Promise<{
     [key:string]: string
-  }
-  searchParams: {
-    [key: string]: string | string[] | undefined
-  }
+  }>
 }
 
 interface TypeState {}
 
-async function PageSingleYacht(props:TypeProps, ref:React.ReactNode){
-  const { params, searchParams } = props
-  const { yachtSlug, seriesSlug, lang } = params
+async function PageSingleYacht(props:TypeProps){
+  const { params } = props
+  const { yachtSlug, seriesSlug, lang } = await params
 
   const data = await fetchGQL(QuerySingleYachtPage, {
     context: {

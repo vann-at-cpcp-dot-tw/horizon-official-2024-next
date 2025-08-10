@@ -1,27 +1,25 @@
 const HQ_API_BASE = process.env.NEXT_PUBLIC_HQ_API_BASE
 const HQ_API_URL = `${HQ_API_BASE}graphql`
 
-import dynamic from "next/dynamic"
-
 import ImageAutoPlaceholder from "~/components/custom/ImageAutoPlaceholder"
 import { fetchGQL } from "~/lib/apollo/server"
 import { QueryHomePage, QueryHomeNews } from '~/queries/pages/home.gql'
 
+import Intro from "./(sections)/Intro"
+import IntroAfterSeries from "./(sections)/IntroAfterSeries"
 import KV from "./(sections)/KV"
 import News from "./(sections)/News"
 import Series from "./(sections)/Series"
 import ComingEvents from "../news/(templates)/ComingEvents"
-const Intro = dynamic(() => import("./(sections)/Intro"), {ssr: false})
-const IntroAfterSeries = dynamic(() => import("./(sections)/IntroAfterSeries"), {ssr: false})
 
 export default async function PageHome({
   params
 }:{
-  params: {
+  params: Promise<{
     lang: string
-  }
+  }>
 }){
-  const { lang } = params
+  const { lang } = await params
   const data = await fetchGQL(QueryHomePage)
   const newsData = await fetchGQL(QueryHomeNews, {
     context: {

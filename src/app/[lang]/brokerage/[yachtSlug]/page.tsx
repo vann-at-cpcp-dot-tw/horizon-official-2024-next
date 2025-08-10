@@ -21,16 +21,16 @@ import { isEmpty } from '~/lib/utils'
 import { QuerySingleBrokerage } from '~/queries/pages/brokerage-[yachtSlug].gql'
 
 interface TypeProps {
-  params: {
+  params: Promise<{
     lang: string
     [key:string]: string
-  }
+  }>
 }
 
 interface TypeState {}
 
 async function PageSingleBrokerage({params}:TypeProps){
-  const { lang, yachtSlug } = params
+  const { lang, yachtSlug } = await params
   const data = await fetchGQL(QuerySingleBrokerage, {
     variables: {
       slug: yachtSlug

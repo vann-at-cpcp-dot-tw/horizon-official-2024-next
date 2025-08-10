@@ -14,7 +14,7 @@ interface TypeProps {
 }
 interface TypeState {}
 
-export default function Loading(props:TypeProps, ref:React.ReactNode){
+export default function Loading(props:TypeProps){
   const { fill='#ffffff' } = props
   const { className, style={} } = props
   return <Suspense fallback={null}>

@@ -60,7 +60,7 @@ interface TypeProps {
 }
 interface TypeState {}
 
-function SingleCategory(props:TypeProps, ref:React.ReactNode){
+function SingleCategory(props:TypeProps){
   const { className } = props
   const { __ } = useTranslate()
   const params = useParams()

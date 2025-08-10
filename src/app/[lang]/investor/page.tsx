@@ -18,14 +18,14 @@ import { i18n } from "~~/i18n.config"
 import List from "./(templates)/List"
 
 interface TypeProps {
-  params: {
+  params: Promise<{
     lang: string
-  }
+  }>
 }
 interface TypeState {}
 
 export default async function PageInvestor({params}:TypeProps){
-  const { lang } = params
+  const { lang } = await params
 
   const access = CONTENT_TYPE === 'hq'
   if( !access ){

@@ -18,6 +18,7 @@ import { TypeMenuListNode } from "./index"
 import MenuVision from "./MenuVision"
 import IconMenuBack from "../icons/MenuBack"
 
+
 interface TypeProps {
   list: TypeMenuListNode[]
   currentScreen: {
@@ -41,7 +42,7 @@ interface TypeProps {
 }
 interface TypeState {}
 
-function MenuScreen(props:TypeProps, ref:React.ReactNode){
+function MenuScreen(props:TypeProps){
 
   const { lang } = useParams()
   const viewport = useWindowSize()

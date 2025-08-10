@@ -31,7 +31,7 @@ interface TypeProps {
 }
 interface TypeState {}
 
-function GAGallery(props:TypeProps, ref:React.ReactNode){
+function GAGallery(props:TypeProps){
   // const store = useStore()
   // const router = useRouter()
   const viewport = useWindowSize()

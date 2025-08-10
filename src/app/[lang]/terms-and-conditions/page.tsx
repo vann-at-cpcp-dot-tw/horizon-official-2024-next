@@ -11,14 +11,14 @@ import { isEmpty } from '~/lib/utils'
 import { QueryTermsPage } from '~/queries/pages/terms-and-conditions.gql'
 
 interface TypeProps {
-  params: {
+  params: Promise<{
     lang: string
-  }
+  }>
 }
 interface TypeState {}
 
 async function PageTerms({params}:TypeProps){
-  const { lang } = params
+  const { lang } = await params
   const data = await fetchGQL(QueryTermsPage)
 
   return <main className="pb-24">

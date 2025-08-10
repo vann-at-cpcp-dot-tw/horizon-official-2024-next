@@ -25,7 +25,7 @@ interface TypeProps {
 }
 interface TypeState {}
 
-function OverflowContent(props:TypeProps, ref:React.ReactNode){
+function OverflowContent(props:TypeProps){
 
   const viewport = useWindowSize()
   // const isClient = useIsClient()
@@ -47,7 +47,7 @@ function OverflowContent(props:TypeProps, ref:React.ReactNode){
         animate={typeof props?.animate === 'boolean' ?( props?.animate ?'enter' :'exit') :false}
         whileInView={typeof props?.animate !== 'boolean' ?'enter' :''}
         viewport={props.viewport || {
-          margin: `0px 0px -${viewport.height / 4}px 0px`
+          margin: `0px 0px -${viewport.height / 4}px 0px` as any
         }}
         transition={{
           duration: props?.duration || 1.6,

@@ -28,7 +28,7 @@ interface TypeProps {
 }
 interface TypeState {}
 
-function YachtsExteriorSwiper(props:TypeProps, ref:React.ReactNode){
+function YachtsExteriorSwiper(props:TypeProps){
   const viewport = useWindowSize()
   const { className } = props
   const {size:slideFrameSize, setNode:setSlideFrameNode} = useDomNodeSize()

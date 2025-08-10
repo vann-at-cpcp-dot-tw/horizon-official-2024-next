@@ -96,7 +96,7 @@ function createHullGQLString(list:{yachtSlug:string, hullName:string}[] | undefi
   }, '')
 }
 
-function ComingEventDetail(props:TypeProps, ref:React.ReactNode){
+function ComingEventDetail(props:TypeProps){
   const router = useRouter()
   const { __ } = useTranslate()
   const { className } = props

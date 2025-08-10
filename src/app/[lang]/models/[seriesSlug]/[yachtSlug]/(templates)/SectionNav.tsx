@@ -31,7 +31,7 @@ function scrollTo(targetSelector:string, offset=0){
   })
 }
 
-function SectionNav(props:TypeProps, ref:React.ReactNode){
+function SectionNav(props:TypeProps){
   const topOffset = 8
   const store = useStore()
   const { __ } = useTranslate()

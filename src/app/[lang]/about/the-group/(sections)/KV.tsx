@@ -20,7 +20,7 @@ interface TypeProps {
 
 interface TypeState {}
 
-function KV(props:TypeProps, ref:React.ReactNode){
+function KV(props:TypeProps){
   const { className } = props
 
   return <div className={twMerge('relative  w-full', className)}>

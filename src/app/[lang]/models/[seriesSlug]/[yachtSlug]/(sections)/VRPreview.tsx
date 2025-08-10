@@ -51,7 +51,7 @@ function scrollTo(targetSelector:string, offset=0){
   })
 }
 
-function VRPreview(props:TypeProps, ref:React.ReactNode){
+function VRPreview(props:TypeProps){
   const { className } = props
   const { __ } = useTranslate()
   const hasContent = useMemo(()=>{

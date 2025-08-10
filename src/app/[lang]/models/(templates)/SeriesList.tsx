@@ -19,7 +19,7 @@ interface TypeYachtNode {
   title: string
 }
 
-export default async function SeriesList(props:TypeProps, ref:React.ReactNode){
+export default async function SeriesList(props:TypeProps){
   const { lang } = props
   const listWithPlaceholder = await Promise.all(
     props?.list?.map?.(async (node:any) => {

@@ -20,7 +20,7 @@ interface TypeProps {
 }
 interface TypeState {}
 
-function GAGalleryNav(props:TypeProps, ref:React.ReactNode){
+function GAGalleryNav(props:TypeProps){
 
   const { className } = props
 

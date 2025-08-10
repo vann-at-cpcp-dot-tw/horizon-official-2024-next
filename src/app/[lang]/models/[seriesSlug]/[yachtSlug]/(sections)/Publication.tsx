@@ -32,7 +32,7 @@ interface TypeProps {
 }
 interface TypeState {}
 
-async function Publication(props:TypeProps, ref:React.ReactNode){
+async function Publication(props:TypeProps){
   const { className } = props
   if( isEmpty(props?.list) ){
     return null

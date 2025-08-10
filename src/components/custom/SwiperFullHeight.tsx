@@ -27,7 +27,7 @@ interface TypeProps {
 }
 interface TypeState {}
 
-function SwiperFullHeight(props:TypeProps, ref:React.ReactNode){
+function SwiperFullHeight(props:TypeProps){
   const { className } = props
   const [swiper, setSwiper] = useState<SwiperClass>(({} as SwiperClass))
   const [realIndex, setRealIndex] = useState(0)

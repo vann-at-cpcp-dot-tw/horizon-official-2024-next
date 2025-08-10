@@ -19,7 +19,7 @@ interface TypeProps {
 }
 interface TypeState {}
 
-function Breadcrumb(props:TypeProps, ref:React.ReactNode){
+function Breadcrumb(props:TypeProps){
 
   const { lang } = useParams()
   const { className } = props

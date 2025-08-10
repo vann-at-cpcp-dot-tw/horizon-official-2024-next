@@ -7,7 +7,7 @@ interface TypeProps {
 }
 interface TypeState {}
 
-async function ImageAutoPlaceholder(props:TypeProps, ref:React.ReactNode){
+async function ImageAutoPlaceholder(props:TypeProps){
   const { className } = props
   const placeholder = await genImageBlurHash(props?.src)
   return <Image className={className}

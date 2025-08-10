@@ -7,7 +7,6 @@ const webpack = require('webpack')
 const nextConfig = {
   // basePath: process.env.NEXT_PUBLIC_APP_BASE || '/',
   reactStrictMode: true,
-  swcMinify: true,
   env: {},
   // assetPrefix:  process.env.NODE_ENV === "production" ?'/' :'',
   // serverRuntimeConfig: {
@@ -59,15 +58,6 @@ const nextConfig = {
         test: /\.(graphql|gql)/,
         exclude: /node_modules/,
         loader: "graphql-tag/loader"
-      },
-      {
-        test: /\.(js|jsx)$/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-react'],
-          },
-        },
       }
     )
 

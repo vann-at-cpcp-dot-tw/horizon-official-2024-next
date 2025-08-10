@@ -44,7 +44,7 @@ interface TypeProps {
 }
 interface TypeState {}
 
-function ContentList(props:TypeProps, ref:React.ReactNode){
+function ContentList(props:TypeProps){
   // const store = useStore()
   // const viewport = useWindowSize()
   const searchParams = useSearchParams()

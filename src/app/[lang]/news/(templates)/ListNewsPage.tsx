@@ -66,7 +66,7 @@ interface TypeProps {
 }
 interface TypeState {}
 
-function List(props:TypeProps, ref:React.ReactNode){
+function List(props:TypeProps){
   const { __ } = useTranslate()
   const { searchObject, updateSearch } = useSearchObject()
   const { className, lang } = props

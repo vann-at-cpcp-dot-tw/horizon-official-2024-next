@@ -18,7 +18,7 @@ interface TypeProps {
 }
 interface TypeState {}
 
-function Intro(props:TypeProps, ref:React.ReactNode){
+function Intro(props:TypeProps){
   const { className } = props
   return <Suspense fallback={null}>
     <div className={twMerge('lg:mb-24 mb-10', className)}>

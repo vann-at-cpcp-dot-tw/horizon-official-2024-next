@@ -21,7 +21,7 @@ interface TypeProps {
 }
 interface TypeState {}
 
-function QAList(props:TypeProps, ref:React.ReactNode){
+function QAList(props:TypeProps){
   const { className } = props
   const [active, setActive] = useState(0)
   return <Suspense fallback={null}>

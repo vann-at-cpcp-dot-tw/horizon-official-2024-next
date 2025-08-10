@@ -26,7 +26,7 @@ interface TypeProps {
 }
 interface TypeState {}
 
-function PageNav(props:TypeProps, ref:React.ReactNode){
+function PageNav(props:TypeProps){
   const { className } = props
   const { hasNextPage, hasPreviousPage  } = props?.pageInfo || {}
 

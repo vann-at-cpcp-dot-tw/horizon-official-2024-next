@@ -3,9 +3,9 @@ const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
 import { Suspense, forwardRef, useState, useRef, useReducer, useEffect, useMemo, useCallback } from 'react'
 
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import Image from "next/image"
 import { useRouter } from 'next/navigation'
-import { useQuery, useMutation, useQueryClient } from 'react-query'
 import { twMerge } from 'tailwind-merge'
 import { useWindowSize } from "vanns-common-modules/dist/use/react"
 
@@ -23,7 +23,7 @@ interface IState {
 }
 
 
-export default function ExampleFull(props:IProps, ref:React.ReactNode){
+export default function ExampleFull(props:IProps){
   const store = useStore()
   const router = useRouter()
   const viewport = useWindowSize()

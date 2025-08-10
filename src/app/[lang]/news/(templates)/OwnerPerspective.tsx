@@ -15,7 +15,7 @@ interface TypeProps {
 }
 interface TypeState {}
 
-function OwnerPerspective(props:TypeProps, ref:React.ReactNode){
+function OwnerPerspective(props:TypeProps){
   const { className } = props
 
   return <Suspense fallback={null}>

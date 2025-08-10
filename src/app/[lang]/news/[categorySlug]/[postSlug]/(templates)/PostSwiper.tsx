@@ -26,7 +26,7 @@ interface TypeProps {
 }
 interface TypeState {}
 
-function PostSwiper(props:TypeProps, ref:React.ReactNode){
+function PostSwiper(props:TypeProps){
   const { className } = props
   const [swiper, setSwiper] = useState<SwiperClass>(({} as SwiperClass))
   const [realIndex, setRealIndex] = useState(0)

@@ -22,7 +22,7 @@ interface TypeProps {
 }
 interface TypeState {}
 
-export default function CoverTitle(props:TypeProps, ref:React.ReactNode){
+export default function CoverTitle(props:TypeProps){
   const store = useStore()
   const { __ } = useTranslate()
   const { className } = props

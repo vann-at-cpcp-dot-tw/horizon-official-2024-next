@@ -27,7 +27,7 @@ interface TypeProps {
 }
 interface TypeState {}
 
-function Hulls(props:TypeProps, ref:React.ReactNode){
+function Hulls(props:TypeProps){
   const router = useRouter()
   const { className } = props
   const params = useParams()

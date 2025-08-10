@@ -32,7 +32,7 @@ interface TypeProps {
 }
 interface TypeState {}
 
-function SpecAndFeatures(props:TypeProps, ref:React.ReactNode){
+function SpecAndFeatures(props:TypeProps){
 
   const { className } = props
   const [active, setActive] = useState<string | number>(props?.activeDefault || 0)

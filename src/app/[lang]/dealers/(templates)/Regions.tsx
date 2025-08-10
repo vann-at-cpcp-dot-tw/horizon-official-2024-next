@@ -18,7 +18,7 @@ interface TypeProps {
 }
 interface TypeState {}
 
-function RegionsNav(props:TypeProps, ref:React.ReactNode){
+function RegionsNav(props:TypeProps){
 
   const { className } = props
   const [activeRegionIndex, setActiveRegionIndex] = useState<number | null>(null)

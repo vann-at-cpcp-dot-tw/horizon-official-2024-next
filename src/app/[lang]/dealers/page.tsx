@@ -19,15 +19,15 @@ import { i18n } from "~~/i18n.config"
 import Regions from "./(templates)/Regions"
 
 interface TypeProps {
-  params: {
+  params: Promise<{
     lang: string
-  }
+  }>
 }
 
 interface TypeState {}
 
 export default async function PageDealers({params}:TypeProps){
-  const { lang } = params
+  const { lang } = await params
   const access = CONTENT_TYPE === 'hq'
   if( !access ){
     if( lang === i18n.defaultLocale.shortCode ){

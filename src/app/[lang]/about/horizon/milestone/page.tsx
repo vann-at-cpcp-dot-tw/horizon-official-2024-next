@@ -16,14 +16,14 @@ import SwiperMilestone from "./(sections)/SwiperMilestone"
 export default async function PageHome({
   params
 }:{
-  params: {
+  params: Promise<{
     lang: string
     data: {
       [key:string]: any
     }
-  }
+  }>
 }){
-  const { lang } = params
+  const { lang } = await params
   const data = await fetchGQL(QueryMilestone, {
     context: {
       uri: HQ_API_URL

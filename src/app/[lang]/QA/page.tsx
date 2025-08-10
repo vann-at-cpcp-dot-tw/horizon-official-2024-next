@@ -15,14 +15,14 @@ import { QueryQA } from '~/queries/pages/QA.gql'
 import QAList from "./(templates)/QAList"
 
 interface TypeProps {
-  params: {
+  params: Promise<{
     lang: string
-  }
+  }>
 }
 interface TypeState {}
 
 async function PageTerms({params}:TypeProps){
-  const { lang } = params
+  const { lang } = await params
   const data = await fetchGQL(QueryQA, {
     context: {
       uri: HQ_API_URL

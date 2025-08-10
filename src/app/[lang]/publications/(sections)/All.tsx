@@ -26,7 +26,7 @@ interface TypeProps {
 interface TypeState {}
 
 
-function All(props:TypeProps, ref:React.ReactNode){
+function All(props:TypeProps){
   const { className } = props
   const { __ } = useTranslate()
   const params = useParams()

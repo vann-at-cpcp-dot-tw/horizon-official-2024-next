@@ -23,7 +23,7 @@ interface TypeProps {
 }
 interface TypeState {}
 
-function News(props:TypeProps, ref:React.ReactNode){
+function News(props:TypeProps){
   const { __ } = useTranslate()
   const { className } = props
   const posts = useMemo<{

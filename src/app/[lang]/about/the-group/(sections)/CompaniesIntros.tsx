@@ -20,7 +20,7 @@ interface TypeProps {
 }
 interface TypeState {}
 
-function CompaniesIntros(props:TypeProps, ref:React.ReactNode){
+function CompaniesIntros(props:TypeProps){
   const { className } = props
 
   return <Suspense fallback={null}>

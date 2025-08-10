@@ -33,7 +33,7 @@ interface TypeProps {
 
 interface TypeState {}
 
-function SpecTable(props:TypeProps, ref:React.ReactNode){
+function SpecTable(props:TypeProps){
   const { className } = props
   const { __ } = useTranslate()
   const termsConfig = useMemo(()=>{

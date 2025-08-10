@@ -8,7 +8,7 @@ import { useLazyQuery } from "@apollo/client"
 import Image from "next/image"
 import { useParams, useSearchParams } from 'next/navigation'
 import { twMerge } from 'tailwind-merge'
-import { useSearchObject, usePathnameWithoutLang } from 'vanns-common-modules/dist/use/next'
+import { useSearchObject,  } from 'vanns-common-modules/dist/use/next'
 import { useTranslate } from "vanns-common-modules/dist/use/react"
 
 import { ICommonData, useCommonData } from "~/app/[lang]/providers"
@@ -40,7 +40,7 @@ interface TypeProps {
 }
 interface TypeState {}
 
-function ListWithCategory(props:TypeProps, ref:React.ReactNode){
+function ListWithCategory(props:TypeProps){
   const { searchObject, updateSearch } = useSearchObject()
   const { __ } = useTranslate()
   const [isFilterChanged, setIsFilterChanged] = useState(false)

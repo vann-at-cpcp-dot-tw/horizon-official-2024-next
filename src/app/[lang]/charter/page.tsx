@@ -15,9 +15,9 @@ import { isEmpty } from '~/lib/utils'
 import { QueryCharterPage } from '~/queries/pages/charter.gql'
 
 interface TypeProps {
-  params: {
+  params: Promise<{
     lang: string
-  }
+  }>
 }
 interface TypeState {}
 
@@ -28,7 +28,7 @@ async function PageCharters({params}:TypeProps){
     redirect('/')
   }
 
-  const { lang } = params
+  const { lang } = await params
   const data = await fetchGQL(QueryCharterPage, {
     variables: {
       first: postsPerPage

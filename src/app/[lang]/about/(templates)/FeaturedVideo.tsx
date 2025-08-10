@@ -14,7 +14,7 @@ interface TypeProps {
 }
 interface TypeState {}
 
-function FeaturedVideo(props:TypeProps, ref:React.ReactNode){
+function FeaturedVideo(props:TypeProps){
   // const store = useStore()
   // const router = useRouter()
   // const viewport = useWindowSize()

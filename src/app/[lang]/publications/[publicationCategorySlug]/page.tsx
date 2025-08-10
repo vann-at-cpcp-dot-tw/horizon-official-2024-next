@@ -12,20 +12,15 @@ import { QueryPublicationCategory } from '~/queries/pages/publications-[publicat
 import SingleCategory from "../(sections)/SingleCategory"
 
 interface TypeProps {
-  params: {
-    data: {
-      [key:string]: any
-    }
-  }
-  & {
+  params: Promise<{
     [key:string]: string
-  }
+  }>
 }
 interface TypeState {}
 
 async function PagePublications({params}:TypeProps){
 
-  const { publicationCategorySlug, lang } = params
+  const { publicationCategorySlug, lang } = await params
   const data = await fetchGQL(QueryPublicationCategory, {
     context: {
       uri: HQ_API_URL

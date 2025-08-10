@@ -24,7 +24,7 @@ interface IState {
   [key:string]: any
 }
 
-export default function Alert(props:IProps, ref:React.ReactNode){
+export default function Alert(props:IProps){
   const store = useStore()
   const { id, className, title, children, confirm } = props ?? {}
 

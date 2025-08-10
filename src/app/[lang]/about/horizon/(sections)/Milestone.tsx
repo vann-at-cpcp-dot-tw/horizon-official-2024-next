@@ -21,7 +21,7 @@ interface TypeProps {
 }
 interface TypeState {}
 
-function Milestone(props:TypeProps, ref:React.ReactNode){
+function Milestone(props:TypeProps){
   const { __ } = useTranslate()
   const viewport = useWindowSize()
   const { className } = props

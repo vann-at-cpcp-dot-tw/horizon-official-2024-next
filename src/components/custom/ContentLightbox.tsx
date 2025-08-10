@@ -26,7 +26,7 @@ interface TypeProps {
 interface TypeState {}
 
 
-function ContentLightbox(props:TypeProps, ref:React.ReactNode){
+function ContentLightbox(props:TypeProps){
   const { className, theme='light' } = props
 
   const backgrounds = {

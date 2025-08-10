@@ -8,9 +8,9 @@ import LinkWithLang from '~/components/custom/LinkWithLang'
 import NotFound from "~/components/custom/NotFound"
 import { isEmpty } from '~/lib/utils'
 interface TypeProps {
-  params: {
+  params: Promise<{
     lang: string
-  }
+  }>
 }
 interface TypeState {}
 

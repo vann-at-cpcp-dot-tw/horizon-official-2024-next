@@ -16,15 +16,15 @@ import PostSwiper from "./(templates)/PostSwiper"
 import RelatedPosts from "../../(templates)/RelatedPosts"
 
 interface TypeProps {
-  params: {
+  params: Promise<{
     [key:string]: string
-  }
+  }>
 }
 interface TypeState {}
 
 export default async function PageSinglePost({params}:TypeProps){
 
-  const { lang, categorySlug, postSlug } = params
+  const { lang, categorySlug, postSlug } = await params
   const data = await fetchGQL(QuerySinglePost, {
     context: {
       uri: HQ_API_URL

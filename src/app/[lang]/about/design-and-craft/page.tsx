@@ -14,11 +14,11 @@ import FeaturedVideo from "../(templates)/FeaturedVideo"
 export default async function PageAboutDesign({
   params
 }:{
-  params: {
+  params: Promise<{
     lang: string
-  }
+  }>
 }){
-  const { lang } = params
+  const { lang } = await params
   const data = await fetchGQL(QueryPageAboutDesignAndCraft, {
     context: {
       uri: HQ_API_URL

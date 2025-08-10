@@ -34,7 +34,7 @@ interface TypeProps {
 
 interface TypeState {}
 
-function List(props:TypeProps, ref:React.ReactNode){
+function List(props:TypeProps){
   const { className } = props
   const [mergedList, setMergedList] = useState<TypePostNode[] | null>(null)
   const[getData, { data, loading }] = useLazyQuery(QueryInvestorPage, {

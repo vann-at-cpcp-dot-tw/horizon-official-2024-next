@@ -1,9 +1,9 @@
 import Link from "next/link"
 
 interface TypeProps {
-  params: {
+  params: Promise<{
     lang: string
-  }
+  }>
 }
 interface TypeState {}
 

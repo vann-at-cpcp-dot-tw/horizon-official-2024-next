@@ -27,7 +27,7 @@ interface TypeState {
   footerHeight: number
 }
 
-function Footer(props:TypeProps, ref:React.ReactNode){
+function Footer(props:TypeProps){
   const viewport = useWindowSize()
   const footerRef = useRef<HTMLDivElement>(null)
   const store = useStore()

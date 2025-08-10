@@ -26,7 +26,7 @@ interface TypeProps {
 }
 interface TypeState {}
 
-function SwiperMilestone(props:TypeProps, ref:React.ReactNode){
+function SwiperMilestone(props:TypeProps){
   const [swiper, setSwiper] = useState<SwiperClass>(({} as SwiperClass))
   const [swiperTimeline, setSwiperTimeline] = useState<SwiperClass>(({} as SwiperClass))
   const [realIndex, setRealIndex] = useState(0)

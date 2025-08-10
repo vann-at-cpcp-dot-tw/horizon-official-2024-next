@@ -20,7 +20,7 @@ interface TypeProps {
 
 interface TypeState {}
 
-function SingleSeriesTop(props:TypeProps, ref:React.ReactNode){
+function SingleSeriesTop(props:TypeProps){
   const { __ } = useTranslate()
   const commonData = useCommonData()
   const { yachtSeriesList:allSeries } = commonData

@@ -59,14 +59,14 @@ export default async function RootLayout({
   params,
   children
 }: {
-  params: {
+  params: Promise<{
     lang: string
-  }
+  }>
   children: React.ReactNode
 }) {
 
   // fetch data from server side
-  const { lang } = params
+  const { lang } = await params
   const commonData = await getCommonData()
   const externalLinks = await getExternalLinks()
   const translations = await getTranslations()

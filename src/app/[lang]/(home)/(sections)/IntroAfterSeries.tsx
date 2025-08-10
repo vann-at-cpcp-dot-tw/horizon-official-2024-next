@@ -20,12 +20,12 @@ interface TypeProps {
 }
 interface TypeState {}
 
-function IntroAfterSeries(props:TypeProps, ref:React.ReactNode){
+function IntroAfterSeries(props:TypeProps){
   const { __ } = useTranslate()
   const viewport = useWindowSize()
   const animateAnchorRef = useRef(null)
   const animateAnchorIsInView = useInView(animateAnchorRef, {
-    margin: `0px 0px -${(viewport.height || 0)/4}px 0px`
+    margin: `0px 0px -${(viewport.height || 0)/4}px 0px` as any
   })
 
   return <Suspense fallback={null}>

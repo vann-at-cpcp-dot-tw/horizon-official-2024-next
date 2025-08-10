@@ -29,7 +29,7 @@ interface TypeProps {
 }
 interface TypeState {}
 
-function PageTop(props:TypeProps, ref:React.ReactNode){
+function PageTop(props:TypeProps){
   const store = useStore()
   const { __ } = useTranslate()
   const { className } = props

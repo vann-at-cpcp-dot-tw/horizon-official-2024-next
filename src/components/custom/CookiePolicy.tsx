@@ -19,7 +19,7 @@ interface TypeProps {
 
 interface TypeState {}
 
-function CookiePolicy(props:TypeProps, ref:React.ReactNode){
+function CookiePolicy(props:TypeProps){
   const { className } = props
   const params = useParams()
   const { lang } = params

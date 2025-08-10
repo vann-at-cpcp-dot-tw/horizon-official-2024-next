@@ -102,7 +102,7 @@ interface TypeMenuSeriesNode {
   } | null
 }
 
-function MainMenu(props:TypeProps, ref:React.ReactNode){
+function MainMenu(props:TypeProps){
   const { __ } = useTranslate()
   const store = useStore()
   const router = useRouter()

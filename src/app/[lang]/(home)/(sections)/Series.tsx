@@ -11,7 +11,7 @@ import SwiperOverflow from '~/components/custom/SwiperOverflow'
 interface TypeProps {}
 interface TypeState {}
 
-function Series(props:TypeProps, ref:React.ReactNode){
+function Series(props:TypeProps){
 
   const commonData = useCommonData()
   const { __ } = useTranslate()

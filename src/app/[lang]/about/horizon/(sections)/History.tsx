@@ -13,7 +13,7 @@ interface TypeProps {
 }
 interface TypeState {}
 
-function History(props:TypeProps, ref:React.ReactNode){
+function History(props:TypeProps){
   const { className } = props
   return <Suspense fallback={null}>
     <div className={twMerge('mb-16', className)}>

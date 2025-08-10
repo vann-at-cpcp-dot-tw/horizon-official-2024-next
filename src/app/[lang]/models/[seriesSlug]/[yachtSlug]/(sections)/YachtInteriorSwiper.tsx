@@ -31,7 +31,7 @@ interface TypeProps {
 }
 interface TypeState {}
 
-function YachtInteriorSwiper(props:TypeProps, ref:React.ReactNode){
+function YachtInteriorSwiper(props:TypeProps){
   const viewport = useWindowSize()
   const { className } = props
   const [realIndex, setRealIndex] = useState(0)

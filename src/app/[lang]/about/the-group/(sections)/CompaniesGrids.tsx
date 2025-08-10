@@ -1,3 +1,4 @@
+"use client"
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
 import { Suspense } from 'react'
@@ -10,7 +11,7 @@ import T from 'vanns-common-modules/dist/components/react/T'
 
 import ImageAutoPlaceholder from "~/components/custom/ImageAutoPlaceholder"
 import { isEmpty } from '~/lib/utils'
-const AniCounter = dynamic(() => import('~/components/custom/dynamic/AniCounter'), {ssr: false})
+const AniCounter = dynamic(() => import('~/components/custom/dynamic/AniCounter'))
 
 export interface TypeCompanyNode {
   basic:{
@@ -49,7 +50,7 @@ interface TypeProps {
 }
 interface TypeState {}
 
-function CompaniesGrids(props:TypeProps, ref:React.ReactNode){
+function CompaniesGrids(props:TypeProps){
   // const store = useStore()
   // const router = useRouter()
   // const viewport = useWindowSize()

@@ -20,7 +20,7 @@ interface TypeProps {
 }
 interface TypeState {}
 
-function CoverImage(props:TypeProps, ref:React.ReactNode){
+function CoverImage(props:TypeProps){
   const store = useStore()
   const { className } = props
   const [KVEnterAble, setKVEnterAble] = useState(false)

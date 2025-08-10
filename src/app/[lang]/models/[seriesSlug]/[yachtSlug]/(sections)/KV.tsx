@@ -18,7 +18,7 @@ interface TypeProps {
 }
 interface TypeState {}
 
-function KV(props:TypeProps, ref:React.ReactNode){
+function KV(props:TypeProps){
   const viewport = useWindowSize()
   const { className } = props
   const store = useStore()

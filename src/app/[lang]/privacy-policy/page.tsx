@@ -11,14 +11,14 @@ import { isEmpty } from '~/lib/utils'
 import { QueryPolicyPage } from '~/queries/pages/privacy-policy.gql'
 
 interface TypeProps {
-  params: {
+  params: Promise<{
     lang: string
-  }
+  }>
 }
 interface TypeState {}
 
 async function PagePolicy({params}:TypeProps){
-  const { lang } = params
+  const { lang } = await params
   const data = await fetchGQL(QueryPolicyPage)
 
   return <main className="pb-24">

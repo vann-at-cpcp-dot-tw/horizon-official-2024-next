@@ -19,11 +19,11 @@ import NumericalData from "./(sections)/NumericalData"
 export default async function PageAboutHorizon({
   params
 }:{
-  params: {
+  params: Promise<{
     lang: string
-  }
+  }>
 }){
-  const { lang } = params
+  const { lang } = await params
   const data = await fetchGQL(QueryPageAboutHorizon, {
     context: {
       uri: HQ_API_URL

@@ -36,7 +36,7 @@ interface TypeProps {
 
 interface TypeState {}
 
-function SwiperOverflow(props:TypeProps, ref:React.ReactNode){
+function SwiperOverflow(props:TypeProps){
   const params = useParams()
   const { lang } = params
   const [bodyWidth, setBodyWidth] = useState(0)

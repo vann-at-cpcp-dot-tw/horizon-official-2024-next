@@ -35,7 +35,7 @@ interface TypeProps {
 interface TypeState {}
 
 
-export default function ListFilters(props:TypeProps, ref:React.ReactNode){
+export default function ListFilters(props:TypeProps){
 
   const router = useRouter()
   const { className } = props

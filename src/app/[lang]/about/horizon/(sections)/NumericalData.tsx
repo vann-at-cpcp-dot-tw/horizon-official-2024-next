@@ -12,7 +12,7 @@ import { useTranslate } from "vanns-common-modules/dist/use/react"
 
 import { isEmpty, numberFormat } from '~/lib/utils'
 import { useStore } from '~/store'
-const AniCounter = dynamic(() => import('~/components/custom/dynamic/AniCounter'), {ssr: false})
+const AniCounter = dynamic(() => import('~/components/custom/dynamic/AniCounter'))
 
 interface TypeProps {
   yachtsBuild?: string | number
@@ -24,7 +24,7 @@ interface TypeProps {
 
 interface TypeState {}
 
-function NumericalData(props:TypeProps, ref:React.ReactNode){
+function NumericalData(props:TypeProps){
   const { className } = props
   const { __ } = useTranslate()
 

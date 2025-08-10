@@ -27,7 +27,7 @@ interface TypeProps {
 
 interface TypeState {}
 
-function Header(props:TypeProps, ref:React.ReactNode){
+function Header(props:TypeProps){
   const store = useStore()
   const router = useRouter()
   const { __ } = useTranslate()

@@ -16,7 +16,7 @@ import { TranslateProvider } from "vanns-common-modules/dist/providers/react/Tra
 
 import { ApolloProvider }  from "~/lib/apollo/client"
 
-const DOMLoader = dynamic(() => import('~/components/custom/dynamic/DOMLoader'), {ssr: false})
+const DOMLoader = dynamic(() => import('~/components/custom/dynamic/DOMLoader'))
 
 export interface ICommonData {
   yachtSeriesList: {

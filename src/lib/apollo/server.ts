@@ -1,6 +1,6 @@
 import { ApolloLink, ApolloClient, InMemoryCache, createHttpLink } from "@apollo/client"
 import { setContext } from "@apollo/client/link/context"
-import { registerApolloClient } from "@apollo/experimental-nextjs-app-support/rsc"
+import { registerApolloClient } from "@apollo/client-integration-nextjs"
 import { TypedDocumentNode } from "@graphql-typed-document-node/core"
 import { headers, cookies } from 'next/headers'
 import { tools as langTools } from "vanns-common-modules/dist/use/next/useLangGuard"
@@ -8,6 +8,7 @@ import { tools as langTools } from "vanns-common-modules/dist/use/next/useLangGu
 import { i18n } from "~~/i18n.config"
 
 import { REVALIDATE, FETCH_URI, IFetchGQLArgs, IMakeApolloClient } from './index'
+
 
 
 const { convertLocaleCode } = langTools(i18n)
@@ -78,7 +79,8 @@ function makeApolloClient(args?:IMakeApolloClient){
 const { getClient } = makeApolloClient()
 
 export async function fetchGQL(query:TypedDocumentNode, args?:IFetchGQLArgs){
-  const requestLang = headers().get('x-lang') || i18n.defaultLocale.shortCode
+  const headersList = await headers()
+  const requestLang = headersList.get('x-lang') || i18n.defaultLocale.shortCode
   const localeCode = convertLocaleCode(requestLang, 'long')
   const { variables = {}, context = {} } = args ?? {}
   const { contextHeaders = {} } = context

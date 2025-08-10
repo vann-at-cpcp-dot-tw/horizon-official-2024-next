@@ -20,30 +20,31 @@ import NewsPageEventsBlock from "./(templates)/NewsPageEventsBlock"
 import OwnerPerspective from "./(templates)/OwnerPerspective"
 
 interface TypeProps {
-  params: {
+  params: Promise<{
     lang: string
-  }
-  searchParams: {
+  }>
+  searchParams: Promise<{
     [key:string]: string
-  }
+  }>
 }
 
 interface TypeState {}
 
 export default async function PageNews({params, searchParams}:TypeProps){
-  const { lang } = params
+  const { lang } = await params
+  const resolvedSearchParams = await searchParams
   const data = await fetchGQL(QueryNewsPage, {
     context: {
       uri: HQ_API_URL
     },
     variables: {
       first: postsPerPage,
-      relatedYachtSeries: searchParams.series || null,
-      year: searchParams.year ?Number(searchParams.year) :null,
+      relatedYachtSeries: resolvedSearchParams.series || null,
+      year: resolvedSearchParams.year ?Number(resolvedSearchParams.year) :null,
       ...(
-        searchParams.category
+        resolvedSearchParams.category
           ? {
-            categories: [searchParams.category],
+            categories: [resolvedSearchParams.category],
             categoriesOperator: 'IN'
           }:{
             categories: [],

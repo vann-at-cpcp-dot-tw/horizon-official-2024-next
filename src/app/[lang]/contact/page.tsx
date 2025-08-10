@@ -14,16 +14,16 @@ import { QueryDealersWithRegion } from '~/queries/pages/dealers.gql'
 import Form from "./(templates)/Form"
 
 interface TypeProps {
-  params: {
+  params: Promise<{
     lang: string
-  }
+  }>
 }
 
 interface TypeState {}
 
 async function PageContact({params}:TypeProps){
-  const { lang } = params
-  const headersList = headers()
+  const { lang } = await params
+  const headersList = await headers()
   const referer = headersList.get('referer')
 
   let data

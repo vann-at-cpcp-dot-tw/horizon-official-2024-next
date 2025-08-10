@@ -13,15 +13,15 @@ import { QueryYachtsWithSeries } from '~/queries/pages/models.gql'
 import SeriesList from "./(templates)/SeriesList"
 
 interface TypeProps {
-  params: {
+  params: Promise<{
     lang: string
-  }
+  }>
 }
 
 interface TypeState {}
 
-export default async function PageModels(props:TypeProps, ref:React.ReactNode){
-  const { lang } = props?.params ?? {}
+export default async function PageModels(props:TypeProps){
+  const { lang } = await props.params
   const data = await fetchGQL(QueryYachtsWithSeries, {
     context: {
       uri: HQ_API_URL

@@ -62,7 +62,7 @@ interface TypeProps {
 }
 interface TypeState {}
 
-function HullDetail(props:TypeProps, ref:React.ReactNode){
+function HullDetail(props:TypeProps){
   const viewport = useWindowSize()
   const { className, background='var(--color-golden-300)' } = props
   const router = useRouter()

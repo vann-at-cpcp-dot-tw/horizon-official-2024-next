@@ -24,7 +24,7 @@ interface TypeProps {
 }
 interface TypeState {}
 
-function IFrameGallery(props:TypeProps, ref:React.ReactNode){
+function IFrameGallery(props:TypeProps){
 
   const [activeIndex, setActiveIndex] = useState(0)
   const {size:contentWrapperSize, setNode:setContentWrapperNode} = useDomNodeSize()

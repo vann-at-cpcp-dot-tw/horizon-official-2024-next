@@ -25,7 +25,7 @@ interface TypeProps {
 }
 interface TypeState {}
 
-function SpecTableSection(props:TypeProps, ref:React.ReactNode){
+function SpecTableSection(props:TypeProps){
 
   const { className } = props
   const [active, setActive] = useState(0)

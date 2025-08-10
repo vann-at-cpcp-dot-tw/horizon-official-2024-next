@@ -24,7 +24,7 @@ interface TypeProps {
 interface TypeState {}
 
 
-function RelatedPosts(props:TypeProps, ref:React.ReactNode){
+function RelatedPosts(props:TypeProps){
   const { className } = props
 
   const { data:nextPosts } = useQuery(QueryRelatedPosts, {

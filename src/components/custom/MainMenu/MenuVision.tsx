@@ -38,7 +38,7 @@ interface TypeProps {
 
 interface TypeState {}
 
-function MenuVision(props:TypeProps, ref:React.ReactNode){
+function MenuVision(props:TypeProps){
   const [mediaLoaded, setMediaLoaded] = useState(false)
   const images = useMemo(()=>{
     return [props?.image]

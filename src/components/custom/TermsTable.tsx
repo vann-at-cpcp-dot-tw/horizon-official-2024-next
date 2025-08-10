@@ -21,7 +21,7 @@ interface TypeProps {
 
 interface TypeState {}
 
-function TermsTable(props:TypeProps, ref:React.ReactNode){
+function TermsTable(props:TypeProps){
 
   const { className } = props
 

@@ -22,10 +22,10 @@ import { isEmpty } from '~/lib/utils'
 import { QuerySingleCharter } from '~/queries/pages/charter-[yachtSlug].gql'
 
 interface TypeProps {
-  params: {
+  params: Promise<{
     lang: string
     [key:string]: string
-  }
+  }>
 }
 
 interface TypeState {}
@@ -36,7 +36,7 @@ async function PageSingleCharter({params}:TypeProps){
     redirect('/')
   }
 
-  const { lang, yachtSlug } = params
+  const { lang, yachtSlug } = await params
   const data = await fetchGQL(QuerySingleCharter, {
     variables: {
       slug: yachtSlug

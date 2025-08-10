@@ -16,7 +16,7 @@ interface TypeProps {
 }
 interface TypeState {}
 
-function PageTransition(props:TypeProps, ref:React.ReactNode){
+function PageTransition(props:TypeProps){
   const { className } = props
   return <Suspense fallback={null}>
     {/* <AnimatePresence> */}

@@ -23,7 +23,7 @@ interface TypeProps {
 }
 interface TypeState {}
 
-export default async function CoverStory(props:TypeProps, ref:React.ReactNode){
+export default async function CoverStory(props:TypeProps){
   const { className } = props
   const placeholder = await genImageBlurHash(props?.image)
 

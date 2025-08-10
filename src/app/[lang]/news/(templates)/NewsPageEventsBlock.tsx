@@ -32,7 +32,7 @@ interface TypeProps {
 }
 interface TypeState {}
 
-function NewsPageEventsBlock(props:TypeProps, ref:React.ReactNode){
+function NewsPageEventsBlock(props:TypeProps){
   const { className } = props
   const { __ } = useTranslate()
   return <Suspense fallback={null}>

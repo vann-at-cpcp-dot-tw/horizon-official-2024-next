@@ -26,7 +26,7 @@ interface TypeState {}
 
 
 
-function ComingEvents(props:TypeProps, ref:React.ReactNode){
+function ComingEvents(props:TypeProps){
   const router = useRouter()
   const { __ } = useTranslate()
   const { className } = props
