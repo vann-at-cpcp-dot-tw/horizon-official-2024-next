@@ -42,7 +42,12 @@ module.exports = {
       'warn',
       2,
       {
-        ignoredNodes: ['JSXAttribute', 'JSXSpreadAttribute', 'TemplateLiteral'],
+        ignoredNodes: [
+          'JSXAttribute',
+          'JSXSpreadAttribute',
+          'TemplateLiteral',
+          'JSXFragment', // 這是 <React.Fragment> 簡短寫法為 <></>, 忽略這個是因為簡短寫法會導致 eslint 出現無限迴圈的 bug
+        ],
         SwitchCase: 1,
         VariableDeclarator: 'first',
         // MemberExpression: 0,
