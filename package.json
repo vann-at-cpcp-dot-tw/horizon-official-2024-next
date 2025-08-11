@@ -46,7 +46,7 @@
     "swiper": "^11.0.5",
     "tailwind-merge": "^2.0.0",
     "tailwindcss-animate": "^1.0.7",
-    "vanns-common-modules": "github:vann-at-cpcp-dot-tw/vanns-common-modules#semver:^1.0.0",
+    "vanns-common-modules": "github:vann-at-cpcp-dot-tw/vanns-common-modules#semver:^1.0.1",
     "zustand": "^4.4.6"
   },
   "devDependencies": {
