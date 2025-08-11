@@ -66,7 +66,7 @@ function Form(props:TypeProps){
   const { className } = props
 
   return <ContentLightbox
-  onClose={handleClose}>
+    onClose={handleClose}>
     <>
       <Alert id="ContactForm" title="Success">
         <div className="text-center text-[#4A4A4A]">{ __('We will get in touch with you soon.') }</div>

@@ -55,14 +55,9 @@ export interface TypePublicationCategoryNode {
 
 
 interface TypeProps {
-  params: {
-    data: {
-      [key:string]: any
-    }
-  }
-  & {
+  params: Promise<{
     [key:string]: string
-  }
+  }>
   children: React.ReactNode
 }
 
