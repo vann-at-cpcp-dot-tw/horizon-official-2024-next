@@ -1,5 +1,7 @@
 "use client"
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
+const HQ_API_BASE = process.env.NEXT_PUBLIC_HQ_API_BASE
+const HQ_API_URL = `${HQ_API_BASE}graphql`
 const postsPerPage = 10
 
 import { Suspense, useMemo, useEffect, useState } from 'react'
@@ -48,7 +50,11 @@ function ListWithCategory(props:TypeProps){
   const commonData = useCommonData()
   const { categorySlug } = params
   const { className, lang } = props
-  const[getData, { data, loading }] = useLazyQuery(QueryPostsByCategory)
+  const[getData, { data, loading }] = useLazyQuery(QueryPostsByCategory, {
+    context: {
+      uri: HQ_API_URL
+    }
+  })
   const { yachtSeriesList } = commonData ?? {}
   const listData = useMemo(()=>{
     let list = data?.category?.translation?.posts?.nodes || props?.list

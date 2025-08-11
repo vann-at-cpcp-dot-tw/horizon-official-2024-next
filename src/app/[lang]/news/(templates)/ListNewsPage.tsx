@@ -1,5 +1,7 @@
 "use client"
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
+const HQ_API_BASE = process.env.NEXT_PUBLIC_HQ_API_BASE
+const HQ_API_URL = `${HQ_API_BASE}graphql`
 const postsPerPage = 6
 
 import { Suspense, useMemo, useEffect, useContext, useRef, useState, useCallback } from 'react'
@@ -76,6 +78,9 @@ function List(props:TypeProps){
   const[getData, { data, loading }] = useLazyQuery(QueryNews, {
     fetchPolicy: 'cache-and-network',
     notifyOnNetworkStatusChange: true,
+    context: {
+      uri: HQ_API_URL
+    },
     onCompleted: (data) => {
       setMergedList((prev)=>{
         return [

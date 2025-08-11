@@ -17,14 +17,6 @@ function makeApolloClient(args?:IMakeApolloClient){
   const { middlewares } = args ?? {}
 
   const { getClient } = registerApolloClient(()=>{
-    // 為了讓每次 fetch 都能動態改 uri
-    const dynamicUriLink = new ApolloLink((operation, forward) => {
-      const { uri: contextUri } = operation.getContext()
-      operation.setContext({
-        uri: contextUri || FETCH_URI  // 使用 context 中的 uri 或默認 uri
-      })
-      return forward(operation)
-    })
 
     const middleware = setContext((operation, prevContext) => {
       const { headers:prevHeaders } = prevContext
@@ -37,7 +29,10 @@ function makeApolloClient(args?:IMakeApolloClient){
     })
 
     const httpLink = createHttpLink({
-      uri: FETCH_URI,
+      uri: (operation) => {
+        const { uri: contextUri } = operation.getContext()
+        return contextUri || FETCH_URI
+      },
       fetchOptions: {
         next: {
           revalidate: REVALIDATE
@@ -61,7 +56,6 @@ function makeApolloClient(args?:IMakeApolloClient){
         },
       }),
       link: ApolloLink.from([
-        dynamicUriLink,
         middleware,
         ...(middlewares || []),
         httpLink,
