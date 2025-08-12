@@ -21,6 +21,8 @@ const nextConfig = {
     includePaths: [path.join(__dirname, 'src/styles')],
   },
   images: {
+    loader: 'custom',
+    loaderFile: './src/lib/cdnImageLoader.js',
     remotePatterns: [
       {
         protocol: 'https',
