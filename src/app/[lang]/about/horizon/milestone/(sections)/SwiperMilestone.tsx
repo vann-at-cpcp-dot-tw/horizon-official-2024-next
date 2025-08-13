@@ -102,8 +102,8 @@ function SwiperMilestone(props:TypeProps){
                       src={node.image}
                       fill={true}
                       sizes="50vw"
-                      placeholder={node?.placeholder ?'blur' :'empty'}
-                      blurDataURL={node.placeholder}
+                      placeholder="blur"
+                      // blurDataURL={node.placeholder}
                       alt="" />
                     </RatioArea>
                     <div className="pb-10">

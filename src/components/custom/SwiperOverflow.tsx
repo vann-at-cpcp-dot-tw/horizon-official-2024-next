@@ -161,8 +161,8 @@ function SwiperOverflow(props:TypeProps){
                       fill={true}
                       src={node?.mediaItemUrl || ''}
                       sizes="52.25vw"
-                      placeholder={node?.placeholder ?'blur' :'empty'}
-                      blurDataURL={node?.placeholder}
+                      placeholder="blur"
+                      // blurDataURL={node?.placeholder}
                       priority={true}
                       alt="" />
 

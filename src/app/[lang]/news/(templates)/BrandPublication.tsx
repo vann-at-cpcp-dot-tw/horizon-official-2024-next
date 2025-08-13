@@ -72,8 +72,8 @@ function BrandPublication(props:TypeProps){
                   style={{height:'auto'}}
                   width={202}
                   height={278}
-                  placeholder={props.placeholder ?'blur' :'empty'}
-                  blurDataURL={props.placeholder}
+                  placeholder="blur"
+                  // blurDataURL={props.placeholder}
                   alt="" />
                 </a>
               </div>

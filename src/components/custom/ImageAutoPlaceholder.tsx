@@ -8,15 +8,15 @@ interface TypeState {}
 
 async function ImageAutoPlaceholder(props:TypeProps){
   const { className } = props
-  const placeholder = await genImageBlurHash(props?.src)
+  // const placeholder = await genImageBlurHash(props?.src)
   return <Image className={className}
     src={props?.src || ''}
     width={props?.width}
     height={props?.height}
     fill={props?.fill}
     sizes={props?.sizes}
-    placeholder={placeholder ?'blur' :'empty'}
-    blurDataURL={placeholder}
+    placeholder="blur"
+    // blurDataURL={placeholder}
     alt="" />
 }
 

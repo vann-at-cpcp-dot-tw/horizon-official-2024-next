@@ -25,7 +25,7 @@ interface TypeState {}
 
 export default async function CoverStory(props:TypeProps){
   const { className } = props
-  const placeholder = await genImageBlurHash(props?.image)
+  // const placeholder = await genImageBlurHash(props?.image) // 暫時停用，因似乎有性能問題，故回歸預設 placeholder
 
   return <Suspense fallback={null}>
     <div className={twMerge('container-fluid px-0 lg:mb-32 mb-10', className)}>
@@ -37,7 +37,8 @@ export default async function CoverStory(props:TypeProps){
         lang={props.lang}>
           <CoverImage
           image={props?.image}
-          placeholder={placeholder} />
+          // placeholder={placeholder}
+          />
         </LinkWithLang>
       </RatioArea>
 

@@ -152,8 +152,9 @@ function SingleCategory(props:TypeProps){
                           style={{
                             objectFit: 'cover',
                           }}
-                          placeholder={placeholders?.[index] ?'blur' :'empty'}
-                          blurDataURL={placeholders?.[index]} />
+                          placeholder="blur"
+                          // blurDataURL={placeholders?.[index]}
+                          />
                         </RatioArea>
                       </div>
                     }

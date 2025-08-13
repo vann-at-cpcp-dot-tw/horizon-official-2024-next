@@ -40,7 +40,7 @@ async function Publication(props:TypeProps){
   const listWithPlaceholder = await Promise.all(props?.list?.map(async (node) => {
     return {
       ...node,
-      placeholder: await genImageBlurHash(node?.publicationCustomFields?.publication?.publicationCover?.node?.mediaItemUrl || '')
+      // placeholder: await genImageBlurHash(node?.publicationCustomFields?.publication?.publicationCover?.node?.mediaItemUrl || '') // 暫時停用，因似乎有性能問題，故回歸預設 placeholder
     }
   }))
 
@@ -66,8 +66,9 @@ async function Publication(props:TypeProps){
                   width={330}
                   height={238}
                   alt=""
-                  placeholder={node?.placeholder ?'blur' :'empty'}
-                  blurDataURL={node?.placeholder} />
+                  placeholder="blur"
+                  // blurDataURL={node?.placeholder}
+                  />
                 </a>
               </div>
             })

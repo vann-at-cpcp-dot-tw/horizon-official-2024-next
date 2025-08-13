@@ -59,8 +59,8 @@ function PostSwiper(props:TypeProps){
                     width={900}
                     height={506}
                     priority={true}
-                    placeholder={node?.placeholder ?'blur' :'empty'}
-                    blurDataURL={node?.placeholder}
+                    placeholder="blur"
+                    // blurDataURL={node?.placeholder}
                     alt="" />
                   }
                 </RatioArea>

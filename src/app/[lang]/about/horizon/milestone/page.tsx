@@ -35,7 +35,7 @@ export default async function PageHome({
       return {
         ...node,
         image: node?.image?.node?.mediaItemUrl,
-        placeholder: await genImageBlurHash(node?.image?.node?.mediaItemUrl)
+        // placeholder: await genImageBlurHash(node?.image?.node?.mediaItemUrl) // 暫時停用，因似乎有性能問題，故回歸預設 placeholder
       }
     })
   )

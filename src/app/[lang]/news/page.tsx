@@ -69,7 +69,7 @@ export default async function PageNews({params, searchParams}:TypeProps){
 
   const publicationCover = data.publicationCategory?.publications?.nodes?.[0]?.translation?.publicationCustomFields?.publication?.publicationCover?.node?.mediaItemUrl || ''
   const publicationPdf = data.publicationCategory?.publications?.nodes?.[0]?.translation?.publicationCustomFields?.publication?.pdf?.node?.mediaItemUrl || ''
-  const publicationPlaceholder = await genImageBlurHash(publicationCover)
+  // const publicationPlaceholder = await genImageBlurHash(publicationCover) // 暫時停用，因似乎有性能問題，故回歸預設 placeholder
 
   return <main className="grow pb-5">
 
@@ -92,7 +92,7 @@ export default async function PageNews({params, searchParams}:TypeProps){
 
     <BrandPublication
     publicationCover={publicationCover}
-    placeholder={publicationPlaceholder}
+    // placeholder={publicationPlaceholder}
     pdf={publicationPdf} />
 
     <OwnerPerspective image={data.newsPageSettings.ownerPerspective.image?.node?.mediaItemUrl} description={data.newsPageSettings.ownerPerspective?.description} />

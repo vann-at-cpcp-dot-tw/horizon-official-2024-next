@@ -34,7 +34,7 @@ export default async function PageAboutDesign({
             ...partnerNode,
             image: {
               ...(partnerNode?.image || {}),
-              placeholder: await genImageBlurHash(partnerNode?.image?.node?.mediaItemUrl)
+              // placeholder: await genImageBlurHash(partnerNode?.image?.node?.mediaItemUrl) // 暫時停用，因似乎有性能問題，故回歸預設 placeholder
             }
           }
         })) :[]
@@ -45,7 +45,7 @@ export default async function PageAboutDesign({
           ...node.basic,
           keyImage: {
             ...(node?.basic?.keyImage || {}),
-            placeholder: await genImageBlurHash(node?.basic?.keyImage?.node?.mediaItemUrl)
+            // placeholder: await genImageBlurHash(node?.basic?.keyImage?.node?.mediaItemUrl) // 暫時停用，因似乎有性能問題，故回歸預設 placeholder
           },
         },
         designPartners

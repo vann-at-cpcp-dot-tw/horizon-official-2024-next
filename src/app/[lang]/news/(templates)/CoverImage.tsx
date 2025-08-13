@@ -58,8 +58,9 @@ function CoverImage(props:TypeProps){
       fill={true}
       sizes="100vw"
       alt=""
-      placeholder={props?.placeholder ?'blur' :'empty'}
-      blurDataURL={props?.placeholder} />
+      placeholder="blur"
+      // blurDataURL={props?.placeholder}
+      />
       </motion.div>
     </div>
   </Suspense>

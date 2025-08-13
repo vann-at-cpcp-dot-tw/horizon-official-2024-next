@@ -37,10 +37,10 @@ export default async function PageSinglePost({params}:TypeProps){
   const post = data?.category?.posts?.nodes?.[0]
   const galleryWithPlaceholder = await Promise.all(
     post?.postCustomFields?.gallery?.map?.(async (node:any) => {
-      const base64 = await genImageBlurHash(node?.image?.node?.mediaItemUrl)
+      // const base64 = await genImageBlurHash(node?.image?.node?.mediaItemUrl) // 暫時停用，因似乎有性能問題，故回歸預設 placeholder
       return {
         ...node,
-        placeholder: base64,
+        // placeholder: base64,
       }
     }) || []
   )

@@ -33,7 +33,7 @@ export default async function PageAboutInnovation({
           ...node.basic,
           keyImage: {
             ...(node?.basic?.keyImage || {}),
-            placeholder: await genImageBlurHash(node?.basic?.keyImage?.node?.mediaItemUrl)
+            // placeholder: await genImageBlurHash(node?.basic?.keyImage?.node?.mediaItemUrl) // 暫時停用，因似乎有性能問題，故回歸預設 placeholder
           },
         },
       }

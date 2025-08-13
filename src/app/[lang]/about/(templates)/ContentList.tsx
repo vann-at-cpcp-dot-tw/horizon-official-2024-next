@@ -114,8 +114,8 @@ function ContentList(props:TypeProps){
                 width={900}
                 height={506}
                 priority={true}
-                placeholder={node?.basic?.keyImage?.placeholder ?'blur' :'empty'}
-                blurDataURL={node?.basic?.keyImage?.placeholder}
+                placeholder="blur"
+                // blurDataURL={node?.basic?.keyImage?.placeholder}
                 alt=""
                 style={{
                   transition: 'all 1.6s cubic-bezier(0.215, 0.610, 0.355, 1.000)'
@@ -165,8 +165,8 @@ function ContentList(props:TypeProps){
                               src={designerNode?.image?.node?.mediaItemUrl || ''}
                               fill={true}
                               sizes="25vw"
-                              placeholder={designerNode?.image?.placeholder ?'blur' :'empty'}
-                              blurDataURL={designerNode?.image?.placeholder}
+                              placeholder="blur"
+                              // blurDataURL={designerNode?.image?.placeholder}
                               alt="" />
                             </RatioArea>
                             <div className="mb-2 text-[24px] text-gray-900">{designerNode?.title}</div>
