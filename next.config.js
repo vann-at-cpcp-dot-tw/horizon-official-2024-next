@@ -53,6 +53,10 @@ const nextConfig = {
     // domains: ['wp-horizon-official.ddev.site']
   },
   trailingSlash: false, // for exportPathMap
+  experimental: {
+      // 記憶體優化（如果是 v15+）
+      webpackMemoryOptimizations: true,
+  },
   webpack: (config, { dev, isServer })=>{
     config.module.rules.push(
       {
