@@ -145,8 +145,8 @@ export default function ListFilters(props:TypeProps){
                   router.push(`${pathname}?${genQueryString({key:'orderby', value:e.target.value})}`, {scroll:false})
                 }}>
                 <option value="">{ __('Latest Listing') }</option>
-                <option value="length,desc">{ __('Length - Hight to Low') }</option>
-                <option value="length,asc">{ __('Length - Low to Hight') }</option>
+                <option value="length,desc">{ __('Length - High to Low') }</option>
+                <option value="length,asc">{ __('Length - Low to High') }</option>
               </select>
             </div>
           </div>
