@@ -41,7 +41,7 @@ function CompaniesIntros(props:TypeProps){
                   }
                 </div>
                 {
-                  node?.description && <div className="mx-auto w-full max-w-[864px] text-[15px] text-gray-700">{node.description}</div>
+                  node?.description && <div className="mx-auto w-full max-w-[864px] text-[15px] text-gray-700" dangerouslySetInnerHTML={{__html:node.description}}></div>
                 }
               </div>
             </div>
