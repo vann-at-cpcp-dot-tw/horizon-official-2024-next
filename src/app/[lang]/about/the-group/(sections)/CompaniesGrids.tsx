@@ -78,7 +78,7 @@ function CompaniesGrids(props:TypeProps){
                       </div>
                     }
                     {
-                      node?.shortDescription && <div className="text-center text-[12px] text-gray-300 lg:text-[14px]">{node?.shortDescription}</div>
+                      node?.shortDescription && <div className="text-center text-[12px] text-gray-300 lg:text-[14px]" dangerouslySetInnerHTML={{__html: node?.shortDescription}}></div>
                     }
                   </div>
                 </div>
