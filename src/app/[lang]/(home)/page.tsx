@@ -33,9 +33,8 @@ export default async function PageHome({
     <KV
     title={kvTitle}
     imageNode={
-      <ImageAutoPlaceholder className="absolute left-0 top-0 z-0 size-full object-cover"
-      src={kvImage?.node?.mediaItemUrl || ''}
-      fill={true}
+      <img className="absolute left-0 top-0 z-0 size-full object-cover"
+      srcSet={kvImage?.node?.srcSet || ''}
       sizes="100vw" />
     }
     video={kvVideo?.node?.mediaItemUrl}
