@@ -21,7 +21,7 @@ query QueryPageAboutInnovation(
             }
           }
         }
-        content
+        content(sizesString: "(max-width: 991px) 100vw, 900px")
       }
     }
   }

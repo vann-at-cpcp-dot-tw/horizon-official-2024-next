@@ -158,7 +158,7 @@ function ContentList(props:TypeProps){
                               <img className="absolute left-0 top-0 size-full"
                               src={designerNode?.image?.node?.mediaItemUrl}
                               srcSet={designerNode?.image?.node?.srcSet}
-                              sizes="25vw" />
+                              sizes="(max-width:991px) 50vw, 25vw" />
                             </RatioArea>
                             <div className="mb-2 text-[24px] text-gray-900">{designerNode?.title}</div>
 

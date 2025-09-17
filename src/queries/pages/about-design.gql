@@ -21,7 +21,7 @@ query QueryPageAboutDesignAndCraft(
             }
           }
         }
-        content
+        content(sizesString: "(max-width: 991px) 100vw, 900px")
         designPartnersTitle
         designPartners {
           title
