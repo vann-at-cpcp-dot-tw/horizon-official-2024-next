@@ -10,7 +10,10 @@ import LinkWithLang from '~/components/custom/LinkWithLang'
 import { isEmpty } from '~/lib/utils'
 
 interface TypeProps {
-  items: string[]
+  items: {
+    mediaItemUrl?: string
+    srcSet?: string
+  }[]
   [key:string]: any
 }
 interface TypeState {}
@@ -25,11 +28,7 @@ function Achievement(props:TypeProps){
           {
             props?.items?.map?.((node, index)=>{
               return <div className="col-auto h-[80px] py-2 lg:h-[100px]" key={index}>
-                <Image src={node} width={100} height={100} alt=""
-                style={{
-                  height:'100%',
-                  width: 'auto'
-                }}/>
+                <img className="h-full w-auto" src={node?.mediaItemUrl} srcSet={node?.srcSet} />
               </div>
             })
           }

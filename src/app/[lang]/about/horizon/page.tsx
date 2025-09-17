@@ -47,7 +47,12 @@ export default async function PageAboutHorizon({
     iso9001Certified={numericalData?.iso9001Certified}
     employees={numericalData?.employees} />
 
-    <Achievement items={achievement?.map?.((node:{image:{node:{mediaItemUrl:string}}})=>node?.image?.node?.mediaItemUrl || '')} />
+    <Achievement items={achievement?.map?.((node:any)=>{
+      return {
+        mediaItemUrl: node?.image?.node?.mediaItemUrl,
+        srcSet: node?.image?.node?.srcSet
+      }
+    })} />
 
     <History content={history} />
 
