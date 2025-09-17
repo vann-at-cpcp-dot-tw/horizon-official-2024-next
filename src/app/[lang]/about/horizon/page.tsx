@@ -33,10 +33,12 @@ export default async function PageAboutHorizon({
   return <main>
     <KV
     background={firstScreen?.backgroundVideo?.node?.mediaItemUrl}
-    heroImageNode={<ImageAutoPlaceholder src={`${firstScreen?.heroImage?.node?.mediaItemUrl}`} width={1920} height={1080} />}
+    heroImageNode={<img src={firstScreen?.heroImage?.node?.mediaItemUrl} srcSet={firstScreen?.heroImage?.node?.srcSet} sizes="(min-width:1200px) 1920px, (max-width:991px) 100vw, 956px" />}
     description={firstScreen?.description} />
 
-    <Discover content={discoverHorizon} imageAfterContent={imageAfterDiscoverHorizon?.node?.mediaItemUrl} />
+    <Discover
+    content={discoverHorizon}
+    imageAfterContent={imageAfterDiscoverHorizon?.node} />
 
 
     <NumericalData

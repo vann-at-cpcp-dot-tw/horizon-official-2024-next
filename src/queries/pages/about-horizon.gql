@@ -14,6 +14,7 @@ query QueryPageAboutHorizon(
         heroImage {
           node {
             mediaItemUrl
+            srcSet
           }
         }
         description
@@ -22,6 +23,7 @@ query QueryPageAboutHorizon(
       imageAfterDiscoverHorizon {
         node {
           mediaItemUrl
+          srcSet
         }
       }
       numericalData {
@@ -34,6 +36,7 @@ query QueryPageAboutHorizon(
         image {
           node {
             mediaItemUrl
+            srcSet
           }
         }
       }

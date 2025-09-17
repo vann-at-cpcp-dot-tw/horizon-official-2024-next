@@ -6,12 +6,14 @@ import { twMerge } from 'tailwind-merge'
 import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'
 import T from 'vanns-common-modules/dist/components/react/T'
 
-import ImageAutoPlaceholder from "~/components/custom/ImageAutoPlaceholder"
 import { isEmpty } from '~/lib/utils'
 
 interface TypeProps {
   content: string
-  imageAfterContent: string
+  imageAfterContent: {
+    mediaItemUrl?: string
+    srcSet?: string
+  }
   [key:string]: any
 }
 interface TypeState {}
@@ -27,7 +29,7 @@ function Discover(props:TypeProps){
         </pre>
       </div>
       <RatioArea ratio="56.25">
-        <ImageAutoPlaceholder src={props?.imageAfterContent} fill={true} sizes="100vw" />
+        <img className="absolute inset-0 size-full object-cover" src={props?.imageAfterContent?.mediaItemUrl} srcSet={props?.imageAfterContent?.srcSet} sizes="100vw" />
       </RatioArea>
     </div>
   </Suspense>
