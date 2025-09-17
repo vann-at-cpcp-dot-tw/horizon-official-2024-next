@@ -7,7 +7,6 @@ const postsPerPage = 30
 import { Suspense, useState, useMemo, useEffect } from 'react'
 
 import { useLazyQuery } from "@apollo/client"
-import Image from "next/image"
 import { useRouter, useParams, useSearchParams } from 'next/navigation'
 import { twMerge } from 'tailwind-merge'
 

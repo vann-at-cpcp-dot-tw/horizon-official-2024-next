@@ -4,7 +4,6 @@ const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 import { Suspense, useRef } from 'react'
 
 import { motion, useInView } from "framer-motion"
-import Image from "next/image"
 import { twMerge } from 'tailwind-merge'
 import { useWindowSize } from 'vanns-common-modules/dist/use/react'
 

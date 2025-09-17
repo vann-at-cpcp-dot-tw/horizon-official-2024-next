@@ -110,7 +110,7 @@ function YachtsExteriorSwiper(props:TypeProps){
                       <Image className="absolute left-0 top-0 z-0 size-full object-cover"
                         priority={true}
                         src={node?.image?.node?.mediaItemUrl || ''}
-                        placeholder="blur"
+                        // placeholder="blur"
                         // blurDataURL={imageBlurHashes?.[index]}
                         fill={true}
                         sizes="76.35vw"
@@ -171,7 +171,7 @@ function YachtsExteriorSwiper(props:TypeProps){
                 width: '100%',
                 height: viewport.width && viewport.width >= 992 ?'100%' :'auto'
               }}
-              placeholder="blur"
+              // placeholder="blur"
               // blurDataURL={imageBlurHashes?.[index]}
               alt="" />,
             }))

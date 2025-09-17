@@ -59,7 +59,7 @@ function PostSwiper(props:TypeProps){
                     width={900}
                     height={506}
                     priority={true}
-                    placeholder="blur"
+                    // placeholder="blur"
                     // blurDataURL={node?.placeholder}
                     alt="" />
                   }

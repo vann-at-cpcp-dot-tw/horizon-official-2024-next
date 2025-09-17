@@ -114,7 +114,7 @@ function ContentList(props:TypeProps){
                 width={900}
                 height={506}
                 priority={true}
-                placeholder="blur"
+                // placeholder="blur"
                 // blurDataURL={node?.basic?.keyImage?.placeholder}
                 alt=""
                 style={{
@@ -165,7 +165,7 @@ function ContentList(props:TypeProps){
                               src={designerNode?.image?.node?.mediaItemUrl || ''}
                               fill={true}
                               sizes="25vw"
-                              placeholder="blur"
+                              // placeholder="blur"
                               // blurDataURL={designerNode?.image?.placeholder}
                               alt="" />
                             </RatioArea>

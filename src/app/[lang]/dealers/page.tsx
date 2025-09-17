@@ -4,7 +4,6 @@ const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
 const HQ_API_BASE = process.env.NEXT_PUBLIC_HQ_API_BASE
 const HQ_API_URL = `${HQ_API_BASE}graphql`
 
-import Image from "next/image"
 import { redirect } from "next/navigation"
 import T from 'vanns-common-modules/dist/components/react/T'
 

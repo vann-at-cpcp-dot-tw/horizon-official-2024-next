@@ -6,7 +6,6 @@ const HQ_API_URL = `${HQ_API_BASE}graphql`
 import { Suspense, useMemo, useEffect } from 'react'
 
 import { useQuery } from "@apollo/client"
-import Image from "next/image"
 import { usePathname, useSearchParams, useRouter } from "next/navigation"
 import { twMerge } from 'tailwind-merge'
 import { useTranslate } from "vanns-common-modules/dist/use/react"

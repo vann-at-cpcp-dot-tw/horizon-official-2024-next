@@ -1,7 +1,6 @@
 const HQ_API_BASE = process.env.NEXT_PUBLIC_HQ_API_BASE
 const HQ_API_URL = `${HQ_API_BASE}graphql`
 
-import ImageAutoPlaceholder from "~/components/custom/ImageAutoPlaceholder"
 import { fetchGQL } from "~/lib/apollo/server"
 import { QueryHomePage, QueryHomeNews } from '~/queries/pages/home.gql'
 
@@ -34,7 +33,8 @@ export default async function PageHome({
     title={kvTitle}
     imageNode={
       <img className="absolute left-0 top-0 z-0 size-full object-cover"
-      srcSet={kvImage?.node?.srcSet || ''}
+      src={kvImage?.node?.mediaItemUrl}
+      srcSet={kvImage?.node?.srcSet}
       sizes="100vw" />
     }
     video={kvVideo?.node?.mediaItemUrl}
@@ -45,6 +45,7 @@ export default async function PageHome({
     <IntroAfterSeries
     smallVideo={homePageIntroduction?.smallVideo?.node?.mediaItemUrl}
     smallImg={homePageIntroduction?.smallImg?.node?.mediaItemUrl}
+    smallImgSrcSet={ homePageIntroduction?.smallImg?.node?.srcSet }
     wideVideo={homePageIntroduction?.innovationVideo?.node?.mediaItemUrl}
     lang={lang}/>
 

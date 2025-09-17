@@ -15,7 +15,7 @@ async function ImageAutoPlaceholder(props:TypeProps){
     height={props?.height}
     fill={props?.fill}
     sizes={props?.sizes}
-    placeholder="blur"
+    // placeholder="blur"
     // blurDataURL={placeholder}
     alt="" />
 }

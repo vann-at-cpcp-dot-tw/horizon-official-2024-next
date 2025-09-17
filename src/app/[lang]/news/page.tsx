@@ -4,7 +4,6 @@ const HQ_API_URL = `${HQ_API_BASE}graphql`
 const postsPerPage = 6
 
 import { headers } from 'next/headers'
-import Image from "next/image"
 import { genImageBlurHash } from 'vanns-common-modules/dist/lib/next'
 
 import LinkWithLang from '~/components/custom/LinkWithLang'

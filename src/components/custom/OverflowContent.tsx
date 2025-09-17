@@ -7,7 +7,6 @@ const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
 import { Suspense, useEffect, useState } from 'react'
 
 import { motion } from "framer-motion"
-import Image from "next/image"
 import { twMerge } from 'tailwind-merge'
 import { useWindowSize } from 'vanns-common-modules/dist/use/react'
 import { useIsClient } from 'vanns-common-modules/dist/use/react'

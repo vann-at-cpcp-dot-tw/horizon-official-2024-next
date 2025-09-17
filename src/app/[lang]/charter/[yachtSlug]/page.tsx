@@ -2,7 +2,6 @@ const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 const CONTENT_TYPE = process.env.NEXT_PUBLIC_CONTENT_TYPE || 'hq'
 const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
 
-import Image from "next/image"
 import { redirect } from "next/navigation"
 import T from 'vanns-common-modules/dist/components/react/T'
 

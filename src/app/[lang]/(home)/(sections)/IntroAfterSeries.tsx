@@ -4,7 +4,6 @@ const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 import { Suspense, useRef } from 'react'
 
 import { useInView } from "framer-motion"
-import Image from "next/image"
 import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'
 import { useWindowSize } from "vanns-common-modules/dist/use/react"
 import { useTranslate } from "vanns-common-modules/dist/use/react"
@@ -15,6 +14,7 @@ import OverflowContent from '~/components/custom/OverflowContent'
 interface TypeProps {
   smallVideo: string
   smallImg: string
+  smallImgSrcSet: string
   wideVideo: string
   lang: string
 }
@@ -46,7 +46,7 @@ function IntroAfterSeries(props:TypeProps){
                   playsInline
                   muted
                   loop></video>
-                    :<Image className="absolute left-0 top-0 z-0 size-full border-8 border-white object-cover" src={props?.smallImg || ''} alt="" width={450} height={337}/>
+                    :<img className="absolute left-0 top-0 z-0 size-full border-8 border-white object-cover" src={props?.smallImg} srcSet={props?.smallImgSrcSet} sizes="(max-width:991px) 100vw, 450px"/>
                 }
               </RatioArea>
             </div>

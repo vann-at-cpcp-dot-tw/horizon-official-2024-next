@@ -5,7 +5,6 @@ const postsPerPage = 3
 import { Suspense, useMemo } from 'react'
 
 import { useQuery } from "@apollo/client"
-import Image from "next/image"
 import { twMerge } from 'tailwind-merge'
 
 import LinkWithLang from '~/components/custom/LinkWithLang'

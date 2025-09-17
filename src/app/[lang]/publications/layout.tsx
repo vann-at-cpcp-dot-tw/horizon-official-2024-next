@@ -2,7 +2,6 @@ const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 const HQ_API_BASE = process.env.NEXT_PUBLIC_HQ_API_BASE
 const HQ_API_URL = `${HQ_API_BASE}graphql`
 
-import Image from "next/image"
 import { genImageBlurHash } from 'vanns-common-modules/dist/lib/next'
 
 import LinkWithLang from '~/components/custom/LinkWithLang'

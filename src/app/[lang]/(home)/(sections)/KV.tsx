@@ -4,7 +4,6 @@ const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 import { Suspense, useRef, useEffect, useState } from 'react'
 
 import { motion } from "framer-motion"
-import Image from "next/image"
 
 import { useStore } from '~/store'
 
@@ -16,6 +15,7 @@ interface TypeProps {
     image?: {
       node?: {
         mediaItemUrl?: string
+        srcSet?: string
       }
     }
   }[]
@@ -95,7 +95,7 @@ function KV(props:TypeProps){
         <div className="absolute bottom-5 right-5 hidden lg:block">
           {
             props?.achievements?.map((node, index)=>{
-              return <Image key={index} src={node?.image?.node?.mediaItemUrl || ''} width={100} height={37} alt=""/>
+              return <img key={index} src={node?.image?.node?.mediaItemUrl} srcSet={node?.image?.node?.srcSet} />
             })
           }
         </div>

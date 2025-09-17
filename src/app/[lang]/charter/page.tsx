@@ -4,7 +4,6 @@ const CONTENT_TYPE = process.env.NEXT_PUBLIC_CONTENT_TYPE || 'hq'
 const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
 const postsPerPage = 30
 
-import Image from "next/image"
 import { redirect } from "next/navigation"
 import T from 'vanns-common-modules/dist/components/react/T'
 

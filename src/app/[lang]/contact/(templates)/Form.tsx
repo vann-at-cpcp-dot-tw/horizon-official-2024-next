@@ -7,7 +7,6 @@ const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
 
 import { Suspense, useCallback } from 'react'
 
-import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { twMerge } from 'tailwind-merge'
 import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'

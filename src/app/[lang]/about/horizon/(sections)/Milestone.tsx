@@ -44,7 +44,7 @@ function Milestone(props:TypeProps){
           <Image className="absolute left-0 top-0 z-0 size-full object-cover"
           src={milestonePic}
           fill={true}
-          placeholder="blur"
+          // placeholder="blur"
           alt="" />
         </RatioArea>
       </div>

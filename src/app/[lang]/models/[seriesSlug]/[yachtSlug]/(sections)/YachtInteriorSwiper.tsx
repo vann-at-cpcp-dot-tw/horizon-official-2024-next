@@ -80,7 +80,7 @@ function YachtInteriorSwiper(props:TypeProps){
                     fill={true}
                     sizes="23.42vw"
                     src={node?.image?.node?.mediaItemUrl || ''}
-                    placeholder="blur"
+                    // placeholder="blur"
                     // blurDataURL={imageBlurHashes?.[index]}
                     alt="" />
                   </RatioArea>
@@ -109,7 +109,7 @@ function YachtInteriorSwiper(props:TypeProps){
                 width: '100%',
                 height: viewport.width && viewport.width >= 992 ?'100%' :'auto'
               }}
-                placeholder="blur"
+                // placeholder="blur"
                 // blurDataURL={imageBlurHashes?.[index]}
                 alt="" />,
               title: node?.description

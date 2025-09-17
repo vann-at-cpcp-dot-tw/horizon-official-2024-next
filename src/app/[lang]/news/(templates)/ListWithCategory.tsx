@@ -7,7 +7,6 @@ const postsPerPage = 10
 import { Suspense, useMemo, useEffect, useState } from 'react'
 
 import { useLazyQuery } from "@apollo/client"
-import Image from "next/image"
 import { useParams, useSearchParams } from 'next/navigation'
 import { twMerge } from 'tailwind-merge'
 import { useSearchObject,  } from 'vanns-common-modules/dist/use/next'

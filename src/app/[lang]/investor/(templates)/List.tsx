@@ -9,7 +9,6 @@ const postsPerPage = 10
 import { Suspense, useState, useMemo, useEffect } from 'react'
 
 import { useLazyQuery } from "@apollo/client"
-import Image from "next/image"
 import { twMerge } from 'tailwind-merge'
 
 import Loading from '~/components/custom/icons/Loading'

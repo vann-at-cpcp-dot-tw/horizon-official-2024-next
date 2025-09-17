@@ -131,7 +131,7 @@ function All(props:TypeProps){
                               style={{
                                 objectFit: 'cover',
                               }}
-                              placeholder="blur"
+                              // placeholder="blur"
                               priority={true} />
                             </RatioArea>
                           </div>
@@ -175,7 +175,7 @@ function All(props:TypeProps){
                               style={{
                                 objectFit: 'cover',
                               }}
-                              placeholder="blur"
+                              // placeholder="blur"
                               priority={true} />
                           </RatioArea>
                         </div>

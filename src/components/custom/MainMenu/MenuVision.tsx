@@ -124,7 +124,7 @@ function MenuVision(props:TypeProps){
                   <Image className="absolute left-0 top-0 z-0 size-full object-cover"
                   fill={true}
                   src={props?.image}
-                  placeholder="blur"
+                  // placeholder="blur"
                   // blurDataURL={imageBlurHashes[0]}
                   alt=""
                   onLoad={()=>{

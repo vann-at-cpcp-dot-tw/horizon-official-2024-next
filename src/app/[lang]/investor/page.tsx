@@ -5,7 +5,6 @@ const HQ_API_BASE = process.env.NEXT_PUBLIC_HQ_API_BASE
 const HQ_API_URL = `${HQ_API_BASE}graphql`
 const postsPerPage = 10
 
-import Image from "next/image"
 import { redirect } from "next/navigation"
 import T from 'vanns-common-modules/dist/components/react/T'
 

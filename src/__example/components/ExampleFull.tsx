@@ -4,7 +4,6 @@ const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 import { Suspense, forwardRef, useState, useRef, useReducer, useEffect, useMemo, useCallback } from 'react'
 
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import Image from "next/image"
 import { useRouter } from 'next/navigation'
 import { twMerge } from 'tailwind-merge'
 import { useWindowSize } from "vanns-common-modules/dist/use/react"

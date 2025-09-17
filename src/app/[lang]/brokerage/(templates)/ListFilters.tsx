@@ -6,7 +6,6 @@ const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
 
 import { Suspense, useCallback } from 'react'
 
-import Image from "next/image"
 import { useRouter, useSearchParams } from 'next/navigation'
 import { twMerge } from 'tailwind-merge'
 import { isEmpty } from "vanns-common-modules/dist/lib/utils"

@@ -42,7 +42,7 @@ export default async function SeriesList(props:TypeProps){
                 fill={true}
                 src={node?.yachtsSeriesCustomFields?.seriesKeyImage?.node?.mediaItemUrl || ''}
                 alt=""
-                placeholder="blur"
+                // placeholder="blur"
                 // blurDataURL={node?.placeholder}
                 />
               </LinkWithLang>
