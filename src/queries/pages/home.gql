@@ -9,6 +9,7 @@ query QueryHomePage(
         mainTitle
         heroImage {
           node {
+            srcSet
             mediaItemUrl
           }
         }
@@ -27,6 +28,7 @@ query QueryHomePage(
         smallImg{
           node {
             mediaItemUrl
+            srcSet
           }
         }
         innovationVideo {
@@ -39,6 +41,7 @@ query QueryHomePage(
         image {
           node {
             mediaItemUrl
+            srcSet
           }
         }
       }
