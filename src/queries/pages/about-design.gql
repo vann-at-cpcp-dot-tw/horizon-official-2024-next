@@ -17,6 +17,7 @@ query QueryPageAboutDesignAndCraft(
           keyImage {
             node {
               mediaItemUrl
+              srcSet
             }
           }
         }
@@ -29,6 +30,7 @@ query QueryPageAboutDesignAndCraft(
           image {
             node {
               mediaItemUrl
+              srcSet
             }
           }
         }
