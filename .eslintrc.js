@@ -18,6 +18,7 @@ module.exports = {
     }
   },
   rules: {
+    "@next/next/no-img-element": "off",
     "import/order": [
       "error",
       {
