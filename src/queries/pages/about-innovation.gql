@@ -17,6 +17,7 @@ query QueryPageAboutInnovation(
           keyImage {
             node {
               mediaItemUrl
+              srcSet
             }
           }
         }
