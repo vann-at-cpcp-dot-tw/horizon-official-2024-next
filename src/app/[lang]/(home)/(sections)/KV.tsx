@@ -95,7 +95,7 @@ function KV(props:TypeProps){
         <div className="absolute bottom-5 right-5 hidden lg:block">
           {
             props?.achievements?.map((node, index)=>{
-              return <img key={index} src={node?.image?.node?.mediaItemUrl} srcSet={node?.image?.node?.srcSet} />
+              return <img className="w-[100px]" key={index} src={node?.image?.node?.mediaItemUrl} srcSet={node?.image?.node?.srcSet} />
             })
           }
         </div>
