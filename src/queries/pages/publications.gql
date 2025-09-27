@@ -24,6 +24,7 @@ query QueryPublicationsPage {
               publicationCover {
                 node {
                   mediaItemUrl
+                  srcSet
                   mediaDetails {
                     width
                     height

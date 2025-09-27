@@ -21,6 +21,7 @@ query QuerySingleCharter(
         #           publicationCover {
         #             node {
         #               mediaItemUrl
+        #               srcSet
         #             }
         #           }
         #           pdf {

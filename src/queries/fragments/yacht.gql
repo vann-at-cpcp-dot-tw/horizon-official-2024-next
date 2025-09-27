@@ -104,6 +104,7 @@ fragment yachtRelatedPublications on YachtCustomFields {
             publicationCover {
               node {
                 mediaItemUrl
+                srcSet
               }
             }
             pdf {

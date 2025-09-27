@@ -133,6 +133,7 @@ query QueryNewsPage(
               publicationCover {
                 node {
                   mediaItemUrl
+                  srcSet
                 }
               }
               pdf {

@@ -36,6 +36,7 @@ query QueryPublicationCategory(
               publicationCover {
                 node {
                   mediaItemUrl
+                  srcSet
                   mediaDetails {
                     width
                     height
