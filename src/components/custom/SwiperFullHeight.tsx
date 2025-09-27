@@ -52,7 +52,12 @@ function SwiperFullHeight(props:TypeProps){
       setIframeSize(widthBasedSize || iframeSize)
     }
 
-  }, [contentWrapperSize.width, contentWrapperSize.height, props.iframeRatio])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    contentWrapperSize.width,
+    contentWrapperSize.height,
+    props.iframeRatio
+  ])
 
   return <Suspense fallback={null}>
     <div className={twMerge(`lg:absolute relative w-full lg:h-full h-auto left-0 top-0 flex flex-col flex-nowrap overflow-hidden`, className)}>
