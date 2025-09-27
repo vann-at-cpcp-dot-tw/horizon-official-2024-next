@@ -44,7 +44,10 @@ function SwiperOverflow(props:TypeProps){
   const { size:paginationSize, setNode:setPaginationNode } = useDomNodeSize()
   const centerRight = useMemo(()=>{
     return (bodyWidth - centerSize.width) / 2
-  }, [bodyWidth])
+  }, [
+    bodyWidth,
+    centerSize.width
+  ])
 
   const useModules = useMemo(()=>{
     let useModules = []
