@@ -26,7 +26,7 @@ function SingleSeriesTop(props:TypeProps){
   const { yachtSeriesList:allSeries } = commonData
   const seriesData = useMemo(()=>{
     return allSeries?.nodes?.find((node:{slug:string})=>node.slug === props.slug)
-  }, [allSeries])
+  }, [allSeries, props.slug])
 
   const { className } = props
 
