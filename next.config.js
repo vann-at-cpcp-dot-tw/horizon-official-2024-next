@@ -21,7 +21,7 @@ const nextConfig = {
     includePaths: [path.join(__dirname, 'src/styles')],
   },
   images: {
-    // unoptimized: true,
+    // unoptimized: true, // 是否開啟 Next.js 內建的影像優化功能
     remotePatterns: [
       {
         protocol: 'https',
