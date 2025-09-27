@@ -8,6 +8,7 @@ query QueryPageAboutTheGroup(
       atgpHeroImage {
         node {
           mediaItemUrl
+          srcSet
         }
       }
       atgpGroupIntroduction
@@ -24,11 +25,13 @@ query QueryPageAboutTheGroup(
             grid {
               node {
                 mediaItemUrl
+                srcSet
               }
             }
             banner {
               node {
                 mediaItemUrl
+                srcSet
               }
             }
           }

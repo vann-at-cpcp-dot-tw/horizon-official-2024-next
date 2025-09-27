@@ -7,7 +7,6 @@ import { twMerge } from 'tailwind-merge'
 import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'
 import T from 'vanns-common-modules/dist/components/react/T'
 
-import ImageAutoPlaceholder from "~/components/custom/ImageAutoPlaceholder"
 const AniCounter = dynamic(() => import('~/components/custom/dynamic/AniCounter'))
 
 export interface TypeCompanyNode {
@@ -60,7 +59,11 @@ function CompaniesGrids(props:TypeProps){
               companiesRow?.companies?.map((node:TypeCompanyNode, index)=>{
                 return <div className="lg:col col-12 mb-10 lg:mb-20" key={`${companiesRowIndex}-${index}`}>
                   <RatioArea className="mb-3 lg:mb-6" ratio="56.25">
-                    <ImageAutoPlaceholder className="absolute left-0 top-0 size-full" src={node?.images?.grid?.node?.mediaItemUrl} fill={true} sizes="50vw" />
+                    <img
+                    className="absolute left-0 top-0 size-full"
+                    src={node?.images?.grid?.node?.mediaItemUrl}
+                    srcSet={node?.images?.grid?.node?.srcSet}
+                    sizes="(max-width:991px) 100w, 50vw" />
                   </RatioArea>
 
                   <div className="px-2.5">
