@@ -53,7 +53,11 @@ function VRPreview(props:TypeProps){
   const { __ } = useTranslate()
   const hasContent = useMemo(()=>{
     return props?.gallery?.length > 0 && (props?.preview?.previewVideo?.node?.mediaItemUrl || props?.preview?.previewImage?.node?.mediaItemUrl)
-  }, [props?.gallery, props?.previewVideo?.node?.mediaItemUrl, props?.previewImage?.node?.mediaItemUrl])
+  }, [
+    props?.gallery,
+    props?.preview?.previewVideo?.node?.mediaItemUrl,
+    props?.preview?.previewImage?.node?.mediaItemUrl
+  ])
 
   const [isOpen, setIsOpen] = useState(false)
 
