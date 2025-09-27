@@ -35,7 +35,7 @@ query QuerySinglePost(
               image {
                 node {
                   mediaItemUrl
-              }
+                  srcSet
             }
           }
         }
@@ -90,6 +90,7 @@ query QueryRelatedPosts(
               image {
                 node {
                   mediaItemUrl
+                  srcSet
                 }
               }
             }

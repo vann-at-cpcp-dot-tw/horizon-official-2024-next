@@ -3,7 +3,6 @@ const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
 import { Suspense } from 'react'
 
-import Image from "next/image"
 import { useParams } from "next/navigation"
 import { twMerge } from 'tailwind-merge'
 import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'
@@ -15,7 +14,7 @@ interface TypeProps {
   title: string
   date: string
   href: string
-  thumbnail: string
+  thumbnail?: ImageNode
   categories?: {
     name?: string
     href?: string
@@ -57,8 +56,10 @@ export default function ListItem(props:TypeProps){
         className="absolute left-0 top-0 z-0 size-full overflow-hidden"
         href={props.href}
         lang={lang}>
-          <Image className="pointer-events-none absolute z-0 size-full object-cover group-hover:scale-[1.2] group-active:scale-[1.2]"
-          src={props?.thumbnail} fill={true} sizes="540px" alt=""
+          <img className="pointer-events-none absolute z-0 size-full object-cover group-hover:scale-[1.2] group-active:scale-[1.2]"
+          src={props?.thumbnail?.mediaItemUrl}
+          srcSet={props?.thumbnail?.srcSet}
+          sizes="(max-width:991px) 100vw, 540px"
           style={{
             transition: 'all 1.6s cubic-bezier(0.215, 0.610, 0.355, 1.000)'
           }}/>

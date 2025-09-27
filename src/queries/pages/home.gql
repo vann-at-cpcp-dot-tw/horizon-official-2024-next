@@ -79,6 +79,7 @@ query QueryHomePage(
           image {
             node {
               mediaItemUrl
+              srcSet
             }
           }
         }
@@ -120,6 +121,7 @@ query QueryHomeNews{
           image {
             node {
               mediaItemUrl
+              srcSet
             }
           }
         }
