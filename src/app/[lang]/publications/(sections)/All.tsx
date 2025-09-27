@@ -3,7 +3,6 @@ const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
 import { Suspense, useContext, useState, useRef, useMemo, useEffect } from 'react'
 
-import Image from "next/image"
 import { useParams } from "next/navigation"
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { SwiperClass } from "swiper/react"
@@ -123,16 +122,10 @@ function All(props:TypeProps){
 
                           publicationNode?.publicationCustomFields?.publication?.publicationCover?.node?.mediaDetails?.width && <div className="mb-2">
                             <RatioArea ratio={(publicationNode.publicationCustomFields.publication.publicationCover.node.mediaDetails?.height / publicationNode.publicationCustomFields.publication.publicationCover.node.mediaDetails.width * 100) as number}>
-                              <Image className="absolute size-full"
-                              src={`${publicationNode.publicationCustomFields?.publication?.publicationCover?.node?.mediaItemUrl || ''}`}
-                              alt=""
-                              fill
-                              sizes={viewport.width && viewport.width >= 992 ?'25vw' :'50vw'}
-                              style={{
-                                objectFit: 'cover',
-                              }}
-                              // placeholder="blur"
-                              priority={true} />
+                              <img className="absolute left-0 top-0 size-full object-cover"
+                              src={publicationNode.publicationCustomFields?.publication?.publicationCover?.node?.mediaItemUrl}
+                              srcSet={publicationNode.publicationCustomFields?.publication?.publicationCover?.node?.srcSet}
+                              sizes="(max-width:991px) 50vw, 25vw" />
                             </RatioArea>
                           </div>
                         }
@@ -167,16 +160,10 @@ function All(props:TypeProps){
                       {
                         categoryNode?.publications?.nodes?.[5]?.publicationCustomFields?.publication?.publicationCover?.node?.mediaDetails?.width && <div className="mb-2">
                           <RatioArea ratio={(categoryNode.publications.nodes[5].publicationCustomFields.publication.publicationCover.node.mediaDetails.height / categoryNode.publications.nodes[5].publicationCustomFields.publication.publicationCover.node.mediaDetails.width * 100) as number}>
-                            <Image className="absolute size-full opacity-0"
-                              src={`${categoryNode.publications.nodes[5].publicationCustomFields.publication.publicationCover.node.mediaItemUrl || ''}`}
-                              alt=""
-                              fill
-                              sizes={viewport.width && viewport.width >= 992 ?'25vw' :'50vw'}
-                              style={{
-                                objectFit: 'cover',
-                              }}
-                              // placeholder="blur"
-                              priority={true} />
+                            <img className="absolute left-0 top-0 size-full object-cover opacity-0"
+                              src={categoryNode.publications.nodes[5].publicationCustomFields.publication.publicationCover.node.mediaItemUrl}
+                              srcSet={categoryNode.publications.nodes[5].publicationCustomFields.publication.publicationCover.node.srcSet}
+                              sizes="(max-width:991px) 50vw, 25vw"/>
                           </RatioArea>
                         </div>
                       }

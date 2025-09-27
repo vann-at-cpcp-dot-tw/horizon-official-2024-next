@@ -18,8 +18,7 @@ export interface TypePublicationNode {
   publicationCustomFields: {
     publication: {
       publicationCover: {
-        node?: {
-          mediaItemUrl?: string
+        node?: ImageNode & {
           mediaDetails?: {
             width: number
             height: number
