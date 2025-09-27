@@ -64,6 +64,8 @@ function DOMLoader(props:TypeProps){
         }, 400)
       }, 500 + 1750)
     }
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [progressNumber])
 
   return <div id="DOMLoader" className={twMerge('fixed bg-golden-100 w-screen h-screen left-0 top-0 z-[999999] flex justify-center items-center', props?.className)}>
