@@ -21,7 +21,7 @@ const nextConfig = {
     includePaths: [path.join(__dirname, 'src/styles')],
   },
   images: {
-    unoptimized: true,
+    // unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',
@@ -54,8 +54,8 @@ const nextConfig = {
   },
   trailingSlash: false, // for exportPathMap
   experimental: {
-      // 記憶體優化（如果是 v15+）
-      webpackMemoryOptimizations: true,
+    // 記憶體優化（如果是 v15+）
+    webpackMemoryOptimizations: true,
   },
   webpack: (config, { dev, isServer })=>{
     config.module.rules.push(
