@@ -100,7 +100,9 @@ function ListWithCategory(props:TypeProps){
     getData({
       variables: queryVariables
     })
-  },[getData, searchObject.series, searchObject.year, isFilterChanged])
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[ queryVariables ])
 
   if( loading ){
     return <div className="py-20">
