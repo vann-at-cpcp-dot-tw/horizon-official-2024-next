@@ -3,7 +3,7 @@ const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 const CONTENT_TYPE = process.env.NEXT_PUBLIC_CONTENT_TYPE || 'hq'
 const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
 
-import { Suspense, useEffect, useMemo } from 'react'
+import { Suspense, useEffect, useMemo, useState } from 'react'
 
 import Image from "next/image"
 import { useParams, usePathname } from "next/navigation"
@@ -35,6 +35,11 @@ function Header(props:TypeProps){
   const { lang } = useParams()
   const { y:pageScrollY } = useWindowScroll()
   const pathnameWithoutLang = usePathnameWithoutLang()
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   useEffect(()=>{
     if( headerSize?.height > 0 ){
@@ -46,6 +51,9 @@ function Header(props:TypeProps){
       // document.body.style.paddingTop = `${headerSize.height}px`
       ;(document.getElementById('app') as HTMLDivElement).style.paddingTop = `${headerSize.height}px`
     }
+
+  // store 如果加進去，會造成無限迴圈
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [headerSize.height])
 
   const headerStyle = useMemo(()=>{
@@ -75,7 +83,7 @@ function Header(props:TypeProps){
       ...whiteEffect,
       ...scrollEffect,
     }
-  }, [pageScrollY, headerSize.height, pathnameWithoutLang, lang])
+  }, [pageScrollY, headerSize.height, pathnameWithoutLang])
 
 
   return <Suspense fallback={null}>
@@ -86,7 +94,7 @@ function Header(props:TypeProps){
         <div className="row relative max-h-[66px] items-center justify-between lg:max-h-[102px]"
         style={{
           transition: 'all .8s cubic-bezier(0.215, 0.610, 0.355, 1.000)',
-          height: pageScrollY > headerSize.height ?'80px' :'102px'
+          height: mounted && (pageScrollY > headerSize.height) ?'80px' : '102px',
         }}>
           <div className="col-auto -ml-3">
             <MainMenu />
