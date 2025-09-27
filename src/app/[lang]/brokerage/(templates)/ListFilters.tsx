@@ -63,7 +63,6 @@ export default function ListFilters(props:TypeProps){
 
     return new URLSearchParams(queries).toString()
   }, [
-    pathname,
     queryCondition,
     queryYachtLength,
     queryYachtPrice,
