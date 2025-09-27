@@ -34,7 +34,10 @@ async function PageAboutTheGroup({params}:TypeProps){
   } = data?.aboutTheGroup?.aboutTheGroupCustomFields ?? {}
 
   return <main className="pb-10 lg:pb-24">
-    <KV heroImage={heroImage?.node?.mediaItemUrl || ''} />
+    <KV heroImage={{
+      src: heroImage?.node?.mediaItemUrl || '',
+      srcSet: heroImage?.node?.srcSet || ''
+    }} />
     <CompaniesGrids organizationRows={organizationRows} />
     <GroupIntroduction content={groupIntroduction || ''} />
     <CompaniesIntros organizationRows={organizationRows} />

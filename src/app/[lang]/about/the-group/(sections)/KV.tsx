@@ -5,13 +5,14 @@ import { twMerge } from 'tailwind-merge'
 import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'
 import T from 'vanns-common-modules/dist/components/react/T'
 
-import ImageAutoPlaceholder from "~/components/custom/ImageAutoPlaceholder"
 import { isEmpty } from '~/lib/utils'
 import { useStore } from '~/store'
 
 interface TypeProps {
-  heroImage: string
-  heroImagePlaceHolder?: string
+  heroImage: {
+    src?: string
+    srcSet?: string
+  }
   [key:string]: any
 }
 
@@ -22,7 +23,10 @@ function KV(props:TypeProps){
 
   return <div className={twMerge('relative  w-full', className)}>
     <RatioArea ratio="42.85">
-      <ImageAutoPlaceholder className="absolute left-0 top-0 size-full" src={props?.heroImage} fill={true} sizes="100vw" />
+      <img className="absolute left-0 top-0 size-full"
+      src={props.heroImage?.src}
+      srcSet={props.heroImage?.srcSet}
+      sizes="100vw" />
     </RatioArea>
 
     <div className="py-12 lg:py-20">
