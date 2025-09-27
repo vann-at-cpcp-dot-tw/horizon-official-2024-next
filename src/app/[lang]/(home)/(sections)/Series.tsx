@@ -31,7 +31,7 @@ function Series(props:TypeProps){
         </div>
       }
     })
-  }, [yachtSeriesList])
+  }, [yachtSeriesList, __])
 
   return <Suspense fallback={null}>
     <SwiperOverflow
