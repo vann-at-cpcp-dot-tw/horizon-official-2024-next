@@ -2,7 +2,6 @@ const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 const CONTENT_TYPE = process.env.NEXT_PUBLIC_CONTENT_TYPE || 'hq'
 const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
 
-import Image from "next/image"
 import { redirect } from "next/navigation"
 import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'
 
@@ -41,7 +40,11 @@ async function PageTeam({params}:TypeProps){
             data?.teamPageSettings?.teamPageCustomFields?.teamMembers?.map((node:{[key:string]:any}, index:number)=>{
               return <div className="lg:col-3 col-6 mb-8" key={index}>
                 <RatioArea className="mb-3" ratio="114.28">
-                  <Image className="absolute left-0 top-0 size-full" src={node?.image?.node?.mediaItemUrl || ''} fill={true} alt="" />
+                  <img
+                  className="absolute left-0 top-0 size-full"
+                  src={node?.image?.node?.mediaItemUrl}
+                  srcSet={node?.image?.node?.srcSet}
+                  sizes="(max-width:991px) 50vw, 25vw"/>
                 </RatioArea>
 
                 <div className="mb-2 text-[24px] text-gray-900">{node?.name}</div>
