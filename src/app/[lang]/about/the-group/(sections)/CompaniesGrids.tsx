@@ -63,7 +63,7 @@ function CompaniesGrids(props:TypeProps){
                     className="absolute left-0 top-0 size-full"
                     src={node?.images?.grid?.node?.mediaItemUrl}
                     srcSet={node?.images?.grid?.node?.srcSet}
-                    sizes="(max-width:991px) 100w, 50vw" />
+                    sizes="(max-width:991px) 100vw, 50vw" />
                   </RatioArea>
 
                   <div className="px-2.5">
