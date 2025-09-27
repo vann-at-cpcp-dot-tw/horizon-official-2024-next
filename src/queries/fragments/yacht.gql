@@ -50,6 +50,7 @@ fragment yachtGeneralArrangementImages on YachtCustomFields {
       image {
         node {
           mediaItemUrl
+          srcSet
         }
       }
     }

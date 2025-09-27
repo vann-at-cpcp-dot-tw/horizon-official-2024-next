@@ -19,6 +19,7 @@ export interface TypeGAImageNode {
   image?: {
     node?: {
       mediaItemUrl: string
+      srcSet?: string
     }
   }
 }
@@ -45,7 +46,7 @@ function GAGallery(props:TypeProps){
   const images = useMemo<TypeGAImageNode[]>(()=>{
     return props?.list?.[activeType]?.images || []
   }, [props?.list, activeType])
-  const imageItem = useMemo(()=>images?.[activeItem]?.image?.node?.mediaItemUrl, [images,activeItem])
+  const imageItem = useMemo(()=>images?.[activeItem]?.image?.node, [images,activeItem])
 
   useEffect(()=>{
     if( isOpen ){
@@ -90,11 +91,11 @@ function GAGallery(props:TypeProps){
                   <i className="bi bi-plus-lg text-[24px] text-white"></i>
                 </div>
               </div>
-              <Image
+              <img
               className={`group-hover:brightness-50 ${isLoading ?'opacity-0' :'opacity-1'}`}
-              src={imageItem}
-              fill={true}
-              sizes="90vw"
+              src={imageItem?.mediaItemUrl || ''}
+              srcSet={imageItem?.srcSet || ''}
+              sizes="100vw"
               style={{
                 transition: 'all 0.5s cubic-bezier(0.215, 0.610, 0.355, 1.000)'
               }}
@@ -126,7 +127,10 @@ function GAGallery(props:TypeProps){
               <div className="flex grow !flex-nowrap overflow-hidden">
                 <div className="size-full shrink px-5 pb-5 lg:px-10 lg:pb-10">
                   <div className="relative size-full">
-                    <Image className={`${isLightboxLoading ?'opacity-0' :'opacity-1'}`} src={imageItem} fill={true} sizes="100vw"
+                    <img className={`${isLightboxLoading ?'opacity-0' :'opacity-1'}`}
+                    src={imageItem?.mediaItemUrl}
+                    srcSet={imageItem?.srcSet}
+                    sizes="100vw"
                     style={{
                       objectFit: "contain",
                       objectPosition: "top",
