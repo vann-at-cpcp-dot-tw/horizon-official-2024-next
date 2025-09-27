@@ -3,7 +3,6 @@ const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
 import { Suspense, useMemo, useState, useEffect } from 'react'
 
-import Image from "next/image"
 import { twMerge } from 'tailwind-merge'
 import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'
 import { useTranslate } from "vanns-common-modules/dist/use/react"
@@ -23,9 +22,7 @@ interface TypeProps {
       }
     }
     previewImage?: {
-      node?: {
-        mediaItemUrl: string
-      }
+      node?: ImageNode
     }
   }
   gallery: {
@@ -88,7 +85,10 @@ function VRPreview(props:TypeProps){
           {
             props?.preview?.previewVideo?.node?.mediaItemUrl
               ? <video className="absolute left-0 top-0 z-0 size-full object-cover" src={props?.preview?.previewVideo?.node?.mediaItemUrl} autoPlay playsInline muted loop></video>
-              : <Image className="absolute left-0 top-0 z-0 size-full object-cover" fill={true} sizes="100vw" src={props?.preview?.previewImage?.node?.mediaItemUrl || ''} alt=""/>
+              : <img className="absolute left-0 top-0 z-0 size-full object-cover"
+              src={props?.preview?.previewImage?.node?.mediaItemUrl}
+              srcSet={props?.preview?.previewImage?.node?.srcSet}
+              sizes="100vw"/>
           }
         </div>
       </RatioArea>
