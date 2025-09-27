@@ -23,8 +23,8 @@ interface TypeSwiperSlideNode {
   slug: string,
   label: string,
   link: string,
-  srcSet?: string,
   mediaItemUrl?: string,
+  srcSet?: string,
   specTerms?: {
     [key:string]: {
       metric: string

@@ -3,7 +3,6 @@ const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
 import { Suspense, useMemo, useEffect, useState, ReactNode } from 'react'
 
-import Image from "next/image"
 import { useParams } from 'next/navigation'
 import { Autoplay } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -23,7 +22,6 @@ interface TypeProps {
     content?: string | ReactNode
     link?: string
     mediaItemUrl?: string
-    placeholder?: string
     srcSet?: string
   }[]
   swiperOptions?: {
@@ -157,15 +155,11 @@ function SwiperOverflow(props:TypeProps){
 
                   <LinkWithLang className="absolute left-0 top-0 z-0 size-full" href={node?.link || ''} lang={lang}>
                     <>
-                      <Image className="absolute left-0 top-0 z-0 size-full object-cover"
-                      fill={true}
-                      src={node?.mediaItemUrl || ''}
-                      sizes="52.25vw"
-                      // placeholder="blur"
-                      // blurDataURL={node?.placeholder}
-                      priority={true}
-                      alt="" />
-
+                      <img
+                      className="absolute left-0 top-0 z-0 size-full object-cover"
+                      src={node?.mediaItemUrl}
+                      srcSet={node?.srcSet}
+                      sizes="(max-width:991px) 52.25vw, 100vw" />
                       <div className="absolute left-0 top-0 z-10 size-full">{ node?.content }</div>
                     </>
                   </LinkWithLang>

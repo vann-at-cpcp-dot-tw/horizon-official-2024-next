@@ -24,6 +24,7 @@ function Series(props:TypeProps){
         label: listNode.name,
         link: `/models/${listNode.slug}`,
         mediaItemUrl: listNode?.yachtsSeriesCustomFields?.seriesKeyImage?.node?.mediaItemUrl,
+        srcSet: listNode?.yachtsSeriesCustomFields?.seriesKeyImage?.node?.srcSet,
         content: <div className="absolute left-0 top-0 flex size-full flex-col justify-end p-2.5 text-white lg:items-center lg:p-5">
           <div className="mb-2 text-[12px] font-700 lg:text-[15px]">{listNode?.name} { __('Series') }</div>
           <div className="serif mb-2 text-[16px] leading-[1.2] lg:text-[24px]">{listNode?.yachtsSeriesCustomFields?.seriesSimpleDescription}</div>
