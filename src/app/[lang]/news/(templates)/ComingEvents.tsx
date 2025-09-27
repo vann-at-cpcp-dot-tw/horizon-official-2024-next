@@ -69,7 +69,7 @@ function ComingEvents(props:TypeProps){
     }else{
       document.body.classList.remove('lb-open')
     }
-  }, [lightboxQuery])
+  }, [isLightboxOpen])
 
 
 
