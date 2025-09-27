@@ -54,7 +54,7 @@ function News(props:TypeProps){
                 href={`/news/${node?.filteredCategories?.[0]?.slug}/${node.slug}`}
                 title={node?.title}
                 date={node?.date}
-                thumbnail={node?.postCustomFields?.gallery?.[0]?.image?.node?.mediaItemUrl || ''}
+                thumbnail={node?.postCustomFields?.gallery?.[0]?.image?.node}
                 categories={node?.filteredCategories} />
               </div>
             })
