@@ -15,7 +15,7 @@ import { isEmpty } from '~/lib/utils'
 interface TypeProps {
   slug: string
   title: string
-  thumbnail: string
+  thumbnail: ImageSrc
   href: string
   lang: string | string[]
   infos?: string[]
@@ -42,7 +42,10 @@ function ListItem(props:TypeProps){
               <i className="bi bi-plus-lg text-[24px] text-white"></i>
             </div>
           </div>
-          <Image className="absolute left-0 top-0 size-full" src={props?.thumbnail || ''} fill={true} sizes="50vw" alt="" />
+          <img className="absolute left-0 top-0 size-full"
+          src={props?.thumbnail?.src}
+          srcSet={props?.thumbnail?.srcSet}
+          sizes="(max-width:991px) 100vw, 50vw" />
         </RatioArea>
         <div className="serif text-[18px] leading-[1.2] text-minor-900 lg:text-[24px]">{props?.title}</div>
         {

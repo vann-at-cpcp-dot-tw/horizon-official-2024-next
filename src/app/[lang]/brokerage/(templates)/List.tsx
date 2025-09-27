@@ -160,7 +160,10 @@ export default function List(props:TypeProps){
                 <ListItem
                 title={node.title}
                 slug={node.slug}
-                thumbnail={node?.customFields?.exteriorImages?.[0]?.image?.node?.mediaItemUrl}
+                thumbnail={{
+                  src: node?.customFields?.exteriorImages?.[0]?.image?.node?.mediaItemUrl,
+                  srcSet: node?.customFields?.exteriorImages?.[0]?.image?.node?.srcSet
+                }}
                 lang={lang as string}
                 href={`/${props?.queryPostType === 'charter' ?'charter' :DEALER_REGION === 'US' ?'inventory' :'brokerage'}/${node.slug}`}
                 infos={[

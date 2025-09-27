@@ -37,6 +37,7 @@ query QueryBrokeragePage(
           image {
             node {
               mediaItemUrl
+              srcSet
             }
           }
         }
@@ -125,6 +126,7 @@ query QueryBrokerages(
           image {
             node {
               mediaItemUrl
+              srcSet
             }
           }
         }
