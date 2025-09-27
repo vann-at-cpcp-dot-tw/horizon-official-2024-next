@@ -12,6 +12,7 @@ query QueryCommonData(
           image {
             node {
               mediaItemUrl
+              srcSet
             }
           }
           video {
@@ -24,6 +25,7 @@ query QueryCommonData(
           image {
             node {
               mediaItemUrl
+              srcSet
             }
           }
           video {
@@ -36,6 +38,7 @@ query QueryCommonData(
           image {
             node {
               mediaItemUrl
+              srcSet
             }
           }
           video {
@@ -86,6 +89,7 @@ query QueryCommonData(
           image {
             node {
               mediaItemUrl
+              srcSet
             }
           }
           video {
