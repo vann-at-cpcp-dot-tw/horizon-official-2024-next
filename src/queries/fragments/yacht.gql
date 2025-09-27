@@ -68,6 +68,7 @@ fragment yachtVRPreview on YachtCustomFields {
     previewImage {
       node {
         mediaItemUrl
+        srcSet
       }
     }
   }
@@ -83,6 +84,7 @@ fragment yachtVideosPreview on YachtCustomFields {
     previewImage {
       node {
         mediaItemUrl
+        srcSet
       }
     }
   }

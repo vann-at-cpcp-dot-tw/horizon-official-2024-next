@@ -6,3 +6,8 @@ type ImageSrc = {
   src: string
   srcSet?: string
 }
+
+type ImageNode = {
+  mediaItemUrl: string
+  srcSet?: string
+}
