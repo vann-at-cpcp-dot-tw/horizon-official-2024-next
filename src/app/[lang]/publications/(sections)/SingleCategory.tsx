@@ -6,7 +6,6 @@ const HQ_API_URL = `${HQ_API_BASE}graphql`
 import { Suspense, useMemo, useContext, useState } from 'react'
 
 import { useLazyQuery } from "@apollo/client"
-import Image from "next/image"
 import { useParams } from "next/navigation"
 import { twMerge } from 'tailwind-merge'
 import RatioArea from "vanns-common-modules/dist/components/react/RatioArea"
@@ -28,24 +27,7 @@ interface TypeProps {
     translation: {
       name: string
       publications: {
-        nodes: {
-          slug: string
-          title: string
-          publicationCustomFields: {
-            publication: {
-              publicationCover: {
-                node?: {
-                  mediaItemUrl?: string
-                }
-              }
-              pdf: {
-                node?: {
-                  mediaItemUrl?: string
-                }
-              }
-            }
-          }
-        }[]
+        nodes: TypePublicationNode[]
         pageInfo: {
           hasNextPage: boolean
           hasPreviousPage: boolean
@@ -144,17 +126,10 @@ function SingleCategory(props:TypeProps){
                     {
                       node?.publicationCustomFields?.publication?.publicationCover?.node?.mediaDetails?.width && <div className="relative mb-2">
                         <RatioArea ratio={(node.publicationCustomFields.publication.publicationCover.node.mediaDetails?.height / node.publicationCustomFields.publication.publicationCover.node.mediaDetails.width * 100) as number}>
-                          <Image className="absolute size-full"
-                          src={`${node.publicationCustomFields?.publication?.publicationCover?.node?.mediaItemUrl || ''}`}
-                          alt=""
-                          fill
-                          sizes={viewport.width && viewport.width >= 992 ?'25vw' :'50vw'}
-                          style={{
-                            objectFit: 'cover',
-                          }}
-                          // placeholder="blur"
-                          // blurDataURL={placeholders?.[index]}
-                          />
+                          <img className="absolute left-0 top-0 size-full object-cover"
+                          src={node.publicationCustomFields?.publication?.publicationCover?.node?.mediaItemUrl}
+                          srcSet={node.publicationCustomFields?.publication?.publicationCover?.node?.srcSet}
+                          sizes="(max-width:991px) 50vw, 25vw" />
                         </RatioArea>
                       </div>
                     }
