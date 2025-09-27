@@ -26,7 +26,7 @@ interface TypeProps {
   },
   vision: {
     video: string
-    image: string
+    imageNode: ImageNode
     content?: {
       slug?: string
       title?: string
@@ -174,7 +174,7 @@ function MenuScreen(props:TypeProps){
                 ?(!props.currentScreen?.seriesSlug && !props.currentScreen?.yachtSlug)
                   ? <MenuVision
                   video={props?.vision?.video || ''}
-                  image={props?.vision?.image || ''} />
+                  imageNode={props?.vision?.imageNode || ''} />
                   :<>
                     {
                       props?.list?.map((seriesNode:TypeMenuListNode, index)=>{
@@ -189,7 +189,7 @@ function MenuScreen(props:TypeProps){
                             && props.currentScreen?.seriesSlug === seriesNode.key
                             && <MenuVision
                             video={seriesNode?.vision?.video || props?.vision?.video || ''}
-                            image={seriesNode?.vision?.image || props?.vision?.video || ''}>
+                            imageNode={seriesNode?.vision?.imageNode || props?.vision?.imageNode || ''}>
                               <div className="absolute left-0 top-0 flex size-full flex-col items-center justify-end">
                                 <div className="absolute left-0 top-0 z-0 size-full bg-major-900" style={{opacity:0.2}}></div>
                                 <div className="relative z-10 pb-[70px] text-center text-white">
@@ -209,7 +209,7 @@ function MenuScreen(props:TypeProps){
                                 {
                                   props.currentScreen?.yachtSlug === childNode.key && <MenuVision
                               video={childNode?.vision?.video || props?.vision?.video || ''}
-                              image={childNode?.vision?.image || props?.vision?.video || ''}>
+                              imageNode={childNode?.vision?.imageNode || props?.vision?.imageNode || ''}>
                                     <div className="absolute left-0 top-0 flex size-full flex-col items-center justify-end">
                                       <div className="absolute left-0 top-0 z-0 size-full bg-major-900" style={{opacity:0.2}}></div>
                                       <div className="relative z-10 pb-[70px] text-center text-white">
@@ -233,7 +233,7 @@ function MenuScreen(props:TypeProps){
                   </>
                 : <MenuVision
                   video={props?.vision?.video || ''}
-                  image={props?.vision?.image || ''} />
+                  imageNode={props?.vision?.imageNode || ''} />
             }
           </AnimatePresence>
         </div>

@@ -33,7 +33,7 @@ interface TypeMenuItem {
   href?: string
   onClick?: Function
   vision?: {
-    image: string
+    imageNode: ImageNode
     video: string
     content?: {
       title?: string
@@ -50,7 +50,7 @@ interface TypeMenus {
   [key:string]: {
     list: TypeMenuListNode[]
     vision?: {
-      image: string
+      imageNode: ImageNode
       video: string
     }
     onBackClick?: Function
@@ -69,10 +69,7 @@ interface TypeMenuSeriesNode {
     }[]
   }
   image: {
-    node: {
-      srcSet: string
-      mediaItemUrl?: string
-    } | null
+    node: ImageNode | null
   }
   video: {
     node: {
@@ -89,10 +86,7 @@ interface TypeMenuSeriesNode {
       }[]
     }
     image: {
-      node: {
-        srcSet: string
-        mediaItemUrl?: string
-      } | null
+      node: ImageNode | null
     }
     video: {
       node: {
@@ -125,7 +119,7 @@ function MainMenu(props:TypeProps){
     return {
       main: {
         vision: {
-          image: menuItemImages.normal?.image?.node?.mediaItemUrl,
+          imageNode: menuItemImages.normal?.image?.node,
           video: menuItemImages.normal?.video?.node?.mediaItemUrl,
         },
         list: [
@@ -215,7 +209,7 @@ function MainMenu(props:TypeProps){
           })
         },
         vision: {
-          image: menuItemImages.about?.image?.node?.mediaItemUrl,
+          imageNode: menuItemImages.about?.image?.node,
           video: menuItemImages.about?.video?.node?.mediaItemUrl,
         },
         list: [
@@ -250,7 +244,7 @@ function MainMenu(props:TypeProps){
           })
         },
         vision: {
-          image: menuItemImages.models?.image?.node?.mediaItemUrl,
+          imageNode: menuItemImages.models?.image?.node,
           video: menuItemImages.models?.video?.node?.mediaItemUrl,
         },
         list: menuSeries?.map((seriesNode:TypeMenuSeriesNode)=>{
@@ -267,7 +261,7 @@ function MainMenu(props:TypeProps){
                 label: yachtData?.title,
                 slug: yachtData?.slug,
                 vision: {
-                  image: menuChildNode?.image?.node?.mediaItemUrl,
+                  imageNode: menuChildNode?.image?.node,
                   video: menuChildNode?.video?.node?.mediaItemUrl,
                   content: {
                     title: yachtData?.title,
@@ -316,7 +310,7 @@ function MainMenu(props:TypeProps){
             label: `${seriesData?.name} ${__('Series')}`,
             slug: seriesData?.slug,
             vision: {
-              image: seriesNode.image?.node?.mediaItemUrl,
+              imageNode: seriesNode.image?.node,
               video: seriesNode.video?.node?.mediaItemUrl,
               content: {
                 title: `${seriesData?.name} ${__('Series')}`,
@@ -396,16 +390,20 @@ function MainMenu(props:TypeProps){
             animate={isMenuOpen ?'enter' :'exit'}>
               {
                 Object.entries(menus).map((menuEntries, index)=>{
+
                   const [menuGroupKey, menuGroupNode] = menuEntries
+
                   return <AnimatePresence mode="wait" key={index}>
                     {
                       menuScreen.key === menuGroupKey && <MenuScreen
                         currentScreen={menuScreen}
                         list={menuGroupNode.list}
-                        vision={menuGroupNode?.vision || {
-                          image: menuItemImages.normal?.image?.node?.mediaItemUrl || '',
-                          video: menuItemImages.normal?.video?.node?.mediaItemUrl || ''
-                        }}
+                        vision={
+                          menuGroupNode?.vision || {
+                            imageNode: menuItemImages.normal?.image?.node,
+                            video: menuItemImages.normal?.video?.node?.mediaItemUrl || ''
+                          }
+                        }
                         isMenuOpen={isMenuOpen}
                         isPageChanging={isPageChanging}
                         setIsMenuOpen={setIsMenuOpen}
