@@ -17,6 +17,7 @@ fragment yachtHeroImage on YachtCustomFields {
   heroImage {
     node {
       mediaItemUrl
+      srcSet
     }
   }
 }

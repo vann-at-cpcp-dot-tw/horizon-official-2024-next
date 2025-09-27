@@ -113,7 +113,12 @@ async function PageSingleYacht(props:TypeProps){
         }
       ]} />
 
-    <KV video={heroVideo?.node?.mediaItemUrl || ''} image={heroImage?.node?.mediaItemUrl || ''} />
+    <KV
+    video={heroVideo?.node?.mediaItemUrl || ''}
+    image={{
+      src: heroImage?.node?.mediaItemUrl,
+      srcSet: heroImage?.node?.srcSet,
+    }} />
 
     <Intro title={yachtTitle}
     description={yachtDescription}
