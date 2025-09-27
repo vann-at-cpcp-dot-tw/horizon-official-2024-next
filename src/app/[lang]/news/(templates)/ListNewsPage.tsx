@@ -135,7 +135,14 @@ function List(props:TypeProps){
     getData({
       variables: queryVariables
     })
-  },[getData, searchObject.series, searchObject.year, searchObject.category, isFilterChanged])
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[
+    searchObject.series,
+    searchObject.year,
+    searchObject.category,
+    isFilterChanged
+  ])
 
   return <Suspense fallback={null}>
     <div className={twMerge('', className)}>
