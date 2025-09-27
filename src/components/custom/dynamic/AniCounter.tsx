@@ -25,12 +25,11 @@ function DynamicAniCounter(props:TypeProps){
     margin: `0px 0px -${(viewport.height || 0) / 4}px 0px` as any,
     // once: viewport.width <= 991,
   })
-  const { from, to } = props
 
   useEffect(() => {
     const node = nodeRef.current
 
-    if( !node || isNaN(from) || isNaN(to) ){
+    if( !node || isNaN(props.from) || isNaN(props.to) ){
       return
     }
 
@@ -39,7 +38,7 @@ function DynamicAniCounter(props:TypeProps){
       return
     }
 
-    const controls = animate(from, to,{
+    const controls = animate(props.from, props.to,{
       duration: props?.duration || 1,
       onUpdate(value) {
         node.textContent = numberFormat(value)
@@ -47,7 +46,7 @@ function DynamicAniCounter(props:TypeProps){
     })
 
     return () => controls.stop()
-  }, [nodeRef.current, from, to, isInView])
+  }, [props.duration, props.from, props.to, isInView])
 
   return <span className={twMerge('', className)} ref={nodeRef}></span>
 }
