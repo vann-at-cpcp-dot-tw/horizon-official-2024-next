@@ -30,7 +30,7 @@ function KV(props:TypeProps){
     if( store.isLoadingScreenFadedOut ){
       (videoRef.current as HTMLVideoElement).play()
     }
-  }, [store.isLoadingScreenFadedOut, videoRef.current])
+  }, [store.isLoadingScreenFadedOut])
 
   useEffect(()=>{
     if( store.isLoadingScreenFadedOut ){
