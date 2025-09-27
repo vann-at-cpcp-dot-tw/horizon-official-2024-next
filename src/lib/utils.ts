@@ -90,3 +90,65 @@ export function formatPostCategories(categories:{[key:string]:any} | undefined, 
     }
   }) || []
 }
+
+/**
+ * 從 srcSet 字符串中提取最小寬度的 URL 和寬度
+ * @param srcSet - srcSet 字符串，格式如 "url1 480w, url2 768w, url3 1024w"
+ * @returns 最小寬度對應的 URL 和寬度對象，如果無法解析則返回 null
+ */
+export function getLowestWidthUrl(srcSet: string): { url: string, width: number } | null {
+  if (!srcSet) return null
+
+  // 解析 srcSet 字符串，提取 URL 和寬度
+  const entries = srcSet.split(',').map(entry => {
+    const parts = entry.trim().split(' ')
+    if (parts.length !== 2) return null
+
+    const url = parts[0]
+    const widthStr = parts[1]
+
+    // 確保寬度格式正確 (例如: "480w")
+    if (!widthStr.endsWith('w')) return null
+
+    const width = parseInt(widthStr.slice(0, -1))
+
+    if (isNaN(width)) return null
+    return { url, width }
+  }).filter(Boolean) as { url: string, width: number }[]
+
+  if (entries.length === 0) return null
+
+  // 找出最小寬度的項目
+  const lowest = entries.reduce((min, curr) =>
+    curr.width < min.width ? curr : min
+  )
+
+  return { url: lowest.url, width: lowest.width }
+}
+
+/**
+ * 根據圖片寬度和螢幕寬度計算適應性模糊值
+ * @param imageWidth - 圖片原始寬度
+ * @param seedBlur - 基準模糊值，如 "10px"
+ * @param screenWidth - 螢幕寬度（可選），未提供時不進行縮放
+ * @returns 適應螢幕尺寸的模糊值
+ */
+export function calcBlur(imageWidth: number, seedBlur: string, screenWidth?: number): string {
+  // 解析種子模糊值
+  const seedValue = parseFloat(seedBlur)
+  if (isNaN(seedValue)) return seedBlur
+
+  // 如果沒有提供螢幕寬度，使用圖片原始寬度（不縮放）
+  const targetWidth = screenWidth ?? imageWidth
+
+  // 計算圖片縮放因子
+  const scaleFactor = targetWidth / imageWidth
+
+  // 使用平方根保持體感一致性，避免過度放大或縮小
+  const adaptedBlur = seedValue * Math.sqrt(scaleFactor)
+
+  // 保留單位（預設為 px）
+  const unit = seedBlur.replace(/[\d.]/g, '') || 'px'
+
+  return `${adaptedBlur.toFixed(2)}${unit}`
+}
