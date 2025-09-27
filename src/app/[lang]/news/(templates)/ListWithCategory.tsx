@@ -174,7 +174,7 @@ function ListWithCategory(props:TypeProps){
                 href={`/news/${categorySlug}/${node.slug}`}
                 title={node?.title}
                 date={node?.date}
-                thumbnail={node?.postCustomFields?.gallery?.[0]?.image?.node?.mediaItemUrl || ''}
+                thumbnail={node?.postCustomFields?.gallery?.[0]?.image?.node}
                 categories={node?.filteredCategories} />
               </div>
             })
@@ -186,7 +186,7 @@ function ListWithCategory(props:TypeProps){
                 href={`/news/${categorySlug}/${node.slug}`}
                 title={node?.title}
                 date={node?.date}
-                thumbnail={node?.postCustomFields?.gallery?.[0]?.image?.node?.mediaItemUrl || ''}
+                thumbnail={node?.postCustomFields?.gallery?.[0]?.image?.node}
                 categories={node?.filteredCategories} />
               </div>
             })
