@@ -88,6 +88,7 @@ function List(props:TypeProps){
       variables: queryVariables
     })
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.list])
 
   return <Suspense fallback={null}>
