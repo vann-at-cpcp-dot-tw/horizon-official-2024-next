@@ -329,7 +329,15 @@ function MainMenu(props:TypeProps){
         })
       },
     }
-  }, [menuSeries, viewport.width, __])
+  }, [
+    menuSeries,
+    viewport.width,
+    __,
+    router,
+    menuItemImages,
+    lang,
+    pathnameWithoutLang,
+  ])
 
   useEffect(()=>{
     if( isMenuOpen ){
