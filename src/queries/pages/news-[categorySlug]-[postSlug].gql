@@ -31,11 +31,12 @@ query QuerySinglePost(
           }
         }
         postCustomFields {
-            gallery {
-              image {
-                node {
-                  mediaItemUrl
-                  srcSet
+          gallery {
+            image {
+              node {
+                mediaItemUrl
+                srcSet
+              }
             }
           }
         }
