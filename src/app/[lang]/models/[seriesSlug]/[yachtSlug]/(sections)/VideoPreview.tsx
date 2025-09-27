@@ -36,7 +36,11 @@ function VideoPreview(props:TypeProps){
   const { className } = props
   const hasContent = useMemo(()=>{
     return props?.gallery?.length > 0 && (props?.preview?.previewVideo?.node?.mediaItemUrl || props?.preview?.previewImage?.node?.mediaItemUrl)
-  }, [props?.gallery, props?.previewVideo?.node?.mediaItemUrl, props?.previewImage?.node?.mediaItemUrl])
+  }, [
+    props?.gallery,
+    props?.preview?.previewVideo?.node?.mediaItemUrl,
+    props?.preview?.previewImage?.node?.mediaItemUrl
+  ])
   const [isOpen, setIsOpen] = useState(false)
   const {size:previewBlock, setNode:setPreviewBlock} = useDomNodeSize()
   const [isHovering, setIsHovering] = useState(false)
