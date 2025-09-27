@@ -66,7 +66,7 @@ async function Publication(props:TypeProps){
                   width={330}
                   height={238}
                   alt=""
-                  placeholder="blur"
+                  // placeholder="blur"
                   // blurDataURL={node?.placeholder}
                   />
                 </a>
