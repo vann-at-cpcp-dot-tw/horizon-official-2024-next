@@ -5,7 +5,6 @@ import { Suspense } from 'react'
 import { twMerge } from 'tailwind-merge'
 import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'
 
-import ImageAutoPlaceholder from "~/components/custom/ImageAutoPlaceholder"
 import LinkWithLang from '~/components/custom/LinkWithLang'
 import { isEmpty } from '~/lib/utils'
 
@@ -28,8 +27,12 @@ function CompaniesIntros(props:TypeProps){
         props?.organizationRows?.map((rowNode, rowIndex)=>{
           return rowNode?.companies?.map((node, index)=>{
             return <div className="relative mb-16 lg:mb-[120px]" key={`${rowIndex}-${index}`}>
+
               <RatioArea className="mb-4 lg:mb-8" ratio="42.85">
-                <ImageAutoPlaceholder className="absolute left-0 top-0 size-full" src={node?.images?.banner?.node?.mediaItemUrl} fill={true} sizes="100vw" />
+                <img className="absolute left-0 top-0 size-full"
+                src={node?.images?.banner?.node?.mediaItemUrl}
+                srcSet={node?.images?.banner?.node?.srcSet}
+                sizes="100vw" />
               </RatioArea>
 
               <div className="container">
