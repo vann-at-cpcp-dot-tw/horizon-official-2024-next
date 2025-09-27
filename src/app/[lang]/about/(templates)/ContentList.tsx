@@ -82,7 +82,7 @@ function ContentList(props:TypeProps){
     }else{
       document.body.classList.remove('lb-open')
     }
-  }, [lightboxQuery])
+  }, [isLightboxOpen])
 
 
   return <Suspense fallback={null}>
