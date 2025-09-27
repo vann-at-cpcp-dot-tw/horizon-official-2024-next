@@ -43,6 +43,7 @@ query QuerySingleCharter(
           image {
             node {
               mediaItemUrl
+              srcSet
             }
           }
         }
@@ -51,6 +52,7 @@ query QuerySingleCharter(
           image {
             node {
               mediaItemUrl
+              srcSet
             }
           }
         }
