@@ -2,9 +2,7 @@ const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 const HQ_API_BASE = process.env.NEXT_PUBLIC_HQ_API_BASE
 const HQ_API_URL = `${HQ_API_BASE}graphql`
 
-import Image from "next/image"
 import T from 'vanns-common-modules/dist/components/react/T'
-import { genImageBlurHash } from 'vanns-common-modules/dist/lib/next'
 
 import ContentLightbox from '~/components/custom/ContentLightbox'
 import LinkWithLang from '~/components/custom/LinkWithLang'
@@ -50,7 +48,7 @@ export default async function PageHome({
   }
   closeIcon={
     <LinkWithLang className="btn" href={`${APP_BASE}about/horizon`} lang={lang}>
-      <Image src={`${APP_BASE}assets/img/icon_menu_x.svg`} width={48} height={48} style={{filter:'grayscale(1) brightness(100)'}} alt=""/>
+      <img src={`${APP_BASE}assets/img/icon_menu_x.svg`} style={{width:'48px', height:'48px', filter:'grayscale(1) brightness(100)'}} />
     </LinkWithLang>
   }>
     <div className="mb-auto lg:my-auto">
