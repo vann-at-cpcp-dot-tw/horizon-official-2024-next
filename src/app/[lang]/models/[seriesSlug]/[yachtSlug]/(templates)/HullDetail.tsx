@@ -125,6 +125,8 @@ function HullDetail(props:TypeProps){
       document.body.classList.remove('lb-open')
       props?.onUnMounted?.()
     }
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props?.onUnMounted])
 
 
