@@ -4,7 +4,6 @@ import { Suspense } from 'react'
 
 import { twMerge } from 'tailwind-merge'
 import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'
-import { genImageBlurHash } from 'vanns-common-modules/dist/lib/next'
 
 import LinkWithLang from '~/components/custom/LinkWithLang'
 import { isEmpty } from '~/lib/utils'
@@ -16,7 +15,7 @@ interface TypeProps {
   slug: string
   title: string
   date: string
-  image: string
+  image: ImageNode
   lang: string
   [key:string]: any
 }
@@ -24,7 +23,6 @@ interface TypeState {}
 
 export default async function CoverStory(props:TypeProps){
   const { className } = props
-  // const placeholder = await genImageBlurHash(props?.image) // 暫時停用，因似乎有性能問題，故回歸預設 placeholder
 
   return <Suspense fallback={null}>
     <div className={twMerge('container-fluid px-0 lg:mb-32 mb-10', className)}>
@@ -34,10 +32,7 @@ export default async function CoverStory(props:TypeProps){
         className="absolute left-0 top-0 size-full"
         href={`/news/cover-story/${props.slug}`}
         lang={props.lang}>
-          <CoverImage
-          image={props?.image}
-          // placeholder={placeholder}
-          />
+          <CoverImage image={props?.image} />
         </LinkWithLang>
       </RatioArea>
 

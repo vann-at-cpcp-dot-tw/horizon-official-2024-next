@@ -77,7 +77,7 @@ export default async function PageNews({params, searchParams}:TypeProps){
       title={data?.coverStory?.translation?.posts?.nodes?.[0]?.title}
       date={data?.coverStory?.translation?.posts?.nodes?.[0]?.date}
       lang={lang}
-      image={data?.coverStory?.translation?.posts?.nodes?.[0]?.postCustomFields?.coverImage?.node?.mediaItemUrl} />
+      image={data?.coverStory?.translation?.posts?.nodes?.[0]?.postCustomFields?.coverImage?.node} />
     }
 
     <div className="mb-20">

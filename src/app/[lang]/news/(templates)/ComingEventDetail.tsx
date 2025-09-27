@@ -85,6 +85,7 @@ function createHullGQLString(list:{yachtSlug:string, hullName:string}[] | undefi
                 image {
                   node {
                     mediaItemUrl
+                    srcSet
                   }
                 }
               }
@@ -194,7 +195,11 @@ function ComingEventDetail(props:TypeProps){
                 hullList.map((node, index)=>{
                   return <div className="lg:col-6 col-12 mb-10" key={index}>
                     <RatioArea className="mb-3" ratio="56.25">
-                      <Image className="absolute left-0 top-0 size-full object-cover" fill={true} src={node.hull?.exteriorImages?.[0]?.image?.node?.mediaItemUrl || ''} sizes="50vw" alt="" />
+                      <img
+                      className="absolute left-0 top-0 size-full object-cover"
+                      src={node.hull?.exteriorImages?.[0]?.image?.node?.mediaItemUrl || ''}
+                      srcSet={node.hull?.exteriorImages?.[0]?.image?.node?.srcSet || ''}
+                      sizes="(max-width:991px) 100vw, 50vw" />
                     </RatioArea>
                     <div className="serif mb-2 text-center text-[21px] text-minor-900 lg:mb-4 lg:text-[24px]">{node.yachtName} <span className="text-[22px]">/</span> {node.hull?.hullName}</div>
                     <div className="flex justify-center">

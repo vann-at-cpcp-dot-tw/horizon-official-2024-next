@@ -6,7 +6,6 @@ const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
 import { Suspense, useState, useEffect } from 'react'
 
 import { motion } from "framer-motion"
-import Image from "next/image"
 import { twMerge } from 'tailwind-merge'
 
 import LinkWithLang from '~/components/custom/LinkWithLang'
@@ -14,7 +13,7 @@ import { isEmpty } from '~/lib/utils'
 import { useStore } from '~/store'
 
 interface TypeProps {
-  image: string
+  image: ImageNode
   placeholder?: string
   [key:string]: any
 }
@@ -53,14 +52,10 @@ function CoverImage(props:TypeProps){
       initial="exit"
       exit="exit"
       animate={KVEnterAble ?'enter' :'exit'}>
-        <Image className="object-cover"
-      src={props?.image}
-      fill={true}
-      sizes="100vw"
-      alt=""
-      // placeholder="blur"
-      // blurDataURL={props?.placeholder}
-        />
+        <img className="object-cover"
+        src={props?.image?.mediaItemUrl || '' }
+        srcSet={props?.image?.srcSet || ''}
+        sizes="100vw" />
       </motion.div>
     </div>
   </Suspense>
