@@ -2,7 +2,6 @@ const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
 import { Suspense } from 'react'
 
-import Image from "next/image"
 import { twMerge } from 'tailwind-merge'
 import T from 'vanns-common-modules/dist/components/react/T'
 import { genImageBlurHash } from 'vanns-common-modules/dist/lib/next'
@@ -18,6 +17,7 @@ interface TypeProps {
         publicationCover: {
           node?: {
             mediaItemUrl?: string
+            srcSet?: string
           }
         }
         pdf: {
@@ -60,15 +60,11 @@ async function Publication(props:TypeProps){
                 style={{
                   boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.5)'
                 }}>
-                  <Image
-                  src={node?.publicationCustomFields?.publication?.publicationCover?.node?.mediaItemUrl || ''}
+                  <img
                   className="w-full"
-                  width={330}
-                  height={238}
-                  alt=""
-                  // placeholder="blur"
-                  // blurDataURL={node?.placeholder}
-                  />
+                  src={node?.publicationCustomFields?.publication?.publicationCover?.node?.mediaItemUrl || ''}
+                  srcSet={node?.publicationCustomFields?.publication?.publicationCover?.node?.srcSet}
+                  sizes="330px" />
                 </a>
               </div>
             })
