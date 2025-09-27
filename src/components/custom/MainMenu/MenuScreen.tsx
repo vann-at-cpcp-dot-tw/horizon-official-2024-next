@@ -51,7 +51,7 @@ function MenuScreen(props:TypeProps){
   return <Suspense fallback={null}>
     <div className="absolute left-0 top-0 flex size-full !flex-nowrap items-center bg-white">
 
-      <div className="flex size-full flex-none flex-col justify-center p-5 lg:w-[25%] lg:min-w-[300px]">
+      <div className="flex size-full flex-none flex-col justify-center p-5 lg:w-1/4 lg:min-w-[300px]">
         {
           props?.onBackClick
             ? <div className="btn -ml-5 -mt-5"
