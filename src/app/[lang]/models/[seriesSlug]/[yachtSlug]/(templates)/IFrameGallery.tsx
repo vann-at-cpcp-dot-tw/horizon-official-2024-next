@@ -54,6 +54,7 @@ function IFrameGallery(props:TypeProps){
       setIframeSize(widthBasedSize || iframeSize)
     }
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [contentWrapperSize.width, contentWrapperSize.height, props.iframeRatio])
 
   return <Suspense fallback={null}>
