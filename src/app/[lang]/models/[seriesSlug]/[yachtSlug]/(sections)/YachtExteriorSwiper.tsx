@@ -3,7 +3,6 @@ const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
 import { Suspense, useState, useMemo, useEffect } from 'react'
 
-import Image from "next/image"
 import { EffectFade } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { SwiperClass } from "swiper/react"
@@ -19,9 +18,7 @@ import SwiperFullHeight from '~/components/custom/SwiperFullHeight'
 interface TypeProps {
   list: {
     image?: {
-      node?: {
-        mediaItemUrl: string
-      }
+      node?: ImageNode
     }
   }[]
   [key:string]: any
@@ -107,14 +104,10 @@ function YachtsExteriorSwiper(props:TypeProps){
                       viewport.width && viewport.width <= 991 ?setIsOpen(true) :null
                     }}>
                     <RatioArea ratio="56.25">
-                      <Image className="absolute left-0 top-0 z-0 size-full object-cover"
-                        priority={true}
-                        src={node?.image?.node?.mediaItemUrl || ''}
-                        // placeholder="blur"
-                        // blurDataURL={imageBlurHashes?.[index]}
-                        fill={true}
-                        sizes="76.35vw"
-                        alt="" />
+                      <img className="absolute left-0 top-0 z-0 size-full object-cover"
+                      src={node?.image?.node?.mediaItemUrl}
+                      srcSet={node?.image?.node?.srcSet}
+                      sizes="(max-width: 991px) 100vw, 76.35vw" />
                     </RatioArea>
                   </div>
                 </SwiperSlide>
@@ -161,19 +154,15 @@ function YachtsExteriorSwiper(props:TypeProps){
           <SwiperFullHeight
           list={
             props?.list?.map((node, index)=>({
-              content: <Image src={node?.image?.node?.mediaItemUrl || ''}
-              fill={viewport.width && viewport.width >= 992 ?true :false}
-              width={viewport.width && viewport.width >= 992 ?0 :1920}
-              height={viewport.width && viewport.width >= 992 ?0 :1080}
-              sizes="100vw"
+              content: <img
+              src={node?.image?.node?.mediaItemUrl || ''}
+              srcSet={node?.image?.node?.srcSet || ''}
+              sizes="(max-width:991px) 100vw, 1920px"
               style={{
                 objectFit: viewport.width && viewport.width >= 992 ?'contain' :'cover',
                 width: '100%',
                 height: viewport.width && viewport.width >= 992 ?'100%' :'auto'
-              }}
-              // placeholder="blur"
-              // blurDataURL={imageBlurHashes?.[index]}
-              alt="" />,
+              }} />,
             }))
           } />
         </ContentLightbox>

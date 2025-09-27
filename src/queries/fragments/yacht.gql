@@ -27,6 +27,7 @@ fragment yachtExteriorImages on YachtCustomFields {
     image {
       node {
         mediaItemUrl
+        srcSet
       }
     }
   }
@@ -37,6 +38,7 @@ fragment yachtInteriorImages on YachtCustomFields {
     image {
       node {
         mediaItemUrl
+        srcSet
       }
     }
     description
