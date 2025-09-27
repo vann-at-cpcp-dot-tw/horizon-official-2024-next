@@ -17,6 +17,7 @@ query QueryYachtsWithSeries(
           seriesKeyImage {
             node {
               mediaItemUrl
+              srcSet
             }
           }
         }

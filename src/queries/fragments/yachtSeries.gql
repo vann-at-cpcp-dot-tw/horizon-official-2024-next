@@ -8,6 +8,7 @@ fragment yachtSeriesKeyImage on YachtsSeriesCustomFields {
   seriesKeyImage {
     node {
       mediaItemUrl
+      srcSet
     }
   }
 }

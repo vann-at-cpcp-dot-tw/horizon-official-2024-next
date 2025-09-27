@@ -38,13 +38,10 @@ export default async function SeriesList(props:TypeProps){
           return <div className="mb-10 w-full lg:w-1/2" key={index}>
             <RatioArea className="mb-4" ratio="63.47">
               <LinkWithLang className="absolute left-0 top-0 size-full" href={`/models/${node.slug}`} lang={props.lang}>
-                <Image className="absolute left-0 top-0 z-0 size-full object-cover"
-                fill={true}
+                <img className="absolute left-0 top-0 z-0 size-full object-cover"
                 src={node?.yachtsSeriesCustomFields?.seriesKeyImage?.node?.mediaItemUrl || ''}
-                alt=""
-                // placeholder="blur"
-                // blurDataURL={node?.placeholder}
-                />
+                srcSet={node?.yachtsSeriesCustomFields?.seriesKeyImage?.node?.srcSet}
+                sizes="(max-width:991px) 100vw, 50vw" />
               </LinkWithLang>
             </RatioArea>
             <div className="px-5 lg:px-12">
