@@ -3,7 +3,6 @@ const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
 import { Suspense, useEffect, useState, useMemo } from 'react'
 
-import Image from "next/image"
 import Marquee from "react-fast-marquee"
 import { EffectFade } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -21,9 +20,7 @@ import SwiperFullHeight from '~/components/custom/SwiperFullHeight'
 interface TypeProps {
   list: {
     image?: {
-      node?: {
-        mediaItemUrl: string
-      }
+      node?: ImageNode
     }
     description: string
   }[]
@@ -76,13 +73,10 @@ function YachtInteriorSwiper(props:TypeProps){
                         <i className="bi bi-plus-lg text-[24px] text-white"></i>
                       </div>
                     </div>
-                    <Image className="absolute left-0 top-0 z-0 size-full object-cover"
-                    fill={true}
-                    sizes="23.42vw"
+                    <img className="absolute left-0 top-0 z-0 size-full object-cover"
                     src={node?.image?.node?.mediaItemUrl || ''}
-                    // placeholder="blur"
-                    // blurDataURL={imageBlurHashes?.[index]}
-                    alt="" />
+                    srcSet={node?.image?.node?.srcSet || ''}
+                    sizes="(max-width:991px) 44vw, 23.42vw"/>
                   </RatioArea>
                 </div>
               </div>
@@ -99,19 +93,15 @@ function YachtInteriorSwiper(props:TypeProps){
           <SwiperFullHeight
           list={
             props?.list?.map?.((node, index)=>({
-              content: <Image src={node?.image?.node?.mediaItemUrl || ''}
-              fill={viewport.width && viewport.width >= 992 ?true :false}
-              width={viewport.width && viewport.width >= 992 ?0 :1920}
-              height={viewport.width && viewport.width >= 992 ?0 :1080}
+              content: <img
+              src={node?.image?.node?.mediaItemUrl || ''}
+              srcSet={node?.image?.node?.srcSet || ''}
               sizes="100vw"
               style={{
                 objectFit: viewport.width && viewport.width >= 992 ?'contain' :'cover',
                 width: '100%',
                 height: viewport.width && viewport.width >= 992 ?'100%' :'auto'
-              }}
-                // placeholder="blur"
-                // blurDataURL={imageBlurHashes?.[index]}
-                alt="" />,
+              }} />,
               title: node?.description
             }))
           }

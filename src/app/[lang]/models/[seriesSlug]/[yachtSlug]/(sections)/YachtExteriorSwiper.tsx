@@ -157,7 +157,7 @@ function YachtsExteriorSwiper(props:TypeProps){
               content: <img
               src={node?.image?.node?.mediaItemUrl || ''}
               srcSet={node?.image?.node?.srcSet || ''}
-              sizes="(max-width:991px) 100vw, 1920px"
+              sizes="100vw"
               style={{
                 objectFit: viewport.width && viewport.width >= 992 ?'contain' :'cover',
                 width: '100%',
