@@ -55,7 +55,7 @@ function NewsPageEventsBlock(props:TypeProps){
                 title={node.title}
                 date={node.date}
                 href={`/news/events/${node.slug}`}
-                thumbnail={node.postCustomFields?.gallery?.[0]?.image?.node?.mediaItemUrl || ''}
+                thumbnail={node.postCustomFields?.gallery?.[0]?.image?.node}
                 categories={[
                   {
                     name: 'Events',

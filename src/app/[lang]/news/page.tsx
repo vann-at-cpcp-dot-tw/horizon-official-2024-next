@@ -92,6 +92,6 @@ export default async function PageNews({params, searchParams}:TypeProps){
     publicationCover={publicationCover}
     pdf={publicationPdf} />
 
-    <OwnerPerspective image={data.newsPageSettings.ownerPerspective.image?.node?.mediaItemUrl} description={data.newsPageSettings.ownerPerspective?.description} />
+    <OwnerPerspective image={data.newsPageSettings.ownerPerspective.image?.node} description={data.newsPageSettings.ownerPerspective?.description} />
   </main>
 }

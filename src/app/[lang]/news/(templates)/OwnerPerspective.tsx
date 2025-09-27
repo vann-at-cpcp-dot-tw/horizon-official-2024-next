@@ -1,7 +1,6 @@
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 import { Suspense } from 'react'
 
-import Image from "next/image"
 import { twMerge } from 'tailwind-merge'
 import T from "vanns-common-modules/dist/components/react/T"
 
@@ -9,7 +8,7 @@ import LinkWithLang from '~/components/custom/LinkWithLang'
 import { isEmpty } from '~/lib/utils'
 
 interface TypeProps {
-  image: string
+  image?: ImageNode
   description: string
   [key:string]: any
 }
@@ -41,7 +40,10 @@ function OwnerPerspective(props:TypeProps){
             </div>
           </div>
           <div className="lg:col-6 col-12 relative">
-            <Image className="w-full" src={props.image} width={1920} height={1920} alt=""
+            <img className="w-full"
+            src={props.image?.mediaItemUrl}
+            srcSet={props.image?.srcSet}
+            sizes="(max-width:991px) 100vw, 50vw"
             style={{
               width: '100%',
               minWidth: '100%',
