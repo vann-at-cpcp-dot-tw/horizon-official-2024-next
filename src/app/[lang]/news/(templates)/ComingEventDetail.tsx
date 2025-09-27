@@ -107,7 +107,7 @@ function ComingEventDetail(props:TypeProps){
   const [openHull, setOpenHull] = useState<{yachtSlug:string | null, yachtName:string|null, hullName:string|null} | null>(null)
   const hullGQLString = useMemo(()=>{
     return createHullGQLString(props?.relatedHulls, 'EN') // 20250426 新增需求：Hull 只接英文版
-  }, [props?.relatedHulls, lang])
+  }, [props?.relatedHulls])
 
   const { data:hullListData } = useQuery<{[key:string]:TypeYachtNode}>(gql `query QueryHulls {
     ${hullGQLString}
