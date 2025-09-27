@@ -3,7 +3,6 @@ const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
 import { Suspense, useMemo, useState } from 'react'
 
-import Image from "next/image"
 import { Autoplay } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { SwiperClass } from "swiper/react"
@@ -16,9 +15,7 @@ import { isEmpty } from '~/lib/utils'
 interface TypeProps {
   gallery: {
     image?: {
-      node?: {
-        mediaItemUrl: string
-      }
+      node?: ImageNode
     }
     placeholder?: string
   }[]
@@ -54,14 +51,10 @@ function PostSwiper(props:TypeProps){
               return <SwiperSlide key={index}>
                 <RatioArea ratio="56.25">
                   {
-                    <Image className="absolute left-0 top-0 z-0 size-full object-cover"
+                    <img className="absolute left-0 top-0 z-0 size-full object-cover"
                     src={node?.image?.node?.mediaItemUrl || ''}
-                    width={900}
-                    height={506}
-                    priority={true}
-                    // placeholder="blur"
-                    // blurDataURL={node?.placeholder}
-                    alt="" />
+                    srcSet={node?.image?.node?.srcSet || ''}
+                    sizes="(max-width:991px) 100vw, 900px" />
                   }
                 </RatioArea>
               </SwiperSlide>
