@@ -100,7 +100,11 @@ function SpecTable(props:TypeProps){
 
       return acc
     }, [])
-  }, [props.specTerms])
+  }, [
+    termsConfig,
+    props.displayTermKeys,
+    props.specTerms,
+  ])
 
   return <Suspense fallback={null}>
     {
