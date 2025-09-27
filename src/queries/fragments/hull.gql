@@ -46,6 +46,7 @@ fragment hullExteriorImages on YachtCustomFieldsHulls {
     image {
       node {
         mediaItemUrl
+        srcSet
       }
     }
   }
@@ -56,6 +57,7 @@ fragment hullInteriorImages on YachtCustomFieldsHulls {
     image {
       node {
         mediaItemUrl
+        srcSet
       }
     }
     description
@@ -68,6 +70,7 @@ fragment hullGeneralArrangementImages on YachtCustomFieldsHulls {
     image {
       node {
         mediaItemUrl
+        srcSet
       }
     }
   }

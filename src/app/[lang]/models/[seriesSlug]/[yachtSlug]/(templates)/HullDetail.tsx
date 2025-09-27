@@ -3,7 +3,6 @@ const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 
 import { Suspense, useEffect, useMemo, useState } from 'react'
 
-import Image from "next/image"
 import { useRouter, usePathname } from 'next/navigation'
 import { twMerge } from 'tailwind-merge'
 import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'
@@ -25,16 +24,12 @@ interface TypeProps {
   vrEmbedUrl?: string
   exteriorImages?: {
     image: {
-      node?: {
-        mediaItemUrl: string
-      }
+      node?: ImageNode
     }
   }[]
   interiorImages?: {
     image: {
-      node?: {
-        mediaItemUrl: string
-      }
+      node?: ImageNode
     }
     description?: string
   }[]
@@ -47,9 +42,7 @@ interface TypeProps {
   generalArrangementImages?: {
     title: string
     image: {
-      node?: {
-        mediaItemUrl: string
-      }
+      node?: ImageNode
     }
   }[]
   embedVideosGallery?: {
@@ -150,6 +143,7 @@ function HullDetail(props:TypeProps){
   useEffect(()=>{
     setIsGALoading(true)
   }, [activeGAIndex, gaActiveItem])
+
   return <ContentLightbox
   stickyHeader={
     <>
@@ -198,17 +192,15 @@ function HullDetail(props:TypeProps){
                 props?.exteriorImages && <SwiperFullHeight
                 list={props.exteriorImages.map((node)=>{
                   return {
-                    content: <Image src={node?.image?.node?.mediaItemUrl || ''}
-                    fill={viewport.width && viewport.width >= 992 ?true :false}
-                    width={viewport.width && viewport.width >= 992 ?0 :1920}
-                    height={viewport.width && viewport.width >= 992 ?0 :1080}
+                    content: <img
+                    src={node?.image?.node?.mediaItemUrl}
+                    srcSet={node?.image?.node?.srcSet}
                     sizes="100vw"
                     style={{
                       objectFit: viewport.width && viewport.width >= 992 ?'contain' :'cover',
                       width: '100%',
                       height: viewport.width && viewport.width >= 992 ?'100%' :'auto'
                     }}
-                    alt=""
                     onLoad={()=>{
                       setIsLoading(false)
                     }} />,
@@ -226,17 +218,15 @@ function HullDetail(props:TypeProps){
                 props?.interiorImages && <SwiperFullHeight
                 list={props.interiorImages.map((node)=>{
                   return {
-                    content: <Image src={node?.image?.node?.mediaItemUrl || ''}
-                    fill={viewport.width && viewport.width >= 992 ?true :false}
-                    width={viewport.width && viewport.width >= 992 ?0 :1920}
-                    height={viewport.width && viewport.width >= 992 ?0 :1080}
+                    content: <img
+                    src={node?.image?.node?.mediaItemUrl || ''}
+                    srcSet={node?.image?.node?.srcSet || ''}
                     sizes="100vw"
                     style={{
                       objectFit: viewport.width && viewport.width >= 992 ?'contain' :'cover',
                       width: '100%',
                       height: viewport.width && viewport.width >= 992 ?'100%' :'auto'
                     }}
-                    alt=""
                     onLoad={()=>{
                       setIsLoading(false)
                     }}/>,
@@ -267,20 +257,20 @@ function HullDetail(props:TypeProps){
               }
 
               <div className="relative grow">
-                <Image className={`pointer-events-none ${isGALoading ?'opacity-0' :'opacity-1'}`}
-                  src={gaActiveItem?.image?.node?.mediaItemUrl || ''}
-                  fill={true}
-                  sizes="100vw"
-                  style={{
-                    objectFit: "contain",
-                    objectPosition: "top",
-                    transition: 'all 0.5s cubic-bezier(0.215, 0.610, 0.355, 1.000)'
-                  }}
-                  alt=""
-                  onLoad={()=>{
-                    setIsLoading(false)
-                    setIsGALoading(false)
-                  }} />
+                <img
+                className={`pointer-events-none ${isGALoading ?'opacity-0' :'opacity-1'}`}
+                src={gaActiveItem?.image?.node?.mediaItemUrl || ''}
+                srcSet={gaActiveItem?.image?.node?.srcSet || ''}
+                sizes="100vw"
+                style={{
+                  objectFit: "contain",
+                  objectPosition: "top",
+                  transition: 'all 0.5s cubic-bezier(0.215, 0.610, 0.355, 1.000)'
+                }}
+                onLoad={()=>{
+                  setIsLoading(false)
+                  setIsGALoading(false)
+                }} />
               </div>
             </div>
 
