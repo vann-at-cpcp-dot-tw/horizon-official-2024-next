@@ -37,12 +37,14 @@ query QuerySingleBrokerage(
         heroImage {
           node {
             mediaItemUrl
+            srcSet
           }
         }
         exteriorImages {
           image {
             node {
               mediaItemUrl
+              srcSet
             }
           }
         }
@@ -51,6 +53,7 @@ query QuerySingleBrokerage(
           image {
             node {
               mediaItemUrl
+              srcSet
             }
           }
         }
