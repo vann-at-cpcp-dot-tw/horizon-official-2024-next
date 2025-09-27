@@ -102,7 +102,7 @@ function ListWithCategory(props:TypeProps){
     })
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[ queryVariables ])
+  },[ isFilterChanged, queryVariables ])
 
   if( loading ){
     return <div className="py-20">
