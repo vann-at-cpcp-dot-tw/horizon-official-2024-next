@@ -12,6 +12,7 @@ query QueryMilestone(
         image {
           node {
             mediaItemUrl
+            srcSet
           }
         }
       }

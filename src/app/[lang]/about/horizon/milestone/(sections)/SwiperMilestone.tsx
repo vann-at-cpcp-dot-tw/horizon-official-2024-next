@@ -18,7 +18,10 @@ interface TypeProps {
   list: {
     year: string
     title: string
-    image: string
+    image: {
+      src?: string,
+      srcSet?: string
+    },
     placeholder?: string
     description?: string
   }[]
@@ -97,13 +100,11 @@ function SwiperMilestone(props:TypeProps){
                     // minHeight: '406px',
                   }}>
                     <RatioArea className="mb-3" ratio="56.25">
-                      <Image
+                      <img
                       className="absolute left-0 top-0 z-0 size-full object-cover"
-                      src={node.image}
-                      fill={true}
-                      sizes="50vw"
-                      placeholder="blur"
-                      // blurDataURL={node.placeholder}
+                      src={node.image?.src}
+                      srcSet={node.image?.srcSet}
+                      sizes="(max-width: 991px) 100vw, 50vw"
                       alt="" />
                     </RatioArea>
                     <div className="pb-10">
