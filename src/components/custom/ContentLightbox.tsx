@@ -6,7 +6,6 @@ const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
 import { Suspense, useCallback, useEffect, useMemo } from 'react'
 
 import { motion } from "framer-motion"
-import Image from "next/image"
 import { twMerge } from 'tailwind-merge'
 
 import LinkWithLang from '~/components/custom/LinkWithLang'
@@ -38,9 +37,10 @@ function ContentLightbox(props:TypeProps){
 
   const CloseIcon = useCallback(()=>{
     const icons = {
-      light: <Image src={`${APP_BASE}assets/img/icon_menu_x.svg`} width={48} height={48} alt=""/>,
-      dark: <Image src={`${APP_BASE}assets/img/icon_menu_x.svg`} width={48} height={48} alt=""
-      style={{
+      light: <img src={`${APP_BASE}assets/img/icon_menu_x.svg`} style={{width:'48px', height:'48px'}}/>,
+      dark: <img src={`${APP_BASE}assets/img/icon_menu_x.svg`} style={{
+        width:'48px',
+        height:'48px',
         filter: theme === 'light' ?'' :'grayscale(100) brightness(1000)',
       }} />
     } as Record<string, React.ReactNode>
