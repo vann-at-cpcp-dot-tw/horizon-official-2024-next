@@ -140,6 +140,7 @@ export default function List(props:TypeProps){
       variables: queryVariables
     })
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [queryCondition, queryYachtLength, queryYachtPrice, queryYachtYear, queryOrderby, props.list])
 
   return <Suspense fallback={null}>
