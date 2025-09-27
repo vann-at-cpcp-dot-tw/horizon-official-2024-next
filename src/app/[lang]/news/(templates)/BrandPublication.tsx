@@ -6,7 +6,6 @@ const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
 
 import { Suspense, useEffect, useState } from 'react'
 
-import Image from "next/image"
 import { useParams } from "next/navigation"
 import { twMerge } from 'tailwind-merge'
 import { useTranslate } from "vanns-common-modules/dist/use/react"
@@ -20,9 +19,8 @@ import { useStore } from "~/store"
 import useForm from "~/use/useForm"
 
 interface TypeProps {
-  publicationCover: string
+  publicationCover: ImageNode
   pdf: string
-  placeholder?: string
   [key:string]: any
 }
 
@@ -67,14 +65,10 @@ function BrandPublication(props:TypeProps){
                 style={{
                   boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.5)'
                 }}>
-                  <Image
-                  src={props.publicationCover}
-                  style={{height:'auto'}}
-                  width={202}
-                  height={278}
-                  placeholder="blur"
-                  // blurDataURL={props.placeholder}
-                  alt="" />
+                  <img
+                  src={props.publicationCover?.mediaItemUrl}
+                  srcSet={props.publicationCover?.srcSet}
+                  sizes="202px" />
                 </a>
               </div>
               <div className="lg:col-6 col-12 mb-5 text-gray-500 lg:mb-0">
