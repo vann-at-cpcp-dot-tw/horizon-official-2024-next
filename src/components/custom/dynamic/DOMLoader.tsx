@@ -4,21 +4,17 @@ const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 import { useEffect, useState } from 'react'
 
 import { motion } from 'framer-motion'
-import imagesLoaded from 'imagesloaded'
 import Image from "next/image"
 import NProgress from 'nprogress'
 import { useInterval } from 'react-use'
 import { twMerge } from 'tailwind-merge'
 
-import { isEmpty } from '~/lib/utils'
 import { useStore } from '~/store'
 import 'nprogress/nprogress.css'
 
 interface TypeProps {
   className?: string
 }
-
-interface TypeState {}
 
 function DOMLoader(props:TypeProps){
   const store = useStore()
@@ -28,17 +24,40 @@ function DOMLoader(props:TypeProps){
   useEffect(()=>{
     if (typeof window !== 'undefined'){
       if( !NProgress.isStarted() ){
-        NProgress.configure({ minimum:0.01, trickleSpeed:50 })
+        NProgress.configure({
+          minimum: 0.01,
+          trickleSpeed: 50
+        })
         NProgress.start()
       }
 
       document.body.classList.add('overflow-hidden')
-      imagesLoaded(document.body, ()=>{
+
+      // 監聽所有資源載入完成
+      let hasCompleted = false
+      const handleLoad = () => {
+        if (hasCompleted) return
+        hasCompleted = true
         setTimeout(()=>{
           NProgress.done()
           setProgressNumber(1)
         }, 500)
-      })
+      }
+
+      // 如果頁面已經載入完成
+      if (document.readyState === 'complete') {
+        handleLoad()
+      } else {
+        window.addEventListener('load', handleLoad)
+
+        // Fallback: 最多等待 30 秒
+        setTimeout(() => {
+          if (!hasCompleted) {
+            console.warn('DOMLoader: 30秒 timeout，強制完成載入')
+            handleLoad()
+          }
+        }, 30000)
+      }
     }
   }, [])
 
