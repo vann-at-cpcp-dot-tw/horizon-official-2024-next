@@ -48,6 +48,24 @@ function MenuVision(props:TypeProps){
     }
   }, [props?.imageNode?.srcSet, viewport.width])
 
+  // 修復快速開關選單時圖片快取問題
+  useEffect(() => {
+    // 重置載入狀態
+    setMediaLoaded(false)
+
+    // 只檢查圖片載入狀態（影片的 onCanPlay 沒有快取問題）
+    if (!props?.video && props?.imageNode?.mediaItemUrl) {
+      const img = new Image()
+      img.onload = () => setMediaLoaded(true)
+      img.src = props.imageNode.mediaItemUrl
+
+      // 如果圖片已經載入（來自快取）
+      if (img.complete) {
+        setMediaLoaded(true)
+      }
+    }
+  }, [props?.video, props?.imageNode?.mediaItemUrl])
+
   return <Suspense fallback={null}>
     <div className="absolute left-0 top-0 z-0 size-full">
       {
