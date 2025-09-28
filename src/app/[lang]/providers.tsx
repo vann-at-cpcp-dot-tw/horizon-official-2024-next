@@ -10,13 +10,11 @@ import 'swiper/css/scrollbar'
 
 import { useState, ReactNode, createContext } from 'react'
 
-import dynamic from "next/dynamic"
 import { createScopeStoreProvider } from "vanns-common-modules/dist/providers/react"
 import { TranslateProvider } from "vanns-common-modules/dist/providers/react/Translate"
 
+import DOMLoader from '~/components/custom/dynamic/DOMLoader'
 import { ApolloProvider }  from "~/lib/apollo/client"
-
-const DOMLoader = dynamic(() => import('~/components/custom/dynamic/DOMLoader'))
 
 export interface ICommonData {
   yachtSeriesList: {
