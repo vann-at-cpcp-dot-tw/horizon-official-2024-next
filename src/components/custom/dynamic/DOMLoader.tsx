@@ -23,7 +23,7 @@ interface TypeState {}
 function DOMLoader(props:TypeProps){
   const store = useStore()
   const [progressNumber, setProgressNumber] = useState(0.01)
-  const [enterAniable, setEnerAniable] = useState(false)
+  const [enterAniable, setEnterAniable] = useState(false)
 
   useEffect(()=>{
     if (typeof window !== 'undefined'){
@@ -53,7 +53,7 @@ function DOMLoader(props:TypeProps){
       setTimeout(()=>{
         window.scrollTo(0, 0)
       }, 1)
-      setEnerAniable(true)
+      setEnterAniable(true)
       store.set({ isPageLoaded: true })
       document.body.classList.add('page-loaded')
       setTimeout(()=>{

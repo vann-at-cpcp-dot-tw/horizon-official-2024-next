@@ -339,7 +339,7 @@ function MainMenu(){
   ])
 
   // 預載選單圖片 - 使用 eager 模式在頁面載入時就開始預載
-  const { isImagePreloaded } = useMenuImagePreload({
+  useMenuImagePreload({
     menuData: menus,
     isMenuOpen,
     eager: true // 立即預載，不等待選單開啟
@@ -425,8 +425,7 @@ function MainMenu(){
                         onBackClick={menuGroupNode?.onBackClick}
                         onCloseClick={()=>{
                           setIsMenuOpen(false)
-                        }}
-                        isImagePreloaded={isImagePreloaded} />
+                        }} />
                     }
                   </AnimatePresence>
                 })

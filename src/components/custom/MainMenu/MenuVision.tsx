@@ -33,7 +33,6 @@ interface TypeProps {
   video: string
   imageNode: ImageNode
   children?: React.ReactNode
-  isImagePreloaded?: (srcSet: string) => boolean
 }
 
 interface TypeState {}
@@ -48,9 +47,6 @@ function MenuVision(props:TypeProps){
       blur: calcBlur(placeholderImage?.width || 0, '10px', viewport.width)
     }
   }, [props?.imageNode?.srcSet, viewport.width])
-
-  // 檢查 blur 圖是否已預載
-  const isBlurImagePreloaded = props?.isImagePreloaded?.(props?.imageNode?.srcSet || '') || false
 
   // 只檢查原圖載入狀態
   useEffect(() => {
@@ -96,7 +92,7 @@ function MenuVision(props:TypeProps){
         }}
         initial="exit"
         exit="exit"
-        animate={(!mediaLoaded && !isBlurImagePreloaded) ?'enter' :'exit'}>
+        animate={!mediaLoaded ?'enter' :'exit'}>
           <img className="absolute left-0 top-0 z-0 size-full object-cover"
           src={imagePlaceholder.url}
           style={{
@@ -105,36 +101,6 @@ function MenuVision(props:TypeProps){
           <div className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2">
             <Loading style={{width:'120px'}} fill="var(--color-golden-900)" />
           </div>
-        </motion.div>
-      }
-
-      {/* 預載的 blur 圖，立即顯示 */}
-      {
-        isBlurImagePreloaded && !mediaLoaded && <motion.div className="absolute left-0 top-0 z-[15] size-full"
-        variants={{
-          enter: {
-            opacity: 1,
-            transition: {
-              duration: 0.2,
-              ease: [0.215, 0.610, 0.355, 1.000]
-            }
-          },
-          exit: {
-            opacity: 0,
-            transition: {
-              duration: 0.8,
-              ease: [0.215, 0.610, 0.355, 1.000]
-            }
-          },
-        }}
-        initial="enter"
-        exit="exit"
-        animate={mediaLoaded ? 'exit' : 'enter'}>
-          <img className="absolute left-0 top-0 z-0 size-full object-cover"
-          src={imagePlaceholder.url}
-          style={{
-            filter: `blur(${imagePlaceholder.blur})`
-          }}/>
         </motion.div>
       }
 
