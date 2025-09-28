@@ -3,7 +3,7 @@ const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 const CONTENT_TYPE = process.env.NEXT_PUBLIC_CONTENT_TYPE || 'hq'
 const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
 
-import { Suspense, useContext, useState, useEffect, useMemo, useReducer } from 'react'
+import { Suspense, useState, useEffect, useMemo, useReducer } from 'react'
 
 import { motion, AnimatePresence } from "framer-motion"
 import Image from "next/image"
@@ -15,7 +15,8 @@ import { tools as langTools } from "vanns-common-modules/dist/use/next/useLangGu
 import { useWindowSize } from 'vanns-common-modules/dist/use/react'
 import { useTranslate } from "vanns-common-modules/dist/use/react"
 
-import { ICommonData, useCommonData } from "~/app/[lang]/providers"
+import { useCommonData } from "~/app/[lang]/providers"
+import { useMenuImagePreload } from '~/hooks/useMenuImagePreload'
 import { genSpecString } from '~/lib/utils'
 import { useStore } from '~/store'
 import { i18n } from '~~/i18n.config'
@@ -23,8 +24,6 @@ import { i18n } from '~~/i18n.config'
 import MenuScreen from "./MenuScreen"
 
 const { pathnameWithLang } = langTools(i18n)
-interface TypeProps {}
-interface TypeState {}
 
 interface TypeMenuItem {
   key: string
@@ -96,7 +95,7 @@ interface TypeMenuSeriesNode {
   } | null
 }
 
-function MainMenu(props:TypeProps){
+function MainMenu(){
   const { __ } = useTranslate()
   const store = useStore()
   const router = useRouter()
@@ -339,6 +338,13 @@ function MainMenu(props:TypeProps){
     pathnameWithoutLang,
   ])
 
+  // 預載選單圖片 - 使用 eager 模式在頁面載入時就開始預載
+  const { isImagePreloaded } = useMenuImagePreload({
+    menuData: menus,
+    isMenuOpen,
+    eager: true // 立即預載，不等待選單開啟
+  })
+
   useEffect(()=>{
     if( isMenuOpen ){
       document.body.classList.add('menu-open')
@@ -419,7 +425,8 @@ function MainMenu(props:TypeProps){
                         onBackClick={menuGroupNode?.onBackClick}
                         onCloseClick={()=>{
                           setIsMenuOpen(false)
-                        }} />
+                        }}
+                        isImagePreloaded={isImagePreloaded} />
                     }
                   </AnimatePresence>
                 })

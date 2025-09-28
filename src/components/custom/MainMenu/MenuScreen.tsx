@@ -39,6 +39,7 @@ interface TypeProps {
   setIsMenuOpen: Function
   onCloseClick: Function
   onBackClick?: Function
+  isImagePreloaded: (srcSet: string) => boolean
 }
 interface TypeState {}
 
@@ -174,7 +175,8 @@ function MenuScreen(props:TypeProps){
                 ?(!props.currentScreen?.seriesSlug && !props.currentScreen?.yachtSlug)
                   ? <MenuVision
                   video={props?.vision?.video || ''}
-                  imageNode={props?.vision?.imageNode || ''} />
+                  imageNode={props?.vision?.imageNode || ''}
+                  isImagePreloaded={props.isImagePreloaded} />
                   :<>
                     {
                       props?.list?.map((seriesNode:TypeMenuListNode, index)=>{
@@ -189,7 +191,8 @@ function MenuScreen(props:TypeProps){
                             && props.currentScreen?.seriesSlug === seriesNode.key
                             && <MenuVision
                             video={seriesNode?.vision?.video || props?.vision?.video || ''}
-                            imageNode={seriesNode?.vision?.imageNode || props?.vision?.imageNode || ''}>
+                            imageNode={seriesNode?.vision?.imageNode || props?.vision?.imageNode || ''}
+                            isImagePreloaded={props.isImagePreloaded}>
                               <div className="absolute left-0 top-0 flex size-full flex-col items-center justify-end">
                                 <div className="absolute left-0 top-0 z-0 size-full bg-major-900" style={{opacity:0.2}}></div>
                                 <div className="relative z-10 pb-[70px] text-center text-white">
@@ -209,7 +212,8 @@ function MenuScreen(props:TypeProps){
                                 {
                                   props.currentScreen?.yachtSlug === childNode.key && <MenuVision
                               video={childNode?.vision?.video || props?.vision?.video || ''}
-                              imageNode={childNode?.vision?.imageNode || props?.vision?.imageNode || ''}>
+                              imageNode={childNode?.vision?.imageNode || props?.vision?.imageNode || ''}
+                              isImagePreloaded={props.isImagePreloaded}>
                                     <div className="absolute left-0 top-0 flex size-full flex-col items-center justify-end">
                                       <div className="absolute left-0 top-0 z-0 size-full bg-major-900" style={{opacity:0.2}}></div>
                                       <div className="relative z-10 pb-[70px] text-center text-white">
@@ -233,7 +237,8 @@ function MenuScreen(props:TypeProps){
                   </>
                 : <MenuVision
                   video={props?.vision?.video || ''}
-                  imageNode={props?.vision?.imageNode || ''} />
+                  imageNode={props?.vision?.imageNode || ''}
+                  isImagePreloaded={props.isImagePreloaded} />
             }
           </AnimatePresence>
         </div>
