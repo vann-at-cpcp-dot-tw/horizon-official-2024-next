@@ -50,22 +50,53 @@ function MenuVision(props:TypeProps){
 
   // 只檢查原圖載入狀態
   useEffect(() => {
-    // 重置載入狀態
-    setMediaLoaded(false)
-
     // 如果是影片或沒有圖片URL，直接返回
     if (props?.video || !props?.imageNode?.mediaItemUrl) {
+      setMediaLoaded(false)
       return
     }
 
-    // 只檢查原圖載入狀態
-    const img = new Image()
-    img.onload = () => setMediaLoaded(true)
+    // 重置載入狀態
+    setMediaLoaded(false)
+
+    let img: HTMLImageElement | null = new Image()
+    let isCancelled = false
+
+    // 先綁定事件處理器
+    const handleLoad = () => {
+      if (!isCancelled) {
+        setMediaLoaded(true)
+      }
+    }
+
+    const handleError = () => {
+      if (!isCancelled) {
+        // 載入失敗也設為 true，避免一直顯示 loading
+        setMediaLoaded(true)
+      }
+    }
+
+    img.onload = handleLoad
+    img.onerror = handleError
+
+    // 再設置 src
     img.src = props.imageNode.mediaItemUrl
 
-    // 如果圖片已經載入（來自快取）
-    if (img.complete) {
-      setMediaLoaded(true)
+    // 使用 setTimeout 避免 race condition，檢查是否已從快取載入
+    setTimeout(() => {
+      if (!isCancelled && img && img.complete && img.naturalWidth > 0) {
+        setMediaLoaded(true)
+      }
+    }, 0)
+
+    // Cleanup 函數
+    return () => {
+      isCancelled = true
+      if (img) {
+        img.onload = null
+        img.onerror = null
+        img = null
+      }
     }
   }, [props?.video, props?.imageNode?.mediaItemUrl])
 
