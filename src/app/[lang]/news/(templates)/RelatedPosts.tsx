@@ -64,7 +64,7 @@ function RelatedPosts(props:TypeProps){
                 href={`/news/${props.categorySlug}/${node.slug}`}
                 title={node?.title}
                 date={node?.date}
-                thumbnail={node?.postCustomFields?.gallery?.[0]?.image?.node?.mediaItemUrl || ''}
+                thumbnail={node?.postCustomFields?.gallery?.[0]?.image?.node}
                 categories={formatCategories(node?.categories?.nodes)} />
               </div>
             })
