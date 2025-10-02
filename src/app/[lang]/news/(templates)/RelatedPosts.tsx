@@ -1,5 +1,7 @@
 "use client"
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
+const HQ_API_BASE = process.env.NEXT_PUBLIC_HQ_API_BASE
+const HQ_API_URL = `${HQ_API_BASE}graphql`
 const postsPerPage = 3
 
 import { Suspense, useMemo } from 'react'
@@ -29,6 +31,9 @@ function RelatedPosts(props:TypeProps){
   const { data:nextPosts } = useQuery(QueryRelatedPosts, {
     fetchPolicy: 'cache-and-network',
     skip: !props.postCursor || !props.categorySlug,
+    context: {
+      uri: HQ_API_URL
+    },
     variables: {
       categorySlug: props.categorySlug,
       after: props.postCursor,
@@ -39,6 +44,9 @@ function RelatedPosts(props:TypeProps){
   const { data:prevPosts } = useQuery(QueryRelatedPosts, {
     fetchPolicy: 'cache-and-network',
     skip: !props.postCursor || !props.categorySlug,
+    context: {
+      uri: HQ_API_URL
+    },
     variables: {
       categorySlug: props.categorySlug,
       before: props.postCursor,
