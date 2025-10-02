@@ -3,7 +3,6 @@ const HQ_API_BASE = process.env.NEXT_PUBLIC_HQ_API_BASE
 const HQ_API_URL = `${HQ_API_BASE}graphql`
 
 import T from 'vanns-common-modules/dist/components/react/T'
-import { genImageBlurHash } from 'vanns-common-modules/dist/lib/next'
 
 import Breadcrumb from '~/components/custom/Breadcrumb'
 import LinkWithLang from '~/components/custom/LinkWithLang'
