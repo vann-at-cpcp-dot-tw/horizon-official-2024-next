@@ -69,7 +69,8 @@ function MenuVision(props:TypeProps){
             opacity: 0,
             transition: {
               duration: 1,
-              ease: [0.215, 0.610, 0.355, 1.000]
+              ease: [0.215, 0.610, 0.355, 1.000],
+              delay: 0.33,
             }
           }}>
             <img className="absolute left-0 top-0 z-0 size-full object-cover"
@@ -91,7 +92,6 @@ function MenuVision(props:TypeProps){
             opacity: 1,
             transition: {
               duration: 2,
-              delay: 0.25,
               ease: [0.215, 0.610, 0.355, 1.000]
             }
           },
