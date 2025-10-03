@@ -13,6 +13,7 @@ import { useTranslate, useWindowSize } from "vanns-common-modules/dist/use/react
 
 import HullDetail from '~/app/[lang]/models/[seriesSlug]/[yachtSlug]/(templates)/HullDetail'
 import ContentLightbox from '~/components/custom/ContentLightbox'
+import Loading from '~/components/custom/icons/Loading'
 import LinkWithLang from '~/components/custom/LinkWithLang'
 import { Button } from '~/components/ui/button'
 import buttonStyles from '~/components/ui/button.module.sass'
@@ -114,7 +115,11 @@ function HullCard({
                 initial={{ opacity: 1 }}
                 exit={{
                   opacity: 0,
-                  transition: { duration: 1, ease: [0.215, 0.610, 0.355, 1.000] }
+                  transition: {
+                    duration: 1,
+                    ease: [0.215, 0.610, 0.355, 1.000],
+                    delay: 0.33,
+                  }
                 }}
               >
                 <img
@@ -170,6 +175,7 @@ function ComingEventDetail(props:TypeProps){
   const client = useApolloClient()
   const [openHull, setOpenHull] = useState<{yachtSlug:string | null, yachtName:string|null, hullName:string|null} | null>(null)
   const [hullListData, setHullListData] = useState<{yachtName:string, yachtSlug:string, hull:TypeHullNode}[]>([])
+  const [hullListLoading, setHullListLoading] = useState(false)
 
   const { data:openHullData, error:openHullError, loading:openHullLoading } = useQuery(QuerySingleHull, {
     fetchPolicy: 'cache-and-network',
@@ -188,8 +194,11 @@ function ComingEventDetail(props:TypeProps){
     const fetchHulls = async () => {
       if (!props?.relatedHulls || props.relatedHulls.length === 0) {
         setHullListData([])
+        setHullListLoading(false)
         return
       }
+
+      setHullListLoading(true)
 
       try {
         // 取得唯一的 yacht slugs
@@ -206,7 +215,7 @@ function ComingEventDetail(props:TypeProps){
             context: {
               uri: HQ_API_URL
             },
-            // fetchPolicy: 'network-only' // 確保資料新鮮度
+            fetchPolicy: 'network-only' // 確保資料新鮮度
           })
         )
 
@@ -245,6 +254,8 @@ function ComingEventDetail(props:TypeProps){
       } catch (error) {
         console.error('Failed to fetch hulls:', error)
         setHullListData([])
+      } finally {
+        setHullListLoading(false)
       }
     }
 
@@ -278,30 +289,43 @@ function ComingEventDetail(props:TypeProps){
       </div>
 
       {
-        !isEmpty(hullListData) && (
+        props?.relatedHulls && props.relatedHulls.length > 0 && (
           <>
             <div className="container serif mb-3 text-center text-[32px] italic text-major-900 lg:mb-6 lg:text-[40px]">
               { __('ON DISPLAY') }
             </div>
-            <div className="container-fluid mb-6 lg:mb-20">
-              <div className="row justify-center">
-                {
-                  hullListData.map((node, index: number) => (
-                    <HullCard
-                      key={index}
-                      node={node}
-                      onOpenDetail={() => {
-                        setOpenHull({
-                          yachtSlug: node.yachtSlug,
-                          yachtName: node.yachtName,
-                          hullName: node.hull?.hullName,
-                        })
-                      }}
-                    />
-                  ))
-                }
+
+            {/* Loading 狀態 */}
+            {hullListLoading && (
+              <div className="container-fluid mb-6 lg:mb-20">
+                <div className="flex justify-center py-20">
+                  <Loading style={{width:'120px'}} fill="var(--color-golden-900)" />
+                </div>
               </div>
-            </div>
+            )}
+
+            {/* 顯示資料 */}
+            {!hullListLoading && !isEmpty(hullListData) && (
+              <div className="container-fluid mb-6 lg:mb-20">
+                <div className="row justify-center">
+                  {
+                    hullListData.map((node, index: number) => (
+                      <HullCard
+                        key={index}
+                        node={node}
+                        onOpenDetail={() => {
+                          setOpenHull({
+                            yachtSlug: node.yachtSlug,
+                            yachtName: node.yachtName,
+                            hullName: node.hull?.hullName,
+                          })
+                        }}
+                      />
+                    ))
+                  }
+                </div>
+              </div>
+            )}
           </>
         )
       }
