@@ -3,20 +3,20 @@ const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 const HQ_API_BASE = process.env.NEXT_PUBLIC_HQ_API_BASE
 const HQ_API_URL = `${HQ_API_BASE}graphql`
 
-import { Suspense, useMemo, useState, useEffect } from 'react'
+import { Suspense, useMemo, useState, useEffect, useRef } from 'react'
 
 import { useApolloClient, useQuery, gql } from "@apollo/client"
-import Image from "next/image"
+import { motion, AnimatePresence } from 'framer-motion'
 import { usePathname, useRouter, useParams } from 'next/navigation'
 import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'
-import { useTranslate } from "vanns-common-modules/dist/use/react"
+import { useTranslate, useWindowSize } from "vanns-common-modules/dist/use/react"
 
 import HullDetail from '~/app/[lang]/models/[seriesSlug]/[yachtSlug]/(templates)/HullDetail'
 import ContentLightbox from '~/components/custom/ContentLightbox'
 import LinkWithLang from '~/components/custom/LinkWithLang'
 import { Button } from '~/components/ui/button'
 import buttonStyles from '~/components/ui/button.module.sass'
-import { isEmpty } from '~/lib/utils'
+import { isEmpty, getLowestWidthUrl, calcBlur } from '~/lib/utils'
 import { QuerySingleHull } from '~/queries/categories/hull.gql'
 
 // 輕量級查詢：只取 yacht title 和 hulls 的基本資訊（用於列表顯示）
@@ -34,6 +34,7 @@ const QUERY_YACHT_HULL = gql`
                 node {
                   mediaItemUrl
                   srcSet
+                  placeholder: sourceUrl(size: VMO_32)
                 }
               }
             }
@@ -71,6 +72,94 @@ interface TypeProps {
 
 interface TypeState {}
 
+// HullCard 子組件：處理單個 hull 的圖片載入
+function HullCard({
+  node,
+  onOpenDetail
+}: {
+  node: {yachtName:string, yachtSlug:string, hull:TypeHullNode},
+  onOpenDetail: () => void
+}) {
+  const { __ } = useTranslate()
+  const [imageLoaded, setImageLoaded] = useState(false)
+  const imgRef = useRef<HTMLImageElement>(null)
+  const viewport = useWindowSize()
+
+  const imagePlaceholder = useMemo(() => {
+    const placeholderImage = getLowestWidthUrl(
+      node.hull?.exteriorImages?.[0]?.image?.node?.srcSet || ''
+    )
+    return {
+      url: node.hull?.exteriorImages?.[0]?.image?.node?.placeholder || '',
+      blur: calcBlur(placeholderImage?.width || 32, '10px', viewport.width)
+    }
+  }, [node.hull?.exteriorImages?.[0]?.image?.node, viewport.width])
+
+  useEffect(() => {
+    setImageLoaded(false)
+    if (imgRef.current?.complete && imgRef.current?.naturalWidth > 0) {
+      setImageLoaded(true)
+    }
+  }, [node.hull?.exteriorImages?.[0]?.image?.node?.mediaItemUrl])
+
+  return (
+    <div className="col-12 lg:col-6 mb-10">
+      <RatioArea className="mb-3" ratio="56.25">
+        <div className="absolute left-0 top-0 size-full">
+          {/* Blur Placeholder */}
+          <AnimatePresence>
+            {!imageLoaded && imagePlaceholder.url && (
+              <motion.div
+                className="pointer-events-none absolute left-0 top-0 z-10 size-full"
+                initial={{ opacity: 1 }}
+                exit={{
+                  opacity: 0,
+                  transition: { duration: 1, ease: [0.215, 0.610, 0.355, 1.000] }
+                }}
+              >
+                <img
+                  className="absolute left-0 top-0 size-full object-cover"
+                  src={imagePlaceholder.url}
+                  style={{ filter: `blur(${imagePlaceholder.blur})` }}
+                  alt=""
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* 主圖片 */}
+          <motion.img
+            ref={imgRef}
+            className="absolute left-0 top-0 size-full object-cover"
+            src={node.hull?.exteriorImages?.[0]?.image?.node?.mediaItemUrl || ''}
+            srcSet={node.hull?.exteriorImages?.[0]?.image?.node?.srcSet || ''}
+            sizes="(max-width:991px) 100vw, 50vw"
+            onLoad={() => setImageLoaded(true)}
+            initial={{ opacity: 0 }}
+            animate={{
+              opacity: imageLoaded ? 1 : 0,
+              transition: { duration: 1, ease: [0.215, 0.610, 0.355, 1.000] }
+            }}
+            alt={`${node.yachtName} ${node.hull?.hullName}`}
+          />
+        </div>
+      </RatioArea>
+      <div className="serif mb-2 text-center text-[21px] text-minor-900 lg:mb-4 lg:text-[24px]">
+        {node.yachtName} <span className="text-[22px]">/</span> {node.hull?.hullName}
+      </div>
+      <div className="flex justify-center">
+        <Button
+          variant="outline"
+          className={`${buttonStyles['rounded-outline']}`}
+          onClick={onOpenDetail}
+        >
+          { __('MORE DETAIL') }
+        </Button>
+      </div>
+    </div>
+  )
+}
+
 function ComingEventDetail(props:TypeProps){
   const router = useRouter()
   const { __ } = useTranslate()
@@ -81,7 +170,6 @@ function ComingEventDetail(props:TypeProps){
   const client = useApolloClient()
   const [openHull, setOpenHull] = useState<{yachtSlug:string | null, yachtName:string|null, hullName:string|null} | null>(null)
   const [hullListData, setHullListData] = useState<{yachtName:string, yachtSlug:string, hull:TypeHullNode}[]>([])
-  const [hullListLoading, setHullListLoading] = useState(false)
 
   const { data:openHullData, error:openHullError, loading:openHullLoading } = useQuery(QuerySingleHull, {
     fetchPolicy: 'cache-and-network',
@@ -103,8 +191,6 @@ function ComingEventDetail(props:TypeProps){
         return
       }
 
-      setHullListLoading(true)
-
       try {
         // 取得唯一的 yacht slugs
         const uniqueYachtSlugs = Array.from(new Set(props.relatedHulls.map(item => item.yachtSlug).filter(Boolean)))
@@ -120,7 +206,7 @@ function ComingEventDetail(props:TypeProps){
             context: {
               uri: HQ_API_URL
             },
-            fetchPolicy: 'cache-and-network' // 優先快取，同時檢查更新
+            // fetchPolicy: 'network-only' // 確保資料新鮮度
           })
         )
 
@@ -159,8 +245,6 @@ function ComingEventDetail(props:TypeProps){
       } catch (error) {
         console.error('Failed to fetch hulls:', error)
         setHullListData([])
-      } finally {
-        setHullListLoading(false)
       }
     }
 
@@ -194,59 +278,30 @@ function ComingEventDetail(props:TypeProps){
       </div>
 
       {
-        props?.relatedHulls && props.relatedHulls.length > 0 && (
+        !isEmpty(hullListData) && (
           <>
             <div className="container serif mb-3 text-center text-[32px] italic text-major-900 lg:mb-6 lg:text-[40px]">
               { __('ON DISPLAY') }
             </div>
-            {hullListLoading ? (
-              <div className="container-fluid mb-6 lg:mb-20">
-                <div className="row justify-center">
-                  {props.relatedHulls.map((_, index: number) => (
-                    <div className="col-12 lg:col-6 mb-10" key={index}>
-                      <div className="animate-pulse">
-                        <div className="mb-3 h-64 rounded bg-gray-200"></div>
-                        <div className="mx-auto mb-2 h-8 w-3/4 rounded bg-gray-200"></div>
-                        <div className="flex justify-center">
-                          <div className="h-10 w-32 rounded bg-gray-200"></div>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+            <div className="container-fluid mb-6 lg:mb-20">
+              <div className="row justify-center">
+                {
+                  hullListData.map((node, index: number) => (
+                    <HullCard
+                      key={index}
+                      node={node}
+                      onOpenDetail={() => {
+                        setOpenHull({
+                          yachtSlug: node.yachtSlug,
+                          yachtName: node.yachtName,
+                          hullName: node.hull?.hullName,
+                        })
+                      }}
+                    />
+                  ))
+                }
               </div>
-            ) : !isEmpty(hullListData) ? (
-              <div className="container-fluid mb-6 lg:mb-20">
-                <div className="row justify-center">
-                  {
-                    hullListData.map((node, index: number)=>{
-                      return <div className="col-12 lg:col-6 mb-10" key={index}>
-                        <RatioArea className="mb-3" ratio="56.25">
-                          <img
-                          className="absolute left-0 top-0 size-full object-cover"
-                          src={node.hull?.exteriorImages?.[0]?.image?.node?.mediaItemUrl || ''}
-                          srcSet={node.hull?.exteriorImages?.[0]?.image?.node?.srcSet || ''}
-                          sizes="(max-width:991px) 100vw, 50vw" />
-                        </RatioArea>
-                        <div className="serif mb-2 text-center text-[21px] text-minor-900 lg:mb-4 lg:text-[24px]">{node.yachtName} <span className="text-[22px]">/</span> {node.hull?.hullName}</div>
-                        <div className="flex justify-center">
-                          <Button variant="outline" className={`${buttonStyles['rounded-outline']}`}
-                            onClick={()=>{
-                              setOpenHull({
-                                yachtSlug: node.yachtSlug,
-                                yachtName: node.yachtName,
-                                hullName: node.hull?.hullName,
-                              })
-                            }}>
-                            { __('MORE DETAIL') }
-                          </Button>
-                        </div>
-                      </div>
-                    })
-                  }
-                </div>
-              </div>
-            ) : null}
+            </div>
           </>
         )
       }
