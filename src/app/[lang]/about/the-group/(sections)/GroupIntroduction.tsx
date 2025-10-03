@@ -18,7 +18,7 @@ function GroupIntroduction(props:TypeProps){
   return <Suspense fallback={null}>
     <div className={twMerge('', className)}>
       <div className="container pb-16 lg:pb-[120px] lg:pt-10">
-        <div className="mx-auto w-full max-w-[900px] text-gray-700">{props?.content}</div>
+        <div className="mx-auto w-full max-w-[900px] text-gray-700" dangerouslySetInnerHTML={{ __html: props?.content }}></div>
       </div>
     </div>
   </Suspense>
