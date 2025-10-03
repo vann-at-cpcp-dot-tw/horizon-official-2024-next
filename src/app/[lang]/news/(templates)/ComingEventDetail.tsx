@@ -5,7 +5,7 @@ const HQ_API_URL = `${HQ_API_BASE}graphql`
 
 import { Suspense, useMemo, useState, useEffect } from 'react'
 
-import { gql, useQuery } from "@apollo/client"
+import { useApolloClient, useQuery, gql } from "@apollo/client"
 import Image from "next/image"
 import { usePathname, useRouter, useParams } from 'next/navigation'
 import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'
@@ -19,25 +19,33 @@ import buttonStyles from '~/components/ui/button.module.sass'
 import { isEmpty } from '~/lib/utils'
 import { QuerySingleHull } from '~/queries/categories/hull.gql'
 
-interface TypeHullNode {
-  // exteriorImages?: {
-  //   image?: {
-  //     node?: {
-  //       mediaItemUrl: string
-  //     }
-  //   }
-  // }[]
-  [key:string]: any
-}
-
-interface TypeYachtNode {
-  translation: {
-    slug: string
-    title: string
-    yachtCustomFields: {
-      hulls?: TypeHullNode[]
+// 輕量級查詢：只取 yacht title 和 hulls 的基本資訊（用於列表顯示）
+const QUERY_YACHT_HULL = gql`
+  query QueryYachtHull($yachtSlug: ID!, $language: LanguageCodeEnum!) {
+    yacht(id: $yachtSlug, idType: SLUG) {
+      translation(language: $language) {
+        slug
+        title
+        yachtCustomFields {
+          hulls {
+            hullName
+            exteriorImages {
+              image {
+                node {
+                  mediaItemUrl
+                  srcSet
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
+`
+
+interface TypeHullNode {
+  [key:string]: any
 }
 
 interface TypeProps {
@@ -63,40 +71,6 @@ interface TypeProps {
 
 interface TypeState {}
 
-function createHullGQLString(list:{yachtSlug:string, hullName:string}[] | undefined, lang:string){
-  if( !list ){
-    return null
-  }
-
-  return list.reduce((acc:string, node:{yachtSlug:string, hullName:string}, index:number)=>{
-
-    if( !node.yachtSlug ){ return acc }
-
-    return `
-      ${acc}
-      yacht${index}:yacht(id:"${node?.yachtSlug}", idType: SLUG){
-        translation(language: ${lang.toUpperCase()}){
-          slug
-          title
-          yachtCustomFields {
-            hulls {
-              hullName
-              exteriorImages {
-                image {
-                  node {
-                    mediaItemUrl
-                    srcSet
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    `
-  }, '')
-}
-
 function ComingEventDetail(props:TypeProps){
   const router = useRouter()
   const { __ } = useTranslate()
@@ -104,20 +78,10 @@ function ComingEventDetail(props:TypeProps){
   const pathname = usePathname()
   const params = useParams()
   const { lang } = params
+  const client = useApolloClient()
   const [openHull, setOpenHull] = useState<{yachtSlug:string | null, yachtName:string|null, hullName:string|null} | null>(null)
-  const hullGQLString = useMemo(()=>{
-    return createHullGQLString(props?.relatedHulls, 'EN') // 20250426 新增需求：Hull 只接英文版
-  }, [props?.relatedHulls])
-
-  const { data:hullListData } = useQuery<{[key:string]:TypeYachtNode}>(gql `query QueryHulls {
-    ${hullGQLString}
-  }`, {
-    fetchPolicy: 'cache-and-network',
-    skip: !hullGQLString,
-    context: {
-      uri: HQ_API_URL,
-    },
-  })
+  const [hullListData, setHullListData] = useState<{yachtName:string, yachtSlug:string, hull:TypeHullNode}[]>([])
+  const [hullListLoading, setHullListLoading] = useState(false)
 
   const { data:openHullData, error:openHullError, loading:openHullLoading } = useQuery(QuerySingleHull, {
     fetchPolicy: 'cache-and-network',
@@ -131,32 +95,77 @@ function ComingEventDetail(props:TypeProps){
     }
   })
 
-  const hullList = useMemo(()=>{
-    if( !props?.relatedHulls || !hullListData){
-      return []
-    }
-
-    const reduced = Object.values(hullListData).reduce<{yachtName:string, yachtSlug:string, hull:TypeHullNode}[]>((acc, yachtNode:TypeYachtNode, index:number)=>{
-      const findHullName = props?.relatedHulls?.[index]?.hullName
-      const foundedHull = yachtNode?.translation?.yachtCustomFields?.hulls?.find?.((hullNode)=>hullNode?.hullName === findHullName)
-
-      if( !findHullName || !foundedHull ){
-        return acc
+  // 使用 useEffect 來並行查詢多個 hulls
+  useEffect(() => {
+    const fetchHulls = async () => {
+      if (!props?.relatedHulls || props.relatedHulls.length === 0) {
+        setHullListData([])
+        return
       }
 
-      return [
-        ...acc,
-        {
-          yachtSlug: yachtNode?.translation?.slug,
-          yachtName: yachtNode?.translation?.title,
-          hull: foundedHull
-        }
-      ]
-    }, [])
+      setHullListLoading(true)
 
-    return reduced
+      try {
+        // 取得唯一的 yacht slugs
+        const uniqueYachtSlugs = Array.from(new Set(props.relatedHulls.map(item => item.yachtSlug).filter(Boolean)))
 
-  }, [hullListData, props?.relatedHulls])
+        // 並行查詢所有 yachts（每個 yacht 只查一次）
+        const yachtQueries = uniqueYachtSlugs.map(yachtSlug =>
+          client.query({
+            query: QUERY_YACHT_HULL,
+            variables: {
+              yachtSlug,
+              language: 'EN' // 20250426 新增需求：Hull 只接英文版
+            },
+            context: {
+              uri: HQ_API_URL
+            },
+            fetchPolicy: 'cache-and-network' // 優先快取，同時檢查更新
+          })
+        )
+
+        const yachtResults = await Promise.all(yachtQueries)
+
+        // 建立 yacht 資料的 map
+        const yachtMap = new Map()
+        yachtResults.forEach(result => {
+          const yacht = result.data?.yacht?.translation
+          if (yacht) {
+            yachtMap.set(yacht.slug, yacht)
+          }
+        })
+
+        // 組合最終資料
+        const finalResults = props.relatedHulls
+          .filter(item => item.yachtSlug && item.hullName)
+          .map(item => {
+            const yacht = yachtMap.get(item.yachtSlug)
+            if (!yacht) return null
+
+            const hull = yacht.yachtCustomFields?.hulls?.find(
+              (h: TypeHullNode) => h.hullName === item.hullName
+            )
+            if (!hull) return null
+
+            return {
+              yachtSlug: yacht.slug,
+              yachtName: yacht.title,
+              hull
+            }
+          })
+          .filter(Boolean) as {yachtName:string, yachtSlug:string, hull:TypeHullNode}[]
+
+        setHullListData(finalResults)
+      } catch (error) {
+        console.error('Failed to fetch hulls:', error)
+        setHullListData([])
+      } finally {
+        setHullListLoading(false)
+      }
+    }
+
+    fetchHulls()
+  }, [props?.relatedHulls, client])
 
   useEffect(()=>{
     document.body.classList.add('lb-open')
@@ -185,41 +194,61 @@ function ComingEventDetail(props:TypeProps){
       </div>
 
       {
-        !isEmpty(hullList) && <>
-          <div className="container serif mb-3 text-center text-[32px] italic text-major-900 lg:mb-6 lg:text-[40px]">
-            { __('ON DISPLAY') }
-          </div>
-          <div className="container-fluid mb-6 lg:mb-20">
-            <div className="row justify-center">
-              {
-                hullList.map((node, index)=>{
-                  return <div className="lg:col-6 col-12 mb-10" key={index}>
-                    <RatioArea className="mb-3" ratio="56.25">
-                      <img
-                      className="absolute left-0 top-0 size-full object-cover"
-                      src={node.hull?.exteriorImages?.[0]?.image?.node?.mediaItemUrl || ''}
-                      srcSet={node.hull?.exteriorImages?.[0]?.image?.node?.srcSet || ''}
-                      sizes="(max-width:991px) 100vw, 50vw" />
-                    </RatioArea>
-                    <div className="serif mb-2 text-center text-[21px] text-minor-900 lg:mb-4 lg:text-[24px]">{node.yachtName} <span className="text-[22px]">/</span> {node.hull?.hullName}</div>
-                    <div className="flex justify-center">
-                      <Button variant="outline" className={`${buttonStyles['rounded-outline']}`}
-                        onClick={()=>{
-                          setOpenHull({
-                            yachtSlug: node.yachtSlug,
-                            yachtName: node.yachtName,
-                            hullName: node.hull?.hullName,
-                          })
-                        }}>
-                        { __('MORE DETAIL') }
-                      </Button>
-                    </div>
-                  </div>
-                })
-              }
+        props?.relatedHulls && props.relatedHulls.length > 0 && (
+          <>
+            <div className="container serif mb-3 text-center text-[32px] italic text-major-900 lg:mb-6 lg:text-[40px]">
+              { __('ON DISPLAY') }
             </div>
-          </div>
-        </>
+            {hullListLoading ? (
+              <div className="container-fluid mb-6 lg:mb-20">
+                <div className="row justify-center">
+                  {props.relatedHulls.map((_, index: number) => (
+                    <div className="col-12 lg:col-6 mb-10" key={index}>
+                      <div className="animate-pulse">
+                        <div className="mb-3 h-64 rounded bg-gray-200"></div>
+                        <div className="mx-auto mb-2 h-8 w-3/4 rounded bg-gray-200"></div>
+                        <div className="flex justify-center">
+                          <div className="h-10 w-32 rounded bg-gray-200"></div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ) : !isEmpty(hullListData) ? (
+              <div className="container-fluid mb-6 lg:mb-20">
+                <div className="row justify-center">
+                  {
+                    hullListData.map((node, index: number)=>{
+                      return <div className="col-12 lg:col-6 mb-10" key={index}>
+                        <RatioArea className="mb-3" ratio="56.25">
+                          <img
+                          className="absolute left-0 top-0 size-full object-cover"
+                          src={node.hull?.exteriorImages?.[0]?.image?.node?.mediaItemUrl || ''}
+                          srcSet={node.hull?.exteriorImages?.[0]?.image?.node?.srcSet || ''}
+                          sizes="(max-width:991px) 100vw, 50vw" />
+                        </RatioArea>
+                        <div className="serif mb-2 text-center text-[21px] text-minor-900 lg:mb-4 lg:text-[24px]">{node.yachtName} <span className="text-[22px]">/</span> {node.hull?.hullName}</div>
+                        <div className="flex justify-center">
+                          <Button variant="outline" className={`${buttonStyles['rounded-outline']}`}
+                            onClick={()=>{
+                              setOpenHull({
+                                yachtSlug: node.yachtSlug,
+                                yachtName: node.yachtName,
+                                hullName: node.hull?.hullName,
+                              })
+                            }}>
+                            { __('MORE DETAIL') }
+                          </Button>
+                        </div>
+                      </div>
+                    })
+                  }
+                </div>
+              </div>
+            ) : null}
+          </>
+        )
       }
 
       <div className="container serif mb-10 text-center">
