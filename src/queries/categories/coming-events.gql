@@ -32,3 +32,26 @@ query QueryComingEvents(
     }
   }
 }
+
+query QueryYachtHull($yachtSlug: ID!, $language: LanguageCodeEnum!) {
+  yacht(id: $yachtSlug, idType: SLUG) {
+    translation(language: $language) {
+      slug
+      title
+      yachtCustomFields {
+        hulls {
+          hullName
+          exteriorImages {
+            image {
+              node {
+                mediaItemUrl
+                srcSet
+                placeholder: sourceUrl(size: VMO_32)
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

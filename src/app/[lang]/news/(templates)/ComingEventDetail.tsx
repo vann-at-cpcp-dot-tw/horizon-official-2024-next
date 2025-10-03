@@ -1,3 +1,65 @@
+// 本頁的  hullList 的優化特別使用了 client.query 而不是 useQuery？
+// 核心原因：動態數量的並行查詢
+
+// 這個場景的特殊性在於：
+// 1. 查詢數量是動態的 - 根據 relatedHulls 可能需要查詢 1 個、2 個或更多 yachts
+// 2. 需要並行執行 - 用 Promise.all 確保所有查詢同時發出
+// 3. 需要等待全部完成 - 只有當所有 yacht 數據都回來，才能組合成最終的 hull list
+
+// 為什麼 useQuery 不適合？
+// React Hooks 的限制：
+// // ❌ 不能這樣做 - Hooks 數量必須固定
+// uniqueYachtSlugs.forEach(slug => {
+//   const { data } = useQuery(QueryYachtHull, {  // 違反 Rules of Hooks
+//     variables: { yachtSlug: slug }
+//   })
+// })
+
+// // ❌ 也不能這樣 - 不知道要寫幾個 useQuery
+// const { data: data1 } = useQuery(...)  // 如果只有 1 個 yacht 呢？
+// const { data: data2 } = useQuery(...)  // 如果有 5 個 yacht 呢？
+// const { data: data3 } = useQuery(...)
+
+// useLazyQuery 也不理想：
+// const [fetchYacht] = useLazyQuery(QueryYachtHull)
+
+// uniqueYachtSlugs.forEach(slug => {
+//   fetchYacht({ variables: { yachtSlug: slug } })
+// })
+// // 問題：無法用 Promise.all 等待全部完成
+// // 問題：loading 狀態分散，難以統一管理
+
+// 當前方案的優勢
+// useEffect(() => {
+//   const fetchHulls = async () => {
+//     // 1. 去重
+//     const uniqueYachtSlugs = Array.from(new Set(...))
+
+//     // 2. 建立並行查詢陣列
+//     const yachtQueries = uniqueYachtSlugs.map(yachtSlug =>
+//       client.query({
+//         query: QueryYachtHull,
+//         variables: { yachtSlug, language: 'EN' }
+//       })
+//     )
+
+//     // 3. 並行執行，等待全部完成
+//     const results = await Promise.all(yachtQueries)
+
+//     // 4. 統一處理結果
+//     setHullListData(...)
+//     setHullListLoading(false)
+//   }
+
+//   fetchHulls()
+// }, [props?.relatedHulls, client])
+
+// 優點：
+// 1. ✅ 清晰的 loading 狀態管理（開始 → 查詢中 → 完成）
+// 2. ✅ 統一的錯誤處理
+// 3. ✅ 確保並行執行（網路請求同時發出）
+// 4. ✅ 等待全部完成才更新 UI（避免部分數據閃爍）
+
 "use client"
 const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 const HQ_API_BASE = process.env.NEXT_PUBLIC_HQ_API_BASE
@@ -5,7 +67,7 @@ const HQ_API_URL = `${HQ_API_BASE}graphql`
 
 import { Suspense, useMemo, useState, useEffect, useRef } from 'react'
 
-import { useApolloClient, useQuery, gql } from "@apollo/client"
+import { useApolloClient, useQuery } from "@apollo/client"
 import { motion, AnimatePresence } from 'framer-motion'
 import { usePathname, useRouter, useParams } from 'next/navigation'
 import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'
@@ -18,33 +80,8 @@ import LinkWithLang from '~/components/custom/LinkWithLang'
 import { Button } from '~/components/ui/button'
 import buttonStyles from '~/components/ui/button.module.sass'
 import { isEmpty, getLowestWidthUrl, calcBlur } from '~/lib/utils'
+import { QueryYachtHull } from '~/queries/categories/coming-events.gql'
 import { QuerySingleHull } from '~/queries/categories/hull.gql'
-
-// 輕量級查詢：只取 yacht title 和 hulls 的基本資訊（用於列表顯示）
-const QUERY_YACHT_HULL = gql`
-  query QueryYachtHull($yachtSlug: ID!, $language: LanguageCodeEnum!) {
-    yacht(id: $yachtSlug, idType: SLUG) {
-      translation(language: $language) {
-        slug
-        title
-        yachtCustomFields {
-          hulls {
-            hullName
-            exteriorImages {
-              image {
-                node {
-                  mediaItemUrl
-                  srcSet
-                  placeholder: sourceUrl(size: VMO_32)
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`
 
 interface TypeHullNode {
   [key:string]: any
@@ -86,22 +123,23 @@ function HullCard({
   const imgRef = useRef<HTMLImageElement>(null)
   const viewport = useWindowSize()
 
+  // 提取 imageNode 避免 dependency 中的複雜表達式
+  const imageNode = node.hull?.exteriorImages?.[0]?.image?.node
+
   const imagePlaceholder = useMemo(() => {
-    const placeholderImage = getLowestWidthUrl(
-      node.hull?.exteriorImages?.[0]?.image?.node?.srcSet || ''
-    )
+    const placeholderImage = getLowestWidthUrl(imageNode?.srcSet || '')
     return {
-      url: node.hull?.exteriorImages?.[0]?.image?.node?.placeholder || '',
+      url: imageNode?.placeholder || '',
       blur: calcBlur(placeholderImage?.width || 32, '10px', viewport.width)
     }
-  }, [node.hull?.exteriorImages?.[0]?.image?.node, viewport.width])
+  }, [imageNode?.srcSet, imageNode?.placeholder, viewport.width])
 
   useEffect(() => {
     setImageLoaded(false)
     if (imgRef.current?.complete && imgRef.current?.naturalWidth > 0) {
       setImageLoaded(true)
     }
-  }, [node.hull?.exteriorImages?.[0]?.image?.node?.mediaItemUrl])
+  }, [imageNode?.mediaItemUrl])
 
   return (
     <div className="col-12 lg:col-6 mb-10">
@@ -136,8 +174,8 @@ function HullCard({
           <motion.img
             ref={imgRef}
             className="absolute left-0 top-0 size-full object-cover"
-            src={node.hull?.exteriorImages?.[0]?.image?.node?.mediaItemUrl || ''}
-            srcSet={node.hull?.exteriorImages?.[0]?.image?.node?.srcSet || ''}
+            src={imageNode?.mediaItemUrl || ''}
+            srcSet={imageNode?.srcSet || ''}
             sizes="(max-width:991px) 100vw, 50vw"
             onLoad={() => setImageLoaded(true)}
             initial={{ opacity: 0 }}
@@ -207,7 +245,7 @@ function ComingEventDetail(props:TypeProps){
         // 並行查詢所有 yachts（每個 yacht 只查一次）
         const yachtQueries = uniqueYachtSlugs.map(yachtSlug =>
           client.query({
-            query: QUERY_YACHT_HULL,
+            query: QueryYachtHull,
             variables: {
               yachtSlug,
               language: 'EN' // 20250426 新增需求：Hull 只接英文版
