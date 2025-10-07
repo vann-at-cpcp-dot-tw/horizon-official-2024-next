@@ -57,7 +57,7 @@ async function PageSingleCharter({params}:TypeProps){
       }
     ]} />
 
-    <KV video="" image={customFields?.heroImage?.node?.mediaItemUrl || ''} />
+    <KV video="" image={customFields?.heroImage?.node} />
 
     <Intro className="mb-6" title={postTitle} description={customFields?.yachtDescription} />
 

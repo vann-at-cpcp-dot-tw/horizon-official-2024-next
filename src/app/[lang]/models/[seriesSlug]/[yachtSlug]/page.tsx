@@ -5,6 +5,7 @@ const HQ_API_URL = `${HQ_API_BASE}graphql`
 import T from 'vanns-common-modules/dist/components/react/T'
 
 import News from '~/app/[lang]/(home)/(sections)/News'
+import KV from '~/app/[lang]/models/[seriesSlug]/[yachtSlug]/(sections)/KV'
 import Breadcrumb from '~/components/custom/Breadcrumb'
 import LinkWithLang from '~/components/custom/LinkWithLang'
 import NotFound from "~/components/custom/NotFound"
@@ -17,7 +18,6 @@ import { QuerySingleYachtPage, QuerySingleYachtHullsList } from '~/queries/pages
 import GAGallery from "./(sections)/GAGallery"
 import Hulls from "./(sections)/Hulls"
 import Intro from "./(sections)/Intro"
-import KV from "./(sections)/KV"
 import Publication from "./(sections)/Publication"
 import SpecTable from "./(sections)/SpecTable"
 import VideoPreview from "./(sections)/VideoPreview"
@@ -115,10 +115,7 @@ async function PageSingleYacht(props:TypeProps){
 
     <KV
     video={heroVideo?.node?.mediaItemUrl || ''}
-    image={{
-      src: heroImage?.node?.mediaItemUrl,
-      srcSet: heroImage?.node?.srcSet,
-    }} />
+    image={heroImage?.node} />
 
     <Intro title={yachtTitle}
     description={yachtDescription}

@@ -13,7 +13,7 @@ import { useStore } from '~/store'
 
 interface TypeProps {
   video: string
-  image: ImageSrc
+  image: ImageNode
   [key:string]: any
 }
 interface TypeState {}
@@ -67,7 +67,7 @@ function KV(props:TypeProps){
             props?.video
               ?<video ref={videoRef} className="absolute left-0 top-0 z-0 size-full object-cover" src={props?.video} playsInline muted loop autoPlay></video>
               :<img className="absolute left-0 top-0 z-0 size-full object-cover"
-              src={props?.image?.src}
+              src={props?.image?.mediaItemUrl}
               srcSet={props?.image?.srcSet}
               sizes="100vw"/>
           }
