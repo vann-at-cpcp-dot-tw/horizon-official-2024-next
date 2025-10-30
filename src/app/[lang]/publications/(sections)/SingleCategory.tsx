@@ -9,7 +9,6 @@ import { useLazyQuery } from "@apollo/client"
 import { useParams } from "next/navigation"
 import { twMerge } from 'tailwind-merge'
 import RatioArea from "vanns-common-modules/dist/components/react/RatioArea"
-import { useImageBlurHashes } from 'vanns-common-modules/dist/use/next'
 import { useWindowSize } from 'vanns-common-modules/dist/use/react'
 import { useTranslate } from "vanns-common-modules/dist/use/react"
 
@@ -69,8 +68,6 @@ function SingleCategory(props:TypeProps){
   }, [publicationCategory])
 
   const viewport = useWindowSize()
-
-  const placeholders = useImageBlurHashes(images)
 
   if( loading ){
     return <div className="flex h-full flex-col items-center justify-center">

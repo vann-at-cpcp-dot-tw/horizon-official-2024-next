@@ -10,7 +10,6 @@ import { SwiperClass } from "swiper/react"
 import { twMerge } from 'tailwind-merge'
 import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'
 import 'swiper/css/effect-fade'
-import { useImageBlurHashes } from 'vanns-common-modules/dist/use/next'
 import { useWindowSize } from 'vanns-common-modules/dist/use/react'
 import { useTranslate } from "vanns-common-modules/dist/use/react"
 
@@ -46,7 +45,6 @@ function YachtInteriorSwiper(props:TypeProps){
   const images = useMemo(()=>{
     return props?.list?.map((node)=>node?.image?.node?.mediaItemUrl)
   }, [props.list])
-  const imageBlurHashes = useImageBlurHashes(images)
 
   return <Suspense fallback={null}>
     <div id="SECTION_INTERIOR" className={twMerge('overflow-hidden lg:mb-24 mb-12', className)}>

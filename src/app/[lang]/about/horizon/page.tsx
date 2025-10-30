@@ -2,7 +2,6 @@ const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || '/'
 const HQ_API_BASE = process.env.NEXT_PUBLIC_HQ_API_BASE
 const HQ_API_URL = `${HQ_API_BASE}graphql`
 
-import ImageAutoPlaceholder from "~/components/custom/ImageAutoPlaceholder"
 import { Button } from '~/components/ui/button'
 import { fetchGQL } from "~/lib/apollo/server"
 import { QueryPageAboutHorizon } from '~/queries/pages/about-horizon.gql'

@@ -8,7 +8,6 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import { SwiperClass } from "swiper/react"
 import { twMerge } from 'tailwind-merge'
 import RatioArea from 'vanns-common-modules/dist/components/react/RatioArea'
-import { useImageBlurHashes } from 'vanns-common-modules/dist/use/next'
 import { useDomNodeSize } from 'vanns-common-modules/dist/use/react'
 import { useWindowSize } from 'vanns-common-modules/dist/use/react'
 
@@ -45,7 +44,6 @@ function YachtsExteriorSwiper(props:TypeProps){
   const images = useMemo(()=>{
     return props?.list?.map((node)=>node?.image?.node?.mediaItemUrl)
   }, [props.list])
-  const imageBlurHashes = useImageBlurHashes(images)
 
   return <Suspense fallback={null}>
 
