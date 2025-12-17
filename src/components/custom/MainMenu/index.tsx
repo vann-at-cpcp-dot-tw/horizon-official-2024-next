@@ -259,55 +259,55 @@ function MainMenu(){
                 return !isYachtExcluded(excludeDealers)
               })
               .map((menuChildNode)=>{
-              const yachtData = menuChildNode?.yacht?.nodes?.[0]?.translation
-              const spec = yachtData?.yachtCustomFields?.specsTable?.[0]?.specTerms
-              return {
-                key: yachtData?.slug,
-                label: yachtData?.title,
-                slug: yachtData?.slug,
-                vision: {
-                  imageNode: menuChildNode?.image?.node,
-                  video: menuChildNode?.video?.node?.mediaItemUrl,
-                  content: {
-                    title: yachtData?.title,
-                    subtitle: genSpecString([
-                      {
-                        value: [
-                          spec?.loa?.metric,
-                          spec?.loa?.imperial
-                        ]
-                      },
-                      {
-                        value: [
-                          spec?.engines?.metric
-                        ]
-                      },
-                      {
-                        value: [
-                          spec?.cabins?.metric,
-                        ]
-                      }
-                    ])
-                  }
-                },
-                onClick: ()=>{
-                  if( viewport.width && viewport.width >= 992 ){
-                    setMenuScreen({
-                      key: 'models',
-                      seriesSlug: seriesData?.slug,
-                      yachtSlug: yachtData?.slug,
-                    })
-                  }else{
-                    if( pathnameWithoutLang === `/models/${seriesData?.slug}/${yachtData?.slug}` ){
-                      setIsMenuOpen(false)
+                const yachtData = menuChildNode?.yacht?.nodes?.[0]?.translation
+                const spec = yachtData?.yachtCustomFields?.specsTable?.[0]?.specTerms
+                return {
+                  key: yachtData?.slug,
+                  label: yachtData?.title,
+                  slug: yachtData?.slug,
+                  vision: {
+                    imageNode: menuChildNode?.image?.node,
+                    video: menuChildNode?.video?.node?.mediaItemUrl,
+                    content: {
+                      title: yachtData?.title,
+                      subtitle: genSpecString([
+                        {
+                          value: [
+                            spec?.loa?.metric,
+                            spec?.loa?.imperial
+                          ]
+                        },
+                        {
+                          value: [
+                            spec?.engines?.metric
+                          ]
+                        },
+                        {
+                          value: [
+                            spec?.cabins?.metric,
+                          ]
+                        }
+                      ])
                     }
+                  },
+                  onClick: ()=>{
+                    if( viewport.width && viewport.width >= 992 ){
+                      setMenuScreen({
+                        key: 'models',
+                        seriesSlug: seriesData?.slug,
+                        yachtSlug: yachtData?.slug,
+                      })
+                    }else{
+                      if( pathnameWithoutLang === `/models/${seriesData?.slug}/${yachtData?.slug}` ){
+                        setIsMenuOpen(false)
+                      }
 
-                    setIsPageChanging(true)
-                    router.push(pathnameWithLang(`/models/${seriesData?.slug}/${yachtData.slug}`, lang as string))
+                      setIsPageChanging(true)
+                      router.push(pathnameWithLang(`/models/${seriesData?.slug}/${yachtData.slug}`, lang as string))
+                    }
                   }
                 }
-              }
-            })
+              })
           }
 
           return {
