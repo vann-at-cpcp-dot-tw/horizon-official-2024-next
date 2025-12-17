@@ -61,7 +61,7 @@ export default async function PageSingleSeries(props:TypeProps){
   })
   const { yachtSeries } = data ?? {}
   const { yachts } = yachtSeries?.translation ?? {}
-  const filteredYachts = filterYachtsByRegion(yachts?.nodes || [])
+  const filteredYachts = filterYachtsByRegion<TypeYachtNode>(yachts?.nodes || [])
   const yachtsSwiperList = filteredYachts?.map?.((node:TypeYachtNode)=>{
     return {
       slug: node.slug,
