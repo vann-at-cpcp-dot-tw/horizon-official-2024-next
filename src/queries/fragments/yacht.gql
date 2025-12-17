@@ -5,6 +5,10 @@ fragment yachtBasic on Yacht {
   title
 }
 
+fragment yachtExcludeDealers on YachtCustomFields {
+  excludeDealers
+}
+
 fragment yachtHeroVideo on YachtCustomFields {
   heroVideo {
     node {

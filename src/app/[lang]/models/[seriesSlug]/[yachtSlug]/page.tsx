@@ -13,6 +13,7 @@ import { Button } from '~/components/ui/button'
 import buttonStyles from '~/components/ui/button.module.sass'
 import { fetchGQL } from "~/lib/apollo/server"
 import { isEmpty, convertYoutubeUrlToEmbed } from '~/lib/utils'
+import { isYachtExcluded } from '~/lib/yachtFilter'
 import { QuerySingleYachtPage, QuerySingleYachtHullsList } from '~/queries/pages/models-[seriesSlug]-[yachtSlug].gql'
 
 import GAGallery from "./(sections)/GAGallery"
@@ -58,7 +59,12 @@ async function PageSingleYacht(props:TypeProps){
   })
   const { relatedPublication } = data?.yacht?.EN?.yachtCustomFields ?? {}
   const { title:yachtTitle, yachtSeriesList, yachtCustomFields } = data?.yacht?.translation ?? {}
-  const { heroVideo, heroImage, yachtDescription, exteriorImages, interiorImages, specsTable, generalArrangementImages, vrPreview, videosPreview, embedVideosGallery } = yachtCustomFields ?? {}
+  const { excludeDealers, heroVideo, heroImage, yachtDescription, exteriorImages, interiorImages, specsTable, generalArrangementImages, vrPreview, videosPreview, embedVideosGallery } = yachtCustomFields ?? {}
+
+  // 檢查當前地區是否被排除
+  if (isYachtExcluded(excludeDealers)) {
+    return <NotFound />
+  }
 
   const hulls = hullsData?.yacht?.translation?.yachtCustomFields?.hulls?.filter?.((node:any)=>!node?.isHidden)
   const parentSeries = yachtSeriesList?.nodes?.[0]

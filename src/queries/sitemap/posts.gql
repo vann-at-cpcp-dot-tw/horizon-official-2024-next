@@ -60,6 +60,9 @@ query QueryPostsForSiteMap {
       ) {
         nodes {
           slug
+          yachtCustomFields {
+            excludeDealers
+          }
         }
       }
     }

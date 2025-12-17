@@ -18,6 +18,7 @@ import { useTranslate } from "vanns-common-modules/dist/use/react"
 import { useCommonData } from "~/app/[lang]/providers"
 import { useMenuImagePreload } from '~/hooks/useMenuImagePreload'
 import { genSpecString } from '~/lib/utils'
+import { isYachtExcluded } from '~/lib/yachtFilter'
 import { useStore } from '~/store'
 import { i18n } from '~~/i18n.config'
 
@@ -252,7 +253,12 @@ function MainMenu(){
           let children
 
           if(  Array.isArray(seriesNode?.yachts) ){
-            children = seriesNode?.yachts.map((menuChildNode)=>{
+            children = seriesNode?.yachts
+              .filter((menuChildNode)=>{
+                const excludeDealers = menuChildNode?.yacht?.nodes?.[0]?.translation?.yachtCustomFields?.excludeDealers
+                return !isYachtExcluded(excludeDealers)
+              })
+              .map((menuChildNode)=>{
               const yachtData = menuChildNode?.yacht?.nodes?.[0]?.translation
               const spec = yachtData?.yachtCustomFields?.specsTable?.[0]?.specTerms
               return {

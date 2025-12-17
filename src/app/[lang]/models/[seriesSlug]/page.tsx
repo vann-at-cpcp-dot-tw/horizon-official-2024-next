@@ -9,6 +9,7 @@ import { useWindowSize } from 'vanns-common-modules/dist/use/react'
 
 import { fetchGQL } from "~/lib/apollo/server"
 import { isEmpty } from '~/lib/utils'
+import { filterYachtsByRegion } from '~/lib/yachtFilter'
 import { QuerySingleSeriesPage } from '~/queries/pages/models-[seriesSlug].gql'
 import { useStore } from '~/store'
 
@@ -27,6 +28,7 @@ interface TypeYachtNode {
   slug: string
   title: string
   yachtCustomFields?: {
+    excludeDealers?: string[] | null
     exteriorImages?: {
       image?: {
         node: {
@@ -59,7 +61,8 @@ export default async function PageSingleSeries(props:TypeProps){
   })
   const { yachtSeries } = data ?? {}
   const { yachts } = yachtSeries?.translation ?? {}
-  const yachtsSwiperList = yachts.nodes?.map?.((node:TypeYachtNode)=>{
+  const filteredYachts = filterYachtsByRegion(yachts?.nodes || [])
+  const yachtsSwiperList = filteredYachts?.map?.((node:TypeYachtNode)=>{
     return {
       slug: node.slug,
       label: node.title,

@@ -19,6 +19,7 @@ query QuerySingleYachtPage(
         }
       }
       yachtCustomFields {
+        ...yachtExcludeDealers
         yachtDescription
         ...yachtHeroVideo
         ...yachtHeroImage

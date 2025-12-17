@@ -8,6 +8,7 @@ import T from 'vanns-common-modules/dist/components/react/T'
 
 import { fetchGQL } from "~/lib/apollo/server"
 import { isEmpty } from '~/lib/utils'
+import { filterYachtsByRegion } from '~/lib/yachtFilter'
 import { QueryYachtsWithSeries } from '~/queries/pages/models.gql'
 
 import SeriesList from "./(templates)/SeriesList"
@@ -27,7 +28,19 @@ export default async function PageModels(props:TypeProps){
       uri: HQ_API_URL
     }
   })
-  const translatedList = data?.yachtSeriesList?.nodes?.map((node:any)=>node?.translation)
+  const translatedList = data?.yachtSeriesList?.nodes?.map((node:any)=>{
+    const translation = node?.translation
+    if (translation?.yachts?.nodes) {
+      return {
+        ...translation,
+        yachts: {
+          ...translation.yachts,
+          nodes: filterYachtsByRegion(translation.yachts.nodes)
+        }
+      }
+    }
+    return translation
+  })
 
   return <Suspense fallback={null}>
     <div className="py-8 lg:py-16">

@@ -80,6 +80,7 @@ query QueryCommonData(
                 translation(language: $translation) {
                   ...yachtBasic
                   yachtCustomFields {
+                    ...yachtExcludeDealers
                     ...yachtSpecsTable
                   }
                 }

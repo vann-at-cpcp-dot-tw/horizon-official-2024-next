@@ -23,6 +23,7 @@ query QuerySingleSeriesPage(
         nodes {
           ...yachtBasic
           yachtCustomFields {
+            ...yachtExcludeDealers
             ...yachtExteriorImages
             ...yachtSpecsTable
           }

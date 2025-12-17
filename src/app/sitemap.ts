@@ -7,6 +7,7 @@ import { MetadataRoute } from 'next'
 
 import { fetchGQL } from "~/lib/apollo/server"
 import { formatPostCategories } from "~/lib/utils"
+import { filterYachtsByRegion } from '~/lib/yachtFilter'
 import { QueryPostsForSiteMap } from '~/queries/sitemap/posts.gql'
 
 const genSitemapObjects = async () => {
@@ -45,13 +46,14 @@ const genSitemapObjects = async () => {
 
   const yachts = data?.yachtSeriesList?.nodes?.reduce?.((acc:any, node:any)=>{
     const seriesSlug = node?.slug
-    const yachts = node?.yachts?.nodes?.map((yachtNode:any)=>{
+    const filteredYachtNodes = filterYachtsByRegion(node?.yachts?.nodes || [])
+    const yachts = filteredYachtNodes.map((yachtNode:any)=>{
       return {
         url: `${APP_URL}/models/${seriesSlug}/${yachtNode?.slug}`,
         lastModified: new Date(),
         changeFrequency: 'monthly'
       }
-    }) || []
+    })
     return [
       ...acc,
       ...yachts,
