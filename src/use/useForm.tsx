@@ -1,16 +1,16 @@
-import { useReducer, useState } from 'react'
+import { useReducer, useState, useRef } from 'react'
 
 export default function useForm<T>(api:string, defaultForm:T){
 
-
   const [loading, setLoading] = useState(false)
+  const isSubmitting = useRef(false)
   const [form, setForm] = useReducer((state:T, updateState:Partial<T>)=>({...state, ...updateState}), defaultForm)
 
   async function handleSubmit(form:{[key:string]:any}){
-    if( loading ){
+    if( isSubmitting.current ){
       return
     }
-
+    isSubmitting.current = true
     setLoading(true)
 
     const formData = new FormData()
@@ -23,6 +23,7 @@ export default function useForm<T>(api:string, defaultForm:T){
     })
     const json = await res.json()
 
+    isSubmitting.current = false
     setLoading(false)
     return json
   }
