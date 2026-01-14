@@ -183,8 +183,8 @@ function MainMenu(){
               ?[
                 {
                   key: 'brokerage',
-                  label: DEALER_REGION === 'US' ?__('Inventory') as string :__('Brokerage') as string,
-                  href: DEALER_REGION === 'US' ?'/inventory' :'/brokerage'
+                  label: ['AU', 'US'].includes(DEALER_REGION as string) ?__('Inventory') as string :__('Brokerage') as string,
+                  href: ['AU', 'US'].includes(DEALER_REGION as string) ?'/inventory' :'/brokerage'
                 },
                 ...(
                   ['EU'].includes(DEALER_REGION as string)

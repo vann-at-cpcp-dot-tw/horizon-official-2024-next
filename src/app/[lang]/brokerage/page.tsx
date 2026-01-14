@@ -39,7 +39,7 @@ async function PageBrokerage({params}:TypeProps){
   return <main className="pb-12 lg:pb-24">
 
     <div className="container serif my-6 text-center text-[32px] text-minor-900 lg:my-10">
-      { DEALER_REGION === 'US' ?'Inventory' :'Brokerage' }
+      { ['AU', 'US'].includes(DEALER_REGION as string) ?'Inventory' :'Brokerage' }
     </div>
 
     <List

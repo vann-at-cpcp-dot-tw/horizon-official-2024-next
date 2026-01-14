@@ -107,7 +107,7 @@ const nextConfig = {
       //     has: [{ type: 'query', key: 'overrideMe' }],
       //   },
       // ],
-      afterFiles: process.env.NEXT_PUBLIC_DEALER_REGION === 'US' ?[
+      afterFiles: ['AU', 'US'].includes(process.env.NEXT_PUBLIC_DEALER_REGION) ?[
         // These rewrites are checked after pages/public files
         // are checked but before dynamic routes
         {

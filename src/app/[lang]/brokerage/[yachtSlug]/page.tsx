@@ -43,8 +43,8 @@ async function PageSingleBrokerage({params}:TypeProps){
     <Breadcrumb className="pb-5 pt-2.5 lg:pt-10"
     list={[
       {
-        label: DEALER_REGION === 'US' ?'Inventory' :'Brokerage',
-        href: DEALER_REGION === 'US' ?'/inventory' :'/brokerage'
+        label: ['AU', 'US'].includes(DEALER_REGION as string) ?'Inventory' :'Brokerage',
+        href: ['AU', 'US'].includes(DEALER_REGION as string) ?'/inventory' :'/brokerage'
       },
       {
         label: postTitle,
