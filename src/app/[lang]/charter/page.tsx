@@ -4,7 +4,7 @@ const CONTENT_TYPE = process.env.NEXT_PUBLIC_CONTENT_TYPE || 'hq'
 const DEALER_REGION = process.env.NEXT_PUBLIC_DEALER_REGION
 const postsPerPage = 30
 
-import { redirect } from "next/navigation"
+import { notFound } from "next/navigation"
 import T from 'vanns-common-modules/dist/components/react/T'
 
 import List from '~/app/[lang]/brokerage/(templates)/List'
@@ -22,9 +22,9 @@ interface TypeState {}
 
 async function PageCharters({params}:TypeProps){
 
-  const access = CONTENT_TYPE === 'dealer' && ['AU', 'EU'].includes(DEALER_REGION as string)
+  const access = CONTENT_TYPE === 'dealer' && ['EU'].includes(DEALER_REGION as string)
   if( !access ){
-    redirect('/')
+    notFound()
   }
 
   const { lang } = await params

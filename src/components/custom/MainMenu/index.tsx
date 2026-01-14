@@ -187,7 +187,7 @@ function MainMenu(){
                   href: DEALER_REGION === 'US' ?'/inventory' :'/brokerage'
                 },
                 ...(
-                  ['AU', 'EU'].includes(DEALER_REGION as string)
+                  ['EU'].includes(DEALER_REGION as string)
                     ? [
                       {
                         key: 'charter',
