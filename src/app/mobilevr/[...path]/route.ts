@@ -1,6 +1,7 @@
-import { NextRequest } from 'next/server'
-import path from 'path'
 import fs from 'fs'
+import path from 'path'
+
+import { NextRequest } from 'next/server'
 
 export const dynamic = 'force-dynamic'
 
