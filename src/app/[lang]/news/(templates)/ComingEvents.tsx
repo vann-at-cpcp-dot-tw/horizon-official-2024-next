@@ -80,7 +80,7 @@ function ComingEvents(props:TypeProps){
           <div className={`mb-1 ${props?.isSmallLayout ?'text-[21px] lg:text-[28px]' :'text-[20px] lg:text-[40px]'} italic`}>
             { __('- ON THE -') }</div>
           <div className={`leading-none ${props?.isSmallLayout ?'text-[32px] lg:text-[53px]' :'text-[40px] lg:text-[80px]'}`}>
-            { __('CALENDER') }
+            { __('CALENDAR') }
           </div>
           {
             props?.isSmallLayout && <div className="text-gray-500">
