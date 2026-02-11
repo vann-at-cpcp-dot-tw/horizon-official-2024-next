@@ -36,7 +36,7 @@ function Hulls(props:TypeProps){
   const pathname = usePathname()
   const { __ } = useTranslate()
   const targetHull = useMemo(()=>{
-    return props?.list?.find?.((node)=>node?.hullName?.toLowerCase() === queryHullName.toLowerCase())
+    return props?.list?.find?.((node)=>node?.hullName?.trim()?.toLowerCase() === queryHullName.trim().toLowerCase())
   }, [queryHullName, props.list])
 
   const { data:openHullData, error:openHullError, loading:openHullLoading } = useQuery(QuerySingleHull, {
