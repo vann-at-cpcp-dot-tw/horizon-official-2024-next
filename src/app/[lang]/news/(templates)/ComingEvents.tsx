@@ -52,7 +52,8 @@ function ComingEvents(props:TypeProps){
 
       return [
         ...acc,
-        String(index)
+        String(index),
+        ...(node?.slug ? [node.slug] : [])
       ]
     }, [])
 
@@ -99,7 +100,7 @@ function ComingEvents(props:TypeProps){
               if( isLightboxOpen ){
                 return
               }
-              router.push(`${pathname}?comingEvent=${index}`, {scroll:false})
+              router.push(`${pathname}?comingEvent=${node?.slug || index}`, {scroll:false})
             }}>
               <div className="serif mb-1 text-[21px] italic leading-[1.2] text-minor-900 lg:text-[32px]">{node?.title}</div>
               <div className="row !flex-nowrap items-end">
@@ -114,7 +115,7 @@ function ComingEvents(props:TypeProps){
               </div>
 
               {
-                isLightboxOpen && lightboxQuery === String(index) && <ComingEventDetail
+                isLightboxOpen && (lightboxQuery === String(index) || lightboxQuery === node?.slug) && <ComingEventDetail
                 title={node.title}
                 content={node.content}
                 subtitle={node.comingEventCustomFields?.subtitle}
